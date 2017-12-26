@@ -1,0 +1,29 @@
+{
+  "name": "firescript",
+  "version": "0.0.0",
+  "description": "FireScript transpiler",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "mocha --reporter lagoon-reporter tests/**/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@calypso/~/firescript.git"
+  },
+  "keywords": [
+    "fire",
+    "fs",
+    "firescript"
+  ],
+  "author": "Andi Heinkelein <andifeind@noname-media.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "inspect.js": "1.9.0",
+    "lagoon-reporter": "0.3.4",
+    "mocha": "4.0.1"
+  },
+  "dependencies": {
+    "esprima": "4.0.0",
+    "supershit": "0.3.1"
+  }
+}
