@@ -4,11 +4,11 @@ class ExpressionStatement extends FireScriptElement {
   constructor (ast) {
     super(ast)
 
-    this.expression = ast.expression
+    this.expression = this.createElement(ast.expression)
   }
 
   toString () {
-
+    return this.expression.toString()
   }
 }
 

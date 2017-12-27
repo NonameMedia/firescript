@@ -1,4 +1,5 @@
 const elements = {
+  CallExpression: require('./elements/CallExpression'),
   ExpressionStatement: require('./elements/ExpressionStatement'),
   Identifier: require('./elements/Identifier'),
   ImportDeclaration: require('./elements/ImportDeclaration'),
