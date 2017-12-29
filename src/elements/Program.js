@@ -11,7 +11,8 @@ class Program extends FireScriptElement {
   }
 
   toString () {
-    return this.childs.map((item) => item.toString()).join('')
+    const childs = this.childs.map((item) => item.toString()).join('')
+    return `${childs}\n`
   }
 }
 

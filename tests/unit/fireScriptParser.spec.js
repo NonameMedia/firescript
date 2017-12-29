@@ -7,7 +7,7 @@ const helloWorldFS =
 
 const helloWorldAST = require('../fixtures/helloWorldAST.json')
 
-describe.only('FireScriptParser', () => {
+describe('FireScriptParser', () => {
   describe('parse()', () => {
     it('Parse a .fs into AST', () => {
       const FireScript = new FireScriptParser()
