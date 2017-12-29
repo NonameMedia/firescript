@@ -1,6 +1,6 @@
 class FireScriptParser {
   constructor () {
-    this.keyWords = 'import|class'
+    this.keyWords = 'import|func'
     this.punctationChars = '[.=(){}]'
     this.stringPattern = '\'[^]+?\''
     this.indentionStr = '  '
@@ -91,12 +91,12 @@ class FireScriptParser {
     const body = []
 
     while (true) {
-      const token = this.token.shift()
-      if (!token) {
+      const nextToken = this.getNextToken()
+      if (!nextToken) {
         break
       }
 
-      body.push(this.parseToken(token))
+      body.push(this.parseToken())
     }
 
     const node = {
@@ -108,10 +108,15 @@ class FireScriptParser {
     return node
   }
 
-  parseToken (token) {
+  parseToken () {
+    const token = this.token.shift()
     if (token.type === 'keyword') {
       if (token.value === 'import') {
         return this.parseImportDeclaration()
+      }
+
+      if (token.value === 'func') {
+        return this.parseFunctionDeclaration()
       }
     }
 
@@ -146,6 +151,50 @@ class FireScriptParser {
       type: 'ImportDeclaration',
       source,
       specifiers
+    }
+
+    return node
+  }
+
+  parseFunctionDeclaration () {
+    let id
+    let params = []
+    let body = {}
+
+    const token = this.token.shift()
+    if (token.type === 'identifier') {
+      id = this.parseIdentifier()
+    }
+
+    const nextToken = this.getNextToken()
+    console.log('NEX TOK', nextToken)
+    if (nextToken.type === 'punctation' && nextToken.value === '(') {
+      while (true) {
+        const token = this.token.shift()
+        console.log('TOK', token)
+        if (token.type === 'punctation' && token.value === ')') {
+          break
+        }
+
+        if (token.type === 'identifier') {
+          params.push(token.value)
+          continue
+        }
+
+        if (token.type === 'punctation' && token.value === ',') {
+          continue
+        }
+      }
+    }
+
+    const node = {
+      async: false,
+      expression: false,
+      generator: false,
+      type: 'FunctionDeclaration',
+      id,
+      params,
+      body
     }
 
     return node

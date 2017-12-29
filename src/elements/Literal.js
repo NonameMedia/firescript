@@ -8,7 +8,11 @@ class Literal extends FireScriptElement {
   }
 
   toString () {
-    return `'${this.value}'`
+    if (typeof this.value === 'string') {
+      return `'${this.value}'`
+    }
+
+    return `${this.value}`
   }
 }
 

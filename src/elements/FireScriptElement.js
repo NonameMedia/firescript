@@ -13,6 +13,15 @@ class FireScriptElement {
     this.parent = null
     this.type = ast.type
     this.childs = []
+    this.indention = 0
+  }
+
+  indent (size) {
+    this.indention += size
+  }
+
+  indentionStr () {
+    return '  '.repeat(this.indention)
   }
 
   nextChild (cld) {
@@ -28,6 +37,7 @@ class FireScriptElement {
 
     const child = new Factory(ast)
     child.parent = this
+    child.indention = this.indention
     return child
   }
 
