@@ -4,7 +4,9 @@
   "description": "FireScript transpiler",
   "main": "src/app.js",
   "scripts": {
-    "test": "mocha --reporter lagoon-reporter tests/**/*.spec.js"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha --reporter lagoon-reporter tests/unit/**/*.spec.js",
+    "test:integration": "mocha --reporter lagoon-reporter tests/integration/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "author": "Andi Heinkelein <andifeind@noname-media.com>",
   "license": "MIT",
   "devDependencies": {
+    "@noname-media/eslint-config-standard": "^1.1.0",
     "inspect.js": "1.9.0",
     "lagoon-reporter": "0.3.4",
     "mocha": "4.0.1",
