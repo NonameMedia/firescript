@@ -1,3 +1,5 @@
+const Program = require('./fs-nodes/Program')
+
 class FireScriptParser {
   constructor (conf) {
     conf = conf || {}
@@ -5,6 +7,7 @@ class FireScriptParser {
     this.keyWords = 'import|func|class|const|let|var|return'
     this.punctationChars = '[.=(){},+*/-]'
     this.stringPattern = '\'[^]+?\''
+    this.binaryOperatorPattern = /^[+*/&-]$/
     this.indentionStr = '  '
     this.showIndex = conf.index === undefined ? true : conf.index
     this.showLines = conf.lines === undefined ? true : conf.line
@@ -56,7 +59,7 @@ class FireScriptParser {
         }
 
         if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex]
+          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[2].length + 1]
         }
 
         token.push(item)
@@ -74,7 +77,7 @@ class FireScriptParser {
         }
 
         if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex]
+          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[3].length + 1]
         }
 
         token.push(item)
@@ -92,7 +95,7 @@ class FireScriptParser {
         }
 
         if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex]
+          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[4].length + 1]
         }
 
         token.push(item)
@@ -110,7 +113,7 @@ class FireScriptParser {
         }
 
         if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex]
+          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[5].length + 1]
         }
 
         token.push(item)
@@ -122,34 +125,19 @@ class FireScriptParser {
   }
 
   parse (source) {
-    this.token = this.tokenize(source)
+    const token = this.tokenize(source)
     this.__input = source
-    console.log('TOKEN', this.token)
-    return this.parseProgram()
-  }
+    console.log('TOKEN', token)
 
-  parseProgram () {
-    const body = []
-
-    while (true) {
-      const nextToken = this.getNextToken()
-      if (!nextToken) {
-        break
+    try {
+      const ast = new Program(token)
+      return ast.toJSON()
+    } catch (err) {
+      if (!err.token) {
+        throw err
       }
-
-      const parsedToken = this.parseToken()
-      if (parsedToken) {
-        body.push(parsedToken)
-      }
+      this.syntaxError(err)
     }
-
-    const node = {
-      type: 'Program',
-      sourceType: 'module',
-      body: body
-    }
-
-    return node
   }
 
   parseToken () {
@@ -178,18 +166,16 @@ class FireScriptParser {
     }
 
     if (nextToken.type === 'identifier') {
-      if (this.lookForward(2, 'punctation', '+')) {
-        return this.parseBinaryExpression()
-      } else {
-        return this.parseIdentifier()
-      }
+      return this.parseIdentifier()
     }
 
     if (nextToken.type === 'literal') {
-      if (this.lookForward(2, 'punctation', '+')) {
+      return this.parseLiteral()
+    }
+
+    if (nextToken.type === 'punctation') {
+      if (this.binaryOperatorPattern.test(nextToken.value)) {
         return this.parseBinaryExpression()
-      } else {
-        return this.parseLiteral()
       }
     }
 
@@ -235,53 +221,7 @@ class FireScriptParser {
     return node
   }
 
-  parseFunctionDeclaration () {
-    let params = []
-    let body = {}
 
-    let token = this.getToken('FunctionDeclaration')
-    if (!token.type === 'func') {
-      this.syntaxError(`${token.value} is not a function expression`)
-    }
-
-    const id = this.parseIdentifier()
-
-    token = this.getToken('FunctionDeclaration')
-    if (token.type === 'punctation' && token.value === '(') {
-      while (true) {
-        const nextToken = this.getNextToken()
-        console.log('TOK', nextToken)
-        if (nextToken.type === 'punctation' && nextToken.value === ')') {
-          this.getToken('FunctionDeclaration')
-          break
-        }
-
-        if (nextToken.type === 'identifier') {
-          params.push(this.parseIdentifier())
-          continue
-        }
-
-        if (nextToken.type === 'punctation' && nextToken.value === ',') {
-          this.getToken('FunctionDeclaration')
-          continue
-        }
-      }
-    } else {
-      this.syntaxError('Function arguments expected', token)
-    }
-
-    const node = {
-      async: false,
-      expression: false,
-      generator: false,
-      type: 'FunctionDeclaration',
-      id,
-      params,
-      body
-    }
-
-    return node
-  }
 
   parseImportDefaultSpecifier () {
     const node = {
@@ -337,24 +277,15 @@ class FireScriptParser {
     return node
   }
 
-  parseIdentifier () {
-    const token = this.getToken('Identifier')
-
-    if (token.type !== 'identifier') {
-      this.syntaxError(`Identifier expected, but a ${token.type} was given`)
-    }
-
-    const node = {
-      name: token.value,
-      type: 'Identifier'
-    }
-
-    return node
-  }
-
   parseBinaryExpression () {
-    const left = this.parseToken()
-    const operator = this.parseOperator()
+    const token = this.getToken('BinaryExpression')
+
+    if (token.type !== 'punctation' && !this.binaryOperatorPattern.test(token.value)) {
+      this.syntaxError('Token is not a binary operator', token)
+    }
+
+    const operator = token.value
+    const left = this.getPreviousSibling()
     const right = this.parseToken()
 
     const node = {
@@ -364,14 +295,13 @@ class FireScriptParser {
       operator
     }
 
+    this.replacePreviousSibling(node)
     return node
   }
 
   parseOperator () {
-    const token = this.getToken('Operator')
     if (token.type === 'punctation') {
       if (!/^[+*/-]$/.test(token.value)) {
-        this.syntaxError('Unknow operator', token)
       }
     } else {
       this.syntaxError('Unexpected token', token)
@@ -419,8 +349,8 @@ class FireScriptParser {
     return true
   }
 
-  syntaxError (message, token) {
-    token = token || this.token[0]
+  syntaxError (err) {
+    const token = err.token
     const source = this.__input.split(/\n/g)
     const startLine = Math.max(0, token.line[0] - 3)
     const endLine = Math.max(0, token.line[0])
@@ -430,7 +360,7 @@ class FireScriptParser {
       return `${lineNum} | ${line}\n`
     }).join('').concat(`${' '.repeat(token.line[1] + String(endLine).length + 2)}^\n`)
 
-    const err = new SyntaxError(`${message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`)
+    err.message = `${err.message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`
     err.stack = '\n\n' + this.callStack.join('\n') + '\n\n' + err.stack
     throw err
   }
