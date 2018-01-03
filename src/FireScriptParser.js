@@ -8,6 +8,7 @@ class FireScriptParser {
     this.indentionStr = '  '
     this.showIndex = conf.index === undefined ? true : conf.index
     this.showLines = conf.lines === undefined ? true : conf.line
+    this.callStack = []
   }
 
   tokenize (source) {
@@ -24,8 +25,8 @@ class FireScriptParser {
 
       // console.log(match)
       if (match[1] !== undefined) {
-        lastEOLIndex = reg.lastIndex
         const indention = match[1].substr(match[1].lastIndexOf('\n') + 1)
+        lastEOLIndex = reg.lastIndex - indention.length
 
         const item = {
           type: 'indention',
@@ -158,12 +159,11 @@ class FireScriptParser {
     }
 
     if (nextToken.type === 'indention') {
-      this.token.shift()
+      this.getToken('Token')
       return this.parseToken()
     }
 
     if (nextToken.type === 'keyword') {
-      this.token.shift()
       if (nextToken.value === 'import') {
         return this.parseImportDeclaration()
       }
@@ -173,20 +173,24 @@ class FireScriptParser {
       }
 
       if (['var', 'const', 'let'].includes(nextToken.value)) {
-        return this.parseVariableDeclaration(nextToken.value)
+        return this.parseVariableDeclaration()
       }
     }
 
     if (nextToken.type === 'identifier') {
-      if (this.lookForward(1, 'punctation', '+')) {
+      if (this.lookForward(2, 'punctation', '+')) {
         return this.parseBinaryExpression()
       } else {
-        return this.parseLiteral()
+        return this.parseIdentifier()
       }
     }
 
     if (nextToken.type === 'literal') {
-      return this.parseLiteral()
+      if (this.lookForward(2, 'punctation', '+')) {
+        return this.parseBinaryExpression()
+      } else {
+        return this.parseLiteral()
+      }
     }
 
     console.log('UNUSED TOKEN', nextToken)
@@ -194,13 +198,18 @@ class FireScriptParser {
   }
 
   parseImportDeclaration () {
+    let token = this.getToken('ImportDeclaration')
+    if (!token.type === 'import') {
+      this.syntaxError(`${token.value} is not a import declaration`)
+    }
+
     const specifiers = []
 
     while (true) {
       const nextToken = this.getNextToken()
       if (nextToken.type === 'identifier') {
         if (nextToken.value === 'from') {
-          this.token.shift()
+          this.getToken('ImportDeclaration')
           break
         }
 
@@ -227,33 +236,38 @@ class FireScriptParser {
   }
 
   parseFunctionDeclaration () {
-    let id
     let params = []
     let body = {}
 
-    const token = this.token.shift()
-    if (token.type === 'identifier') {
-      id = this.parseIdentifier()
+    let token = this.getToken('FunctionDeclaration')
+    if (!token.type === 'func') {
+      this.syntaxError(`${token.value} is not a function expression`)
     }
 
-    const nextToken = this.getNextToken()
-    if (nextToken.type === 'punctation' && nextToken.value === '(') {
+    const id = this.parseIdentifier()
+
+    token = this.getToken('FunctionDeclaration')
+    if (token.type === 'punctation' && token.value === '(') {
       while (true) {
-        const token = this.token.shift()
-        console.log('TOK', token)
-        if (token.type === 'punctation' && token.value === ')') {
+        const nextToken = this.getNextToken()
+        console.log('TOK', nextToken)
+        if (nextToken.type === 'punctation' && nextToken.value === ')') {
+          this.getToken('FunctionDeclaration')
           break
         }
 
-        if (token.type === 'identifier') {
-          params.push(token.value)
+        if (nextToken.type === 'identifier') {
+          params.push(this.parseIdentifier())
           continue
         }
 
-        if (token.type === 'punctation' && token.value === ',') {
+        if (nextToken.type === 'punctation' && nextToken.value === ',') {
+          this.getToken('FunctionDeclaration')
           continue
         }
       }
+    } else {
+      this.syntaxError('Function arguments expected', token)
     }
 
     const node = {
@@ -278,7 +292,15 @@ class FireScriptParser {
     return node
   }
 
-  parseVariableDeclaration (kind) {
+  parseVariableDeclaration () {
+    let token = this.getToken('VariableDeclaration')
+    if (!['var', 'const', 'let'].includes(token.value)) {
+      this.syntaxError(`${token.value} is not a variable declaration`)
+    }
+
+    console.log('VAR', token)
+
+    const kind = token.value
     const declarations = []
 
     while (true) {
@@ -308,7 +330,7 @@ class FireScriptParser {
 
     const nextToken = this.getNextToken()
     if (nextToken.type === 'punctation' && nextToken.value === '=') {
-      this.token.shift()
+      this.getToken('VariableDeclarator')
       node.init = this.parseToken()
     }
 
@@ -316,7 +338,11 @@ class FireScriptParser {
   }
 
   parseIdentifier () {
-    const token = this.token.shift()
+    const token = this.getToken('Identifier')
+
+    if (token.type !== 'identifier') {
+      this.syntaxError(`Identifier expected, but a ${token.type} was given`)
+    }
 
     const node = {
       name: token.value,
@@ -327,19 +353,35 @@ class FireScriptParser {
   }
 
   parseBinaryExpression () {
-    const token = this.token.shift()
+    const left = this.parseToken()
+    const operator = this.parseOperator()
+    const right = this.parseToken()
 
     const node = {
       type: 'BinaryExpression',
-      left: this.parseLiteral(),
-      right: this.parseLiteral()
+      left,
+      right,
+      operator
     }
 
     return node
   }
 
+  parseOperator () {
+    const token = this.getToken('Operator')
+    if (token.type === 'punctation') {
+      if (!/^[+*/-]$/.test(token.value)) {
+        this.syntaxError('Unknow operator', token)
+      }
+    } else {
+      this.syntaxError('Unexpected token', token)
+    }
+
+    return token.value
+  }
+
   parseLiteral () {
-    const token = this.token.shift()
+    const token = this.getToken('Literal')
 
     const node = {
       type: 'Literal',
@@ -348,6 +390,12 @@ class FireScriptParser {
     }
 
     return node
+  }
+
+  getToken (method) {
+    const token = this.token.shift()
+    this.callStack.push(`${method} @ ${token.type} | ${token.value}`)
+    return token
   }
 
   getNextToken () {
@@ -382,7 +430,9 @@ class FireScriptParser {
       return `${lineNum} | ${line}\n`
     }).join('').concat(`${' '.repeat(token.line[1] + String(endLine).length + 2)}^\n`)
 
-    throw new Error(`Syntax error! ${message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`)
+    const err = new SyntaxError(`${message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`)
+    err.stack = '\n\n' + this.callStack.join('\n') + '\n\n' + err.stack
+    throw err
   }
 }
 
