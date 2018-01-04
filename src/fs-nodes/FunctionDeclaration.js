@@ -4,60 +4,47 @@ class FunctionDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    this.id = this.createNode(tokenStack)
-  }
-
-  parseFunctionDeclaration () {
-    let params = []
-    let body = {}
-
-    let token = this.getToken('FunctionDeclaration')
-    if (!token.type === 'func') {
-      this.syntaxError(`${token.value} is not a function expression`, token)
+    let token = tokenStack.shift()
+    if (!token.value === 'func') {
+      this.syntaxError('Unexpected token', token)
     }
 
-    const id = this.parseIdentifier()
+    this.id = this.createNode(tokenStack)
+    this.params = []
 
-    token = this.getToken('FunctionDeclaration')
+    token = tokenStack.shift()
     if (token.type === 'punctation' && token.value === '(') {
       while (true) {
-        const nextToken = this.getNextToken()
-        console.log('TOK', nextToken)
+        const nextToken = tokenStack[0]
         if (nextToken.type === 'punctation' && nextToken.value === ')') {
-          this.getToken('FunctionDeclaration')
+          tokenStack.shift()
           break
         }
 
         if (nextToken.type === 'identifier') {
-          params.push(this.parseIdentifier())
+          this.params.push(this.createNode(tokenStack))
           continue
         }
 
         if (nextToken.type === 'punctation' && nextToken.value === ',') {
-          this.getToken('FunctionDeclaration')
+          tokenStack.shift()
           continue
         }
       }
     } else {
       this.syntaxError('Function arguments expected', token)
     }
-
-    const node = {
-      async: false,
-      expression: false,
-      generator: false,
-      type: 'FunctionDeclaration',
-      id,
-      params,
-      body
-    }
-
-    return node
   }
 
   toJSON () {
     return {
-      id: this.id
+      type: 'FunctionDeclaration',
+      id: this.id,
+      params: this.params,
+      body: this.body,
+      async: false,
+      expression: false,
+      generator: false
     }
   }
 }

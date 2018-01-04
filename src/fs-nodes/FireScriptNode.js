@@ -1,25 +1,28 @@
 class FireScriptNode {
   constructor (parent) {
     this.parent = parent || null
+    this.callStack = parent ? parent.callStack : []
   }
 
   createNode (tokenStack) {
-    const token = tokenStack.shift()
-    if (!token) {
+    const nextToken = tokenStack[0]
+    if (!nextToken) {
       return null
     }
+
+    this.callStack.push(`${this.constructor.name} @ ${nextToken.type} | ${nextToken.value}`)
 
     // if (nextToken.type === 'indention') {
     //   this.getToken('Token')
     //   return this.parseToken()
     // }
     //
-    if (token.type === 'keyword') {
+    if (nextToken.type === 'keyword') {
     //   if (nextToken.value === 'import') {
     //     return this.parseImportDeclaration()
     //   }
 
-      if (token.value === 'func') {
+      if (nextToken.value === 'func') {
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
 
@@ -30,7 +33,7 @@ class FireScriptNode {
       //
     }
 
-    if (token.type === 'identifier') {
+    if (nextToken.type === 'identifier') {
       return this.getNodeInstance('Identifier', tokenStack)
     }
     //
@@ -43,13 +46,14 @@ class FireScriptNode {
     //     return this.parseBinaryExpression()
     //   }
 
-    console.log('UNUSED TOKEN', token)
-    this.syntaxError('Unexpected token', token)
+    console.log('UNUSED TOKEN', nextToken)
+    this.syntaxError('Unexpected token', nextToken)
   }
 
   syntaxError (message, token) {
     const err = new SyntaxError(`${message} at line ${token.line[0]} at column ${token.line[1]}`)
     err.token = token
+    err.callStack = this.callStack
     throw err
   }
 

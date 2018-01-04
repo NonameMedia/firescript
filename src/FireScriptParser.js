@@ -361,7 +361,7 @@ class FireScriptParser {
     }).join('').concat(`${' '.repeat(token.line[1] + String(endLine).length + 2)}^\n`)
 
     err.message = `${err.message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`
-    err.stack = '\n\n' + this.callStack.join('\n') + '\n\n' + err.stack
+    err.stack = '\n\n' + err.callStack.join('\n') + '\n\n' + err.stack
     throw err
   }
 }
