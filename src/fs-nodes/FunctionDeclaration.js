@@ -34,6 +34,8 @@ class FunctionDeclaration extends FireScriptNode {
     } else {
       this.syntaxError('Function arguments expected', token)
     }
+
+    this.body = this.createNode(tokenStack)
   }
 
   toJSON () {

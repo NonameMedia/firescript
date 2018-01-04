@@ -41,7 +41,7 @@ class FireScriptParser {
         }
 
         if (this.showLines) {
-          item.line = lineNum += 1
+          item.line = [lineNum += 1, 1]
         }
 
         token.push(item)
@@ -221,81 +221,12 @@ class FireScriptParser {
     return node
   }
 
-
-
   parseImportDefaultSpecifier () {
     const node = {
       type: 'ImportDefaultSpecifier',
       local: this.parseIdentifier()
     }
 
-    return node
-  }
-
-  parseVariableDeclaration () {
-    let token = this.getToken('VariableDeclaration')
-    if (!['var', 'const', 'let'].includes(token.value)) {
-      this.syntaxError(`${token.value} is not a variable declaration`)
-    }
-
-    console.log('VAR', token)
-
-    const kind = token.value
-    const declarations = []
-
-    while (true) {
-      const nextToken = this.getNextToken()
-      if (nextToken.type === 'identifier') {
-        declarations.push(this.parseVariableDeclarator())
-      } else {
-        break
-      }
-    }
-
-    const node = {
-      kind,
-      type: 'VariableDeclaration',
-      declarations
-    }
-
-    return node
-  }
-
-  parseVariableDeclarator () {
-    const node = {
-      type: 'VariableDeclarator',
-      id: this.parseIdentifier(),
-      init: null
-    }
-
-    const nextToken = this.getNextToken()
-    if (nextToken.type === 'punctation' && nextToken.value === '=') {
-      this.getToken('VariableDeclarator')
-      node.init = this.parseToken()
-    }
-
-    return node
-  }
-
-  parseBinaryExpression () {
-    const token = this.getToken('BinaryExpression')
-
-    if (token.type !== 'punctation' && !this.binaryOperatorPattern.test(token.value)) {
-      this.syntaxError('Token is not a binary operator', token)
-    }
-
-    const operator = token.value
-    const left = this.getPreviousSibling()
-    const right = this.parseToken()
-
-    const node = {
-      type: 'BinaryExpression',
-      left,
-      right,
-      operator
-    }
-
-    this.replacePreviousSibling(node)
     return node
   }
 
@@ -360,7 +291,7 @@ class FireScriptParser {
       return `${lineNum} | ${line}\n`
     }).join('').concat(`${' '.repeat(token.line[1] + String(endLine).length + 2)}^\n`)
 
-    err.message = `${err.message} at line ${token.line[0]} at column ${token.line[1]}\n\n${preview}`
+    err.message = `${err.message}\n\n${preview}`
     err.stack = '\n\n' + err.callStack.join('\n') + '\n\n' + err.stack
     throw err
   }
