@@ -45,7 +45,7 @@ describe('Integrtion test runner', () => {
           })
 
           it('Inspect transpiled FS source', () => {
-            const expected = inspect.readFile(path.join(testCase.path, 'index.fs'))
+            const expected = inspect.readFile(path.join(testCase.path, 'index.fire'))
             inspect(expected).isEql(fsSource)
           })
 
