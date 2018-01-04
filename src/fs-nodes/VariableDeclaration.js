@@ -15,35 +15,23 @@ class VariableDeclaration extends FireScriptNode {
 
     while (true) {
       const nextToken = tokenStack[0]
-      if (nextToken.type === 'identifier') {
-        this.declarations.push(this.parseVariableDeclarator(tokenStack))
+      console.log('NEXT', nextToken)
+      if (nextToken.type === 'punctation' && nextToken.value === ',') {
+        tokenStack.shift()
+        this.declarations.push(this.createVariableDeclaratorNode(tokenStack))
+      } else if (nextToken.type === 'identifier' || nextToken.type === 'punctation') {
+        this.declarations.push(this.createVariableDeclaratorNode(tokenStack))
       } else {
         break
       }
     }
   }
 
-  parseVariableDeclarator (tokenStack) {
-    const node = {
-      type: 'VariableDeclarator',
-      id: this.createNode(tokenStack),
-      init: null
-    }
-
-    const nextToken = tokenStack[0]
-    if (nextToken.type === 'punctation' && nextToken.value === '=') {
-      tokenStack.shift()
-      node.init = this.createNode(tokenStack)
-    }
-
-    return node
-  }
-
   toJSON () {
     return {
       type: 'VariableDeclaration',
       kind: this.kind,
-      declarations: this.declarations
+      declarations: this.declarations.map((item) => item.toJSON())
     }
   }
 }
