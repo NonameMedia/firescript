@@ -6,7 +6,7 @@ class FireScriptParser {
 
     this.keyWords = 'import|func|class|const|let|var|return'
     this.punctationChars = '[.=(){},+*/-]'
-    this.stringPattern = '\'[^]+?\''
+    this.literalPattern = '\'[^]+?\'|\\d+'
     this.binaryOperatorPattern = /^[+*/&-]$/
     this.indentionStr = '  '
     this.showIndex = conf.index === undefined ? true : conf.index
@@ -15,7 +15,7 @@ class FireScriptParser {
   }
 
   tokenize (source) {
-    const reg = new RegExp(`(\\n\\s*)|(${this.keyWords})|(${this.punctationChars})|(${this.stringPattern})|([a-zA-Z][a-zA-Z0-9$_-]*)`, 'g')
+    const reg = new RegExp(`(\\n\\s*)|(${this.keyWords})|(${this.punctationChars})|(${this.literalPattern})|([a-zA-Z][a-zA-Z0-9$_-]*)`, 'g')
     const token = []
     let lineNum = 1
     let lastEOLIndex = 0
@@ -140,49 +140,6 @@ class FireScriptParser {
     }
   }
 
-  parseToken () {
-    const nextToken = this.getNextToken()
-    if (!nextToken) {
-      return null
-    }
-
-    if (nextToken.type === 'indention') {
-      this.getToken('Token')
-      return this.parseToken()
-    }
-
-    if (nextToken.type === 'keyword') {
-      if (nextToken.value === 'import') {
-        return this.parseImportDeclaration()
-      }
-
-      if (nextToken.value === 'func') {
-        return this.parseFunctionDeclaration()
-      }
-
-      if (['var', 'const', 'let'].includes(nextToken.value)) {
-        return this.parseVariableDeclaration()
-      }
-    }
-
-    if (nextToken.type === 'identifier') {
-      return this.parseIdentifier()
-    }
-
-    if (nextToken.type === 'literal') {
-      return this.parseLiteral()
-    }
-
-    if (nextToken.type === 'punctation') {
-      if (this.binaryOperatorPattern.test(nextToken.value)) {
-        return this.parseBinaryExpression()
-      }
-    }
-
-    console.log('UNUSED TOKEN', nextToken)
-    this.syntaxError('Unexpected token', nextToken)
-  }
-
   parseImportDeclaration () {
     let token = this.getToken('ImportDeclaration')
     if (!token.type === 'import') {
@@ -225,29 +182,6 @@ class FireScriptParser {
     const node = {
       type: 'ImportDefaultSpecifier',
       local: this.parseIdentifier()
-    }
-
-    return node
-  }
-
-  parseOperator () {
-    if (token.type === 'punctation') {
-      if (!/^[+*/-]$/.test(token.value)) {
-      }
-    } else {
-      this.syntaxError('Unexpected token', token)
-    }
-
-    return token.value
-  }
-
-  parseLiteral () {
-    const token = this.getToken('Literal')
-
-    const node = {
-      type: 'Literal',
-      raw: token.value,
-      value: token.value.slice(1, -1)
     }
 
     return node

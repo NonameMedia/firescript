@@ -4,6 +4,8 @@ class FireScriptNode {
     this.indention = parent ? parent.indention : 0
     this.callStack = parent ? parent.callStack : []
     this.binaryOperatorPattern = /^[+*/&-]$/
+    this.assignmentOperatorPattern = /^[=]$/
+    this.type = this.constructor.name
   }
 
   createNode (tokenStack) {
@@ -12,10 +14,7 @@ class FireScriptNode {
       return null
     }
 
-    this.callStack.push(`${this.constructor.name} @ ${nextToken.type} | ${nextToken.value}`)
-
     if (nextToken.type === 'indention') {
-      console.log('INDENTION', this.indention, nextToken.value)
       if (this.indention < nextToken.value) {
         return this.getNodeInstance('BlockStatement', tokenStack)
       } else {
@@ -44,13 +43,17 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'identifier') {
+      if (this.lookForward(tokenStack, 'punctation', '=', 1)) {
+        return this.getNodeInstance('ExpressionStatement', tokenStack)
+      }
+
       return this.getNodeInstance('Identifier', tokenStack)
     }
-    //
-    // if (nextToken.type === 'literal') {
-    //   return this.parseLiteral()
-    // }
-    //
+
+    if (nextToken.type === 'literal') {
+      return this.getNodeInstance('Literal', tokenStack)
+    }
+
     if (nextToken.type === 'punctation') {
       if (this.binaryOperatorPattern.test(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
@@ -61,6 +64,31 @@ class FireScriptNode {
     this.syntaxError('Unexpected token', nextToken)
   }
 
+  createVariableDeclaratorNode (tokenStack) {
+    return this.getNodeInstance('VariableDeclarator', tokenStack)
+  }
+
+  createIdentifierNode (tokenStack) {
+    return this.getNodeInstance('Identifier', tokenStack)
+  }
+
+  createAssignmentNode (tokenStack) {
+    return this.getNodeInstance('AssignmentExpression', tokenStack)
+  }
+
+  lookForward (tokenStack, type, value, index) {
+    const token = tokenStack[index]
+    if (!token) {
+      return false
+    }
+
+    if (value && token.value !== value) {
+      return false
+    }
+
+    return token.type === type
+  }
+
   syntaxError (message, token) {
     const err = new SyntaxError(`${message} at line ${token.line[0]} at column ${token.line[1]}`)
     err.token = token
@@ -69,12 +97,38 @@ class FireScriptNode {
   }
 
   getNodeInstance (nodeName, tokenStack) {
+    const nextToken = tokenStack[0]
+    this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
     return new Node(tokenStack, this)
   }
 
   getPreviousSibling () {
     console.log('PARENT', this.parent)
+  }
+
+  getNextValueNodes (tokenStack) {
+    let node = this.createNode(tokenStack)
+    while (true) {
+      const nextToken = tokenStack[0]
+      if (this.isBinaryOperator(nextToken)) {
+        const binaryNode = this.createNode(tokenStack)
+        binaryNode.left = node
+        node = binaryNode
+      } else {
+        break
+      }
+    }
+
+    return node
+  }
+
+  isAssignmentOperator (token) {
+    return token.type === 'punctation' && this.assignmentOperatorPattern.test(token.value)
+  }
+
+  isBinaryOperator (token) {
+    return token.type === 'punctation' && this.binaryOperatorPattern.test(token.value)
   }
 }
 

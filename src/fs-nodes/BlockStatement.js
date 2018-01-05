@@ -27,7 +27,7 @@ class BlockStatement extends FireScriptNode {
   toJSON () {
     return {
       type: 'BlockStatement',
-      body: this.body
+      body: this.body.map((item) => item.toJSON())
     }
   }
 }

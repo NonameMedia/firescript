@@ -41,9 +41,9 @@ class FunctionDeclaration extends FireScriptNode {
   toJSON () {
     return {
       type: 'FunctionDeclaration',
-      id: this.id,
-      params: this.params,
-      body: this.body,
+      id: this.id.toJSON(),
+      params: this.params.map((item) => item.toJSON()),
+      body: this.body.toJSON(),
       async: false,
       expression: false,
       generator: false

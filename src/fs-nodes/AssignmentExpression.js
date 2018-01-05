@@ -1,13 +1,14 @@
 const FireScriptNode = require('./FireScriptNode')
 
-class BinaryExpression extends FireScriptNode {
+class AssignmentExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
+    this.left = this.createIdentifierNode(tokenStack)
     const token = tokenStack.shift()
 
-    if (token.type !== 'punctation' && !this.binaryOperatorPattern.test(token.value)) {
-      this.syntaxError('Token is not a binary operator', token)
+    if (token.type !== 'punctation' && !this.assignmentOperatorPattern.test(token.value)) {
+      this.syntaxError('Token is not a assignment operator', token)
     }
 
     this.operator = token.value
@@ -16,7 +17,7 @@ class BinaryExpression extends FireScriptNode {
 
   toJSON () {
     return {
-      type: 'BinaryExpression',
+      type: 'AssignmentExpression',
       operator: this.operator,
       left: this.left.toJSON(),
       right: this.right.toJSON()
@@ -24,4 +25,4 @@ class BinaryExpression extends FireScriptNode {
   }
 }
 
-module.exports = BinaryExpression
+module.exports = AssignmentExpression

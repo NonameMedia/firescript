@@ -17,7 +17,7 @@ class ReturnStatement extends FireScriptNode {
   toJSON () {
     return {
       type: 'ReturnStatement',
-      argument: this.argument
+      argument: this.argument.toJSON()
     }
   }
 }

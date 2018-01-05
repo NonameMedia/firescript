@@ -20,7 +20,7 @@ class Program extends FireScriptNode {
     return {
       type: 'Program',
       sourceType: 'module',
-      body: this.body
+      body: this.body.map((item) => item.toJSON())
     }
   }
 }
