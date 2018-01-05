@@ -140,53 +140,6 @@ class FireScriptParser {
     }
   }
 
-  parseImportDeclaration () {
-    let token = this.getToken('ImportDeclaration')
-    if (!token.type === 'import') {
-      this.syntaxError(`${token.value} is not a import declaration`)
-    }
-
-    const specifiers = []
-
-    while (true) {
-      const nextToken = this.getNextToken()
-      if (nextToken.type === 'identifier') {
-        if (nextToken.value === 'from') {
-          this.getToken('ImportDeclaration')
-          break
-        }
-
-        specifiers.push(this.parseImportDefaultSpecifier())
-      } else {
-        console.log(nextToken)
-        break
-      }
-    }
-
-    const nextToken = this.getNextToken()
-    let source
-    if (nextToken.type === 'literal') {
-      source = this.parseLiteral()
-    }
-
-    const node = {
-      type: 'ImportDeclaration',
-      source,
-      specifiers
-    }
-
-    return node
-  }
-
-  parseImportDefaultSpecifier () {
-    const node = {
-      type: 'ImportDefaultSpecifier',
-      local: this.parseIdentifier()
-    }
-
-    return node
-  }
-
   getToken (method) {
     const token = this.token.shift()
     this.callStack.push(`${method} @ ${token.type} | ${token.value}`)

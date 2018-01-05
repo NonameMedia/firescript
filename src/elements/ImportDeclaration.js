@@ -9,7 +9,7 @@ class ImportDeclaration extends FireScriptElement {
   }
 
   toString () {
-    const eol = this.nextChild && this.nextChild.type !== 'ImportDeclaration' && this.blankLineAfterBlock ? '\n\n' : '\n'
+    const eol = this.nextChild && this.nextChild.type !== 'ImportDeclaration' && this.blankLineAfterBlock ? '\n' : ''
     const source = this.source
     const specifiers = this.specifiers.join(', ')
 

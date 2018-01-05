@@ -7,6 +7,7 @@ const elements = {
   FunctionDeclaration: require('./elements/FunctionDeclaration'),
   Identifier: require('./elements/Identifier'),
   ImportDeclaration: require('./elements/ImportDeclaration'),
+  ImportSpecifier: require('./elements/ImportSpecifier'),
   ImportDefaultSpecifier: require('./elements/ImportDefaultSpecifier'),
   Literal: require('./elements/Literal'),
   Program: require('./elements/Program'),

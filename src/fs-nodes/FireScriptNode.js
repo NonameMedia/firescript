@@ -76,6 +76,14 @@ class FireScriptNode {
     return this.getNodeInstance('AssignmentExpression', tokenStack)
   }
 
+  createImportDefaultSpecifierNode (tokenStack) {
+    return this.getNodeInstance('ImportDefaultSpecifier', tokenStack)
+  }
+
+  createImportSpecifierNode (tokenStack) {
+    return this.getNodeInstance('ImportSpecifier', tokenStack)
+  }
+
   lookForward (tokenStack, type, value, index) {
     const token = tokenStack[index]
     if (!token) {
