@@ -10,7 +10,7 @@ class ExpressionStatement extends FireScriptNode {
   toJSON () {
     return {
       type: 'ExpressionStatement',
-      expression: this.expression
+      expression: this.expression.toJSON()
     }
   }
 }

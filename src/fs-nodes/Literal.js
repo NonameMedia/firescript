@@ -6,7 +6,16 @@ class Literal extends FireScriptNode {
 
     const token = tokenStack.shift()
     this.raw = token.value
-    this.value = token.value.replace(/(^["'`])|(["'`]$)/g, '')
+
+    if (/^["'`]/.test(token.value)) {
+      this.value = token.value.slice(1, -1)
+    } else if (/^\d+$/.test(token.value)) {
+      this.value = parseInt(token.value, 10)
+    } else if (/^\d+\.\d+$/.test(token.value)) {
+      this.value = parseFloat(token.value, 10)
+    } else {
+      this.value = token.value
+    }
   }
 
   toJSON () {
