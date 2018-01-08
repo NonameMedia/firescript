@@ -20,3 +20,20 @@ const str1 = 'Hello '
 const str2 = 'World'
 const greeting = str1 + str2
 ```
+
+Multiline strings
+-----------------
+
+```fire
+const str = '''
+  Hello
+  World,
+  I'm a multiline
+  string
+
+const str = ```
+  Hello
+  World,
+  I'm a multiline
+  code block
+```

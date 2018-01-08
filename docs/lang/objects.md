@@ -26,4 +26,6 @@ const obj =
       'blu'
       blobber:
         'blubber'
+      blobber:
+        true
 ```
