@@ -11,7 +11,7 @@
 7 silly lifecycle firescript@0.0.0~pretest:unit: no script for pretest:unit, continuing
 8 info lifecycle firescript@0.0.0~test:unit: firescript@0.0.0
 9 verbose lifecycle firescript@0.0.0~test:unit: unsafe-perm in lifecycle true
-10 verbose lifecycle firescript@0.0.0~test:unit: PATH: /home/andi/Projects/FireScript/firescript/node_modules/npm/bin/node-gyp-bin:/home/andi/Projects/FireScript/firescript/node_modules/.bin:/home/andi/.nvm/versions/node/v8.9.1/lib/node_modules/npm/bin/node-gyp-bin:/home/andi/Projects/FireScript/firescript/node_modules/.bin:/home/andi/.nvm/versions/node/v8.9.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+10 verbose lifecycle firescript@0.0.0~test:unit: PATH: /home/andi/Projects/FireScript/firescript/node_modules/npm/bin/node-gyp-bin:/home/andi/Projects/FireScript/firescript/node_modules/.bin:/home/andi/.nvm/versions/node/v8.9.1/lib/node_modules/npm/bin/node-gyp-bin:/home/andi/Projects/FireScript/firescript/node_modules/.bin:/home/andi/.nvm/versions/node/v8.9.1/bin:/home/andi/.go/bin:/home/andi/Applications/bin:/home/andi/Applications/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 11 verbose lifecycle firescript@0.0.0~test:unit: CWD: /home/andi/Projects/FireScript/firescript
 12 silly lifecycle firescript@0.0.0~test:unit: Args: [ '-c',
 12 silly lifecycle   'mocha --reporter lagoon-reporter tests/unit/**/*.spec.js' ]

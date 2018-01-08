@@ -1,13 +1,3 @@
-const SUPPORTED_ELEMENTS = [
-  // ArrayPattern | ObjectPattern
-  // ThisExpression | Identifier | Literal |
-  // ArrayExpression | ObjectExpression | FunctionExpression | ArrowFunctionExpression | ClassExpression |
-  // TaggedTemplateExpression | MemberExpression | Super | MetaProperty |
-  // NewExpression | CallExpression | UpdateExpression | AwaitExpression | UnaryExpression |
-  // BinaryExpression | LogicalExpression | ConditionalExpression |
-  // YieldExpression | AssignmentExpression | SequenceExpression
-]
-
 class FireScriptElement {
   constructor (ast) {
     this.parent = null
