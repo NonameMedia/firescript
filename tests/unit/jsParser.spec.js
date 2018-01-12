@@ -2,12 +2,10 @@ const inspect = require('inspect.js')
 const JSParser = require('../../src/JSParser')
 
 const helloWorldJS =
-  'import print from "print"\n' +
-  'print("Hello World!")\n'
+  'import print from \'print\'\n' +
+  'print(\'Hello World!\')\n'
 
-const helloWorldAST = {
-
-}
+const helloWorldAST = require('../fixtures/helloWorldAST.json')
 
 describe('JSParser', () => {
   describe('parseAST()', () => {

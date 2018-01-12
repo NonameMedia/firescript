@@ -1,5 +1,29 @@
 const FireScriptNode = require('./FireScriptNode')
 
+const ALLOWED_CHILDS = [
+  'BlockStatement',
+  'BreakStatement',
+  'ClassDeclaration',
+  'ContinueStatement',
+  'DebuggerStatement',
+  'DoWhileStatement',
+  'EmptyStatement',
+  'ExpressionStatement',
+  'ForStatement',
+  'ForInStatement',
+  'ForOfStatement',
+  'FunctionDeclaration',
+  'IfStatement',
+  'LabeledStatement',
+  'ReturnStatement',
+  'SwitchStatement',
+  'ThrowStatement',
+  'TryStatement',
+  'VariableDeclaration',
+  'WhileStatement',
+  'WithStatement'
+]
+
 class BlockStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
@@ -13,14 +37,19 @@ class BlockStatement extends FireScriptNode {
     this.body = []
     this.indention = token.value
 
-    console.log('TYPE', tokenStack[0])
     while (true) {
       const nextToken = tokenStack[0]
+      if (!nextToken) {
+        break
+      }
+
       if (nextToken.type === 'indention' && nextToken.value < this.indention) {
         break
       }
 
-      this.body.push(this.createNode(tokenStack))
+      const child = this.createNode(tokenStack)
+      this.isAllowedToken(child, ALLOWED_CHILDS)
+      this.body.push(child)
     }
   }
 

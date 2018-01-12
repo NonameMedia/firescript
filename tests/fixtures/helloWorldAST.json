@@ -2,7 +2,7 @@
   "body": [
     {
       "source": {
-        "raw": "\"print\"",
+        "raw": "'print'",
         "type": "Literal",
         "value": "print"
       },
@@ -21,7 +21,7 @@
       "expression": {
         "arguments": [
           {
-            "raw": "\"Hello World!\"",
+            "raw": "'Hello World!'",
             "type": "Literal",
             "value": "Hello World!"
           }

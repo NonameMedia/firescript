@@ -1,8 +1,12 @@
+const Tokenizer = require('./FireScriptTokenizer')
 const Program = require('./fs-nodes/Program')
 
 class FireScriptParser {
   constructor (conf) {
     conf = conf || {}
+
+    this.setLocation = conf.loc || false
+    this.setRange = conf.range || false
 
     this.keyWords = 'import|func|class|const|let|var|return'
     this.punctationChars = '[.=(){},+*/-]'
@@ -15,113 +19,12 @@ class FireScriptParser {
   }
 
   tokenize (source) {
-    const reg = new RegExp(`(\\n\\s*)|(${this.keyWords})|(${this.punctationChars})|(${this.literalPattern})|([a-zA-Z][a-zA-Z0-9$_-]*)`, 'g')
-    const token = []
-    let lineNum = 1
-    let lastEOLIndex = 0
+    const tokenizer = new Tokenizer({
+      range: this.setRange || false,
+      loc: true
+    })
 
-    while (true) {
-      const match = reg.exec(source)
-      if (!match) {
-        break
-      }
-
-      // console.log(match)
-      if (match[1] !== undefined) {
-        const indention = match[1].substr(match[1].lastIndexOf('\n') + 1)
-        lastEOLIndex = reg.lastIndex - indention.length
-
-        const item = {
-          type: 'indention',
-          value: indention.length
-        }
-
-        if (this.showIndex) {
-          item.index = [reg.lastIndex - indention.length, reg.lastIndex]
-        }
-
-        if (this.showLines) {
-          item.line = [lineNum += 1, 1]
-        }
-
-        token.push(item)
-        continue
-      }
-
-      if (match[2] !== undefined) {
-        const item = {
-          type: 'keyword',
-          value: match[2]
-        }
-
-        if (this.showIndex) {
-          item.index = [reg.lastIndex - match[2].length, reg.lastIndex]
-        }
-
-        if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[2].length + 1]
-        }
-
-        token.push(item)
-        continue
-      }
-
-      if (match[3] !== undefined) {
-        const item = {
-          type: 'punctation',
-          value: match[3]
-        }
-
-        if (this.showIndex) {
-          item.index = [reg.lastIndex - match[3].length, reg.lastIndex]
-        }
-
-        if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[3].length + 1]
-        }
-
-        token.push(item)
-        continue
-      }
-
-      if (match[4] !== undefined) {
-        const item = {
-          type: 'literal',
-          value: match[4]
-        }
-
-        if (this.showIndex) {
-          item.index = [reg.lastIndex - match[4].length, reg.lastIndex]
-        }
-
-        if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[4].length + 1]
-        }
-
-        token.push(item)
-        continue
-      }
-
-      if (match[5] !== undefined) {
-        const item = {
-          type: 'identifier',
-          value: match[5]
-        }
-
-        if (this.showIndex) {
-          item.index = [reg.lastIndex - match[5].length, reg.lastIndex]
-        }
-
-        if (this.showLines) {
-          item.line = [lineNum, reg.lastIndex - lastEOLIndex - match[5].length + 1]
-        }
-
-        token.push(item)
-        continue
-      }
-    }
-
-    return token
+    return tokenizer.tokenize(source)
   }
 
   parse (source) {
@@ -170,13 +73,13 @@ class FireScriptParser {
   syntaxError (err) {
     const token = err.token
     const source = this.__input.split(/\n/g)
-    const startLine = Math.max(0, token.line[0] - 3)
-    const endLine = Math.max(0, token.line[0])
+    const startLine = Math.max(0, token.loc.start[0] - 3)
+    const endLine = Math.max(0, token.loc.start[0])
     const previewArr = source.slice(startLine, endLine)
     const preview = previewArr.map((line, index) => {
       const lineNum = ` ${startLine + index + 1}`.slice(String(endLine).length)
       return `${lineNum} | ${line}\n`
-    }).join('').concat(`${' '.repeat(token.line[1] + String(endLine).length + 2)}^\n`)
+    }).join('').concat(`${' '.repeat(token.loc.start[1] + String(endLine).length + 3)}^\n`)
 
     err.message = `${err.message}\n\n${preview}`
     err.stack = '\n\n' + err.callStack.join('\n') + '\n\n' + err.stack

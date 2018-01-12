@@ -15,7 +15,10 @@ class VariableDeclaration extends FireScriptNode {
 
     while (true) {
       const nextToken = tokenStack[0]
-      console.log('NEXT', nextToken)
+      if (!nextToken) {
+        break
+      }
+
       if (nextToken.type === 'punctation' && nextToken.value === ',') {
         tokenStack.shift()
         this.declarations.push(this.createVariableDeclaratorNode(tokenStack))

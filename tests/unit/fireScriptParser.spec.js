@@ -9,7 +9,7 @@ const helloWorldAST = require('../fixtures/helloWorldAST.json')
 
 describe('FireScriptParser', () => {
   describe('parse()', () => {
-    it('Parse a .fs into AST', () => {
+    it('Parse a .fire into AST', () => {
       const FireScript = new FireScriptParser()
       const ast = FireScript.parse(helloWorldFS)
       inspect(ast).isObject()

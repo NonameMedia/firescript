@@ -40,11 +40,23 @@ class FireScriptNode {
       if (nextToken.value === 'return') {
         return this.getNodeInstance('ReturnStatement', tokenStack)
       }
+
+      if (nextToken.value === 'super') {
+        return this.getNodeInstance('Super', tokenStack)
+      }
     }
 
     if (nextToken.type === 'identifier') {
       if (this.lookForward(tokenStack, 'punctation', '=', 1)) {
         return this.getNodeInstance('ExpressionStatement', tokenStack)
+      }
+
+      if (this.lookForward(tokenStack, 'punctation', '(', 1)) {
+        return this.getNodeInstance('ExpressionStatement', tokenStack)
+      }
+
+      if (nextToken.value === 'this') {
+        return this.getNodeInstance('ThisExpression', tokenStack)
       }
 
       return this.getNodeInstance('Identifier', tokenStack)
@@ -76,6 +88,10 @@ class FireScriptNode {
     return this.getNodeInstance('AssignmentExpression', tokenStack)
   }
 
+  createCallExpressionNode (tokenStack) {
+    return this.getNodeInstance('CallExpression', tokenStack)
+  }
+
   createImportDefaultSpecifierNode (tokenStack) {
     return this.getNodeInstance('ImportDefaultSpecifier', tokenStack)
   }
@@ -85,6 +101,7 @@ class FireScriptNode {
   }
 
   lookForward (tokenStack, type, value, index) {
+    index = index || 0
     const token = tokenStack[index]
     if (!token) {
       return false
@@ -98,7 +115,7 @@ class FireScriptNode {
   }
 
   syntaxError (message, token) {
-    const err = new SyntaxError(`${message} at line ${token.line[0]} at column ${token.line[1]}`)
+    const err = new SyntaxError(`${message} at line ${token.loc.start[0]} at column ${token.loc.start[1] + 1}`)
     err.token = token
     err.callStack = this.callStack
     throw err
@@ -119,6 +136,10 @@ class FireScriptNode {
     let node = this.createNode(tokenStack)
     while (true) {
       const nextToken = tokenStack[0]
+      if (!nextToken) {
+        break
+      }
+
       if (this.isBinaryOperator(nextToken)) {
         const binaryNode = this.createNode(tokenStack)
         binaryNode.left = node
@@ -137,6 +158,12 @@ class FireScriptNode {
 
   isBinaryOperator (token) {
     return token.type === 'punctation' && this.binaryOperatorPattern.test(token.value)
+  }
+
+  isAllowedToken (token, validTokens) {
+    if (!validTokens.includes(token.type)) {
+      this.syntaxError(`Token ${token.type} not allowed here`, token)
+    }
   }
 }
 

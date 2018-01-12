@@ -11,7 +11,7 @@ class FunctionDeclaration extends FireScriptElement {
 
   toString () {
     const indention = this.indentionStr()
-    return `${indention}func ${this.id} (${this.params.join(', ')})\n${this.body}`
+    return `${indention}func ${this.id} (${this.params.join(', ')})\n${this.body}\n`
   }
 }
 

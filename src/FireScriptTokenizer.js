@@ -3,11 +3,12 @@ class FireSciptTokenizer {
     opts = opts || {}
     this.setRange = opts.range || false
     this.setLocation = opts.loc || false
-    this.keyWords = ['class', 'const', 'export', 'func', 'import', 'let', 'return', 'var']
+    this.keyWords = ['class', 'const', 'export', 'func', 'import', 'let', 'return', 'super', 'var']
     this.punctationChars = '[.=(){},+*/-]'
     this.literalPattern = '\'[^]+?\'|\\d+'
 
     this.token = []
+    this.lineNums = []
   }
 
   tokenize (source) {
@@ -65,13 +66,12 @@ class FireSciptTokenizer {
       value
     }
 
+    const len = typeof value === 'string' ? value.length : value
     if (this.setRange) {
-      const len = typeof value === 'string' ? value.length : value
       item.range = [this.lastIndex - len, this.lastIndex]
     }
 
     if (this.setLocation) {
-      const len = typeof value === 'string' ? value.length : value
       const indexEnd = this.lastIndex - this.lastEOLIndex
       const indexStart = indexEnd - len
 
@@ -84,6 +84,7 @@ class FireSciptTokenizer {
     }
 
     this.token.push(item)
+    this.lineNums.push([this.lineNum, this.lastIndex - this.lastEOLIndex - len])
   }
 
   countLineBreaks (str) {

@@ -1,6 +1,7 @@
 const path = require('path')
 const inspect = require('inspect.js')
 const SuperFS = require('superfs')
+const FireScriptTokenizer = require('../../').FireScriptTokenizer
 const FireScriptParser = require('../../').FireScriptParser
 const FireScriptTranspiler = require('../../').FireScriptTranspiler
 const JSParser = require('../../').JSParser
@@ -35,7 +36,6 @@ describe('Integrtion test runner', () => {
             const parser = new JSParser()
             jsAST = parser.parseAST(source)
             inspect(jsAST).isObject()
-            inspect(jsAST).isObject()
           })
 
           it(`Transpile AST into FS`, () => {
@@ -50,10 +50,7 @@ describe('Integrtion test runner', () => {
           })
 
           it(`Tokenize FS`, () => {
-            const parser = new FireScriptParser({
-              index: false,
-              lines: false
-            })
+            const parser = new FireScriptTokenizer()
             fsToken = parser.tokenize(fsSource)
             inspect(fsToken).isArray()
           })

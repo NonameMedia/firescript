@@ -9,7 +9,7 @@ class FunctionDeclaration extends FireScriptNode {
       this.syntaxError('Unexpected token', token)
     }
 
-    this.id = this.createNode(tokenStack)
+    this.id = this.createIdentifierNode(tokenStack)
     this.params = []
 
     token = tokenStack.shift()
@@ -32,6 +32,7 @@ class FunctionDeclaration extends FireScriptNode {
         }
       }
     } else {
+      console.log(token)
       this.syntaxError('Function arguments expected', token)
     }
 
