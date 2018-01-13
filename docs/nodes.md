@@ -9,7 +9,7 @@ ObjectPattern
 ThisExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
 Identifier                            [ (x) Unittest (x) Parser (-) Transpiler ]
 Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
-ArrayExpression
+ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ObjectExpression
 Property
 FunctionExpression
@@ -59,7 +59,6 @@ VariableDeclaration
 VariableDeclarator
 WhileStatement
 WithStatement
-Program
 Program
 ImportDeclaration
 ImportSpecifier

@@ -70,6 +70,10 @@ class FireScriptNode {
       if (this.binaryOperatorPattern.test(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
+
+      if (nextToken.value === '[') {
+        return this.getNodeInstance('ArrayExpression', tokenStack)
+      }
     }
 
     console.log('UNUSED TOKEN', nextToken)
