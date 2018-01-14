@@ -84,7 +84,7 @@ describe('Literal', () => {
 
     it('returns a fs-node litteral item of type number', () => {
       const tokenStack = [
-        { 'type': 'literal', 'value': '123' }
+        { 'type': 'numeric', 'value': '123' }
       ]
 
       const node = new Literal(tokenStack)

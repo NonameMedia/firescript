@@ -31,12 +31,22 @@ class ArrayExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
+    const token = tokenStack.shift()
+    if (token.type !== 'punctuator' && token.value !== '[') {
+      this.syntaxError('Array declaration expected', token)
+    }
+
     this.elements = []
 
     while (true) {
-      if (this.lookForward(tokenStack, 'punctation', ']')) {
+      if (this.lookForward(tokenStack, 'punctuator', ']')) {
         tokenStack.shift()
         break
+      }
+
+      if (this.lookForward(tokenStack, 'punctuator', ',')) {
+        tokenStack.shift()
+        continue
       }
 
       const elements = this.createNode(tokenStack)

@@ -13,10 +13,10 @@ class FunctionDeclaration extends FireScriptNode {
     this.params = []
 
     token = tokenStack.shift()
-    if (token.type === 'punctation' && token.value === '(') {
+    if (token.type === 'punctuator' && token.value === '(') {
       while (true) {
         const nextToken = tokenStack[0]
-        if (nextToken.type === 'punctation' && nextToken.value === ')') {
+        if (nextToken.type === 'punctuator' && nextToken.value === ')') {
           tokenStack.shift()
           break
         }
@@ -26,7 +26,7 @@ class FunctionDeclaration extends FireScriptNode {
           continue
         }
 
-        if (nextToken.type === 'punctation' && nextToken.value === ',') {
+        if (nextToken.type === 'punctuator' && nextToken.value === ',') {
           tokenStack.shift()
           continue
         }

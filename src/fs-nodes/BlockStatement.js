@@ -48,6 +48,11 @@ class BlockStatement extends FireScriptNode {
       }
 
       const child = this.createNode(tokenStack)
+      if (!child) {
+        break
+      }
+
+      console.log('CHILD', child)
       this.isAllowedToken(child, ALLOWED_CHILDS)
       this.body.push(child)
     }

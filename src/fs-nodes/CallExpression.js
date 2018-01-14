@@ -9,17 +9,17 @@ class CallExpression extends FireScriptNode {
 
     let token = tokenStack.shift()
 
-    if (token.type !== 'punctation' && token.value !== '(') {
+    if (token.type !== 'punctuator' && token.value !== '(') {
       this.syntaxError('Unexpected token', token)
     }
 
     while (true) {
-      if (this.lookForward(tokenStack, 'punctation', ')')) {
+      if (this.lookForward(tokenStack, 'punctuator', ')')) {
         token = tokenStack.shift()
         break
       }
 
-      if (this.lookForward(tokenStack, 'punctation', ',')) {
+      if (this.lookForward(tokenStack, 'punctuator', ',')) {
         token = tokenStack.shift()
         continue
       }

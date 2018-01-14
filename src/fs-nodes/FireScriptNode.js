@@ -47,11 +47,11 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'identifier') {
-      if (this.lookForward(tokenStack, 'punctation', '=', 1)) {
+      if (this.lookForward(tokenStack, 'operator', '=', 1)) {
         return this.getNodeInstance('ExpressionStatement', tokenStack)
       }
 
-      if (this.lookForward(tokenStack, 'punctation', '(', 1)) {
+      if (this.lookForward(tokenStack, 'punctuator', '(', 1)) {
         return this.getNodeInstance('ExpressionStatement', tokenStack)
       }
 
@@ -66,13 +66,19 @@ class FireScriptNode {
       return this.getNodeInstance('Literal', tokenStack)
     }
 
-    if (nextToken.type === 'punctation') {
-      if (this.binaryOperatorPattern.test(nextToken.value)) {
-        return this.getNodeInstance('BinaryExpression', tokenStack)
-      }
+    if (nextToken.type === 'numeric') {
+      return this.getNodeInstance('Literal', tokenStack)
+    }
 
+    if (nextToken.type === 'punctuator') {
       if (nextToken.value === '[') {
         return this.getNodeInstance('ArrayExpression', tokenStack)
+      }
+    }
+
+    if (nextToken.type === 'operator') {
+      if (this.binaryOperatorPattern.test(nextToken.value)) {
+        return this.getNodeInstance('BinaryExpression', tokenStack)
       }
     }
 
@@ -119,7 +125,10 @@ class FireScriptNode {
   }
 
   syntaxError (message, token) {
-    const err = new SyntaxError(`${message} at line ${token.loc.start[0]} at column ${token.loc.start[1] + 1}`)
+    const lineNum = token && token.loc ? token.loc.start[0] : ''
+    const colNum = token && token.loc ? token.loc.start[1] : ''
+    const errMessage = lineNum ? `${message} at line ${lineNum} at column ${colNum + 1}` : message
+    const err = new SyntaxError(errMessage)
     err.token = token
     err.callStack = this.callStack
     throw err
@@ -129,7 +138,10 @@ class FireScriptNode {
     const nextToken = tokenStack[0]
     this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
-    return new Node(tokenStack, this)
+    const node = new Node(tokenStack, this)
+    node.lineNum = nextToken.loc.start[0]
+    node.colNum = nextToken.loc.start[1]
+    return node
   }
 
   getPreviousSibling () {
@@ -157,16 +169,16 @@ class FireScriptNode {
   }
 
   isAssignmentOperator (token) {
-    return token.type === 'punctation' && this.assignmentOperatorPattern.test(token.value)
+    return token.type === 'operator' && this.assignmentOperatorPattern.test(token.value)
   }
 
   isBinaryOperator (token) {
-    return token.type === 'punctation' && this.binaryOperatorPattern.test(token.value)
+    return token.type === 'operator' && this.binaryOperatorPattern.test(token.value)
   }
 
-  isAllowedToken (token, validTokens) {
-    if (!validTokens.includes(token.type)) {
-      this.syntaxError(`Token ${token.type} not allowed here`, token)
+  isAllowedToken (child, validTokens, token) {
+    if (!validTokens.includes(child.type)) {
+      this.syntaxError(`Token ${child.type} not allowed within a ${child.parent.type}`, token)
     }
   }
 }

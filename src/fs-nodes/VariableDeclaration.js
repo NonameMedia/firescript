@@ -19,10 +19,10 @@ class VariableDeclaration extends FireScriptNode {
         break
       }
 
-      if (nextToken.type === 'punctation' && nextToken.value === ',') {
+      if (nextToken.type === 'punctuator' && nextToken.value === ',') {
         tokenStack.shift()
         this.declarations.push(this.createVariableDeclaratorNode(tokenStack))
-      } else if (nextToken.type === 'identifier' || nextToken.type === 'punctation') {
+      } else if (nextToken.type === 'identifier' || nextToken.type === 'operator') {
         this.declarations.push(this.createVariableDeclaratorNode(tokenStack))
       } else {
         break

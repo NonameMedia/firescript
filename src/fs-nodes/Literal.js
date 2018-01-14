@@ -7,12 +7,14 @@ class Literal extends FireScriptNode {
     const token = tokenStack.shift()
     this.raw = token.value
 
-    if (/^["'`]/.test(token.value)) {
+    if (token.type === 'numeric') {
+      if (/^\d+$/.test(token.value)) {
+        this.value = parseInt(token.value, 10)
+      } else if (/^\d+\.\d+$/.test(token.value)) {
+        this.value = parseFloat(token.value, 10)
+      }
+    } else if (/^["'`]/.test(token.value)) {
       this.value = token.value.slice(1, -1)
-    } else if (/^\d+$/.test(token.value)) {
-      this.value = parseInt(token.value, 10)
-    } else if (/^\d+\.\d+$/.test(token.value)) {
-      this.value = parseFloat(token.value, 10)
     } else if (token.value === 'true') {
       this.value = true
     } else if (token.value === 'false') {

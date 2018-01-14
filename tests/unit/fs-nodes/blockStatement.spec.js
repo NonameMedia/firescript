@@ -7,7 +7,7 @@ describe('BlockStatement', () => {
       { 'type': 'indention', 'value': 2 },
       { 'type': 'keyword', 'value': 'const' },
       { 'type': 'identifier', 'value': 'res' },
-      { 'type': 'punctation', 'value': '=' },
+      { 'type': 'operator', 'value': '=' },
       { 'type': 'identifier', 'value': 'num1' }
     ]
 

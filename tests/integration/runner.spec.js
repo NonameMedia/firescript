@@ -27,7 +27,6 @@ describe('Integrtion test runner', () => {
         describe(`of ${group}`, () => {
           let jsAST
           let fsAST
-          let jsSource
           let fsSource
           let fsToken
 
