@@ -4,19 +4,19 @@ class ImportDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    let token = tokenStack.shift()
+    let token = tokenStack.next()
     if (!token.type === 'import') {
       this.syntaxError(`${token.value} is not a import declaration`)
     }
 
     this.specifiers = []
-    this.hasDefaultSpecifier = this.lookForward(tokenStack, 'identifier', 'from', 1)
+    this.hasDefaultSpecifier = tokenStack.lookForward('identifier', 'from', 1)
 
     while (true) {
-      const nextToken = tokenStack[0]
+      const nextToken = tokenStack.current()
       if (nextToken.type === 'identifier') {
         if (nextToken.value === 'from') {
-          tokenStack.shift()
+          tokenStack.next()
           break
         }
 
@@ -26,7 +26,7 @@ class ImportDeclaration extends FireScriptNode {
           this.specifiers.push(this.createImportSpecifierNode(tokenStack))
         }
       } else if (nextToken.type === 'punctuator' && nextToken.value === ',') {
-        tokenStack.shift()
+        tokenStack.next()
         continue
       } else {
         this.syntaxError('Unexpected token', nextToken)

@@ -4,7 +4,7 @@ class VariableDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (!['var', 'let', 'const'].includes(token.value)) {
       this.syntaxError('Unexpected token, var let or const expected', token)
@@ -14,13 +14,13 @@ class VariableDeclaration extends FireScriptNode {
     this.declarations = []
 
     while (true) {
-      const nextToken = tokenStack[0]
+      const nextToken = tokenStack.current()
       if (!nextToken) {
         break
       }
 
       if (nextToken.type === 'punctuator' && nextToken.value === ',') {
-        tokenStack.shift()
+        tokenStack.next()
         this.declarations.push(this.createVariableDeclaratorNode(tokenStack))
       } else if (nextToken.type === 'identifier' || nextToken.type === 'operator') {
         this.declarations.push(this.createVariableDeclaratorNode(tokenStack))

@@ -4,7 +4,7 @@ class Identifier extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.type !== 'identifier') {
       this.syntaxError(`Identifier expected, but a ${token.type} was given`, token)

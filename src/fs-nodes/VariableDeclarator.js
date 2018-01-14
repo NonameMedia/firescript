@@ -10,8 +10,8 @@ class VariableDeclarator extends FireScriptNode {
 
     this.id = this.createIdentifierNode(tokenStack)
 
-    if (this.lookForward(tokenStack, 'operator', '=')) {
-      tokenStack.shift()
+    if (tokenStack.expect('operator', '=')) {
+      tokenStack.goForward()
       this.init = this.getNextValueNodes(tokenStack)
     }
   }

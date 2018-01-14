@@ -5,7 +5,7 @@ class AssignmentExpression extends FireScriptNode {
     super(parent)
 
     this.left = this.createIdentifierNode(tokenStack)
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.type !== 'operator' && !this.assignmentOperatorPattern.test(token.value)) {
       this.syntaxError('Token is not a assignment operator', token)

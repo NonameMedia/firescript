@@ -4,7 +4,7 @@ class Literal extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
     this.raw = token.value
 
     if (token.type === 'numeric') {

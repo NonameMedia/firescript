@@ -1,3 +1,5 @@
+const TokenStack = require('./TokenStack')
+
 class FireSciptTokenizer {
   constructor (opts) {
     opts = opts || {}
@@ -16,7 +18,7 @@ class FireSciptTokenizer {
     this.literalPattern = '\'[^]+?\'|true|false|null'
     this.numericPattern = '-?\\d+'
 
-    this.token = []
+    this.token = new TokenStack()
     this.lineNums = []
   }
 

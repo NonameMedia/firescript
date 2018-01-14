@@ -4,7 +4,7 @@ class Super extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.type !== 'identifier' && token.value !== 'this') {
       this.syntaxError(`Super expected, but a ${token.type} was given`, token)

@@ -4,13 +4,12 @@ class ReturnStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.value !== 'return') {
       this.syntaxError('Unexpected token', token)
     }
 
-    console.log('TYPE', tokenStack[0])
     this.argument = this.createNode(tokenStack)
   }
 

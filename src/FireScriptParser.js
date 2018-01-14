@@ -30,7 +30,6 @@ class FireScriptParser {
   parse (source) {
     const token = this.tokenize(source)
     this.__input = source
-    console.log('TOKEN', token)
 
     try {
       const ast = new Program(token)

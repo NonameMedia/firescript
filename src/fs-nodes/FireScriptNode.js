@@ -9,7 +9,7 @@ class FireScriptNode {
   }
 
   createNode (tokenStack) {
-    const nextToken = tokenStack[0]
+    const nextToken = tokenStack.current()
     if (!nextToken) {
       return null
     }
@@ -18,7 +18,7 @@ class FireScriptNode {
       if (this.indention < nextToken.value) {
         return this.getNodeInstance('BlockStatement', tokenStack)
       } else {
-        tokenStack.shift()
+        tokenStack.next()
       }
 
       return this.createNode(tokenStack)
@@ -47,11 +47,11 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'identifier') {
-      if (this.lookForward(tokenStack, 'operator', '=', 1)) {
+      if (tokenStack.lookForward('operator', '=', 1)) {
         return this.getNodeInstance('ExpressionStatement', tokenStack)
       }
 
-      if (this.lookForward(tokenStack, 'punctuator', '(', 1)) {
+      if (tokenStack.lookForward('punctuator', '(', 1)) {
         return this.getNodeInstance('ExpressionStatement', tokenStack)
       }
 
@@ -110,20 +110,6 @@ class FireScriptNode {
     return this.getNodeInstance('ImportSpecifier', tokenStack)
   }
 
-  lookForward (tokenStack, type, value, index) {
-    index = index || 0
-    const token = tokenStack[index]
-    if (!token) {
-      return false
-    }
-
-    if (value && token.value !== value) {
-      return false
-    }
-
-    return token.type === type
-  }
-
   syntaxError (message, token) {
     const lineNum = token && token.loc ? token.loc.start[0] : ''
     const colNum = token && token.loc ? token.loc.start[1] : ''
@@ -135,7 +121,7 @@ class FireScriptNode {
   }
 
   getNodeInstance (nodeName, tokenStack) {
-    const nextToken = tokenStack[0]
+    const nextToken = tokenStack.current()
     this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
     const node = new Node(tokenStack, this)
@@ -151,7 +137,7 @@ class FireScriptNode {
   getNextValueNodes (tokenStack) {
     let node = this.createNode(tokenStack)
     while (true) {
-      const nextToken = tokenStack[0]
+      const nextToken = tokenStack.current()
       if (!nextToken) {
         break
       }

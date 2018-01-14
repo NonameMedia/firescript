@@ -7,9 +7,9 @@ class ImportSpecifier extends FireScriptNode {
     this.imported = this.createIdentifierNode(tokenStack)
     this.local = this.imported
 
-    const nextToken = tokenStack[0]
+    const nextToken = tokenStack.current()
     if (nextToken.value === 'as') {
-      tokenStack.shift()
+      tokenStack.next()
       this.local = this.createIdentifierNode(tokenStack)
     }
   }

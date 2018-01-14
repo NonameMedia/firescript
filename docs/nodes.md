@@ -10,7 +10,7 @@ ThisExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
 Identifier                            [ (x) Unittest (x) Parser (-) Transpiler ]
 Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
 ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
-ObjectExpression
+ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Property
 FunctionExpression
 ArrowFunctionExpression

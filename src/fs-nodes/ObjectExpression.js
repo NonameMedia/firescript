@@ -27,7 +27,7 @@ const ALLOWED_ELEMENTS = [
   'SpreadElement'
 ]
 
-class ArrayExpression extends FireScriptNode {
+class ObjectExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
@@ -40,12 +40,12 @@ class ArrayExpression extends FireScriptNode {
 
     while (true) {
       if (tokenStack.lookForward('punctuator', ']')) {
-        tokenStack.next()
+        tokenStack.goForward()
         break
       }
 
       if (tokenStack.lookForward('punctuator', ',')) {
-        tokenStack.next()
+        tokenStack.goForward()
         continue
       }
 
@@ -57,10 +57,10 @@ class ArrayExpression extends FireScriptNode {
 
   toJSON () {
     return {
-      type: 'ArrayExpression',
+      type: 'ObjectExpression',
       elements: this.elements.map((item) => item.toJSON())
     }
   }
 }
 
-module.exports = ArrayExpression
+module.exports = ObjectExpression

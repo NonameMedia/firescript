@@ -4,7 +4,7 @@ class BinaryExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.type !== 'operator' && !this.binaryOperatorPattern.test(token.value)) {
       this.syntaxError('Token is not a binary operator', token)

@@ -4,7 +4,7 @@ class FunctionDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    let token = tokenStack.shift()
+    let token = tokenStack.next()
     if (!token.value === 'func') {
       this.syntaxError('Unexpected token', token)
     }
@@ -12,28 +12,29 @@ class FunctionDeclaration extends FireScriptNode {
     this.id = this.createIdentifierNode(tokenStack)
     this.params = []
 
-    token = tokenStack.shift()
-    if (token.type === 'punctuator' && token.value === '(') {
+    if (tokenStack.expect('punctuator', '(')) {
+      tokenStack.goForward()
+
       while (true) {
-        const nextToken = tokenStack[0]
-        if (nextToken.type === 'punctuator' && nextToken.value === ')') {
-          tokenStack.shift()
+        if (tokenStack.expect('punctuator', ')')) {
+          tokenStack.goForward()
           break
         }
 
-        if (nextToken.type === 'identifier') {
+        if (tokenStack.expect('punctuator', ',')) {
+          tokenStack.goForward()
+          continue
+        }
+
+        if (tokenStack.expect('identifier')) {
           this.params.push(this.createNode(tokenStack))
           continue
         }
 
-        if (nextToken.type === 'punctuator' && nextToken.value === ',') {
-          tokenStack.shift()
-          continue
-        }
+        this.syntaxError('Identifier expected', tokenStack.current())
       }
     } else {
-      console.log(token)
-      this.syntaxError('Function arguments expected', token)
+      this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
     this.body = this.createNode(tokenStack)

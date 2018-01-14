@@ -7,20 +7,20 @@ class CallExpression extends FireScriptNode {
     this.callee = this.createIdentifierNode(tokenStack)
     this.arguments = []
 
-    let token = tokenStack.shift()
-
-    if (token.type !== 'punctuator' && token.value !== '(') {
-      this.syntaxError('Unexpected token', token)
+    if (!tokenStack.expect('punctuator', '(')) {
+      this.syntaxError('Unexpected token', tokenStack.current())
     }
 
+    tokenStack.goForward()
+
     while (true) {
-      if (this.lookForward(tokenStack, 'punctuator', ')')) {
-        token = tokenStack.shift()
+      if (tokenStack.expect('punctuator', ')')) {
+        tokenStack.goForward()
         break
       }
 
-      if (this.lookForward(tokenStack, 'punctuator', ',')) {
-        token = tokenStack.shift()
+      if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.goForward()
         continue
       }
 

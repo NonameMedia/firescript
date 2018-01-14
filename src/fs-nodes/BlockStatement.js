@@ -28,7 +28,7 @@ class BlockStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.shift()
+    const token = tokenStack.next()
 
     if (token.type !== 'indention') {
       this.syntaxError('Unexpected token', token)
@@ -38,7 +38,7 @@ class BlockStatement extends FireScriptNode {
     this.indention = token.value
 
     while (true) {
-      const nextToken = tokenStack[0]
+      const nextToken = tokenStack.current()
       if (!nextToken) {
         break
       }
@@ -52,7 +52,6 @@ class BlockStatement extends FireScriptNode {
         break
       }
 
-      console.log('CHILD', child)
       this.isAllowedToken(child, ALLOWED_CHILDS)
       this.body.push(child)
     }

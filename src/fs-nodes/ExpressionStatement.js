@@ -4,9 +4,9 @@ class ExpressionStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    if (this.lookForward(tokenStack, 'operator', '=', 1)) {
+    if (tokenStack.lookForward('operator', '=', 1)) {
       this.expression = this.createAssignmentNode(tokenStack)
-    } else if (this.lookForward(tokenStack, 'punctuator', '(', 1)) {
+    } else if (tokenStack.lookForward('punctuator', '(', 1)) {
       this.expression = this.createCallExpressionNode(tokenStack)
     }
   }
