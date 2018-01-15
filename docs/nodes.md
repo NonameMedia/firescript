@@ -71,21 +71,44 @@ ExportSpecifier
 
 --
 
+## Expressions and Patterns
+
+A binding pattern can be one of the following:
+
+```ts
+type BindingPattern = ArrayPattern | ObjectPattern;
+```
+
+An expression can be one of the following:
+
+```ts
+type Expression = ThisExpression | Identifier | Literal |
+    ArrayExpression | ObjectExpression | FunctionExpression | ArrowFunctionExpression | ClassExpression |
+    TaggedTemplateExpression | MemberExpression | Super | MetaProperty |
+    NewExpression | CallExpression | UpdateExpression | AwaitExpression | UnaryExpression |
+    BinaryExpression | LogicalExpression | ConditionalExpression |
+    YieldExpression | AssignmentExpression | SequenceExpression;
+```
+
 Array Pattern
 
+```ts
 interface ArrayPattern {
     type: 'ArrayPattern';
     elements: ArrayPatternElement[];
 }
+```
 
 with
 
+```ts
 type ArrayPatternElement = AssignmentPattern | Identifier | BindingPattern | RestElement | null;
 
 interface RestElement {
     type: 'RestElement';
     argument: Identifier | BindingPattern;
 }
+```
 
 Assignment Pattern
 

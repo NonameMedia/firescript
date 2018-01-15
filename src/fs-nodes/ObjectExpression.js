@@ -32,14 +32,14 @@ class ObjectExpression extends FireScriptNode {
     super(parent)
 
     const token = tokenStack.next()
-    if (token.type !== 'punctuator' && token.value !== '[') {
+    if (token.type !== 'punctuator' && token.value !== '{') {
       this.syntaxError('Array declaration expected', token)
     }
 
     this.elements = []
 
     while (true) {
-      if (tokenStack.lookForward('punctuator', ']')) {
+      if (tokenStack.lookForward('punctuator', '}')) {
         tokenStack.goForward()
         break
       }
