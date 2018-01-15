@@ -1,7 +1,10 @@
 class TokenStack extends Array {
-  constructor () {
+  constructor (items) {
     super()
 
+    if (items) {
+      items.forEach((item) => this.push(item))
+    }
     this.index = 0
   }
 
@@ -48,6 +51,29 @@ class TokenStack extends Array {
     }
 
     return token.type === type
+  }
+
+  isIndention (indention, mode) {
+    mode = mode || 'eq'
+    const token = this.current()
+    if (token.type !== 'indention') {
+      return false
+    }
+
+    console.log('INDENT', token.value, mode, indention)
+    if (mode === 'eq') {
+      return token.value === indention
+    } else if (mode === 'lt') {
+      return token.value < indention
+    } else if (mode === 'lte') {
+      return token.value <= indention
+    } else if (mode === 'gt') {
+      return token.value > indention
+    } else if (mode === 'gte') {
+      return token.value >= indention
+    } else {
+      throw new Error(`Wrong mode param! '${mode}'`)
+    }
   }
 
   print (msg) {

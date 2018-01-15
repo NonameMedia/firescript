@@ -6,6 +6,7 @@ class FireScriptNode {
     this.binaryOperatorPattern = /^[+*/&-]$/
     this.assignmentOperatorPattern = /^[=]$/
     this.type = this.constructor.name
+    this.indentionSize = 2
   }
 
   createNode (tokenStack) {
@@ -82,7 +83,6 @@ class FireScriptNode {
       }
     }
 
-    console.log('UNUSED TOKEN', nextToken)
     this.syntaxError('Unexpected token', nextToken)
   }
 
@@ -124,10 +124,7 @@ class FireScriptNode {
     const nextToken = tokenStack.current()
     this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
-    const node = new Node(tokenStack, this)
-    node.lineNum = nextToken.loc.start[0]
-    node.colNum = nextToken.loc.start[1]
-    return node
+    return new Node(tokenStack, this)
   }
 
   getPreviousSibling () {

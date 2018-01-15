@@ -1,6 +1,9 @@
 Arrays
 ======
 
+Syntax
+------
+
 ```fire
 const arr = [ 'Foo', 'Bar' ]
 const arr = [
@@ -26,4 +29,33 @@ const arr =
   []
     'three'
     'four'
+```
+
+Output
+------
+
+```js
+const arr = [
+  'Foo',
+  'Bar'
+]
+```
+
+Allowed childs
+--------------
+
+```
+Expression | SpreadElement
+```
+
+Esprima interfaces
+------------------
+
+```ts
+interface ArrayExpression {
+    type: 'ArrayExpression';
+    elements: ArrayExpressionElement[];
+}
+
+type ArrayExpressionElement = Expression | SpreadElement;
 ```
