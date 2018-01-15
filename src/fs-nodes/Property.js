@@ -27,52 +27,37 @@ const ALLOWED_ELEMENTS = [
   'SpreadElement'
 ]
 
-class ObjectExpression extends FireScriptNode {
+class Property extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    this.properties = []
+    this.key = this.createNode(tokenStack)
 
-    if (tokenStack.expect('punctuator', '{')) {
-      this.parseCommonSyntax(tokenStack)
-    } else if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
-      this.parseBracelessSyntax(tokenStack)
-    } else {
-      this.syntaxError('Array declaration expected', tokenStack.current())
+    if (!tokenStack.expect('punctuator', ':')) {
+      this.syntaxError('Unexpected token', tokenStack.current())
     }
-  }
 
-  parseCommonSyntax (tokenStack) {
     tokenStack.goForward()
-
-    while (true) {
-      if (tokenStack.expect('punctuator', '}')) {
-        tokenStack.goForward()
-        break
-      }
-
-      if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.goForward()
-        continue
-      }
-
-      const property = this.createPropertyNode(tokenStack)
-      this.isAllowedToken(property, ALLOWED_ELEMENTS)
-      this.properties.push(property)
-    }
+    const property = this.createNode(tokenStack)
+    this.isAllowedToken(property, ALLOWED_ELEMENTS)
+    this.value = property
   }
 
   parseBracelessSyntax (tokenStack) {
     tokenStack.goForward()
     const childIndention = this.indention + this.indentionSize
+    console.log(tokenStack, this.indention, childIndention)
 
     while (true) {
+      console.log('CHECK', tokenStack.current())
       if (tokenStack.isIndention(this.indention, 'lte')) {
         tokenStack.goForward()
+        console.log('BRK')
         break
       }
 
       if (tokenStack.isIndention(childIndention, 'eq')) {
+        console.log('CONT')
         tokenStack.goForward()
         continue
       }
@@ -81,18 +66,22 @@ class ObjectExpression extends FireScriptNode {
         this.syntaxError('Invalid indention', tokenStack.current())
       }
 
-      const property = this.createPropertyNode(tokenStack)
-      this.isAllowedToken(property, ALLOWED_ELEMENTS)
-      this.properties.push(property)
+      console.log(tokenStack, this.indention, childIndention)
+      console.log(tokenStack.current())
+      const elements = this.createNode(tokenStack)
+      this.isAllowedToken(elements, ALLOWED_ELEMENTS)
+      this.elements.push(elements)
     }
   }
 
   toJSON () {
     return {
-      type: 'ObjectExpression',
-      properties: this.properties.map((item) => item.toJSON())
+      type: 'Property',
+      key: this.key.toJSON(),
+      value: this.value.toJSON(),
+      shorthand: false
     }
   }
 }
 
-module.exports = ObjectExpression
+module.exports = Property

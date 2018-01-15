@@ -1,12 +1,13 @@
 const inspect = require('inspect.js')
+const TokenStack = require('../../../src/TokenStack')
 const Literal = require('../../../src/fs-nodes/Literal')
 
 describe('Literal', () => {
   describe('instance', () => {
     it('returns a fs-node litteral item of type string', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': '\'bla\'' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
@@ -19,9 +20,9 @@ describe('Literal', () => {
     })
 
     it('returns a fs-node litteral item of type boolean (true)', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': 'true' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
@@ -34,9 +35,9 @@ describe('Literal', () => {
     })
 
     it('returns a fs-node litteral item of type boolean (false)', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': 'false' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
@@ -49,9 +50,9 @@ describe('Literal', () => {
     })
 
     it('returns a fs-node litteral item of type boolean (null)', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': 'null' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
@@ -63,9 +64,9 @@ describe('Literal', () => {
     })
 
     it('returns a fs-node litteral item of type regexp', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': '/^bla/g' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
@@ -83,9 +84,9 @@ describe('Literal', () => {
     })
 
     it('returns a fs-node litteral item of type number', () => {
-      const tokenStack = [
+      const tokenStack = new TokenStack([
         { 'type': 'numeric', 'value': '123' }
-      ]
+      ])
 
       const node = new Literal(tokenStack)
 
