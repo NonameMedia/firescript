@@ -13,7 +13,7 @@ ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Property                              [ (x) Unittest (-) Parser (-) Transpiler ]
 FunctionExpression                    [ (x) Unittest (-) Parser (-) Transpiler ]
-ArrowFunctionExpression
+ArrowFunctionExpression               [ (x) Unittest (-) Parser (-) Transpiler ]
 ClassExpression
 ClassBody
 MethodDefinition
