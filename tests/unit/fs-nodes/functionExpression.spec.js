@@ -141,5 +141,42 @@ describe('FunctionExpression', () => {
       inspect(node.expression).isFalse()
       inspect(node.generator).isTrue()
     })
+
+    it('returns a function expression node, async function', () => {
+      const tokenStack = new TokenStack([
+        { type: 'keyword', value: 'async' },
+        { type: 'identifier', value: 'blub' },
+        { type: 'punctuator', value: '(' },
+        { type: 'identifier', value: 'num1' },
+        { type: 'punctuator', value: ')' },
+        { type: 'indention', value: '2' },
+        { type: 'keyword', value: 'const' },
+        { type: 'identifier', value: 'res' },
+        { type: 'operator', value: '=' },
+        { type: 'identifier', value: 'num1' },
+        { type: 'operator', value: '+' },
+        { type: 'numeric', value: '1' },
+        { type: 'indention', value: '2' },
+        { type: 'keyword', value: 'return' },
+        { type: 'identifier', value: 'res' },
+        { type: 'indention', value: '0' }
+      ])
+
+      const node = new FunctionExpression(tokenStack)
+
+      inspect(node).isObject()
+      inspect(node.type).isEql('FunctionExpression')
+      inspect(node.id).isObject()
+      inspect(node.id.toJSON()).isEql({
+        type: 'Identifier',
+        name: 'blub'
+      })
+      inspect(node.params).isArray()
+      inspect(node.params).hasLength(1)
+      inspect(node.body).isObject()
+      inspect(node.async).isTrue()
+      inspect(node.expression).isFalse()
+      inspect(node.generator).isFalse()
+    })
   })
 })

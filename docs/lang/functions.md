@@ -14,12 +14,6 @@ func foo (num)
   return num
 ```
 
-```fire
-func foo (num)
-  num += 1
-  return num
-```
-
 
 #### Output
 
@@ -33,7 +27,7 @@ function foo (num) {
 ### Function expression
 
 ```fire
-const foo = (num) =>
+const foo = func foo (num)
   num += 1
   return num
 ```
@@ -43,6 +37,50 @@ const foo = (num) =>
 ```js
 function foo (num) {
   num += 1
+  return num
+}
+```
+
+### Generator function
+
+```fire
+gen foo (num)
+  while (true)
+    yield num += 1
+    if num > 100
+      break
+
+  return num
+```
+
+#### Output
+
+```js
+function * foo (num) {
+  while(true) {
+    yield num += 1
+    if (num > 100) {
+      break
+    }
+  }
+
+  return num
+}
+```
+
+### Async function
+
+```fire
+async foo (num)
+  await num += 1
+  return num
+```
+
+#### Output
+
+```js
+function * foo (num) {
+  await num += 1
   return num
 }
 ```

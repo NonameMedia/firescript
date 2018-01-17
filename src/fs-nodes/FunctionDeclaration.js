@@ -10,13 +10,15 @@ class FunctionDeclaration extends FireScriptNode {
     this.generator = false
 
     let token = tokenStack.next()
-    if (token.value === 'gen') {
+    if (token.value === 'async') {
+      this.async = true
+    } else if (token.value === 'gen') {
       this.generator = true
     } else if (!token.value === 'func') {
       this.syntaxError('Unexpected token', token)
     }
 
-    if (tokenStack.expect('identifier')) {
+    if (this.async || tokenStack.expect('identifier')) {
       this.id = this.createIdentifierNode(tokenStack)
     }
 

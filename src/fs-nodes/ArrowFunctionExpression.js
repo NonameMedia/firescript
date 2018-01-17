@@ -10,6 +10,11 @@ class ArrowFunctionExpression extends FireScriptNode {
     this.generator = false
     this.params = []
 
+    if (tokenStack.expect('keyword', 'async')) {
+      this.async = true
+      tokenStack.goForward()
+    }
+
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
 
