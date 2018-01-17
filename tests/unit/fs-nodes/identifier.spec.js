@@ -1,11 +1,12 @@
 const inspect = require('inspect.js')
+const TokenStack = require('../../../src/TokenStack')
 const Identifier = require('../../../src/fs-nodes/Identifier')
 
 describe('Identifier', () => {
   describe('instance', () => {
-    const tokenStack = [
+    const tokenStack = new TokenStack([
       { 'type': 'identifier', 'value': 'res' }
-    ]
+    ])
 
     it('returns a fs-node item', () => {
       const node = new Identifier(tokenStack)

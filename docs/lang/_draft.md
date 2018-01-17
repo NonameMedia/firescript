@@ -6,12 +6,13 @@ Description
 Syntax
 ------
 
+### NodeType
+
 ```fire
 
 ```
 
-Output
-------
+#### Output
 
 ```js
 
@@ -28,5 +29,12 @@ Esprima interfaces
 ------------------
 
 ```ts
+
+```
+
+Examples
+--------
+
+```fire
 
 ```

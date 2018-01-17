@@ -1,3 +1,8 @@
+const NODE_GROUPS = {
+  'BindingPattern': [
+
+  ]
+}
 class FireScriptNode {
   constructor (parent) {
     this.parent = parent || null
@@ -108,6 +113,10 @@ class FireScriptNode {
 
   createImportSpecifierNode (tokenStack) {
     return this.getNodeInstance('ImportSpecifier', tokenStack)
+  }
+
+  createPropertyNode (tokenStack) {
+    return this.getNodeInstance('Property', tokenStack)
   }
 
   syntaxError (message, token) {

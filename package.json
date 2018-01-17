@@ -24,6 +24,7 @@
     "inspect.js": "1.9.0",
     "lagoon-reporter": "0.3.4",
     "mocha": "4.0.1",
+    "prettier": "1.10.2",
     "superfs": "0.7.0"
   },
   "dependencies": {

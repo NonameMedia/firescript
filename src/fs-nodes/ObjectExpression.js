@@ -1,64 +1,73 @@
 const FireScriptNode = require('./FireScriptNode')
 
 const ALLOWED_ELEMENTS = [
-  'ThisExpression',
-  'Identifier',
-  'Literal',
-  'ArrayExpression',
-  'ObjectExpression',
-  'FunctionExpression',
-  'ArrowFunctionExpression',
-  'ClassExpression',
-  'TaggedTemplateExpression',
-  'MemberExpression',
-  'Super',
-  'MetaProperty',
-  'NewExpression',
-  'CallExpression',
-  'UpdateExpression',
-  'AwaitExpression',
-  'UnaryExpression',
-  'BinaryExpression',
-  'LogicalExpression',
-  'ConditionalExpression',
-  'YieldExpression',
-  'AssignmentExpression',
-  'SequenceExpression',
-  'SpreadElement'
+  'Property'
 ]
 
 class ObjectExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    const token = tokenStack.next()
-    if (token.type !== 'punctuator' && token.value !== '{') {
-      this.syntaxError('Array declaration expected', token)
-    }
+    this.properties = []
 
-    this.elements = []
+    if (tokenStack.expect('punctuator', '{')) {
+      this.parseCommonSyntax(tokenStack)
+    } else if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
+      this.parseBracelessSyntax(tokenStack)
+    } else {
+      this.syntaxError('Array declaration expected', tokenStack.current())
+    }
+  }
+
+  parseCommonSyntax (tokenStack) {
+    tokenStack.goForward()
 
     while (true) {
-      if (tokenStack.lookForward('punctuator', '}')) {
+      if (tokenStack.expect('punctuator', '}')) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.lookForward('punctuator', ',')) {
+      if (tokenStack.expect('punctuator', ',')) {
         tokenStack.goForward()
         continue
       }
 
-      const elements = this.createNode(tokenStack)
-      this.isAllowedToken(elements, ALLOWED_ELEMENTS)
-      this.elements.push(elements)
+      const property = this.createPropertyNode(tokenStack)
+      this.isAllowedToken(property, ALLOWED_ELEMENTS)
+      this.properties.push(property)
+    }
+  }
+
+  parseBracelessSyntax (tokenStack) {
+    tokenStack.goForward()
+    const childIndention = this.indention + this.indentionSize
+
+    while (true) {
+      if (tokenStack.isIndention(this.indention, 'lte')) {
+        tokenStack.goForward()
+        break
+      }
+
+      if (tokenStack.isIndention(childIndention, 'eq')) {
+        tokenStack.goForward()
+        continue
+      }
+
+      if (tokenStack.expect('indention')) {
+        this.syntaxError('Invalid indention', tokenStack.current())
+      }
+
+      const property = this.createPropertyNode(tokenStack)
+      this.isAllowedToken(property, ALLOWED_ELEMENTS)
+      this.properties.push(property)
     }
   }
 
   toJSON () {
     return {
       type: 'ObjectExpression',
-      elements: this.elements.map((item) => item.toJSON())
+      properties: this.properties.map((item) => item.toJSON())
     }
   }
 }

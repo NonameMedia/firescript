@@ -60,7 +60,7 @@ Allowed childs
 The list shows all allowed childs of an ObjectExpression.
 
 ```
-AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null
+Literal | AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null
 ```
 
 Esprima interfaces
