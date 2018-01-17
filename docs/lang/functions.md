@@ -14,6 +14,13 @@ func foo (num)
   return num
 ```
 
+```fire
+func foo (num)
+  num += 1
+  return num
+```
+
+
 #### Output
 
 ```js

@@ -12,7 +12,7 @@ Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
 ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Property                              [ (x) Unittest (-) Parser (-) Transpiler ]
-FunctionExpression
+FunctionExpression                    [ (x) Unittest (-) Parser (-) Transpiler ]
 ArrowFunctionExpression
 ClassExpression
 ClassBody

@@ -1,6 +1,6 @@
 const FireScriptNode = require('./FireScriptNode')
 
-class FunctionDeclaration extends FireScriptNode {
+class ArrowFunctionExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
@@ -8,18 +8,6 @@ class FunctionDeclaration extends FireScriptNode {
     this.async = false
     this.expression = false
     this.generator = false
-
-    let token = tokenStack.next()
-    if (token.value === 'gen') {
-      this.generator = true
-    } else if (!token.value === 'func') {
-      this.syntaxError('Unexpected token', token)
-    }
-
-    if (tokenStack.expect('identifier')) {
-      this.id = this.createIdentifierNode(tokenStack)
-    }
-
     this.params = []
 
     if (tokenStack.expect('punctuator', '(')) {
@@ -47,12 +35,17 @@ class FunctionDeclaration extends FireScriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
+    if (!tokenStack.expect('punctuator', '=>')) {
+      this.syntaxError('Unexpected token', tokenStack.current())
+    }
+
+    tokenStack.goForward()
     this.body = this.createNode(tokenStack)
   }
 
   toJSON () {
     return {
-      type: 'FunctionDeclaration',
+      type: 'ArrowFunctionExpression',
       id: this.id.toJSON(),
       params: this.params.map((item) => item.toJSON()),
       body: this.body.toJSON(),
@@ -63,4 +56,4 @@ class FunctionDeclaration extends FireScriptNode {
   }
 }
 
-module.exports = FunctionDeclaration
+module.exports = ArrowFunctionExpression
