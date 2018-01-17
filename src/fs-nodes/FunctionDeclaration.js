@@ -4,6 +4,10 @@ class FunctionDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
+    this.async = false
+    this.expression = false
+    this.generator = false
+
     let token = tokenStack.next()
     if (!token.value === 'func') {
       this.syntaxError('Unexpected token', token)
@@ -46,9 +50,9 @@ class FunctionDeclaration extends FireScriptNode {
       id: this.id.toJSON(),
       params: this.params.map((item) => item.toJSON()),
       body: this.body.toJSON(),
-      async: false,
-      expression: false,
-      generator: false
+      async: this.async,
+      expression: this.expression,
+      generator: this.generator
     }
   }
 }

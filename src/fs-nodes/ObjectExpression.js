@@ -1,30 +1,7 @@
 const FireScriptNode = require('./FireScriptNode')
 
 const ALLOWED_ELEMENTS = [
-  'ThisExpression',
-  'Identifier',
-  'Literal',
-  'ArrayExpression',
-  'ObjectExpression',
-  'FunctionExpression',
-  'ArrowFunctionExpression',
-  'ClassExpression',
-  'TaggedTemplateExpression',
-  'MemberExpression',
-  'Super',
-  'MetaProperty',
-  'NewExpression',
-  'CallExpression',
-  'UpdateExpression',
-  'AwaitExpression',
-  'UnaryExpression',
-  'BinaryExpression',
-  'LogicalExpression',
-  'ConditionalExpression',
-  'YieldExpression',
-  'AssignmentExpression',
-  'SequenceExpression',
-  'SpreadElement'
+  'Property'
 ]
 
 class ObjectExpression extends FireScriptNode {

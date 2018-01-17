@@ -1,30 +1,17 @@
 const FireScriptNode = require('./FireScriptNode')
 
-const ALLOWED_ELEMENTS = [
-  'ThisExpression',
+const ALLOWED_KEYS = [
   'Identifier',
+  'Literal'
+]
+
+const ALLOWED_VALUES = [
   'Literal',
-  'ArrayExpression',
-  'ObjectExpression',
+  'AssignmentPattern',
+  'Identifier',
+  'BindingPattern',
   'FunctionExpression',
-  'ArrowFunctionExpression',
-  'ClassExpression',
-  'TaggedTemplateExpression',
-  'MemberExpression',
-  'Super',
-  'MetaProperty',
-  'NewExpression',
-  'CallExpression',
-  'UpdateExpression',
-  'AwaitExpression',
-  'UnaryExpression',
-  'BinaryExpression',
-  'LogicalExpression',
-  'ConditionalExpression',
-  'YieldExpression',
-  'AssignmentExpression',
-  'SequenceExpression',
-  'SpreadElement'
+  'null'
 ]
 
 class Property extends FireScriptNode {
@@ -32,6 +19,7 @@ class Property extends FireScriptNode {
     super(parent)
 
     this.key = this.createNode(tokenStack)
+    this.isAllowedToken(this.key, ALLOWED_KEYS)
 
     if (!tokenStack.expect('punctuator', ':')) {
       this.syntaxError('Unexpected token', tokenStack.current())
@@ -39,39 +27,8 @@ class Property extends FireScriptNode {
 
     tokenStack.goForward()
     const property = this.createNode(tokenStack)
-    this.isAllowedToken(property, ALLOWED_ELEMENTS)
+    this.isAllowedToken(property, ALLOWED_VALUES)
     this.value = property
-  }
-
-  parseBracelessSyntax (tokenStack) {
-    tokenStack.goForward()
-    const childIndention = this.indention + this.indentionSize
-    console.log(tokenStack, this.indention, childIndention)
-
-    while (true) {
-      console.log('CHECK', tokenStack.current())
-      if (tokenStack.isIndention(this.indention, 'lte')) {
-        tokenStack.goForward()
-        console.log('BRK')
-        break
-      }
-
-      if (tokenStack.isIndention(childIndention, 'eq')) {
-        console.log('CONT')
-        tokenStack.goForward()
-        continue
-      }
-
-      if (tokenStack.expect('indention')) {
-        this.syntaxError('Invalid indention', tokenStack.current())
-      }
-
-      console.log(tokenStack, this.indention, childIndention)
-      console.log(tokenStack.current())
-      const elements = this.createNode(tokenStack)
-      this.isAllowedToken(elements, ALLOWED_ELEMENTS)
-      this.elements.push(elements)
-    }
   }
 
   toJSON () {
@@ -79,7 +36,10 @@ class Property extends FireScriptNode {
       type: 'Property',
       key: this.key.toJSON(),
       value: this.value.toJSON(),
-      shorthand: false
+      shorthand: false,
+      computed: false,
+      kind: 'init',
+      method: false
     }
   }
 }

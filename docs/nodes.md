@@ -11,7 +11,7 @@ Identifier                            [ (x) Unittest (x) Parser (-) Transpiler ]
 Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
 ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
-Property
+Property                              [ (x) Unittest (-) Parser (-) Transpiler ]
 FunctionExpression
 ArrowFunctionExpression
 ClassExpression
