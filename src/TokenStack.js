@@ -60,7 +60,6 @@ class TokenStack extends Array {
       return false
     }
 
-    console.log('INDENT', token.value, mode, indention)
     if (mode === 'eq') {
       return token.value === indention
     } else if (mode === 'lt') {
