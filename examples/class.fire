@@ -1,0 +1,6 @@
+class Banana
+  constructor ()
+    this.color = 'yellow'
+
+  getColor ()
+    return this.color

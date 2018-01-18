@@ -255,12 +255,14 @@ interface TemplateLiteral {
 
 Member Expression
 
+```ts
 interface MemberExpression {
     type: 'MemberExpression';
     computed: boolean;
     object: Expression;
     property: Expression;
 }
+```
 
 Super
 

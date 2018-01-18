@@ -14,17 +14,18 @@ class FireScriptNode {
     this.indentionSize = 2
   }
 
-  createNode (tokenStack) {
+  createNode (tokenStack, expectedNode) {
     const nextToken = tokenStack.current()
     if (!nextToken) {
-      return null
+      return this.createNullNode(tokenStack)
     }
 
     if (nextToken.type === 'indention') {
       if (this.indention < nextToken.value) {
+        this.isExpectedNode(expectedNode, 'BlockStatement', tokenStack.current())
         return this.getNodeInstance('BlockStatement', tokenStack)
       } else {
-        tokenStack.next()
+        tokenStack.goForward()
       }
 
       return this.createNode(tokenStack)
@@ -32,62 +33,81 @@ class FireScriptNode {
 
     if (nextToken.type === 'keyword') {
       if (nextToken.value === 'import') {
+        this.isExpectedNode(expectedNode, 'ImportDeclaration', tokenStack.current())
         return this.getNodeInstance('ImportDeclaration', tokenStack)
       }
 
       if (nextToken.value === 'func') {
+        this.isExpectedNode(expectedNode, 'FunctionDeclaration', tokenStack.current())
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
 
       if (['var', 'const', 'let'].includes(nextToken.value)) {
+        this.isExpectedNode(expectedNode, 'VariableDeclaration', tokenStack.current())
         return this.getNodeInstance('VariableDeclaration', tokenStack)
       }
 
       if (nextToken.value === 'return') {
+        this.isExpectedNode(expectedNode, 'ReturnStatement', tokenStack.current())
         return this.getNodeInstance('ReturnStatement', tokenStack)
       }
 
       if (nextToken.value === 'super') {
+        this.isExpectedNode(expectedNode, 'Super', tokenStack.current())
         return this.getNodeInstance('Super', tokenStack)
       }
     }
 
     if (nextToken.type === 'identifier') {
-      if (tokenStack.lookForward('operator', '=', 1)) {
-        return this.getNodeInstance('ExpressionStatement', tokenStack)
-      }
+      // if (this.isExpressionStatement(tokenStack)) {
+      //   this.isExpectedNode(expectedNode, 'ExpressionStatement', tokenStack.current())
+      //   return this.getNodeInstance('ExpressionStatement', tokenStack)
+      // }
 
       if (tokenStack.lookForward('punctuator', '(', 1)) {
+        if (this.type === 'MethodDefinition') {
+          this.isExpectedNode(expectedNode, 'FunctionExpression', tokenStack.current())
+          return this.getNodeInstance('FunctionExpression', tokenStack)
+        }
+
+        this.isExpectedNode(expectedNode, 'ExpressionStatement', tokenStack.current())
         return this.getNodeInstance('ExpressionStatement', tokenStack)
       }
 
       if (nextToken.value === 'this') {
-        return this.getNodeInstance('ThisExpression', tokenStack)
+        this.isExpectedNode(expectedNode, 'ThisExpression', tokenStack.current())
+        return this.createFullNode('ThisExpression', tokenStack)
       }
 
+      this.isExpectedNode(expectedNode, 'Identifier', tokenStack.current())
       return this.getNodeInstance('Identifier', tokenStack)
     }
 
     if (nextToken.type === 'literal') {
+      this.isExpectedNode(expectedNode, 'Literal', tokenStack.current())
       return this.getNodeInstance('Literal', tokenStack)
     }
 
     if (nextToken.type === 'numeric') {
+      this.isExpectedNode(expectedNode, 'Literal', tokenStack.current())
       return this.getNodeInstance('Literal', tokenStack)
     }
 
     if (nextToken.type === 'punctuator') {
       if (nextToken.value === '[') {
+        this.isExpectedNode(expectedNode, 'ArrayExpression', tokenStack.current())
         return this.getNodeInstance('ArrayExpression', tokenStack)
       }
     }
 
     if (nextToken.type === 'operator') {
       if (this.binaryOperatorPattern.test(nextToken.value)) {
+        this.isExpectedNode(expectedNode, 'BinaryExpression', tokenStack.current())
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
     }
 
+    console.log('UNUSED', nextToken)
     this.syntaxError('Unexpected token', nextToken)
   }
 
@@ -119,6 +139,26 @@ class FireScriptNode {
     return this.getNodeInstance('Property', tokenStack)
   }
 
+  createClassDeclarationNode (tokenStack) {
+    return this.getNodeInstance('ClassDeclaration', tokenStack)
+  }
+
+  createClassBodyNode (tokenStack) {
+    return this.getNodeInstance('ClassBody', tokenStack)
+  }
+
+  createMethodDefinitionNode (tokenStack) {
+    return this.getNodeInstance('MethodDefinition', tokenStack)
+  }
+
+  createNullNode (tokenStack) {
+    const nextToken = tokenStack.current()
+    const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
+    this.callStack.push(`NullNode @ ${typeStr}`)
+    const Node = require('./NullNode')
+    return new Node(tokenStack, this)
+  }
+
   syntaxError (message, token) {
     const lineNum = token && token.loc ? token.loc.start[0] : ''
     const colNum = token && token.loc ? token.loc.start[1] : ''
@@ -133,7 +173,21 @@ class FireScriptNode {
     const nextToken = tokenStack.current()
     this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
-    return new Node(tokenStack, this)
+    const node = new Node(tokenStack, this)
+    return node
+  }
+
+  createFullNode (nodeName, tokenStack) {
+    const node = this.getNodeInstance(nodeName, tokenStack)
+    if (tokenStack.expect('operator', '=')) {
+      console.log('========')
+    }
+
+    if (tokenStack.expect('punctuator', '.')) {
+      console.log('..........')
+    }
+
+    return node
   }
 
   getPreviousSibling () {
@@ -169,9 +223,43 @@ class FireScriptNode {
   }
 
   isAllowedToken (child, validTokens, token) {
-    if (!validTokens.includes(child.type)) {
-      this.syntaxError(`Token ${child.type} not allowed within a ${child.parent.type}`, token)
+    const type = child === null ? 'null' : child.type
+    if (!validTokens.includes(type)) {
+      this.syntaxError(`Token ${type} not allowed within a ${child.parent.type}`, token)
     }
+  }
+
+  isExpectedNode (expected, actual, token) {
+    if (expected && expected !== actual) {
+      this.syntaxError(`Unexpected token, ${actual} was given but ${expected} was expected}`, token)
+    }
+  }
+
+  isExpressionStatement (tokenStack) {
+    console.log('TTT', this.type)
+    if (this.type === 'ExpressionStatement') {
+      return false
+    }
+    for (let i = tokenStack.index; i < tokenStack.length; i++) {
+      const token = tokenStack[i]
+      console.log('I', i)
+      if (token.type === 'identifier') {
+        continue
+      }
+
+      if (token.type === 'punctuator' && token.value === '.') {
+        continue
+      }
+
+      if (token.type === 'operator' && token.value === '=') {
+        console.log('YES')
+        return true
+      }
+
+      break
+    }
+
+    return false
   }
 }
 

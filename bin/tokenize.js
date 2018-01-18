@@ -13,7 +13,12 @@ module.exports = (supershit) => {
       const lines = []
       tokenStack.forEach((token) => {
         const keyQuote = ctx.js ? '' : '"'
-        const valueQuote = ctx.js ? '\'' : '"'
+        const isNonLiteral =
+          typeof token.value === 'number' ||
+          typeof token.value === 'undefined' ||
+          typeof token.value === 'boolean' ||
+          token.value === null
+        const valueQuote = isNonLiteral ? '' : ctx.js ? '\'' : '"'
 
         const str = []
         str.push(`${keyQuote}type${keyQuote}: ${valueQuote}${token.type}${valueQuote}`)
