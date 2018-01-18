@@ -14,7 +14,7 @@ class FireScriptNode {
     this.indentionSize = 2
   }
 
-  createNode (tokenStack, expectedNode) {
+  createNode (tokenStack, expectedNode, noFullNode) {
     const nextToken = tokenStack.current()
     if (!nextToken) {
       return this.createNullNode(tokenStack)
@@ -79,8 +79,7 @@ class FireScriptNode {
         return this.createFullNode('ThisExpression', tokenStack)
       }
 
-      this.isExpectedNode(expectedNode, 'Identifier', tokenStack.current())
-      return this.getNodeInstance('Identifier', tokenStack)
+      return this.createFullNode('Identifier', tokenStack, noFullNode)
     }
 
     if (nextToken.type === 'literal') {
@@ -151,6 +150,10 @@ class FireScriptNode {
     return this.getNodeInstance('MethodDefinition', tokenStack)
   }
 
+  createMemberExpressionNode (tokenStack) {
+    return this.getNodeInstance('MemberExpression', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -169,22 +172,23 @@ class FireScriptNode {
     throw err
   }
 
-  getNodeInstance (nodeName, tokenStack) {
+  getNodeInstance (nodeName, tokenStack, subNode) {
     const nextToken = tokenStack.current()
     this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
     const Node = require(`./${nodeName}`)
-    const node = new Node(tokenStack, this)
+    const node = new Node(tokenStack, this, subNode)
     return node
   }
 
-  createFullNode (nodeName, tokenStack) {
-    const node = this.getNodeInstance(nodeName, tokenStack)
+  createFullNode (nodeName, tokenStack, subNode) {
+    const node = this.getNodeInstance(nodeName, tokenStack, subNode)
+    console.log('CREATE FULL', node.type)
     if (tokenStack.expect('operator', '=')) {
       console.log('========')
     }
 
     if (tokenStack.expect('punctuator', '.')) {
-      console.log('..........')
+      return this.createFullNode('MemberExpression', tokenStack, node)
     }
 
     return node

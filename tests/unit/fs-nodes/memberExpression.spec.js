@@ -1,29 +1,69 @@
 const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
+const FireScriptNode = require('../../../src/fs-nodes/FireScriptNode')
+const Identifier = require('../../../src/fs-nodes/Identifier')
 const MemberExpression = require('../../../src/fs-nodes/MemberExpression')
 
-describe('MemberExpression', () => {
+describe.only('MemberExpression', () => {
   describe('instance', () => {
-    const tokenStack = new TokenStack([
-      { 'type': 'identifier', 'value': 'bla' },
-      { 'type': 'punctuator', 'value': '.' },
-      { 'type': 'identifier', 'value': 'blub' }
-    ])
+    it('returns a member expression node', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'identifier', 'value': 'bla' },
+        { 'type': 'punctuator', 'value': '.' },
+        { 'type': 'identifier', 'value': 'blub' }
+      ])
 
-    it('returns a fs-node item', () => {
-      const node = new MemberExpression(tokenStack)
+      const objectNode = new Identifier(tokenStack)
+      const node = new MemberExpression(tokenStack, null, objectNode)
 
       inspect(node).isObject()
       inspect(node.type).isEql('MemberExpression')
       inspect(node.object).isObject()
-      inspect(node.object.toJson()).isEql({
+      inspect(node.object.toJSON()).isEql({
         type: 'Identifier',
         name: 'bla'
       })
       inspect(node.property).isObject()
-      inspect(node.property.toJson()).isEql({
+      inspect(node.property.toJSON()).isEql({
         type: 'Identifier',
-        name: 'blubb'
+        name: 'blub'
+      })
+    })
+
+    it('returns a member expression node with sub nodes', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'identifier', 'value': 'bla' },
+        { 'type': 'punctuator', 'value': '.' },
+        { 'type': 'identifier', 'value': 'blub' },
+        { 'type': 'punctuator', 'value': '.' },
+        { 'type': 'identifier', 'value': 'blob' }
+      ])
+
+      const objectNode = new Identifier(tokenStack)
+      const node = new MemberExpression(tokenStack, null, objectNode)
+
+      inspect(node).isObject()
+      inspect(node.type).isEql('MemberExpression')
+      inspect(node.object).isObject()
+      inspect(node.toJSON()).isEql({
+        type: 'MemberExpression',
+        computed: false,
+        object: {
+          type: 'MemberExpression',
+          computed: false,
+          object: {
+            type: 'Identifier',
+            name: 'bla'
+          },
+          property: {
+            type: 'Identifier',
+            name: 'blub'
+          }
+        },
+        property: {
+          type: 'Identifier',
+          name: 'blob'
+        }
       })
     })
   })
