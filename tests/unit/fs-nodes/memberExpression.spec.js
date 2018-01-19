@@ -1,10 +1,8 @@
 const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
-const FireScriptNode = require('../../../src/fs-nodes/FireScriptNode')
-const Identifier = require('../../../src/fs-nodes/Identifier')
 const MemberExpression = require('../../../src/fs-nodes/MemberExpression')
 
-describe.only('MemberExpression', () => {
+describe('MemberExpression', () => {
   describe('instance', () => {
     it('returns a member expression node', () => {
       const tokenStack = new TokenStack([
