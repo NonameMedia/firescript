@@ -76,10 +76,10 @@ class FireScriptNode {
 
       if (nextToken.value === 'this') {
         this.isExpectedNode(expectedNode, 'ThisExpression', tokenStack.current())
-        return this.createFullNode('ThisExpression', tokenStack)
+        return this.getNodeInstance('ThisExpression', tokenStack)
       }
 
-      return this.createFullNode('Identifier', tokenStack, noFullNode)
+      return this.getNodeInstance('Identifier', tokenStack, noFullNode)
     }
 
     if (nextToken.type === 'literal') {
@@ -96,6 +96,11 @@ class FireScriptNode {
       if (nextToken.value === '[') {
         this.isExpectedNode(expectedNode, 'ArrayExpression', tokenStack.current())
         return this.getNodeInstance('ArrayExpression', tokenStack)
+      }
+
+      if (nextToken.value === '.') {
+        console.log('THIS TOKEN', this.type)
+        return null
       }
     }
 

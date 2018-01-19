@@ -30,12 +30,8 @@ class MemberExpression extends FireScriptNode {
   constructor (tokenStack, parent, object) {
     super(parent)
 
-    if (!object) {
-      this.syntaxError('Parent node not set')
-    }
-
-    this.object = object
-    this.isAllowedToken(this.object, ALLOWED_CHILDS)
+    this.object = object || this.createNode(tokenStack)
+    this.isAllowedToken(this.object, ALLOWED_CHILDS, tokenStack.current())
 
     tokenStack.print()
     if (!tokenStack.expect('punctuator', '.')) {
@@ -45,7 +41,7 @@ class MemberExpression extends FireScriptNode {
     tokenStack.goForward()
 
     this.property = this.createNode(tokenStack)
-    this.isAllowedToken(this.object, ALLOWED_CHILDS)
+    this.isAllowedToken(this.object, ALLOWED_CHILDS, tokenStack.current())
   }
 
   toJSON () {

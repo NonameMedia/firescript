@@ -13,8 +13,8 @@ describe.only('MemberExpression', () => {
         { 'type': 'identifier', 'value': 'blub' }
       ])
 
-      const objectNode = new Identifier(tokenStack)
-      const node = new MemberExpression(tokenStack, null, objectNode)
+      // const objectNode = new Identifier(tokenStack)
+      const node = new MemberExpression(tokenStack)
 
       inspect(node).isObject()
       inspect(node.type).isEql('MemberExpression')
@@ -39,8 +39,9 @@ describe.only('MemberExpression', () => {
         { 'type': 'identifier', 'value': 'blob' }
       ])
 
-      const objectNode = new Identifier(tokenStack)
-      const node = new MemberExpression(tokenStack, null, objectNode)
+      // const objectNode = new Identifier(tokenStack)
+      const childNode = new MemberExpression(tokenStack)
+      const node = new MemberExpression(tokenStack, null, childNode)
 
       inspect(node).isObject()
       inspect(node.type).isEql('MemberExpression')
