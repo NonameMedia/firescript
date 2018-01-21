@@ -185,15 +185,15 @@ class FireScriptNode {
     return node
   }
 
-  createFullNode (nodeName, tokenStack, subNode) {
-    const node = this.getNodeInstance(nodeName, tokenStack, subNode)
+  createFullNode (tokenStack, subNode) {
+    const node = this.createNode(tokenStack)
     console.log('CREATE FULL', node.type)
     if (tokenStack.expect('operator', '=')) {
       console.log('========')
     }
 
     if (tokenStack.expect('punctuator', '.')) {
-      return this.createFullNode('MemberExpression', tokenStack, node)
+      return this.getNodeInstance('MemberExpression', tokenStack, node)
     }
 
     return node
@@ -234,7 +234,7 @@ class FireScriptNode {
   isAllowedToken (child, validTokens, token) {
     const type = child === null ? 'null' : child.type
     if (!validTokens.includes(type)) {
-      this.syntaxError(`Token ${type} not allowed within a ${child.parent.type}`, token)
+      this.syntaxError(`Token ${type} not allowed within a ${this.type}`, token)
     }
   }
 

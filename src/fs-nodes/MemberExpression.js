@@ -31,6 +31,7 @@ class MemberExpression extends FireScriptNode {
     super(parent)
 
     this.object = object || this.createNode(tokenStack)
+    console.log('CHECK MEM CHILD', this.object.type, this.type)
     this.isAllowedToken(this.object, ALLOWED_CHILDS, tokenStack.current())
 
     tokenStack.print()
