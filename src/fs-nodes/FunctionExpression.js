@@ -9,14 +9,15 @@ class FunctionExpression extends FireScriptNode {
     this.expression = false
     this.generator = false
 
-    console.log('PAR', this.parent.type)
-    let token = tokenStack.next()
-    if (token.value === 'async') {
-      this.async = true
-    } else if (token.value === 'gen') {
-      this.generator = true
-    } else if (!token.value === 'func' && this.parent.type !== 'MethodDefinition') {
-      this.syntaxError('Unexpected token', token)
+    if (this.parent.type !== 'MethodDefinition') {
+      let token = tokenStack.next()
+      if (token.value === 'async') {
+        this.async = true
+      } else if (token.value === 'gen') {
+        this.generator = true
+      } else if (!token.value === 'func') {
+        this.syntaxError('Unexpected token', token)
+      }
     }
 
     if (this.async || tokenStack.expect('identifier')) {
@@ -40,7 +41,7 @@ class FunctionExpression extends FireScriptNode {
         }
 
         if (tokenStack.expect('identifier')) {
-          this.params.push(this.createNode(tokenStack))
+          this.params.push(this.createIdentifierNode(tokenStack))
           continue
         }
 
@@ -50,7 +51,7 @@ class FunctionExpression extends FireScriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
-    this.body = this.createNode(tokenStack)
+    this.body = this.createFullNode(tokenStack)
   }
 
   parseClassMethod () {
@@ -64,7 +65,7 @@ class FunctionExpression extends FireScriptNode {
   toJSON () {
     return {
       type: 'FunctionExpression',
-      id: this.id.toJSON(),
+      id: this.id ? this.id.toJSON() : this.id,
       params: this.params.map((item) => item.toJSON()),
       body: this.body.toJSON(),
       async: this.async,

@@ -3,6 +3,9 @@ const NODE_GROUPS = {
 
   ]
 }
+
+const BINARY_OPERATORS = ['+']
+
 class FireScriptNode {
   constructor (parent) {
     this.parent = parent || null
@@ -14,7 +17,7 @@ class FireScriptNode {
     this.indentionSize = 2
   }
 
-  createNode (tokenStack, expectedNode, noFullNode) {
+  createNode (tokenStack, expectedNode) {
     const nextToken = tokenStack.current()
     if (!nextToken) {
       return this.createNullNode(tokenStack)
@@ -79,7 +82,7 @@ class FireScriptNode {
         return this.getNodeInstance('ThisExpression', tokenStack)
       }
 
-      return this.getNodeInstance('Identifier', tokenStack, noFullNode)
+      return this.getNodeInstance('Identifier', tokenStack)
     }
 
     if (nextToken.type === 'literal') {
@@ -115,6 +118,10 @@ class FireScriptNode {
     this.syntaxError('Unexpected token', nextToken)
   }
 
+  resolve (tokenStack) {
+
+  }
+
   createVariableDeclaratorNode (tokenStack) {
     return this.getNodeInstance('VariableDeclarator', tokenStack)
   }
@@ -123,8 +130,8 @@ class FireScriptNode {
     return this.getNodeInstance('Identifier', tokenStack)
   }
 
-  createAssignmentNode (tokenStack) {
-    return this.getNodeInstance('AssignmentExpression', tokenStack)
+  createAssignmentExpressionNode (tokenStack, left) {
+    return this.getNodeInstance('AssignmentExpression', tokenStack, left)
   }
 
   createCallExpressionNode (tokenStack) {
@@ -159,6 +166,10 @@ class FireScriptNode {
     return this.getNodeInstance('MemberExpression', tokenStack)
   }
 
+  createFunctionExpressionNode (tokenStack) {
+    return this.getNodeInstance('FunctionExpression', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -185,15 +196,110 @@ class FireScriptNode {
     return node
   }
 
-  createFullNode (tokenStack, subNode) {
-    const node = this.createNode(tokenStack)
-    console.log('CREATE FULL', node.type)
-    if (tokenStack.expect('operator', '=')) {
-      console.log('========')
+  createNodeItem (tokenStack) {
+    const nextToken = tokenStack.current()
+    if (!nextToken) {
+      return this.createNullNode(tokenStack)
     }
 
-    if (tokenStack.expect('punctuator', '.')) {
-      return this.getNodeInstance('MemberExpression', tokenStack, node)
+    if (nextToken.type === 'indention') {
+      if (this.indention < nextToken.value) {
+        // this.isExpectedNode(expectedNode, 'BlockStatement', tokenStack.current())
+        return this.getNodeInstance('BlockStatement', tokenStack)
+      } else {
+        tokenStack.goForward()
+      }
+
+      return this.createNode(tokenStack)
+    }
+
+    if (nextToken.type === 'keyword') {
+      if (nextToken.value === 'import') {
+        // this.isExpectedNode(expectedNode, 'ImportDeclaration', tokenStack.current())
+        return this.getNodeInstance('ImportDeclaration', tokenStack)
+      }
+
+      if (nextToken.value === 'func') {
+        // this.isExpectedNode(expectedNode, 'FunctionDeclaration', tokenStack.current())
+        return this.getNodeInstance('FunctionDeclaration', tokenStack)
+      }
+
+      if (['var', 'const', 'let'].includes(nextToken.value)) {
+        // this.isExpectedNode(expectedNode, 'VariableDeclaration', tokenStack.current())
+        return this.getNodeInstance('VariableDeclaration', tokenStack)
+      }
+
+      if (nextToken.value === 'return') {
+        // this.isExpectedNode(expectedNode, 'ReturnStatement', tokenStack.current())
+        return this.getNodeInstance('ReturnStatement', tokenStack)
+      }
+
+      if (nextToken.value === 'super') {
+        // this.isExpectedNode(expectedNode, 'Super', tokenStack.current())
+        return this.getNodeInstance('Super', tokenStack)
+      }
+    }
+
+    if (nextToken.type === 'identifier') {
+      // if (this.isExpressionStatement(tokenStack)) {
+      //   this.isExpectedNode(expectedNode, 'ExpressionStatement', tokenStack.current())
+      //   return this.getNodeInstance('ExpressionStatement', tokenStack)
+      // }
+
+      // if (tokenStack.lookForward('punctuator', '(', 1)) {
+      //   if (this.type === 'MethodDefinition') {
+      //     this.isExpectedNode(expectedNode, 'FunctionExpression', tokenStack.current())
+      //     return this.getNodeInstance('FunctionExpression', tokenStack)
+      //   }
+      //
+      //   this.isExpectedNode(expectedNode, 'ExpressionStatement', tokenStack.current())
+      //   return this.getNodeInstance('ExpressionStatement', tokenStack)
+      // }
+
+      if (nextToken.value === 'this') {
+        return this.getNodeInstance('ThisExpression', tokenStack)
+      }
+
+      return this.getNodeInstance('Identifier', tokenStack)
+    }
+
+    if (nextToken.type === 'literal') {
+      return this.getNodeInstance('Literal', tokenStack)
+    }
+
+    if (nextToken.type === 'numeric') {
+      return this.getNodeInstance('Literal', tokenStack)
+    }
+
+    if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
+      // if (nextToken.value === '[') {
+      //   this.isExpectedNode(expectedNode, 'ArrayExpression', tokenStack.current())
+      //   return this.getNodeInstance('ArrayExpression', tokenStack)
+      // }
+      //
+      // if (nextToken.value === '.') {
+      //   console.log('THIS TOKEN', this.type)
+      //   return null
+      // }
+      console.log('BÄM', nextToken)
+      this.syntaxError('Unexpected token, could not create node item!', nextToken)
+    }
+  }
+
+  createFullNode (tokenStack) {
+    let node
+    node = this.createNodeItem(tokenStack)
+    while (true) {
+      console.log('NODE', node.type)
+      if (tokenStack.expect('operator', '=')) {
+        node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
+      } else if (tokenStack.expect('operator', BINARY_OPERATORS)) {
+        node = this.getNodeInstance('BinaryExpression', tokenStack, node)
+      } else if (tokenStack.expect('punctuator', '.')) {
+        node = this.getNodeInstance('MemberExpression', tokenStack, node)
+      } else {
+        break
+      }
     }
 
     return node

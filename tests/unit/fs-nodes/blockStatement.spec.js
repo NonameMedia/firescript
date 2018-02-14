@@ -66,7 +66,15 @@ describe('BlockStatement', () => {
               name: 'res'
             },
             init: {
-              type: 'ThisExpression'
+              type: 'MemberExpression',
+              computed: false,
+              object: {
+                type: 'ThisExpression'
+              },
+              property: {
+                type: 'Identifier',
+                name: 'num1'
+              }
             }
           }]
         }]

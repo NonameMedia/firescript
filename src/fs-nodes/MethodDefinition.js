@@ -1,30 +1,30 @@
 const FireScriptNode = require('./FireScriptNode')
 
 const ALLOWED_KEYS = [
-  'ThisExpression',
+  // 'ThisExpression',
   'Identifier',
-  'Literal',
-  'ArrayExpression',
-  'ObjectExpression',
-  'FunctionExpression',
-  'ArrowFunctionExpression',
-  'ClassExpression',
-  'TaggedTemplateExpression',
-  'MemberExpression',
-  'Super',
-  'MetaProperty',
-  'NewExpression',
-  'CallExpression',
-  'UpdateExpression',
-  'AwaitExpression',
-  'UnaryExpression',
-  'BinaryExpression',
-  'LogicalExpression',
-  'ConditionalExpression',
-  'YieldExpression',
-  'AssignmentExpression',
-  'SequenceExpression',
-  'Null'
+  'Literal'
+  // 'ArrayExpression',
+  // 'ObjectExpression',
+  // 'FunctionExpression',
+  // 'ArrowFunctionExpression',
+  // 'ClassExpression',
+  // 'TaggedTemplateExpression',
+  // 'MemberExpression',
+  // 'Super',
+  // 'MetaProperty',
+  // 'NewExpression',
+  // 'CallExpression',
+  // 'UpdateExpression',
+  // 'AwaitExpression',
+  // 'UnaryExpression',
+  // 'BinaryExpression',
+  // 'LogicalExpression',
+  // 'ConditionalExpression',
+  // 'YieldExpression',
+  // 'AssignmentExpression',
+  // 'SequenceExpression',
+  // 'Null'
 ]
 
 const ALLOWED_VALUES = [
@@ -44,12 +44,12 @@ class MethodDefinition extends FireScriptNode {
       this.goForward()
     }
 
-    console.log(tokenStack)
-    this.key = this.createNode(tokenStack)
+    tokenStack.print('METHOD -------')
+    this.key = this.createNodeItem(tokenStack)
     this.isAllowedToken(this.key, ALLOWED_KEYS)
 
-    this.value = this.createNode(tokenStack)
-    this.isAllowedToken(this.key, ALLOWED_VALUES)
+    this.value = this.createFunctionExpressionNode(tokenStack)
+    this.isAllowedToken(this.value, ALLOWED_VALUES)
   }
 
   toJSON () {

@@ -68,6 +68,16 @@ describe('Integrtion test runner', () => {
           it('Inspect transpiled FS AST', () => {
             inspect(fsAST).isEql(jsAST)
           })
+
+          it(`Transpile FS-AST into JS`, () => {
+            const parser = new FireScriptParser()
+            fsAST = parser.parse(fsSource)
+            inspect(fsAST).isObject()
+          })
+
+          it('Inspect transpiled JS', () => {
+            inspect(fsAST).isEql(jsAST)
+          })
         })
       })
     })

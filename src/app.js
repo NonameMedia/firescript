@@ -21,5 +21,14 @@ module.exports = {
         return ast
       }
     })
+  },
+  retranspile (input, opts) {
+    return prettier.format('', {
+      parser () {
+        const fsParser = new FireScriptParser(opts)
+        const ast = fsParser.parse(input)
+        return ast
+      }
+    })
   }
 }

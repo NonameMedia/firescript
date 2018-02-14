@@ -46,7 +46,9 @@ class TokenStack extends Array {
       return false
     }
 
-    if (value && token.value !== value) {
+    if (value && Array.isArray(value)) {
+      return value.indexOf(token.value) >= 0
+    } else if (value && token.value !== value) {
       return false
     }
 

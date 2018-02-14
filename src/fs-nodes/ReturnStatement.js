@@ -10,7 +10,7 @@ class ReturnStatement extends FireScriptNode {
       this.syntaxError('Unexpected token', token)
     }
 
-    this.argument = this.createNode(tokenStack)
+    this.argument = this.createFullNode(tokenStack)
   }
 
   toJSON () {

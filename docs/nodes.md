@@ -55,7 +55,7 @@ SwitchCase
 ThrowStatement
 TryStatement
 CatchClause
-VariableDeclaration
+VariableDeclaration                   [ (x) Unittest (x) Parser (-) Transpiler ]
 VariableDeclarator
 WhileStatement
 WithStatement

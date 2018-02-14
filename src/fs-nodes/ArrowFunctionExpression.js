@@ -30,7 +30,7 @@ class ArrowFunctionExpression extends FireScriptNode {
         }
 
         if (tokenStack.expect('identifier')) {
-          this.params.push(this.createNode(tokenStack))
+          this.params.push(this.createNodeItem(tokenStack))
           continue
         }
 
@@ -45,7 +45,7 @@ class ArrowFunctionExpression extends FireScriptNode {
     }
 
     tokenStack.goForward()
-    this.body = this.createNode(tokenStack)
+    this.body = this.createFullNode(tokenStack)
   }
 
   toJSON () {

@@ -5,13 +5,23 @@ class ClassBody extends FireScriptNode {
     super(parent)
 
     this.body = []
+    const parentIndention = this.indention
+    const currentIndention = this.indention + this.indentionSize
 
     while (true) {
+      if (tokenStack.expect('indention')) {
+        const token = tokenStack.next()
+        this.indention = token.value
+      } else {
+        this.syntaxError(`Indention of ${parentIndention} expected, but it is ${currentIndention}`, tokenStack)
+      }
+
+      console.log('INDENTION', this.indention, this.indentionSize, tokenStack.isIndention(this.indention - this.indentionSize, 'lte'))
       if (tokenStack.isIndention(this.indention - this.indentionSize, 'lte')) {
         break
       }
 
-      this.createMethodDefinitionNode(tokenStack)
+      this.body.push(this.createMethodDefinitionNode(tokenStack))
     }
   }
 

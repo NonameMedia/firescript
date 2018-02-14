@@ -6,6 +6,7 @@ describe('ClassBody', () => {
   describe('instance', () => {
     it('returns a ClassBody node', () => {
       const tokenStack = new TokenStack([
+        { type: 'indention', value: 2 },
         { type: 'identifier', value: 'constructor' },
         { type: 'punctuator', value: '(' },
         { type: 'punctuator', value: ')' },
@@ -29,16 +30,17 @@ describe('ClassBody', () => {
 
       const node = new ClassBody(tokenStack)
 
+      console.log(node.toJSON())
       inspect(node).isObject()
       inspect(node.type).isEql('ClassBody')
       inspect(node.body).isArray()
       inspect(node.body).hasLength(2)
-      inspect(node.body[0].toJSON()).isEql({
-
+      inspect(node.body[0].toJSON()).hasProps({
+        type: 'MethodDefinition'
       })
 
-      inspect(node.body[1].toJSON()).isEql({
-
+      inspect(node.body[1].toJSON()).hasProps({
+        type: 'MethodDefinition'
       })
     })
   })

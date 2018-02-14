@@ -1,10 +1,10 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class AssignmentExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, left) {
     super(parent)
 
-    this.left = this.createIdentifierNode(tokenStack)
+    this.left = left || this.createNodeItem(tokenStack)
     const token = tokenStack.next()
 
     if (token.type !== 'operator' && !this.assignmentOperatorPattern.test(token.value)) {

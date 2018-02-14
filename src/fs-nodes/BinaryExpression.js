@@ -1,11 +1,12 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class BinaryExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, left) {
     super(parent)
 
-    const token = tokenStack.next()
+    this.left = left || this.createNodeItem(tokenStack)
 
+    const token = tokenStack.next()
     if (token.type !== 'operator' && !this.binaryOperatorPattern.test(token.value)) {
       this.syntaxError('Token is not a binary operator', token)
     }
