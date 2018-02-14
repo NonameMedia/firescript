@@ -12,7 +12,7 @@ class AssignmentExpression extends FireScriptNode {
     }
 
     this.operator = token.value
-    this.right = this.createNode(tokenStack)
+    this.right = this.createFullNode(tokenStack)
   }
 
   toJSON () {

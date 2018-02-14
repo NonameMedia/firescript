@@ -56,7 +56,7 @@ class ArrayExpression extends FireScriptNode {
         continue
       }
 
-      const elements = this.createNode(tokenStack)
+      const elements = this.createFullNode(tokenStack)
       this.isAllowedToken(elements, ALLOWED_ELEMENTS)
       this.elements.push(elements)
     }
@@ -87,7 +87,7 @@ class ArrayExpression extends FireScriptNode {
 
       console.log(tokenStack, this.indention, childIndention)
       console.log(tokenStack.current())
-      const elements = this.createNode(tokenStack)
+      const elements = this.createFullNode(tokenStack)
       this.isAllowedToken(elements, ALLOWED_ELEMENTS)
       this.elements.push(elements)
     }

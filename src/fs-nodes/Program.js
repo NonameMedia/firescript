@@ -7,7 +7,7 @@ class Program extends FireScriptNode {
     this.body = []
 
     while (true) {
-      const node = this.createNode(tokenStack)
+      const node = this.createFullNode(tokenStack)
       if (!node) {
         break
       }

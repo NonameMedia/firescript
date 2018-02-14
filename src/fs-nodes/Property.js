@@ -18,7 +18,7 @@ class Property extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    this.key = this.createNode(tokenStack)
+    this.key = this.createNodeItem(tokenStack)
     this.isAllowedToken(this.key, ALLOWED_KEYS)
 
     if (!tokenStack.expect('punctuator', ':')) {
@@ -26,7 +26,7 @@ class Property extends FireScriptNode {
     }
 
     tokenStack.goForward()
-    const property = this.createNode(tokenStack)
+    const property = this.createFullNode(tokenStack)
     this.isAllowedToken(property, ALLOWED_VALUES)
     this.value = property
   }

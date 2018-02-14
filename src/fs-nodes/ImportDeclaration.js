@@ -34,7 +34,7 @@ class ImportDeclaration extends FireScriptNode {
       }
     }
 
-    this.source = this.createNode(tokenStack)
+    this.source = this.createNodeItem(tokenStack)
   }
 
   toJSON () {

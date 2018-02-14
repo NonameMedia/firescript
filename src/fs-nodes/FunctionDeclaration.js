@@ -39,7 +39,7 @@ class FunctionDeclaration extends FireScriptNode {
         }
 
         if (tokenStack.expect('identifier')) {
-          this.params.push(this.createNode(tokenStack))
+          this.params.push(this.createNodeItem(tokenStack))
           continue
         }
 
@@ -49,7 +49,7 @@ class FunctionDeclaration extends FireScriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
-    this.body = this.createNode(tokenStack)
+    this.body = this.createFullNode(tokenStack)
   }
 
   toJSON () {

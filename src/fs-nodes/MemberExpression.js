@@ -30,17 +30,16 @@ class MemberExpression extends FireScriptNode {
   constructor (tokenStack, parent, object) {
     super(parent)
 
-    this.object = object || this.createFullNode(tokenStack)
+    this.object = object || this.createIdentifierNode(tokenStack)
     this.isAllowedToken(this.object, ALLOWED_CHILDS, tokenStack.current())
 
-    tokenStack.print()
     if (!tokenStack.expect('punctuator', '.')) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
     tokenStack.goForward()
 
-    this.property = this.createNode(tokenStack)
+    this.property = this.createIdentifierNode(tokenStack)
     this.isAllowedToken(this.object, ALLOWED_CHILDS, tokenStack.current())
   }
 
