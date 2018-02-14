@@ -1,10 +1,37 @@
 const FireScriptNode = require('./FireScriptNode')
 
+const ALLOWED_CALLEE_TYPES = [
+  'ThisExpression',
+  'Identifier',
+  'Literal'
+  // 'ArrayExpression',
+  // 'ObjectExpression',
+  // 'FunctionExpression',
+  // 'ArrowFunctionExpression',
+  // 'ClassExpression',
+  // 'TaggedTemplateExpression',
+  // 'MemberExpression',
+  // 'Super',
+  // 'MetaProperty',
+  // 'NewExpression',
+  // 'CallExpression',
+  // 'UpdateExpression',
+  // 'AwaitExpression',
+  // 'UnaryExpression',
+  // 'BinaryExpression',
+  // 'LogicalExpression',
+  // 'ConditionalExpression',
+  // 'YieldExpression',
+  // 'AssignmentExpression',
+  // 'SequenceExpression'
+]
+
 class CallExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, callee) {
     super(parent)
 
-    this.callee = this.createIdentifierNode(tokenStack)
+    this.callee = callee || this.createIdentifierNode(tokenStack)
+    this.isAllowedToken(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
     this.arguments = []
 
     if (!tokenStack.expect('punctuator', '(')) {

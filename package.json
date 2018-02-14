@@ -5,8 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "mocha --reporter lagoon-reporter tests/unit/**/*.spec.js",
-    "test:integration": "mocha --reporter lagoon-reporter tests/integration/**/*.spec.js"
+    "test:unit": "mocha --reporter lagoon-reporter tests/unit/\\*\\*/\\*.spec.js",
+    "test:integration": "mocha --reporter lagoon-reporter tests/integration/\\*\\*/\\*.spec.js"
   },
   "repository": {
     "type": "git",

@@ -4,11 +4,12 @@ class Program extends FireScriptNode {
   constructor (tokenStack) {
     super()
 
+    this.isBlockScope = true
     this.body = []
 
     while (true) {
       const node = this.createFullNode(tokenStack)
-      if (!node) {
+      if (!node || node.type === 'Null') {
         break
       }
 

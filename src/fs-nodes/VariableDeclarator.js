@@ -14,7 +14,6 @@ class VariableDeclarator extends FireScriptNode {
     if (tokenStack.expect('operator', '=')) {
       tokenStack.goForward()
       this.init = this.createFullNode(tokenStack)
-      console.log('INIT', this.init)
     }
   }
 

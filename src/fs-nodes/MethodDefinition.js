@@ -44,7 +44,6 @@ class MethodDefinition extends FireScriptNode {
       this.goForward()
     }
 
-    tokenStack.print('METHOD -------')
     this.key = this.createNodeItem(tokenStack)
     this.isAllowedToken(this.key, ALLOWED_KEYS)
 

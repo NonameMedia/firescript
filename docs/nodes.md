@@ -23,7 +23,7 @@ TemplateLiteral
 MemberExpression
 Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
 MetaProperty
-CallExpression
+CallExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
 NewExpression
 SpreadElement
 UpdateExpression

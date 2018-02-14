@@ -1,10 +1,10 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class ExpressionStatement extends FireScriptNode {
-  constructor (tokenStack, parent, left) {
+  constructor (tokenStack, parent, expression) {
     super(parent)
 
-    this.expression = this.createAssignmentExpressionNode(tokenStack, left)
+    this.expression = expression
   }
 
   toJSON () {

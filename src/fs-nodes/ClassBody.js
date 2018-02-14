@@ -16,7 +16,7 @@ class ClassBody extends FireScriptNode {
         this.syntaxError(`Indention of ${parentIndention} expected, but it is ${currentIndention}`, tokenStack)
       }
 
-      console.log('INDENTION', this.indention, this.indentionSize, tokenStack.isIndention(this.indention - this.indentionSize, 'lte'))
+      // console.log('INDENTION', this.indention, this.indentionSize, tokenStack.isIndention(this.indention - this.indentionSize, 'lte'))
       if (tokenStack.isIndention(this.indention - this.indentionSize, 'lte')) {
         break
       }

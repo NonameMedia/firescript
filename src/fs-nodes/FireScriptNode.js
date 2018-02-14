@@ -2,6 +2,7 @@ const BINARY_OPERATORS = ['+']
 
 class FireScriptNode {
   constructor (parent) {
+    this.isBlockScope = false
     this.parent = parent || {
       type: 'None'
     }
@@ -156,13 +157,25 @@ class FireScriptNode {
   createFullNode (tokenStack) {
     let node
     node = this.createNodeItem(tokenStack)
+
+    if (node.type === 'Null') {
+      return node
+    }
+
     while (true) {
       if (tokenStack.expect('operator', '=')) {
+        node = this.getNodeInstance('AssignmentExpression', tokenStack, node)
         node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
       } else if (tokenStack.expect('operator', BINARY_OPERATORS)) {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '.')) {
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
+      } else if (tokenStack.expect('punctuator', '(')) {
+        node = this.getNodeInstance('CallExpression', tokenStack, node)
+        if (this.isBlockScope) {
+          node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
+        }
+        break
       } else {
         break
       }

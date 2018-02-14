@@ -186,16 +186,53 @@ describe('FireScriptNode', () => {
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
-        type: 'MemberExpression',
-        computed: false,
-        object: {
-          name: 'Banana',
-          type: 'Identifier'
-        },
-        property: {
-          name: 'isFruit',
-          type: 'Identifier'
+        type: 'ExpressionStatement',
+        expression: {
+          type: 'AssignmentExpression',
+          left: {
+            type: 'MemberExpression',
+            computed: false,
+            object: {
+              name: 'Banana',
+              type: 'Identifier'
+            },
+            property: {
+              name: 'isFruit',
+              type: 'Identifier'
+            }
+          },
+          right: {
+            type: 'Identifier',
+            name: 'true'
+          },
+          operator: '='
         }
+      })
+    })
+
+    it('creates a CallExpression node', () => {
+      const fsn = new FireScriptNode()
+      const tokenStack = new TokenStack([
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'punctuator', 'value': '(' },
+        { 'type': 'numeric', 'value': '1' },
+        { 'type': 'punctuator', 'value': ')' },
+        { 'type': 'indention', 'value': 0 }
+      ])
+
+      const node = fsn.createFullNode(tokenStack)
+
+      inspect(node.toJSON()).isEql({
+        type: 'CallExpression',
+        callee: {
+          type: 'Identifier',
+          name: 'banana'
+        },
+        arguments: [{
+          type: 'Literal',
+          raw: '1',
+          value: 1
+        }]
       })
     })
   })
