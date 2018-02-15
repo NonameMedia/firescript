@@ -125,6 +125,28 @@ describe('FireScriptNode', () => {
         }
       })
     })
+
+    it('creates a NewExpression node', () => {
+      const fsn = new FireScriptNode()
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'new' },
+        { 'type': 'identifier', 'value': 'Banana' },
+        { 'type': 'punctuator', 'value': '(' },
+        { 'type': 'punctuator', 'value': ')' },
+        { 'type': 'indention', 'value': 0 }
+      ])
+
+      const node = fsn.createNodeItem(tokenStack)
+
+      inspect(node.toJSON()).isEql({
+        type: 'NewExpression',
+        arguments: [],
+        callee: {
+          type: 'Identifier',
+          name: 'Banana'
+        }
+      })
+    })
   })
 
   describe('createFullNode()', () => {

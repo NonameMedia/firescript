@@ -130,6 +130,10 @@ class FireScriptNode {
         // this.isExpectedNode(expectedNode, 'Super', tokenStack.current())
         return this.getNodeInstance('Super', tokenStack)
       }
+
+      if (nextToken.value === 'new') {
+        return this.getNodeInstance('NewExpression', tokenStack)
+      }
     }
 
     if (nextToken.type === 'identifier') {
