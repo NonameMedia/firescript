@@ -65,18 +65,14 @@ class ArrayExpression extends FireScriptNode {
   parseBracelessSyntax (tokenStack) {
     tokenStack.goForward()
     const childIndention = this.indention + this.indentionSize
-    console.log(tokenStack, this.indention, childIndention)
 
     while (true) {
-      console.log('CHECK', tokenStack.current())
       if (tokenStack.isIndention(this.indention, 'lte')) {
         tokenStack.goForward()
-        console.log('BRK')
         break
       }
 
       if (tokenStack.isIndention(childIndention, 'eq')) {
-        console.log('CONT')
         tokenStack.goForward()
         continue
       }
@@ -85,8 +81,6 @@ class ArrayExpression extends FireScriptNode {
         this.syntaxError('Invalid indention', tokenStack.current())
       }
 
-      console.log(tokenStack, this.indention, childIndention)
-      console.log(tokenStack.current())
       const elements = this.createFullNode(tokenStack)
       this.isAllowedToken(elements, ALLOWED_ELEMENTS)
       this.elements.push(elements)

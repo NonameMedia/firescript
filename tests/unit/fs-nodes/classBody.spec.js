@@ -30,7 +30,6 @@ describe('ClassBody', () => {
 
       const node = new ClassBody(tokenStack)
 
-      console.log(node.toJSON())
       inspect(node).isObject()
       inspect(node.type).isEql('ClassBody')
       inspect(node.body).isArray()
