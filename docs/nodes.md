@@ -33,7 +33,7 @@ BinaryExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 LogicalExpression
 ConditionalExpression
 YieldExpression
-AssignmentExpression
+AssignmentExpression                  [ (x) Unittest (-) Parser (-) Transpiler ]
 SequenceExpression
 BlockStatement                        [ (x) Unittest (x) Parser (-) Transpiler ]
 BreakStatement
