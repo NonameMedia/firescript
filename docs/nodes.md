@@ -2,7 +2,7 @@ FS Node
 -------
 
 
-ArrayPattern
+ArrayPattern                          [ (x) Unittest (-) Parser (-) Transpiler ]
 RestElement
 AssignmentPattern
 ObjectPattern
@@ -24,12 +24,12 @@ MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
 MetaProperty
 CallExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
-NewExpression
+NewExpression                         [ (x) Unittest (-) Parser (-) Transpiler ]
 SpreadElement
 UpdateExpression
 AwaitExpression
 UnaryExpression
-BinaryExpression
+BinaryExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 LogicalExpression
 ConditionalExpression
 YieldExpression
