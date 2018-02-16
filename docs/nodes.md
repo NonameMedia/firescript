@@ -46,10 +46,10 @@ ExpressionStatement
 ForStatement
 ForInStatement
 ForOfStatement
-FunctionDeclaration
+FunctionDeclaration                   [ (x) Unittest (-) Parser (-) Transpiler ]
 IfStatement
 LabeledStatement
-ReturnStatement
+ReturnStatement                       [ (x) Unittest (-) Parser (-) Transpiler ]
 SwitchStatement
 SwitchCase
 ThrowStatement
