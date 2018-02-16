@@ -116,6 +116,10 @@ class FireScriptNode {
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
 
+      if (nextToken.value === 'class') {
+        return this.getNodeInstance(this.isBlockScope ? 'ClassDeclaration' : 'ClassExpression', tokenStack)
+      }
+
       if (['var', 'const', 'let'].includes(nextToken.value)) {
         // this.isExpectedNode(expectedNode, 'VariableDeclaration', tokenStack.current())
         return this.getNodeInstance('VariableDeclaration', tokenStack)

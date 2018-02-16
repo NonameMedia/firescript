@@ -36,8 +36,8 @@ class MethodDefinition extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    this.id = null
     this.static = false
+    this.kind = 'method'
 
     if (tokenStack.expect('identifier', 'static') && this.lookForward('identifier')) {
       this.static = true
@@ -45,6 +45,10 @@ class MethodDefinition extends FireScriptNode {
     }
 
     this.key = this.createNodeItem(tokenStack)
+    if (this.key.type === 'Identifier' && this.key.name === 'constructor') {
+      this.kind = 'constructor'
+    }
+
     this.isAllowedToken(this.key, ALLOWED_KEYS)
 
     this.value = this.createFunctionExpressionNode(tokenStack)

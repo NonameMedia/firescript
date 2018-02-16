@@ -14,13 +14,13 @@ ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Property                              [ (x) Unittest (-) Parser (-) Transpiler ]
 FunctionExpression                    [ (x) Unittest (-) Parser (-) Transpiler ]
 ArrowFunctionExpression               [ (x) Unittest (-) Parser (-) Transpiler ]
-ClassExpression
-ClassBody
-MethodDefinition
+ClassExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
+ClassBody                             [ (x) Unittest (-) Parser (-) Transpiler ]
+MethodDefinition                      [ (x) Unittest (-) Parser (-) Transpiler ]
 TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
-MemberExpression
+MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
 MetaProperty
 CallExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
@@ -37,7 +37,7 @@ AssignmentExpression
 SequenceExpression
 BlockStatement                        [ (x) Unittest (x) Parser (-) Transpiler ]
 BreakStatement
-ClassDeclaration
+ClassDeclaration                      [ (x) Unittest (-) Parser (-) Transpiler ]
 ContinueStatement
 DebuggerStatement
 DoWhileStatement
