@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
 const MethodDefinition = require('../../../src/fs-nodes/MethodDefinition')
 
-describe.only('MethodDefinition', () => {
+describe('MethodDefinition', () => {
   describe('instance', () => {
     it('returns a MethodDefinition node', () => {
       const tokenStack = new TokenStack([

@@ -12,7 +12,7 @@ const BINARY_OPERASTORS = [
 describe('BinaryExpression', () => {
   describe('instance', () => {
     BINARY_OPERASTORS.forEach((operator) => {
-      it(`returns a BinaryOperator, using '${operator}'`, () => {
+      it(`returns a BinaryExpression, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
           { 'type': 'numeric', 'value': '6' },
           { 'type': 'operator', 'value': operator },
@@ -41,7 +41,7 @@ describe('BinaryExpression', () => {
     })
 
     BINARY_OPERASTORS.forEach((operator) => {
-      it(`returns a BinaryOperator, using '${operator}', get left from outside`, () => {
+      it(`returns a BinaryExpression, using '${operator}', get left from outside`, () => {
         const tokenStack = new TokenStack([
           { 'type': 'numeric', 'value': '6' },
           { 'type': 'operator', 'value': operator },
