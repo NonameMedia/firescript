@@ -1,27 +1,20 @@
 const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
-const ReturnStatement = require('../../../src/fs-nodes/ReturnStatement')
+const Identifier = require('../../../src/fs-nodes/Identifier')
 
-describe.only('ReturnStatement', () => {
+describe('Identifier', () => {
   describe('instance', () => {
     const tokenStack = new TokenStack([
-      { 'type': 'keyword', 'value': 'return' },
-      { 'type': 'identifier', 'value': 'banana' },
-      { 'type': 'indention', 'value': 0 }
+      { 'type': 'identifier', 'value': 'res' }
     ])
 
     it('returns a fs-node item', () => {
-      const node = new ReturnStatement(tokenStack)
+      const node = new Identifier(tokenStack)
 
       inspect(node).isObject()
-      inspect(node.type).isEql('ReturnStatement')
-      inspect(node.toJSON()).isEql({
-        type: 'ReturnStatement',
-        argument: {
-          type: 'Identifier',
-          name: 'banana'
-        }
-      })
+      inspect(node.type).isEql('Identifier')
+      inspect(node.name).isString()
+      inspect(node.name).isEql('res')
     })
   })
 })
