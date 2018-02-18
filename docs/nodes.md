@@ -26,7 +26,7 @@ MetaProperty
 CallExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
 NewExpression                         [ (x) Unittest (-) Parser (-) Transpiler ]
 SpreadElement
-UpdateExpression
+UpdateExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 AwaitExpression
 UnaryExpression
 BinaryExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]

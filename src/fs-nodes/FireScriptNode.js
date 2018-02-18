@@ -1,4 +1,5 @@
 const BINARY_OPERATORS = ['+']
+const UPDATE_OPERATORS = ['++', '--']
 
 class FireScriptNode {
   constructor (parent) {
@@ -10,6 +11,7 @@ class FireScriptNode {
     this.callStack = parent ? parent.callStack : []
     this.binaryOperatorPattern = /^[+*/&-]$/
     this.assignmentOperatorPattern = /^[=]$/
+    this.updateOperatorPattern = /^(\+\+|--)$/
     this.type = this.constructor.name
     this.indentionSize = 2
   }
@@ -178,15 +180,18 @@ class FireScriptNode {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '.')) {
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
+      } else if (tokenStack.expect('operator', UPDATE_OPERATORS)) {
+        node = this.getNodeInstance('UpdateExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)
-        if (this.isBlockScope) {
-          node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
-        }
         break
       } else {
         break
       }
+    }
+
+    if (this.isBlockScope && ['UpdateExpression', 'CallExpression'].includes(node.type)) {
+      node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
     }
 
     return node
