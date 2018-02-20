@@ -43,11 +43,11 @@ DebuggerStatement
 DoWhileStatement
 EmptyStatement
 ExpressionStatement
-ForStatement
+ForStatement                          [ (x) Unittest (-) Parser (-) Transpiler ]
 ForInStatement
-ForOfStatement
+ForOfStatement                        [ (x) Unittest (-) Parser (-) Transpiler ]
 FunctionDeclaration                   [ (x) Unittest (-) Parser (-) Transpiler ]
-IfStatement
+IfStatement                           [ (x) Unittest (-) Parser (-) Transpiler ]
 LabeledStatement
 ReturnStatement                       [ (x) Unittest (-) Parser (-) Transpiler ]
 SwitchStatement
@@ -57,7 +57,7 @@ TryStatement
 CatchClause
 VariableDeclaration                   [ (x) Unittest (x) Parser (-) Transpiler ]
 VariableDeclarator
-WhileStatement
+WhileStatement                        [ (x) Unittest (-) Parser (-) Transpiler ]
 WithStatement
 Program
 ImportDeclaration

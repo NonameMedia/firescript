@@ -1,4 +1,7 @@
-const BINARY_OPERATORS = ['+']
+const BINARY_OPERATORS = ['instanceof',
+  'in', '+', '-', '*', '/', '%', '**',
+  '|', '^', '&', '==', '!=', '===', '!==',
+  '<', '>', '<=', '<<', '>>', '>>>']
 const UPDATE_OPERATORS = ['++', '--']
 
 class FireScriptNode {
@@ -22,6 +25,10 @@ class FireScriptNode {
 
   createIdentifierNode (tokenStack) {
     return this.getNodeInstance('Identifier', tokenStack)
+  }
+
+  createBlockStatement (tokenStack) {
+    return this.getNodeInstance('BlockStatement', tokenStack)
   }
 
   createAssignmentExpressionNode (tokenStack, left) {
@@ -64,6 +71,10 @@ class FireScriptNode {
     return this.getNodeInstance('FunctionExpression', tokenStack)
   }
 
+  createVariableDeclarationNode (tokenStack, kind) {
+    return this.getNodeInstance('VariableDeclaration', tokenStack, kind)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -97,9 +108,13 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'indention') {
+      // console.log('INDENTION', this.indention, nextToken.value)
       if (this.indention < nextToken.value) {
         // this.isExpectedNode(expectedNode, 'BlockStatement', tokenStack.current())
         return this.getNodeInstance('BlockStatement', tokenStack)
+      } else if (this.indention > nextToken.value) {
+        tokenStack.goForward()
+        return this.createNullNode(tokenStack)
       } else {
         tokenStack.goForward()
       }
@@ -139,6 +154,23 @@ class FireScriptNode {
 
       if (nextToken.value === 'new') {
         return this.getNodeInstance('NewExpression', tokenStack)
+      }
+
+      if (nextToken.value === 'if') {
+        return this.getNodeInstance('IfStatement', tokenStack)
+      }
+
+      tokenStack.print()
+      this.syntaxError('Unexpected keyword!', nextToken)
+    }
+
+    if (nextToken.type === 'operator') {
+      if (UPDATE_OPERATORS.includes(nextToken.value)) {
+        return this.getNodeInstance('UpdateExpression', tokenStack)
+      }
+
+      if (BINARY_OPERATORS.includes(nextToken.value)) {
+        return this.getNodeInstance('BinaryExpression', tokenStack)
       }
     }
 

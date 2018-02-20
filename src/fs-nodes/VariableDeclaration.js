@@ -1,16 +1,14 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class VariableDeclaration extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, kind) {
     super(parent)
 
-    const token = tokenStack.next()
-
-    if (!['var', 'let', 'const'].includes(token.value)) {
-      this.syntaxError('Unexpected token, var let or const expected', token)
+    this.kind = kind || tokenStack.getRawValue()
+    if (!['var', 'let', 'const'].includes(this.kind)) {
+      this.syntaxError('Unexpected token, var let or const expected', tokenStack.previous())
     }
 
-    this.kind = token.value
     this.declarations = []
 
     while (true) {

@@ -27,6 +27,15 @@ class TokenStack extends Array {
     return token
   }
 
+  previous () {
+    const token = this[this.index - 1]
+    if (!token) {
+      return null
+    }
+
+    return token
+  }
+
   goForward (numItems) {
     this.index += (numItems || 1)
   }
@@ -38,6 +47,11 @@ class TokenStack extends Array {
   lookForward (type, value, numItems) {
     const index = this.index + (numItems || 1)
     return this.expect(type, value, index)
+  }
+
+  getRawValue () {
+    const token = this.next()
+    return token.value
   }
 
   expect (type, value, index) {
