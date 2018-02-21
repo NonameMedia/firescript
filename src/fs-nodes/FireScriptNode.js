@@ -75,6 +75,10 @@ class FireScriptNode {
     return this.getNodeInstance('VariableDeclaration', tokenStack, kind)
   }
 
+  createTemplateElementNode (tokenStack) {
+    return this.getNodeInstance('TemplateElement', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'

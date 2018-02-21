@@ -1,14 +1,29 @@
 const FireScriptNode = require('./FireScriptNode')
 
 const ALLOWED_CHILDS = [
-  'ThisExpression', 'Identifier', 'Literal',
-  'ArrayExpression', 'ObjectExpression',
-  'FunctionExpression', 'ArrowFunctionExpression', 'ClassExpression',
-  'TaggedTemplateExpression', 'MemberExpression', 'Super', 'MetaProperty',
-  'NewExpression', 'CallExpression', 'UpdateExpression',
-  'AwaitExpression', 'UnaryExpression',
-  'BinaryExpression', 'LogicalExpression', 'ConditionalExpression',
-  'YieldExpression', 'AssignmentExpression', 'SequenceExpression'
+  'ThisExpression',
+  'Identifier',
+  'Literal',
+  'ArrayExpression',
+  'ObjectExpression',
+  'FunctionExpression',
+  'ArrowFunctionExpression',
+  'ClassExpression',
+  'TaggedTemplateExpression',
+  'MemberExpression',
+  'Super',
+  'MetaProperty',
+  'NewExpression',
+  'CallExpression',
+  'UpdateExpression',
+  'AwaitExpression',
+  'UnaryExpression',
+  'BinaryExpression',
+  'LogicalExpression',
+  'ConditionalExpression',
+  'YieldExpression',
+  'AssignmentExpression',
+  'SequenceExpression'
 ]
 
 /**

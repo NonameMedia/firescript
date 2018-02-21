@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
 const ObjectPattern = require('../../../src/fs-nodes/ObjectPattern')
 
-describe.only('ObjectPattern', () => {
+describe('ObjectPattern', () => {
   describe('instance', () => {
     it('returns an object node', () => {
       const tokenStack = new TokenStack([

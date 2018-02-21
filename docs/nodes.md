@@ -19,7 +19,7 @@ ClassBody                             [ (x) Unittest (-) Parser (-) Transpiler ]
 MethodDefinition                      [ (x) Unittest (-) Parser (-) Transpiler ]
 TaggedTemplateExpression
 TemplateElement                       [ (x) Unittest (-) Parser (-) Transpiler ]
-TemplateLiteral
+TemplateLiteral                       [ (x) Unittest (-) Parser (-) Transpiler ]
 MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
 MetaProperty

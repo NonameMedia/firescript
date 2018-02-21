@@ -6,9 +6,9 @@ describe('TemplateElement', () => {
   describe('instance', () => {
     it('returns a TemplateElement node', () => {
       const tokenStack = new TokenStack([
-        { 'type': 'template', 'value': 'Hello `' },
+        { 'type': 'template', 'value': 'Hello `${' },
         { 'type': 'identifier', 'value': 'name' },
-        { 'type': 'template', 'value': '\\`, whats on?' }
+        { 'type': 'template', 'value': '}\\`, whats on?' }
       ])
 
       const node = new TemplateElement(tokenStack)
