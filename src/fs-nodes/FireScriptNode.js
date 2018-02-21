@@ -79,6 +79,10 @@ class FireScriptNode {
     return this.getNodeInstance('TemplateElement', tokenStack)
   }
 
+  createTempalteLiteralNode (tokenStack) {
+    return this.getNodeInstance('TemplateLiteral', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -221,6 +225,11 @@ class FireScriptNode {
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)
         break
+      } else if (tokenStack.expect('template')) {
+        if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
+          break
+        }
+        node = this.getNodeInstance('TaggedTemplateExpression', tokenStack, node)
       } else {
         break
       }
@@ -238,6 +247,36 @@ class FireScriptNode {
     if (!validTokens.includes(type)) {
       this.syntaxError(`Token ${type} not allowed within a ${this.type}`, token)
     }
+  }
+
+  isExpressionNode (node) {
+    const EXPRESSION_NODES = [
+      'ThisExpression',
+      'Identifier',
+      'Literal',
+      'ArrayExpression',
+      'ObjectExpression',
+      'FunctionExpression',
+      'ArrowFunctionExpression',
+      'ClassExpression',
+      'TaggedTemplateExpression',
+      'MemberExpression',
+      'Super',
+      'MetaProperty',
+      'NewExpression',
+      'CallExpression',
+      'UpdateExpression',
+      'AwaitExpression',
+      'UnaryExpression',
+      'BinaryExpression',
+      'LogicalExpression',
+      'ConditionalExpression',
+      'YieldExpression',
+      'AssignmentExpression',
+      'SequenceExpression',
+      'SpreadElement'
+    ]
+    return EXPRESSION_NODES.includes(node.type)
   }
 
   isExpectedNode (expected, actual, token) {

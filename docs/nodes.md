@@ -17,7 +17,7 @@ ArrowFunctionExpression               [ (x) Unittest (-) Parser (-) Transpiler ]
 ClassExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ClassBody                             [ (x) Unittest (-) Parser (-) Transpiler ]
 MethodDefinition                      [ (x) Unittest (-) Parser (-) Transpiler ]
-TaggedTemplateExpression
+TaggedTemplateExpression              [ (x) Unittest (-) Parser (-) Transpiler ]
 TemplateElement                       [ (x) Unittest (-) Parser (-) Transpiler ]
 TemplateLiteral                       [ (x) Unittest (-) Parser (-) Transpiler ]
 MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]

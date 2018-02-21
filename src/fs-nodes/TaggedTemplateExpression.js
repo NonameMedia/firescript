@@ -5,26 +5,30 @@ const FireScriptNode = require('./FireScriptNode')
  *
  * interface TaggedTemplateExpression {
  *   type: 'TaggedTemplateExpression';
- *   readonly tag: Expression;
- *   readonly quasi: TemplateLiteral;
+ *   tag: Expression;
+ *   quasi: TemplateLiteral;
  * }
  *
  * @class TaggedTemplateExpression
  * @extends FireScriptNode
  */
 class TaggedTemplateExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, tag) {
     super(parent)
 
-    const token = tokenStack.next()
-    this.raw = token.value
+    this.tag = tag || this.createFullNode(tokenStack)
+    if (!this.isExpressionNode(this.tag)) {
+      this.syntaxError(`Node ${this.tag.type} is not an Expression node`)
+    }
+
+    this.quasi = this.createTempalteLiteralNode(tokenStack)
   }
 
   toJSON () {
     return {
       type: 'TaggedTemplateExpression',
-      tag: this.tag,
-      quasi: this.quasi
+      tag: this.tag.toJSON(),
+      quasi: this.quasi.toJSON()
     }
   }
 }
