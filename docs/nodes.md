@@ -3,9 +3,9 @@ FS Node
 
 
 ArrayPattern                          [ (x) Unittest (-) Parser (-) Transpiler ]
-RestElement
-AssignmentPattern
-ObjectPattern
+RestElement                           [ (x) Unittest (-) Parser (-) Transpiler ]
+AssignmentPattern                     [ (x) Unittest (-) Parser (-) Transpiler ]
+ObjectPattern                         [ (x) Unittest (-) Parser (-) Transpiler ]
 ThisExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
 Identifier                            [ (x) Unittest (x) Parser (-) Transpiler ]
 Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
@@ -18,7 +18,7 @@ ClassExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
 ClassBody                             [ (x) Unittest (-) Parser (-) Transpiler ]
 MethodDefinition                      [ (x) Unittest (-) Parser (-) Transpiler ]
 TaggedTemplateExpression
-TemplateElement
+TemplateElement                       [ (x) Unittest (-) Parser (-) Transpiler ]
 TemplateLiteral
 MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
@@ -44,7 +44,7 @@ DoWhileStatement
 EmptyStatement
 ExpressionStatement
 ForStatement                          [ (x) Unittest (-) Parser (-) Transpiler ]
-ForInStatement
+ForInStatement                        [ (x) Unittest (x) Parser (-) Transpiler ]
 ForOfStatement                        [ (x) Unittest (-) Parser (-) Transpiler ]
 FunctionDeclaration                   [ (x) Unittest (-) Parser (-) Transpiler ]
 IfStatement                           [ (x) Unittest (-) Parser (-) Transpiler ]

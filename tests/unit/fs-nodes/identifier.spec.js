@@ -8,7 +8,7 @@ describe('Identifier', () => {
       { 'type': 'identifier', 'value': 'res' }
     ])
 
-    it('returns a fs-node item', () => {
+    it('returns a Identifier node', () => {
       const node = new Identifier(tokenStack)
 
       inspect(node).isObject()
