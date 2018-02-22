@@ -54,7 +54,7 @@ class BlockStatement extends FireScriptNode {
         break
       }
 
-      this.isAllowedToken(child, ALLOWED_CHILDS, tokenStack.current())
+      this.isAllowedNode(child, ALLOWED_CHILDS, tokenStack.current())
       this.body.push(child)
     }
   }

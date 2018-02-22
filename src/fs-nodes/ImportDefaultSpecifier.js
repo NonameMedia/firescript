@@ -1,5 +1,17 @@
 const FireScriptNode = require('./FireScriptNode')
 
+/**
+ * ImportDefaultSpecifier
+ *
+ * @class ImportDefaultSpecifier
+ * @extends FireScriptNode
+ *
+ * interface ImportDefaultSpecifier {
+ *     type: 'ImportDefaultSpecifier' | 'ImportDefaultSpecifier' | 'ImportNamespaceSpecifier';
+ *     local: Identifier;
+ *     imported?: Identifier;
+ * }
+ */
 class ImportDefaultSpecifier extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)

@@ -31,7 +31,7 @@ class CallExpression extends FireScriptNode {
     super(parent)
 
     this.callee = callee || this.createIdentifierNode(tokenStack)
-    this.isAllowedToken(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
+    this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
     this.arguments = []
 
     if (!tokenStack.expect('punctuator', '(')) {

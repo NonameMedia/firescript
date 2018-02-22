@@ -49,10 +49,10 @@ class MethodDefinition extends FireScriptNode {
       this.kind = 'constructor'
     }
 
-    this.isAllowedToken(this.key, ALLOWED_KEYS)
+    this.isAllowedNode(this.key, ALLOWED_KEYS)
 
     this.value = this.createFunctionExpressionNode(tokenStack)
-    this.isAllowedToken(this.value, ALLOWED_VALUES)
+    this.isAllowedNode(this.value, ALLOWED_VALUES)
   }
 
   toJSON () {

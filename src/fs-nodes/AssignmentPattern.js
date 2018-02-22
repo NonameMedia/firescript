@@ -50,7 +50,7 @@ class AssignmentPattern extends FireScriptNode {
     tokenStack.goForward()
 
     this.right = this.createFullNode(tokenStack)
-    this.isAllowedToken(this.right, ALLOWED_CHILDS)
+    this.isAllowedNode(this.right, ALLOWED_CHILDS)
   }
 
   toJSON () {

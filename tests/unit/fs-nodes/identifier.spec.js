@@ -4,11 +4,11 @@ const Identifier = require('../../../src/fs-nodes/Identifier')
 
 describe('Identifier', () => {
   describe('instance', () => {
-    const tokenStack = new TokenStack([
-      { 'type': 'identifier', 'value': 'res' }
-    ])
-
     it('returns a Identifier node', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'identifier', 'value': 'res' }
+      ])
+
       const node = new Identifier(tokenStack)
 
       inspect(node).isObject()

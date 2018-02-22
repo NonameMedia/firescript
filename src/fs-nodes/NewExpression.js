@@ -37,7 +37,7 @@ class NewExpression extends FireScriptNode {
     tokenStack.goForward()
 
     this.callee = this.createIdentifierNode(tokenStack)
-    this.isAllowedToken(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
+    this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
     this.arguments = []
 
     if (!tokenStack.expect('punctuator', '(')) {

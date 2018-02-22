@@ -17,7 +17,7 @@ class RestElement extends FireScriptNode {
     tokenStack.goForward()
 
     this.argument = this.createFullNode(tokenStack)
-    this.isAllowedToken(this.argument, ALLOWED_CHILDS)
+    this.isAllowedNode(this.argument, ALLOWED_CHILDS)
   }
 
   toJSON () {

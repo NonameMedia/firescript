@@ -23,8 +23,8 @@ class FireScriptNode {
     return this.getNodeInstance('VariableDeclarator', tokenStack)
   }
 
-  createIdentifierNode (tokenStack) {
-    return this.getNodeInstance('Identifier', tokenStack)
+  createIdentifierNode (tokenStack, name) {
+    return this.getNodeInstance('Identifier', tokenStack, name)
   }
 
   createBlockStatement (tokenStack) {
@@ -242,7 +242,7 @@ class FireScriptNode {
     return node
   }
 
-  isAllowedToken (child, validTokens, token) {
+  isAllowedNode (child, validTokens, token) {
     const type = child === null ? 'null' : child.type
     if (!validTokens.includes(type)) {
       this.syntaxError(`Token ${type} not allowed within a ${this.type}`, token)

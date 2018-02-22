@@ -1,73 +1,91 @@
 FS Node
 -------
 
-
-ArrayPattern                          [ (x) Unittest (-) Parser (-) Transpiler ]
-RestElement                           [ (x) Unittest (-) Parser (-) Transpiler ]
-AssignmentPattern                     [ (x) Unittest (-) Parser (-) Transpiler ]
-ObjectPattern                         [ (x) Unittest (-) Parser (-) Transpiler ]
-ThisExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
-Identifier                            [ (x) Unittest (x) Parser (-) Transpiler ]
-Literal                               [ (x) Unittest (x) Parser (-) Transpiler ]
-ArrayExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
-ObjectExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
-Property                              [ (x) Unittest (-) Parser (-) Transpiler ]
-FunctionExpression                    [ (x) Unittest (-) Parser (-) Transpiler ]
-ArrowFunctionExpression               [ (x) Unittest (-) Parser (-) Transpiler ]
-ClassExpression                       [ (x) Unittest (-) Parser (-) Transpiler ]
-ClassBody                             [ (x) Unittest (-) Parser (-) Transpiler ]
-MethodDefinition                      [ (x) Unittest (-) Parser (-) Transpiler ]
-TaggedTemplateExpression              [ (x) Unittest (-) Parser (-) Transpiler ]
-TemplateElement                       [ (x) Unittest (-) Parser (-) Transpiler ]
-TemplateLiteral                       [ (x) Unittest (-) Parser (-) Transpiler ]
-MemberExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
-Super                                 [ (x) Unittest (-) Parser (-) Transpiler ]
-MetaProperty
-CallExpression                        [ (x) Unittest (-) Parser (-) Transpiler ]
-NewExpression                         [ (x) Unittest (-) Parser (-) Transpiler ]
 SpreadElement
-UpdateExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 AwaitExpression
 UnaryExpression
-BinaryExpression                      [ (x) Unittest (-) Parser (-) Transpiler ]
 LogicalExpression
 ConditionalExpression
 YieldExpression
-AssignmentExpression                  [ (x) Unittest (-) Parser (-) Transpiler ]
 SequenceExpression
-BlockStatement                        [ (x) Unittest (x) Parser (-) Transpiler ]
 BreakStatement
-ClassDeclaration                      [ (x) Unittest (-) Parser (-) Transpiler ]
 ContinueStatement
 DebuggerStatement
 DoWhileStatement
 EmptyStatement
 ExpressionStatement
-ForStatement                          [ (x) Unittest (-) Parser (-) Transpiler ]
-ForInStatement                        [ (x) Unittest (x) Parser (-) Transpiler ]
-ForOfStatement                        [ (x) Unittest (-) Parser (-) Transpiler ]
-FunctionDeclaration                   [ (x) Unittest (-) Parser (-) Transpiler ]
-IfStatement                           [ (x) Unittest (-) Parser (-) Transpiler ]
 LabeledStatement
-ReturnStatement                       [ (x) Unittest (-) Parser (-) Transpiler ]
 SwitchStatement
 SwitchCase
 ThrowStatement
 TryStatement
 CatchClause
-VariableDeclaration                   [ (x) Unittest (x) Parser (-) Transpiler ]
 VariableDeclarator
-WhileStatement                        [ (x) Unittest (-) Parser (-) Transpiler ]
 WithStatement
-Program
 ImportDeclaration
-ImportSpecifier
 ImportDefaultSpecifier
 ImportNamespaceSpecifier
 ExportAllDeclaration
 ExportDefaultDeclaration
 ExportNamedDeclaration
 ExportSpecifier
+
+1) Class and Unittest
+---------------------
+
+ImportSpecifier
+Program
+ArrayPattern
+RestElement
+AssignmentPattern
+ObjectPattern
+ThisExpression
+Identifier                            
+Literal                               
+ArrayExpression
+ObjectExpression
+Property
+FunctionExpression
+ArrowFunctionExpression
+ClassExpression
+ClassBody
+MethodDefinition
+TaggedTemplateExpression
+TemplateElement
+TemplateLiteral
+MemberExpression
+Super
+MetaProperty
+CallExpression
+NewExpression
+UpdateExpression
+BinaryExpression
+AssignmentExpression
+BlockStatement                        
+ClassDeclaration
+ForStatement
+ForInStatement                        
+ForOfStatement
+FunctionDeclaration
+IfStatement
+ReturnStatement
+VariableDeclaration                   
+WhileStatement
+
+
+
+
+2) FSParser can create item from fs source
+------------------------------------------
+
+3) FSTranspiler can transpile it into JS
+----------------------------------------
+
+4) JSParser can create item from js source
+------------------------------------------
+
+5) JSTranspiler can transpile it into FS
+----------------------------------------
 
 --
 
@@ -273,9 +291,9 @@ interface Super {
 MetaProperty
 
 interface MetaProperty {
-    type: 'MetaProperty';
-    meta: Identifier;
-    property: Identifier;
+  type: 'MetaProperty';
+  meta: Identifier;
+  property: Identifier;
 }
 
 Call and New Expressions

@@ -1,16 +1,20 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class Identifier extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, name) {
     super(parent)
 
-    const token = tokenStack.next()
+    if (name) {
+      this.name = name
+    } else {
+      const token = tokenStack.next()
 
-    if (token.type !== 'identifier') {
-      this.syntaxError(`Identifier expected, but a ${token.type} was given`, token)
+      if (token.type !== 'identifier') {
+        this.syntaxError(`Identifier expected, but a ${token.type} was given`, token)
+      }
+
+      this.name = token.value
     }
-
-    this.name = token.value
   }
 
   toJSON () {

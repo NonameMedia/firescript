@@ -34,7 +34,7 @@ class ObjectExpression extends FireScriptNode {
       }
 
       const property = this.createPropertyNode(tokenStack)
-      this.isAllowedToken(property, ALLOWED_ELEMENTS)
+      this.isAllowedNode(property, ALLOWED_ELEMENTS)
       this.properties.push(property)
     }
   }
@@ -59,7 +59,7 @@ class ObjectExpression extends FireScriptNode {
       }
 
       const property = this.createPropertyNode(tokenStack)
-      this.isAllowedToken(property, ALLOWED_ELEMENTS)
+      this.isAllowedNode(property, ALLOWED_ELEMENTS)
       this.properties.push(property)
     }
   }

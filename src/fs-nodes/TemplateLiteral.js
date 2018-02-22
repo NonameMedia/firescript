@@ -57,7 +57,7 @@ class TemplateLiteral extends FireScriptNode {
       }
 
       const expression = this.createFullNode(tokenStack)
-      this.isAllowedToken(expression, ALLOWED_EXPRESSIONS)
+      this.isAllowedNode(expression, ALLOWED_EXPRESSIONS)
       this.expressions.push(expression)
     }
   }
