@@ -104,5 +104,26 @@ describe('ImportDeclaration', () => {
         }
       })
     })
+
+    it('returns a ImportDeclaration node without any ImportSpecifiers', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'import' },
+        { 'type': 'literal', 'value': '"foo"' }
+      ])
+
+      const node = new ImportDeclaration(tokenStack)
+
+      inspect(node).isObject()
+      inspect(node.type).isEql('ImportDeclaration')
+      inspect(node.toJSON()).isEql({
+        type: 'ImportDeclaration',
+        specifiers: [],
+        source: {
+          type: 'Literal',
+          raw: '"foo"',
+          value: 'foo'
+        }
+      })
+    })
   })
 })

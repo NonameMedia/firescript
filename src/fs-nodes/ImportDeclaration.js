@@ -25,6 +25,8 @@ class ImportDeclaration extends FireScriptNode {
         } else {
           this.specifiers.push(this.createImportSpecifierNode(tokenStack))
         }
+      } else if (tokenStack.expect('literal') && this.specifiers.length === 0) {
+        break
       } else if (tokenStack.expect('punctuator', ',')) {
         tokenStack.next()
         continue

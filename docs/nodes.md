@@ -22,7 +22,6 @@ TryStatement
 CatchClause
 VariableDeclarator
 WithStatement
-ImportDeclaration
 ImportNamespaceSpecifier
 ExportAllDeclaration
 ExportDefaultDeclaration
@@ -32,6 +31,7 @@ ExportSpecifier
 1) Class and Unittest
 ---------------------
 
+ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
 Program
