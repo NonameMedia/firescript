@@ -25,10 +25,17 @@ class ImportDeclaration extends FireScriptNode {
         } else {
           this.specifiers.push(this.createImportSpecifierNode(tokenStack))
         }
-      } else if (nextToken.type === 'punctuator' && nextToken.value === ',') {
+      } else if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.next()
+        continue
+      } else if (tokenStack.expect('punctuator', '{')) {
+        tokenStack.next()
+        continue
+      } else if (tokenStack.expect('punctuator', '}')) {
         tokenStack.next()
         continue
       } else {
+        tokenStack.print()
         this.syntaxError('Unexpected token', nextToken)
         break
       }

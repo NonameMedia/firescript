@@ -23,7 +23,6 @@ CatchClause
 VariableDeclarator
 WithStatement
 ImportDeclaration
-ImportDefaultSpecifier
 ImportNamespaceSpecifier
 ExportAllDeclaration
 ExportDefaultDeclaration
@@ -34,6 +33,7 @@ ExportSpecifier
 ---------------------
 
 ImportSpecifier
+ImportDefaultSpecifier
 Program
 ArrayPattern
 RestElement
