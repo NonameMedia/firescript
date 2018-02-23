@@ -43,6 +43,10 @@ class FireScriptNode {
     return this.getNodeInstance('ImportDefaultSpecifier', tokenStack)
   }
 
+  createImportNamespaceSpecifierNode (tokenStack) {
+    return this.getNodeInstance('ImportNamespaceSpecifier', tokenStack)
+  }
+
   createImportSpecifierNode (tokenStack) {
     return this.getNodeInstance('ImportSpecifier', tokenStack)
   }

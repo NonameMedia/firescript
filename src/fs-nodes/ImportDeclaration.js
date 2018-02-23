@@ -10,32 +10,32 @@ class ImportDeclaration extends FireScriptNode {
     }
 
     this.specifiers = []
-    this.hasDefaultSpecifier = tokenStack.lookForward('identifier', 'from', 1)
 
     while (true) {
       const nextToken = tokenStack.current()
-      if (nextToken.type === 'identifier') {
-        if (nextToken.value === 'from') {
-          tokenStack.next()
-          break
-        }
-
-        if (this.hasDefaultSpecifier) {
-          this.specifiers.push(this.createImportDefaultSpecifierNode(tokenStack))
-        } else {
-          this.specifiers.push(this.createImportSpecifierNode(tokenStack))
-        }
+      if (tokenStack.expect('identifier', 'from')) {
+        tokenStack.goForward()
+        break
       } else if (tokenStack.expect('literal') && this.specifiers.length === 0) {
         break
-      } else if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.next()
-        continue
       } else if (tokenStack.expect('punctuator', '{')) {
-        tokenStack.next()
-        continue
-      } else if (tokenStack.expect('punctuator', '}')) {
-        tokenStack.next()
-        continue
+        tokenStack.goForward()
+
+        while (true) {
+          if (tokenStack.expect('punctuator', '}')) {
+            tokenStack.goForward()
+            break
+          } else if (tokenStack.expect('punctuator', ',')) {
+            tokenStack.goForward()
+            continue
+          }
+
+          this.specifiers.push(this.createImportSpecifierNode(tokenStack))
+        }
+      } else if (tokenStack.expect('operator', '*')) {
+        this.specifiers.push(this.createImportNamespaceSpecifierNode(tokenStack))
+      } else if (tokenStack.expect('identifier')) {
+        this.specifiers.push(this.createImportDefaultSpecifierNode(tokenStack))
       } else {
         tokenStack.print()
         this.syntaxError('Unexpected token', nextToken)
