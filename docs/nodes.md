@@ -9,7 +9,6 @@ Unimplemented
 -------------
 
 SpreadElement
-UnaryExpression
 LogicalExpression
 ConditionalExpression
 SequenceExpression
@@ -19,7 +18,6 @@ EmptyStatement
 LabeledStatement
 SwitchStatement
 SwitchCase
-ThrowStatement
 VariableDeclarator
 ImportNamespaceSpecifier
 ExportAllDeclaration
@@ -32,9 +30,11 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+UnaryExpression
 ExpressionStatement
 TryStatement
 CatchClause
+ThrowStatement
 ContinueStatement
 AwaitExpression
 ExportDefaultDeclaration
