@@ -14,8 +14,6 @@ LogicalExpression
 ConditionalExpression
 YieldExpression
 SequenceExpression
-BreakStatement
-ContinueStatement
 DebuggerStatement
 DoWhileStatement
 EmptyStatement
@@ -38,6 +36,7 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+ContinueStatement
 AwaitExpression
 ExportDefaultDeclaration
 YieldExpression
