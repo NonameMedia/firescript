@@ -10,7 +10,7 @@ class WhileStatement extends FireScriptNode {
 
     tokenStack.goForward()
     this.test = this.createFullNode(tokenStack)
-    this.body = this.createBlockStatement(tokenStack)
+    this.body = this.createBlockStatementNode(tokenStack)
   }
 
   toJSON () {

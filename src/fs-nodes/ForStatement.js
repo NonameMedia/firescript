@@ -25,7 +25,7 @@ class ForStatement extends FireScriptNode {
     tokenStack.goForward()
     this.update = this.createFullNode(tokenStack)
 
-    this.body = this.createBlockStatement(tokenStack)
+    this.body = this.createBlockStatementNode(tokenStack)
   }
 
   toJSON () {

@@ -27,7 +27,7 @@ class FireScriptNode {
     return this.getNodeInstance('Identifier', tokenStack, name)
   }
 
-  createBlockStatement (tokenStack) {
+  createBlockStatementNode (tokenStack) {
     return this.getNodeInstance('BlockStatement', tokenStack)
   }
 
