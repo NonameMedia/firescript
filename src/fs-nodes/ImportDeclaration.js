@@ -34,8 +34,15 @@ class ImportDeclaration extends FireScriptNode {
         }
       } else if (tokenStack.expect('operator', '*')) {
         this.specifiers.push(this.createImportNamespaceSpecifierNode(tokenStack))
+      } else if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.goForward()
+        continue
       } else if (tokenStack.expect('identifier')) {
-        this.specifiers.push(this.createImportDefaultSpecifierNode(tokenStack))
+        if (tokenStack.lookForward('identifier', 'from') && this.specifiers.length === 0) {
+          this.specifiers.push(this.createImportDefaultSpecifierNode(tokenStack))
+        } else {
+          this.specifiers.push(this.createImportSpecifierNode(tokenStack))
+        }
       } else {
         tokenStack.print()
         this.syntaxError('Unexpected token', nextToken)
