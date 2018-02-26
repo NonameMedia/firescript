@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 const TokenStack = require('../../../src/TokenStack')
 const ExportDefaultDeclaration = require('../../../src/fs-nodes/ExportDefaultDeclaration')
 
-describe.only('ExportDefaultDeclaration', () => {
+describe('ExportDefaultDeclaration', () => {
   describe('instance', () => {
     it('returns a ExportDefaultDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
