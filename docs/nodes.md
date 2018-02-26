@@ -1,8 +1,14 @@
 FS Node
 -------
 
+Not going to be implemented
+---------------------------
+WithStatement
+
+Unimplemented
+-------------
+
 SpreadElement
-AwaitExpression
 UnaryExpression
 LogicalExpression
 ConditionalExpression
@@ -21,18 +27,19 @@ ThrowStatement
 TryStatement
 CatchClause
 VariableDeclarator
-WithStatement
 ImportNamespaceSpecifier
 ExportAllDeclaration
-ExportDefaultDeclaration
-ExportNamedDeclaration
-ExportSpecifier
+
+~ ExportNamedDeclaration
+~ ExportSpecifier
 
 
 
 1) Class and Unittest
 ---------------------
 
+AwaitExpression
+ExportDefaultDeclaration
 YieldExpression
 BreakStatement
 ImportDeclaration
