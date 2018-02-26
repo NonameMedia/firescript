@@ -6,9 +6,7 @@ AwaitExpression
 UnaryExpression
 LogicalExpression
 ConditionalExpression
-YieldExpression
 SequenceExpression
-BreakStatement
 ContinueStatement
 DebuggerStatement
 DoWhileStatement
@@ -20,7 +18,6 @@ SwitchCase
 ThrowStatement
 TryStatement
 CatchClause
-VariableDeclarator
 WithStatement
 ImportNamespaceSpecifier
 ExportAllDeclaration
@@ -28,9 +25,13 @@ ExportDefaultDeclaration
 ExportNamedDeclaration
 ExportSpecifier
 
+YieldExpression
+
+
 1) Class and Unittest
 ---------------------
 
+BreakStatement
 ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
@@ -70,6 +71,7 @@ FunctionDeclaration
 IfStatement
 ReturnStatement
 VariableDeclaration                   
+VariableDeclarator
 WhileStatement
 
 
