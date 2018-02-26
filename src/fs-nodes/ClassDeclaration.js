@@ -1,5 +1,18 @@
 const FireScriptNode = require('./FireScriptNode')
 
+/**
+ * ClassDeclaration
+ *
+ * @extends FireScriptNode
+ * @class ClassDeclaration
+ *
+ * interface ClassDeclaration {
+ *   type: 'ClassDeclaration';
+ *   id: Identifier | null;
+ *   superClass: Identifier | null;
+ *   body: ClassBody;
+ * }
+ */
 class ClassDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
@@ -28,7 +41,8 @@ class ClassDeclaration extends FireScriptNode {
   toJSON () {
     return {
       type: 'ClassDeclaration',
-      body: this.body.map((item) => item.toJSON())
+      id: this.id ? this.id.toJSON() : null,
+      body: this.body.toJSON()
     }
   }
 }
