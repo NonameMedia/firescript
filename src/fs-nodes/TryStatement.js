@@ -23,7 +23,7 @@ class TryStatement extends FireScriptNode {
 
     tokenStack.goForward()
     this.body = this.createBlockStatementNode(tokenStack)
-    this.handler = this.createCatchClause(tokenStack)
+    this.handler = this.createCatchClauseNode(tokenStack)
     if (tokenStack.expect('keyword', 'finally')) {
       tokenStack.goForward()
       this.handler = this.createBlockStatementNode(tokenStack)

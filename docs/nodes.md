@@ -12,18 +12,14 @@ SpreadElement
 UnaryExpression
 LogicalExpression
 ConditionalExpression
-YieldExpression
 SequenceExpression
 DebuggerStatement
 DoWhileStatement
 EmptyStatement
-ExpressionStatement
 LabeledStatement
 SwitchStatement
 SwitchCase
 ThrowStatement
-TryStatement
-CatchClause
 VariableDeclarator
 ImportNamespaceSpecifier
 ExportAllDeclaration
@@ -36,6 +32,9 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+ExpressionStatement
+TryStatement
+CatchClause
 ContinueStatement
 AwaitExpression
 ExportDefaultDeclaration

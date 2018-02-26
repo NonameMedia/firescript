@@ -87,6 +87,10 @@ class FireScriptNode {
     return this.getNodeInstance('TemplateLiteral', tokenStack)
   }
 
+  createCatchClauseNode (tokenStack) {
+    return this.getNodeInstance('CatchClause', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
