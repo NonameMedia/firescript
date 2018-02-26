@@ -34,6 +34,7 @@ class ExportNamedDeclaration extends FireScriptNode {
       this.isAllowedNode(this.declaration, ALLOWED_CHILDS)
     } else {
       // TODO destruced exports
+      this.syntaxError('Named exports because of reasons not implemented yet')
     }
 
     if (tokenStack.expect('identifier', 'from')) {
