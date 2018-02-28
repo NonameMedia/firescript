@@ -8,9 +8,6 @@ WithStatement
 Unimplemented
 -------------
 
-SpreadElement
-LogicalExpression
-ConditionalExpression
 SequenceExpression
 DebuggerStatement
 DoWhileStatement
@@ -30,6 +27,9 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+ConditionalExpression
+LogicalExpression
+SpreadElement
 UnaryExpression
 ExpressionStatement
 TryStatement
