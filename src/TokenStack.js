@@ -54,6 +54,21 @@ class TokenStack extends Array {
     return token.value
   }
 
+  getIndention () {
+    for (let index = this.index; index >= 0; index--) {
+      const token = this[index]
+      if (!token) {
+        return 0
+      }
+
+      if (token.type === 'indention') {
+        return token.value
+      }
+    }
+
+    return 0
+  }
+
   expect (type, value, index) {
     const token = this[index || this.index]
     if (!token) {

@@ -9,13 +9,11 @@ Unimplemented
 -------------
 
 SequenceExpression
-DebuggerStatement
 DoWhileStatement
 EmptyStatement
 LabeledStatement
 SwitchStatement
 SwitchCase
-VariableDeclarator
 ImportNamespaceSpecifier
 ExportAllDeclaration
 
@@ -27,6 +25,7 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+DebuggerStatement
 ConditionalExpression
 LogicalExpression
 SpreadElement

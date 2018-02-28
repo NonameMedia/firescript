@@ -91,6 +91,10 @@ class FireScriptNode {
     return this.getNodeInstance('CatchClause', tokenStack)
   }
 
+  createSwitchCaseNode (tokenStack) {
+    return this.getNodeInstance('SwitchCase', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -174,6 +178,14 @@ class FireScriptNode {
 
       if (nextToken.value === 'if') {
         return this.getNodeInstance('IfStatement', tokenStack)
+      }
+
+      if (nextToken.value === 'break') {
+        return this.getNodeInstance('BreakStatement', tokenStack)
+      }
+
+      if (nextToken.value === 'switch') {
+        return this.getNodeInstance('SwitchStatement', tokenStack)
       }
 
       tokenStack.print()

@@ -19,6 +19,8 @@ class BreakStatement extends FireScriptNode {
       this.syntaxError('Unexpected token, BreakStatement expected', tokenStack.current())
     }
 
+    tokenStack.goForward()
+
     if (tokenStack.expect('identifier')) {
       this.lable = this.createIdentifierNode(tokenStack)
     } else {
