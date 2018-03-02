@@ -77,9 +77,6 @@ ForOfStatement
 FunctionDeclaration
 IfStatement
 ReturnStatement
-VariableDeclaration                   
-VariableDeclarator
-
 
 1.5) Document it first ;)
 -------------------------
@@ -87,6 +84,9 @@ VariableDeclarator
 
 2) FSParser can create item from fs source
 ------------------------------------------
+
+VariableDeclaration                   
+VariableDeclarator
 WhileStatement
 
 3) FSTranspiler can transpile it into JS

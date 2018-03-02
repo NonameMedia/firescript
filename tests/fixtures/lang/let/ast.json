@@ -1,0 +1,24 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "foo"
+                    },
+                    "init": {
+                        "type": "Literal",
+                        "value": "Foo",
+                        "raw": "'Foo'"
+                    }
+                }
+            ],
+            "kind": "let"
+        }
+    ],
+    "sourceType": "module"
+}
