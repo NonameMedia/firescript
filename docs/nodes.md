@@ -1,7 +1,7 @@
 FS Node
 -------
 
-Not going to be implemented
+Going not to be implemented
 ---------------------------
 WithStatement
 EmptyStatement
@@ -75,16 +75,17 @@ ForStatement
 ForInStatement                        
 ForOfStatement
 FunctionDeclaration
-IfStatement
 ReturnStatement
 
 1.5) Document it first ;)
 -------------------------
 
 
+
 2) FSParser can create item from fs source
 ------------------------------------------
 
+IfStatement
 VariableDeclaration                   
 VariableDeclarator
 WhileStatement

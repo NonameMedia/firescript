@@ -38,7 +38,7 @@ describe('IfStatement', () => {
       })
     })
 
-    it('returns an IfStatement with an alternat block', () => {
+    it('returns an IfStatement with an alternate block', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'if' },
         { 'type': 'identifier', 'value': 'banana' },
@@ -86,7 +86,7 @@ describe('IfStatement', () => {
       })
     })
 
-    it('returns an IfStatement with an alternat if block', () => {
+    it('returns an IfStatement with an alternate if block', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'if' },
         { 'type': 'identifier', 'value': 'banana' },
@@ -139,6 +139,77 @@ describe('IfStatement', () => {
             }]
           },
           alternate: null
+        }
+      })
+    })
+
+    it('returns an IfStatement with two alternate blocks', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'if' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'keyword', 'value': 'return' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 0 },
+        { 'type': 'keyword', 'value': 'elif' },
+        { 'type': 'identifier', 'value': 'apple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'keyword', 'value': 'return' },
+        { 'type': 'identifier', 'value': 'apple' },
+        { 'type': 'indention', 'value': 0 },
+        { 'type': 'keyword', 'value': 'else' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'keyword', 'value': 'return' },
+        { 'type': 'identifier', 'value': 'null' },
+        { 'type': 'indention', 'value': 0 }
+      ])
+
+      const node = new IfStatement(tokenStack)
+
+      inspect(node).isObject()
+      inspect(node.type).isEql('IfStatement')
+      inspect(node.toJSON()).isEql({
+        type: 'IfStatement',
+        test: {
+          type: 'Identifier',
+          name: 'banana'
+        },
+        consequent: {
+          type: 'BlockStatement',
+          body: [{
+            type: 'ReturnStatement',
+            argument: {
+              type: 'Identifier',
+              name: 'banana'
+            }
+          }]
+        },
+        alternate: {
+          type: 'IfStatement',
+          test: {
+            type: 'Identifier',
+            name: 'apple'
+          },
+          consequent: {
+            type: 'BlockStatement',
+            body: [{
+              type: 'ReturnStatement',
+              argument: {
+                type: 'Identifier',
+                name: 'apple'
+              }
+            }]
+          },
+          alternate: {
+            type: 'BlockStatement',
+            body: [{
+              type: 'ReturnStatement',
+              argument: {
+                type: 'Identifier',
+                name: 'null'
+              }
+            }]
+          }
         }
       })
     })

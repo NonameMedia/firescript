@@ -1,0 +1,6 @@
+if foo
+  console.log(foo)
+elif bar
+  console.log(bar)
+else
+  console.log('nothing')
