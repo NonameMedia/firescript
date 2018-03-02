@@ -1,12 +1,29 @@
 Function declaration
 ====================
 
-Description
+FireScript knows three types of functions. These are common functions, async functions and generator functions. The **func** keyword defines a common function, **async** defines an async function and the **gen** keyword defines a generator function.
 
 Syntax
 ------
 
+```
+func [name] (...[args])
+  [body]
+```
+
+```
+async [name] (...[args])
+  [body]
+```
+
+```
+gen [name] (...[args])
+  [body]
+```
+
 ### Function declaration
+
+#### FireScript
 
 ```fire
 func foo (num)
@@ -15,16 +32,18 @@ func foo (num)
 ```
 
 
-#### Output
+#### Javascript
 
 ```js
 function foo (num) {
-  num += 1
-  return num
+  num += 1;
+  return num;
 }
 ```
 
 ### Function expression
+
+#### FireScript
 
 ```fire
 const foo = func foo (num)
@@ -32,16 +51,18 @@ const foo = func foo (num)
   return num
 ```
 
-#### Output
+#### Javascript
 
 ```js
 function foo (num) {
-  num += 1
-  return num
+  num += 1;
+  return num;
 }
 ```
 
 ### Generator function
+
+#### FireScript
 
 ```fire
 gen foo (num)
@@ -53,22 +74,24 @@ gen foo (num)
   return num
 ```
 
-#### Output
+#### Javascript
 
 ```js
 function * foo (num) {
   while(true) {
-    yield num += 1
+    yield num += 1;
     if (num > 100) {
-      break
+      break;
     }
   }
 
-  return num
+  return num;
 }
 ```
 
 ### Async function
+
+#### FireScript
 
 ```fire
 async foo (num)
@@ -80,69 +103,14 @@ async foo (num)
 
 ```js
 function * foo (num) {
-  await num += 1
-  return num
+  await num += 1;
+  return num;
 }
-```
-
-Allowed childs
---------------
-
-```
-BlockStatement
-```
-
-Esprima interfaces
-------------------
-
-```ts
-interface FunctionExpression {
-    type: 'FunctionExpression';
-    id: Identifier | null;
-    params: FunctionParameter[];
-    body: BlockStatement;
-    generator: boolean;
-    async: boolean;
-    expression: boolean;
-}
-
-
-type FunctionParameter = AssignmentPattern | Identifier | BindingPattern;
-```
-
-```ts
-The value of generator is true for a generator expression.
-Arrow Function Expression
-
-interface FunctionExpression {
-    type: 'ArrowFunctionExpression';
-    id: Identifier | null;
-    params: FunctionParameter[];
-    body: BlockStatement | Expression;
-    generator: boolean;
-    async: boolean;
-    expression: false;
-}
-```
-
-```ts
-interface FunctionDeclaration {
-    type: 'FunctionDeclaration';
-    id: Identifier | null;
-    params: FunctionParameter[];
-    body: BlockStatement;
-    generator: boolean;
-    async: boolean;
-    expression: false;
-}
-
-type FunctionParameter = AssignmentPattern | Identifier | BindingPattern;
-
 ```
 
 ---
 
-## Drafts
+## Draft
 
 ### Syntax
 
