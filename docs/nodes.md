@@ -4,19 +4,15 @@ FS Node
 Not going to be implemented
 ---------------------------
 WithStatement
+EmptyStatement
 
 Unimplemented
 -------------
 
-SequenceExpression
-DoWhileStatement
-EmptyStatement
-LabeledStatement
-SwitchStatement
-SwitchCase
-ImportNamespaceSpecifier
-ExportAllDeclaration
+?? LabeledStatement
 
+~ ImportNamespaceSpecifier
+~ ExportAllDeclaration
 ~ ExportNamedDeclaration
 ~ ExportSpecifier
 
@@ -25,6 +21,10 @@ ExportAllDeclaration
 1) Class and Unittest
 ---------------------
 
+SwitchStatement
+SwitchCase
+DoWhileStatement
+SequenceExpression
 DebuggerStatement
 ConditionalExpression
 LogicalExpression
@@ -80,8 +80,6 @@ ReturnStatement
 VariableDeclaration                   
 VariableDeclarator
 WhileStatement
-
-
 
 
 2) FSParser can create item from fs source

@@ -32,7 +32,7 @@ Complex objects
 const obj =
   foo:
     bar: 'Bar'
-    bla:
+    bla: []
       'bli'
       'bla'
       'blu'

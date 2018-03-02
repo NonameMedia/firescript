@@ -188,6 +188,10 @@ class FireScriptNode {
         return this.getNodeInstance('SwitchStatement', tokenStack)
       }
 
+      if (nextToken.value === 'while') {
+        return this.getNodeInstance('WhileStatement', tokenStack)
+      }
+
       tokenStack.print()
       this.syntaxError('Unexpected keyword!', nextToken)
     }

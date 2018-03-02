@@ -49,6 +49,11 @@ class BlockStatement extends FireScriptNode {
         break
       }
 
+      if (nextToken.type === 'indention' && nextToken.value === this.indention) {
+        tokenStack.goForward()
+        continue
+      }
+
       const child = this.createFullNode(tokenStack)
       if (!child) {
         break

@@ -1,20 +1,14 @@
 const TokenStack = require('./TokenStack')
+const constants = require('./utils/constants')
 
 class FireSciptTokenizer {
   constructor (opts) {
     opts = opts || {}
     this.setRange = opts.range || false
     this.setLocation = opts.loc || false
-    this.keyWords = ['class', 'const', 'export', 'func', 'import', 'let', 'return', 'super', 'var']
-    this.punctuatorChars = '[.=(){},+*/-]'
-    this.punctators = [
-      '.', '=', '(', ')', '{', '}', '[', ']', ','
-    ]
-    this.operators = [
-      '!==', '!=', '!', '%=', '%', '&&', '&=', '&', '**', '*=', '*',
-      '++', '+=', '+', '--', '-=', '-', '/=', '/', '<<=', '<<', '<=',
-      '<', '===', '==', '=', '>>>=', '>>>', '>>=', '>>', '>=', '>',
-      '^=', '^', '|=', '||', '~']
+    this.keyWords = constants.KEYWORDS
+    this.punctators = constants.PUNCTUATORS
+    this.operators = constants.OPERATORS
     this.literalPattern = '\'[^]+?\'|true|false|null'
     this.numericPattern = '-?\\d+'
 
@@ -23,7 +17,7 @@ class FireSciptTokenizer {
   }
 
   regExpEscape (arr) {
-    return arr.map((item) => item.replace(/[\\|\]*+?[()/]/g, (match) => {
+    return arr.map((item) => item.replace(/[\\|\]*+?[()^$/]/g, (match) => {
       return `\\${match}`
     }))
   }
@@ -48,6 +42,10 @@ class FireSciptTokenizer {
       const match = reg.exec(source)
       if (!match) {
         break
+      }
+
+      if (match[0] === '') {
+        throw new Error('Parser error! Unmatched item')
       }
 
       this.lastIndex = reg.lastIndex
@@ -92,6 +90,8 @@ class FireSciptTokenizer {
         this.addToken('identifier', match[7])
         continue
       }
+
+      throw new Error('Parser error! Unexpected token')
     }
 
     return this.token

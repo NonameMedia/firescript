@@ -11,7 +11,7 @@ const steps = inspect.readDir(TEST_CASE_DIR)
 
 describe('Integrtion test runner', () => {
   steps.forEach((step) => {
-    if (!step.isDirectory()) {
+    if (!step.isDirectory() || !step.name.startsWith('step')) {
       return
     }
 
@@ -33,7 +33,7 @@ describe('Integrtion test runner', () => {
           it(`Parse AST from JS`, () => {
             const source = inspect.readFile(path.join(testCase.path, 'index.js'))
             const parser = new JSParser()
-            jsAST = parser.parseAST(source)
+            jsAST = parser.parse(source)
             inspect(jsAST).isObject()
           })
 

@@ -1,0 +1,34 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "WhileStatement",
+      "test": {
+        "type": "Literal",
+        "value": true,
+        "raw": "true"
+      },
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "expression": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "foo"
+              },
+              "arguments": []
+            }
+          },
+          {
+            "type": "BreakStatement",
+            "label": null
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
+}

@@ -9,7 +9,6 @@ class FireScriptParser {
     this.setRange = conf.range || false
 
     this.keyWords = 'import|func|class|const|let|var|return'
-    this.punctuatorChars = '[.=(){},+*/-]'
     this.literalPattern = '\'[^]+?\'|\\d+'
     this.binaryOperatorPattern = /^[+*/&-]$/
     this.indentionStr = '  '

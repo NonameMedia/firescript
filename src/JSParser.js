@@ -1,7 +1,7 @@
 const esprima = require('esprima')
 
 class JSParser {
-  parseAST (str) {
+  parse (str) {
     return esprima.parseModule(str)
   }
 }
