@@ -3,37 +3,39 @@ const FireScriptNode = require('./FireScriptNode')
 const ALLOWED_CALLEE_TYPES = [
   'ThisExpression',
   'Identifier',
-  'Literal'
-  // 'ArrayExpression',
-  // 'ObjectExpression',
-  // 'FunctionExpression',
-  // 'ArrowFunctionExpression',
-  // 'ClassExpression',
-  // 'TaggedTemplateExpression',
-  // 'MemberExpression',
-  // 'Super',
-  // 'MetaProperty',
-  // 'NewExpression',
-  // 'CallExpression',
-  // 'UpdateExpression',
-  // 'AwaitExpression',
-  // 'UnaryExpression',
-  // 'BinaryExpression',
-  // 'LogicalExpression',
-  // 'ConditionalExpression',
-  // 'YieldExpression',
-  // 'AssignmentExpression',
-  // 'SequenceExpression'
+  'Literal',
+  'ArrayExpression',
+  'ObjectExpression',
+  'FunctionExpression',
+  'ArrowFunctionExpression',
+  'ClassExpression',
+  'TaggedTemplateExpression',
+  'MemberExpression',
+  'Super',
+  'MetaProperty',
+  'NewExpression',
+  'CallExpression',
+  'UpdateExpression',
+  'AwaitExpression',
+  'UnaryExpression',
+  'BinaryExpression',
+  'LogicalExpression',
+  'ConditionalExpression',
+  'YieldExpression',
+  'AssignmentExpression',
+  'SequenceExpression'
 ]
 
 class CallExpression extends FireScriptNode {
   constructor (tokenStack, parent, callee) {
     super(parent)
 
+    console.log('CALLEE', callee)
     this.callee = callee || this.createIdentifierNode(tokenStack)
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
     this.arguments = []
 
+    tokenStack.print()
     if (!tokenStack.expect('punctuator', '(')) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
