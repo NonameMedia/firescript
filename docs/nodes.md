@@ -79,11 +79,15 @@ IfStatement
 ReturnStatement
 VariableDeclaration                   
 VariableDeclarator
-WhileStatement
+
+
+1.5) Document it first ;)
+-------------------------
 
 
 2) FSParser can create item from fs source
 ------------------------------------------
+WhileStatement
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------

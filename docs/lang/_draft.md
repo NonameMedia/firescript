@@ -6,35 +6,18 @@ Description
 Syntax
 ------
 
-### NodeType
+```
+syntax
+```
+
+### FireScript
 
 ```fire
 
 ```
 
-#### Output
+#### Javascript
 
 ```js
-
-```
-
-Allowed childs
---------------
-
-```
-
-```
-
-Esprima interfaces
-------------------
-
-```ts
-
-```
-
-Examples
---------
-
-```fire
 
 ```

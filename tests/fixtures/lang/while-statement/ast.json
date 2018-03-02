@@ -4,9 +4,17 @@
     {
       "type": "WhileStatement",
       "test": {
-        "type": "Literal",
-        "value": true,
-        "raw": "true"
+        "type": "BinaryExpression",
+        "operator": "<",
+        "left": {
+          "type": "Identifier",
+          "name": "i"
+        },
+        "right": {
+          "type": "Literal",
+          "value": 100,
+          "raw": "100"
+        }
       },
       "body": {
         "type": "BlockStatement",
@@ -14,17 +22,42 @@
           {
             "type": "ExpressionStatement",
             "expression": {
-              "type": "CallExpression",
-              "callee": {
+              "type": "AssignmentExpression",
+              "operator": "+=",
+              "left": {
                 "type": "Identifier",
-                "name": "foo"
+                "name": "i"
               },
-              "arguments": []
+              "right": {
+                "type": "Literal",
+                "value": 1,
+                "raw": "1"
+              }
             }
           },
           {
-            "type": "BreakStatement",
-            "label": null
+            "type": "ExpressionStatement",
+            "expression": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "console"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "log"
+                }
+              },
+              "arguments": [
+                {
+                  "type": "Identifier",
+                  "name": "i"
+                }
+              ]
+            }
           }
         ]
       }
