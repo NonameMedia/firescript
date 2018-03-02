@@ -1,7 +1,10 @@
 module.exports = {
   KEYWORDS: [
-    'break', 'class', 'const', 'do', 'export', 'func', 'if', 'import', 'let', 'return', 'super',
-    'var', 'while'
+    'await', 'break', 'class', 'const', 'continue', 'do',
+    'elif', 'else', 'export', 'func',
+    'if', 'import',
+    'let', 'return', 'super',
+    'var', 'while', 'yield'
   ],
   OPERATORS: [
     '!==', '!=', '!', '%=', '%', '&&', '&=', '&', '**', '*=', '*',
@@ -11,5 +14,18 @@ module.exports = {
   ],
   PUNCTUATORS: [
     '.', '=', '(', ')', '{', '}', '[', ']', ','
+  ],
+  BINARY_OPERATORS: [
+    'instanceof', 'in', '+', '-', '*', '/', '%', '**',
+    '|', '^', '&', '==', '!=', '===', '!==',
+    '<', '>', '<=', '<<', '>>', '>>>'
+  ],
+  UPDATE_OPERATORS: ['++', '--'],
+  UNARY_OPERATORS: [
+    '+', '-', '~', '!', 'delete', 'void', 'typeof'
+  ],
+  ASSIGNMENT_OPERATORS: [
+    '=', '*=', '**=', '/=', '%=', '+=', '-=',
+    '<<=', '>>=', '>>>=', '&=', '^=', '|='
   ]
 }

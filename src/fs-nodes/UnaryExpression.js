@@ -1,8 +1,5 @@
 const FireScriptNode = require('./FireScriptNode')
-
-const UNARY_OPERATORS = [
-  '+', '-', '~', '!', 'delete', 'void', 'typeof'
-]
+const constants = require('../utils/constants')
 
 /**
  * UnaryExpression
@@ -24,7 +21,7 @@ class UnaryExpression extends FireScriptNode {
     const token = tokenStack.next()
     this.operator = token.value
 
-    if (!UNARY_OPERATORS.includes(token.value)) {
+    if (!constants.UNARY_OPERATORS.includes(token.value)) {
       this.syntaxError('Token is not a unary operator', token)
     }
 

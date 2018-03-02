@@ -1,8 +1,4 @@
-const BINARY_OPERATORS = ['instanceof',
-  'in', '+', '-', '*', '/', '%', '**',
-  '|', '^', '&', '==', '!=', '===', '!==',
-  '<', '>', '<=', '<<', '>>', '>>>']
-const UPDATE_OPERATORS = ['++', '--']
+const constants = require('../utils/constants')
 
 class FireScriptNode {
   constructor (parent) {
@@ -197,11 +193,11 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'operator') {
-      if (UPDATE_OPERATORS.includes(nextToken.value)) {
+      if (constants.UPDATE_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('UpdateExpression', tokenStack)
       }
 
-      if (BINARY_OPERATORS.includes(nextToken.value)) {
+      if (constants.BINARY_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
     }
@@ -237,14 +233,14 @@ class FireScriptNode {
     }
 
     while (true) {
-      if (tokenStack.expect('operator', '=')) {
+      if (tokenStack.expect('operator', constants.ASSIGNMENT_OPERATORS)) {
         node = this.getNodeInstance('AssignmentExpression', tokenStack, node)
         node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
-      } else if (tokenStack.expect('operator', BINARY_OPERATORS)) {
+      } else if (tokenStack.expect('operator', constants.BINARY_OPERATORS)) {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '.')) {
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
-      } else if (tokenStack.expect('operator', UPDATE_OPERATORS)) {
+      } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)

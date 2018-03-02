@@ -1,4 +1,5 @@
 const FireScriptNode = require('./FireScriptNode')
+const constants = require('../utils/constants')
 
 class AssignmentExpression extends FireScriptNode {
   constructor (tokenStack, parent, left) {
@@ -7,7 +8,7 @@ class AssignmentExpression extends FireScriptNode {
     this.left = left || this.createNodeItem(tokenStack)
     const token = tokenStack.next()
 
-    if (token.type !== 'operator' && !this.assignmentOperatorPattern.test(token.value)) {
+    if (token.type !== 'operator' && !constants.ASSIGNMENT_OPERATORS.includes(token.value)) {
       this.syntaxError('Token is not a assignment operator', token)
     }
 
