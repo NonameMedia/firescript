@@ -14,18 +14,38 @@ The **yield*** statement delegates to another generator or iterable object.
 Syntax
 ------
 
+##### Function
+
 ```
 func [name] (...[args])
   [body]
 ```
+
+##### Async function
 
 ```
 async [name] (...[args])
   [body]
 ```
 
+##### Generator function
+
 ```
 gen [name] (...[args])
+  [body]
+```
+
+##### Arrow function
+
+```
+=> (...[args])
+  [body]
+```
+
+##### Async arrow function
+
+```
+=> async (...[args])
   [body]
 ```
 

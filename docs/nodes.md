@@ -74,11 +74,11 @@ ForOfStatement
 1.5) Document it first ;)
 -------------------------
 
-ArrowFunctionExpression
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+ArrowFunctionExpression
 FunctionExpression
 AwaitExpression
 YieldExpression

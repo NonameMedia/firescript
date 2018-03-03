@@ -206,6 +206,10 @@ class FireScriptNode {
       if (constants.BINARY_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
+
+      if (nextToken.value === '=>') {
+        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
+      }
     }
 
     if (nextToken.type === 'identifier') {
@@ -224,14 +228,7 @@ class FireScriptNode {
       return this.getNodeInstance('Literal', tokenStack)
     }
 
-    if (nextToken.type === 'punctuator') {
-      if (nextToken.value === '(') {
-        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
-      }
-    }
-
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
-      console.log('BÄM', nextToken)
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
     }
   }

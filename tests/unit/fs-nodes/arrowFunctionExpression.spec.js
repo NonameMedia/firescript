@@ -6,10 +6,10 @@ describe('ArrowFunctionExpression', () => {
   describe('instance', () => {
     it('returns an arrow function expression node', () => {
       const tokenStack = new TokenStack([
+        { type: 'operator', value: '=>' },
         { type: 'punctuator', value: '(' },
         { type: 'identifier', value: 'num1' },
         { type: 'punctuator', value: ')' },
-        { type: 'operator', value: '=>' },
         { type: 'indention', value: '2' },
         { type: 'keyword', value: 'const' },
         { type: 'identifier', value: 'res' },
@@ -38,11 +38,11 @@ describe('ArrowFunctionExpression', () => {
 
     it('returns a async arrow function expression node', () => {
       const tokenStack = new TokenStack([
+        { type: 'operator', value: '=>' },
         { type: 'keyword', value: 'async' },
         { type: 'punctuator', value: '(' },
         { type: 'identifier', value: 'num1' },
         { type: 'punctuator', value: ')' },
-        { type: 'operator', value: '=>' },
         { type: 'indention', value: '2' },
         { type: 'keyword', value: 'const' },
         { type: 'identifier', value: 'res' },
@@ -71,12 +71,12 @@ describe('ArrowFunctionExpression', () => {
 
     it('returns an arrow function expression node with two arguments', () => {
       const tokenStack = new TokenStack([
+        { type: 'operator', value: '=>' },
         { type: 'punctuator', value: '(' },
         { type: 'identifier', value: 'num1' },
         { type: 'punctuator', value: ',' },
         { type: 'identifier', value: 'num2' },
         { type: 'punctuator', value: ')' },
-        { type: 'operator', value: '=>' },
         { type: 'indention', value: '2' },
         { type: 'keyword', value: 'const' },
         { type: 'identifier', value: 'res' },

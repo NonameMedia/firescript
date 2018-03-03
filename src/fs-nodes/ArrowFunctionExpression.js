@@ -10,7 +10,12 @@ class ArrowFunctionExpression extends FireScriptNode {
     this.generator = false
     this.params = []
 
-    tokenStack.print()
+    if (!tokenStack.expect('operator', '=>')) {
+      this.syntaxError('Unexpected token', tokenStack.current())
+    }
+
+    tokenStack.goForward()
+
     if (tokenStack.expect('keyword', 'async')) {
       this.async = true
       tokenStack.goForward()
@@ -41,18 +46,13 @@ class ArrowFunctionExpression extends FireScriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
-    if (!tokenStack.expect('operator', '=>')) {
-      this.syntaxError('Unexpected token', tokenStack.current())
-    }
-
-    tokenStack.goForward()
-    this.body = this.createFullNode(tokenStack)
+    this.body = this.createBlockStatementNode(tokenStack)
   }
 
   toJSON () {
     return {
       type: 'ArrowFunctionExpression',
-      id: this.id ? this.id.toJSON() : null,
+      id: null,
       params: this.params.map((item) => item.toJSON()),
       body: this.body.toJSON(),
       async: this.async,
