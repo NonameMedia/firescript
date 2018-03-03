@@ -10,6 +10,7 @@ class ArrowFunctionExpression extends FireScriptNode {
     this.generator = false
     this.params = []
 
+    tokenStack.print()
     if (tokenStack.expect('keyword', 'async')) {
       this.async = true
       tokenStack.goForward()
@@ -40,7 +41,7 @@ class ArrowFunctionExpression extends FireScriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
-    if (!tokenStack.expect('punctuator', '=>')) {
+    if (!tokenStack.expect('operator', '=>')) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
@@ -51,7 +52,7 @@ class ArrowFunctionExpression extends FireScriptNode {
   toJSON () {
     return {
       type: 'ArrowFunctionExpression',
-      id: this.id.toJSON(),
+      id: this.id ? this.id.toJSON() : null,
       params: this.params.map((item) => item.toJSON()),
       body: this.body.toJSON(),
       async: this.async,

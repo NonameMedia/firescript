@@ -1,4 +1,5 @@
 const FireScriptNode = require('./FireScriptNode')
+const constants = require('../utils/constants')
 
 class UpdateExpression extends FireScriptNode {
   constructor (tokenStack, parent, argument) {
@@ -14,7 +15,7 @@ class UpdateExpression extends FireScriptNode {
       this.argument = argument || this.createNodeItem(tokenStack)
 
       const token = tokenStack.next()
-      if (token.type !== 'operator' && !this.updateOperatorPattern.test(token.value)) {
+      if (token.type !== 'operator' && !constants.UPDATE_OPERATORS.includes(token.value)) {
         this.syntaxError('Token is not an update operator', token)
       }
 

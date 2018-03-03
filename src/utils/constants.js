@@ -9,7 +9,7 @@ module.exports = {
   OPERATORS: [
     '!==', '!=', '!', '%=', '%', '&&', '&=', '&', '**', '*=', '*',
     '++', '+=', '+', '--', '-=', '-', '/=', '/', '<<=', '<<', '<=',
-    '<', '===', '==', '=', '>>>=', '>>>', '>>=', '>>', '>=', '>',
+    '<', '=>', '===', '==', '=', '>>>=', '>>>', '>>=', '>>', '>=', '>',
     '^=', '^', '|=', '||', '~'
   ],
   PUNCTUATORS: [
@@ -27,5 +27,12 @@ module.exports = {
   ASSIGNMENT_OPERATORS: [
     '=', '*=', '**=', '/=', '%=', '+=', '-=',
     '<<=', '>>=', '>>>=', '&=', '^=', '|='
+  ],
+  BLOCK_SCOPE_WRAP_EXPRESSIONS: [
+    'UpdateExpression',
+    'CallExpression',
+    'AwaitExpression',
+    'YieldExpression',
+    'ArrowFunctionExpression'
   ]
 }

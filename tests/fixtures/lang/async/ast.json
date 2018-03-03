@@ -1,0 +1,56 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "FunctionDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "foo"
+            },
+            "params": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ],
+            "body": {
+                "type": "BlockStatement",
+                "body": [
+                    {
+                        "type": "ExpressionStatement",
+                        "expression": {
+                            "type": "AwaitExpression",
+                            "argument": {
+                                "type": "Identifier",
+                                "name": "a"
+                            }
+                        }
+                    },
+                    {
+                        "type": "ReturnStatement",
+                        "argument": {
+                            "type": "BinaryExpression",
+                            "operator": "+",
+                            "left": {
+                                "type": "Identifier",
+                                "name": "a"
+                            },
+                            "right": {
+                                "type": "Identifier",
+                                "name": "b"
+                            }
+                        }
+                    }
+                ]
+            },
+            "generator": false,
+            "expression": false,
+            "async": true
+        }
+    ],
+    "sourceType": "module"
+}

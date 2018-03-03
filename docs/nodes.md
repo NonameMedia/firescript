@@ -35,9 +35,7 @@ TryStatement
 CatchClause
 ThrowStatement
 ContinueStatement
-AwaitExpression
 ExportDefaultDeclaration
-YieldExpression
 BreakStatement
 ImportDeclaration
 ImportSpecifier
@@ -53,8 +51,6 @@ Literal
 ArrayExpression
 ObjectExpression
 Property
-FunctionExpression
-ArrowFunctionExpression
 ClassExpression
 ClassBody
 MethodDefinition
@@ -74,17 +70,20 @@ ClassDeclaration
 ForStatement
 ForInStatement                        
 ForOfStatement
-FunctionDeclaration
-ReturnStatement
 
 1.5) Document it first ;)
 -------------------------
 
-
+ArrowFunctionExpression
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+FunctionExpression
+AwaitExpression
+YieldExpression
+ReturnStatement
+FunctionDeclaration
 IfStatement
 VariableDeclaration                   
 VariableDeclarator

@@ -1,0 +1,3 @@
+(a, b) => {
+  return 'foo'
+}

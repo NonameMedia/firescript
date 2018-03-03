@@ -3,6 +3,14 @@ Function declaration
 
 FireScript knows three types of functions. These are common functions, async functions and generator functions. The **func** keyword defines a common function, **async** defines an async function and the **gen** keyword defines a generator function.
 
+The **return** statement stops the execution of a function and returns a value to the function caller. Return works in `func`, `async` and `gen` functions.
+
+The **await** operator waits for a Promise. It can used within a `async` function.
+
+The **yield** operator pauses and resumes a generator. It works within a `gen` functions.
+
+The **yield*** statement delegates to another generator or iterable object.
+
 Syntax
 ------
 
@@ -104,6 +112,27 @@ async foo (num)
 ```js
 function * foo (num) {
   await num += 1;
+  return num;
+}
+```
+
+### Arrow functions
+
+Arrow functions are anonymous functions and they don't have their own *this*, *arguments*, *super*, or *new.target* arguments.
+
+#### FireScript
+
+```fire
+(num) =>
+  num += 1
+  return num
+```
+
+#### Output
+
+```js
+(num) => {
+  num += 1;
   return num;
 }
 ```

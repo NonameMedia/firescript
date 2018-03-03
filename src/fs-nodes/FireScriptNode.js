@@ -8,9 +8,6 @@ class FireScriptNode {
     }
     this.indention = parent ? parent.indention : 0
     this.callStack = parent ? parent.callStack : []
-    this.binaryOperatorPattern = /^[+*/&-]$/
-    this.assignmentOperatorPattern = /^[=]$/
-    this.updateOperatorPattern = /^(\+\+|--)$/
     this.type = this.constructor.name
     this.indentionSize = 2
   }
@@ -115,7 +112,9 @@ class FireScriptNode {
 
   getNodeInstance (nodeName, tokenStack, subNode) {
     const nextToken = tokenStack.current()
-    this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
+    if (nextToken) {
+      this.callStack.push(`${nodeName} @ ${nextToken.type} | ${nextToken.value}`)
+    }
     const Node = require(`./${nodeName}`)
     const node = new Node(tokenStack, this, subNode)
     return node
@@ -144,12 +143,10 @@ class FireScriptNode {
 
     if (nextToken.type === 'keyword') {
       if (nextToken.value === 'import') {
-        // this.isExpectedNode(expectedNode, 'ImportDeclaration', tokenStack.current())
         return this.getNodeInstance('ImportDeclaration', tokenStack)
       }
 
-      if (nextToken.value === 'func') {
-        // this.isExpectedNode(expectedNode, 'FunctionDeclaration', tokenStack.current())
+      if (['func', 'async', 'gen'].includes(nextToken.value)) {
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
 
@@ -158,17 +155,22 @@ class FireScriptNode {
       }
 
       if (['var', 'const', 'let'].includes(nextToken.value)) {
-        // this.isExpectedNode(expectedNode, 'VariableDeclaration', tokenStack.current())
         return this.getNodeInstance('VariableDeclaration', tokenStack)
       }
 
       if (nextToken.value === 'return') {
-        // this.isExpectedNode(expectedNode, 'ReturnStatement', tokenStack.current())
         return this.getNodeInstance('ReturnStatement', tokenStack)
       }
 
+      if (nextToken.value === 'await') {
+        return this.getNodeInstance('AwaitExpression', tokenStack)
+      }
+
+      if (nextToken.value === 'yield') {
+        return this.getNodeInstance('YieldExpression', tokenStack)
+      }
+
       if (nextToken.value === 'super') {
-        // this.isExpectedNode(expectedNode, 'Super', tokenStack.current())
         return this.getNodeInstance('Super', tokenStack)
       }
 
@@ -222,6 +224,12 @@ class FireScriptNode {
       return this.getNodeInstance('Literal', tokenStack)
     }
 
+    if (nextToken.type === 'punctuator') {
+      if (nextToken.value === '(') {
+        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
+      }
+    }
+
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
       console.log('BÄM', nextToken)
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
@@ -259,7 +267,7 @@ class FireScriptNode {
       }
     }
 
-    if (this.isBlockScope && ['UpdateExpression', 'CallExpression'].includes(node.type)) {
+    if (this.isBlockScope && constants.BLOCK_SCOPE_WRAP_EXPRESSIONS.includes(node.type)) {
       node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
     }
 
