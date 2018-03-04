@@ -12,15 +12,20 @@ class ObjectExpression extends FireScriptNode {
 
     if (tokenStack.expect('punctuator', '{')) {
       this.parseCommonSyntax(tokenStack)
+      if (tokenStack.expect('punctuator', '}')) {
+        tokenStack.goForward()
+      }
     } else if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
       this.parseBracelessSyntax(tokenStack)
     } else {
-      this.syntaxError('Array declaration expected', tokenStack.current())
+      this.syntaxError('Object declaration expected', tokenStack.current())
     }
   }
 
   parseCommonSyntax (tokenStack) {
     tokenStack.goForward()
+
+    this.indention = tokenStack.getIndention()
 
     while (true) {
       if (tokenStack.expect('punctuator', '}')) {
@@ -28,14 +33,31 @@ class ObjectExpression extends FireScriptNode {
         break
       }
 
-      if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.goForward()
-        continue
-      }
-
       const property = this.createPropertyNode(tokenStack)
       this.isAllowedNode(property, ALLOWED_ELEMENTS)
       this.properties.push(property)
+
+      if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.goForward()
+        continue
+      } else if (tokenStack.expect('indention')) {
+        if (tokenStack.isIndention('lt', this.indention)) {
+          tokenStack.goForward()
+          break
+        } else if (tokenStack.isIndention('eq', this.indention)) {
+          tokenStack.goForward()
+          continue
+        } else {
+          this.syntaxError('Indetion error!')
+        }
+      } else if (tokenStack.expect('punctuator', '}')) {
+        tokenStack.goForward()
+        break
+      } else {
+        this.syntaxError('Unexpected token!', tokenStack.current())
+      }
+
+      break
     }
   }
 
@@ -44,12 +66,12 @@ class ObjectExpression extends FireScriptNode {
     const childIndention = this.indention + this.indentionSize
 
     while (true) {
-      if (tokenStack.isIndention(this.indention, 'lte')) {
+      if (tokenStack.isIndention('lte', this.indention)) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.isIndention(childIndention, 'eq')) {
+      if (tokenStack.isIndention('eq', childIndention)) {
         tokenStack.goForward()
         continue
       }

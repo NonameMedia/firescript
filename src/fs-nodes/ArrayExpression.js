@@ -67,12 +67,12 @@ class ArrayExpression extends FireScriptNode {
     const childIndention = this.indention + this.indentionSize
 
     while (true) {
-      if (tokenStack.isIndention(this.indention, 'lte')) {
+      if (tokenStack.isIndention('lte', this.indention)) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.isIndention(childIndention, 'eq')) {
+      if (tokenStack.isIndention('eq', childIndention)) {
         tokenStack.goForward()
         continue
       }

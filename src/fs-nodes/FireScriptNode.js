@@ -92,6 +92,10 @@ class FireScriptNode {
     return this.getNodeInstance('IfStatement', tokenStack, test)
   }
 
+  createObjectExpressionNode (tokenStack) {
+    return this.getNodeInstance('ObjectExpression', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'

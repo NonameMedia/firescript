@@ -88,7 +88,7 @@ class SwitchCase extends FireScriptNode {
       }
 
       if (nextToken.type === 'indention') {
-        if (tokenStack.isIndention(this.indention, 'lt')) {
+        if (tokenStack.isIndention('lt', this.indention)) {
           tokenStack.goForward()
           break
         }

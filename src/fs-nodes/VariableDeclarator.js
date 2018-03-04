@@ -9,8 +9,18 @@ class VariableDeclarator extends FireScriptNode {
 
     if (tokenStack.expect('operator', '=')) {
       tokenStack.goForward()
-      this.init = this.createFullNode(tokenStack)
+      if (this.tryObject(tokenStack)) {
+        this.init = this.createObjectExpressionNode(tokenStack)
+      } else {
+        this.init = this.createFullNode(tokenStack)
+      }
     }
+  }
+
+  tryObject (tokenStack) {
+    return tokenStack.expect('indention') &&
+      tokenStack.lookForward('identifier', null, 1) &&
+      tokenStack.lookForward('punctuator', ':', 2)
   }
 
   toJSON () {

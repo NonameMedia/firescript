@@ -11,8 +11,7 @@ class ClassBody extends FireScriptNode {
         this.indention = token.value
       }
 
-      // console.log('INDENTION', this.indention, this.indentionSize, tokenStack.isIndention(this.indention - this.indentionSize, 'lte'))
-      if (tokenStack.isIndention(this.indention - this.indentionSize, 'lte')) {
+      if (tokenStack.isIndention('lte', this.indention - this.indentionSize)) {
         break
       }
 

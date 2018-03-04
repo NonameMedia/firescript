@@ -84,8 +84,7 @@ class TokenStack extends Array {
     return token.type === type
   }
 
-  isIndention (indention, mode) {
-    mode = mode || 'eq'
+  isIndention (mode, indention) {
     indention = Math.max(indention, 0)
     const token = this.current()
 
