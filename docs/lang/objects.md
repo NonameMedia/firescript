@@ -1,32 +1,80 @@
 Objects
 =======
 
-The ObjectExpression declares objects as variable values or as function arguments.
+The ObjectExpression declares objects as variable values or function arguments. An object is a list of key/value pairs.
 
 Syntax
 ------
 
-```fire
-const obj = { foo: 'Foo', bar: 'Bar' }
-const obj = {
-  foo: 'Foo',
-  bar: 'Bar'
-}
+##### Multiline syntax
+
+```
+const obj =
+  [key]: [value]
+  [key]: [value]
+  [key]: [value]
 ```
 
-An object expression syntax without any braces and commas is also supported.
-Each property has to be placed in its own line, a leading comma is not allowed.
-An indention lower or equal of the declaratior signals the ending of an object block.
+```
+foo({
+  [key]: [value]
+  [key]: [value]
+  [key]: [value]
+})
+```
+
+##### Inline syntax
+
+```
+const obj = { [key]: [value], [key]: [value], [key]: [value] }
+```
+
+
+### Multiline syntax
+
+The multiline expression is similar to Javascript. A curly brace wraps a list of key/value pairs. Each pair has to be in one line. A leading comma is not allowed. The curly braces are optional in variable declarations. An indention lower or equal to the declaratior signals the ending of an object block.
 Empty lines between properties possible, but not recommented.
 
+#### FireScript
+
 ```fire
-const obj =
+const foo =
   foo: 'Foo'
   bar: 'Bar'
 ```
 
-Complex objects
----------------
+#### Javascript
+
+```js
+const foo = {
+  foo: 'Foo',
+  bar: 'Bar'
+};
+```
+
+### Inline syntax
+
+#### FireScript
+
+```fire
+foo({ foo: 'Foo', bar: 'Bar' })
+```
+
+#### Javascript
+
+```js
+foo({ foo: 'Foo', bar: 'Bar' });
+```
+
+---
+
+
+Examples
+--------
+
+This exmaple shows a complex object structure with different data types
+
+##### FireScript
 
 ```fire
 const obj =
@@ -36,56 +84,29 @@ const obj =
       'bli'
       'bla'
       'blu'
-      blobber:
-        'blubber'
-      blobber:
-        true
+      blobber: 'blubber'
+    blobber: true
 ```
 
-Output
-------
+##### Javascript
 
 A Javascript representation would be
 
 ```js
 const obj = {
-  foo: 'Foo',
-  bar: 'Bar'
-}
-```
-
-Allowed childs
---------------
-
-The list shows all allowed childs of an ObjectExpression.
-
-```
-Literal | AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null
-```
-
-Esprima interfaces
-------------------
-
-### Object Expression
-
-```ts
-interface ObjectExpression {
-    type: 'ObjectExpression';
-    properties: Property[];
-}
-
-```
-
-where
-
-```ts
-interface Property {
-    type: 'Property';
-    key: Identifier | Literal;
-    computed: boolean;
-    value: AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null;
-    kind: 'get' | 'set' | 'init';
-    method: false;
-    shorthand: boolean;
+  foo: {
+    bar: 'Bar',
+    bla: [
+      'bli',
+      'bla',
+      'blu',
+      {
+        blobber: 'blubber'
+      }
+    ],
+    {
+      blobber: true
+    }
+  }
 }
 ```

@@ -49,7 +49,6 @@ ThisExpression
 Identifier                            
 Literal                               
 ArrayExpression
-ObjectExpression
 Property
 ClassExpression
 ClassBody
@@ -65,7 +64,6 @@ NewExpression
 UpdateExpression
 BinaryExpression
 AssignmentExpression
-BlockStatement                        
 ClassDeclaration
 ForStatement
 ForInStatement                        
@@ -74,10 +72,12 @@ ForOfStatement
 1.5) Document it first ;)
 -------------------------
 
+ObjectExpression
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+BlockStatement                        
 ArrowFunctionExpression
 FunctionExpression
 AwaitExpression

@@ -51,7 +51,7 @@ class CallExpression extends FireScriptNode {
         continue
       }
 
-      this.arguments.push(this.createNodeItem(tokenStack))
+      this.arguments.push(this.createFullNode(tokenStack))
     }
   }
 

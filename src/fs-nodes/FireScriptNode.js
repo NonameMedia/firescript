@@ -228,6 +228,12 @@ class FireScriptNode {
       return this.getNodeInstance('Literal', tokenStack)
     }
 
+    if (nextToken.type === 'punctuator') {
+      if (nextToken.value === '{') {
+        return this.getNodeInstance('ObjectExpression', tokenStack)
+      }
+    }
+
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
     }
