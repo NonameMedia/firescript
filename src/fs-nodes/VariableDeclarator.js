@@ -9,8 +9,19 @@ class VariableDeclarator extends FireScriptNode {
 
     if (tokenStack.expect('operator', '=')) {
       tokenStack.goForward()
-      if (this.tryObject(tokenStack)) {
-        this.init = this.createObjectExpressionNode(tokenStack)
+
+      if (tokenStack.expect('indention')) {
+        const objectExpressionNode = this.tryObjectExpression(tokenStack)
+        if (objectExpressionNode) {
+          this.init = objectExpressionNode
+        } else {
+          const arrayExpressionNode = this.tryArrayExpression(tokenStack)
+          if (arrayExpressionNode) {
+            this.init = arrayExpressionNode
+          } else {
+            this.syntaxError('Unexpected token!', tokenStack.current())
+          }
+        }
       } else {
         this.init = this.createFullNode(tokenStack)
       }
@@ -18,6 +29,12 @@ class VariableDeclarator extends FireScriptNode {
   }
 
   tryObject (tokenStack) {
+    return tokenStack.expect('indention') &&
+      tokenStack.lookForward('identifier', null, 1) &&
+      tokenStack.lookForward('punctuator', ':', 2)
+  }
+
+  tryArray (tokenStack) {
     return tokenStack.expect('indention') &&
       tokenStack.lookForward('identifier', null, 1) &&
       tokenStack.lookForward('punctuator', ':', 2)

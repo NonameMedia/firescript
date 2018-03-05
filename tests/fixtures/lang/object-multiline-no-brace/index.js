@@ -1,4 +1,4 @@
 const obj = {
-  foo: 'Foo'
+  foo: 'Foo',
   bar: 'Bar'
 }

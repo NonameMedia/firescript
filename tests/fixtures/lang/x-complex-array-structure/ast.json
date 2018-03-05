@@ -1,0 +1,130 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "arr"
+                    },
+                    "init": {
+                        "type": "ArrayExpression",
+                        "elements": [
+                            {
+                                "type": "Literal",
+                                "value": "Foo",
+                                "raw": "'Foo'"
+                            },
+                            {
+                                "type": "Literal",
+                                "value": "Bar",
+                                "raw": "'Bar'"
+                            },
+                            {
+                                "type": "ObjectExpression",
+                                "properties": [
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "bla"
+                                        },
+                                        "computed": false,
+                                        "value": {
+                                            "type": "ArrayExpression",
+                                            "elements": [
+                                                {
+                                                    "type": "Literal",
+                                                    "value": "bla",
+                                                    "raw": "'bla'"
+                                                },
+                                                {
+                                                    "type": "Literal",
+                                                    "value": "blabla",
+                                                    "raw": "'blabla'"
+                                                }
+                                            ]
+                                        },
+                                        "kind": "init",
+                                        "method": false,
+                                        "shorthand": false
+                                    },
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "one"
+                                        },
+                                        "computed": false,
+                                        "value": {
+                                            "type": "Literal",
+                                            "value": 1,
+                                            "raw": "1"
+                                        },
+                                        "kind": "init",
+                                        "method": false,
+                                        "shorthand": false
+                                    },
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "two"
+                                        },
+                                        "computed": false,
+                                        "value": {
+                                            "type": "ObjectExpression",
+                                            "properties": [
+                                                {
+                                                    "type": "Property",
+                                                    "key": {
+                                                        "type": "Literal",
+                                                        "value": "number",
+                                                        "raw": "'number'"
+                                                    },
+                                                    "computed": false,
+                                                    "value": {
+                                                        "type": "Literal",
+                                                        "value": 2,
+                                                        "raw": "2"
+                                                    },
+                                                    "kind": "init",
+                                                    "method": false,
+                                                    "shorthand": false
+                                                }
+                                            ]
+                                        },
+                                        "kind": "init",
+                                        "method": false,
+                                        "shorthand": false
+                                    },
+                                    {
+                                        "type": "Property",
+                                        "key": {
+                                            "type": "Identifier",
+                                            "name": "three"
+                                        },
+                                        "computed": false,
+                                        "value": {
+                                            "type": "Literal",
+                                            "value": "3",
+                                            "raw": "'3'"
+                                        },
+                                        "kind": "init",
+                                        "method": false,
+                                        "shorthand": false
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "const"
+        }
+    ],
+    "sourceType": "module"
+}

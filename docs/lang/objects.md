@@ -32,7 +32,7 @@ const obj = { [key]: [value], [key]: [value], [key]: [value] }
 
 ### Multiline syntax
 
-The multiline expression is similar to Javascript. A curly brace wraps a list of key/value pairs. Each pair has to be in one line. A leading comma is not allowed. The curly braces are optional in variable declarations. An indention lower or equal to the declaratior signals the ending of an object block.
+The object expression is similar to Javascript. A curly brace wraps a list of key/value pairs. Each pair has to be in one line. A leading comma is not allowed. The curly braces are optional in variable declarations. An indention lower or equal to the declaratior signals the ending of an object block.
 Empty lines between properties possible, but not recommented.
 
 #### FireScript

@@ -48,7 +48,6 @@ ObjectPattern
 ThisExpression
 Identifier                            
 Literal                               
-ArrayExpression
 Property
 ClassExpression
 ClassBody
@@ -72,11 +71,12 @@ ForOfStatement
 1.5) Document it first ;)
 -------------------------
 
-ObjectExpression
+ArrayExpression
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+ObjectExpression
 BlockStatement                        
 ArrowFunctionExpression
 FunctionExpression

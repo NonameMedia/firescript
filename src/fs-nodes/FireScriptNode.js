@@ -96,6 +96,10 @@ class FireScriptNode {
     return this.getNodeInstance('ObjectExpression', tokenStack)
   }
 
+  createArrayExpressionNode (tokenStack) {
+    return this.getNodeInstance('ArrayExpression', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -235,6 +239,8 @@ class FireScriptNode {
     if (nextToken.type === 'punctuator') {
       if (nextToken.value === '{') {
         return this.getNodeInstance('ObjectExpression', tokenStack)
+      } else if (nextToken.value === '[') {
+        return this.getNodeInstance('ArrayExpression', tokenStack)
       }
     }
 
@@ -321,6 +327,26 @@ class FireScriptNode {
   isExpectedNode (expected, actual, token) {
     if (expected && expected !== actual) {
       this.syntaxError(`Unexpected token, ${actual} was given but ${expected} was expected}`, token)
+    }
+  }
+
+  tryObjectExpression (tokenStack) {
+    const curIndex = tokenStack.index
+    try {
+      return this.createObjectExpressionNode(tokenStack)
+    } catch (err) {
+      tokenStack.index = curIndex
+      return null
+    }
+  }
+
+  tryArrayExpression (tokenStack) {
+    const curIndex = tokenStack.index
+    try {
+      return this.createArrayExpressionNode(tokenStack)
+    } catch (err) {
+      tokenStack.index = curIndex
+      return null
     }
   }
 }

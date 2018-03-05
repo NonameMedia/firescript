@@ -1,8 +1,36 @@
 Arrays
 ======
 
+The ArrayExpression declares an array. An array is a list of `values`.
+
+
+
 Syntax
 ------
+
+##### Multiline syntax
+```
+const arr = [
+  [value]
+  [value]
+  [value]
+]
+```
+
+##### Inline syntax
+
+```
+const arr = [ [value], [value], [value] ]
+```
+
+## Multiline syntax
+
+The array expression is similar to Javascript. A xxx brace wraps a list of values.
+Each `value` has to be in one line. Leading commas are not allowed.  
+~~An indention lower or equal to the declaratior signals the ending of an object block.~~
+Empty lines between values possible, but not recommented.
+
+### FireScript
 
 ```fire
 const arr = [ 'Foo', 'Bar' ]

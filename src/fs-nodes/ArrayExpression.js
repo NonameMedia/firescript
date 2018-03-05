@@ -45,20 +45,42 @@ class ArrayExpression extends FireScriptNode {
   parseCommonSyntax (tokenStack) {
     tokenStack.goForward()
 
+    this.indention = tokenStack.getIndention()
+
     while (true) {
       if (tokenStack.expect('punctuator', ']')) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.goForward()
-        continue
-      }
-
       const elements = this.createFullNode(tokenStack)
       this.isAllowedNode(elements, ALLOWED_ELEMENTS)
       this.elements.push(elements)
+
+      if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.goForward()
+        continue
+      } else if (tokenStack.expect('indention')) {
+        if (tokenStack.isIndention('lt', this.indention)) {
+          tokenStack.goForward()
+          if (tokenStack.expect('punctuator', ']')) {
+            tokenStack.goForward()
+          }
+          break
+        } else if (tokenStack.isIndention('eq', this.indention)) {
+          tokenStack.goForward()
+          continue
+        } else {
+          this.syntaxError('Indetion error!')
+        }
+      } else if (tokenStack.expect('punctuator', ']')) {
+        tokenStack.goForward()
+        break
+      } else {
+        this.syntaxError('Unexpected token!', tokenStack.current())
+      }
+
+      break
     }
   }
 
