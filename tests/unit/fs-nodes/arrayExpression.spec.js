@@ -66,6 +66,7 @@ describe('ArrayExpression', () => {
         { type: 'literal', value: '\'Foo\'' },
         { type: 'indention', value: 2 },
         { type: 'literal', value: '\'Bar\'' },
+        { type: 'indention', value: 2 },
         { type: 'indention', value: 4 },
         { type: 'identifier', value: 'bla' },
         { type: 'punctuator', value: ':' },
@@ -101,18 +102,102 @@ describe('ArrayExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ArrayExpression')
-      inspect(node.elements).isArray()
-      inspect(node.elements).hasLength(2)
-      inspect(node.elements[0].toJSON()).isEql({
-        'type': 'Literal',
-        'value': 1,
-        'raw': '1'
-      })
-
-      inspect(node.elements[1].toJSON()).isEql({
-        'type': 'Literal',
-        'value': 2,
-        'raw': '2'
+      inspect(node.toJSON()).isEql({
+        'type': 'ArrayExpression',
+        'elements': [{
+          'type': 'Literal',
+          'value': 'Foo',
+          'raw': "'Foo'"
+        }, {
+          'type': 'Literal',
+          'value': 'Bar',
+          'raw': "'Bar'"
+        }, {
+          'type': 'ObjectExpression',
+          'properties': [{
+            'type': 'Property',
+            'key': {
+              'type': 'Identifier',
+              'name': 'bla'
+            },
+            'computed': false,
+            'value': {
+              'type': 'ArrayExpression',
+              'elements': [{
+                'type': 'Literal',
+                'value': 'bla',
+                'raw': "'bla'"
+              }, {
+                'type': 'Literal',
+                'value': 'blabla',
+                'raw': "'blabla'"
+              }
+              ]},
+            'kind': 'init',
+            'method': false,
+            'shorthand': false
+          }, {
+            'type': 'Property',
+            'key': {
+              'type': 'Identifier',
+              'name': 'one'
+            },
+            'computed': false,
+            'value': {
+              'type': 'Literal',
+              'value': 1,
+              'raw': '1'
+            },
+            'kind': 'init',
+            'method': false,
+            'shorthand': false
+          }, {
+            'type': 'Property',
+            'key': {
+              'type': 'Identifier',
+              'name': 'two'
+            },
+            'computed': false,
+            'value': {
+              'type': 'ObjectExpression',
+              'properties': [{
+                'type': 'Property',
+                'key': {
+                  'type': 'Literal',
+                  'value': 'number',
+                  'raw': "'number'"
+                },
+                'computed': false,
+                'value': {
+                  'type': 'Literal',
+                  'value': 2,
+                  'raw': '2'
+                },
+                'kind': 'init',
+                'method': false,
+                'shorthand': false
+              }]
+            },
+            'kind': 'init',
+            'method': false,
+            'shorthand': false
+          }, {
+            'type': 'Property',
+            'key': {
+              'type': 'Identifier',
+              'name': 'three'
+            },
+            'computed': false,
+            'value': {
+              'type': 'Literal',
+              'value': '3',
+              'raw': "'3'"
+            },
+            'kind': 'init',
+            'method': false,
+            'shorthand': false
+          }]
+        }]
       })
     })
   })

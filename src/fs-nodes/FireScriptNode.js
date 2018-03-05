@@ -270,6 +270,15 @@ class FireScriptNode {
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)
         break
+      // } else if (tokenStack.expect('punctuator', ':')) {
+      //   if (this.type === 'ObjectExpression') {
+      //     node = this.getNodeInstance('Property', tokenStack, node)
+      //     break
+      //   } else if (this.type === 'ArrayExpression') {
+      //     const property = this.getNodeInstance('Property', tokenStack, node)
+      //     node = this.getNodeInstance('ObjectExpression', tokenStack, property)
+      //     break
+      //   }
       } else if (tokenStack.expect('template')) {
         if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
           break

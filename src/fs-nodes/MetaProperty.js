@@ -33,7 +33,6 @@ class MetaProperty extends FireScriptNode {
 
     this.isAllowedNode(this.meta, ALLOWED_CHILDS, tokenStack.current())
 
-    tokenStack.print()
     if (!tokenStack.expect('punctuator', '.')) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }

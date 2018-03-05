@@ -9,16 +9,18 @@ const ALLOWED_VALUES = [
   'Literal',
   'AssignmentPattern',
   'Identifier',
-  'BindingPattern',
+  'ObjectExpression',
+  'ArrayExpression',
   'FunctionExpression',
   'null'
 ]
 
 class Property extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, key) {
     super(parent)
+    this.isBlockScope = true
 
-    this.key = this.createNodeItem(tokenStack)
+    this.key = key || this.createNodeItem(tokenStack)
     this.isAllowedNode(this.key, ALLOWED_KEYS)
 
     if (!tokenStack.expect('punctuator', ':')) {
@@ -26,9 +28,25 @@ class Property extends FireScriptNode {
     }
 
     tokenStack.goForward()
-    const property = this.createFullNode(tokenStack)
-    this.isAllowedNode(property, ALLOWED_VALUES)
-    this.value = property
+    if (tokenStack.isIndention('gt', this.indention)) {
+      const objectExpression = this.tryObjectExpression(tokenStack)
+      if (objectExpression) {
+        this.value = objectExpression
+      } else {
+        const arrayExpression = this.tryArrayExpression(tokenStack)
+
+        if (arrayExpression) {
+          this.value = arrayExpression
+        } else {
+          this.syntaxError('Indention error', tokenStack.current())
+        }
+      }
+    } else {
+      const property = this.createFullNode(tokenStack)
+      this.value = property
+    }
+
+    this.isAllowedNode(this.value, ALLOWED_VALUES)
   }
 
   toJSON () {

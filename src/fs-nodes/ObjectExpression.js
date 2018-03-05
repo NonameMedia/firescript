@@ -5,79 +5,70 @@ const ALLOWED_ELEMENTS = [
 ]
 
 class ObjectExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, property) {
     super(parent)
 
     this.properties = []
 
     if (tokenStack.expect('punctuator', '{')) {
-      this.parseCommonSyntax(tokenStack)
-      if (tokenStack.expect('punctuator', '}')) {
-        tokenStack.goForward()
+      tokenStack.goForward()
+      if (!tokenStack.expect('indention')) {
+        this.parseProperties(tokenStack)
+        return
       }
-    } else if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
-      this.parseBracelessSyntax(tokenStack)
+    }
+
+    if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
+      this.indention = tokenStack.getIndention()
+      this.parseProperties(tokenStack)
+    } else if (property) {
+      this.properties.push(property)
+      this.parseProperties(tokenStack)
     } else {
       this.syntaxError('Object declaration expected', tokenStack.current())
     }
   }
 
-  parseCommonSyntax (tokenStack) {
-    tokenStack.goForward()
-
-    this.indention = tokenStack.getIndention()
-
+  parseProperties (tokenStack) {
     while (true) {
       if (tokenStack.expect('punctuator', '}')) {
         tokenStack.goForward()
         break
       }
 
-      const property = this.createPropertyNode(tokenStack)
-      this.isAllowedNode(property, ALLOWED_ELEMENTS)
-      this.properties.push(property)
+      if (tokenStack.isIndention('lt', this.indention)) {
+        tokenStack.goForward()
+        if (tokenStack.expect('punctuator', ['}', ']'])) {
+          tokenStack.goForward()
+        }
+
+        break
+      }
+
+      if (tokenStack.isIndention('eq', this.indention)) {
+        tokenStack.goForward()
+        continue
+      }
+
+      if (tokenStack.isIndention('gt', this.indention)) {
+        const objectExpression = this.tryObjectExpression(tokenStack)
+        if (objectExpression) {
+          this.properties.push(objectExpression)
+          continue
+        }
+
+        const arrayExpression = this.tryArrayExpression(tokenStack)
+        if (arrayExpression) {
+          this.properties.push(arrayExpression)
+          continue
+        }
+
+        this.syntaxError('Indention error', tokenStack.current())
+      }
 
       if (tokenStack.expect('punctuator', ',')) {
         tokenStack.goForward()
         continue
-      } else if (tokenStack.expect('indention')) {
-        if (tokenStack.isIndention('lt', this.indention)) {
-          tokenStack.goForward()
-          break
-        } else if (tokenStack.isIndention('eq', this.indention)) {
-          tokenStack.goForward()
-          continue
-        } else {
-          this.syntaxError('Indetion error!')
-        }
-      } else if (tokenStack.expect('punctuator', '}')) {
-        tokenStack.goForward()
-        break
-      } else {
-        this.syntaxError('Unexpected token!', tokenStack.current())
-      }
-
-      break
-    }
-  }
-
-  parseBracelessSyntax (tokenStack) {
-    tokenStack.goForward()
-    const childIndention = this.indention + this.indentionSize
-
-    while (true) {
-      if (tokenStack.isIndention('lte', this.indention)) {
-        tokenStack.goForward()
-        break
-      }
-
-      if (tokenStack.isIndention('eq', childIndention)) {
-        tokenStack.goForward()
-        continue
-      }
-
-      if (tokenStack.expect('indention')) {
-        this.syntaxError('Invalid indention', tokenStack.current())
       }
 
       const property = this.createPropertyNode(tokenStack)
