@@ -40,7 +40,6 @@ BreakStatement
 ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
-Program
 ArrayPattern
 RestElement
 AssignmentPattern
@@ -48,10 +47,6 @@ ObjectPattern
 ThisExpression
 Identifier                            
 Literal                               
-Property
-ClassExpression
-ClassBody
-MethodDefinition
 TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
@@ -63,7 +58,6 @@ NewExpression
 UpdateExpression
 BinaryExpression
 AssignmentExpression
-ClassDeclaration
 ForStatement
 ForInStatement                        
 ForOfStatement
@@ -71,10 +65,16 @@ ForOfStatement
 1.5) Document it first ;)
 -------------------------
 
+ClassDeclaration
+ClassExpression
+ClassBody
+MethodDefinition
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+Program
+Property
 ArrayExpression
 ObjectExpression
 BlockStatement                        

@@ -1,12 +1,26 @@
-Item
-====
+Class declaration
+=================
 
-Description
+The `class` keyword creates a new class with a given `name`.
+The optional `extends` keyword sets a `superClass`. The new created class gets all methods from `superClass`
 
 Syntax
 ------
 
-### class declaration
+```
+class [name] extends [superClass]
+  [method] ([args])
+    [body]
+
+  [method] ([args])
+    [body]
+
+
+```
+
+### Class declaration
+
+#### FireScript
 
 ```fire
 class Foo
@@ -17,56 +31,16 @@ class Foo
     return this.value
 ```
 
-#### Output
+#### Javascript
 
 ```js
+class Foo {
+  constructor () {
+    this.value = 'foo';
+  }
 
-```
-
-Allowed childs
---------------
-
-```
-
-```
-
-Esprima interfaces
-
-------------------
-
-```ts
-interface ClassDeclaration {
-    type: 'ClassDeclaration';
-    id: Identifier | null;
-    superClass: Identifier | null;
-    body: ClassBody;
+  bla () {
+    return this.value;
+  }
 }
-
-interface ClassExpression {
-    type: 'ClassExpression';
-    id: Identifier | null;
-    superClass: Identifier | null;
-    body: ClassBody;
-}
-
-interface ClassBody {
-    type: 'ClassBody';
-    body: MethodDefinition[];
-}
-
-interface MethodDefinition {
-    type: 'MethodDefinition';
-    key: Expression | null;
-    computed: boolean;
-    value: FunctionExpression | null;
-    kind: 'method' | 'constructor';
-    static: boolean;
-}
-```
-
-Examples
---------
-
-```fire
-
 ```
