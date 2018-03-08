@@ -198,6 +198,10 @@ class FireScriptNode {
         return this.getNodeInstance('WhileStatement', tokenStack)
       }
 
+      if (nextToken.value === 'for') {
+        return this.getNodeInstance('ForStatement', tokenStack)
+      }
+
       tokenStack.print()
       this.syntaxError('Unexpected keyword!', nextToken)
     }

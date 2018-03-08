@@ -49,7 +49,7 @@ class Program extends FireScriptNode {
         break
       }
 
-      this.isAllowedNode(node, ALLOWED_CHILDS)
+      this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
       this.body.push(node)
     }
   }

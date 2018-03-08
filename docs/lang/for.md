@@ -1,44 +1,28 @@
 For loops
 =========
 
-Description
+The `for` statement creates a loop consists of a `condition`. The `body` gets executed as long as the `condition` evaluates to true.
 
 Syntax
 ------
 
-### NodeType
+```
+for [initilazion]; [condition]; [final]
+  [body]
+```
+
+### FireScript
 
 ```fire
 for let i = 0; i < l; i++
-  // body
-
-for el of arr
+  console.log(i)
 
 ```
 
 #### Output
 
 ```js
-
-```
-
-Allowed childs
---------------
-
-```
-
-```
-
-Esprima interfaces
-------------------
-
-```ts
-
-```
-
-Examples
---------
-
-```fire
-
+for (let i = 0; i < l; i++) {
+  console.log(i);
+}
 ```

@@ -28,7 +28,6 @@ describe('ForStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ForStatement')
-      console.log(node.toJSON())
       inspect(node.toJSON()).isEql({
         type: 'ForStatement',
         init: {
