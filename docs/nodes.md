@@ -21,8 +21,6 @@ Unimplemented
 1) Class and Unittest
 ---------------------
 
-SwitchStatement
-SwitchCase
 DoWhileStatement
 SequenceExpression
 DebuggerStatement
@@ -73,6 +71,8 @@ MethodDefinition
 2) FSParser can create item from fs source
 ------------------------------------------
 
+SwitchStatement
+SwitchCase
 Program
 Property
 ArrayExpression

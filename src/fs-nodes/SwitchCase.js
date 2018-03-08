@@ -69,6 +69,7 @@ class SwitchCase extends FireScriptNode {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
+    this.indention = tokenStack.getIndention()
     const type = tokenStack.getRawValue()
 
     if (type === 'case') {
@@ -84,8 +85,6 @@ class SwitchCase extends FireScriptNode {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    this.indention = tokenStack.getRawValue()
-
     while (true) {
       const nextToken = tokenStack.current()
       if (!nextToken) {
@@ -93,7 +92,7 @@ class SwitchCase extends FireScriptNode {
       }
 
       if (nextToken.type === 'indention') {
-        if (tokenStack.isIndention('lt', this.indention)) {
+        if (tokenStack.isIndention('lte', this.indention)) {
           tokenStack.goForward()
           break
         }
