@@ -1,0 +1,38 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "foo"
+                    },
+                    "init": {
+                        "type": "NewExpression",
+                        "callee": {
+                            "type": "Identifier",
+                            "name": "Foo"
+                        },
+                        "arguments": [
+                            {
+                                "type": "Literal",
+                                "value": "one",
+                                "raw": "'one'"
+                            },
+                            {
+                                "type": "Literal",
+                                "value": "two",
+                                "raw": "'two'"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "const"
+        }
+    ],
+    "sourceType": "module"
+}

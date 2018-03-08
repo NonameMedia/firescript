@@ -1,0 +1,27 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "foo"
+                    },
+                    "init": {
+                        "type": "NewExpression",
+                        "callee": {
+                            "type": "Identifier",
+                            "name": "Foo"
+                        },
+                        "arguments": []
+                    }
+                }
+            ],
+            "kind": "const"
+        }
+    ],
+    "sourceType": "module"
+}

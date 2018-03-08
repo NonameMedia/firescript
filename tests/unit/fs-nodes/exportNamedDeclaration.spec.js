@@ -28,7 +28,8 @@ describe('ExportNamedDeclaration', () => {
           body: {
             type: 'ClassBody',
             body: []
-          }
+          },
+          superClass: null
         },
         source: null
       })
