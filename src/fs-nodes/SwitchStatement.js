@@ -19,6 +19,8 @@ class SwitchStatement extends FireScriptNode {
     tokenStack.goForward()
 
     this.cases = []
+
+    let hasDefault = false
     while (true) {
       const nextToken = tokenStack.current()
       if (!nextToken) {
@@ -28,6 +30,12 @@ class SwitchStatement extends FireScriptNode {
       if (nextToken.type === 'indention' && nextToken.value < this.indention) {
         tokenStack.goForward()
         break
+      }
+
+      if (tokenStack.expect('keyword', 'case') && hasDefault) {
+        this.syntaxError('Case clause not allowed after a default clause', tokenStack.current())
+      } else if (tokenStack.expect('keyword', 'default')) {
+        hasDefault = true
       }
 
       this.cases.push(this.createSwitchCaseNode(tokenStack))

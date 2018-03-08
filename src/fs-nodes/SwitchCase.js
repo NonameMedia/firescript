@@ -65,13 +65,18 @@ class SwitchCase extends FireScriptNode {
     super(parent)
     this.isBlockScope = true
 
-    if (!tokenStack.expect('keyword', 'case')) {
+    if (!tokenStack.expect('keyword', ['case', 'default'])) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    tokenStack.goForward()
-    this.test = this.createFullNode(tokenStack)
-    this.isAllowedNode(this.test, ALLOWED_TEST_EXPRESSIONS)
+    const type = tokenStack.getRawValue()
+
+    if (type === 'case') {
+      this.test = this.createFullNode(tokenStack)
+      this.isAllowedNode(this.test, ALLOWED_TEST_EXPRESSIONS)
+    } else {
+      this.test = null
+    }
 
     this.consequent = []
 
@@ -108,7 +113,7 @@ class SwitchCase extends FireScriptNode {
   toJSON () {
     return {
       type: 'SwitchCase',
-      test: this.test.toJSON(),
+      test: this.test ? this.test.toJSON() : null,
       consequent: this.consequent.map((item) => item.toJSON())
     }
   }

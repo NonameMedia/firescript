@@ -1,9 +1,9 @@
 module.exports = {
   KEYWORDS: [
-    'async', 'await', 'break', 'class', 'const', 'continue', 'do',
+    'async', 'await', 'break', 'case', 'class', 'const', 'continue', 'default', 'do',
     'elif', 'else', 'export', 'func', 'gen',
     'if', 'import',
-    'let', 'return', 'super',
+    'let', 'return', 'super', 'switch',
     'var', 'while', 'yield'
   ],
   OPERATORS: [
