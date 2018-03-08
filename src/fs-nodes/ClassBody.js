@@ -5,12 +5,15 @@ class ClassBody extends FireScriptNode {
     super(parent)
 
     this.body = []
-    while (true) {
-      if (tokenStack.expect('indention')) {
-        const token = tokenStack.next()
-        this.indention = token.value
-      }
 
+    if (tokenStack.expect('indention')) {
+      const token = tokenStack.next()
+      this.indention = token.value
+    } else {
+      this.syntaxError('Unexpected token')
+    }
+
+    while (true) {
       if (tokenStack.isIndention('lte', this.indention - this.indentionSize)) {
         break
       }

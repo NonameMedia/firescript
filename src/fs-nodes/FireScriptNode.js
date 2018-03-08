@@ -178,10 +178,6 @@ class FireScriptNode {
         return this.getNodeInstance('YieldExpression', tokenStack)
       }
 
-      if (nextToken.value === 'super') {
-        return this.getNodeInstance('Super', tokenStack)
-      }
-
       if (nextToken.value === 'new') {
         return this.getNodeInstance('NewExpression', tokenStack)
       }
@@ -223,6 +219,10 @@ class FireScriptNode {
     if (nextToken.type === 'identifier') {
       if (nextToken.value === 'this') {
         return this.getNodeInstance('ThisExpression', tokenStack)
+      }
+
+      if (nextToken.value === 'super') {
+        return this.getNodeInstance('Super', tokenStack)
       }
 
       return this.getNodeInstance('Identifier', tokenStack)

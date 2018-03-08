@@ -42,7 +42,8 @@ class ClassDeclaration extends FireScriptNode {
     return {
       type: 'ClassDeclaration',
       id: this.id ? this.id.toJSON() : null,
-      body: this.body.toJSON()
+      body: this.body.toJSON(),
+      superClass: this.superClass ? this.superClass.toJSON() : null
     }
   }
 }

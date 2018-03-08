@@ -1,9 +1,10 @@
 module.exports = {
   KEYWORDS: [
-    'async', 'await', 'break', 'case', 'class', 'const', 'continue', 'default', 'do',
-    'elif', 'else', 'export', 'func', 'gen',
+    'async', 'await', 'break', 'case', 'class', 'const',
+    'continue', 'default', 'do',
+    'elif', 'else', 'export', 'extends', 'for', 'func', 'gen',
     'if', 'import',
-    'let', 'return', 'super', 'switch',
+    'let', 'new', 'return', 'switch',
     'var', 'while', 'yield'
   ],
   OPERATORS: [
@@ -13,7 +14,7 @@ module.exports = {
     '^=', '^', '|=', '||', '~'
   ],
   PUNCTUATORS: [
-    '.', '=', '(', ')', '{', '}', '[', ']', ',', ':'
+    '.', '=', '(', ')', '{', '}', '[', ']', ',', ':', ';'
   ],
   BINARY_OPERATORS: [
     'instanceof', 'in', '+', '-', '*', '/', '%', '**',

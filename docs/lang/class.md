@@ -44,3 +44,32 @@ class Foo {
   }
 }
 ```
+
+### Extends
+
+#### FireScript
+
+```fire
+class Bla extends from Foo
+  constructor ()
+    super()
+    this.value = 'bla'
+
+  blub ()
+    return this.bla()
+```
+
+#### Javascript
+
+```js
+class Bla extends Foo {
+  constructor () {
+    super()
+    this.value = 'bla';
+  }
+
+  blub () {
+    return this.bla();
+  }
+}
+```
