@@ -199,6 +199,14 @@ class FireScriptNode {
       }
 
       if (nextToken.value === 'for') {
+        if (tokenStack.lookForward('identifier', 'in', 2)) {
+          return this.getNodeInstance('ForInStatement', tokenStack)
+        }
+
+        if (tokenStack.lookForward('identifier', 'of', 2)) {
+          return this.getNodeInstance('ForOfStatement', tokenStack)
+        }
+
         return this.getNodeInstance('ForStatement', tokenStack)
       }
 
@@ -268,6 +276,8 @@ class FireScriptNode {
       } else if (tokenStack.expect('operator', constants.BINARY_OPERATORS)) {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '.')) {
+        node = this.getNodeInstance('MemberExpression', tokenStack, node)
+      } else if (tokenStack.expect('punctuator', '[')) {
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)

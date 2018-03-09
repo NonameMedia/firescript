@@ -31,22 +31,29 @@ class MemberExpression extends FireScriptNode {
     super(parent)
 
     this.object = object || this.createIdentifierNode(tokenStack)
+    this.computed = false
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
 
-    if (!tokenStack.expect('punctuator', '.')) {
+    if (!tokenStack.expect('punctuator', ['.', '['])) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
     tokenStack.goForward()
 
     this.property = this.createIdentifierNode(tokenStack)
+
+    if (tokenStack.expect('punctuator', ']')) {
+      this.computed = true
+      tokenStack.goForward()
+    }
+
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
   }
 
   toJSON () {
     return {
       type: 'MemberExpression',
-      computed: false,
+      computed: this.computed,
       object: this.object.toJSON(),
       property: this.property.toJSON()
     }

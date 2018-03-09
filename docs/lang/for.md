@@ -1,5 +1,5 @@
-For loops
-=========
+for
+===
 
 The `for` statement creates a loop consists of a `condition`. The `body` gets executed as long as the `condition` evaluates to true.
 
@@ -11,6 +11,15 @@ for [initilazion]; [condition]; [final]
   [body]
 ```
 
+```
+for [variable] in [object]
+  [body]
+```
+
+```
+for [variable] of [iterable]
+  [body]
+```
 ### FireScript
 
 ```fire
