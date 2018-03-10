@@ -301,7 +301,11 @@ class FireScriptNode {
         if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
           break
         }
-        node = this.getNodeInstance('TemplateLiteral', tokenStack, node)
+        if (node.type === 'Identifier') {
+          node = this.getNodeInstance('TaggedTemplateExpression', tokenStack, node)
+        } else {
+          node = this.getNodeInstance('TemplateLiteral', tokenStack, node)
+        }
       } else {
         break
       }

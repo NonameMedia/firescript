@@ -35,6 +35,7 @@ module.exports = {
     'AwaitExpression',
     'YieldExpression',
     'ArrowFunctionExpression',
-    'TemplateLiteral'
+    'TemplateLiteral',
+    'TaggedTemplateExpression'
   ]
 }

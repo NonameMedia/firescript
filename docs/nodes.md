@@ -52,10 +52,7 @@ ObjectPattern
 AssignmentPattern
 
 ThisExpression
-
 TaggedTemplateExpression
-TemplateElement
-TemplateLiteral
 
 
 
@@ -64,9 +61,12 @@ TemplateLiteral
 
 
 
+
 2) FSParser can create item from fs source
 ------------------------------------------
 
+TemplateElement
+TemplateLiteral
 ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
