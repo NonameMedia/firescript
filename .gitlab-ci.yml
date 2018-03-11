@@ -1,4 +1,4 @@
-image: node:latest
+image: node:8
 
 cache:
   paths:
@@ -13,4 +13,3 @@ integration tests:
   script:
    - npm install
    - npm run test:integration
-
