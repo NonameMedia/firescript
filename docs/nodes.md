@@ -45,9 +45,6 @@ ContinueStatement
 
 ExportDefaultDeclaration
 
-ImportDeclaration
-ImportSpecifier
-ImportDefaultSpecifier
 
 RestElement
 ArrayPattern
@@ -60,22 +57,25 @@ TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
 
-CallExpression
 
-ForStatement
-ForInStatement                        
-ForOfStatement
 
 1.5) Document it first ;)
 -------------------------
 
-MetaProperty
-NewExpression
 
 
 2) FSParser can create item from fs source
 ------------------------------------------
 
+ImportDeclaration
+ImportSpecifier
+ImportDefaultSpecifier
+CallExpression
+ForStatement
+ForInStatement                        
+ForOfStatement
+MetaProperty
+NewExpression
 SwitchStatement
 SwitchCase
 Super

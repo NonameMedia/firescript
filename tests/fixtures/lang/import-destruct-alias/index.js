@@ -1,0 +1,1 @@
+import { banana as b, coconut as c } from 'fruits'

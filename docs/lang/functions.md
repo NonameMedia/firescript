@@ -157,6 +157,21 @@ Arrow functions are anonymous functions and they don't have their own *this*, *a
 }
 ```
 
+### Function call
+
+A function call has the same syntax as in Javascript.
+
+#### FireScript
+
+```fire
+foo('bar')
+```
+
+#### Javascript
+
+```js
+foo('bar')
+```
 ---
 
 ## Draft

@@ -1,0 +1,38 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        },
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "coconut"
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "coconut"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "fruits",
+        "raw": "'fruits'"
+      }
+    }
+  ],
+  "sourceType": "module"
+}

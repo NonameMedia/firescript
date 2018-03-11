@@ -1,0 +1,25 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "Identifier",
+                    "name": "foo"
+                },
+                "arguments": [{
+                  "type": "Literal",
+                  "raw": "'one'",
+                  "value": "one"
+                }, {
+                  "type": "Literal",
+                  "raw": "'two'",
+                  "value": "two"
+                }]
+            }
+        }
+    ],
+    "sourceType": "module"
+}

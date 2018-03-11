@@ -18,6 +18,19 @@ class ImportDeclaration extends FireScriptNode {
         break
       } else if (tokenStack.expect('literal') && this.specifiers.length === 0) {
         break
+      } else if (tokenStack.expect('indention')) {
+        tokenStack.goForward()
+
+        while (true) {
+          if (tokenStack.expect('identifier', 'from')) {
+            break
+          } else if (tokenStack.expect('indention')) {
+            tokenStack.goForward()
+            continue
+          }
+
+          this.specifiers.push(this.createImportSpecifierNode(tokenStack))
+        }
       } else if (tokenStack.expect('punctuator', '{')) {
         tokenStack.goForward()
 

@@ -61,7 +61,11 @@ class FireSciptTokenizer {
       }
 
       if (match[2] !== undefined) {
-        this.addToken('keyword', match[2])
+        if (this.handleAsKeyword(match[2])) {
+          this.addToken('keyword', match[2])
+        } else {
+          this.addToken('identifier', match[2])
+        }
         continue
       }
 
@@ -137,6 +141,55 @@ class FireSciptTokenizer {
     }
 
     return lines
+  }
+
+  lookBackInLine (type, value) {
+    for (let i = this.token.length - 1; i > -1; i--) {
+      const token = this.token[i]
+      if (token.type === 'indention') {
+        return false
+      }
+
+      console.log('LOOKBACK', token, type, value)
+      if (token.type === type && token.value === value) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  lookBackward (type, value, numItems) {
+    numItems = numItems || 1
+    const token = this.token[this.token.length - 1 - numItems]
+    if (token.type === type && token.value === value) {
+      return true
+    }
+
+    return false
+  }
+
+  handleAsKeyword (keyWord) {
+    if (this.token.length <= 1) return true
+
+    console.log('KW', keyWord)
+    if (keyWord === 'extends') {
+      return this.lookBackInLine('keyword', 'class')
+    }
+
+    if (keyWord === 'new') return true
+
+    const lastToken = this.token[this.token.length - 1]
+    console.log('LT', lastToken)
+    if (lastToken.type === 'indention') {
+      return true
+    }
+
+    if (keyWord === 'async') {
+      return this.lookBackward('operator', '=>')
+    }
+
+    return false
   }
 }
 

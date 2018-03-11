@@ -1,0 +1,17 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "Identifier",
+                    "name": "foo"
+                },
+                "arguments": []
+            }
+        }
+    ],
+    "sourceType": "module"
+}
