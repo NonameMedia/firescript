@@ -150,7 +150,6 @@ class FireSciptTokenizer {
         return false
       }
 
-      console.log('LOOKBACK', token, type, value)
       if (token.type === type && token.value === value) {
         return true
       }
@@ -172,7 +171,6 @@ class FireSciptTokenizer {
   handleAsKeyword (keyWord) {
     if (this.token.length <= 1) return true
 
-    console.log('KW', keyWord)
     if (keyWord === 'extends') {
       return this.lookBackInLine('keyword', 'class')
     }
@@ -180,7 +178,6 @@ class FireSciptTokenizer {
     if (keyWord === 'new') return true
 
     const lastToken = this.token[this.token.length - 1]
-    console.log('LT', lastToken)
     if (lastToken.type === 'indention') {
       return true
     }
