@@ -9,7 +9,7 @@ class FireSciptTokenizer {
     this.keyWords = constants.KEYWORDS
     this.punctators = constants.PUNCTUATORS
     this.operators = constants.OPERATORS
-    this.literalPattern = '\'[^]+?\'|true|false|null'
+    this.literalPattern = '(?:\'[^]*?(?:\\$\\{[^]+?\\}[^]*?)*?\')|"[^]+?"|true|false|null' // eslint-disable-line no-template-curly-in-string
     this.numericPattern = '-?\\d+'
 
     this.token = new TokenStack()
@@ -17,7 +17,7 @@ class FireSciptTokenizer {
   }
 
   regExpEscape (arr) {
-    return arr.map((item) => item.replace(/[\\|\]*+?[()^$/]/g, (match) => {
+    return arr.map((item) => item.replace(/[\\|\]*+?[(){}^$/]/g, (match) => {
       return `\\${match}`
     }))
   }
@@ -80,8 +80,13 @@ class FireSciptTokenizer {
       }
 
       if (match[5] !== undefined) {
-        this.addToken('literal', match[5])
-        this.lineNum += this.countLineBreaks(match[5])
+        if (this.isTemplate(match[5])) {
+          this.splitTemplateLiteral(match[5])
+        } else {
+          this.addToken('literal', match[5])
+          this.lineNum += this.countLineBreaks(match[5])
+        }
+
         continue
       }
 
@@ -187,6 +192,32 @@ class FireSciptTokenizer {
     }
 
     return false
+  }
+
+  isTemplate (str) {
+    return /\$\{[^]+?\}/.test(str)
+  }
+
+  splitTemplateLiteral (literal) {
+    const match = literal.slice(1, -1).split(/(\${[^]+?\})/)
+    let prefixNext = false
+    match.forEach((m) => {
+      if (m.startsWith('${') && m.endsWith('}')) {
+        prefixNext = true
+        this.token[this.token.length - 1].value += '${'
+        const subToken = new FireSciptTokenizer()
+        subToken.tokenize(m.slice(2, -1))
+        subToken.token.forEach((token) => this.token.push(token))
+        return
+      }
+
+      this.addToken('template', prefixNext ? '}' + m : m)
+      prefixNext = false
+    })
+
+    if (prefixNext) {
+      this.addToken('template', '}')
+    }
   }
 }
 

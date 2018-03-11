@@ -1,0 +1,3 @@
+const fruit = "coconut"
+const kind = 'nut'
+module.exports = 'A ${fruit} is a tasty ${kind}'

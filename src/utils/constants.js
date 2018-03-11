@@ -34,6 +34,7 @@ module.exports = {
     'CallExpression',
     'AwaitExpression',
     'YieldExpression',
-    'ArrowFunctionExpression'
+    'ArrowFunctionExpression',
+    'TemplateLiteral'
   ]
 }

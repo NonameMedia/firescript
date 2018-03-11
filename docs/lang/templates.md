@@ -1,41 +1,23 @@
 Templates
 =========
 
-Description
+Template literals are strings with embedded expresisions. An `expression` enclosed by `${` and `}` is getting evaluated and replaced by the returned value.
 
 Syntax
 ------
 
-### NodeType
-
-```fire
-`Hello ${name}`
-`How are you?`
+```
+const tmpl = `Hello ${[expression]}`
 ```
 
-#### Output
+#### FireScript
+
+```fire
+const greeting = `Hello ${name}`
+```
+
+#### Javascript
 
 ```js
-
-```
-
-Allowed childs
---------------
-
-```
-
-```
-
-Esprima interfaces
-------------------
-
-```ts
-
-```
-
-Examples
---------
-
-```fire
-
+const greeting = `Hello ${name}`;
 ```

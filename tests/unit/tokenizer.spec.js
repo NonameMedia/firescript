@@ -146,5 +146,34 @@ describe('Tokenizer', () => {
         { type: 'indention', value: 0, loc: { start: [ 11, 0 ], end: [ 11, 0 ] } }
       ])
     })
+
+    it('detects string and template literals', () => {
+      const coconutSource = inspect.readFile(path.join(__dirname, '../fixtures/coconut.fire'))
+      const tokenizer = new Tokenizer()
+      const token = tokenizer.tokenize(coconutSource)
+      inspect(token).isArray()
+      inspect(token).isEql([
+        { type: 'keyword', value: 'const' },
+        { type: 'identifier', value: 'fruit' },
+        { type: 'operator', value: '=' },
+        { type: 'literal', value: '"coconut"' },
+        { type: 'indention', value: 0 },
+        { type: 'keyword', value: 'const' },
+        { type: 'identifier', value: 'kind' },
+        { type: 'operator', value: '=' },
+        { type: 'literal', value: '\'nut\'' },
+        { type: 'indention', value: 0 },
+        { type: 'identifier', value: 'module' },
+        { type: 'punctuator', value: '.' },
+        { type: 'identifier', value: 'exports' },
+        { type: 'operator', value: '=' },
+        { type: 'template', value: 'A ${' },
+        { type: 'identifier', value: 'fruit' },
+        { type: 'template', value: '} is a tasty ${' },
+        { type: 'identifier', value: 'kind' },
+        { type: 'template', value: '}' },
+        { type: 'indention', value: 0 }
+      ])
+    })
   })
 })

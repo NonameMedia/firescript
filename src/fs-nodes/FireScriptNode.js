@@ -244,6 +244,10 @@ class FireScriptNode {
       return this.getNodeInstance('Literal', tokenStack)
     }
 
+    if (nextToken.type === 'template') {
+      return this.getNodeInstance('TemplateLiteral', tokenStack)
+    }
+
     if (nextToken.type === 'numeric') {
       return this.getNodeInstance('Literal', tokenStack)
     }
@@ -297,7 +301,7 @@ class FireScriptNode {
         if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
           break
         }
-        node = this.getNodeInstance('TaggedTemplateExpression', tokenStack, node)
+        node = this.getNodeInstance('TemplateLiteral', tokenStack, node)
       } else {
         break
       }
