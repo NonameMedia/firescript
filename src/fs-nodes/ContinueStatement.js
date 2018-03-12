@@ -19,6 +19,8 @@ class ContinueStatement extends FireScriptNode {
       this.syntaxError('Unexpected token, ContinueStatement expected', tokenStack.current())
     }
 
+    tokenStack.goForward()
+
     if (tokenStack.expect('identifier')) {
       this.lable = this.createIdentifierNode(tokenStack)
     } else {

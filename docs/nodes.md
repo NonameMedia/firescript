@@ -23,7 +23,6 @@ Unimplemented
 
 
 
-ConditionalExpression
 
 SequenceExpression
 LogicalExpression
@@ -34,8 +33,6 @@ AssignmentExpression
 
 
 
-BreakStatement
-ContinueStatement
 
 ExportDefaultDeclaration
 
@@ -55,6 +52,9 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+BreakStatement
+ContinueStatement
+ConditionalExpression
 DebuggerStatement
 DoWhileStatement
 TryStatement

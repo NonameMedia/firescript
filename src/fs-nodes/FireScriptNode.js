@@ -190,6 +190,10 @@ class FireScriptNode {
         return this.getNodeInstance('BreakStatement', tokenStack)
       }
 
+      if (nextToken.value === 'continue') {
+        return this.getNodeInstance('ContinueStatement', tokenStack)
+      }
+
       if (nextToken.value === 'switch') {
         return this.getNodeInstance('SwitchStatement', tokenStack)
       }
@@ -223,7 +227,7 @@ class FireScriptNode {
       }
 
       tokenStack.print()
-      this.syntaxError('Unexpected keyword!', nextToken)
+      this.syntaxError('Unknown keyword!', nextToken)
     }
 
     if (nextToken.type === 'operator') {

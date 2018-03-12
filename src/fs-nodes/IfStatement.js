@@ -14,7 +14,8 @@ class IfStatement extends FireScriptNode {
       tokenStack.goForward()
       this.test = this.createFullNode(tokenStack)
     }
-    this.consequent = this.createBlockStatementNode(tokenStack)
+
+    this.consequent = this.createFullNode(tokenStack)
 
     if (tokenStack.expect('keyword', 'elif')) {
       tokenStack.goForward()
