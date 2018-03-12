@@ -202,6 +202,10 @@ class FireScriptNode {
         return this.getNodeInstance('TryStatement', tokenStack)
       }
 
+      if (nextToken.value === 'do') {
+        return this.getNodeInstance('DoWhileStatement', tokenStack)
+      }
+
       if (nextToken.value === 'for') {
         if (tokenStack.lookForward('identifier', 'in', 2)) {
           return this.getNodeInstance('ForInStatement', tokenStack)

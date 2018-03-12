@@ -34,11 +34,7 @@ BinaryExpression
 UpdateExpression
 AssignmentExpression
 
-SpreadElement
 
-TryStatement
-CatchClause
-ThrowStatement
 
 BreakStatement
 ContinueStatement
@@ -61,6 +57,10 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+TryStatement
+CatchClause
+ThrowStatement
+SpreadElement
 ThisExpression
 TaggedTemplateExpression
 TemplateElement
