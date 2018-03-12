@@ -51,6 +51,10 @@ class Program extends FireScriptNode {
 
       this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
       this.body.push(node)
+
+      if (tokenStack.expect('indention')) {
+        tokenStack.goForward()
+      }
     }
   }
 

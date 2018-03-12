@@ -21,7 +21,6 @@ Unimplemented
 1) Class and Unittest
 ---------------------
 
-DoWhileStatement
 
 DebuggerStatement
 
@@ -57,6 +56,7 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+DoWhileStatement
 TryStatement
 CatchClause
 ThrowStatement

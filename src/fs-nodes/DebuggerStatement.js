@@ -18,17 +18,12 @@ class DebuggerStatement extends FireScriptNode {
       this.syntaxError('Unexpected token, DebuggerStatement expected', tokenStack.current())
     }
 
-    if (tokenStack.expect('identifier')) {
-      this.lable = this.createIdentifierNode(tokenStack)
-    } else {
-      this.label = null
-    }
+    tokenStack.goForward()
   }
 
   toJSON () {
     return {
-      type: 'DebuggerStatement',
-      label: this.label ? this.label.toJSON() : null
+      type: 'DebuggerStatement'
     }
   }
 }

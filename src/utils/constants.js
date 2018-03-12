@@ -1,7 +1,7 @@
 module.exports = {
   KEYWORDS: [
     'async', 'await', 'break', 'case', 'catch', 'class', 'const',
-    'continue', 'default', 'do',
+    'continue', 'debugger', 'default', 'do',
     'elif', 'else', 'export', 'extends', 'for', 'func', 'gen',
     'if', 'import',
     'let', 'new', 'return', 'switch', 'try',
