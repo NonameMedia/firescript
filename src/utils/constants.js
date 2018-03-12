@@ -14,7 +14,7 @@ module.exports = {
     '^=', '^', '|=', '||', '~'
   ],
   PUNCTUATORS: [
-    '...', '.', '=', '(', ')', '{', '}', '[', ']', ',', ':', ';'
+    '...', '.', '=', '(', ')', '{', '}', '[', ']', ',', ':', ';', '?'
   ],
   BINARY_OPERATORS: [
     'instanceof', 'in', '+', '-', '*', '/', '%', '**',
@@ -36,6 +36,7 @@ module.exports = {
     'YieldExpression',
     'ArrowFunctionExpression',
     'TemplateLiteral',
-    'TaggedTemplateExpression'
+    'TaggedTemplateExpression',
+    'ConditionalExpression'
   ]
 }

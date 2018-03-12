@@ -22,7 +22,6 @@ Unimplemented
 ---------------------
 
 
-DebuggerStatement
 
 ConditionalExpression
 
@@ -56,6 +55,7 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+DebuggerStatement
 DoWhileStatement
 TryStatement
 CatchClause

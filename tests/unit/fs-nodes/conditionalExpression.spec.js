@@ -8,9 +8,9 @@ describe('ConditionalExpression', () => {
     it('returns an ConditionalExpression', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'banana' },
-        { 'type': 'operator', 'value': '?' },
+        { 'type': 'punctuator', 'value': '?' },
         { 'type': 'identifier', 'value': 'true' },
-        { 'type': 'operator', 'value': ':' },
+        { 'type': 'punctuator', 'value': ':' },
         { 'type': 'identifier', 'value': 'false' },
         { 'type': 'indention', 'value': 0 }
       ])
@@ -39,9 +39,9 @@ describe('ConditionalExpression', () => {
     it('returns an ConditionalExpression, get test param from outside', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'banana' },
-        { 'type': 'operator', 'value': '?' },
+        { 'type': 'punctuator', 'value': '?' },
         { 'type': 'identifier', 'value': 'true' },
-        { 'type': 'operator', 'value': ':' },
+        { 'type': 'punctuator', 'value': ':' },
         { 'type': 'identifier', 'value': 'false' },
         { 'type': 'indention', 'value': 0 }
       ])

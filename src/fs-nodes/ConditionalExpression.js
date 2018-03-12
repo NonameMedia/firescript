@@ -19,15 +19,16 @@ class ConditionalExpression extends FireScriptNode {
 
     this.test = test || this.createFullNode(tokenStack)
 
-    if (!tokenStack.expect('operator', '?')) {
-      this.syntaxError('Unexpected token! ? operator expected', tokenStack.current())
+    if (!tokenStack.expect('punctuator', '?')) {
+      tokenStack.print()
+      this.syntaxError('Unexpected token! ? punctuator expected', tokenStack.current())
     }
 
     tokenStack.goForward()
     this.consequent = this.createFullNode(tokenStack)
 
-    if (!tokenStack.expect('operator', ':')) {
-      this.syntaxError('Unexpected token! : operator expected', tokenStack.current())
+    if (!tokenStack.expect('punctuator', ':')) {
+      this.syntaxError('Unexpected token! : punctuator expected', tokenStack.current())
     }
 
     tokenStack.goForward()

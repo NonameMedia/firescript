@@ -1,0 +1,26 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "ConditionalExpression",
+        "test": {
+          "type": "Identifier",
+          "name": "foo"
+        },
+        "consequent": {
+          "type": "Literal",
+          "value": "foo",
+          "raw": "'foo'"
+        },
+        "alternate": {
+          "type": "Literal",
+          "value": "bar",
+          "raw": "'bar'"
+        }
+      }
+    }
+  ],
+  "sourceType": "module"
+}

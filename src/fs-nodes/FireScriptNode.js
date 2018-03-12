@@ -307,6 +307,9 @@ class FireScriptNode {
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)
         break
+      } else if (tokenStack.expect('punctuator', '?') && this.type !== 'ConditionalExpression') {
+        node = this.getNodeInstance('ConditionalExpression', tokenStack, node)
+        break
       // } else if (tokenStack.expect('punctuator', ':')) {
       //   if (this.type === 'ObjectExpression') {
       //     node = this.getNodeInstance('Property', tokenStack, node)

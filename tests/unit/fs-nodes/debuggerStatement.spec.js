@@ -15,8 +15,7 @@ describe('DebuggerStatement', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('DebuggerStatement')
       inspect(node.toJSON()).isEql({
-        type: 'DebuggerStatement',
-        label: null
+        type: 'DebuggerStatement'
       })
     })
   })
