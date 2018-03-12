@@ -57,7 +57,6 @@ class ImportDeclaration extends FireScriptNode {
           this.specifiers.push(this.createImportSpecifierNode(tokenStack))
         }
       } else {
-        tokenStack.print()
         this.syntaxError('Unexpected token', nextToken)
         break
       }

@@ -6,7 +6,6 @@ class ClassBody extends FireScriptNode {
 
     this.body = []
 
-    tokenStack.print()
     if (tokenStack.expect('indention')) {
       const token = tokenStack.next()
       this.indention = token.value
