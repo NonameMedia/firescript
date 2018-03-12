@@ -22,7 +22,7 @@ class TryStatement extends FireScriptNode {
     }
 
     tokenStack.goForward()
-    this.body = this.createBlockStatementNode(tokenStack)
+    this.block = this.createBlockStatementNode(tokenStack)
     this.handler = this.createCatchClauseNode(tokenStack)
     if (tokenStack.expect('keyword', 'finally')) {
       tokenStack.goForward()
@@ -33,7 +33,7 @@ class TryStatement extends FireScriptNode {
   toJSON () {
     return {
       type: 'TryStatement',
-      body: this.body.toJSON(),
+      block: this.block.toJSON(),
       handler: this.handler ? this.handler.toJSON() : null,
       finalizer: this.finalizer ? this.finalizer.toJSON() : null
     }

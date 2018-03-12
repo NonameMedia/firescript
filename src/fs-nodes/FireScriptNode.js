@@ -198,6 +198,10 @@ class FireScriptNode {
         return this.getNodeInstance('WhileStatement', tokenStack)
       }
 
+      if (nextToken.value === 'try') {
+        return this.getNodeInstance('TryStatement', tokenStack)
+      }
+
       if (nextToken.value === 'for') {
         if (tokenStack.lookForward('identifier', 'in', 2)) {
           return this.getNodeInstance('ForInStatement', tokenStack)
@@ -255,8 +259,14 @@ class FireScriptNode {
     if (nextToken.type === 'punctuator') {
       if (nextToken.value === '{') {
         return this.getNodeInstance('ObjectExpression', tokenStack)
-      } else if (nextToken.value === '[') {
+      }
+
+      if (nextToken.value === '[') {
         return this.getNodeInstance('ArrayExpression', tokenStack)
+      }
+
+      if (nextToken.value === '...') {
+        return this.getNodeInstance('SpreadElement', tokenStack)
       }
     }
 

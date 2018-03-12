@@ -1,0 +1,70 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "TryStatement",
+      "block": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "expression": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "db"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "connect"
+                }
+              },
+              "arguments": []
+            }
+          }
+        ]
+      },
+      "handler": {
+        "type": "CatchClause",
+        "param": {
+          "type": "Identifier",
+          "name": "err"
+        },
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "console"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "log"
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "err"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "finalizer": null
+    }
+  ],
+  "sourceType": "module"
+}

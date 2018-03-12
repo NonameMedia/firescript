@@ -1,0 +1,25 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "foo"
+        },
+        "arguments": [
+          {
+            "type": "SpreadElement",
+            "argument": {
+              "type": "Identifier",
+              "name": "bar"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
+}

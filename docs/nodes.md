@@ -51,8 +51,6 @@ ArrayPattern
 ObjectPattern
 AssignmentPattern
 
-ThisExpression
-TaggedTemplateExpression
 
 
 
@@ -60,11 +58,11 @@ TaggedTemplateExpression
 -------------------------
 
 
-
-
 2) FSParser can create item from fs source
 ------------------------------------------
 
+ThisExpression
+TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
 ImportDeclaration

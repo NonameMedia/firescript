@@ -21,7 +21,7 @@ describe('TryStatement', () => {
       inspect(node.type).isEql('TryStatement')
       inspect(node.toJSON()).isEql({
         type: 'TryStatement',
-        body: {
+        block: {
           type: 'BlockStatement',
           body: []
         },
