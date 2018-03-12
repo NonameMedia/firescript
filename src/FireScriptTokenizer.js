@@ -17,7 +17,7 @@ class FireSciptTokenizer {
   }
 
   regExpEscape (arr) {
-    return arr.map((item) => item.replace(/[\\|\]*+?[(){}^$/]/g, (match) => {
+    return arr.map((item) => item.replace(/[.\\|\]*+?[(){}^$/]/g, (match) => {
       return `\\${match}`
     }))
   }
@@ -27,13 +27,14 @@ class FireSciptTokenizer {
       `\\n\\s*`,
       `?:\\b(${this.keyWords.join('|')})\\b`,
       `${this.regExpEscape(this.operators).join('|')}`,
-      `[${this.regExpEscape(this.punctators).join()}]`,
+      `${this.regExpEscape(this.punctators).join('|')}`,
       `${this.literalPattern}`,
       `${this.numericPattern}`,
       `[a-zA-Z_][a-zA-Z0-9$_-]*`
     ]
 
     const reg = new RegExp(`(${pattern.join(')|(')})`, 'g')
+    // console.log('REG', reg)
     this.lineNum = 1
     this.lastEOLIndex = 0
     this.lastIndex = 0

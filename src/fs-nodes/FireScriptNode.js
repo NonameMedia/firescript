@@ -271,6 +271,7 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
+      tokenStack.print()
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
     }
   }
