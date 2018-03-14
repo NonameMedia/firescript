@@ -100,6 +100,10 @@ class FireScriptNode {
     return this.getNodeInstance('ArrayExpression', tokenStack)
   }
 
+  createExportSpecifierNode (tokenStack) {
+    return this.getNodeInstance('ExportSpecifier', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -152,6 +156,14 @@ class FireScriptNode {
     if (nextToken.type === 'keyword') {
       if (nextToken.value === 'import') {
         return this.getNodeInstance('ImportDeclaration', tokenStack)
+      }
+
+      if (nextToken.value === 'export') {
+        if (tokenStack.lookForward('identifier', 'default', 1)) {
+          return this.getNodeInstance('ExportDefaultDeclaration', tokenStack)
+        }
+
+        return this.getNodeInstance('ExportNamedDeclaration', tokenStack)
       }
 
       if (['func', 'async', 'gen'].includes(nextToken.value)) {

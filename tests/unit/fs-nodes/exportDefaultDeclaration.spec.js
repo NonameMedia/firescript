@@ -7,6 +7,7 @@ describe('ExportDefaultDeclaration', () => {
     it('returns a ExportDefaultDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'export' },
+        { 'type': 'identifier', 'value': 'default' },
         { 'type': 'identifier', 'value': 'foo' },
         { 'type': 'indention', 'value': 2 }
       ])
