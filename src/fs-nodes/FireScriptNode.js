@@ -20,6 +20,10 @@ class FireScriptNode {
     return this.getNodeInstance('Identifier', tokenStack, name)
   }
 
+  createLiteralNode (tokenStack, name) {
+    return this.getNodeInstance('Literal', tokenStack, name)
+  }
+
   createBlockStatementNode (tokenStack) {
     return this.getNodeInstance('BlockStatement', tokenStack)
   }
@@ -161,6 +165,10 @@ class FireScriptNode {
       if (nextToken.value === 'export') {
         if (tokenStack.lookForward('identifier', 'default', 1)) {
           return this.getNodeInstance('ExportDefaultDeclaration', tokenStack)
+        }
+
+        if (tokenStack.lookForward('operator', '*', 1)) {
+          return this.getNodeInstance('ExportAllDeclaration', tokenStack)
         }
 
         return this.getNodeInstance('ExportNamedDeclaration', tokenStack)

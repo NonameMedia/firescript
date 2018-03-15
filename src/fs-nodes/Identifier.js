@@ -7,12 +7,11 @@ class Identifier extends FireScriptNode {
     if (name) {
       this.name = name
     } else {
-      const token = tokenStack.next()
-
-      if (token.type !== 'identifier') {
-        this.syntaxError(`Identifier expected, but a ${token.type} was given`, token)
+      if (!tokenStack.expect('identifier')) {
+        this.syntaxError('Unexpected Token! Identifier expected', tokenStack.current())
       }
 
+      const token = tokenStack.next()
       this.name = token.value
     }
   }

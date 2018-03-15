@@ -10,6 +10,7 @@ class ArrowFunctionExpression extends FireScriptNode {
     this.generator = false
     this.params = []
 
+    tokenStack.print()
     if (!tokenStack.expect('operator', '=>')) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }

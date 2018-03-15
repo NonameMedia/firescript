@@ -77,13 +77,13 @@ Examples
 
 ### Export types
 
-| FireScript            | >= ES7                 | < ES7                                   |     |
-| --------------------- | ---------------------- | --------------------------------------- | --- |
-| export default banana | export default banana  | module.exports = banana                 |     |
-| export banana         | export { banana }      | module.exports.banana = banana          |     |
-| export banana as b    | export { banana as b } | module.exports.b = banana               |     |
-| export let banana     | export let banana      | module.exports.banana = let banana      |     |
-| export class Banana   | export class Banana {} | module.exports.banana = class banana {} |     |
+| FireScript            | >= ES7                 |
+| --------------------- | ---------------------- |
+| export default banana | export default banana  |
+| export banana         | export { banana }      |
+| export banana as b    | export { banana as b } |
+| export let banana     | export let banana      |
+| export class Banana   | export class Banana {} |
 
 
 export { name1, name2, …, nameN };

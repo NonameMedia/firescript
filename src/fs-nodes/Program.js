@@ -12,7 +12,7 @@ const ALLOWED_SCRIPT_CHILDS = [
 ]
 
 const ALLOWED_MODULE_CHILDS = [
-  'ImportDeclaration', 'ExportDeclaration'
+  'ImportDeclaration', 'ExportAllDeclaration', 'ExportDefaultDeclaration', 'ExportNamedDeclaration'
 ]
 
 /**

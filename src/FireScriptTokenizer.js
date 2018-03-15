@@ -164,9 +164,13 @@ class FireSciptTokenizer {
     return false
   }
 
-  lookBackward (type, value, numItems) {
-    numItems = numItems || 1
+  lookBack (type, value, numItems) {
+    numItems = numItems || 0
     const token = this.token[this.token.length - 1 - numItems]
+    if (!token) {
+      return false
+    }
+
     if (token.type === type && token.value === value) {
       return true
     }
@@ -175,10 +179,14 @@ class FireSciptTokenizer {
   }
 
   handleAsKeyword (keyWord) {
-    if (this.token.length <= 1) return true
+    if (this.token.length < 1) return true
 
     if (keyWord === 'extends') {
       return this.lookBackInLine('keyword', 'class')
+    }
+
+    if (keyWord === 'default' && this.lookBack('keyword', 'export', 1)) {
+      return false
     }
 
     if (keyWord === 'new') return true
@@ -189,7 +197,15 @@ class FireSciptTokenizer {
     }
 
     if (keyWord === 'async') {
-      return this.lookBackward('operator', '=>')
+      return this.lookBack('operator', '=>')
+    }
+
+    if (['class', 'var', 'let', 'const', 'func', 'gen', 'async'].includes(keyWord) && this.lookBack('keyword', 'export')) {
+      return true
+    }
+
+    if (['var', 'let', 'const'].includes(keyWord) && this.lookBack('keyword', 'for')) {
+      return true
     }
 
     return false

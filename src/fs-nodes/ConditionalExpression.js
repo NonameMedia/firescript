@@ -20,7 +20,6 @@ class ConditionalExpression extends FireScriptNode {
     this.test = test || this.createFullNode(tokenStack)
 
     if (!tokenStack.expect('punctuator', '?')) {
-      tokenStack.print()
       this.syntaxError('Unexpected token! ? punctuator expected', tokenStack.current())
     }
 

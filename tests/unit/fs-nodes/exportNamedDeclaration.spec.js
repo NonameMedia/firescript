@@ -117,7 +117,7 @@ describe('ExportNamedDeclaration', () => {
       inspect(node.type).isEql('ExportNamedDeclaration')
       inspect(node.toJSON()).isEql({
         type: 'ExportNamedDeclaration',
-        declaration: {},
+        declaration: null,
         specifiers: [{
           type: 'ExportSpecifier',
           exported: {
@@ -148,7 +148,7 @@ describe('ExportNamedDeclaration', () => {
       inspect(node.type).isEql('ExportNamedDeclaration')
       inspect(node.toJSON()).isEql({
         type: 'ExportNamedDeclaration',
-        declaration: {},
+        declaration: null,
         specifiers: [{
           type: 'ExportSpecifier',
           exported: {
@@ -179,7 +179,7 @@ describe('ExportNamedDeclaration', () => {
       inspect(node.type).isEql('ExportNamedDeclaration')
       inspect(node.toJSON()).isEql({
         type: 'ExportNamedDeclaration',
-        declaration: {},
+        declaration: null,
         specifiers: [{
           type: 'ExportSpecifier',
           exported: {
@@ -224,7 +224,7 @@ describe('ExportNamedDeclaration', () => {
       inspect(node.type).isEql('ExportNamedDeclaration')
       inspect(node.toJSON()).isEql({
         type: 'ExportNamedDeclaration',
-        declaration: {},
+        declaration: null,
         specifiers: [{
           type: 'ExportSpecifier',
           exported: {

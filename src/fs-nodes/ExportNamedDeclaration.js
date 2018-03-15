@@ -1,9 +1,13 @@
 const FireScriptNode = require('./FireScriptNode')
 
-const ALLOWED_CHILDS = [
+const ALLOWED_DECLARATIONS = [
   'ClassDeclaration',
   'FunctionDeclaration',
   'VariableDeclaration'
+]
+
+const ALLOWED_SPECIFIERS = [
+  ''
 ]
 /**
  * ExportNamedDeclaration description
@@ -33,10 +37,14 @@ class ExportNamedDeclaration extends FireScriptNode {
 
     if (tokenStack.expect('keyword', ['class', 'func', 'var', 'let', 'const'])) {
       this.declaration = this.createFullNode(tokenStack)
-      this.isAllowedNode(this.declaration, ALLOWED_CHILDS)
+      this.isAllowedNode(this.declaration, ALLOWED_DECLARATIONS)
     } else {
       while (true) {
-        tokenStack.print()
+        if (tokenStack.isIndention('gte', this.indention)) {
+          tokenStack.goForward()
+          break
+        }
+
         const node = this.createExportSpecifierNode(tokenStack)
         this.specifiers.push(node)
 
