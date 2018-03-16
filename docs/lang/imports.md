@@ -3,6 +3,9 @@ import
 
 The import statement imports functions and objects from an external script or module
 
+(i) The `import` and `require()` statements in Javascript are different.
+Read more at this [blog post](https://medium.com/the-node-js-collection/an-update-on-es6-modules-in-node-js-42c958b890c)
+
 Syntax
 ------
 
