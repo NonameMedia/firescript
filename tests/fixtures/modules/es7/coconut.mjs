@@ -6,4 +6,4 @@ function getInstance () {
 
 }
 
-export Coconut as coconut
+export {Coconut as coconut, getInstance}

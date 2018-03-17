@@ -7,7 +7,7 @@ describe('ExportAllDeclaration', () => {
     it('returns a ExportAllDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'export' },
-        { 'type': 'identifier', 'value': '*' },
+        { 'type': 'operator', 'value': '*' },
         { 'type': 'identifier', 'value': 'from' },
         { 'type': 'literal', 'value': '\'banana\'' },
         { 'type': 'indention', 'value': 2 }
@@ -19,7 +19,7 @@ describe('ExportAllDeclaration', () => {
       inspect(node.type).isEql('ExportAllDeclaration')
       inspect(node.toJSON()).isEql({
         type: 'ExportAllDeclaration',
-        declaration: {
+        source: {
           type: 'Literal',
           raw: '\'banana\'',
           value: 'banana'
