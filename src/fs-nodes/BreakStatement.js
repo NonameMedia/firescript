@@ -4,7 +4,7 @@ const FireScriptNode = require('./FireScriptNode')
  * BreakStatement
  *
  * @class BreakStatement
- * @extends FireScriptNo
+ * @extends FireScriptNode
  *
  * interface BreakStatement {
  *   type: 'BreakStatement';
