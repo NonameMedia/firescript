@@ -1,0 +1,23 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportNamespaceSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "fruits",
+        "raw": "'fruits'"
+      }
+    }
+  ],
+  "sourceType": "module"
+}

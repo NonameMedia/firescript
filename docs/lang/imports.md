@@ -73,8 +73,6 @@ const identifier2 = __destruct001.identifier2;
 | import * as foo from 'foo'  | import f * as oo from 'foo'      |
 | import foo from 'foo'       | import foo from 'foo'            |
 | import foo, bar             | import { foo, bar } from 'foo'   |
-|                             | import * from 'foo'              |
-|                             |                                  |
 |                             |                                  |
 
 import ** from "module-name";
