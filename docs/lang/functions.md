@@ -172,7 +172,21 @@ foo('bar')
 ```js
 foo('bar')
 ```
+### Function arguments
+
+A function supports parameters like Javascript does, including `rest params` and `default values`
+
+```fire
+func banana (color = 'yellow')
+  return color
+```
+
+```fire
+func getFruits (banana, coconut, ...fruits)
+  return fruits
+```
 ---
+
 
 ## Draft
 
