@@ -1,1 +1,1 @@
-export default banana
+export default banana;

@@ -1,3 +1,3 @@
-(a, b) => {
-  return 'foo'
-}
+async (a, b) => {
+  return 'foo';
+};

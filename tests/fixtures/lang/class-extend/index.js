@@ -1,10 +1,9 @@
 class Bar extends Foo {
-  constructor () {
-    super()
-    this.value = 'bla'
+  constructor() {
+    super();
+    this.value = 'bla';
   }
-
-  blub () {
-    return this.bla()
+  blub() {
+    return this.bla();
   }
 }

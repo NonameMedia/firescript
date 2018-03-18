@@ -1,1 +1,1 @@
-export * from 'banana'
+export * from 'banana';

@@ -1,9 +1,8 @@
 class Foo {
-  constructor () {
-    this.value = 'foo'
+  constructor() {
+    this.value = 'foo';
   }
-
-  bla () {
-    return this.value
+  bla() {
+    return this.value;
   }
 }

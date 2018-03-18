@@ -12,16 +12,16 @@ describe('FireScriptParser', () => {
     testCases.forEach((testCase) => {
       if (testCase.isDirectory()) {
         group = testCase.name
-      }
 
-      it(`${group} into AST`, () => {
-        const ast = require(`${testCase.path}/ast.json`)
-        const source = inspect.readFile(`${testCase.path}/index.fire`)
-        const parser = new FireScriptParser()
-        const fsAST = parser.parse(source)
-        inspect(fsAST).isObject()
-        inspect(fsAST).isEql(ast)
-      })
+        it(`${group} into AST`, () => {
+          const ast = require(`${testCase.path}/ast.json`)
+          const source = inspect.readFile(`${testCase.path}/index.fire`)
+          const parser = new FireScriptParser()
+          const fsAST = parser.parse(source)
+          inspect(fsAST).isObject()
+          inspect(fsAST).isEql(ast)
+        })
+      }
     })
   })
 })

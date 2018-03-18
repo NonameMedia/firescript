@@ -1,2 +1,2 @@
-debugger // eslint-disable-line
-foo()
+debugger;
+foo();

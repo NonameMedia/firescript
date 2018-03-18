@@ -1,1 +1,1 @@
-export { banana as b, coconut as c }
+export { banana as b, coconut as c };
