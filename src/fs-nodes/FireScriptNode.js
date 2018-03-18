@@ -298,6 +298,10 @@ class FireScriptNode {
       }
 
       if (nextToken.value === '...') {
+        if (['FunctionDeclaration', 'FunctionExpression'].includes(this.type)) {
+          return this.getNodeInstance('RestElement', tokenStack)
+        }
+
         return this.getNodeInstance('SpreadElement', tokenStack)
       }
     }

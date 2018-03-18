@@ -11,7 +11,6 @@ Unimplemented
 
 ?? LabeledStatement
 
-~ ImportNamespaceSpecifier
 
 
 
@@ -33,7 +32,6 @@ Unimplemented
 
 
 
-RestElement
 ArrayPattern
 ObjectPattern
 AssignmentPattern
@@ -48,6 +46,8 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+RestElement
+ImportNamespaceSpecifier
 ExportNamedDeclaration
 ExportAllDeclaration
 ExportSpecifier

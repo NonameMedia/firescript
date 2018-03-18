@@ -41,7 +41,7 @@ class FunctionExpression extends FireScriptNode {
         }
 
         if (tokenStack.expect('identifier')) {
-          this.params.push(this.createIdentifierNode(tokenStack))
+          this.params.push(this.createFullNode(tokenStack))
           continue
         }
 

@@ -1,0 +1,2 @@
+func foo(one, two, ...three)
+  return 'one'

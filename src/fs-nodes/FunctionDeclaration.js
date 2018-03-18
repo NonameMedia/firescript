@@ -1,5 +1,13 @@
 const FireScriptNode = require('./FireScriptNode')
 
+const ALLOWED_PARAMS = [
+  'Identifier',
+  'AssignmentPattern',
+  'ArrayPattern',
+  'ObjectPattern',
+  'RestElement'
+]
+
 class FunctionDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
@@ -37,13 +45,9 @@ class FunctionDeclaration extends FireScriptNode {
           tokenStack.goForward()
           continue
         }
-
-        if (tokenStack.expect('identifier')) {
-          this.params.push(this.createNodeItem(tokenStack))
-          continue
-        }
-
-        this.syntaxError('Identifier expected', tokenStack.current())
+        const param = this.createFullNode(tokenStack)
+        this.isAllowedNode(param, ALLOWED_PARAMS)
+        this.params.push(param)
       }
     } else {
       this.syntaxError('Function arguments expected', tokenStack.current())
