@@ -17,27 +17,12 @@ Unimplemented
 1) Class and Unittest
 ---------------------
 
-
-
-
 ? SequenceExpression
 ? LogicalExpression
 ? UnaryExpression
 ? BinaryExpression
 ? UpdateExpression
 ? AssignmentExpression
-
-
-
-
-
-
-ArrayPattern
-ObjectPattern
-AssignmentPattern
-
-
-
 
 1.5) Document it first ;)
 -------------------------
@@ -46,6 +31,9 @@ AssignmentPattern
 2) FSParser can create item from fs source
 ------------------------------------------
 
+ArrayPattern
+ObjectPattern
+AssignmentPattern
 RestElement
 ImportNamespaceSpecifier
 ExportNamedDeclaration
