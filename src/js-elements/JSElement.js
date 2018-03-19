@@ -15,6 +15,10 @@ class JSElement {
   }
 
   createElement (ast) {
+    if (!ast.type) {
+      return null
+    }
+
     let Element
     try {
       Element = require(`./${ast.type}`)
