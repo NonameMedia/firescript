@@ -1,23 +1,24 @@
 const JSElement = require('./JSElement')
 
 /**
- * CallExpression
+ * NewExpression
  *
- * @class CallExpression
+ * @class NewExpression
  * @extends JSElement
  *
- * interface CallExpression {
- *   type: 'CallExpression';
- *   callee: Expression;
- *   arguments: ArgumentListElement[];
- * }
- */
-class CallExpression extends JSElement {
+ * interface NewExpression {
+    type: 'NewExpression';
+    callee: Expression;
+    arguments: ArgumentListElement[];
+}
+*/
+class NewExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
     this.callee = this.createElement(ast.callee)
     this.arguments = this.createElementList(ast.arguments)
+    throw new Error(`Element NewExpression is a DraftElement!`)
   }
 
   toString () {
@@ -25,4 +26,4 @@ class CallExpression extends JSElement {
   }
 }
 
-module.exports = CallExpression
+module.exports = NewExpression

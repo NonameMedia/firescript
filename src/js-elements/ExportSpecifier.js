@@ -1,23 +1,24 @@
 const JSElement = require('./JSElement')
 
 /**
- * CallExpression
+ * ExportSpecifier
  *
- * @class CallExpression
+ * @class ExportSpecifier
  * @extends JSElement
  *
- * interface CallExpression {
- *   type: 'CallExpression';
- *   callee: Expression;
- *   arguments: ArgumentListElement[];
- * }
+ * interface ExportSpecifier {
+ *    type: 'ExportSpecifier';
+ *    exported: Identifier;
+ *    local: Identifier;
+ *}
  */
-class CallExpression extends JSElement {
+class ExportSpecifier extends JSElement {
   constructor (ast) {
     super(ast)
 
     this.callee = this.createElement(ast.callee)
     this.arguments = this.createElementList(ast.arguments)
+    throw new Error(`Element ExportSpecifier is a DraftElement!`)
   }
 
   toString () {
@@ -25,4 +26,4 @@ class CallExpression extends JSElement {
   }
 }
 
-module.exports = CallExpression
+module.exports = ExportSpecifier

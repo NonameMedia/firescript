@@ -1,5 +1,16 @@
 const JSElement = require('./JSElement')
 
+/**
+ * Identifier
+ *
+ * @class Identifier
+ * @extends JSElement
+ *
+ * interface Identifier {
+ *   type: 'Identifier';
+ *   name: string;
+ * }
+ */
 class Identifier extends JSElement {
   constructor (ast) {
     super(ast)

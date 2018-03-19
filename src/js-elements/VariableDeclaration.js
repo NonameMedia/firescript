@@ -1,5 +1,17 @@
 const JSElement = require('./JSElement')
 
+/**
+ * VariableDeclaration
+ *
+ * @class VariableDeclaration
+ * @extends JSElement
+ *
+ * interface VariableDeclaration {
+ *   type: 'VariableDeclaration';
+ *   declarations: VariableDeclarator[];
+ *   kind: 'var' | 'const' | 'let';
+ * }
+ */
 class VariableDeclaration extends JSElement {
   constructor (ast) {
     super(ast)

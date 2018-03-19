@@ -1,23 +1,25 @@
 const JSElement = require('./JSElement')
 
 /**
- * CallExpression
+ * IfStatement
  *
- * @class CallExpression
+ * @class IfStatement
  * @extends JSElement
  *
- * interface CallExpression {
- *   type: 'CallExpression';
- *   callee: Expression;
- *   arguments: ArgumentListElement[];
- * }
- */
-class CallExpression extends JSElement {
+ * interface IfStatement {
+    type: 'IfStatement';
+    test: Expression;
+    consequent: Statement;
+    alternate?: Statement;
+}
+*/
+class IfStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
     this.callee = this.createElement(ast.callee)
     this.arguments = this.createElementList(ast.arguments)
+    throw new Error(`Element IfStatement is a DraftElement!`)
   }
 
   toString () {
@@ -25,4 +27,4 @@ class CallExpression extends JSElement {
   }
 }
 
-module.exports = CallExpression
+module.exports = IfStatement

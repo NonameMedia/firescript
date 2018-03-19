@@ -1,23 +1,24 @@
 const JSElement = require('./JSElement')
 
 /**
- * CallExpression
+ * SwitchStatement
  *
- * @class CallExpression
+ * @class SwitchStatement
  * @extends JSElement
  *
- * interface CallExpression {
- *   type: 'CallExpression';
- *   callee: Expression;
- *   arguments: ArgumentListElement[];
- * }
- */
-class CallExpression extends JSElement {
+ * interface SwitchStatement {
+    type: 'SwitchStatement';
+    discriminant: Expression;
+    cases: SwitchCase[];
+}
+*/
+class SwitchStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
     this.callee = this.createElement(ast.callee)
     this.arguments = this.createElementList(ast.arguments)
+    throw new Error(`Element SwitchStatement is a DraftElement!`)
   }
 
   toString () {
@@ -25,4 +26,4 @@ class CallExpression extends JSElement {
   }
 }
 
-module.exports = CallExpression
+module.exports = SwitchStatement

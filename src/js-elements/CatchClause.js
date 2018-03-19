@@ -1,23 +1,24 @@
 const JSElement = require('./JSElement')
 
 /**
- * CallExpression
+ * CatchClause
  *
- * @class CallExpression
+ * @class CatchClause
  * @extends JSElement
  *
- * interface CallExpression {
- *   type: 'CallExpression';
- *   callee: Expression;
- *   arguments: ArgumentListElement[];
- * }
- */
-class CallExpression extends JSElement {
+ * interface CatchClause {
+    type: 'CatchClause';
+    param: Identifier | BindingPattern;
+    body: BlockStatement;
+}
+*/
+class CatchClause extends JSElement {
   constructor (ast) {
     super(ast)
 
     this.callee = this.createElement(ast.callee)
     this.arguments = this.createElementList(ast.arguments)
+    throw new Error(`Element CatchClause is a DraftElement!`)
   }
 
   toString () {
@@ -25,4 +26,4 @@ class CallExpression extends JSElement {
   }
 }
 
-module.exports = CallExpression
+module.exports = CatchClause

@@ -1,5 +1,17 @@
 const JSElement = require('./JSElement')
 
+/**
+ * VariableDeclarator
+ *
+ * @class VariableDeclarator
+ * @extends JSElement
+ *
+ * interface VariableDeclarator {
+ *   type: 'VariableDeclarator';
+ *   id: Identifier | BindingPattern;
+ *   init: Expression | null;
+ * }
+*/
 class VariableDeclarator extends JSElement {
   constructor (ast) {
     super(ast)
