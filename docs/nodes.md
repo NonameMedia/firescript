@@ -79,12 +79,12 @@ WhileStatement
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
-ThisExpression
-ReturnStatement
 
 3 b) Unit tested
 ----------------------------------------
 
+ThisExpression
+ReturnStatement
 FunctionExpression
 ObjectExpression
 Property

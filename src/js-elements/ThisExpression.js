@@ -7,9 +7,9 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ThisExpression {
-    type: 'ThisExpression';
-}
-*/
+ *   type: 'ThisExpression';
+ * }
+ */
 class ThisExpression extends JSElement {
   constructor (ast) {
     super(ast)
