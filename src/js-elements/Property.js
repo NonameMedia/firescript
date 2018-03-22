@@ -1,5 +1,11 @@
 const JSElement = require('./JSElement')
 
+const ALLOWED_KEY_NODES = [ 'Identifier', 'Literal' ]
+const ALLOWED_VALUE_NODES = [
+  'AssignmentPattern', 'Identifier', 'ArrayPattern',
+  'ObjectPattern', 'FunctionExpression', 'null', 'Literal'
+]
+
 /**
  * Property
  *
@@ -7,26 +13,42 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface Property {
-    type: 'Property';
-    key: Identifier | Literal;
-    computed: boolean;
-    value: AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null;
-    kind: 'get' | 'set' | 'init';
-    method: false;
-    shorthand: boolean;
-}
+ *   type: 'Property';
+ *   key: Identifier | Literal;
+ *   computed: boolean;
+ *   value: AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null;
+ *   kind: 'get' | 'set' | 'init';
+ *   method: false;
+ *   shorthand: boolean;
+ * }
 */
 class Property extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element Property is a DraftElement!`)
+    this.key = this.createElement(ast.key, ALLOWED_KEY_NODES)
+    this.value = this.createElement(ast.value, ALLOWED_VALUE_NODES)
+    this.kind = ast.kind
+    this.method = ast.method
+    this.shorthand = ast.shorthand
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    if (this.shorthand) {
+      return this.key.toESString(ctx)
+    }
+
+    const kind = this.kind === 'init' ? '' : ' ' + this.kind
+
+    if (this.method) {
+      return this.key.toESString(ctx) +
+        this.value.toESString(ctx)
+    }
+
+    return kind +
+      this.key.toESString(ctx) +
+      ': ' +
+      this.value.toESString(ctx)
   }
 }
 

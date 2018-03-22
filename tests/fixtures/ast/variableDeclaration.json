@@ -1,0 +1,16 @@
+{
+  "type": "VariableDeclaration",
+  "kind": "const",
+  "declarations": [{
+    "type": "VariableDeclarator",
+    "id": {
+      "type": "Identifier",
+      "name": "res"
+    },
+    "init": {
+      "type": "Literal",
+      "raw": "'bla'",
+      "value": "bla"
+    }
+  }]
+}

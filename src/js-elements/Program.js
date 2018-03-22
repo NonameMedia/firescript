@@ -19,8 +19,9 @@ class Program extends JSElement {
     this.body = this.createElementList(ast.body)
   }
 
-  toString () {
-    return `${this.body.join('\n')}\n`
+  toESString (ctx) {
+    return ctx.join(this.body, '\n') +
+      '\n'
   }
 }
 

@@ -18,8 +18,10 @@ class ArrayExpression extends JSElement {
     this.elements = this.createElementList(ast.elements)
   }
 
-  toString () {
-    return `[ ${this.elements.join(', ')} ]`
+  toESString (ctx) {
+    return '[ ' +
+    ctx.join(this.elements, ', ') +
+    ' ]'
   }
 }
 

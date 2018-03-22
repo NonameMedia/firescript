@@ -6,6 +6,7 @@ Means, you can use `template strings` or `expressions` to define a value and con
 
 | Datatype | Descroiption                                 |
 | -------- | -------------------------------------------- |
+| `fmt`    | A formate strin literal                      |
 | `str`    | String or template literal                   |
 | `raw`    | Raw string, without template literal parsing |
 | `int`    | An integer                                   |
@@ -38,4 +39,10 @@ const myReg = reg '[A-Za-z]'
 
 ```js
 
+```
+
+### fmt <str> ...<args>|<arr>
+
+```fire
+const str = fmt 'Hello %s, I like %s', name, 'bananas'
 ```

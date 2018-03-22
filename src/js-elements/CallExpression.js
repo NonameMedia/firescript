@@ -20,8 +20,11 @@ class CallExpression extends JSElement {
     this.arguments = this.createElementList(ast.arguments)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return this.callee.toESString(ctx) +
+      '(' +
+      ctx.join(this.arguments, ', ') +
+      ')'
   }
 }
 

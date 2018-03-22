@@ -1,10 +1,12 @@
 const Program = require('./js-elements/Program')
+const RenderContext = require('./RenderContext')
 
 class JSTranspiler {
   transpile (ast) {
     try {
       const jse = new Program(ast)
-      return jse.toString()
+      const ctx = new RenderContext()
+      return jse.toESString(ctx)
     } catch (err) {
       if (!err.token) {
         throw err

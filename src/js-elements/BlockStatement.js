@@ -1,5 +1,16 @@
 const JSElement = require('./JSElement')
 
+const ALLOWED_CHILDS = [
+  'ClassDeclaration', 'FunctionDeclaration', ' VariableDeclaration',
+  'BlockStatement', 'BreakStatement', 'ContinueStatement',
+  'DebuggerStatement', 'DoWhileStatement', 'EmptyStatement',
+  'ExpressionStatement', 'ForStatement', 'ForInStatement',
+  'ForOfStatement', 'FunctionDeclaration', 'IfStatement',
+  'LabeledStatement', 'ReturnStatement', 'SwitchStatement',
+  'ThrowStatement', 'TryStatement', 'VariableDeclaration',
+  'WhileStatement', 'WithStatement'
+]
+
 /**
  * BlockStatement
  *
@@ -7,21 +18,23 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface BlockStatement {
-    type: 'BlockStatement';
-    body: StatementListItem[];
-}
+ *   type: 'BlockStatement';
+ *   body: StatementListItem[];
+ * }
 */
 class BlockStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element BlockStatement is a DraftElement!`)
+    this.body = this.createElementList(ast.body, ALLOWED_CHILDS)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return '{' +
+      ctx.indent(1) +
+      ctx.join(this.body, ctx.indent()) +
+      ctx.indent(-1) +
+      '}'
   }
 }
 

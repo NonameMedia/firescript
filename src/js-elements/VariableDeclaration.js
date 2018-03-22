@@ -20,8 +20,10 @@ class VariableDeclaration extends JSElement {
     this.declarations = this.createElementList(ast.declarations)
   }
 
-  toString () {
-    return `${this.kind} ${this.declarations.join(', ')};`
+  toESString (ctx) {
+    return this.kind +
+      ' ' +
+      ctx.join(this.declarations, ', ')
   }
 }
 

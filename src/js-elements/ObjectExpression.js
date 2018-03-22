@@ -1,5 +1,6 @@
 const JSElement = require('./JSElement')
 
+const ALLOWED_NODES = [ 'Property' ]
 /**
  * ObjectExpression
  *
@@ -7,21 +8,42 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ObjectExpression {
-    type: 'ObjectExpression';
-    properties: Property[];
-}
+ *   type: 'ObjectExpression';
+ *   properties: Property[];
+ * }
 */
 class ObjectExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ObjectExpression is a DraftElement!`)
+    this.properties = this.createElementList(ast.properties, ALLOWED_NODES, 1)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const useMultiline = this.useMultiline()
+    if (useMultiline) {
+      return this.renderMultiline(ctx)
+    }
+
+    return this.renderInline(ctx)
+  }
+
+  useMultiline () {
+    return this.properties.length > 2 || this.properties.some((item) => item.method)
+  }
+
+  renderMultiline (ctx) {
+    return '{' +
+      ctx.indent(+1) +
+      ctx.join(this.properties, `,${ctx.indent()}`) +
+      ctx.indent(-1) +
+      '}'
+  }
+
+  renderInline (ctx) {
+    return '{ ' +
+      ctx.join(this.properties, ', ') +
+      ' }'
   }
 }
 

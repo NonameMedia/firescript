@@ -18,7 +18,7 @@ class Identifier extends JSElement {
     this.name = ast.name
   }
 
-  toString () {
+  toESString (ctx) {
     return this.name
   }
 }

@@ -49,14 +49,12 @@ TryStatement
 CatchClause
 ThrowStatement
 SpreadElement
-ThisExpression
 TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
 ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
-CallExpression
 ForStatement
 ForInStatement                        
 ForOfStatement
@@ -71,26 +69,33 @@ ClassExpression
 ClassBody
 MethodDefinition
 ExpressionStatement
-Identifier                            
-Literal                               
-Program
-Property
-ArrayExpression
-ObjectExpression
-BlockStatement                        
 ArrowFunctionExpression
-FunctionExpression
 AwaitExpression
 YieldExpression
-ReturnStatement
 FunctionDeclaration
 IfStatement
-VariableDeclaration                   
-VariableDeclarator
 WhileStatement
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
+
+ThisExpression
+ReturnStatement
+FunctionExpression
+
+3 b) Unit tested
+----------------------------------------
+
+ObjectExpression
+Property
+ArrayExpression
+BlockStatement                        
+CallExpression
+VariableDeclaration                   
+VariableDeclarator
+Program
+Literal                               
+Identifier
 
 4) JSParser can create item from js source
 ------------------------------------------

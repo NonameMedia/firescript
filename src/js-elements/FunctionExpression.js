@@ -7,26 +7,35 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface FunctionExpression {
-    type: 'FunctionExpression';
-    id: Identifier | null;
-    params: FunctionParameter[];
-    body: BlockStatement;
-    generator: boolean;
-    async: boolean;
-    expression: boolean;
-}
+ *   type: 'FunctionExpression';
+ *   id: Identifier | null;
+ *   params: FunctionParameter[];
+ *   body: BlockStatement;
+ *   generator: boolean;
+ *   async: boolean;
+ *   expression: boolean;
+ * }
 */
 class FunctionExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element FunctionExpression is a DraftElement!`)
+    this.id = ast.id ? this.createElement(ast.id) : null
+    this.params = this.createElementList(ast.params)
+    this.body = this.createElement(ast.body, null)
+    this.async = ast.async
+    console.log('EXP', ast.expression)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const id = this.id ? 'function ' + this.id.toESString(ctx) : ''
+    const async = this.asymc ? 'async ' : ''
+
+    return async + id +
+      ' (' +
+      ctx.join(this.params, ', ') +
+      ') ' +
+      this.body.toESString(ctx)
   }
 }
 

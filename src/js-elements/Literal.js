@@ -17,11 +17,12 @@ class Literal extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.raw = ast.raw
+    this.value = ast.value
+    this.isString = /(^"[^]*"$)|(^'[^]*'$)/.test(ast.raw)
   }
 
-  toString () {
-    return this.raw
+  toESString (ctx) {
+    return this.isString ? `'${this.value}'` : this.value
   }
 }
 
