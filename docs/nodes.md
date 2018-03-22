@@ -57,19 +57,19 @@ MetaProperty
 SwitchStatement
 SwitchCase
 Super
-ClassDeclaration
-ClassExpression
 ClassBody
 MethodDefinition
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
-IfStatement
+ClassDeclaration
+ClassExpression
 
 3 b) Unit tested
 ----------------------------------------
 
+IfStatement
 WhileStatement
 NewExpression
 MemberExpression
