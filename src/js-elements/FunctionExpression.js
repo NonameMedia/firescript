@@ -29,7 +29,7 @@ class FunctionExpression extends JSElement {
 
   toESString (ctx) {
     const id = this.id ? 'function ' + this.id.toESString(ctx) : ''
-    const async = this.asymc ? 'async ' : ''
+    const async = this.async ? 'async ' : ''
 
     return async + id +
       ' (' +
