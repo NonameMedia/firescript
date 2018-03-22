@@ -17,13 +17,14 @@ class MemberExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element MemberExpression is a DraftElement!`)
+    this.object = this.createElement(ast.object)
+    this.property = this.createElement(ast.property)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return this.object.toESString(ctx) +
+      '.' +
+      this.property.toESString(ctx)
   }
 }
 

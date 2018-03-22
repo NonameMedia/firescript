@@ -7,25 +7,29 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface BinaryExpression {
-    type: 'BinaryExpression';
-    operator: 'instanceof' | 'in' | '+' | '-' | '*' | '/' | '%' | '**' |
-        '|' | '^' | '&' | '==' | '!=' | '===' | '!==' |
-        '<' | '>' | '<=' | '<<' | '>>' | '>>>';
-    left: Expression;
-    right: Expression;
-}
-*/
+ *   type: 'BinaryExpression';
+ *   operator: 'instanceof' | 'in' | '+' | '-' | '*' | '/' | '%' | '**' |
+ *       '|' | '^' | '&' | '==' | '!=' | '===' | '!==' |
+ *       '<' | '>' | '<=' | '<<' | '>>' | '>>>';
+ *   left: Expression;
+ *   right: Expression;
+ * }
+ */
 class BinaryExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element BinaryExpression is a DraftElement!`)
+    this.left = this.createElement(ast.left)
+    this.right = this.createElement(ast.right)
+    this.operator = ast.operator
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return this.left.toESString(ctx) +
+      ' ' +
+      this.operator +
+      ' ' +
+      this.right.toESString(ctx)
   }
 }
 

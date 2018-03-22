@@ -7,22 +7,24 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface YieldExpression {
-    type: 'YieldExpression';
-    argument: Expression | null;
-    delegate: boolean;
-}
-*/
+ *   type: 'YieldExpression';
+ *   argument: Expression | null;
+ *   delegate: boolean;
+ * }
+ */
 class YieldExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element YieldExpression is a DraftElement!`)
+    this.argument = this.createElement(ast.argument)
+    this.delegate = ast.delegate
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const delegate = this.delegate ? '* ' : ''
+    return 'yield ' +
+      delegate +
+      this.argument.toESString(ctx)
   }
 }
 

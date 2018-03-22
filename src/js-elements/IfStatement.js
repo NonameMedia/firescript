@@ -7,23 +7,29 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface IfStatement {
-    type: 'IfStatement';
-    test: Expression;
-    consequent: Statement;
-    alternate?: Statement;
-}
-*/
+ *   type: 'IfStatement';
+ *   test: Expression;
+ *   consequent: Statement;
+ *   alternate?: Statement;
+ * }
+ */
 class IfStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element IfStatement is a DraftElement!`)
+    this.test = this.createElement(ast.test)
+    this.consequent = this.createElement(ast.consequent)
+    this.alternate = this.alternate ? this.createElement(ast.alternate) : null
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const alternate = this.alternate ? ' else ' + this.alternate.toESString(ctx) : ''
+
+    return 'if (' +
+      this.test.toESString(ctx) +
+      ') ' +
+      this.consequent.toESString(ctx) +
+      alternate
   }
 }
 

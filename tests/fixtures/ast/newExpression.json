@@ -1,0 +1,8 @@
+{
+    "type": "NewExpression",
+    "argument": {
+        "type": "Identifier",
+        "name": "banana"
+    },
+    "arguments": []
+}

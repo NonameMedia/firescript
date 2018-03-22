@@ -20,9 +20,7 @@ Unimplemented
 ? SequenceExpression
 ? LogicalExpression
 ? UnaryExpression
-? BinaryExpression
 ? UpdateExpression
-? AssignmentExpression
 
 1.5) Document it first ;)
 -------------------------
@@ -56,29 +54,31 @@ ForStatement
 ForInStatement                        
 ForOfStatement
 MetaProperty
-NewExpression
 SwitchStatement
 SwitchCase
 Super
-MemberExpression
 ClassDeclaration
 ClassExpression
 ClassBody
 MethodDefinition
-ExpressionStatement
-ArrowFunctionExpression
-AwaitExpression
-YieldExpression
-IfStatement
-WhileStatement
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
+IfStatement
 
 3 b) Unit tested
 ----------------------------------------
 
+WhileStatement
+NewExpression
+MemberExpression
+AssignmentExpression
+BinaryExpression
+ExpressionStatement
+AwaitExpression
+YieldExpression
+ArrowFunctionExpression
 FunctionDeclaration
 BreakStatement
 ContinueStatement

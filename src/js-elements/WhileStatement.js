@@ -16,13 +16,15 @@ class WhileStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element WhileStatement is a DraftElement!`)
+    this.test = this.createElement(ast.test)
+    this.body = this.createElement(ast.body)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'while (' +
+      this.test.toESString(ctx) +
+      ') ' +
+      this.body.toESString(ctx)
   }
 }
 

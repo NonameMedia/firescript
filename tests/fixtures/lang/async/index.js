@@ -1,4 +1,4 @@
-async function foo(a, b) {
+async function foo (a, b) {
   await a;
   return a + b;
 }
