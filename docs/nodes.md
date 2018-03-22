@@ -40,10 +40,7 @@ ExportNamedDeclaration
 ExportAllDeclaration
 ExportSpecifier
 ExportDefaultDeclaration
-BreakStatement
-ContinueStatement
 ConditionalExpression
-DebuggerStatement
 DoWhileStatement
 TryStatement
 CatchClause
@@ -79,6 +76,9 @@ WhileStatement
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
+BreakStatement
+ContinueStatement
+DebuggerStatement
 
 3 b) Unit tested
 ----------------------------------------

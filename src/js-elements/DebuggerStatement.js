@@ -7,20 +7,16 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface DebuggerStatement {
-    type: 'DebuggerStatement';
-}
-*/
+ *   type: 'DebuggerStatement';
+ * }
+ */
 class DebuggerStatement extends JSElement {
   constructor (ast) {
     super(ast)
-
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element DebuggerStatement is a DraftElement!`)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'debugger;'
   }
 }
 

@@ -14,14 +14,10 @@ const JSElement = require('./JSElement')
 class BreakStatement extends JSElement {
   constructor (ast) {
     super(ast)
-
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element BreakStatement is a DraftElement!`)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'break;'
   }
 }
 
