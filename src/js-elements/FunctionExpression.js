@@ -24,14 +24,16 @@ class FunctionExpression extends JSElement {
     this.params = this.createElementList(ast.params)
     this.body = this.createElement(ast.body, null)
     this.async = ast.async
-    console.log('EXP', ast.expression)
+    this.generator = ast.generator
   }
 
   toESString (ctx) {
-    const id = this.id ? 'function ' + this.id.toESString(ctx) : ''
+    const id = this.id ? this.id.toESString(ctx) : ''
+    const generator = this.generator ? '* ' : ''
+    const func = this.id ? 'function ' : ''
     const async = this.async ? 'async ' : ''
 
-    return async + id +
+    return async + func + generator + id +
       ' (' +
       ctx.join(this.params, ', ') +
       ') ' +

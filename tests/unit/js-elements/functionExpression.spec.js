@@ -27,5 +27,17 @@ describe('JSElements', () => {
         '}'
       )
     })
+
+    it('renders a FunctionExpression element of a generator function', () => {
+      const ast = require('../../fixtures/ast/generatorFunctionExpression.json')
+      const ctx = new RenderContext()
+
+      const jse = new FunctionExpression(ast)
+      inspect(jse.toESString(ctx)).isEql(
+        'function * getFruits (banana) {\n' +
+        '  return banana;\n' +
+        '}'
+      )
+    })
   })
 })
