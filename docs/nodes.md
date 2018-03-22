@@ -81,11 +81,11 @@ WhileStatement
 
 ThisExpression
 ReturnStatement
-FunctionExpression
 
 3 b) Unit tested
 ----------------------------------------
 
+FunctionExpression
 ObjectExpression
 Property
 ArrayExpression
