@@ -23,7 +23,8 @@ class VariableDeclaration extends JSElement {
   toESString (ctx) {
     return this.kind +
       ' ' +
-      ctx.join(this.declarations, ', ')
+      ctx.join(this.declarations, ', ') +
+      ';'
   }
 }
 

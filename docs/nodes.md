@@ -69,20 +69,20 @@ ExpressionStatement
 ArrowFunctionExpression
 AwaitExpression
 YieldExpression
-FunctionDeclaration
 IfStatement
 WhileStatement
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
-BreakStatement
-ContinueStatement
-DebuggerStatement
 
 3 b) Unit tested
 ----------------------------------------
 
+FunctionDeclaration
+BreakStatement
+ContinueStatement
+DebuggerStatement
 ThisExpression
 ReturnStatement
 FunctionExpression

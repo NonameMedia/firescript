@@ -9,7 +9,7 @@ describe('JSElements', () => {
       const ctx = new RenderContext()
       const jse = new VariableDeclaration(ast)
       inspect(jse.toESString(ctx)).isEql(
-        'const res = \'bla\''
+        'const res = \'bla\';'
       )
     })
   })
