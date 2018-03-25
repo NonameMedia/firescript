@@ -22,9 +22,13 @@ class ImportSpecifier extends JSElement {
 
   toESString (ctx) {
     if (this.imported) {
-      return this.local.toESString(ctx) +
+      if (this.imported.name === this.local.name) {
+        return this.local.toESString(ctx)
+      }
+
+      return this.imported.toESString(ctx) +
         ' as ' +
-        this.imported.toESString(ctx)
+        this.local.toESString(ctx)
     }
 
     return this.local.toESString(ctx)

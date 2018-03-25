@@ -7,22 +7,35 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface SwitchStatement {
-    type: 'SwitchStatement';
-    discriminant: Expression;
-    cases: SwitchCase[];
-}
-*/
+ *   type: 'SwitchStatement';
+ *   discriminant: Expression;
+ *   cases: SwitchCase[];
+ * }
+ */
 class SwitchStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element SwitchStatement is a DraftElement!`)
+    this.discriminant = this.createElement(ast.discriminant)
+    this.cases = this.createElementList(ast.cases)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'switch (' +
+      this.discriminant.toESString(ctx) +
+      ') {' +
+      ctx.indent(1) +
+      ctx.each(this.cases, this.blockHandler, ctx.indent()) +
+      ctx.indent(-1) +
+      '}'
+  }
+
+  blockHandler (str, item, index, arr) {
+    if (index + 1 === arr.length || item.consequent.length === 0) {
+      return str
+    }
+
+    return str + '\n'
   }
 }
 

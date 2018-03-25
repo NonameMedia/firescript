@@ -1,5 +1,25 @@
 const JSElement = require('./JSElement')
 
+const ALLOWED_LEFT_CHILDS = [
+  'Identifier',
+  'ArrayPattern',
+  'ObjectPattern'
+]
+
+const ALLOWED_RIGHTT_CHILDS = [
+  'ThisExpression', 'Identifier', 'Literal',
+  'ArrayExpression', 'ObjectExpression',
+  'FunctionExpression', 'ArrowFunctionExpression',
+  'ClassExpression', 'TaggedTemplateExpression',
+  'MemberExpression', 'Super', 'MetaProperty',
+  'NewExpression', 'CallExpression',
+  'UpdateExpression', 'AwaitExpression',
+  'UnaryExpression', 'BinaryExpression',
+  'LogicalExpression', 'ConditionalExpression',
+  'YieldExpression', 'AssignmentExpression',
+  'SequenceExpression'
+]
+
 /**
  * AssignmentPattern
  *
@@ -7,22 +27,23 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface AssignmentPattern {
-    type: 'AssignmentPattern';
-    left: Identifier | BindingPattern;
-    right: Expression;
-}
-*/
+ *   type: 'AssignmentPattern';
+ *   left: Identifier | BindingPattern;
+ *   right: Expression;
+ * }
+ */
 class AssignmentPattern extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element AssignmentPattern is a DraftElement!`)
+    this.left = this.createElement(ast.left, ALLOWED_LEFT_CHILDS)
+    this.right = this.createElement(ast.right, ALLOWED_RIGHTT_CHILDS)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return this.left.toESString(ctx) +
+      ' = ' +
+      this.right.toESString(ctx)
   }
 }
 

@@ -7,22 +7,23 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface MetaProperty {
-  type: 'MetaProperty';
-  meta: Identifier;
-  property: Identifier;
-}
-*/
+ *   type: 'MetaProperty';
+ *   meta: Identifier;
+ *   property: Identifier;
+ * }
+ */
 class MetaProperty extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element MetaProperty is a DraftElement!`)
+    this.meta = this.createElement(ast.meta)
+    this.property = this.createElement(ast.property)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return this.meta.toESString(ctx) +
+      '.' +
+      this.property.toESString(ctx)
   }
 }
 

@@ -44,6 +44,22 @@
                                 "kind": "init",
                                 "method": false,
                                 "shorthand": false
+                            },
+                            {
+                                "type": "Property",
+                                "key": {
+                                    "type": "Identifier",
+                                    "name": "bla"
+                                },
+                                "computed": false,
+                                "value": {
+                                    "type": "Literal",
+                                    "value": "Bla",
+                                    "raw": "'Bla'"
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false
                             }
                         ]
                     }

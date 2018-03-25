@@ -1,0 +1,24 @@
+{
+  "type": "SwitchCase",
+  "test": {
+    "type": "Identifier",
+    "name": "obj"
+  },
+  "consequent": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "one"
+        },
+        "arguments": []
+      }
+    },
+    {
+      "type": "BreakStatement",
+      "label": null
+    }
+  ]
+}

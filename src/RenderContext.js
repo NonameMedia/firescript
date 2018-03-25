@@ -13,6 +13,10 @@ class RenderContext {
   join (arr, joiner) {
     return arr.map((item) => item.toESString(this)).join(joiner)
   }
+
+  each (arr, fn, joiner) {
+    return arr.map((item, index, arr) => fn(item.toESString(this), item, index, arr)).join(joiner)
+  }
 }
 
 module.exports = RenderContext

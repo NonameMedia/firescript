@@ -1,3 +1,4 @@
+const SuperArray = require('superarr')
 const JSElement = require('./JSElement')
 
 /**
@@ -7,22 +8,25 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface TemplateLiteral {
-    type: 'TemplateLiteral';
-    quasis: TemplateElement[];
-    expressions: Expression[];
-}
-*/
+ *   type: 'TemplateLiteral';
+ *   quasis: TemplateElement[];
+ *   expressions: Expression[];
+ * }
+ */
 class TemplateLiteral extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element TemplateLiteral is a DraftElement!`)
+    this.quasis = this.createElementList(ast.quasis)
+    this.expressions = this.createElementList(ast.expressions)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const elements = SuperArray.merge(this.quasis, this.expressions)
+    elements[0].head = true
+    return '`' +
+      ctx.join(elements, '') +
+      '`'
   }
 }
 

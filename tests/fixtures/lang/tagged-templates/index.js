@@ -1,1 +1,1 @@
-tmpl`A ${banana} is a ${fruit}`
+tmpl `A ${banana} is a ${fruit}`;

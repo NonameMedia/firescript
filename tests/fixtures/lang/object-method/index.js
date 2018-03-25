@@ -1,6 +1,6 @@
 const obj = {
   banana: 'Banana',
-  getFruits() {
+  getFruits () {
     return this;
   }
-}
+};

@@ -29,7 +29,7 @@ class ObjectExpression extends JSElement {
   }
 
   useMultiline () {
-    return this.properties.length > 2 || this.properties.some((item) => item.method)
+    return this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value.type))
   }
 
   renderMultiline (ctx) {

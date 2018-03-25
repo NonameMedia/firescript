@@ -17,13 +17,13 @@
                                 "type": "Property",
                                 "key": {
                                     "type": "Identifier",
-                                    "name": "foo"
+                                    "name": "banana"
                                 },
                                 "computed": false,
                                 "value": {
                                     "type": "Literal",
-                                    "value": "Foo",
-                                    "raw": "'Foo'"
+                                    "value": "Banana",
+                                    "raw": "'Banana'"
                                 },
                                 "kind": "init",
                                 "method": false,
@@ -33,16 +33,30 @@
                                 "type": "Property",
                                 "key": {
                                     "type": "Identifier",
-                                    "name": "bar"
+                                    "name": "getFruits"
                                 },
                                 "computed": false,
                                 "value": {
-                                    "type": "Literal",
-                                    "value": "Bar",
-                                    "raw": "'Bar'"
+                                    "type": "FunctionExpression",
+                                    "id": null,
+                                    "params": [],
+                                    "body": {
+                                        "type": "BlockStatement",
+                                        "body": [
+                                            {
+                                                "type": "ReturnStatement",
+                                                "argument": {
+                                                    "type": "ThisExpression"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "generator": false,
+                                    "expression": false,
+                                    "async": false
                                 },
                                 "kind": "init",
-                                "method": false,
+                                "method": true,
                                 "shorthand": false
                             }
                         ]

@@ -7,22 +7,24 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface CatchClause {
-    type: 'CatchClause';
-    param: Identifier | BindingPattern;
-    body: BlockStatement;
-}
-*/
+ *   type: 'CatchClause';
+ *   param: Identifier | BindingPattern;
+ *   body: BlockStatement;
+ * }
+ */
 class CatchClause extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element CatchClause is a DraftElement!`)
+    this.param = this.createElement(ast.param)
+    this.body = this.createElement(ast.body)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'catch (' +
+      this.param.toESString(ctx) +
+      ') ' +
+      this.body.toESString(ctx)
   }
 }
 

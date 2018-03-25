@@ -5,7 +5,7 @@
       "type": "ImportSpecifier",
       "local": {
         "type": "Identifier",
-        "name": "a1"
+        "name": "f1"
       },
       "imported": {
         "type": "Identifier",

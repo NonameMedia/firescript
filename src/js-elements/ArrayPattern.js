@@ -1,5 +1,14 @@
 const JSElement = require('./JSElement')
 
+const ALLOWED_CHILDS = [
+  'AssignmentPattern',
+  'Identifier',
+  'ArrayPattern',
+  'ObjectPattern',
+  'RestElement',
+  'Null'
+]
+
 /**
  * ArrayPattern
  *
@@ -10,18 +19,18 @@ const JSElement = require('./JSElement')
  *   type: 'ArrayPattern';
  *   elements: ArrayPatternElement[];
  * }
-*/
+ */
 class ArrayPattern extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ArrayPattern is a DraftElement!`)
+    this.elements = this.createElementList(ast.elements, ALLOWED_CHILDS)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return '[ ' +
+      ctx.join(this.elements, ', ') +
+      ' ]'
   }
 }
 

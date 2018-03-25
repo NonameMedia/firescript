@@ -7,21 +7,20 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface SpreadElement {
-    type: 'SpreadElement';
-    argument: Expression;
-}
-*/
+ *   type: 'SpreadElement';
+ *   argument: Expression;
+ * }
+ */
 class SpreadElement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element SpreadElement is a DraftElement!`)
+    this.argument = this.createElement(ast.argument)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return '...' +
+      this.argument.toESString(ctx)
   }
 }
 

@@ -7,21 +7,20 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ThrowStatement {
-    type: 'ThrowStatement';
-    argument: Expression;
-}
-*/
+ *   type: 'ThrowStatement';
+ *   argument: Expression;
+ * }
+ */
 class ThrowStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ThrowStatement is a DraftElement!`)
+    this.argument = this.createElement(ast.argument)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'throw ' +
+      this.argument.toESString(ctx)
   }
 }
 

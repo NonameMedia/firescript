@@ -1,0 +1,12 @@
+{
+  "type": "AssignmentPattern",
+  "left": {
+    "type": "Identifier",
+    "name": "fruit"
+  },
+  "right": {
+    "type": "Literal",
+    "value": "banana",
+    "raw": "'banana'"
+  }
+}

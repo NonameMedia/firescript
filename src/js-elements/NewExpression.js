@@ -22,7 +22,7 @@ class NewExpression extends JSElement {
 
   toESString (ctx) {
     return 'new ' +
-      this.callee +
+      this.callee.toESString(ctx) +
       '(' +
       ctx.join(this.arguments, ', ') +
       ')'

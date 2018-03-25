@@ -28,12 +28,14 @@ Unimplemented
 2) FSParser can create item from fs source
 ------------------------------------------
 
+
+3) FSTranspiler can transpile it into JS
+----------------------------------------
+
 ArrayPattern
 ObjectPattern
 AssignmentPattern
 RestElement
-ImportNamespaceSpecifier
-DoWhileStatement
 TryStatement
 CatchClause
 ThrowStatement
@@ -41,23 +43,21 @@ SpreadElement
 TaggedTemplateExpression
 TemplateElement
 TemplateLiteral
-ImportDeclaration
-ImportSpecifier
-ImportDefaultSpecifier
 MetaProperty
 SwitchStatement
 SwitchCase
 
-3) FSTranspiler can transpile it into JS
-----------------------------------------
-
-ForStatement
-ForInStatement                        
-ForOfStatement
-
 3 b) Unit tested
 ----------------------------------------
 
+DoWhileStatement
+ImportNamespaceSpecifier
+ImportDeclaration
+ImportSpecifier
+ImportDefaultSpecifier
+ForStatement
+ForInStatement                        
+ForOfStatement
 UpdateExpression
 ExportNamedDeclaration
 ExportAllDeclaration
@@ -267,11 +267,13 @@ interface MethodDefinition {
 
 Tagged Template Expression
 
+```ts
 interface TaggedTemplateExpression {
     type: 'TaggedTemplateExpression';
     readonly tag: Expression;
     readonly quasi: TemplateLiteral;
 }
+```
 
 with
 

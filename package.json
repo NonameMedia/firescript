@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "esprima": "4.0.0",
+    "superarr": "0.0.0",
     "supershit": "0.3.1"
   }
 }

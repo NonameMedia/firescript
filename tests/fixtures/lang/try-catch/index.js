@@ -1,5 +1,5 @@
 try {
-  db.connect()
+  db.connect();
 } catch (err) {
-  console.log(err)
+  console.log(err);
 }

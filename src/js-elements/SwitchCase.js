@@ -7,22 +7,35 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface SwitchCase {
-    type: 'SwitchCase';
-    test: Expression;
-    consequent: Statement[];
-}
-*/
+ *   type: 'SwitchCase';
+ *   test: Expression;
+ *   consequent: Statement[];
+ * }
+ */
 class SwitchCase extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element SwitchCase is a DraftElement!`)
+    this.test = ast.test ? this.createElement(ast.test) : null
+    this.consequent = this.createElementList(ast.consequent)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
+
+    if (this.consequent.length === 0) {
+      return test +
+        ':'
+    }
+
+    const indent = ctx.indent(1)
+    const consequent = ctx.join(this.consequent, ctx.indent())
+    ctx.indent(-1)
+
+    return test +
+      ':' +
+      indent +
+      consequent
   }
 }
 

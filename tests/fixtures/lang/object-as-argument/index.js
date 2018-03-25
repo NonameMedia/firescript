@@ -1,4 +1,1 @@
-foo({
-  foo: 'Foo',
-  bar: 'Bar'
-});
+foo({ foo: 'Foo', bar: 'Bar' });

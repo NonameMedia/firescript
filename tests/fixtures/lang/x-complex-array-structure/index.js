@@ -4,9 +4,7 @@ const arr = [
   {
     bla: [ 'bla', 'blabla' ],
     one: 1,
-    two: {
-      'number': 2
-    },
+    two: { 'number': 2 },
     three: '3'
   }
-]
+];

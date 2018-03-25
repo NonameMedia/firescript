@@ -7,22 +7,24 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface TemplateElement {
-    type: 'TemplateElement';
-    value: { cooked: string; raw: string };
-    tail: boolean;
-}
-*/
+ *   type: 'TemplateElement';
+ *   value: { cooked: string; raw: string };
+ *   tail: boolean;
+ * }
+ */
 class TemplateElement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element TemplateElement is a DraftElement!`)
+    this.value = ast.value
+    this.tail = ast.tail
+    this.head = false
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const head = this.head ? '' : '}'
+    const tail = this.tail ? '' : '${'
+    return head + this.value.raw + tail
   }
 }
 
