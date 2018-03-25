@@ -7,24 +7,32 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ForStatement {
-    type: 'ForStatement';
-    init: Expression | VariableDeclaration | null;
-    test: Expression | null;
-    update: Expression | null;
-    body: Statement;
-}
-*/
+ *   type: 'ForStatement';
+ *   init: Expression | VariableDeclaration | null;
+ *   test: Expression | null;
+ *   update: Expression | null;
+ *   body: Statement;
+ * }
+ */
 class ForStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ForStatement is a DraftElement!`)
+    this.init = ast.init ? this.createElement(ast.init) : null
+    this.test = ast.test ? this.createElement(ast.test) : null
+    this.update = ast.update ? this.createElement(ast.update) : null
+    this.body = this.createElement(ast.body)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'for (' +
+      this.init.toESString(ctx) +
+      '; ' +
+      this.test.toESString(ctx) +
+      '; ' +
+      this.update.toESString(ctx) +
+      ') ' +
+      this.body.toESString(ctx)
   }
 }
 

@@ -1,0 +1,51 @@
+{
+  "type": "ForInStatement",
+  "left": {
+    "type": "VariableDeclaration",
+    "declarations": [
+      {
+        "type": "VariableDeclarator",
+        "id": {
+          "type": "Identifier",
+          "name": "key"
+        },
+        "init": null
+      }
+    ],
+    "kind": "const"
+  },
+  "right": {
+    "type": "Identifier",
+    "name": "obj"
+  },
+  "body": {
+    "type": "BlockStatement",
+    "body": [
+      {
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "CallExpression",
+          "callee": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "console"
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "log"
+            }
+          },
+          "arguments": [
+            {
+              "type": "Identifier",
+              "name": "key"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "each": false
+}

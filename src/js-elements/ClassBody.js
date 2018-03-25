@@ -19,6 +19,10 @@ class ClassBody extends JSElement {
   }
 
   toESString (ctx) {
+    if (this.body.length === 0) {
+      return '{}'
+    }
+
     return '{' +
       ctx.indent(1) +
       ctx.join(this.body, '\n' + ctx.indent()) +

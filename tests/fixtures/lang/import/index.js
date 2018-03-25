@@ -1,1 +1,1 @@
-import banana from 'banana'
+import banana from 'banana';

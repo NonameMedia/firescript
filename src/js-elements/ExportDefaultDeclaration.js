@@ -7,21 +7,21 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ExportDefaultDeclaration {
-    type: 'ExportDefaultDeclaration';
-    declaration: Identifier | BindingPattern | ClassDeclaration | Expression | FunctionDeclaration;
-}
-*/
+ *   type: 'ExportDefaultDeclaration';
+ *   declaration: Identifier | BindingPattern | ClassDeclaration | Expression | FunctionDeclaration;
+ * }
+ */
 class ExportDefaultDeclaration extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ExportDefaultDeclaration is a DraftElement!`)
+    this.declaration = this.createElement(ast.declaration)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'export default ' +
+      this.declaration.toESString(ctx) +
+      ';'
   }
 }
 

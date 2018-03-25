@@ -19,7 +19,7 @@ class IfStatement extends JSElement {
 
     this.test = this.createElement(ast.test)
     this.consequent = this.createElement(ast.consequent)
-    this.alternate = this.alternate ? this.createElement(ast.alternate) : null
+    this.alternate = ast.alternate ? this.createElement(ast.alternate) : null
   }
 
   toESString (ctx) {

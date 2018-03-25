@@ -7,23 +7,29 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface UpdateExpression {
-    type: 'UpdateExpression';
-    operator: '++' | '--';
-    argument: Expression;
-    prefix: boolean;
-}
-*/
+ *   type: 'UpdateExpression';
+ *   operator: '++' | '--';
+ *   argument: Expression;
+ *   prefix: boolean;
+ * }
+ */
 class UpdateExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element UpdateExpression is a DraftElement!`)
+    this.operator = ast.operator
+    this.argument = this.createElement(ast.argument)
+    this.prefix = ast.prefix
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    if (this.prefix) {
+      return this.operator +
+        this.argument.toESString(ctx)
+    } else {
+      return this.argument.toESString(ctx) +
+        this.operator
+    }
   }
 }
 

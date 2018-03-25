@@ -17,7 +17,7 @@ class VariableDeclarator extends JSElement {
     super(ast)
 
     this.id = this.createElement(ast.id)
-    this.init = this.createElement(ast.init)
+    this.init = ast.init ? this.createElement(ast.init) : null
   }
 
   toESString (ctx) {

@@ -7,21 +7,21 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ExportAllDeclaration {
-    type: 'ExportAllDeclaration';
-    source: Literal;
-}
-*/
+ *   type: 'ExportAllDeclaration';
+ *   source: Literal;
+ * }
+ */
 class ExportAllDeclaration extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ExportAllDeclaration is a DraftElement!`)
+    this.source = this.createElement(ast.source)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'export * from ' +
+      this.source.toESString(ctx) +
+      ';'
   }
 }
 

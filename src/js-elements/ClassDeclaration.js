@@ -29,7 +29,7 @@ class ClassDeclaration extends JSElement {
       this.id.toESString(ctx) +
       superClass +
       ' ' +
-    this.body.toESString(ctx)
+      this.body.toESString(ctx)
   }
 }
 

@@ -17,7 +17,7 @@ class JSElement {
   }
 
   getIndention () {
-    return ' '.repeat((this.__indention + inc) * this.indentionSize)
+    return ' '.repeat((this.__indention) * this.indentionSize)
   }
 
   getTemplate () {
@@ -58,42 +58,8 @@ class JSElement {
     return ast.map((child) => this.createElement(child, ALLOWED_NODES, indentionSize))
   }
 
-  renderAll (nodes, joiner) {
-    return nodes.map((node) => this.renderItem(node)).join(joiner || '')
-  }
-
-  renderItem (node) {
-    return `${node.getIndention()}${node}`
-  }
-
-  render (code) {
-    const str = []
-    if (code) {
-      str.push(code)
-    }
-    const parent = this
-    return {
-      indentChilds (childs) {
-        console.log('CHILDS', childs)
-        childs.forEach((node) => {
-          const ind = node.getIndention()
-          str.push(`\n${ind}${node}`)
-        })
-        return this
-      },
-      render (code) {
-        str.push(code)
-        return this
-      },
-      indent (code) {
-        const ind = parent.getIndention()
-        str.push(`\n${ind}${code}`)
-        return this
-      },
-      toString () {
-        return str.join('')
-      }
-    }
+  getLength () {
+    throw new Error(`getLength method not implemented for element ${this.type}`)
   }
 }
 

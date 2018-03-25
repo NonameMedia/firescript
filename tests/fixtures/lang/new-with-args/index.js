@@ -1,1 +1,1 @@
-const foo = new Foo('one', 'two')
+const foo = new Foo('one', 'two');

@@ -20,7 +20,6 @@ Unimplemented
 ? SequenceExpression
 ? LogicalExpression
 ? UnaryExpression
-? UpdateExpression
 
 1.5) Document it first ;)
 -------------------------
@@ -34,10 +33,6 @@ ObjectPattern
 AssignmentPattern
 RestElement
 ImportNamespaceSpecifier
-ExportNamedDeclaration
-ExportAllDeclaration
-ExportSpecifier
-ExportDefaultDeclaration
 DoWhileStatement
 TryStatement
 CatchClause
@@ -49,9 +44,6 @@ TemplateLiteral
 ImportDeclaration
 ImportSpecifier
 ImportDefaultSpecifier
-ForStatement
-ForInStatement                        
-ForOfStatement
 MetaProperty
 SwitchStatement
 SwitchCase
@@ -59,11 +51,19 @@ SwitchCase
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
-ConditionalExpression
+ForStatement
+ForInStatement                        
+ForOfStatement
 
 3 b) Unit tested
 ----------------------------------------
 
+UpdateExpression
+ExportNamedDeclaration
+ExportAllDeclaration
+ExportSpecifier
+ExportDefaultDeclaration
+ConditionalExpression
 ClassDeclaration
 ClassExpression
 ClassBody

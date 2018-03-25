@@ -1,1 +1,1 @@
-export { banana, coconut }
+export { banana, coconut };

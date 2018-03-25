@@ -18,11 +18,16 @@ class Literal extends JSElement {
     super(ast)
 
     this.value = ast.value
+    this.raw = ast.raw
     this.isString = /(^"[^]*"$)|(^'[^]*'$)/.test(ast.raw)
   }
 
   toESString (ctx) {
     return this.isString ? `'${this.value}'` : this.value
+  }
+
+  getLength () {
+    return this.raw.length
   }
 }
 

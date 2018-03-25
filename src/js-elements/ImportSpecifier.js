@@ -7,22 +7,27 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ImportSpecifier {
-    type: 'ImportSpecifier' | 'ImportDefaultSpecifier' | 'ImportNamespaceSpecifier';
-    local: Identifier;
-    imported?: Identifier;
-}
-*/
+ *   type: 'ImportSpecifier'
+ *   local: Identifier;
+ *   imported?: Identifier;
+ * }
+ */
 class ImportSpecifier extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ImportSpecifier is a DraftElement!`)
+    this.local = this.createElement(ast.local)
+    this.imported = ast.imported ? this.createElement(ast.imported) : null
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    if (this.imported) {
+      return this.local.toESString(ctx) +
+        ' as ' +
+        this.imported.toESString(ctx)
+    }
+
+    return this.local.toESString(ctx)
   }
 }
 

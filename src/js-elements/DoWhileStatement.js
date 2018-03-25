@@ -7,22 +7,25 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface DoWhileStatement {
-    type: 'DoWhileStatement';
-    body: Statement;
-    test: Expression;
-}
-*/
+ *   type: 'DoWhileStatement';
+ *   body: Statement;
+ *   test: Expression;
+ * }
+ */
 class DoWhileStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element DoWhileStatement is a DraftElement!`)
+    this.body = this.createElement(ast.body)
+    this.test = this.createElement(ast.test)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'do ' +
+      this.body.toESString(ctx) +
+      ' while (' +
+      this.test.toESString(ctx) +
+      ');'
   }
 }
 

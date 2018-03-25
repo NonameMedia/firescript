@@ -1,3 +1,3 @@
 for (const prop in obj) {
-  console.log(obj[prop])
+  console.log(obj[prop]);
 }

@@ -21,10 +21,16 @@ class VariableDeclaration extends JSElement {
   }
 
   toESString (ctx) {
+    const semi = this.hasClosingSemicolon() ? ';' : ''
+
     return this.kind +
       ' ' +
       ctx.join(this.declarations, ', ') +
-      ';'
+      semi
+  }
+
+  hasClosingSemicolon () {
+    return !(this.parent && ['ForStatement', 'ForInStatement', 'ForOfStatement'].includes(this.parent.type))
   }
 }
 

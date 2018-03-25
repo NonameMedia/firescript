@@ -1,3 +1,3 @@
 for (const item of arr) {
-  console.log(item)
+  console.log(item);
 }

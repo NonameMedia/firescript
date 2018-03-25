@@ -7,23 +7,46 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ExportNamedDeclaration {
-    type: 'ExportNamedDeclaration';
-    declaration: ClassDeclaration | FunctionDeclaration | VariableDeclaration;
-    specifiers: ExportSpecifier[];
-    source: Literal;
-}
-*/
+ *   type: 'ExportNamedDeclaration';
+ *   declaration: ClassDeclaration | FunctionDeclaration | VariableDeclaration;
+ *   specifiers: ExportSpecifier[];
+ *   source: Literal;
+ * }
+ */
 class ExportNamedDeclaration extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ExportNamedDeclaration is a DraftElement!`)
+    this.declaration = ast.declaration ? this.createElement(ast.declaration) : null
+    this.specifiers = this.createElementList(ast.specifiers)
+    this.source = ast.source ? this.createElement(ast.source) : null
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    if (this.declaration) {
+      return this.renderDeclaration(ctx)
+    } else {
+      return this.renderSpecifiers(ctx)
+    }
+  }
+
+  renderDeclaration (ctx) {
+    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
+
+    return 'export ' +
+      this.declaration.toESString(ctx) +
+      source +
+      ';'
+  }
+
+  renderSpecifiers (ctx) {
+    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
+
+    return 'export { ' +
+      ctx.join(this.specifiers, ', ') +
+      ' }' +
+      source +
+      ';'
   }
 }
 

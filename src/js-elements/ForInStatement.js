@@ -7,24 +7,28 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ForInStatement {
-    type: 'ForInStatement';
-    left: Expression;
-    right: Expression;
-    body: Statement;
-    each: false;
-}
-*/
+ *   type: 'ForInStatement';
+ *   left: Expression;
+ *   right: Expression;
+ *   body: Statement;
+ * }
+ */
 class ForInStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ForInStatement is a DraftElement!`)
+    this.left = this.createElement(ast.left)
+    this.right = this.createElement(ast.right)
+    this.body = this.createElement(ast.body)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return 'for (' +
+      this.left.toESString(ctx) +
+      ' in ' +
+      this.right.toESString(ctx) +
+      ') ' +
+      this.body.toESString(ctx)
   }
 }
 

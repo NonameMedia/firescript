@@ -1,1 +1,1 @@
-const foo = new Foo()
+const foo = new Foo();
