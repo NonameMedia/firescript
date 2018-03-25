@@ -7,23 +7,29 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ClassDeclaration {
-    type: 'ClassDeclaration';
-    id: Identifier | null;
-    superClass: Identifier | null;
-    body: ClassBody;
-}
-*/
+ *   type: 'ClassDeclaration';
+ *   id: Identifier | null;
+ *   superClass: Identifier | null;
+ *   body: ClassBody;
+ * }
+ */
 class ClassDeclaration extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ClassDeclaration is a DraftElement!`)
+    this.id = ast.id ? this.createElement(ast.id) : null
+    this.superClass = ast.superClass ? this.createElement(ast.superClass) : null
+    this.body = ast.body ? this.createElement(ast.body) : null
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
+
+    return 'class ' +
+      this.id.toESString(ctx) +
+      superClass +
+      ' ' +
+    this.body.toESString(ctx)
   }
 }
 

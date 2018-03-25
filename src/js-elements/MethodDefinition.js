@@ -7,25 +7,31 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface MethodDefinition {
-    type: 'MethodDefinition';
-    key: Expression | null;
-    computed: boolean;
-    value: FunctionExpression | null;
-    kind: 'method' | 'constructor';
-    static: boolean;
-}
-*/
+ *   type: 'MethodDefinition';
+ *   key: Expression | null;
+ *   computed: boolean;
+ *   value: FunctionExpression | null;
+ *   kind: 'method' | 'constructor';
+ *   static: boolean;
+ * }
+ */
 class MethodDefinition extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element MethodDefinition is a DraftElement!`)
+    this.key = ast.key ? this.createElement(ast.key) : null
+    this.computed = ast.computed
+    this.value = this.createElement(ast.value)
+    this.kind = ast.kind
+    this.static = ast.static
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    const key = this.kind === 'constructor'
+      ? 'constructor' : this.key.toESString(ctx)
+
+    return key +
+      this.value.toESString(ctx)
   }
 }
 

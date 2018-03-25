@@ -38,7 +38,6 @@ ExportNamedDeclaration
 ExportAllDeclaration
 ExportSpecifier
 ExportDefaultDeclaration
-ConditionalExpression
 DoWhileStatement
 TryStatement
 CatchClause
@@ -56,19 +55,20 @@ ForOfStatement
 MetaProperty
 SwitchStatement
 SwitchCase
-Super
-ClassBody
-MethodDefinition
 
 3) FSTranspiler can transpile it into JS
 ----------------------------------------
 
-ClassDeclaration
-ClassExpression
+ConditionalExpression
 
 3 b) Unit tested
 ----------------------------------------
 
+ClassDeclaration
+ClassExpression
+ClassBody
+Super
+MethodDefinition
 IfStatement
 WhileStatement
 NewExpression

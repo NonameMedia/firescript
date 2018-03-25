@@ -7,21 +7,23 @@ const JSElement = require('./JSElement')
  * @extends JSElement
  *
  * interface ClassBody {
-    type: 'ClassBody';
-    body: MethodDefinition[];
-}
-*/
+ *   type: 'ClassBody';
+ *   body: MethodDefinition[];
+ * }
+ */
 class ClassBody extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element ClassBody is a DraftElement!`)
+    this.body = this.createElementList(ast.body)
   }
 
-  toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+  toESString (ctx) {
+    return '{' +
+      ctx.indent(1) +
+      ctx.join(this.body, '\n' + ctx.indent()) +
+      ctx.indent(-1) +
+      '}'
   }
 }
 
