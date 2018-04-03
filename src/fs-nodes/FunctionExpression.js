@@ -9,7 +9,7 @@ class FunctionExpression extends FireScriptNode {
     this.expression = false
     this.generator = false
 
-    if (this.parent.type !== 'MethodDefinition') {
+    if (!/^(MethodDefinition|Property)$/.test(this.parent.type)) {
       let token = tokenStack.next()
       if (token.value === 'async') {
         this.async = true

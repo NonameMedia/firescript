@@ -15,6 +15,22 @@ const ALLOWED_VALUES = [
   'null'
 ]
 
+/**
+ * Property node
+ *
+ * @class Property
+ * @extends FireScriptNode
+ *
+ * interface Property {
+ *   type: 'Property';
+ *   key: Identifier | Literal;
+ *   computed: boolean;
+ *   value: AssignmentPattern | Identifier | BindingPattern | FunctionExpression | null;
+ *   kind: 'get' | 'set' | 'init';
+ *   method: false;
+ *   shorthand: boolean;
+ * }
+ */
 class Property extends FireScriptNode {
   constructor (tokenStack, parent, key) {
     super(parent)
@@ -22,13 +38,19 @@ class Property extends FireScriptNode {
 
     this.key = key || this.createNodeItem(tokenStack)
     this.isAllowedNode(this.key, ALLOWED_KEYS)
+    this.method = false
 
-    if (!tokenStack.expect('punctuator', ':')) {
+    if (tokenStack.expect('punctuator', ':')) {
+      tokenStack.goForward()
+    } else if (tokenStack.expect('punctuator', '(')) {
+      this.method = true
+    } else {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    tokenStack.goForward()
-    if (tokenStack.isIndention('gt', this.indention)) {
+    if (this.method) {
+      this.value = this.createFunctionExpressionNode(tokenStack)
+    } else if (tokenStack.isIndention('gt', this.indention)) {
       const objectExpression = this.tryObjectExpression(tokenStack)
       if (objectExpression) {
         this.value = objectExpression
@@ -57,7 +79,7 @@ class Property extends FireScriptNode {
       shorthand: false,
       computed: false,
       kind: 'init',
-      method: false
+      method: this.method
     }
   }
 }

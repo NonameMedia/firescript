@@ -5,7 +5,7 @@ const JSTranspiler = require('../../').JSTranspiler
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
 describe('JSTranspiler', () => {
-  describe.only('transpile', () => {
+  describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
 
