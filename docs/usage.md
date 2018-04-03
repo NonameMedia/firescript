@@ -2,7 +2,8 @@ Using FireScript
 ================
 
 FireScript comes with a CLI to transpile the sources into Javascipt.
-Place a `.firescriptrc.cson` file in your project root to set transpiler options.
+Place a `.firescriptrc` file in your project root to set transpiler options.
+The file is interpreted as a `.cson` file.
 
 Transpiler options
 ------------------

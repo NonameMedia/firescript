@@ -14,7 +14,7 @@ class ClassBody extends FireScriptNode {
     }
 
     while (true) {
-      if (tokenStack.isIndention('lte', this.indention - this.indentionSize)) {
+      if (tokenStack.lastIndention('lte', this.indention - this.indentionSize, tokenStack.getIndention())) {
         break
       }
 
