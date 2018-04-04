@@ -84,15 +84,36 @@ class TokenStack extends Array {
     return token.type === type
   }
 
-  isIndention (mode, indention) {
+  lastIndention (mode, indention) {
+    indention = Math.max(indention, 0)
+
+    const currentIndention = this.getIndention()
+    // console.log('INDENTION CHECK', currentIndention, mode, indention)
+
+    if (mode === 'eq') {
+      return currentIndention === indention
+    } else if (mode === 'lt') {
+      return currentIndention < indention
+    } else if (mode === 'lte') {
+      return currentIndention <= indention
+    } else if (mode === 'gt') {
+      return currentIndention > indention
+    } else if (mode === 'gte') {
+      return currentIndention >= indention
+    } else {
+      throw new Error(`Wrong mode param! '${mode}'`)
+    }
+  }
+
+  isIndention (mode, indention, curIndention) {
     indention = Math.max(indention, 0)
     const token = this.current()
 
-    if (token && token.type !== 'indention') {
+    if (curIndention === undefined && token && token.type !== 'indention') {
       return false
     }
 
-    const currentIndention = token === null ? 0 : token.value
+    const currentIndention = curIndention || (token === null ? 0 : token.value)
     // console.log('INDENTION CHECK', currentIndention, mode, indention)
 
     if (mode === 'eq') {
