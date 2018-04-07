@@ -5,6 +5,7 @@ const FireScript = require('../src/app')
 module.exports = (supershit) => {
   return supershit
     .cmd('mkastfile <slug>')
+    .description('Creates an AST file from <input>')
     .action((ctx, slug) => {
       const srcPath = path.join(__dirname, '../', slug, 'index.js')
       const astPath = path.join(__dirname, '../', slug, 'ast.json')

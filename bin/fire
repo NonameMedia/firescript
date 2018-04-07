@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+const path = require('path')
+const supershit = require('supershit')
+
+const cmdPaths = [
+  path.join(__dirname)
+]
+
+supershit.commandLine(cmdPaths, process.argv)

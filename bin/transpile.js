@@ -5,6 +5,7 @@ const FireScript = require('../src/app')
 module.exports = (supershit) => {
   return supershit
     .cmd('transpile <file> [output]')
+    .description('Read a file and transpiles it into FireScipt or Javascript')
     .option('-v,--verbose', 'Verbose log')
     .option('-t,--type', 'Set the source type. (fire|js)')
     .action((ctx, file, output) => {
