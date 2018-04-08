@@ -41,11 +41,11 @@ class VariableDeclarator extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'VariableDeclarator',
       id: this.id.toJSON(),
       init: this.init ? this.init.toJSON() : null
-    }
+    })
   }
 }
 

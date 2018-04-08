@@ -22,9 +22,11 @@ class YieldExpression extends JSElement {
 
   toESString (ctx) {
     const delegate = this.delegate ? '* ' : ''
-    return 'yield ' +
+    return this.renderElement(
+      'yield ' +
       delegate +
       this.argument.toESString(ctx)
+    )
   }
 }
 

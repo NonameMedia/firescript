@@ -19,9 +19,10 @@ class ExportAllDeclaration extends JSElement {
   }
 
   toESString (ctx) {
-    return 'export * from ' +
+    return this.renderElement('export * from ' +
       this.source.toESString(ctx) +
       ';'
+    )
   }
 }
 

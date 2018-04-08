@@ -56,11 +56,11 @@ class CallExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'CallExpression',
       callee: this.callee.toJSON(),
       arguments: this.arguments.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

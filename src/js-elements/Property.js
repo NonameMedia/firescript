@@ -35,20 +35,26 @@ class Property extends JSElement {
 
   toESString (ctx) {
     if (this.shorthand) {
-      return this.key.toESString(ctx)
+      return this.renderElement(
+        this.key.toESString(ctx)
+      )
     }
 
     const kind = this.kind === 'init' ? '' : ' ' + this.kind
 
     if (this.method) {
-      return this.key.toESString(ctx) +
+      return this.renderElement(
+        this.key.toESString(ctx) +
         this.value.toESString(ctx)
+      )
     }
 
-    return kind +
+    return this.renderElement(
+      kind +
       this.key.toESString(ctx) +
       ': ' +
       this.value.toESString(ctx)
+    )
   }
 }
 

@@ -19,9 +19,11 @@ class ReturnStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return 'return ' +
+    return this.renderElement(
+      'return ' +
       this.argument.toESString(ctx) +
       ';'
+    )
   }
 }
 

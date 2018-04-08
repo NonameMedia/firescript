@@ -24,10 +24,10 @@ class AwaitExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'AwaitExpression',
       argument: this.argument.toJSON()
-    }
+    })
   }
 }
 

@@ -25,11 +25,13 @@ class IfStatement extends JSElement {
   toESString (ctx) {
     const alternate = this.alternate ? ' else ' + this.alternate.toESString(ctx) : ''
 
-    return 'if (' +
+    return this.renderElement(
+      'if (' +
       this.test.toESString(ctx) +
       ') ' +
       this.consequent.toESString(ctx) +
       alternate
+    )
   }
 }
 

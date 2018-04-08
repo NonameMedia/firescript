@@ -14,11 +14,11 @@ class WhileStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'WhileStatement',
       test: this.test.toJSON(),
       body: this.body.toJSON()
-    }
+    })
   }
 }
 

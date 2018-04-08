@@ -29,10 +29,10 @@ class BreakStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'BreakStatement',
       label: this.label ? this.label.toJSON() : null
-    }
+    })
   }
 }
 

@@ -63,7 +63,7 @@ class FunctionExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'FunctionExpression',
       id: this.id ? this.id.toJSON() : this.id,
       params: this.params.map((item) => item.toJSON()),
@@ -71,7 +71,7 @@ class FunctionExpression extends FireScriptNode {
       async: this.async,
       expression: this.expression,
       generator: this.generator
-    }
+    })
   }
 }
 

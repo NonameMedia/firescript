@@ -37,10 +37,10 @@ class ExportAllDeclaration extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ExportAllDeclaration',
       source: this.source.toJSON()
-    }
+    })
   }
 }
 

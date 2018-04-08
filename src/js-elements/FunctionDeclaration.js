@@ -33,11 +33,13 @@ class FunctionDeclaration extends JSElement {
     const func = this.id ? 'function ' : ''
     const async = this.async ? 'async ' : ''
 
-    return async + func + generator + id +
+    return this.renderElement(
+      async + func + generator + id +
       ' (' +
       ctx.join(this.params, ', ') +
       ') ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

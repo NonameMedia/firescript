@@ -31,12 +31,12 @@ class IfStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'IfStatement',
       test: this.test.toJSON(),
       consequent: this.consequent.toJSON(),
       alternate: this.alternate ? this.alternate.toJSON() : null
-    }
+    })
   }
 }
 

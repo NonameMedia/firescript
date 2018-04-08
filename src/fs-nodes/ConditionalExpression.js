@@ -35,12 +35,12 @@ class ConditionalExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ConditionalExpression',
       test: this.test.toJSON(),
       consequent: this.consequent.toJSON(),
       alternate: this.alternate ? this.alternate.toJSON() : null
-    }
+    })
   }
 }
 

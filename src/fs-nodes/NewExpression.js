@@ -62,11 +62,11 @@ class NewExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'NewExpression',
       callee: this.callee.toJSON(),
       arguments: this.arguments.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

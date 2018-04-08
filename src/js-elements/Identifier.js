@@ -19,7 +19,7 @@ class Identifier extends JSElement {
   }
 
   toESString (ctx) {
-    return this.name
+    return this.renderElement(this.name)
   }
 }
 

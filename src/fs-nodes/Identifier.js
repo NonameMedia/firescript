@@ -17,10 +17,10 @@ class Identifier extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'Identifier',
       name: this.name
-    }
+    })
   }
 }
 

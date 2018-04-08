@@ -23,10 +23,12 @@ class VariableDeclaration extends JSElement {
   toESString (ctx) {
     const semi = this.hasClosingSemicolon() ? ';' : ''
 
-    return this.kind +
+    return this.renderElement(
+      this.kind +
       ' ' +
       ctx.join(this.declarations, ', ') +
       semi
+    )
   }
 
   hasClosingSemicolon () {

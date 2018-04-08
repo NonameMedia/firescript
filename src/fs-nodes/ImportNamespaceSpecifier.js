@@ -25,10 +25,10 @@ class ImportNamespaceSpecifier extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ImportNamespaceSpecifier',
       local: this.local.toJSON()
-    }
+    })
   }
 }
 

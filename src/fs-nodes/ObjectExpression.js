@@ -78,10 +78,10 @@ class ObjectExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ObjectExpression',
       properties: this.properties.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

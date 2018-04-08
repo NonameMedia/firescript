@@ -20,8 +20,10 @@ class Program extends JSElement {
   }
 
   toESString (ctx) {
-    return ctx.join(this.body, '\n') +
+    return this.renderElement(
+      ctx.join(this.body, '\n') +
       '\n'
+    )
   }
 }
 

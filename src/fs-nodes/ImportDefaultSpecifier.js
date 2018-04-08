@@ -20,10 +20,10 @@ class ImportDefaultSpecifier extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ImportDefaultSpecifier',
       local: this.local.toJSON()
-    }
+    })
   }
 }
 

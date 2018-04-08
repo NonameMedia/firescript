@@ -12,9 +12,9 @@ class Super extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'Super'
-    }
+    })
   }
 }
 

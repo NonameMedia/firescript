@@ -30,12 +30,12 @@ class LogicalExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'LogicalExpression',
       operator: this.operator,
       left: this.left.toJSON(),
       right: this.right.toJSON()
-    }
+    })
   }
 }
 

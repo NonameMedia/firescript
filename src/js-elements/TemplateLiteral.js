@@ -24,9 +24,11 @@ class TemplateLiteral extends JSElement {
   toESString (ctx) {
     const elements = SuperArray.merge(this.quasis, this.expressions)
     elements[0].head = true
-    return '`' +
+    return this.renderElement(
+      '`' +
       ctx.join(elements, '') +
       '`'
+    )
   }
 }
 

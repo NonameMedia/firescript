@@ -25,11 +25,11 @@ class TaggedTemplateExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'TaggedTemplateExpression',
       tag: this.tag.toJSON(),
       quasi: this.quasi.toJSON()
-    }
+    })
   }
 }
 

@@ -33,11 +33,11 @@ class CatchClause extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'CatchClause',
       body: this.body.toJSON(),
       param: this.param.toJSON()
-    }
+    })
   }
 }
 

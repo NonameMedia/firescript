@@ -24,10 +24,10 @@ class ThrowStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ThrowStatement',
       argument: this.argument.toJSON()
-    }
+    })
   }
 }
 

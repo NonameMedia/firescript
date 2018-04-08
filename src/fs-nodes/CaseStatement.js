@@ -19,11 +19,11 @@ class SwitchStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'SwitchStatement',
       discriminant: this.discriminant.toJSON(),
       cases: this.cases.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

@@ -22,12 +22,12 @@ class ForOfStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ForOfStatement',
       left: this.left.toJSON(),
       right: this.right.toJSON(),
       body: this.body.toJSON()
-    }
+    })
   }
 }
 

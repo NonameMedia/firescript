@@ -57,7 +57,7 @@ class FunctionDeclaration extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'FunctionDeclaration',
       id: this.id.toJSON(),
       params: this.params.map((item) => item.toJSON()),
@@ -65,7 +65,7 @@ class FunctionDeclaration extends FireScriptNode {
       async: this.async,
       expression: this.expression,
       generator: this.generator
-    }
+    })
   }
 }
 

@@ -72,7 +72,7 @@ class Property extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'Property',
       key: this.key.toJSON(),
       value: this.value.toJSON(),
@@ -80,7 +80,7 @@ class Property extends FireScriptNode {
       computed: false,
       kind: 'init',
       method: this.method
-    }
+    })
   }
 }
 

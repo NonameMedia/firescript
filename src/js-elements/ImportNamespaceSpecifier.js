@@ -19,8 +19,10 @@ class ImportNamespaceSpecifier extends JSElement {
   }
 
   toESString (ctx) {
-    return '* as ' +
+    return this.renderElement(
+      '* as ' +
       this.local.toESString(ctx)
+    )
   }
 }
 

@@ -41,9 +41,11 @@ class ObjectExpression extends JSElement {
   }
 
   renderInline (ctx) {
-    return '{ ' +
+    return this.renderElement(
+      '{ ' +
       ctx.join(this.properties, ', ') +
       ' }'
+    )
   }
 }
 

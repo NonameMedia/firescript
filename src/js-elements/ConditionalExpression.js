@@ -25,9 +25,9 @@ class ConditionalExpression extends JSElement {
   toESString (ctx) {
     const useMultiline = this.getLength() > 80
     if (useMultiline) {
-      return this.renderMultiline(ctx)
+      return this.renderElement(this.renderMultiline(ctx))
     } else {
-      return this.renderInline(ctx)
+      return this.renderElement(this.renderInline(ctx))
     }
   }
 

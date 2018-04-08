@@ -12,6 +12,22 @@ class FireScriptNode {
     this.indentionSize = 2
   }
 
+  addLeadingComment (comment) {
+    if (!this.leadingComments) {
+      this.leadingComments = []
+    }
+
+    this.leadingComments.unshift(comment)
+  }
+
+  addTrailingComment (comment) {
+    if (!this.trailingComments) {
+      this.trailingComments = []
+    }
+
+    this.trailingComments.push(comment)
+  }
+
   createVariableDeclaratorNode (tokenStack) {
     return this.getNodeInstance('VariableDeclarator', tokenStack)
   }
@@ -155,6 +171,13 @@ class FireScriptNode {
       }
 
       return this.createNodeItem(tokenStack)
+    }
+
+    if (nextToken.type === 'comment' || nextToken.type === 'block-comment') {
+      const comment = this.getNodeInstance('Comment', tokenStack)
+      const node = this.createNodeItem(tokenStack)
+      node.addLeadingComment(comment)
+      return node
     }
 
     if (nextToken.type === 'keyword') {
@@ -429,6 +452,18 @@ class FireScriptNode {
       tokenStack.index = curIndex
       return null
     }
+  }
+
+  createJSON (obj) {
+    if (this.trailingComments) {
+      obj.trailingComments = this.trailingComments.map((item) => item.toJSON())
+    }
+
+    if (this.leadingComments) {
+      obj.leadingComments = this.leadingComments.map((item) => item.toJSON())
+    }
+
+    return obj
   }
 }
 

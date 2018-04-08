@@ -19,8 +19,10 @@ class AwaitExpression extends JSElement {
   }
 
   toESString (ctx) {
-    return 'await ' +
+    return this.renderElement(
+      'await ' +
       this.argument.toESString(ctx)
+    )
   }
 }
 

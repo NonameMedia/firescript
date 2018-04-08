@@ -12,12 +12,8 @@ const JSElement = require('./JSElement')
 }
 */
 class BreakStatement extends JSElement {
-  constructor (ast) {
-    super(ast)
-  }
-
   toESString (ctx) {
-    return 'break;'
+    return this.renderElement('break;')
   }
 }
 

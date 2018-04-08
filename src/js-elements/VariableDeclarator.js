@@ -22,12 +22,16 @@ class VariableDeclarator extends JSElement {
 
   toESString (ctx) {
     if (!this.init) {
-      return this.id.toESString(ctx)
+      return this.renderElement(
+        this.id.toESString(ctx)
+      )
     }
 
-    return this.id.toESString(ctx) +
+    return this.renderElement(
+      this.id.toESString(ctx) +
       ' = ' +
       this.init.toESString(ctx)
+    )
   }
 }
 

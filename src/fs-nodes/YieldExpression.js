@@ -31,11 +31,11 @@ class YieldExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'YieldExpression',
       argument: this.argument.toJSON(),
       delegate: this.delegate
-    }
+    })
   }
 }
 

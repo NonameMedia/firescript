@@ -21,10 +21,12 @@ class CatchClause extends JSElement {
   }
 
   toESString (ctx) {
-    return 'catch (' +
+    return this.renderElement(
+      'catch (' +
       this.param.toESString(ctx) +
       ') ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

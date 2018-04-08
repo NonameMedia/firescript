@@ -66,11 +66,11 @@ class ImportDeclaration extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ImportDeclaration',
       source: this.source.toJSON(),
       specifiers: this.specifiers.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

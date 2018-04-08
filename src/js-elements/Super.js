@@ -11,12 +11,8 @@ const JSElement = require('./JSElement')
 }
 */
 class Super extends JSElement {
-  constructor (ast) {
-    super(ast)
-  }
-
   toESString (ctx) {
-    return 'super'
+    return this.renderElement('super')
   }
 }
 

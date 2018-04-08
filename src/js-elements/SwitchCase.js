@@ -24,18 +24,22 @@ class SwitchCase extends JSElement {
     const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
 
     if (this.consequent.length === 0) {
-      return test +
+      return this.renderElement(
+        test +
         ':'
+      )
     }
 
     const indent = ctx.indent(1)
     const consequent = ctx.join(this.consequent, ctx.indent())
     ctx.indent(-1)
 
-    return test +
+    return this.renderElement(
+      test +
       ':' +
       indent +
       consequent
+    )
   }
 }
 

@@ -29,10 +29,10 @@ class ContinueStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ContinueStatement',
       label: this.label ? this.label.toJSON() : null
-    }
+    })
   }
 }
 

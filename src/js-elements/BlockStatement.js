@@ -30,11 +30,11 @@ class BlockStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return '{' +
+    return this.renderElement('{' +
       ctx.indent(1) +
       ctx.join(this.body, ctx.indent()) +
       ctx.indent(-1) +
-      '}'
+      '}')
   }
 }
 

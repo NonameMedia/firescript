@@ -56,14 +56,14 @@ class MethodDefinition extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'MethodDefinition',
       key: this.key.toJSON(),
       computed: false,
       value: this.value.toJSON(),
       kind: this.kind,
       static: this.static
-    }
+    })
   }
 }
 

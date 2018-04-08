@@ -25,11 +25,13 @@ class TryStatement extends JSElement {
   toESString (ctx) {
     const finalizer = this.finalizer ? this.finalizer.toESString(ctx) : ''
 
-    return 'try ' +
+    return this.renderElement(
+      'try ' +
       this.block.toESString(ctx) +
       ' ' +
       this.handler.toESString(ctx) +
       finalizer
+    )
   }
 }
 

@@ -19,8 +19,10 @@ class SpreadElement extends JSElement {
   }
 
   toESString (ctx) {
-    return '...' +
+    return this.renderElement(
+      '...' +
       this.argument.toESString(ctx)
+    )
   }
 }
 

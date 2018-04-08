@@ -12,12 +12,8 @@ const JSElement = require('./JSElement')
  * }
  */
 class ContinueStatement extends JSElement {
-  constructor (ast) {
-    super(ast)
-  }
-
   toESString (ctx) {
-    return 'continue;'
+    return this.renderElement('continue;')
   }
 }
 

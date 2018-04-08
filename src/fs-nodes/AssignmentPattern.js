@@ -54,11 +54,11 @@ class AssignmentPattern extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'AssignmentPattern',
       left: this.left.toJSON(),
       right: this.right.toJSON()
-    }
+    })
   }
 }
 

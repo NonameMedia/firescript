@@ -20,8 +20,10 @@ class ExpressionStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return this.expression.toESString(ctx) +
+    return this.renderElement(
+      this.expression.toESString(ctx) +
       ';'
+    )
   }
 }
 

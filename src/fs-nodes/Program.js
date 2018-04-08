@@ -59,11 +59,11 @@ class Program extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'Program',
       sourceType: this.sourceType,
       body: this.body.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

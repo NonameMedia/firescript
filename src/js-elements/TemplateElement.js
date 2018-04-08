@@ -24,7 +24,9 @@ class TemplateElement extends JSElement {
   toESString (ctx) {
     const head = this.head ? '' : '}'
     const tail = this.tail ? '' : '${'
-    return head + this.value.raw + tail
+    return this.renderElement(
+      head + this.value.raw + tail
+    )
   }
 }
 

@@ -28,11 +28,13 @@ class ArrowFunctionExpression extends JSElement {
   toESString (ctx) {
     const asyncfn = this.async ? 'async ' : ''
 
-    return asyncfn +
+    return this.renderElement(
+      asyncfn +
       '(' +
       ctx.join(this.params, ', ') +
       ') => ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

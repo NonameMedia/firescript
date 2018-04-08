@@ -17,12 +17,12 @@ class AssignmentExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'AssignmentExpression',
       operator: this.operator,
       left: this.left.toJSON(),
       right: this.right.toJSON()
-    }
+    })
   }
 }
 

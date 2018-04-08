@@ -51,12 +51,12 @@ class MemberExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'MemberExpression',
       computed: this.computed,
       object: this.object.toJSON(),
       property: this.property.toJSON()
-    }
+    })
   }
 }
 

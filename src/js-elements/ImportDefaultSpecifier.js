@@ -19,7 +19,9 @@ class ImportDefaultSpecifier extends JSElement {
   }
 
   toESString (ctx) {
-    return this.local.toESString(ctx)
+    return this.renderElement(
+      this.local.toESString(ctx)
+    )
   }
 }
 

@@ -21,9 +21,11 @@ class TaggedTemplateExpression extends JSElement {
   }
 
   toESString (ctx) {
-    return this.tag.toESString(ctx) +
+    return this.renderElement(
+      this.tag.toESString(ctx) +
       ' ' +
       this.quasi.toESString(ctx)
+    )
   }
 }
 

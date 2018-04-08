@@ -51,7 +51,7 @@ class ArrowFunctionExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ArrowFunctionExpression',
       id: null,
       params: this.params.map((item) => item.toJSON()),
@@ -59,7 +59,7 @@ class ArrowFunctionExpression extends FireScriptNode {
       async: this.async,
       expression: this.expression,
       generator: this.generator
-    }
+    })
   }
 }
 

@@ -25,7 +25,8 @@ class ForStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return 'for (' +
+    return this.renderElement(
+      'for (' +
       this.init.toESString(ctx) +
       '; ' +
       this.test.toESString(ctx) +
@@ -33,6 +34,7 @@ class ForStatement extends JSElement {
       this.update.toESString(ctx) +
       ') ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

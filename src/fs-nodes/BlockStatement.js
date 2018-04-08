@@ -65,10 +65,10 @@ class BlockStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'BlockStatement',
       body: this.body.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

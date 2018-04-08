@@ -22,9 +22,9 @@ class DebuggerStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'DebuggerStatement'
-    }
+    })
   }
 }
 

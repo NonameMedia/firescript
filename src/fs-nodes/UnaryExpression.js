@@ -29,12 +29,12 @@ class UnaryExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'UnaryExpression',
       operator: this.operator,
       argument: this.argument.toJSON(),
       prefix: true
-    }
+    })
   }
 }
 

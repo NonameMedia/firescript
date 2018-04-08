@@ -8,10 +8,10 @@ class ExpressionStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ExpressionStatement',
       expression: this.expression.toJSON()
-    }
+    })
   }
 }
 

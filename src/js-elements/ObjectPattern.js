@@ -19,9 +19,11 @@ class ObjectPattern extends JSElement {
   }
 
   toESString (ctx) {
-    return '{ ' +
+    return this.renderElement(
+      '{ ' +
       ctx.join(this.properties, ', ') +
       ' }'
+    )
   }
 }
 

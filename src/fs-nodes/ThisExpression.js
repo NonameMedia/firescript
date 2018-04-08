@@ -12,9 +12,9 @@ class ThisExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ThisExpression'
-    }
+    })
   }
 }
 

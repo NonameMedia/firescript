@@ -32,10 +32,10 @@ class SpreadElement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'SpreadElement',
       argument: this.argument.toJSON()
-    }
+    })
   }
 }
 

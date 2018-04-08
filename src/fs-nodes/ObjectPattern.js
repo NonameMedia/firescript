@@ -65,10 +65,10 @@ class ObjectPattern extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ObjectPattern',
       properties: this.properties.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

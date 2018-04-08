@@ -21,10 +21,12 @@ class CallExpression extends JSElement {
   }
 
   toESString (ctx) {
-    return this.callee.toESString(ctx) +
+    return this.renderElement(
+      this.callee.toESString(ctx) +
       '(' +
       ctx.join(this.arguments, ', ') +
       ')'
+    )
   }
 }
 

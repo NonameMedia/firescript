@@ -25,8 +25,10 @@ class ExportSpecifier extends JSElement {
       ? ''
       : ' as ' + this.local.toESString()
 
-    return this.exported.toESString(ctx) +
+    return this.renderElement(
+      this.exported.toESString(ctx) +
       local
+    )
   }
 }
 

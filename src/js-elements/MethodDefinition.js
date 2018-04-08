@@ -30,8 +30,10 @@ class MethodDefinition extends JSElement {
     const key = this.kind === 'constructor'
       ? 'constructor' : this.key.toESString(ctx)
 
-    return key +
+    return this.renderElement(
+      key +
       this.value.toESString(ctx)
+    )
   }
 }
 

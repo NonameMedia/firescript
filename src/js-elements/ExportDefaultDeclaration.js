@@ -19,9 +19,11 @@ class ExportDefaultDeclaration extends JSElement {
   }
 
   toESString (ctx) {
-    return 'export default ' +
+    return this.renderElement(
+      'export default ' +
       this.declaration.toESString(ctx) +
       ';'
+    )
   }
 }
 

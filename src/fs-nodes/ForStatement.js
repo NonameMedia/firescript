@@ -29,13 +29,13 @@ class ForStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ForStatement',
       init: this.init.toJSON(),
       test: this.test.toJSON(),
       update: this.update.toJSON(),
       body: this.body.toJSON()
-    }
+    })
   }
 }
 

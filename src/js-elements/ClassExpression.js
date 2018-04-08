@@ -25,11 +25,13 @@ class ClassExpression extends JSElement {
   toESString (ctx) {
     const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
 
-    return 'class ' +
+    return this.renderElement(
+      'class ' +
       this.id.toESString(ctx) +
       superClass +
       ' ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

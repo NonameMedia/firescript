@@ -21,13 +21,15 @@ class SwitchStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return 'switch (' +
+    return this.renderElement(
+      'switch (' +
       this.discriminant.toESString(ctx) +
       ') {' +
       ctx.indent(1) +
       ctx.each(this.cases, this.blockHandler, ctx.indent()) +
       ctx.indent(-1) +
       '}'
+    )
   }
 
   blockHandler (str, item, index, arr) {

@@ -98,10 +98,10 @@ class ArrayExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ArrayExpression',
       elements: this.elements.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

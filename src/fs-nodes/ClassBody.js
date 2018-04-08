@@ -23,10 +23,10 @@ class ClassBody extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ClassBody',
       body: this.body.map((item) => item.toJSON())
-    }
+    })
   }
 }
 

@@ -21,10 +21,10 @@ class RestElement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'RestElement',
       argument: this.argument.toJSON()
-    }
+    })
   }
 }
 

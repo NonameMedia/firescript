@@ -21,9 +21,11 @@ class MetaProperty extends JSElement {
   }
 
   toESString (ctx) {
-    return this.meta.toESString(ctx) +
+    return this.renderElement(
+      this.meta.toESString(ctx) +
       '.' +
       this.property.toESString(ctx)
+    )
   }
 }
 

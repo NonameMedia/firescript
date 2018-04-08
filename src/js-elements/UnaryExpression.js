@@ -23,7 +23,9 @@ class UnaryExpression extends JSElement {
   }
 
   toString () {
-    return `${this.callee}(${this.arguments.join(', ')});`
+    return this.renderElement(
+      `${this.callee}(${this.arguments.join(', ')});`
+    )
   }
 }
 

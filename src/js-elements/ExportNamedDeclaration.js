@@ -24,9 +24,13 @@ class ExportNamedDeclaration extends JSElement {
 
   toESString (ctx) {
     if (this.declaration) {
-      return this.renderDeclaration(ctx)
+      return this.renderElement(
+        this.renderDeclaration(ctx)
+      )
     } else {
-      return this.renderSpecifiers(ctx)
+      return this.renderElement(
+        this.renderSpecifiers(ctx)
+      )
     }
   }
 

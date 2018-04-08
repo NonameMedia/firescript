@@ -81,7 +81,9 @@ class TokenStack extends Array {
       return false
     }
 
-    return token.type === type
+    return Array.isArray(type)
+      ? type.some((t) => t === token.type)
+      : token.type === type
   }
 
   lastIndention (mode, indention) {

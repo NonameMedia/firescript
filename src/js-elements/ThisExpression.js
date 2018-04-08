@@ -16,7 +16,7 @@ class ThisExpression extends JSElement {
   }
 
   toESString () {
-    return 'this'
+    return this.renderElement('this')
   }
 }
 

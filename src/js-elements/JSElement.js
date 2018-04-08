@@ -51,6 +51,14 @@ class JSElement {
 
     child.parent = this
     child.indention = indentionSize ? this.indention + indentionSize : this.indention
+    if (ast.leadingComments) {
+      child.leadingComments = ast.leadingComments
+    }
+
+    if (ast.trailingComments) {
+      child.trailingComments = ast.trailingComments
+    }
+
     return child
   }
 
@@ -60,6 +68,28 @@ class JSElement {
 
   getLength () {
     throw new Error(`getLength method not implemented for element ${this.type}`)
+  }
+
+  renderComments (comments) {
+    if (!comments) return ''
+    return comments.map((comment, index, arr) => {
+      if (comment.type === 'Line') {
+        return '//' + comment.value
+      }
+
+      const blockCommentSpacing =
+        arr[index + 1] && arr[index + 1].type === 'Block'
+          ? '\n'
+          : ''
+
+      return '/*' + comment.value + '*/' + blockCommentSpacing
+    }).join('\n') + '\n'
+  }
+
+  renderElement (str) {
+    return (this.leadingComments ? this.renderComments(this.leadingComments) : '') +
+    str +
+    (this.trailingComments ? this.renderComments(this.trailingComments) : '')
   }
 }
 

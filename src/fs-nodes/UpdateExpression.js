@@ -24,12 +24,12 @@ class UpdateExpression extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'UpdateExpression',
       operator: this.operator,
       argument: this.argument.toJSON(),
       prefix: this.prefix
-    }
+    })
   }
 }
 

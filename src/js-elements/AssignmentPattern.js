@@ -41,9 +41,11 @@ class AssignmentPattern extends JSElement {
   }
 
   toESString (ctx) {
-    return this.left.toESString(ctx) +
+    return this.renderElement(
+      this.left.toESString(ctx) +
       ' = ' +
       this.right.toESString(ctx)
+    )
   }
 }
 

@@ -24,11 +24,15 @@ class UpdateExpression extends JSElement {
 
   toESString (ctx) {
     if (this.prefix) {
-      return this.operator +
+      return this.renderElement(
+        this.operator +
         this.argument.toESString(ctx)
+      )
     } else {
-      return this.argument.toESString(ctx) +
+      return this.renderElement(
+        this.argument.toESString(ctx) +
         this.operator
+      )
     }
   }
 }

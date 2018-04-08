@@ -24,14 +24,18 @@ class MemberExpression extends JSElement {
 
   toESString (ctx) {
     if (this.computed) {
-      return this.object.toESString(ctx) +
+      return this.renderElement(
+        this.object.toESString(ctx) +
         '[' +
         this.property.toESString(ctx) +
         ']'
+      )
     } else {
-      return this.object.toESString(ctx) +
+      return this.renderElement(
+        this.object.toESString(ctx) +
         '.' +
         this.property.toESString(ctx)
+      )
     }
   }
 }

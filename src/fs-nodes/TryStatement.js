@@ -31,12 +31,12 @@ class TryStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'TryStatement',
       block: this.block.toJSON(),
       handler: this.handler ? this.handler.toJSON() : null,
       finalizer: this.finalizer ? this.finalizer.toJSON() : null
-    }
+    })
   }
 }
 

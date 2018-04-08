@@ -21,10 +21,12 @@ class WhileStatement extends JSElement {
   }
 
   toESString (ctx) {
-    return 'while (' +
+    return this.renderElement(
+      'while (' +
       this.test.toESString(ctx) +
       ') ' +
       this.body.toESString(ctx)
+    )
   }
 }
 

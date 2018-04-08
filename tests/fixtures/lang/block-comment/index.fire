@@ -1,0 +1,13 @@
+/*
+Block comment
+*/
+
+/*
+second comment
+*/
+
+/*
+third comment
+*/
+func foo ()
+  return 'foo'

@@ -60,10 +60,10 @@ class ExportDefaultDeclaration extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ExportDefaultDeclaration',
       declaration: this.declaration.toJSON()
-    }
+    })
   }
 }
 

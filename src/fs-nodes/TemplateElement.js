@@ -40,14 +40,14 @@ class TemplateElement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'TemplateElement',
       value: {
         cooked: this.cooked,
         raw: this.raw
       },
       tail: this.tail
-    }
+    })
   }
 }
 

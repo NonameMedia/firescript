@@ -21,11 +21,13 @@ class ImportDeclaration extends JSElement {
   }
 
   toESString (ctx) {
-    return 'import ' +
+    return this.renderElement(
+      'import ' +
       this.renderSpecifiers(ctx) +
       ' from ' +
       this.source.toESString(ctx) +
       ';'
+    )
   }
 
   renderSpecifiers (ctx) {

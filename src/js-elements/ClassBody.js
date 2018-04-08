@@ -23,11 +23,13 @@ class ClassBody extends JSElement {
       return '{}'
     }
 
-    return '{' +
+    return this.renderElement(
+      '{' +
       ctx.indent(1) +
       ctx.join(this.body, '\n' + ctx.indent()) +
       ctx.indent(-1) +
       '}'
+    )
   }
 }
 

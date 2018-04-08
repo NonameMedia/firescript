@@ -14,10 +14,10 @@ class ReturnStatement extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ReturnStatement',
       argument: this.argument.toJSON()
-    }
+    })
   }
 }
 

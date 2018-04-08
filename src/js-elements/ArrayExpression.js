@@ -20,9 +20,9 @@ class ArrayExpression extends JSElement {
 
   toESString (ctx) {
     if (this.useMultiline()) {
-      return this.renderMultiline(ctx)
+      return this.renderElement(this.renderMultiline(ctx))
     } else {
-      return this.renderInline(ctx)
+      return this.renderElement(this.renderInline(ctx))
     }
   }
 

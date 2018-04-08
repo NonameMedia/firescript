@@ -44,11 +44,11 @@ class MetaProperty extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'MetaProperty',
       meta: this.meta.toJSON(),
       property: this.property.toJSON()
-    }
+    })
   }
 }
 

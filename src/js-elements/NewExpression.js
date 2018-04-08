@@ -21,11 +21,13 @@ class NewExpression extends JSElement {
   }
 
   toESString (ctx) {
-    return 'new ' +
+    return this.renderElement(
+      'new ' +
       this.callee.toESString(ctx) +
       '(' +
       ctx.join(this.arguments, ', ') +
       ')'
+    )
   }
 }
 

@@ -27,11 +27,11 @@ class ExportSpecifier extends FireScriptNode {
   }
 
   toJSON () {
-    return {
+    return this.createJSON({
       type: 'ExportSpecifier',
       local: this.local.toJSON(),
       exported: this.exported.toJSON()
-    }
+    })
   }
 }
 

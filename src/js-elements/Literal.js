@@ -23,7 +23,9 @@ class Literal extends JSElement {
   }
 
   toESString (ctx) {
-    return this.isString ? `'${this.value}'` : this.value
+    return this.renderElement(
+      this.isString ? `'${this.value}'` : this.value
+    )
   }
 
   getLength () {
