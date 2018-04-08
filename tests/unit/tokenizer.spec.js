@@ -175,5 +175,31 @@ describe('Tokenizer', () => {
         { type: 'indention', value: 0 }
       ])
     })
+
+    it('detects line and block comments', () => {
+      const peachSource = inspect.readFile(path.join(__dirname, '../fixtures/peach.fire'))
+      const tokenizer = new Tokenizer()
+      const token = tokenizer.tokenize(peachSource)
+      inspect(token).isArray()
+      inspect(token).isEql([
+        { type: 'block-comment', value: '\nHello World method\n' },
+        { type: 'indention', value: 0 },
+        { type: 'keyword', value: 'func' },
+        { type: 'identifier', value: 'hello' },
+        { type: 'punctuator', value: '(' },
+        { type: 'punctuator', value: ')' },
+        { type: 'indention', value: 2 },
+        { type: 'comment', value: ' Prints Hello World' },
+        { type: 'indention', value: 2 },
+        { type: 'identifier', value: 'console' },
+        { type: 'punctuator', value: '.' },
+        { type: 'identifier', value: 'log' },
+        { type: 'punctuator', value: '(' },
+        { type: 'literal', value: '\'Hello World\'' },
+        { type: 'punctuator', value: ')' },
+        { type: 'indention', value: 0 }
+
+      ])
+    })
   })
 })

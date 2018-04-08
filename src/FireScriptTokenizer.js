@@ -11,6 +11,8 @@ class FireSciptTokenizer {
     this.operators = constants.OPERATORS
     this.literalPattern = '(?:\'[^]*?(?:\\$\\{[^]+?\\}[^]*?)*?\')|"[^]+?"|true|false|null' // eslint-disable-line no-template-curly-in-string
     this.numericPattern = '-?\\d+'
+    this.commentPattern = '#.*'
+    this.lineCommentPattern = '\\/\\*[^]*?\\*\\/'
 
     this.token = new TokenStack()
     this.lineNums = []
@@ -25,6 +27,8 @@ class FireSciptTokenizer {
   tokenize (source) {
     const pattern = [
       `\\n\\s*`,
+      this.commentPattern,
+      this.lineCommentPattern,
       `?:\\b(${this.keyWords.join('|')})\\b`,
       `${this.regExpEscape(this.operators).join('|')}`,
       `${this.regExpEscape(this.punctators).join('|')}`,
@@ -62,42 +66,52 @@ class FireSciptTokenizer {
       }
 
       if (match[2] !== undefined) {
-        if (this.handleAsKeyword(match[2])) {
-          this.addToken('keyword', match[2])
-        } else {
-          this.addToken('identifier', match[2])
-        }
+        this.addToken('comment', match[2].substr(1))
         continue
       }
 
       if (match[3] !== undefined) {
-        this.addToken('operator', match[3])
+        this.addToken('block-comment', match[3].slice(2, -2))
         continue
       }
 
       if (match[4] !== undefined) {
-        this.addToken('punctuator', match[4])
+        if (this.handleAsKeyword(match[4])) {
+          this.addToken('keyword', match[4])
+        } else {
+          this.addToken('identifier', match[4])
+        }
         continue
       }
 
       if (match[5] !== undefined) {
-        if (this.isTemplate(match[5])) {
-          this.splitTemplateLiteral(match[5])
+        this.addToken('operator', match[5])
+        continue
+      }
+
+      if (match[6] !== undefined) {
+        this.addToken('punctuator', match[6])
+        continue
+      }
+
+      if (match[7] !== undefined) {
+        if (this.isTemplate(match[7])) {
+          this.splitTemplateLiteral(match[7])
         } else {
-          this.addToken('literal', match[5])
-          this.lineNum += this.countLineBreaks(match[5])
+          this.addToken('literal', match[7])
+          this.lineNum += this.countLineBreaks(match[7])
         }
 
         continue
       }
 
-      if (match[6] !== undefined) {
-        this.addToken('numeric', match[6])
+      if (match[8] !== undefined) {
+        this.addToken('numeric', match[8])
         continue
       }
 
-      if (match[7] !== undefined) {
-        this.addToken('identifier', match[7])
+      if (match[9] !== undefined) {
+        this.addToken('identifier', match[9])
         continue
       }
 
