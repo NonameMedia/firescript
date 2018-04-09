@@ -1,0 +1,48 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "FunctionDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "foo"
+            },
+            "params": [],
+            "body": {
+              "type": "BlockStatement",
+              "body": [{
+                "type": "ReturnStatement",
+                "argument": {
+                  "type": "Literal",
+                  "raw": "'foo'",
+                  "value": "foo"
+                }
+              }]
+            },
+            "generator": false,
+            "expression": false,
+            "async": false,
+            "leadingComments": [
+                {
+                    "type": "Line",
+                    "value": " Line comment"
+                },
+                {
+                    "type": "Line",
+                    "value": " Second comment"
+                },
+                {
+                    "type": "Line",
+                    "value": " Third comment"
+                }
+            ],
+            "trailingComments": [
+                {
+                    "type": "Line",
+                    "value": " Trailing comment"
+                }
+            ]
+        }
+    ],
+    "sourceType": "module"
+}

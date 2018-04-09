@@ -6,6 +6,8 @@ class FireScriptNode {
     this.parent = parent || {
       type: 'None'
     }
+
+    this.childreen = []
     this.indention = parent ? parent.indention : 0
     this.callStack = parent ? parent.callStack : []
     this.type = this.constructor.name
@@ -21,11 +23,12 @@ class FireScriptNode {
   }
 
   addTrailingComment (comment) {
-    if (!this.trailingComments) {
-      this.trailingComments = []
+    const lastChild = this.childreen[this.childreen.length - 1]
+    if (!lastChild.trailingComments) {
+      lastChild.trailingComments = []
     }
 
-    this.trailingComments.push(comment)
+    lastChild.trailingComments.push(comment)
   }
 
   createVariableDeclaratorNode (tokenStack) {
@@ -149,6 +152,9 @@ class FireScriptNode {
     }
     const Node = require(`./${nodeName}`)
     const node = new Node(tokenStack, this, subNode)
+    if (nodeName !== 'Comment') {
+      this.childreen.push(node)
+    }
     return node
   }
 
@@ -176,7 +182,11 @@ class FireScriptNode {
     if (nextToken.type === 'comment' || nextToken.type === 'block-comment') {
       const comment = this.getNodeInstance('Comment', tokenStack)
       const node = this.createNodeItem(tokenStack)
-      node.addLeadingComment(comment)
+      if (node.type === 'Null') {
+        this.addTrailingComment(comment)
+      } else {
+        node.addLeadingComment(comment)
+      }
       return node
     }
 

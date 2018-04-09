@@ -70,8 +70,12 @@ class JSElement {
     throw new Error(`getLength method not implemented for element ${this.type}`)
   }
 
-  renderComments (comments) {
+  renderComments (comments, isTrailing) {
     if (!comments) return ''
+
+    const trailingLine = !isTrailing ? '\n' : ''
+    const leadingLine = isTrailing ? '' : ''
+
     return comments.map((comment, index, arr) => {
       if (comment.type === 'Line') {
         return '//' + comment.value
@@ -82,14 +86,18 @@ class JSElement {
           ? '\n'
           : ''
 
-      return '/*' + comment.value + '*/' + blockCommentSpacing
-    }).join('\n') + '\n'
+      return leadingLine +
+        '/*' +
+        comment.value +
+        '*/' +
+        blockCommentSpacing
+    }).join('\n') + trailingLine
   }
 
   renderElement (str) {
-    return (this.leadingComments ? this.renderComments(this.leadingComments) : '') +
+    return (this.leadingComments ? this.renderComments(this.leadingComments, false) : '') +
     str +
-    (this.trailingComments ? this.renderComments(this.trailingComments) : '')
+    (this.trailingComments ? '\n\n' + this.renderComments(this.trailingComments, true) : '')
   }
 }
 

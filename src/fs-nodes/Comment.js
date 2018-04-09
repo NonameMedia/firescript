@@ -4,7 +4,6 @@ class Comment extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(parent)
 
-    tokenStack.print()
     if (!tokenStack.expect(['comment', 'block-comment'])) {
       this.syntaxError('Unexpected token! Comment expected')
     }
