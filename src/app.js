@@ -5,6 +5,7 @@ const FireScriptParser = require('./FireScriptParser')
 const JSParser = require('./JSParser')
 const FireScriptTranspiler = require('./FireScriptTranspiler')
 const JSTranspiler = require('./JSTranspiler')
+const ParserConfig = require('./utils/ParserConfig')
 
 module.exports = {
   FireScriptTokenizer,
@@ -48,5 +49,9 @@ module.exports = {
         return ast
       }
     })
+  },
+  loadConf (customConf) {
+    const config = new ParserConfig()
+    return config.merge(customConf)
   }
 }

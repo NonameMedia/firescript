@@ -1,52 +1,48 @@
 const fs = require('fs')
 const path = require('path')
-const mkdirp = require('mkdirp')
+const colorfy = require('colorfy')
+const SuperFS = require('superfs')
 const FireScript = require('../src/app')
 
 function transpileFile (filename, srcDir, destDir) {
+  const cf = colorfy()
   if (path.extname(filename) !== '.fire') {
-    console.log(` ... skipping file ${filename}`)
+    cf.ored(' ... skipping file ').lgrey(filename).print()
     return
   }
-
-  mkdirp.sync(destDir)
 
   const infile = path.resolve(srcDir, filename)
   const outfile = path.resolve(destDir, filename.replace(/\.fire$/, '.js'))
 
-  console.log(' ... write file', outfile)
-  // file = path.resolve(process.cwd(), file)
+  cf.yellow(' ... write file ').lgrey(outfile).print()
+
   const input = fs.readFileSync(infile, { encoding: 'utf8' })
 
   const source = FireScript.transpile(input, {
     type: 'fire'
   })
 
-  fs.writeFileSync(outfile, source, { encoding: 'utf8' })
+  SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
 }
 
 module.exports = (supershit) => {
   return supershit
-    .cmd('watch <dir> [destDir]')
+    .cmd('watch [src] [dest]')
     .option('-v, --verbose', 'Verbose log')
-    .action((ctx, dir, destDir) => {
-      const srcDir = path.resolve(process.cwd(), dir)
-      destDir = path.resolve(process.cwd(), destDir)
-      const opts = {
-        recursive: true
+    .action(async (ctx, src, dest) => {
+      const conf = FireScript.loadConf({
+        src: src,
+        dest: dest
+      })
+
+      const srcDir = path.resolve(process.cwd(), conf.src)
+      const destDir = path.resolve(process.cwd(), conf.dest)
+
+      const watchHandler = (flw) => {
+        transpileFile(path.join(flw.relative, flw.changedFile), srcDir, destDir)
       }
 
-      let locked = false
-      fs.watch(srcDir, opts, (eventType, filename) => {
-        if (locked) {
-          return
-        }
-
-        console.log(` ... ${filename} changed`, eventType, filename)
-        locked = true
-        setTimeout(() => { locked = false }, 500)
-        transpileFile(filename, srcDir, destDir)
-      })
+      SuperFS.watch(srcDir, watchHandler)
 
       console.log(`Watching directory '${srcDir}' ...`)
     })

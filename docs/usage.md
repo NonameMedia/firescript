@@ -20,3 +20,7 @@ Transpiler options
 | Option       | Default value | Description                                   |
 | ------------ | ------------- | --------------------------------------------- |
 | esModules | `false`       | Transpile `import` and `export` statements into EcmaScript modules instead of CommonJS modules.                                              |
+
+### Commands
+
+[`watch`](./cli/watch.html) Watches files for changes and run transpilation of a changed file.
