@@ -1,0 +1,7 @@
+{
+  "src": "src/",
+  "dest": "lib/",
+  "features": {
+    "esModules": false
+  }
+}

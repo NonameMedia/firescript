@@ -1,0 +1,4 @@
+src: 'src/'
+dest: 'dist/'
+features:
+  esModules: false
