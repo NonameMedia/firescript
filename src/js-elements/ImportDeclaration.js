@@ -21,6 +21,15 @@ class ImportDeclaration extends JSElement {
   }
 
   toESString (ctx) {
+    console.log(this.featureConf)
+    if (this.featureConf.esModules) {
+      return this.useESModules(ctx)
+    }
+
+    return this.useCommonModules(ctx)
+  }
+
+  useESModules (ctx) {
     return this.renderElement(
       'import ' +
       this.renderSpecifiers(ctx) +
@@ -28,6 +37,16 @@ class ImportDeclaration extends JSElement {
       this.source.toESString(ctx) +
       ';'
     )
+  }
+
+  useCommonModules (ctx) {
+    // return this.renderElement(
+    //   'const ' +
+    //   this.renderSpecifiers(ctx) +
+    //   ' from ' +
+    //   this.source.toESString(ctx) +
+    //   ';'
+    // )
   }
 
   renderSpecifiers (ctx) {

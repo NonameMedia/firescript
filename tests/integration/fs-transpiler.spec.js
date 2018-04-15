@@ -16,7 +16,11 @@ describe('JSTranspiler', () => {
         it(`${group} into Javascript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect.readFile(`${testCase.path}/index.js`)
-          const transpiler = new JSTranspiler()
+          const featureConf = inspect.readJSON(`${testCase.path}/conf.json`)
+          const transpiler = new JSTranspiler({
+            features: featureConf
+          })
+
           const jsSource = transpiler.transpile(ast)
           inspect(jsSource).isString()
           inspect(jsSource).isEql(source)

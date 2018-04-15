@@ -21,10 +21,10 @@
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "^1.1.0",
-    "inspect.js": "1.11.2",
+    "inspect.js": "1.11.3",
     "lagoon-reporter": "0.3.4",
-    "mocha": "5.0.5",
-    "prettier": "1.11.1",
+    "mocha": "5.1.0",
+    "prettier": "1.12.0",
     "superfs": "0.7.0"
   },
   "dependencies": {
