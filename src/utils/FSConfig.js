@@ -1,7 +1,7 @@
 const superconf = require('superconf')
 const defaultConf = require('../../conf/defaultConf.json')
 
-class ParserConfig {
+class FSConfig {
   constructor () {
     const conf = superconf('firescript', {
       cwd: process.cwd()
@@ -23,4 +23,4 @@ class ParserConfig {
   }
 }
 
-module.exports = ParserConfig
+module.exports = FSConfig

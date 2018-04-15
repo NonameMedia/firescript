@@ -1,12 +1,12 @@
 const path = require('path')
 const inspect = require('inspect.js')
-const ParserConfig = require('../../src/utils/ParserConfig')
+const FSConfig = require('../../src/utils/FSConfig')
 
-describe('ParserConfig', () => {
+describe('FSConfig', () => {
   describe('instance', () => {
     it('returns a config load from CWD', () => {
       process.chdir(path.join(__dirname, '../fixtures/banana-project'))
-      const conf = new ParserConfig()
+      const conf = new FSConfig()
       inspect(conf.getConf()).isEql({
         src: 'src/',
         dest: 'dist/',
