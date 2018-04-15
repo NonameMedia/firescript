@@ -12,8 +12,12 @@ class FSConfig {
     }).merge(defaultConf, conf)
   }
 
-  getConf () {
-    return this.__conf
+  getConf (key) {
+    if (!key) {
+      return this.__conf
+    }
+
+    return this.__conf[key]
   }
 
   merge (conf) {
