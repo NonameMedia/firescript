@@ -16,7 +16,7 @@ describe('JSTranspiler', () => {
         it(`${group} into Javascript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect.readFile(`${testCase.path}/index.js`)
-          const featureConf = inspect.readJSON(`${testCase.path}/conf.json`)
+          const featureConf = inspect.readJSON(`${testCase.path}/conf.json`, { silent: true })
           const transpiler = new JSTranspiler({
             features: featureConf
           })

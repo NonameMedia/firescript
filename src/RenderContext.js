@@ -1,7 +1,8 @@
 class RenderContext {
-  constructor () {
+  constructor (features) {
     this.__indention = 0
     this.indentionSize = 2
+    Object.assign(this, features)
   }
 
   indent (size) {

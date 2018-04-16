@@ -1,6 +1,5 @@
 const NodeNotAllowedError = require('../errors/NodeNotAllowedError')
 const TemplateNotFoundError = require('../errors/TemplateNotFoundError')
-const FSConfig = require('../utils/FSConfig')
 const templates = require('../js-templates/esx.js')
 
 class JSElement {
@@ -11,9 +10,6 @@ class JSElement {
     this.indention = 0
     this.__indention = 0
     this.indentionSize = 2
-
-    const conf = new FSConfig()
-    this.featureConf = conf.getConf('features')
   }
 
   indentionStr () {

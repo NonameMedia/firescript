@@ -21,9 +21,12 @@ class FSConfig {
   }
 
   merge (conf) {
-    return superconf.config({
+    const mergedConf = superconf.config({
       dept: 1
     }).merge(this.__conf, conf)
+
+    this.__conf = mergedConf
+    return this.__conf
   }
 }
 

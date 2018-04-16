@@ -21,8 +21,7 @@ class ImportDeclaration extends JSElement {
   }
 
   toESString (ctx) {
-    console.log(this.featureConf)
-    if (this.featureConf.esModules) {
+    if (ctx.esModules) {
       return this.useESModules(ctx)
     }
 
