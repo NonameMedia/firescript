@@ -1,0 +1,5 @@
+{
+  "name": "firescript",
+  "main": "src/app.js",
+  "output": "dist/firescript.js"
+}
