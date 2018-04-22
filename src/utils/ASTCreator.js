@@ -39,6 +39,15 @@ class ASTCreator {
       raw: rawValue
     }
   }
+
+  static memberExpression (object, property) {
+    return {
+      type: 'MemberExpression',
+      object,
+      property,
+      computed: false
+    }
+  }
 }
 
 module.exports = ASTCreator

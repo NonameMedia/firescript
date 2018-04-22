@@ -24,18 +24,24 @@ class ASTTransformer {
     return fn(this.ctx)
   }
 
-  transform (ast) {
+  transform (ast, index, parent) {
     const transformatedAst = {}
 
     const transformationFn = this.get(ast.type)
     if (transformationFn) {
-      ast = transformationFn(ast)
+      const transformed = transformationFn(ast)
+      if (Array.isArray(transformed)) {
+        parent.splice.apply(parent, [index, 1].concat(transformed))
+        ast = parent[index]
+      } else {
+        ast = transformed
+      }
     }
 
     const keys = Object.keys(ast)
     for (const key of keys) {
       if (Array.isArray(ast[key])) {
-        transformatedAst[key] = ast[key].map((item) => this.transform(item))
+        transformatedAst[key] = ast[key].map((item, index, parent) => this.transform(item, index, parent))
       } else if (typeof ast[key] === 'object' && ast[key] !== null) {
         transformatedAst[key] = this.transform(ast[key])
       } else {
