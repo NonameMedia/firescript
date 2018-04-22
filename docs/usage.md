@@ -24,3 +24,15 @@ Transpiler options
 ### Commands
 
 [`watch`](./cli/watch.html) Watches files for changes and run transpilation of a changed file.
+
+
+### Features
+
+#### esModules
+
+Enable `import` and `export` statements.
+
+| Type           | FireScript                       | ESM                         | CommonJS                                |
+| -------------- | -------------------------------- | --------------------------- | --------------------------------------- |
+| Named import   | import banana from 'banana'      | import banana from 'banana' | const banana = require('banana').banana |
+| Default import | import default as banana from 'banana' |                             |                                         |

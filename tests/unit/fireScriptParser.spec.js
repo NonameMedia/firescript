@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 const FireScriptParser = require('../../src/FireScriptParser')
 
 const helloWorldFS =
-  'import print from \'print\'\n\n' +
+  'import ** as print from \'print\'\n\n' +
   'print(\'Hello World!\')\n'
 
 const helloWorldAST = require('../fixtures/helloWorldAST.json')

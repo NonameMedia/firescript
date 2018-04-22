@@ -101,6 +101,8 @@ describe('FireScriptNode', () => {
       const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'import' },
+        { 'type': 'operator', 'value': '**' },
+        { 'type': 'identifier', 'value': 'as' },
         { 'type': 'identifier', 'value': 'banana' },
         { 'type': 'identifier', 'value': 'from' },
         { 'type': 'literal', 'value': '"banana"' },

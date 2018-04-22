@@ -1,6 +1,10 @@
+const path = require('path')
+const superimport = require('superimport')
+
 class ASTTransformer {
-  constructor (ast) {
+  constructor (ctx) {
     this.__transformers = {}
+    this.ctx = ctx
   }
 
   add (type, fn) {
@@ -11,8 +15,16 @@ class ASTTransformer {
     return this.__transformers[type] || null
   }
 
+  load (dirName) {
+    const transformations = superimport.importAll(path.join(__dirname, `./${dirName}`))
+    transformations.forEach((t) => t(this))
+  }
+
+  test (fn) {
+    return fn(this.ctx)
+  }
+
   transform (ast) {
-    const keys = Object.keys(ast)
     const transformatedAst = {}
 
     const transformationFn = this.get(ast.type)
@@ -20,6 +32,7 @@ class ASTTransformer {
       ast = transformationFn(ast)
     }
 
+    const keys = Object.keys(ast)
     for (const key of keys) {
       if (Array.isArray(ast[key])) {
         transformatedAst[key] = ast[key].map((item) => this.transform(item))

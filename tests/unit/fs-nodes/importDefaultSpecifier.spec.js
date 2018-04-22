@@ -6,6 +6,8 @@ describe('ImportDefaultSpecifier', () => {
   describe('instance', () => {
     it('returns a ImportDefaultSpecifier node', () => {
       const tokenStack = new TokenStack([
+        { 'type': 'operator', 'value': '**' },
+        { 'type': 'identifier', 'value': 'as' },
         { 'type': 'identifier', 'value': 'foo' },
         { 'type': 'identifier', 'value': 'from' }
       ])
@@ -25,6 +27,8 @@ describe('ImportDefaultSpecifier', () => {
 
     it('returns a ImportDefaultSpecifier node, without local name', () => {
       const tokenStack = new TokenStack([
+        { 'type': 'operator', 'value': '**' },
+        { 'type': 'identifier', 'value': 'as' },
         { 'type': 'identifier', 'value': 'foo' },
         { 'type': 'identifier', 'value': 'from' }
       ])

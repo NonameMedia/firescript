@@ -1,0 +1,3 @@
+import ** as banana from 'banana'
+
+export default banana

@@ -1,0 +1,11 @@
+{
+    "extends": "../../.eslintrc.json",
+    "rules": {
+        "semi": 0,
+        "space-before-function-paren": 0,
+        "no-debugger": 0,
+        "template-tag-spacing": 0,
+        "no-undef": 0,
+        "no-unused-vars": 0
+    }
+}

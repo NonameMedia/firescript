@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 
 const ASTTransformer = require('../../src/ASTTransformer')
 
-describe.only('ASTTransformer', () => {
+describe('ASTTransformer', () => {
   describe('transform()', () => {
     it('triggers a transformation method', () => {
       const transformer = new ASTTransformer()

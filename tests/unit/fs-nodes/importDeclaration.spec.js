@@ -7,6 +7,8 @@ describe('ImportDeclaration', () => {
     it('returns a ImportDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'import' },
+        { 'type': 'operator', 'value': '**' },
+        { 'type': 'identifier', 'value': 'as' },
         { 'type': 'identifier', 'value': 'foo' },
         { 'type': 'identifier', 'value': 'from' },
         { 'type': 'literal', 'value': '"foo"' }
