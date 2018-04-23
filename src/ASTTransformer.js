@@ -31,8 +31,7 @@ class ASTTransformer {
     if (transformationFn) {
       const transformed = transformationFn(ast)
       if (Array.isArray(transformed)) {
-        parent.splice.apply(parent, [index, 1].concat(transformed))
-        ast = parent[index]
+        return transformed
       } else {
         ast = transformed
       }
@@ -41,7 +40,16 @@ class ASTTransformer {
     const keys = Object.keys(ast)
     for (const key of keys) {
       if (Array.isArray(ast[key])) {
-        transformatedAst[key] = ast[key].map((item, index, parent) => this.transform(item, index, parent))
+        const childs = []
+        ast[key].forEach((item, index, parent) => {
+          const transformed = this.transform(item, index, parent)
+          if (Array.isArray(transformed)) {
+            transformed.forEach((child) => childs.push(this.transform(child)))
+          } else {
+            childs.push(transformed)
+          }
+        })
+        transformatedAst[key] = childs
       } else if (typeof ast[key] === 'object' && ast[key] !== null) {
         transformatedAst[key] = this.transform(ast[key])
       } else {

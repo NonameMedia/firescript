@@ -1,1 +1,1 @@
-import { banana, coconut } from 'fruits';
+import { banana as b, coconut as c } from 'fruits';

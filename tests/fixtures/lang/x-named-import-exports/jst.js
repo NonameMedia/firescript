@@ -1,6 +1,11 @@
 const banana = require('banana').banana;
 const coconut = require('banana').coconut;
 const p1 = require('banana').peach;
-
-module.exports = { banana: banana }
-export class Coconut {}
+module.exports = { banana: banana };
+module.exports.Coconut = class Coconut {
+  constructor () {
+    return this.banana;
+  }
+};
+let peach = 'Peach';
+module.exports.peach = peach;

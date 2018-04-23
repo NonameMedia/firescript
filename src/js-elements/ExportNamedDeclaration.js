@@ -40,7 +40,7 @@ class ExportNamedDeclaration extends JSElement {
     return 'export ' +
       this.declaration.toESString(ctx) +
       source +
-      ';'
+      ''
   }
 
   renderSpecifiers (ctx) {

@@ -48,6 +48,41 @@ class ASTCreator {
       computed: false
     }
   }
+
+  static expressionStatement (expression) {
+    return {
+      type: 'ExpressionStatement',
+      expression
+    }
+  }
+
+  static assignmentExpression (operator, left, right) {
+    return {
+      type: 'AssignmentExpression',
+      operator,
+      left,
+      right
+    }
+  }
+
+  static objectExpression (properties) {
+    return {
+      type: 'ObjectExpression',
+      properties
+    }
+  }
+
+  static property (kind, key, value) {
+    return {
+      type: 'Property',
+      kind,
+      key,
+      value,
+      computed: false,
+      method: false,
+      shorthand: false
+    }
+  }
 }
 
 module.exports = ASTCreator

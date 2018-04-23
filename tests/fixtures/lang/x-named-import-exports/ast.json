@@ -126,6 +126,29 @@
       },
       "specifiers": [],
       "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "peach"
+            },
+            "init": {
+              "type": "Literal",
+              "value": "Peach",
+              "raw": "'Peach'"
+            }
+          }
+        ],
+        "kind": "let"
+      },
+      "specifiers": [],
+      "source": null
     }
   ],
   "sourceType": "module"

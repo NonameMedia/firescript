@@ -8,7 +8,7 @@
           "type": "ImportSpecifier",
           "local": {
             "type": "Identifier",
-            "name": "banana"
+            "name": "b"
           },
           "imported": {
             "type": "Identifier",
@@ -19,7 +19,7 @@
           "type": "ImportSpecifier",
           "local": {
             "type": "Identifier",
-            "name": "coconut"
+            "name": "c"
           },
           "imported": {
             "type": "Identifier",

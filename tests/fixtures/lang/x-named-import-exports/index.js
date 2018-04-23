@@ -5,4 +5,5 @@ export class Coconut {
   constructor () {
     return this.banana;
   }
-};
+}
+export let peach = 'Peach';

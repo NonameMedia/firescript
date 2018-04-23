@@ -1,1 +1,1 @@
-export class Banana {};
+export class Banana {}

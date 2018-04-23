@@ -8,7 +8,7 @@ class ImportDefaultSpecifier extends FireScriptElement {
   }
 
   toString () {
-    return this.local.toString()
+    return `** as ${this.local.toString()}`
   }
 }
 
