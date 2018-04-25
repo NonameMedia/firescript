@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "FireScript transpiler",
   "main": "src/app.js",
+  "bin": {
+    "fire": "./bin/fire"
+  },
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "mocha --reporter lagoon-reporter tests/unit/\\*\\*/\\*.spec.js",
@@ -24,7 +27,6 @@
     "inspect.js": "1.11.4",
     "lagoon-reporter": "0.3.4",
     "mocha": "5.1.1",
-    "prettier": "1.12.1",
     "superfs": "0.7.0"
   },
   "dependencies": {
