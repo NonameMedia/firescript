@@ -1,0 +1,51 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "banana",
+        "raw": "'banana'"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "getBanana"
+        },
+        "params": [],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "Identifier",
+                "name": "banana"
+              }
+            }
+          ]
+        },
+        "generator": false,
+        "expression": false,
+        "async": false
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ],
+  "sourceType": "module"
+}

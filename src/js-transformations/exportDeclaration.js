@@ -6,10 +6,40 @@ function getExportsExpression () {
   return ASTCreator.memberExpression(object, property)
 }
 
+function handleVariableDeclaration (ast) {
+  const childs = []
+
+  childs.push(ast)
+  ast.declarations.forEach((item) => {
+    const property = item.id
+    const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
+
+    childs.push(ASTCreator.expressionStatement(
+      ASTCreator.assignmentExpression('=',
+        memberExpression,
+        property
+      )
+    ))
+  })
+
+  return childs
+}
+
+function handleFunctionOrClassExpression (ast) {
+  const property = ast.id
+  const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
+
+  return ASTCreator.expressionStatement(
+    ASTCreator.assignmentExpression('=',
+      memberExpression,
+      ast
+    )
+  )
+}
+
 module.exports = (transformer) => {
   if (transformer.test((ctx) => ctx.esModules === false)) {
     transformer.add('ExportDefaultDeclaration', (ast) => {
-      console.log(ast)
       const property = ASTCreator.identifier('default')
       const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
       const expression = ASTCreator.expressionStatement(
@@ -22,17 +52,14 @@ module.exports = (transformer) => {
     })
 
     transformer.add('ExportNamedDeclaration', (ast) => {
-      console.log(ast)
       if (ast.declaration) {
-        const property = ast.declaration.id
-        const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
+        if (ast.declaration.type === 'VariableDeclaration') {
+          return handleVariableDeclaration(ast.declaration)
+        }
 
-        return ASTCreator.expressionStatement(
-          ASTCreator.assignmentExpression('=',
-            memberExpression,
-            ast.declaration
-          )
-        )
+        if (['ClassDeclaration', 'FunctionDeclaration'].includes(ast.declaration.type)) {
+          return handleFunctionOrClassExpression(ast.declaration)
+        }
       } else {
         const properties = ast.specifiers.map((specifier) => {
           return ASTCreator.property('init', specifier.local, specifier.exported)
@@ -46,6 +73,8 @@ module.exports = (transformer) => {
           )
         )
       }
+
+      return ast
     })
   }
 }

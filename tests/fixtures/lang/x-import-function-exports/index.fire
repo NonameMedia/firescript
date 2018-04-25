@@ -1,0 +1,4 @@
+import ** as banana from 'banana'
+
+export func getBanana ()
+  return banana

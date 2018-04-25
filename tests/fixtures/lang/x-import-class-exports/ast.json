@@ -1,0 +1,71 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "banana",
+        "raw": "'banana'"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "Banana"
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor"
+              },
+              "computed": false,
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "Identifier",
+                        "name": "banana"
+                      }
+                    }
+                  ]
+                },
+                "generator": false,
+                "expression": false,
+                "async": false
+              },
+              "kind": "constructor",
+              "static": false
+            }
+          ]
+        }
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ],
+  "sourceType": "module"
+}
