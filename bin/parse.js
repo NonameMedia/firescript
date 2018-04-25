@@ -6,6 +6,7 @@ module.exports = (supershit) => {
   return supershit
     .cmd('parse <file> [output]')
     .option('-v,--verbose', 'Verbose log')
+    .description('Parse a .fire or .js file into an AST tree')
     .action((ctx, file, output) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       if (path.extname(file) === '.fire') {

@@ -29,6 +29,7 @@ module.exports = (supershit) => {
   return supershit
     .cmd('watch [src] [dest]')
     .option('-v, --verbose', 'Verbose log')
+    .description('Watch a directory and starts transpilation if a files content changes')
     .action(async (ctx, src, dest) => {
       const conf = FireScript.loadConf({
         src: src,
