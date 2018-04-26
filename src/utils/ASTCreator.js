@@ -95,6 +95,12 @@ class ASTCreator {
       expression: false
     }
   }
+
+  static thisExpression () {
+    return {
+      type: 'ThisExpression'
+    }
+  }
 }
 
 module.exports = ASTCreator

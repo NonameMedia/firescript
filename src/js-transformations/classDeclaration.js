@@ -1,10 +1,31 @@
 const ASTCreator = require('../utils/ASTCreator')
 
-function findConstructor (classBody) {
+function findAndReplaceSuperCall (superClass, functionBody) {
+  const body = functionBody.body
+  for (let i = 0; i < body.length; i++) {
+    if (body[i].type === 'ExpressionStatement') {
+      if (body[i].expression.type === 'CallExpression' &&
+      body[i].expression.callee.type === 'Super') {
+        body[i].expression = ASTCreator.callExpression(
+          ASTCreator.memberExpression(
+            superClass,
+            ASTCreator.identifier('call')
+          ),
+          [ ASTCreator.thisExpression() ].concat(body[i].expression.arguments)
+        )
+      }
+    }
+  }
+
+  return functionBody
+}
+
+function findConstructor (superClass, classBody) {
   for (const item of classBody.body) {
     if (item.kind === 'constructor') {
+      const body = findAndReplaceSuperCall(superClass, item.value.body)
       return {
-        body: item.value.body,
+        body,
         params: item.value.params
       }
     }
@@ -12,13 +33,13 @@ function findConstructor (classBody) {
 }
 
 function handleClassMethod (className, methodDefinition) {
-  const memberExpression = ASTCreator.memberExpression(
+  const proto = ASTCreator.memberExpression(
     className,
     ASTCreator.identifier('prototype')
   )
 
   const left = ASTCreator.memberExpression(
-    memberExpression,
+    proto,
     methodDefinition.key
   )
 
@@ -33,7 +54,8 @@ function handleClassMethod (className, methodDefinition) {
 
 function handleClassDeclaration (ast) {
   const id = ast.id
-  const fn = findConstructor(ast.body)
+  const superClass = ast.superClass
+  const fn = findConstructor(superClass, ast.body)
 
   const childs = []
 
@@ -42,6 +64,41 @@ function handleClassDeclaration (ast) {
     fn.params,
     fn.body
   ))
+
+  const proto = ASTCreator.memberExpression(
+    id,
+    ASTCreator.identifier('prototype')
+  )
+
+  if (superClass) {
+    childs.push(ASTCreator.expressionStatement(
+      ASTCreator.assignmentExpression(
+        '=',
+        proto,
+        ASTCreator.callExpression(
+          ASTCreator.memberExpression(
+            ASTCreator.identifier('Object'),
+            ASTCreator.identifier('create')
+          ),
+          [ ASTCreator.memberExpression(
+            superClass,
+            ASTCreator.identifier('prototype')
+          ) ]
+        )
+      )
+    ))
+
+    childs.push(ASTCreator.expressionStatement(
+      ASTCreator.assignmentExpression(
+        '=',
+        ASTCreator.memberExpression(
+          proto,
+          ASTCreator.identifier('constructor')
+        ),
+        superClass
+      )
+    ))
+  }
 
   for (const method of ast.body.body) {
     if (method.kind === 'method') {
