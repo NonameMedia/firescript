@@ -12,7 +12,7 @@ describe('Transform', () => {
     transformer.load('js-transformations')
   })
 
-  describe('ImportDeclaration', () => {
+  describe('ClassDeclaration', () => {
     it('transform into a commonjs prototype style class', () => {
       const ast = require('../../fixtures/jst/class-declaration/ast.json')
       const jst = require('../../fixtures/jst/class-declaration/jst.json')

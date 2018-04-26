@@ -4,13 +4,14 @@ const JSTranspiler = require('../../').JSTranspiler
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
 describe('JSTranspiler', () => {
+  const featureConf = {
+    esModules: true,
+    esClasses: true
+  }
+
   describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
-
-    const featureConf = {
-      esModules: true
-    }
 
     testCases.forEach((testCase) => {
       if (testCase.isDirectory()) {
@@ -19,6 +20,7 @@ describe('JSTranspiler', () => {
         it(`${group} into Javascript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect.readFile(`${testCase.path}/index.js`)
+
           const transpiler = new JSTranspiler({
             features: featureConf
           })
@@ -35,10 +37,6 @@ describe('JSTranspiler', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
 
-    const featureConf = {
-      esModules: false
-    }
-
     testCases.forEach((testCase) => {
       if (testCase.isDirectory()) {
         group = testCase.name
@@ -48,8 +46,10 @@ describe('JSTranspiler', () => {
 
         it(`${group} into Javascript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
+          const jstConf = inspect.readJSON(`${testCase.path}/jstConf.json`, { silent: true })
+
           const transpiler = new JSTranspiler({
-            features: featureConf
+            features: Object.assign({}, featureConf, jstConf)
           })
 
           const jsSource = transpiler.transpile(ast)
