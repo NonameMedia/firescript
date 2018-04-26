@@ -83,6 +83,18 @@ class ASTCreator {
       shorthand: false
     }
   }
+
+  static functionDeclaration (id, params, body) {
+    return {
+      type: 'FunctionDeclaration',
+      id,
+      params: params || [],
+      body,
+      generator: false,
+      async: false,
+      expression: false
+    }
+  }
 }
 
 module.exports = ASTCreator
