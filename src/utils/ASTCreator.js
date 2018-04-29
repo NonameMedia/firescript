@@ -31,10 +31,10 @@ class ASTCreator {
   }
 
   static literal (rawValue) {
-    const value = rawValue.replace(/^'|'$/, '')
+    const value = rawValue.replace(/^'|'$/g, '')
 
     return {
-      type: 'literal',
+      type: 'Literal',
       value: value,
       raw: rawValue
     }
@@ -59,6 +59,15 @@ class ASTCreator {
   static assignmentExpression (operator, left, right) {
     return {
       type: 'AssignmentExpression',
+      operator,
+      left,
+      right
+    }
+  }
+
+  static binaryExpression (operator, left, right) {
+    return {
+      type: 'BinaryExpression',
       operator,
       left,
       right
