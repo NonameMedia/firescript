@@ -30,7 +30,10 @@ class MethodDefinition extends JSElement {
     const key = this.kind === 'constructor'
       ? 'constructor' : this.key.toESString(ctx)
 
+    const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
+
     return this.renderElement(
+      kind +
       key +
       this.value.toESString(ctx)
     )

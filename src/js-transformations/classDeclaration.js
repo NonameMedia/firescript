@@ -32,7 +32,7 @@ function findConstructor (superClass, classBody) {
   }
 }
 
-function handleClassMethod (className, methodDefinition) {
+function createClassMethod (className, methodDefinition) {
   const proto = ASTCreator.memberExpression(
     className,
     ASTCreator.identifier('prototype')
@@ -47,6 +47,26 @@ function handleClassMethod (className, methodDefinition) {
   right.id = methodDefinition.key
 
   const expression = ASTCreator.assignmentExpression('=', left, right)
+  return ASTCreator.expressionStatement(
+    expression
+  )
+}
+
+function createGetterMethod (className, methodDefinition) {
+  console.log('GETTER', methodDefinition)
+  const getterProto = ASTCreator.memberExpression(
+    className,
+    ASTCreator.identifier('defineProperty')
+  )
+
+  // const config = ASTCreator.objectExpression([
+  //   ASTCreator.property(
+  //     ASTCreator.identifier('get'),
+  //     methodDefinition.value
+  //   )
+  // ])
+
+  const expression = ASTCreator.callExpression(getterProto, methodDefinition.key)
   return ASTCreator.expressionStatement(
     expression
   )
@@ -102,7 +122,9 @@ function handleClassDeclaration (ast) {
 
   for (const method of ast.body.body) {
     if (method.kind === 'method') {
-      childs.push(handleClassMethod(id, method))
+      childs.push(createClassMethod(id, method))
+    } else if (method.kind === 'get') {
+      childs.push(createGetterMethod(id, method))
     }
   }
 

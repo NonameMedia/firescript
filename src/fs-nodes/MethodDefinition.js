@@ -39,9 +39,14 @@ class MethodDefinition extends FireScriptNode {
     this.static = false
     this.kind = 'method'
 
-    if (tokenStack.expect('identifier', 'static') && this.lookForward('identifier')) {
+    if (tokenStack.expect('identifier', 'static') && tokenStack.lookForward('identifier')) {
       this.static = true
       this.goForward()
+    }
+
+    if (tokenStack.expect('identifier', ['get', 'set']) && tokenStack.lookForward('identifier')) {
+      const next = tokenStack.next()
+      this.kind = next.value
     }
 
     this.key = this.createNodeItem(tokenStack)
