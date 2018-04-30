@@ -1,0 +1,119 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "ClassDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "Bar"
+            },
+            "superClass": {
+                "type": "Identifier",
+                "name": "Foo"
+            },
+            "body": {
+                "type": "ClassBody",
+                "body": [
+                    {
+                        "type": "MethodDefinition",
+                        "key": {
+                            "type": "Identifier",
+                            "name": "constructor"
+                        },
+                        "computed": false,
+                        "value": {
+                            "type": "FunctionExpression",
+                            "id": null,
+                            "params": [],
+                            "body": {
+                                "type": "BlockStatement",
+                                "body": [
+                                    {
+                                        "type": "ExpressionStatement",
+                                        "expression": {
+                                            "type": "CallExpression",
+                                            "callee": {
+                                                "type": "Super"
+                                            },
+                                            "arguments": []
+                                        }
+                                    },
+                                    {
+                                        "type": "ExpressionStatement",
+                                        "expression": {
+                                            "type": "AssignmentExpression",
+                                            "operator": "=",
+                                            "left": {
+                                                "type": "MemberExpression",
+                                                "computed": false,
+                                                "object": {
+                                                    "type": "ThisExpression"
+                                                },
+                                                "property": {
+                                                    "type": "Identifier",
+                                                    "name": "value"
+                                                }
+                                            },
+                                            "right": {
+                                                "type": "Literal",
+                                                "value": "bla",
+                                                "raw": "'bla'"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "generator": false,
+                            "expression": false,
+                            "async": false
+                        },
+                        "kind": "constructor",
+                        "static": false
+                    },
+                    {
+                        "type": "MethodDefinition",
+                        "key": {
+                            "type": "Identifier",
+                            "name": "blub"
+                        },
+                        "computed": false,
+                        "value": {
+                            "type": "FunctionExpression",
+                            "id": null,
+                            "params": [],
+                            "body": {
+                                "type": "BlockStatement",
+                                "body": [
+                                    {
+                                        "type": "ReturnStatement",
+                                        "argument": {
+                                            "type": "CallExpression",
+                                            "callee": {
+                                                "type": "MemberExpression",
+                                                "computed": false,
+                                                "object": {
+                                                    "type": "ThisExpression"
+                                                },
+                                                "property": {
+                                                    "type": "Identifier",
+                                                    "name": "bla"
+                                                }
+                                            },
+                                            "arguments": []
+                                        }
+                                    }
+                                ]
+                            },
+                            "generator": false,
+                            "expression": false,
+                            "async": false
+                        },
+                        "kind": "method",
+                        "static": false
+                    }
+                ]
+            }
+        }
+    ],
+    "sourceType": "module"
+}

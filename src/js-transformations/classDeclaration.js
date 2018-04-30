@@ -52,21 +52,36 @@ function createClassMethod (className, methodDefinition) {
   )
 }
 
-function createGetterMethod (className, methodDefinition) {
-  console.log('GETTER', methodDefinition)
+function createProperty (className, method, secondMethod) {
   const getterProto = ASTCreator.memberExpression(
-    className,
+    ASTCreator.identifier('Object'),
     ASTCreator.identifier('defineProperty')
   )
 
-  // const config = ASTCreator.objectExpression([
-  //   ASTCreator.property(
-  //     ASTCreator.identifier('get'),
-  //     methodDefinition.value
-  //   )
-  // ])
+  const methods = [
+    ASTCreator.property('init',
+      ASTCreator.identifier(method.kind),
+      method.value
+    )
+  ]
 
-  const expression = ASTCreator.callExpression(getterProto, methodDefinition.key)
+  if (secondMethod) {
+    methods.push(ASTCreator.property('init',
+      ASTCreator.identifier(secondMethod.kind),
+      secondMethod.value
+    ))
+  }
+
+  const args = [
+    ASTCreator.memberExpression(
+      className,
+      ASTCreator.identifier('prototype')
+    ),
+    ASTCreator.literal(`'${method.key.name}'`),
+    ASTCreator.objectExpression(methods)
+  ]
+
+  const expression = ASTCreator.callExpression(getterProto, args)
   return ASTCreator.expressionStatement(
     expression
   )
@@ -120,11 +135,31 @@ function handleClassDeclaration (ast) {
     ))
   }
 
-  for (const method of ast.body.body) {
+  const methods = ast.body.body.concat()
+  for (const method of methods) {
     if (method.kind === 'method') {
       childs.push(createClassMethod(id, method))
-    } else if (method.kind === 'get') {
-      childs.push(createGetterMethod(id, method))
+    } else if (method.kind === 'get' || method.kind === 'set') {
+      const secondItem = methods.findIndex((item, index, array) => {
+        if (item === method) {
+          return false
+        }
+
+        if (item.key === method.key && ['get', 'set'].includes(item.kind)) {
+          return true
+        }
+
+        return false
+      })
+
+      let property
+      if (secondItem) {
+        property = createProperty(id, method, methods.splice(secondItem, 1)[0])
+      } else {
+        property = createProperty(id, method)
+      }
+
+      childs.push(property)
     }
   }
 
