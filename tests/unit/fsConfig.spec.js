@@ -11,7 +11,8 @@ describe('FSConfig', () => {
         src: 'src/',
         dest: 'dist/',
         features: {
-          esModules: false
+          esModules: false,
+          esClasses: true
         }
       })
     })
@@ -25,7 +26,8 @@ describe('FSConfig', () => {
         src: 'src/',
         dest: 'dist/',
         features: {
-          esModules: false
+          esModules: false,
+          esClasses: true
         }
       })
     })
@@ -35,7 +37,8 @@ describe('FSConfig', () => {
     process.chdir(path.join(__dirname, '../fixtures/banana-project'))
     const conf = new FSConfig()
     inspect(conf.getConf('features')).isEql({
-      esModules: false
+      esModules: false,
+      esClasses: true
     })
   })
 })
