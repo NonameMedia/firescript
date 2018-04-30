@@ -24,15 +24,15 @@
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "^1.1.0",
-    "inspect.js": "1.11.4",
+    "inspect.js": "1.11.7",
     "lagoon-reporter": "0.3.4",
     "mocha": "5.1.1",
-    "superfs": "0.7.0"
+    "superfs": "0.8.0"
   },
   "dependencies": {
     "esprima": "4.0.0",
     "superarr": "0.1.0",
-    "superimport": "1.1.0",
+    "superimport": "1.2.0",
     "supershit": "0.3.1"
   }
 }

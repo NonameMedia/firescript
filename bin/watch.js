@@ -36,6 +36,8 @@ module.exports = (supershit) => {
         dest: dest
       })
 
+      console.log('CONF', conf)
+
       const srcDir = path.resolve(process.cwd(), conf.src)
       const destDir = path.resolve(process.cwd(), conf.dest)
 

@@ -12,7 +12,8 @@ describe('FSConfig', () => {
         dest: 'dist/',
         features: {
           esModules: false,
-          esClasses: true
+          esClasses: true,
+          esTemplates: true
         }
       })
     })
@@ -27,7 +28,8 @@ describe('FSConfig', () => {
         dest: 'dist/',
         features: {
           esModules: false,
-          esClasses: true
+          esClasses: true,
+          esTemplates: true
         }
       })
     })
@@ -38,7 +40,8 @@ describe('FSConfig', () => {
     const conf = new FSConfig()
     inspect(conf.getConf('features')).isEql({
       esModules: false,
-      esClasses: true
+      esClasses: true,
+      esTemplates: true
     })
   })
 })

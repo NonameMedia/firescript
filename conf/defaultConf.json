@@ -3,6 +3,7 @@
   "dest": "lib/",
   "features": {
     "esModules": false,
-    "esClasses": true
+    "esClasses": true,
+    "esTemplates": true
   }
 }
