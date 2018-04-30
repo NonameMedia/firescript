@@ -1,0 +1,128 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "greeting"
+                    },
+                    "init": {
+                        "type": "TemplateLiteral",
+                        "quasis": [
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": "Hello ",
+                                    "cooked": "Hello "
+                                },
+                                "tail": false
+                            },
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": "",
+                                    "cooked": ""
+                                },
+                                "tail": true
+                            }
+                        ],
+                        "expressions": [
+                            {
+                                "type": "Identifier",
+                                "name": "name"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "const"
+        },
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "question"
+                    },
+                    "init": {
+                        "type": "TemplateLiteral",
+                        "quasis": [
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": "What is the ",
+                                    "cooked": "What is the "
+                                },
+                                "tail": false
+                            },
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": " ",
+                                    "cooked": " "
+                                },
+                                "tail": false
+                            },
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": " in ",
+                                    "cooked": " in "
+                                },
+                                "tail": false
+                            },
+                            {
+                                "type": "TemplateElement",
+                                "value": {
+                                    "raw": "?",
+                                    "cooked": "?"
+                                },
+                                "tail": true
+                            }
+                        ],
+                        "expressions": [
+                            {
+                                "type": "Identifier",
+                                "name": "best"
+                            },
+                            {
+                                "type": "CallExpression",
+                                "callee": {
+                                    "type": "MemberExpression",
+                                    "computed": false,
+                                    "object": {
+                                        "type": "Identifier",
+                                        "name": "questions"
+                                    },
+                                    "property": {
+                                        "type": "Identifier",
+                                        "name": "ask"
+                                    }
+                                },
+                                "arguments": [
+                                    {
+                                        "type": "Literal",
+                                        "value": "beer",
+                                        "raw": "'beer'"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Identifier",
+                                "name": "world"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "const"
+        }
+    ],
+    "sourceType": "module"
+}
