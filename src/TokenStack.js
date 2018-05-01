@@ -136,17 +136,17 @@ class TokenStack extends Array {
   print (msg) {
     const startIndex = Math.max(this.index - 2, 0)
     const endIndex = Math.min(startIndex + 5, this.length)
-    console.log('Len:', this.length)
-    console.log('Start:', startIndex)
-    console.log('End:', endIndex)
-    console.log('Index:', this.index)
-    console.log('Stack', this)
+    // console.log('Len:', this.length)
+    // console.log('Start:', startIndex)
+    // console.log('End:', endIndex)
+    // console.log('Index:', this.index)
+    // console.log('Stack', this)
     const items = this.slice(startIndex, endIndex)
     if (msg) {
       console.log(` + ${msg}`)
     }
 
-    console.log('Items:', items)
+    // console.log('Items:', items)
     items.forEach((item, index) => {
       const arrow = this.index - startIndex === index ? '>' : ' '
       console.log(`${arrow}| ${item.type} ${item.value}`)

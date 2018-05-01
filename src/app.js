@@ -17,9 +17,9 @@ module.exports = {
     return tokenizer.tokenize(input)
   },
   transpile (input, opts) {
-    opts = Object.assign(opts || {}, {
+    opts = Object.assign({
       type: 'fire'
-    })
+    }, opts || {})
 
     let ast
 
