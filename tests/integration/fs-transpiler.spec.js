@@ -1,12 +1,10 @@
 const path = require('path')
 const inspect = require('inspect.js')
-const JSTranspiler = require('../../').JSTranspiler
+const FireScriptTranspiler = require('../../').FireScriptTranspiler
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
-describe('JSTranspiler', () => {
+describe.only('FireScriptTranspiler', () => {
   const featureConf = {
-    esModules: true,
-    esClasses: true
   }
 
   describe('transpile', () => {
@@ -17,44 +15,24 @@ describe('JSTranspiler', () => {
       if (testCase.isDirectory()) {
         group = testCase.name
 
-        it(`${group} into Javascript from AST`, () => {
-          const ast = require(`${testCase.path}/ast.json`)
-          const source = inspect.readFile(`${testCase.path}/index.js`)
+        if (group.charAt(0) === '_') {
+          it.skip(`${group.substr(1)} into Javascript from AST`)
+          return
+        }
 
-          const transpiler = new JSTranspiler({
+        it(`${group} into FireScript from AST`, () => {
+          const ast = require(`${testCase.path}/ast.json`)
+          const source = inspect.readFile(`${testCase.path}/index.fire`)
+
+          const transpiler = new FireScriptTranspiler({
             features: featureConf
           })
 
           const jsSource = transpiler.transpile(ast)
           inspect(jsSource).isString()
+          console.log(`${jsSource}¬`)
+          console.log(`${source}¬`)
           inspect(jsSource).isEql(source)
-        })
-      }
-    })
-  })
-
-  describe('transform', () => {
-    const testCases = inspect.readDir(TEST_CASE_DIR)
-    let group
-
-    testCases.forEach((testCase) => {
-      if (testCase.isDirectory()) {
-        group = testCase.name
-        const jst = inspect.readFile(`${testCase.path}/jst.js`, { silent: true })
-
-        if (!jst) return
-
-        it(`${group} into Javascript from AST`, () => {
-          const ast = require(`${testCase.path}/ast.json`)
-          const jstConf = inspect.readJSON(`${testCase.path}/jstConf.json`, { silent: true })
-
-          const transpiler = new JSTranspiler({
-            features: Object.assign({}, featureConf, jstConf)
-          })
-
-          const jsSource = transpiler.transpile(ast)
-          inspect(jsSource).isString()
-          inspect(jsSource).isEql(jst)
         })
       }
     })

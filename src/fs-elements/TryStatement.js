@@ -1,0 +1,38 @@
+const FireScriptElement = require('./FireScriptElement')
+
+/**
+ * TryStatement
+ *
+ * @class TryStatement
+ * @extends FireScriptElement
+ *
+ * interface TryStatement {
+ *   type: 'TryStatement';
+ *   block: BlockStatement;
+ *   handler: CatchClause | null;
+ *   finalizer: BlockStatement | null;
+ * }
+ */
+class TryStatement extends FireScriptElement {
+  constructor (ast) {
+    super(ast)
+
+    this.block = this.createElement(ast.block)
+    this.handler = ast.handler ? this.createElement(ast.handler) : null
+    this.finalizer = ast.finalizer ? this.createElement(ast.finalizer) : null
+  }
+
+  toESString (ctx) {
+    const finalizer = this.finalizer ? this.finalizer.toESString(ctx) : ''
+
+    return this.renderElement(
+      'try ' +
+      this.block.toESString(ctx) +
+      ' ' +
+      this.handler.toESString(ctx) +
+      finalizer
+    )
+  }
+}
+
+module.exports = TryStatement

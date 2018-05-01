@@ -1,1 +1,1 @@
-const obj = [ 'Foo', 'Bar' ];
+const obj = [ 'Foo', 'Bar', 'Bla' ];
