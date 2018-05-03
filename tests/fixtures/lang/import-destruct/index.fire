@@ -1,1 +1,1 @@
-import { banana, coconut } from 'fruits'
+import banana, coconut from 'fruits'

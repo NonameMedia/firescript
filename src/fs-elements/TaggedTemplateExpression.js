@@ -20,11 +20,11 @@ class TaggedTemplateExpression extends FireScriptElement {
     this.quasi = this.createElement(ast.quasi)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      this.tag.toESString(ctx) +
+      this.tag.toFSString(ctx) +
       ' ' +
-      this.quasi.toESString(ctx)
+      this.quasi.toFSString(ctx)
     )
   }
 }

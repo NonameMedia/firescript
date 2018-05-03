@@ -22,14 +22,13 @@ class TryStatement extends FireScriptElement {
     this.finalizer = ast.finalizer ? this.createElement(ast.finalizer) : null
   }
 
-  toESString (ctx) {
-    const finalizer = this.finalizer ? this.finalizer.toESString(ctx) : ''
+  toFSString (ctx) {
+    const finalizer = this.finalizer ? this.finalizer.toFSString(ctx) : ''
 
     return this.renderElement(
-      'try ' +
-      this.block.toESString(ctx) +
-      ' ' +
-      this.handler.toESString(ctx) +
+      'try' +
+      this.block.toFSString(ctx) +
+      this.handler.toFSString(ctx) +
       finalizer
     )
   }

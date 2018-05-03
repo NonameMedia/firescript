@@ -19,25 +19,28 @@ class ObjectExpression extends FireScriptElement {
     this.properties = this.createElementList(ast.properties, ALLOWED_NODES, 1)
   }
 
-  toESString (ctx) {
-    const useMultiline = this.useMultiline()
-    if (useMultiline) {
+  toFSString (ctx) {
+    if (this.isParent('Property')) {
+      this.multilineEnabled = this.parent.parent.multilineEnabled
+    } else {
+      this.multilineEnabled = this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value.type))
+    }
+
+    if (this.multilineEnabled) {
       return this.renderMultiline(ctx)
     }
 
     return this.renderInline(ctx)
   }
 
-  useMultiline () {
-    return this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value.type))
-  }
-
   renderMultiline (ctx) {
-    return '{' +
-      ctx.indent(+1) +
-      ctx.join(this.properties, `,${ctx.indent()}`) +
-      ctx.indent(-1) +
-      '}'
+    const indention = ctx.indent(+1)
+    const properties = ctx.join(this.properties, `${ctx.indent()}`)
+    console.log('PROPS', `>${properties}<`)
+    const outdent = ctx.indent(-1)
+    return indention +
+      properties.trim() +
+      outdent
   }
 
   renderInline (ctx) {

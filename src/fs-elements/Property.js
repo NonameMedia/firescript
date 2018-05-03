@@ -33,10 +33,10 @@ class Property extends FireScriptElement {
     this.shorthand = ast.shorthand
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     if (this.shorthand) {
       return this.renderElement(
-        this.key.toESString(ctx)
+        this.key.toFSString(ctx)
       )
     }
 
@@ -44,16 +44,16 @@ class Property extends FireScriptElement {
 
     if (this.method) {
       return this.renderElement(
-        this.key.toESString(ctx) +
-        this.value.toESString(ctx)
+        this.key.toFSString(ctx) +
+        this.value.toFSString(ctx)
       )
     }
 
     return this.renderElement(
       kind +
-      this.key.toESString(ctx) +
+      this.key.toFSString(ctx) +
       ': ' +
-      this.value.toESString(ctx)
+      this.value.toFSString(ctx)
     )
   }
 }

@@ -18,10 +18,9 @@ class ExportAllDeclaration extends FireScriptElement {
     this.source = this.createElement(ast.source)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement('export * from ' +
-      this.source.toESString(ctx) +
-      ';'
+      this.source.toFSString(ctx)
     )
   }
 }

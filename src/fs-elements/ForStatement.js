@@ -24,16 +24,15 @@ class ForStatement extends FireScriptElement {
     this.body = this.createElement(ast.body)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      'for (' +
-      this.init.toESString(ctx) +
+      'for ' +
+      this.init.toFSString(ctx) +
       '; ' +
-      this.test.toESString(ctx) +
+      this.test.toFSString(ctx) +
       '; ' +
-      this.update.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
+      this.update.toFSString(ctx) +
+      this.body.toFSString(ctx)
     )
   }
 }

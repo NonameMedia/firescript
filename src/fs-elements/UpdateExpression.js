@@ -22,15 +22,15 @@ class UpdateExpression extends FireScriptElement {
     this.prefix = ast.prefix
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     if (this.prefix) {
       return this.renderElement(
         this.operator +
-        this.argument.toESString(ctx)
+        this.argument.toFSString(ctx)
       )
     } else {
       return this.renderElement(
-        this.argument.toESString(ctx) +
+        this.argument.toFSString(ctx) +
         this.operator
       )
     }

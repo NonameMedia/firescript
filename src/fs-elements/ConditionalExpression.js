@@ -22,7 +22,7 @@ class ConditionalExpression extends FireScriptElement {
     this.alternate = this.createElement(ast.alternate)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     const useMultiline = this.getLength() > 80
     if (useMultiline) {
       return this.renderElement(this.renderMultiline(ctx))
@@ -32,10 +32,10 @@ class ConditionalExpression extends FireScriptElement {
   }
 
   renderMultiline (ctx) {
-    const test = this.test.toESString(ctx)
+    const test = this.test.toFSString(ctx)
     const indention = ctx.indent(1)
-    const consequent = this.consequent.toESString(ctx)
-    const alternate = this.alternate.toESString(ctx)
+    const consequent = this.consequent.toFSString(ctx)
+    const alternate = this.alternate.toFSString(ctx)
     ctx.indent(-1)
 
     return test +
@@ -48,9 +48,9 @@ class ConditionalExpression extends FireScriptElement {
   }
 
   renderInline (ctx) {
-    const test = this.test.toESString(ctx)
-    const consequent = this.consequent.toESString(ctx)
-    const alternate = this.alternate.toESString(ctx)
+    const test = this.test.toFSString(ctx)
+    const consequent = this.consequent.toFSString(ctx)
+    const alternate = this.alternate.toFSString(ctx)
 
     return test +
       ' ? ' +

@@ -20,12 +20,11 @@ class CatchClause extends FireScriptElement {
     this.body = this.createElement(ast.body)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      'catch (' +
-      this.param.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
+      'catch ' +
+      this.param.toFSString(ctx) +
+      this.body.toFSString(ctx)
     )
   }
 }

@@ -18,10 +18,10 @@ class ImportNamespaceSpecifier extends FireScriptElement {
     this.local = this.createElement(ast.local)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       '* as ' +
-      this.local.toESString(ctx)
+      this.local.toFSString(ctx)
     )
   }
 }

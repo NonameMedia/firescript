@@ -25,6 +25,17 @@
             "type": "Identifier",
             "name": "coconut"
           }
+        },
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "peach"
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "peach"
+          }
         }
       ],
       "source": {

@@ -20,13 +20,12 @@ class DoWhileStatement extends FireScriptElement {
     this.test = this.createElement(ast.test)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      'do ' +
-      this.body.toESString(ctx) +
-      ' while (' +
-      this.test.toESString(ctx) +
-      ');'
+      'do' +
+      this.body.toFSString(ctx) +
+      'while ' +
+      this.test.toFSString(ctx)
     )
   }
 }

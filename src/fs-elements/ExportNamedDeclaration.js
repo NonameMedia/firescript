@@ -22,7 +22,7 @@ class ExportNamedDeclaration extends FireScriptElement {
     this.source = ast.source ? this.createElement(ast.source) : null
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     if (this.declaration) {
       return this.renderElement(
         this.renderDeclaration(ctx)
@@ -35,22 +35,19 @@ class ExportNamedDeclaration extends FireScriptElement {
   }
 
   renderDeclaration (ctx) {
-    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
+    const source = this.source ? ' from ' + this.source.toFSString(ctx) : ''
 
     return 'export ' +
-      this.declaration.toESString(ctx) +
-      source +
-      ''
+      this.declaration.toFSString(ctx) +
+      source
   }
 
   renderSpecifiers (ctx) {
-    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
+    const source = this.source ? ' from ' + this.source.toFSString(ctx) : ''
 
-    return 'export { ' +
+    return 'export ' +
       ctx.join(this.specifiers, ', ') +
-      ' }' +
-      source +
-      ';'
+      source
   }
 }
 

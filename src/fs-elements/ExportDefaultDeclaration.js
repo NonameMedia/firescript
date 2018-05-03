@@ -18,11 +18,10 @@ class ExportDefaultDeclaration extends FireScriptElement {
     this.declaration = this.createElement(ast.declaration)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       'export default ' +
-      this.declaration.toESString(ctx) +
-      ';'
+      this.declaration.toFSString(ctx)
     )
   }
 }

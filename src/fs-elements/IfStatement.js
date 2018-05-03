@@ -22,8 +22,13 @@ class IfStatement extends FireScriptElement {
     this.alternate = ast.alternate ? this.createElement(ast.alternate) : null
   }
 
+  hasChildConsequent () {
+    return this.alternate && this.alternate.type === 'IfStatement'
+  }
+
   toFSString (ctx) {
-    const alternate = this.alternate ? ' else ' + this.alternate.toFSString(ctx) : ''
+    const elseBlockName = this.hasChildConsequent() ? 'el' : 'else'
+    const alternate = this.alternate ? elseBlockName + this.alternate.toFSString(ctx) : ''
 
     return this.renderElement(
       'if ' +

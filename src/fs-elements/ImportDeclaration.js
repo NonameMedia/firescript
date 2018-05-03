@@ -20,63 +20,58 @@ class ImportDeclaration extends FireScriptElement {
     this.source = this.createElement(ast.source)
   }
 
-  toESString (ctx) {
-    if (ctx.esModules) {
-      return this.useESModules(ctx)
+  toFSString (ctx) {
+    const useMultiline = this.specifiers.length > 2
+
+    if (useMultiline) {
+      return this.renderMultiline(ctx)
     }
 
-    return this.useCommonModules(ctx)
+    return this.renderInline(ctx)
   }
 
-  useESModules (ctx) {
-    return this.renderElement(
-      'import ' +
-      this.renderSpecifiers(ctx) +
-      ' from ' +
-      this.source.toESString(ctx) +
-      ';'
-    )
-  }
-
-  useCommonModules (ctx) {
-    // return this.renderElement(
-    //   'const ' +
-    //   this.renderSpecifiers(ctx) +
-    //   ' from ' +
-    //   this.source.toESString(ctx) +
-    //   ';'
-    // )
-  }
-
-  renderSpecifiers (ctx) {
+  getSpecifiers (ctx) {
     let prevSpecifier = null
     let specifiers = []
-    let nextIndex = 0
 
     for (const item of this.specifiers) {
       let curSpecifier = ''
-      nextIndex += 1
-      let closer = ''
 
       if (item.type === 'ImportSpecifier' && prevSpecifier !== 'ImportSpecifier') {
-        curSpecifier = '{ '
         prevSpecifier = 'ImportSpecifier'
       }
 
-      if (item.type === 'ImportSpecifier') {
-        const nextItem = this.specifiers[nextIndex]
-        if (!nextItem || nextItem.type !== 'ImportSpecifier') {
-          closer = ' }'
-        }
-      }
-
-      curSpecifier += item.toESString(ctx)
-      curSpecifier += closer
+      curSpecifier += item.toFSString(ctx)
 
       specifiers.push(curSpecifier)
     }
 
-    return specifiers.join(', ')
+    return specifiers
+  }
+
+  renderMultiline (ctx) {
+    const indention = ctx.indent(+1)
+    const specifiers = this.getSpecifiers(ctx)
+    ctx.indent(-1)
+
+    return this.renderElement(
+      'import' +
+      indention +
+      specifiers.join(indention) +
+      indention +
+      'from ' +
+      this.source.toFSString(ctx)
+    )
+  }
+
+  renderInline (ctx) {
+    const specifiers = this.getSpecifiers(ctx)
+    return this.renderElement(
+      'import ' +
+      specifiers.join(', ') +
+      ' from ' +
+      this.source.toFSString(ctx)
+    )
   }
 }
 

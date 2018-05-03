@@ -22,14 +22,13 @@ class ForOfStatement extends FireScriptElement {
     this.body = this.createElement(ast.body)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      'for (' +
-      this.left.toESString(ctx) +
+      'for ' +
+      this.left.toFSString(ctx) +
       ' of ' +
-      this.right.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
+      this.right.toFSString(ctx) +
+      this.body.toFSString(ctx)
     )
   }
 }

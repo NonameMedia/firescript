@@ -20,11 +20,16 @@ class VariableDeclaration extends FireScriptElement {
     this.declarations = this.createElementList(ast.declarations)
   }
 
+  isKindRequired () {
+    return !['ForInStatement', 'ForOfStatement'].includes(this.parent.type)
+  }
+
   toFSString (ctx) {
+    const kind = this.isKindRequired() ? this.kind + ' ' : ''
+
     return this.declarations.map((declaration) => {
       return this.renderElement(
-        this.kind +
-        ' ' +
+        kind +
         declaration.toFSString(ctx)
       )
     }).join(ctx.indent())

@@ -103,6 +103,14 @@ class FireScriptElement {
     str +
     (this.trailingComments ? '\n' + this.renderComments(this.trailingComments, true) : '')
   }
+
+  isParent (types) {
+    if (!this.parent) {
+      return false
+    }
+
+    return typeof types === 'string' ? this.parent.type === types : types.includes(this.parent.type)
+  }
 }
 
 module.exports = FireScriptElement

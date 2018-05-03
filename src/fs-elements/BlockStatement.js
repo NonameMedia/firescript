@@ -33,7 +33,7 @@ class BlockStatement extends FireScriptElement {
     return this.renderElement(
       ctx.indent(1) +
       ctx.join(this.body, ctx.indent()) +
-      ctx.indent(-1, true)
+      ctx.indent(-1)
     )
   }
 }

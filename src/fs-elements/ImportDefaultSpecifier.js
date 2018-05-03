@@ -18,9 +18,10 @@ class ImportDefaultSpecifier extends FireScriptElement {
     this.local = this.createElement(ast.local)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      this.local.toESString(ctx)
+      '** as ' +
+      this.local.toFSString(ctx)
     )
   }
 }

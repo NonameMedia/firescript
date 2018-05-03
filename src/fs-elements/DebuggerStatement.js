@@ -11,8 +11,8 @@ const FireScriptElement = require('./FireScriptElement')
  * }
  */
 class DebuggerStatement extends FireScriptElement {
-  toESString (ctx) {
-    return this.renderElement('debugger;')
+  toFSString (ctx) {
+    return this.renderElement('debugger')
   }
 }
 

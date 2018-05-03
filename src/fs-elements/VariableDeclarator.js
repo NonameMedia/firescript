@@ -27,10 +27,14 @@ class VariableDeclarator extends FireScriptElement {
       )
     }
 
+    const init = this.init.toFSString(ctx)
+    const initSpacing = init.startsWith('\n') ? '' : ' '
+
     return this.renderElement(
       this.id.toFSString(ctx) +
-      ' = ' +
-      this.init.toFSString(ctx)
+      ' =' +
+      initSpacing +
+      init
     )
   }
 }

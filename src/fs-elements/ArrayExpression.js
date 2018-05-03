@@ -19,7 +19,13 @@ class ArrayExpression extends FireScriptElement {
   }
 
   toFSString (ctx) {
-    if (this.useMultiline()) {
+    if (this.isParent('Property')) {
+      this.multilineEnabled = this.parent.parent.multilineEnabled
+    } else {
+      this.multilineEnabled = this.elements.length > 2 || this.elements.some((item) => !/Literal|Identifier/.test(item.type))
+    }
+
+    if (this.multilineEnabled) {
       return this.renderElement(this.renderMultiline(ctx))
     } else {
       return this.renderElement(this.renderInline(ctx))
@@ -31,10 +37,15 @@ class ArrayExpression extends FireScriptElement {
   }
 
   renderMultiline (ctx) {
+    const indention = ctx.indent(1)
+    const elements = ctx.join(this.elements, ctx.indent())
+    console.log('PROPS', `>${elements}<`)
+    const outdent = ctx.indent(-1)
+
     return '[' +
-      ctx.indent(1) +
-      ctx.join(this.elements, ctx.indent()) +
-      ctx.indent(-1) +
+      indention +
+      elements.trim() +
+      outdent +
       ']'
   }
 

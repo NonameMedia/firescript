@@ -20,13 +20,13 @@ class ExportSpecifier extends FireScriptElement {
     this.local = this.createElement(ast.local)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     const local = this.exported.name === this.local.name
       ? ''
-      : ' as ' + this.local.toESString()
+      : ' as ' + this.local.toFSString()
 
     return this.renderElement(
-      this.exported.toESString(ctx) +
+      this.exported.toFSString(ctx) +
       local
     )
   }

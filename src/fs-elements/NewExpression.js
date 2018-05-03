@@ -20,10 +20,10 @@ class NewExpression extends FireScriptElement {
     this.arguments = this.createElementList(ast.arguments)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       'new ' +
-      this.callee.toESString(ctx) +
+      this.callee.toFSString(ctx) +
       '(' +
       ctx.join(this.arguments, ', ') +
       ')'

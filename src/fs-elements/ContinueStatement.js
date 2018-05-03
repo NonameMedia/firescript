@@ -12,8 +12,8 @@ const FireScriptElement = require('./FireScriptElement')
  * }
  */
 class ContinueStatement extends FireScriptElement {
-  toESString (ctx) {
-    return this.renderElement('continue;')
+  toFSString (ctx) {
+    return this.renderElement('continue')
   }
 }
 

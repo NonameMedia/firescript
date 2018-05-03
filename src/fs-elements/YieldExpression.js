@@ -20,12 +20,12 @@ class YieldExpression extends FireScriptElement {
     this.delegate = ast.delegate
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     const delegate = this.delegate ? '* ' : ''
     return this.renderElement(
       'yield ' +
       delegate +
-      this.argument.toESString(ctx)
+      this.argument.toFSString(ctx)
     )
   }
 }

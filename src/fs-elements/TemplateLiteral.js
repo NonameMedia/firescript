@@ -21,13 +21,13 @@ class TemplateLiteral extends FireScriptElement {
     this.expressions = this.createElementList(ast.expressions)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     const elements = SuperArray.merge(this.quasis, this.expressions)
     elements[0].head = true
     return this.renderElement(
-      '`' +
+      '\'' +
       ctx.join(elements, '') +
-      '`'
+      '\''
     )
   }
 }

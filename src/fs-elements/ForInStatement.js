@@ -22,13 +22,12 @@ class ForInStatement extends FireScriptElement {
     this.body = this.createElement(ast.body)
   }
 
-  toESString (ctx) {
-    return this.renderElement('for (' +
-      this.left.toESString(ctx) +
+  toFSString (ctx) {
+    return this.renderElement('for ' +
+      this.left.toFSString(ctx) +
       ' in ' +
-      this.right.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
+      this.right.toFSString(ctx) +
+      this.body.toFSString(ctx)
     )
   }
 }

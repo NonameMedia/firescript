@@ -25,7 +25,7 @@ class ClassBody extends FireScriptElement {
 
     return this.renderElement(
       ctx.indent(1) +
-      ctx.join(this.body, ctx.indent()) +
+      ctx.each(this.body, (item) => item.trim(), '\n' + ctx.indent()) +
       ctx.indent(-1)
     )
   }

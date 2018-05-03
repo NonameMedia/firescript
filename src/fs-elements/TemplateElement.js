@@ -21,7 +21,7 @@ class TemplateElement extends FireScriptElement {
     this.head = false
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     const head = this.head ? '' : '}'
     const tail = this.tail ? '' : '${'
     return this.renderElement(

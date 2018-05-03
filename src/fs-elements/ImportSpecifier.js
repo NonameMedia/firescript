@@ -20,23 +20,23 @@ class ImportSpecifier extends FireScriptElement {
     this.imported = ast.imported ? this.createElement(ast.imported) : null
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     if (this.imported) {
       if (this.imported.name === this.local.name) {
         return this.renderElement(
-          this.local.toESString(ctx)
+          this.local.toFSString(ctx)
         )
       }
 
       return this.renderElement(
-        this.imported.toESString(ctx) +
+        this.imported.toFSString(ctx) +
         ' as ' +
-        this.local.toESString(ctx)
+        this.local.toFSString(ctx)
       )
     }
 
     return this.renderElement(
-      this.local.toESString(ctx)
+      this.local.toFSString(ctx)
     )
   }
 }

@@ -20,15 +20,13 @@ class SwitchStatement extends FireScriptElement {
     this.cases = this.createElementList(ast.cases)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      'switch (' +
-      this.discriminant.toESString(ctx) +
-      ') {' +
+      'switch ' +
+      this.discriminant.toFSString(ctx) +
       ctx.indent(1) +
       ctx.each(this.cases, this.blockHandler, ctx.indent()) +
-      ctx.indent(-1) +
-      '}'
+      ctx.indent(-1)
     )
   }
 

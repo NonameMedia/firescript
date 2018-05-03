@@ -20,13 +20,12 @@ class SwitchCase extends FireScriptElement {
     this.consequent = this.createElementList(ast.consequent)
   }
 
-  toESString (ctx) {
-    const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
+  toFSString (ctx) {
+    const test = this.test ? 'case ' + this.test.toFSString(ctx) : 'default'
 
     if (this.consequent.length === 0) {
       return this.renderElement(
-        test +
-        ':'
+        test
       )
     }
 
@@ -36,7 +35,6 @@ class SwitchCase extends FireScriptElement {
 
     return this.renderElement(
       test +
-      ':' +
       indent +
       consequent
     )
