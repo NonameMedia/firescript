@@ -15,13 +15,17 @@ class ReturnStatement extends FireScriptElement {
   constructor (ast) {
     super(ast)
 
-    this.argument = this.createElement(ast.argument)
+    this.argument = ast.argument ? this.createElement(ast.argument) : null
   }
 
   toFSString (ctx) {
+    const arg = this.argument === null ? '' : this.argument.toFSString(ctx)
+    const argSpacing = arg ? ' ' : ''
+
     return this.renderElement(
-      'return ' +
-      this.argument.toFSString(ctx)
+      'return' +
+      argSpacing +
+      arg
     )
   }
 }

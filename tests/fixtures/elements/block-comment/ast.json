@@ -10,7 +10,10 @@
             "params": [],
             "body": {
                 "type": "BlockStatement",
-                "body": []
+                "body": [{
+                    "type": "ReturnStatement",
+                    "argument": null
+                }]
             },
             "generator": false,
             "expression": false,
