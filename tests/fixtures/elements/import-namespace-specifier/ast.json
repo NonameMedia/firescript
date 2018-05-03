@@ -1,0 +1,17 @@
+{
+  "type": "ImportDeclaration",
+  "specifiers": [
+    {
+      "type": "ImportNamespaceSpecifier",
+      "local": {
+        "type": "Identifier",
+        "name": "foo"
+      }
+    }
+  ],
+  "source": {
+    "type": "Literal",
+    "value": "foo",
+    "raw": "'foo'"
+  }
+}

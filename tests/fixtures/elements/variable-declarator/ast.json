@@ -1,0 +1,12 @@
+{
+  "type": "VariableDeclarator",
+  "id": {
+    "type": "Identifier",
+    "name": "res"
+  },
+  "init": {
+    "type": "Literal",
+    "raw": "'bla'",
+    "value": "bla"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "type": "SwitchStatement",
+  "discriminant": {
+    "type": "Literal",
+    "value": true,
+    "raw": "true"
+  },
+  "cases": [
+    {
+      "type": "SwitchCase",
+      "test": {
+        "type": "Identifier",
+        "name": "obj"
+      },
+      "consequent": [
+        {
+          "type": "ExpressionStatement",
+          "expression": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "one"
+            },
+            "arguments": []
+          }
+        },
+        {
+          "type": "BreakStatement",
+          "label": null
+        }
+      ]
+    },
+    {
+      "type": "SwitchCase",
+      "test": null,
+      "consequent": [
+        {
+          "type": "ExpressionStatement",
+          "expression": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "zero"
+            },
+            "arguments": []
+          }
+        }
+      ]
+    }
+  ]
+}

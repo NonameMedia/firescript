@@ -1,0 +1,37 @@
+{
+  "type": "ObjectExpression",
+  "properties": [
+    {
+      "type": "Property",
+      "key": {
+        "type": "Identifier",
+        "name": "banana"
+      },
+      "computed": false,
+      "value": {
+        "type": "Literal",
+        "value": "Banana",
+        "raw": "'Banana'"
+      },
+      "kind": "init",
+      "method": false,
+      "shorthand": false
+    },
+    {
+      "type": "Property",
+      "key": {
+        "type": "Identifier",
+        "name": "mango"
+      },
+      "computed": false,
+      "value": {
+        "type": "Literal",
+        "value": "Mango",
+        "raw": "'Mango'"
+      },
+      "kind": "init",
+      "method": false,
+      "shorthand": false
+    }
+  ]
+}

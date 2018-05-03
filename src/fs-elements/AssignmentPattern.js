@@ -40,11 +40,11 @@ class AssignmentPattern extends FireScriptElement {
     this.right = this.createElement(ast.right, ALLOWED_RIGHTT_CHILDS)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      this.left.toESString(ctx) +
+      this.left.toFSString(ctx) +
       ' = ' +
-      this.right.toESString(ctx)
+      this.right.toFSString(ctx)
     )
   }
 }

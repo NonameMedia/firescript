@@ -27,7 +27,7 @@ class ArrayPattern extends FireScriptElement {
     this.elements = this.createElementList(ast.elements, ALLOWED_CHILDS)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       '[ ' +
       ctx.join(this.elements, ', ') +

@@ -1,0 +1,3 @@
+async getFruits (banana)
+  return banana
+EOL

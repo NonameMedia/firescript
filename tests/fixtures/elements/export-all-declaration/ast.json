@@ -1,0 +1,8 @@
+{
+  "type": "ExportAllDeclaration",
+  "source": {
+    "type": "Literal",
+    "value": "banana",
+    "raw": "'banana'"
+  }
+}
