@@ -22,15 +22,14 @@ class ClassExpression extends FireScriptElement {
     this.body = ast.body ? this.createElement(ast.body) : null
   }
 
-  toESString (ctx) {
-    const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
+  toFSString (ctx) {
+    const superClass = this.superClass ? ' extends ' + this.superClass.toFSString(ctx) : ''
 
     return this.renderElement(
       'class ' +
-      this.id.toESString(ctx) +
+      this.id.toFSString(ctx) +
       superClass +
-      ' ' +
-      this.body.toESString(ctx)
+      this.body.toFSString(ctx)
     )
   }
 }

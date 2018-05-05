@@ -1,4 +1,6 @@
-class Banana
+
   constructor ()
     this.fruit = 'banana'
-EOL
+
+  getFruit ()
+    return this.fruit
