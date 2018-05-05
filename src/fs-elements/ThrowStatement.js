@@ -18,10 +18,10 @@ class ThrowStatement extends FireScriptElement {
     this.argument = this.createElement(ast.argument)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       'throw ' +
-      this.argument.toESString(ctx)
+      this.argument.toFSString(ctx)
     )
   }
 }
