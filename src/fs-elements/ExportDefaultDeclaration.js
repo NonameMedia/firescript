@@ -20,7 +20,7 @@ class ExportDefaultDeclaration extends FireScriptElement {
 
   toFSString (ctx) {
     return this.renderElement(
-      'export default ' +
+      'export ** ' +
       this.declaration.toFSString(ctx)
     )
   }
