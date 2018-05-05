@@ -21,8 +21,7 @@ class Program extends FireScriptElement {
 
   toFSString (ctx) {
     return this.renderElement(
-      ctx.join(this.body, '\n') +
-      '\n'
+      ctx.join(this.body, '\n')
     )
   }
 }
