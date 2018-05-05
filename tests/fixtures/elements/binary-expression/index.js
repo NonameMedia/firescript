@@ -1,1 +1,1 @@
-num >= 100EOL
+num >= 100EOF

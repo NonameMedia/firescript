@@ -1,1 +1,1 @@
-banana ? 'banana' : 'pear'EOL
+banana ? 'banana' : 'pear'EOF

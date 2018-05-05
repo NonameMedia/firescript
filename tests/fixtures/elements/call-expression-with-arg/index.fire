@@ -1,1 +1,1 @@
-banana('yellow')EOL
+banana('yellow')EOF

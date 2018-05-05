@@ -21,7 +21,7 @@ describe.only('FireScriptElements', () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect
             .readFile(`${testCase.path}/index.fire`)
-            .replace(/EOL\s*$/, '')
+            .replace(/EOF\s*$/, '')
 
           const ctx = new RenderContext(null, 'fire')
           const Element = require(`../../src/fs-elements/${ast.type}`)

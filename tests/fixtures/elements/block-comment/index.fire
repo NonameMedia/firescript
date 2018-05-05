@@ -11,4 +11,4 @@ third comment
 */
 func foo ()
   return
-EOL
+EOF

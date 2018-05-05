@@ -1,1 +1,1 @@
-export { banana as b1 }EOL
+export { banana as b1 }EOF

@@ -1,1 +1,1 @@
-fruit = 'banana'EOL
+fruit = 'banana'EOF

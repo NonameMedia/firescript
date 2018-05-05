@@ -1,1 +1,1 @@
-export default bananaEOL
+export default bananaEOF

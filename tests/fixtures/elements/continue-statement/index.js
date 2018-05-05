@@ -1,1 +1,1 @@
-continue;EOL
+continue;EOF

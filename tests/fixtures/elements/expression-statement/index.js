@@ -1,1 +1,1 @@
-await banana;EOL
+await banana;EOF

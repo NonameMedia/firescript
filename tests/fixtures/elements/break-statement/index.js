@@ -1,1 +1,1 @@
-breakEOL
+breakEOF

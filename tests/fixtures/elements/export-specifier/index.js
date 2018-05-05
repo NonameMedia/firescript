@@ -1,1 +1,1 @@
-{ banana as b1 }EOL
+{ banana as b1 }EOF

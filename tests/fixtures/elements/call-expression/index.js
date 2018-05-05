@@ -1,1 +1,1 @@
-banana()EOL
+banana()EOF
