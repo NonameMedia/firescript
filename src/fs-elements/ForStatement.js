@@ -25,8 +25,10 @@ class ForStatement extends FireScriptElement {
   }
 
   toFSString (ctx) {
+    this.init.kind = ''
+
     return this.renderElement(
-      'for ' +
+      'for' +
       this.init.toFSString(ctx) +
       '; ' +
       this.test.toFSString(ctx) +
