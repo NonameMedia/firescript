@@ -9,6 +9,7 @@ second comment
 /*
 third comment
 */
-funcion foo () {
+function foo () {
   return;
-}EOF
+}
+EOF
