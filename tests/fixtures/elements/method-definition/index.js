@@ -1,1 +1,3 @@
-EOF
+getFruit () {
+  return this.fruit;
+}EOF
