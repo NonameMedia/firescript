@@ -1,17 +1,7 @@
 {
-  "type": "ImportDeclaration",
-  "specifiers": [
-    {
-      "type": "ImportDefaultSpecifier",
-      "local": {
-        "type": "Identifier",
-        "name": "foo"
-      }
-    }
-  ],
-  "source": {
-    "type": "Literal",
-    "value": "foo",
-    "raw": "'foo'"
+  "type": "ImportDefaultSpecifier",
+  "local": {
+    "type": "Identifier",
+    "name": "foo"
   }
 }
