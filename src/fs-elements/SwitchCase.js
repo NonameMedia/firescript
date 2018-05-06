@@ -31,12 +31,13 @@ class SwitchCase extends FireScriptElement {
 
     const indent = ctx.indent(1)
     const consequent = ctx.join(this.consequent, ctx.indent())
-    ctx.indent(-1)
+    const outdent = ctx.indent(-1)
 
     return this.renderElement(
       test +
       indent +
-      consequent
+      consequent +
+      '\n'
     )
   }
 }

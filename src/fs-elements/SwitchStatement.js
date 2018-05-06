@@ -21,12 +21,17 @@ class SwitchStatement extends FireScriptElement {
   }
 
   toFSString (ctx) {
+    const discriminant = this.discriminant.toFSString(ctx)
+    const indention = ctx.indent(1)
+    const cases = ctx.each(this.cases, this.blockHandler, ctx.indent())
+    ctx.indent(-1)
+
     return this.renderElement(
       'switch ' +
-      this.discriminant.toFSString(ctx) +
-      ctx.indent(1) +
-      ctx.each(this.cases, this.blockHandler, ctx.indent()) +
-      ctx.indent(-1)
+      discriminant +
+      indention +
+      cases +
+      '\n'
     )
   }
 
@@ -35,7 +40,7 @@ class SwitchStatement extends FireScriptElement {
       return str
     }
 
-    return str + '\n'
+    return str
   }
 }
 
