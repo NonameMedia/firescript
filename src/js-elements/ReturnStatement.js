@@ -19,9 +19,13 @@ class ReturnStatement extends JSElement {
   }
 
   toESString (ctx) {
+    const arg = this.argument === null ? '' : this.argument.toESString(ctx)
+    const argSpacing = arg ? ' ' : ''
+
     return this.renderElement(
       'return ' +
-      this.argument.toESString(ctx) +
+      argSpacing +
+      arg +
       ';'
     )
   }
