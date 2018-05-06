@@ -49,7 +49,7 @@ class ExportDefaultDeclaration extends FireScriptNode {
 
     tokenStack.goForward()
 
-    if (!tokenStack.expect('identifier', 'default')) {
+    if (!tokenStack.expect('operator', '**')) {
       this.syntaxError(`Unexpected token, default identifier expected`)
     }
 

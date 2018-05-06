@@ -3,7 +3,7 @@ const inspect = require('inspect.js')
 const FireScriptTranspiler = require('../../').FireScriptTranspiler
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
-describe.only('FireScriptTranspiler', () => {
+describe('FireScriptTranspiler', () => {
   const featureConf = {
   }
 

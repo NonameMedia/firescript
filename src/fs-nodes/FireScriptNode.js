@@ -196,7 +196,7 @@ class FireScriptNode {
       }
 
       if (nextToken.value === 'export') {
-        if (tokenStack.lookForward('identifier', 'default', 1)) {
+        if (tokenStack.lookForward('operator', '**', 1)) {
           return this.getNodeInstance('ExportDefaultDeclaration', tokenStack)
         }
 
