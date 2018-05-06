@@ -1,4 +1,4 @@
-const JSElement = require('./JSElement')
+return const JSElement = require('./JSElement')
 
 /**
  * Identifier
@@ -20,6 +20,10 @@ class Identifier extends JSElement {
 
   toESString (ctx) {
     return this.renderElement(this.name)
+  }
+
+  getLength () {
+    this.name.length
   }
 }
 

@@ -21,6 +21,10 @@ class Identifier extends FireScriptElement {
   toFSString (ctx) {
     return this.renderElement(this.name)
   }
+
+  getLength () {
+    return this.name.length
+  }
 }
 
 module.exports = Identifier

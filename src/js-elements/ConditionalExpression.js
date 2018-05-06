@@ -44,7 +44,8 @@ class ConditionalExpression extends JSElement {
       consequent +
       indention +
       ': ' +
-      alternate
+      alternate +
+      '\n'
   }
 
   renderInline (ctx) {
@@ -60,7 +61,7 @@ class ConditionalExpression extends JSElement {
   }
 
   getLength () {
-    return this.test.getLength +
+    return this.test.getLength() +
       this.consequent.getLength() +
       this.alternate.getLength() +
       6
