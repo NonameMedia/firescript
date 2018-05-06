@@ -3,7 +3,7 @@ const inspect = require('inspect.js')
 const RenderContext = require('../../src/RenderContext')
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/elements')
 
-describe('JSElements', () => {
+describe('FireScriptElements', () => {
   describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -13,20 +13,20 @@ describe('JSElements', () => {
         group = testCase.name
 
         if (group.charAt(0) === '_') {
-          it.skip(`${group.substr(1)} into JS from an AST snippet`)
+          it.skip(`${group.substr(1)} into FireScript from an AST snippet`)
           return
         }
 
-        it(`${group} into JS from an AST snippet`, () => {
+        it(`${group} into FireScript from an AST snippet`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect
-            .readFile(`${testCase.path}/index.js`)
+            .readFile(`${testCase.path}/index.fire`)
             .replace(/EOF\s*$/, '')
 
-          const ctx = new RenderContext()
-          const Element = require(`../../src/js-elements/${ast.type}`)
-          const jse = new Element(ast)
-          inspect(jse.toESString(ctx)).isEql(source)
+          const ctx = new RenderContext(null, 'fire')
+          const Element = require(`../../src/fs-elements/${ast.type}`)
+          const fse = new Element(ast)
+          inspect(fse.toFSString(ctx)).isEql(source)
         })
       }
     })
