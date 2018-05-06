@@ -20,7 +20,18 @@ class Program extends FireScriptElement {
   }
 
   toFSString (ctx) {
-    const body = ctx.join(this.body, '\n').trim()
+    const body = this.body.map((item, index, arr) => {
+      const str = item.toFSString(ctx)
+      if (/^Import/.test(item.type)) {
+        const next = arr[index + 1]
+        if (next && !/^Import/.test(next.type)) {
+          return str + '\n'
+        }
+      }
+
+      return str
+    }).join('\n').trim()
+
     return this.renderElement(
       body + '\n'
     )

@@ -15,7 +15,6 @@ const FireScriptElement = require('./FireScriptElement')
 class ImportSpecifier extends FireScriptElement {
   constructor (ast) {
     super(ast)
-
     this.local = this.createElement(ast.local)
     this.imported = ast.imported ? this.createElement(ast.imported) : null
   }
