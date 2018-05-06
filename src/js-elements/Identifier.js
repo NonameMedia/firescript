@@ -1,4 +1,4 @@
-return const JSElement = require('./JSElement')
+const JSElement = require('./JSElement')
 
 /**
  * Identifier
@@ -23,7 +23,7 @@ class Identifier extends JSElement {
   }
 
   getLength () {
-    this.name.length
+    return this.name.length
   }
 }
 
