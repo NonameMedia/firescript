@@ -1,2 +1,3 @@
 getFruits ()
   return this
+EOF
