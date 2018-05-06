@@ -21,13 +21,16 @@ class SwitchStatement extends JSElement {
   }
 
   toESString (ctx) {
+    const indention = ctx.indent(1)
+    const cases = ctx.each(this.cases, this.blockHandler, ctx.indent())
+    ctx.indent(-1)
+
     return this.renderElement(
       'switch (' +
       this.discriminant.toESString(ctx) +
       ') {' +
-      ctx.indent(1) +
-      ctx.each(this.cases, this.blockHandler, ctx.indent()) +
-      ctx.indent(-1) +
+      indention +
+      cases +
       '}'
     )
   }
@@ -37,7 +40,7 @@ class SwitchStatement extends JSElement {
       return str
     }
 
-    return str + '\n'
+    return str
   }
 }
 

@@ -38,7 +38,8 @@ class SwitchCase extends JSElement {
       test +
       ':' +
       indent +
-      consequent
+      consequent +
+      '\n'
     )
   }
 }
