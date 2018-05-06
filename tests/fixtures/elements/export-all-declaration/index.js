@@ -1,1 +1,1 @@
-export * from 'banana'; EOF
+export * from 'banana';EOF

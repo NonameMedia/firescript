@@ -1,1 +1,1 @@
-export default bananaEOF
+export default banana;EOF

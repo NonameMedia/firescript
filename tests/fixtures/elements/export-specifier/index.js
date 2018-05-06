@@ -1,1 +1,1 @@
-{ banana as b1 }EOF
+banana as b1EOF
