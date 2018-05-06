@@ -3,7 +3,7 @@ const inspect = require('inspect.js')
 const RenderContext = require('../../src/RenderContext')
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/elements')
 
-describe.only('FireScriptElements', () => {
+describe('FireScriptElements', () => {
   describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
