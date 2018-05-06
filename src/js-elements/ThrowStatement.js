@@ -21,7 +21,8 @@ class ThrowStatement extends JSElement {
   toESString (ctx) {
     return this.renderElement(
       'throw ' +
-      this.argument.toESString(ctx)
+      this.argument.toESString(ctx) +
+      ';'
     )
   }
 }
