@@ -20,11 +20,11 @@ class MetaProperty extends FireScriptElement {
     this.property = this.createElement(ast.property)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
-      this.meta.toESString(ctx) +
+      this.meta.toFSString(ctx) +
       '.' +
-      this.property.toESString(ctx)
+      this.property.toFSString(ctx)
     )
   }
 }
