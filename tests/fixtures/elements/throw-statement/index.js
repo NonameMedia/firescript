@@ -1,1 +1,1 @@
-throw errEOF
+throw err;EOF
