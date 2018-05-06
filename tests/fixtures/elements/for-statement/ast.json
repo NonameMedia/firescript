@@ -16,7 +16,7 @@
         }
       }
     ],
-    "kind": "var"
+    "kind": "let"
   },
   "test": {
     "type": "BinaryExpression",
