@@ -45,6 +45,7 @@ class Property extends FireScriptElement {
     if (this.method) {
       return this.renderElement(
         this.key.toFSString(ctx) +
+        ' ' +
         this.value.toFSString(ctx)
       )
     }

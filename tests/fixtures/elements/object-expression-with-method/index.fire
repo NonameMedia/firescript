@@ -1,5 +1,5 @@
 
   banana: 'Banana'
-  getFruits()
+  getFruits ()
     return this
 EOF
