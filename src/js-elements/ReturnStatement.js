@@ -15,7 +15,7 @@ class ReturnStatement extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.argument = this.createElement(ast.argument)
+    this.argument = ast.argument ? this.createElement(ast.argument) : null
   }
 
   toESString (ctx) {
@@ -23,7 +23,7 @@ class ReturnStatement extends JSElement {
     const argSpacing = arg ? ' ' : ''
 
     return this.renderElement(
-      'return ' +
+      'return' +
       argSpacing +
       arg +
       ';'
