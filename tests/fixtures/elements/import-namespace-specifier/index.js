@@ -1,1 +1,1 @@
-EOF
+* as fooEOF
