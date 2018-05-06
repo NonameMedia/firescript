@@ -1,7 +1,7 @@
 const inspect = require('inspect.js')
 
 const helloWorldFS =
-  'import ** as print from \'print\'\n' +
+  'import ** as print from \'print\'\n\n' +
   'print(\'Hello World!\')\n'
 
 const FireScriptTranspiler = require('../../src/FireScriptTranspiler')

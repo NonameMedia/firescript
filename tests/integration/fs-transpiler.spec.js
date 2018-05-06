@@ -30,8 +30,8 @@ describe('FireScriptTranspiler', () => {
 
           const jsSource = transpiler.transpile(ast)
           inspect(jsSource).isString()
-          console.log(`${jsSource}¬`)
-          console.log(`${source}¬`)
+          // console.log(`${jsSource}¬`)
+          // console.log(`${source}¬`)
           inspect(jsSource).isEql(source)
         })
       }

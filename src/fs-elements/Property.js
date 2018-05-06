@@ -44,8 +44,6 @@ class Property extends FireScriptElement {
     const key = this.key.toFSString(ctx)
     let value = this.value.toFSString(ctx)
 
-    console.log('PROPPARENT', this.parent.type)
-    console.log('PROPVALUE', this.value.type)
     let propertySpacing = ' '
     if (value.startsWith('\n')) {
       propertySpacing = ''

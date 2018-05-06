@@ -39,7 +39,6 @@ class ArrayExpression extends FireScriptElement {
   renderMultiline (ctx) {
     const indention = ctx.indent(1)
     const elements = ctx.join(this.elements, ctx.indent())
-    console.log('PROPS', `>${elements}<`)
     const outdent = ctx.indent(-1)
 
     return '[' +
