@@ -18,7 +18,7 @@ class ObjectPattern extends FireScriptElement {
     this.properties = this.createElementList(ast.properties)
   }
 
-  toESString (ctx) {
+  toFSString (ctx) {
     return this.renderElement(
       '{ ' +
       ctx.join(this.properties, ', ') +
