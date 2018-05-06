@@ -1,1 +1,1 @@
-const res = 'bla'EOF
+const res = 'bla';EOF
