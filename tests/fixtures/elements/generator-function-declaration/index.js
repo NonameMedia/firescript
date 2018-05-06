@@ -1,3 +1,3 @@
-function getFruits (banana) {
-  return banana
+function * getFruits (banana) {
+  return banana;
 }EOF
