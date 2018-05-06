@@ -2,4 +2,4 @@
   'banana',
   'mango',
   'peach'
-]
+]EOF

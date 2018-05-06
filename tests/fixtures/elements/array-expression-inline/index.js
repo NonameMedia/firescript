@@ -1,1 +1,1 @@
-[ 'banana', 'mango' ]
+[ 'banana', 'mango' ]EOF
