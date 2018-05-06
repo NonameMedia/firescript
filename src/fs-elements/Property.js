@@ -41,20 +41,30 @@ class Property extends FireScriptElement {
     }
 
     const kind = this.kind === 'init' ? '' : ' ' + this.kind
+    const key = this.key.toFSString(ctx)
+    let value = this.value.toFSString(ctx)
+
+    console.log('PROPPARENT', this.parent.type)
+    console.log('PROPVALUE', this.value.type)
+    let propertySpacing = ' '
+    if (value.startsWith('\n')) {
+      propertySpacing = ''
+    }
 
     if (this.method) {
       return this.renderElement(
-        this.key.toFSString(ctx) +
-        ' ' +
-        this.value.toFSString(ctx)
+        key +
+        propertySpacing +
+        value
       )
     }
 
     return this.renderElement(
       kind +
-      this.key.toFSString(ctx) +
-      ': ' +
-      this.value.toFSString(ctx)
+      key +
+      ':' +
+      propertySpacing +
+      value
     )
   }
 }

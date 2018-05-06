@@ -20,8 +20,8 @@ class FireScriptElement {
     return ' '.repeat(this.indention * this.indentionSize)
   }
 
-  getIndention () {
-    return ' '.repeat((this.__indention) * this.indentionSize)
+  getIndention (size) {
+    return ' '.repeat((size || this.__indention) * this.indentionSize)
   }
 
   getTemplate () {

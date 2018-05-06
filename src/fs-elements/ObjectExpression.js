@@ -34,10 +34,19 @@ class ObjectExpression extends FireScriptElement {
   }
 
   renderMultiline (ctx) {
-    const indention = ctx.indent(+1)
+    let indention = ctx.indent(+1)
     const properties = ctx.join(this.properties, `${ctx.indent()}`)
-    console.log('PROPS', `>${properties}<`)
-    const outdent = ctx.indent(-1)
+    let outdent = ctx.indent(-1)
+
+    if (this.isParent(['ArrayExpression'])) {
+      indention = this.getIndention(1)
+      outdent = ''
+    }
+
+    if (this.isParent(['Property'])) {
+      outdent = ''
+    }
+
     return indention +
       properties.trim() +
       outdent
