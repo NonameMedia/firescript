@@ -1,1 +1,1 @@
-return bananaEOF
+return banana;EOF
