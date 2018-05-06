@@ -9,7 +9,13 @@ class ForStatement extends FireScriptNode {
     }
 
     tokenStack.goForward()
-    this.init = this.createFullNode(tokenStack)
+
+    if (tokenStack.expect('identifier') && tokenStack.lookForward('operator', '=', 1)) {
+      this.init = this.createVariableDeclarationNode(tokenStack, 'let')
+    } else {
+      this.init = this.createFullNode(tokenStack)
+    }
+
 
     if (!tokenStack.expect('punctuator', ';')) {
       this.syntaxError('Unexpected token!', tokenStack.current())

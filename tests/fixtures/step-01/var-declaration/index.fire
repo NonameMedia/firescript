@@ -1,4 +1,5 @@
 var bla = 'Blabla'
-var blub, blo
+var blub
+var blo
 blub = 1
 blo = 2
