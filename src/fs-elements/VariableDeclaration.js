@@ -21,7 +21,7 @@ class VariableDeclaration extends FireScriptElement {
   }
 
   isKindRequired () {
-    return !['ForInStatement', 'ForOfStatement'].includes(this.parent.type)
+    return !this.isParent(['ForInStatement', 'ForOfStatement'])
   }
 
   toFSString (ctx) {
