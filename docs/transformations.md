@@ -1,7 +1,7 @@
 Transformer
 ===========
 
-The transformer transforms modern Javascript into an older syntax. This feature allows using of modern tecnologies even they arent supported by the browser or Node.js version. All modern features enabled by default, which means transformations are all disabled by default. To enable a transformation, switrch of a feature by setting a feature flag to false.
+The transformer transforms modern Javascript into an older syntax. This feature allows using of modern tecnologies even they arent supported by the browser or Node.js version. All modern features enabled by default, which means transformations are all disabled by default. To enable a transformation, switch of a feature by setting a feature flag to false.
 
 Features
 --------

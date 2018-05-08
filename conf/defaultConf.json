@@ -1,6 +1,7 @@
 {
   "src": "src/",
   "dest": "lib/",
+  "copy": [],
   "features": {
     "esModules": false,
     "esClasses": true,

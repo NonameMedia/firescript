@@ -10,19 +10,23 @@ module.exports = (supershit) => {
     .action(async function (ctx, name) {
       const configFile = path.join(process.cwd(), '.firerc')
       const conf = superconf('fire', {
-        defaultConf: path.join(__dirname, '../conf/defaultConf')
+        defaultConf: path.join(__dirname, '../conf/defaultConf.json')
       })
 
       const res = await this
         .ask({ name: 'src', default: conf.src })
         .ask({ name: 'dest', default: conf.dest })
+        // .ask({ name: 'copy', default: conf.copy, type: 'array' })
         .ask({ name: 'esModules', description: 'ES7 modules enabled (y[es] n[o]?', default: conf.features.esModules ? 'yes' : 'no', type: 'bool', allow: ['y', 'yes', 'n', 'no'] })
         .ask({ name: 'esClasses', description: 'ES6 classes enabled (y[es] n[o]?', default: conf.features.esClasses ? 'yes' : 'yes', type: 'bool', allow: ['y', 'yes', 'n', 'no'] })
         .prompt()
 
+      console.log(res)
+
       const prettyResult = JSON.stringify({
         src: res.src,
         dest: res.dest,
+        // copy: res.copy,
         features: {
           esModules: res.esModules,
           esClasses: res.esClasses
