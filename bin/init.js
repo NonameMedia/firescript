@@ -2,6 +2,7 @@ const path = require('path')
 const SuperFS = require('superfs')
 const superconf = require('superconf')
 const colorfy = require('colorfy')
+const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 
 module.exports = (supershit) => {
   return supershit
@@ -9,9 +10,7 @@ module.exports = (supershit) => {
     .description('Create and initialize a .firerc configuration file under current working dir')
     .action(async (ctx, name) => {
       const configFile = path.join(process.cwd(), '.firerc')
-      const conf = superconf('fire', {
-        defaultConf: path.join(__dirname, '../conf/defaultConf.json')
-      })
+      const conf = superconf.merge(defaultConf, superconf('fire') || {})
 
       const res = await ctx
         .ask({ name: 'src', question: 'Enter source folder', default: conf.src })
