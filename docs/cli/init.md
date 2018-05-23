@@ -22,13 +22,13 @@ Configuration
 
 #### `src` - Source folder
 
-Folder where your files argument
+Folder of your source files
 
 
 #### `dest` - Destination folder
 
 Folder where the transpiled files should go.
-It keeps the path starting from `src` folder.
+It keeps the folder structure starting from `src`.
 
 #### ` copy` - Copy files
 

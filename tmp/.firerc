@@ -1,0 +1,12 @@
+{
+  "src": ".",
+  "dest": "dist/",
+  "copy": [
+    "*.js",
+    "*.json"
+  ],
+  "features": {
+    "esModules": false,
+    "esClasses": true
+  }
+}
