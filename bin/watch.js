@@ -3,6 +3,7 @@ const path = require('path')
 const colorfy = require('colorfy')
 const SuperFS = require('superfs')
 const FireScript = require('../src/app')
+const copy = require('./copy').copy
 
 function transpileFile (filename, srcDir, destDir) {
   const cf = colorfy()
@@ -36,13 +37,16 @@ module.exports = (supershit) => {
         dest: dest
       })
 
+      copy()
       console.log('CONF', conf)
 
       const srcDir = path.resolve(process.cwd(), conf.src)
       const destDir = path.resolve(process.cwd(), conf.dest)
 
       const watchHandler = (flw) => {
-        transpileFile(path.join(flw.relative, flw.changedFile), srcDir, destDir)
+        console.log('FLW', flw)
+        const relative = path.relative(flw.dir, flw.path)
+        transpileFile(path.join(relative, flw.changedFile), srcDir, destDir)
       }
 
       SuperFS.watch(srcDir, watchHandler)

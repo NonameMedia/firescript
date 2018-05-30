@@ -3,7 +3,7 @@ const defaultConf = require('../../conf/defaultConf.json')
 
 class FSConfig {
   constructor () {
-    const conf = superconf('firescript', {
+    const conf = superconf('fire', {
       cwd: process.cwd()
     })
 

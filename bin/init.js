@@ -15,7 +15,7 @@ module.exports = (supershit) => {
       const res = await ctx
         .ask({ name: 'src', question: 'Enter source folder', default: conf.src })
         .ask({ name: 'dest', question: 'Enter destination folder', default: conf.dest })
-        .ask({ name: 'copy', question: 'Copy files to dest folder', default: conf.copy, type: 'array' })
+        // .ask({ name: 'copy', question: 'Copy files to dest folder', default: conf.copy, type: 'array' })
         .ask({ name: 'esModules', question: 'ES7 modules enabled (y[es] n[o]?', default: conf.features.esModules ? 'yes' : 'no', type: 'boolean' })
         .ask({ name: 'esClasses', question: 'ES6 classes enabled (y[es] n[o]?', default: conf.features.esClasses ? 'yes' : 'no', type: 'boolean' })
         .prompt()
