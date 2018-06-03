@@ -15,7 +15,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class TryStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'try')) {
       this.syntaxError('Unexpected token, try keyword expected', tokenStack)

@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ImportNamespaceSpecifier extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('operator', '*')) {
       this.syntaxError('Unexpected token! ImportNamespaceSpecifier expected')

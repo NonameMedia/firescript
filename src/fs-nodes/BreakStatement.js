@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class BreakStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'break')) {
       this.syntaxError('Unexpected token, BreakStatement expected', tokenStack.current())

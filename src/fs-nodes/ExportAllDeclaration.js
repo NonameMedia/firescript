@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ExportAllDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'export')) {
       this.syntaxError(`Unexpected token, export decalration expected`)

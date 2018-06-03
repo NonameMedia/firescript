@@ -8,8 +8,9 @@ describe('FSConfig', () => {
       process.chdir(path.join(__dirname, '../fixtures/banana-project'))
       const conf = new FSConfig()
       inspect(conf.getConf()).isEql({
-        src: 'src/',
+        src: './',
         dest: 'dist/',
+        copy: [],
         features: {
           esModules: false,
           esClasses: true,
@@ -24,8 +25,9 @@ describe('FSConfig', () => {
       process.chdir(path.join(__dirname, '../fixtures/banana-project'))
       const conf = new FSConfig()
       inspect(conf.getConf()).isEql({
-        src: 'src/',
+        src: './',
         dest: 'dist/',
+        copy: [],
         features: {
           esModules: false,
           esClasses: true,

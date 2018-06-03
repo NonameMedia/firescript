@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class TemplateElement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('template')) {
       this.syntaxError('Unexpected token! Tempalte literal expected')

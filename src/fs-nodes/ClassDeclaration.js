@@ -15,7 +15,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ClassDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.id = null
     this.superClass = null

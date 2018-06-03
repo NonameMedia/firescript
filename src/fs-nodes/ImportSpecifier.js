@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ImportSpecifier extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.imported = this.createIdentifierNode(tokenStack)
     this.local = this.imported

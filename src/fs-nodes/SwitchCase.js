@@ -62,14 +62,13 @@ const ALLOWED_CHILDS = [
  */
 class SwitchCase extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
     this.isBlockScope = true
 
     if (!tokenStack.expect('keyword', ['case', 'default'])) {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    this.indention = tokenStack.getIndention()
     const type = tokenStack.getRawValue()
 
     if (type === 'case') {

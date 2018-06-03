@@ -28,7 +28,7 @@ const ALLOWED_CALLEE_TYPES = [
 
 class CallExpression extends FireScriptNode {
   constructor (tokenStack, parent, callee) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.callee = callee || this.createIdentifierNode(tokenStack)
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())

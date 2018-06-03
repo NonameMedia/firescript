@@ -16,7 +16,7 @@ const LOGICAL_OPERATORS = ['||', '&&']
  */
 class LogicalExpression extends FireScriptNode {
   constructor (tokenStack, parent, left) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.left = left || this.createNodeItem(tokenStack)
 

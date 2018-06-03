@@ -26,7 +26,7 @@ const ALLOWED_CHILDS = [
 
 class BlockStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
     this.isBlockScope = true
 
     const token = tokenStack.next()
@@ -36,7 +36,6 @@ class BlockStatement extends FireScriptNode {
     }
 
     this.body = []
-    this.indention = token.value
 
     while (true) {
       const nextToken = tokenStack.current()
@@ -44,18 +43,18 @@ class BlockStatement extends FireScriptNode {
         break
       }
 
-      if (nextToken.type === 'indention' && nextToken.value < this.indention) {
+      if (tokenStack.isIndention('eq', this.indention)) {
         tokenStack.goForward()
         break
       }
 
-      if (nextToken.type === 'indention' && nextToken.value === this.indention) {
+      if (tokenStack.isIndention('gt', this.indention)) {
         tokenStack.goForward()
         continue
       }
 
       const child = this.createFullNode(tokenStack)
-      if (!child) {
+      if (!child || child.type === 'Null') {
         break
       }
 

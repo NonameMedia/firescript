@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class AwaitExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'await')) {
       this.syntaxError('Unexpected token, await keyword expected', tokenStack)

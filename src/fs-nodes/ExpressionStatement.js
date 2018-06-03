@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ExpressionStatement extends FireScriptNode {
   constructor (tokenStack, parent, expression) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.expression = expression
   }

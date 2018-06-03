@@ -1,6 +1,6 @@
 {
-  "src": "src/",
-  "dest": "lib/",
+  "src": "./",
+  "dest": "dist/",
   "copy": [],
   "features": {
     "esModules": false,

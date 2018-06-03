@@ -33,7 +33,7 @@ const ALLOWED_VALUES = [
  */
 class Property extends FireScriptNode {
   constructor (tokenStack, parent, key) {
-    super(parent)
+    super(tokenStack, parent)
     this.isBlockScope = true
 
     this.key = key || this.createNodeItem(tokenStack)

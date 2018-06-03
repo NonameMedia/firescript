@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class TaggedTemplateExpression extends FireScriptNode {
   constructor (tokenStack, parent, tag) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.tag = tag || this.createFullNode(tokenStack)
     if (!this.isExpressionNode(this.tag)) {

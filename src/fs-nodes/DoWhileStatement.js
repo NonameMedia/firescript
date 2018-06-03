@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class DoWhileStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'do')) {
       this.syntaxError('Unexpected token! do keyword expected', tokenStack.current())

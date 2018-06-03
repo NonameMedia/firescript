@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class YieldExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'yield')) {
       this.syntaxError('Unexpected token, yield keyword expected', tokenStack)

@@ -2,19 +2,19 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ClassBody extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.body = []
 
-    if (tokenStack.expect('indention')) {
-      const token = tokenStack.next()
-      this.indention = token.value
-    } else {
+    if (!tokenStack.expect('indention')) {
       this.syntaxError('Unexpected token')
     }
 
+    const token = tokenStack.next()
+    const indention = token.value
+
     while (true) {
-      if (tokenStack.lastIndention('lte', this.indention - this.indentionSize, tokenStack.getIndention())) {
+      if (tokenStack.lastIndention('lte', indention - this.indentionSize, tokenStack.getIndention())) {
         break
       }
 

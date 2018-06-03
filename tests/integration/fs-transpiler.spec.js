@@ -22,7 +22,7 @@ describe('FireScriptTranspiler', () => {
 
         it(`${group} into FireScript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
-          const source = inspect.readFile(`${testCase.path}/index.fire`)
+          const source = inspect.readFile(`${testCase.path}/result.fire`, { silent: true }) || inspect.readFile(`${testCase.path}/index.fire`)
 
           const transpiler = new FireScriptTranspiler({
             features: featureConf

@@ -1,0 +1,49 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                        "type": "CallExpression",
+                        "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                                "type": "CallExpression",
+                                "callee": {
+                                    "type": "MemberExpression",
+                                    "computed": false,
+                                    "object": {
+                                        "type": "Identifier",
+                                        "name": "foo"
+                                    },
+                                    "property": {
+                                        "type": "Identifier",
+                                        "name": "bar"
+                                    }
+                                },
+                                "arguments": []
+                            },
+                            "property": {
+                                "type": "Identifier",
+                                "name": "bla"
+                            }
+                        },
+                        "arguments": []
+                    },
+                    "property": {
+                        "type": "Identifier",
+                        "name": "blubb"
+                    }
+                },
+                "arguments": []
+            }
+        }
+    ],
+    "sourceType": "module"
+}

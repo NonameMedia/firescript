@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ForStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'for')) {
       this.syntaxError('Unexpected token! For statement expected', tokenStack.current())

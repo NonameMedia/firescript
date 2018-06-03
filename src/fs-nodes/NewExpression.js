@@ -28,7 +28,7 @@ const ALLOWED_CALLEE_TYPES = [
 
 class NewExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'new')) {
       this.syntaxError('NewExpression expected!', tokenStack.current())

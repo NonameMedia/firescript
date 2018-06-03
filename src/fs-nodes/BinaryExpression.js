@@ -3,7 +3,7 @@ const constants = require('../utils/constants')
 
 class BinaryExpression extends FireScriptNode {
   constructor (tokenStack, parent, left) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (left) {
       this.left = left

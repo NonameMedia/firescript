@@ -20,7 +20,7 @@ const ALLOWED_PARAMS = [
  */
 class CatchClause extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'catch')) {
       this.syntaxError('Unexpected token, catch keyword expected', tokenStack)

@@ -16,7 +16,7 @@ const constants = require('../utils/constants')
  */
 class UnaryExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     const token = tokenStack.next()
     this.operator = token.value

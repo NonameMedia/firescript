@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ReturnStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     const token = tokenStack.next()
 

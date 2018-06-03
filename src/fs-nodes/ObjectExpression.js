@@ -6,37 +6,41 @@ const ALLOWED_ELEMENTS = [
 
 class ObjectExpression extends FireScriptNode {
   constructor (tokenStack, parent, property) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.properties = []
 
     if (tokenStack.expect('punctuator', '{')) {
       tokenStack.goForward()
       if (!tokenStack.expect('indention')) {
-        this.parseProperties(tokenStack)
+        this.parseProperties(tokenStack, this.indention)
         return
       }
     }
 
-    if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
-      this.indention = tokenStack.getIndention()
-      this.parseProperties(tokenStack)
+    const childIndention = this.indention + this.indentionSize
+    if (tokenStack.expect('indention', childIndention)) {
+      this.parseProperties(tokenStack, childIndention)
     } else if (property) {
       this.properties.push(property)
-      this.parseProperties(tokenStack)
+      this.parseProperties(tokenStack, childIndention)
     } else {
       this.syntaxError('Object declaration expected', tokenStack.current())
     }
   }
 
-  parseProperties (tokenStack) {
+  parseProperties (tokenStack, childIndention) {
     while (true) {
+      if (!tokenStack.current()) {
+        break
+      }
+
       if (tokenStack.expect('punctuator', '}')) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.isIndention('lt', this.indention)) {
+      if (tokenStack.isIndention('lt', childIndention)) {
         tokenStack.goForward()
         if (tokenStack.expect('punctuator', ['}', ']'])) {
           tokenStack.goForward()
@@ -45,12 +49,12 @@ class ObjectExpression extends FireScriptNode {
         break
       }
 
-      if (tokenStack.isIndention('eq', this.indention)) {
+      if (tokenStack.isIndention('eq', childIndention)) {
         tokenStack.goForward()
         continue
       }
 
-      if (tokenStack.isIndention('gt', this.indention)) {
+      if (tokenStack.isIndention('gt', childIndention)) {
         const objectExpression = this.tryObjectExpression(tokenStack)
         if (objectExpression) {
           this.properties.push(objectExpression)

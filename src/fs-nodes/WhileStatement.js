@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class WhileStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'while')) {
       this.syntaxError('Unexpected token! While statement expected', tokenStack.current())

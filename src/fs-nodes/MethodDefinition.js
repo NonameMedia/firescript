@@ -34,7 +34,7 @@ const ALLOWED_VALUES = [
 
 class MethodDefinition extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.static = false
     this.kind = 'method'

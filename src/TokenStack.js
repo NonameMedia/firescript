@@ -54,8 +54,9 @@ class TokenStack extends Array {
     return token.value
   }
 
-  getIndention () {
-    for (let index = this.index; index >= 0; index--) {
+  getIndention (offset) {
+    offset = offset || 0
+    for (let index = this.index + offset; index >= 0; index--) {
       const token = this[index]
       if (!token) {
         return 0
@@ -108,6 +109,14 @@ class TokenStack extends Array {
   }
 
   isIndention (mode, indention, curIndention) {
+    if (typeof indention === 'object') {
+      if (indention.type !== 'indention') {
+        return false
+      }
+
+      indention = indention.value
+    }
+
     indention = Math.max(indention, 0)
     const token = this.current()
 

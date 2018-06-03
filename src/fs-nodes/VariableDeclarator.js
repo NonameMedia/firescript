@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class VariableDeclarator extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     // TODO support binding patterns
     this.id = this.createIdentifierNode(tokenStack)

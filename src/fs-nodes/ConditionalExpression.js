@@ -15,7 +15,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ConditionalExpression extends FireScriptNode {
   constructor (tokenStack, parent, test) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.test = test || this.createFullNode(tokenStack)
 

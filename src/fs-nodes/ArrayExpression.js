@@ -29,34 +29,34 @@ const ALLOWED_ELEMENTS = [
 
 class ArrayExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.elements = []
 
     if (tokenStack.expect('punctuator', '[')) {
       tokenStack.goForward()
       if (!tokenStack.expect('indention')) {
-        this.parseElements(tokenStack)
+        this.parseElements(tokenStack, this.indention)
         return
       }
     }
 
-    if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
-      this.indention = tokenStack.getIndention()
-      this.parseElements(tokenStack)
+    const childIndention = this.indention + this.indentionSize
+    if (tokenStack.expect('indention', childIndention)) {
+      this.parseElements(tokenStack, childIndention)
     } else {
       this.syntaxError('Array declaration expected', tokenStack.current())
     }
   }
 
-  parseElements (tokenStack) {
+  parseElements (tokenStack, childIndention) {
     while (true) {
       if (tokenStack.expect('punctuator', ']')) {
         tokenStack.goForward()
         break
       }
 
-      if (tokenStack.isIndention('lt', this.indention)) {
+      if (tokenStack.isIndention('lt', childIndention)) {
         tokenStack.goForward()
         if (tokenStack.expect('punctuator', ']')) {
           tokenStack.goForward()
@@ -65,12 +65,12 @@ class ArrayExpression extends FireScriptNode {
         break
       }
 
-      if (tokenStack.isIndention('eq', this.indention)) {
+      if (tokenStack.isIndention('eq', childIndention)) {
         tokenStack.goForward()
         continue
       }
 
-      if (tokenStack.isIndention('gt', this.indention)) {
+      if (tokenStack.isIndention('gt', childIndention)) {
         const objectExpression = this.tryObjectExpression(tokenStack)
         if (objectExpression) {
           this.elements.push(objectExpression)

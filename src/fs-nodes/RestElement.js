@@ -8,7 +8,7 @@ const ALLOWED_CHILDS = [
 
 class RestElement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('punctuator', '...')) {
       this.syntaxError('Unexpected token! RestElement expected')

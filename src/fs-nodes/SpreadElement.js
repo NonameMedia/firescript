@@ -19,7 +19,7 @@ const ALLOWED_CHILDS = [
  */
 class SpreadElement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('punctuator', '...')) {
       this.syntaxError('Unexpected token! SpreadElement expected')

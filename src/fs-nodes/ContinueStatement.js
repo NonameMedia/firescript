@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ContinueStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'continue')) {
       this.syntaxError('Unexpected token, ContinueStatement expected', tokenStack.current())

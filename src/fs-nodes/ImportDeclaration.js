@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ImportDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     let token = tokenStack.next()
     if (!token.type === 'import') {

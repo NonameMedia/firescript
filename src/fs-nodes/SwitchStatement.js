@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class SwitchStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'switch')) {
       this.syntaxError('Unexpected token, switch keyword expected', tokenStack.current())
@@ -15,7 +15,7 @@ class SwitchStatement extends FireScriptNode {
       this.syntaxError('Unexpected token')
     }
 
-    this.indention = tokenStack.getIndention()
+    const childIndention = tokenStack.getIndention()
     tokenStack.goForward()
 
     this.cases = []
@@ -27,7 +27,7 @@ class SwitchStatement extends FireScriptNode {
         break
       }
 
-      if (nextToken.type === 'indention' && nextToken.value < this.indention) {
+      if (nextToken.type === 'indention' && nextToken.value < childIndention) {
         tokenStack.goForward()
         break
       }
@@ -39,7 +39,7 @@ class SwitchStatement extends FireScriptNode {
       }
 
       this.cases.push(this.createSwitchCaseNode(tokenStack))
-      if (tokenStack.getIndention() === this.indention) {
+      if (tokenStack.getIndention() === childIndention) {
         continue
       }
 

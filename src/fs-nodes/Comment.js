@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class Comment extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect(['comment', 'block-comment'])) {
       this.syntaxError('Unexpected token! Comment expected')

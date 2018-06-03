@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class Identifier extends FireScriptNode {
   constructor (tokenStack, parent, name) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (name) {
       this.name = name

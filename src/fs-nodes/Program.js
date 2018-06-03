@@ -35,7 +35,7 @@ const ALLOWED_MODULE_CHILDS = [
  */
 class Program extends FireScriptNode {
   constructor (tokenStack, parent, sourceType) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.isBlockScope = true
     this.sourceType = sourceType || 'module'

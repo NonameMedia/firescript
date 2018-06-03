@@ -2,25 +2,23 @@ const FireScriptNode = require('./FireScriptNode')
 
 class IfStatement extends FireScriptNode {
   constructor (tokenStack, parent, test) {
-    super(parent)
+    super(tokenStack, parent)
 
-    if (test) {
-      this.test = test
-    } else {
-      if (!tokenStack.expect('keyword', 'if')) {
-        this.syntaxError('Unexpected token! If statement expected', tokenStack.current())
-      }
+    if (tokenStack.expect('keyword', 'if')) {
+      tokenStack.goForward()
+      this.test = this.createFullNode(tokenStack)
+    } else if (tokenStack.expect('keyword', 'elif')) {
+      this.expectParent('IfStatement', tokenStack.current())
 
       tokenStack.goForward()
       this.test = this.createFullNode(tokenStack)
+    } else {
+      this.syntaxError('Unexpected token! If statement expected', tokenStack.current())
     }
 
     this.consequent = this.createFullNode(tokenStack)
 
     if (tokenStack.expect('keyword', 'elif')) {
-      tokenStack.goForward()
-      const test = this.createFullNode(tokenStack)
-
       this.alternate = this.createIfStatementNode(tokenStack, test)
     }
 

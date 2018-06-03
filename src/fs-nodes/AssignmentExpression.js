@@ -3,7 +3,7 @@ const constants = require('../utils/constants')
 
 class AssignmentExpression extends FireScriptNode {
   constructor (tokenStack, parent, left) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.left = left || this.createNodeItem(tokenStack)
     const token = tokenStack.next()

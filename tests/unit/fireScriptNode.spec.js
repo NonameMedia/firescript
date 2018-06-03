@@ -5,12 +5,12 @@ const FireScriptNode = require('../../src/fs-nodes/FireScriptNode')
 describe('FireScriptNode', () => {
   describe('createNodeItem()', () => {
     it('creates a identifier node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'Banana' },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -20,12 +20,12 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a this node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'this' },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -34,12 +34,12 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a literal node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'literal', 'value': '"Banana"' },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -50,12 +50,12 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a numeric literal node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'numeric', 'value': '123' },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -66,7 +66,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a identifier node on a call expression', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'Banana' },
         { 'type': 'punctuator', 'value': '(' },
@@ -74,6 +73,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -83,12 +83,13 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a BlockStatement node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'indention', 'value': 2 },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
+      fsn.indention = 0
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -98,7 +99,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a ImportDeclaration node on a call expression', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'import' },
         { 'type': 'operator', 'value': '**' },
@@ -109,6 +109,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -129,7 +130,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a NewExpression node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'new' },
         { 'type': 'identifier', 'value': 'Banana' },
@@ -138,6 +138,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -153,12 +154,12 @@ describe('FireScriptNode', () => {
 
   describe('createFullNode()', () => {
     it('creates a identifier node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'Banana' },
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -168,7 +169,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a ExpressionStatement node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'one' },
         { 'type': 'operator', 'value': '=' },
@@ -176,6 +176,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -197,7 +198,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a MemberExpression node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'Banana' },
         { 'type': 'punctuator', 'value': '.' },
@@ -207,6 +207,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -235,7 +236,6 @@ describe('FireScriptNode', () => {
     })
 
     it('creates a CallExpression node', () => {
-      const fsn = new FireScriptNode()
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'banana' },
         { 'type': 'punctuator', 'value': '(' },
@@ -244,6 +244,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
+      const fsn = new FireScriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({

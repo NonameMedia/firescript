@@ -6,13 +6,13 @@ const ALLOWED_ELEMENTS = [
 
 class ObjectPattern extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.properties = []
 
     if (tokenStack.expect('punctuator', '{')) {
       this.parseCommonSyntax(tokenStack)
-    } else if (tokenStack.expect('indention', this.indention + this.indentionSize)) {
+    } else if (tokenStack.expect('indention', this.indention)) {
       this.parseBracelessSyntax(tokenStack)
     } else {
       this.syntaxError('Array declaration expected', tokenStack.current())

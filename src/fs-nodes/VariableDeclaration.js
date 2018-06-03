@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class VariableDeclaration extends FireScriptNode {
   constructor (tokenStack, parent, kind) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.kind = kind || tokenStack.getRawValue()
     if (!['var', 'let', 'const'].includes(this.kind)) {

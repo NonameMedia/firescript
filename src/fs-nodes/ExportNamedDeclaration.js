@@ -24,9 +24,9 @@ const ALLOWED_SPECIFIERS = [
  */
 class ExportNamedDeclaration extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
     this.isBlockScope = true
-    this.indention = tokenStack.getIndention()
+    const indention = tokenStack.getIndention()
 
     if (!tokenStack.expect('keyword', 'export')) {
       this.syntaxError(`Unexpected token, export decalration expected`)
@@ -40,7 +40,7 @@ class ExportNamedDeclaration extends FireScriptNode {
       this.isAllowedNode(this.declaration, ALLOWED_DECLARATIONS)
     } else {
       while (true) {
-        if (tokenStack.isIndention('gte', this.indention)) {
+        if (tokenStack.isIndention('gte', indention)) {
           tokenStack.goForward()
           break
         }
@@ -53,7 +53,7 @@ class ExportNamedDeclaration extends FireScriptNode {
           continue
         }
 
-        if (tokenStack.isIndention('gt', this.indention)) {
+        if (tokenStack.isIndention('gt', indention)) {
           tokenStack.goForward()
           continue
         }

@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ThrowStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'throw')) {
       this.syntaxError('Unexpected token, throw keyword expected', tokenStack)

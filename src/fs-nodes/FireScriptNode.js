@@ -1,14 +1,14 @@
 const constants = require('../utils/constants')
 
 class FireScriptNode {
-  constructor (parent) {
+  constructor (tokenStack, parent) {
     this.isBlockScope = false
     this.parent = parent || {
       type: 'None'
     }
 
     this.childreen = []
-    this.indention = parent ? parent.indention : 0
+    this.indention = tokenStack.getIndention(-1) || 0
     this.callStack = parent ? parent.callStack : []
     this.type = this.constructor.name
     this.indentionSize = 2
@@ -165,7 +165,6 @@ class FireScriptNode {
     }
 
     if (nextToken.type === 'indention') {
-      // console.log('INDENTION', this.indention, nextToken.value)
       if (this.indention < nextToken.value) {
         // this.isExpectedNode(expectedNode, 'BlockStatement', tokenStack.current())
         return this.getNodeInstance('BlockStatement', tokenStack)
@@ -367,19 +366,20 @@ class FireScriptNode {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '(')) {
         node = this.getNodeInstance('CallExpression', tokenStack, node)
-        break
       } else if (tokenStack.expect('punctuator', '?') && this.type !== 'ConditionalExpression') {
         node = this.getNodeInstance('ConditionalExpression', tokenStack, node)
         break
-      // } else if (tokenStack.expect('punctuator', ':')) {
-      //   if (this.type === 'ObjectExpression') {
-      //     node = this.getNodeInstance('Property', tokenStack, node)
-      //     break
-      //   } else if (this.type === 'ArrayExpression') {
-      //     const property = this.getNodeInstance('Property', tokenStack, node)
-      //     node = this.getNodeInstance('ObjectExpression', tokenStack, property)
-      //     break
-      //   }
+      } else if (tokenStack.expect('punctuator', ':')) {
+        if (this.type === 'ObjectExpression') {
+          node = this.getNodeInstance('Property', tokenStack, node)
+          break
+        } else if (this.type === 'ArrayExpression') {
+          const property = this.getNodeInstance('Property', tokenStack, node)
+          node = this.getNodeInstance('ObjectExpression', tokenStack, property)
+          break
+        }
+
+        break
       } else if (tokenStack.expect('template')) {
         if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
           break
@@ -389,6 +389,11 @@ class FireScriptNode {
         } else {
           node = this.getNodeInstance('TemplateLiteral', tokenStack, node)
         }
+      } else if (tokenStack.isIndention('gte', 0) && (
+        tokenStack.lookForward('punctuator', '.', 1)
+      )) {
+        tokenStack.goForward()
+        continue
       } else {
         break
       }
@@ -441,6 +446,12 @@ class FireScriptNode {
   isExpectedNode (expected, actual, token) {
     if (expected && expected !== actual) {
       this.syntaxError(`Unexpected token, ${actual} was given but ${expected} was expected}`, token)
+    }
+  }
+
+  expectParent (type, tokenStack) {
+    if (this.parent.type !== type) {
+      this.syntaxError('Unexpected token! elif statement not allowed here', tokenStack.current())
     }
   }
 

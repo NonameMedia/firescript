@@ -3,7 +3,7 @@ const constants = require('../utils/constants')
 
 class UpdateExpression extends FireScriptNode {
   constructor (tokenStack, parent, argument) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!argument && tokenStack.expect('operator', ['++', '--'])) {
       this.prefix = true

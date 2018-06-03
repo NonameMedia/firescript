@@ -38,7 +38,7 @@ const ALLOWED_CHILDS = [
  */
 class SequenceExpression extends FireScriptNode {
   constructor (tokenStack, parent, expression) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.expressions = []
     if (expression) {

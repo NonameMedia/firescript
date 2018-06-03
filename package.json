@@ -27,6 +27,8 @@
     "inspect.js": "1.11.7",
     "lagoon-reporter": "0.4.0",
     "mocha": "5.2.0",
+    "shell-inspect": "1.2.0",
+    "sinon": "5.0.10",
     "superfs": "0.10.0"
   },
   "dependencies": {

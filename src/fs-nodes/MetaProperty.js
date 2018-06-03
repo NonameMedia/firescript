@@ -18,7 +18,7 @@ const ALLOWED_CHILDS = [
  */
 class MetaProperty extends FireScriptNode {
   constructor (tokenStack, parent, meta) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (meta) {
       this.meta = meta

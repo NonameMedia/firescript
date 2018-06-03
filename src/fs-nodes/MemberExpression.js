@@ -28,7 +28,7 @@ const ALLOWED_CHILDS = [
 
 class MemberExpression extends FireScriptNode {
   constructor (tokenStack, parent, object) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.object = object || this.createIdentifierNode(tokenStack)
     this.computed = false

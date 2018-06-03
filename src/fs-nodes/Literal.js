@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class Literal extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     const token = tokenStack.next()
     this.raw = token.value

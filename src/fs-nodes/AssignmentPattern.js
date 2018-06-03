@@ -39,7 +39,7 @@ const ALLOWED_CHILDS = [
  */
 class AssignmentPattern extends FireScriptNode {
   constructor (tokenStack, parent, left) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.left = left || this.createNodeItem(tokenStack)
 

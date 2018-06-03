@@ -14,7 +14,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class ExportSpecifier extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.exported = this.createIdentifierNode(tokenStack)
     this.local = this.exported

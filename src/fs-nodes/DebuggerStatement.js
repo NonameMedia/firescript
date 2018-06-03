@@ -12,7 +12,7 @@ const FireScriptNode = require('./FireScriptNode')
  */
 class DebuggerStatement extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     if (!tokenStack.expect('keyword', 'debugger')) {
       this.syntaxError('Unexpected token, DebuggerStatement expected', tokenStack.current())

@@ -19,9 +19,10 @@ describe('FireScriptElements', () => {
 
         it(`${group} into FireScript from an AST snippet`, () => {
           const ast = require(`${testCase.path}/ast.json`)
-          const source = inspect
-            .readFile(`${testCase.path}/index.fire`)
-            .replace(/EOF\s*$/, '')
+          const source = (
+            inspect.readFile(`${testCase.path}/result.fire`, { silent: true }) ||
+            inspect.readFile(`${testCase.path}/index.fire`)
+          ).replace(/EOF\s*$/, '')
 
           const ctx = new RenderContext(null, 'fire')
           const Element = require(`../../src/fs-elements/${ast.type}`)

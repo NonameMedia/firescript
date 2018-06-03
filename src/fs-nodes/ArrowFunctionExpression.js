@@ -2,7 +2,7 @@ const FireScriptNode = require('./FireScriptNode')
 
 class ArrowFunctionExpression extends FireScriptNode {
   constructor (tokenStack, parent) {
-    super(parent)
+    super(tokenStack, parent)
 
     this.id = null
     this.async = false
