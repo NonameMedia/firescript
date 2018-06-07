@@ -342,6 +342,19 @@ class FireScriptNode {
       }
     }
 
+    if (tokenStack.expect('punctuator', '(')) {
+      tokenStack.goForward()
+      const node = this.createFullNode(tokenStack)
+      console.log('WRAP NODE', node.type)
+      if (tokenStack.expect('punctuator', ')')) {
+        console.log('CLOSING BRACE')
+        tokenStack.goForward()
+      }
+
+      console.log('WRAP NODE END', node.type)
+      return node
+    }
+
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
       tokenStack.print()
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
@@ -403,7 +416,8 @@ class FireScriptNode {
       }
     }
 
-    if (this.isBlockScope && constants.BLOCK_SCOPE_WRAP_EXPRESSIONS.includes(node.type)) {
+    console.log('TYPE', this.type)
+    if (this.isBlockScope && this.type !== 'Property' && constants.BLOCK_SCOPE_WRAP_EXPRESSIONS.includes(node.type)) {
       node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
     }
 

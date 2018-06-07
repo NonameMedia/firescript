@@ -16,7 +16,10 @@ async function copy () {
   const destDir = path.resolve(process.cwd(), conf.dest)
   const files = await SuperFS.readDir(srcDir, {
     filter: conf.copy,
-    recursive: true
+    recursive: true,
+    ignore: [
+      'node_modules'
+    ]
   })
 
   const copyFiles = files.filter((fl) => {

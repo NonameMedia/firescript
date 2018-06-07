@@ -7,6 +7,7 @@ const ALLOWED_KEYS = [
 
 const ALLOWED_VALUES = [
   'Literal',
+  'TemplateLiteral',
   'AssignmentPattern',
   'Identifier',
   'ObjectExpression',

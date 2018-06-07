@@ -24,7 +24,7 @@ function transpileFile (filename, srcDir, destDir) {
     type: 'fire'
   })
 
-  SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
+  return SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
 }
 
 async function preTranspile (src, dest) {
@@ -33,9 +33,9 @@ async function preTranspile (src, dest) {
   const cf = colorfy()
   cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(src).txt(' to ').lime(dest).nl().print()
 
-  fsFiles.forEach((flw) => {
-    transpileFile(flw.relative, src, dest)
-  })
+  for (const flw of fsFiles) {
+    await transpileFile(flw.relative, src, dest)
+  }
 }
 
 module.exports = (supershit) => {
@@ -63,7 +63,10 @@ module.exports = (supershit) => {
       }
 
       SuperFS.watch(srcDir, {
-        ignore: [destDir]
+        ignore: [
+          'node_modules',
+          destDir
+        ]
       }, watchHandler)
 
       console.log(`Watching directory '${srcDir}' ...`)
