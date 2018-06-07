@@ -5,7 +5,11 @@ class VariableDeclarator extends FireScriptNode {
     super(tokenStack, parent)
 
     // TODO support binding patterns
-    this.id = this.createIdentifierNode(tokenStack)
+    if (tokenStack.expect('punctuator', '[')) {
+      this.id = this.createArrayPatternNode(tokenStack)
+    } else {
+      this.id = this.createIdentifierNode(tokenStack)
+    }
 
     if (tokenStack.expect('operator', '=')) {
       tokenStack.goForward()

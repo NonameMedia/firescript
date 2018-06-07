@@ -123,6 +123,10 @@ class FireScriptNode {
     return this.getNodeInstance('ArrayExpression', tokenStack)
   }
 
+  createArrayPatternNode (tokenStack) {
+    return this.getNodeInstance('ArrayPattern', tokenStack)
+  }
+
   createExportSpecifierNode (tokenStack) {
     return this.getNodeInstance('ExportSpecifier', tokenStack)
   }
