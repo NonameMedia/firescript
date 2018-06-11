@@ -16,7 +16,6 @@ class ArrowFunctionExpression extends FireScriptNode {
     }
 
     if (!params) {
-      console.log('PARAMS')
       if (tokenStack.expect('punctuator', '(')) {
         tokenStack.goForward()
 

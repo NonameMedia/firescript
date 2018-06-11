@@ -131,6 +131,10 @@ class FireScriptNode {
     return this.getNodeInstance('ExportSpecifier', tokenStack)
   }
 
+  createArrowFunctionExpression (tokenStack) {
+    return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
@@ -210,7 +214,7 @@ class FireScriptNode {
         return this.getNodeInstance('ExportNamedDeclaration', tokenStack)
       }
 
-      if (nextToken.value === 'async' && tokenStack.lookForward('punctuator', '(')) {
+      if (nextToken.value === 'async' && tokenStack.lookForward('punctuator', '(', 1)) {
         return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
       }
 
@@ -394,7 +398,16 @@ class FireScriptNode {
       } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', '(')) {
-        node = this.getNodeInstance('CallExpression', tokenStack, node)
+        const arrowFunctionNode = this.tryArrowFunctionExpression(tokenStack)
+        if (arrowFunctionNode) {
+          if (node.type === 'Indentifier' && node.name === 'async') {
+            arrowFunctionNode.async = true
+          }
+
+          node = arrowFunctionNode
+        } else {
+          node = this.getNodeInstance('CallExpression', tokenStack, node)
+        }
       } else if (tokenStack.expect('punctuator', '?') && this.type !== 'ConditionalExpression') {
         node = this.getNodeInstance('ConditionalExpression', tokenStack, node)
         break
@@ -499,6 +512,16 @@ class FireScriptNode {
     const curIndex = tokenStack.index
     try {
       return this.createArrayExpressionNode(tokenStack)
+    } catch (err) {
+      tokenStack.index = curIndex
+      return null
+    }
+  }
+
+  tryArrowFunctionExpression (tokenStack) {
+    const curIndex = tokenStack.index
+    try {
+      return this.createArrowFunctionExpression(tokenStack)
     } catch (err) {
       tokenStack.index = curIndex
       return null
