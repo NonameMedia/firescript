@@ -2,8 +2,12 @@ const FireScriptElement = require('./FireScriptElement')
 
 const ALLOWED_KEY_NODES = [ 'Identifier', 'Literal' ]
 const ALLOWED_VALUE_NODES = [
-  'AssignmentPattern', 'Identifier', 'ArrayPattern',
-  'ObjectPattern', 'FunctionExpression', 'null', 'Literal', 'ArrayExpression', 'ObjectExpression'
+  'AssignmentPattern',
+  'Identifier', 'ArrayPattern',
+  'ObjectPattern',
+  'FunctionExpression', 'null', 'Literal',
+  'ArrayExpression', 'ObjectExpression',
+  'TemplateLiteral'
 ]
 
 /**

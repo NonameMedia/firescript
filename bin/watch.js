@@ -5,7 +5,7 @@ const SuperFS = require('superfs')
 const FireScript = require('../src/app')
 const copy = require('./copy').copy
 
-function transpileFile (filename, srcDir, destDir) {
+async function transpileFile (filename, srcDir, destDir) {
   const cf = colorfy()
   if (path.extname(filename) !== '.fire') {
     cf.ored(' ... skipping file ').lgrey(filename).print()
@@ -18,13 +18,15 @@ function transpileFile (filename, srcDir, destDir) {
   // cf.yellow(' ... write file ').lgrey(outfile).print()
   cf.txt('transpile ').grey(infile).txt(' -> ').lime(outfile).nl().print()
 
-  const input = fs.readFileSync(infile, { encoding: 'utf8' })
+  const input = await SuperFS.readFile(infile)
 
   const source = FireScript.transpile(input, {
-    type: 'fire'
+    type: 'fire',
+    verbose: true
   })
 
-  return SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
+  const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
+  return fl
 }
 
 async function preTranspile (src, dest) {
@@ -59,7 +61,11 @@ module.exports = (supershit) => {
       const watchHandler = (flw) => {
         // console.log('FLW', flw)
         const relative = path.relative(flw.dir, flw.path)
-        transpileFile(path.join(relative, flw.changedFile), srcDir, destDir)
+        transpileFile(path.join(relative, flw.changedFile), srcDir, destDir).then((res) => {
+          console.log('RES', res)
+        }).catch((err) => {
+          console.error('ERR', err)
+        })
       }
 
       SuperFS.watch(srcDir, {

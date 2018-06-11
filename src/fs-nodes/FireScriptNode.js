@@ -12,6 +12,7 @@ class FireScriptNode {
     this.callStack = parent ? parent.callStack : []
     this.type = this.constructor.name
     this.indentionSize = 2
+    this.tokenStack = tokenStack
   }
 
   addLeadingComment (comment) {
@@ -148,7 +149,7 @@ class FireScriptNode {
     const colNum = token && token.loc ? token.loc.start[1] : ''
     const errMessage = lineNum ? `${message} at line ${lineNum} at column ${colNum + 1}` : message
     const err = new SyntaxError(errMessage)
-    err.token = token
+    err.token = token || this.tokenStack.current() || this.tokenStack.previous()
     err.callStack = this.callStack
     throw err
   }
@@ -452,6 +453,10 @@ class FireScriptNode {
   isAllowedNode (child, validTokens, token) {
     const type = child === null ? 'null' : child.type
     if (!validTokens.includes(type)) {
+      if (child.type === 'Null') {
+        this.syntaxError(`Unexpected EOF`, token)
+      }
+
       this.syntaxError(`Token ${type} not allowed within a ${this.type}`, token)
     }
   }

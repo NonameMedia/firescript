@@ -26,6 +26,33 @@ const ALLOWED_CALLEE_TYPES = [
   'SequenceExpression'
 ]
 
+const ALLOWED_ARGUMENT_TYPES = [
+  'ThisExpression',
+  'Identifier',
+  'Literal',
+  'ArrayExpression',
+  'ObjectExpression',
+  'FunctionExpression',
+  'ArrowFunctionExpression',
+  'ClassExpression',
+  'TaggedTemplateExpression',
+  'MemberExpression',
+  'Super',
+  'MetaProperty',
+  'NewExpression',
+  'CallExpression',
+  'UpdateExpression',
+  'AwaitExpression',
+  'UnaryExpression',
+  'BinaryExpression',
+  'LogicalExpression',
+  'ConditionalExpression',
+  'YieldExpression',
+  'AssignmentExpression',
+  'SequenceExpression',
+  'SpreadElement'
+]
+
 class CallExpression extends FireScriptNode {
   constructor (tokenStack, parent, callee) {
     super(tokenStack, parent)
@@ -51,7 +78,9 @@ class CallExpression extends FireScriptNode {
         continue
       }
 
-      this.arguments.push(this.createFullNode(tokenStack))
+      const node = this.createFullNode(tokenStack)
+      this.isAllowedNode(node, ALLOWED_ARGUMENT_TYPES, tokenStack.current())
+      this.arguments.push(node)
     }
   }
 
