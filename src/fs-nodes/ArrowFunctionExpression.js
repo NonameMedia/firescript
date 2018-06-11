@@ -1,14 +1,14 @@
 const FireScriptNode = require('./FireScriptNode')
 
 class ArrowFunctionExpression extends FireScriptNode {
-  constructor (tokenStack, parent) {
+  constructor (tokenStack, parent, params) {
     super(tokenStack, parent)
 
     this.id = null
     this.async = false
     this.expression = false
     this.generator = false
-    this.params = []
+    this.params = params || []
 
     if (!tokenStack.expect('operator', '=>')) {
       this.syntaxError('Unexpected token', tokenStack.current())
@@ -21,30 +21,30 @@ class ArrowFunctionExpression extends FireScriptNode {
       tokenStack.goForward()
     }
 
-    if (tokenStack.expect('punctuator', '(')) {
-      tokenStack.goForward()
-
-      while (true) {
-        if (tokenStack.expect('punctuator', ')')) {
-          tokenStack.goForward()
-          break
-        }
-
-        if (tokenStack.expect('punctuator', ',')) {
-          tokenStack.goForward()
-          continue
-        }
-
-        if (tokenStack.expect('identifier')) {
-          this.params.push(this.createNodeItem(tokenStack))
-          continue
-        }
-
-        this.syntaxError('Identifier expected', tokenStack.current())
-      }
-    } else {
-      this.syntaxError('Function arguments expected', tokenStack.current())
-    }
+    // if (tokenStack.expect('punctuator', '(')) {
+    //   tokenStack.goForward()
+    //
+    //   while (true) {
+    //     if (tokenStack.expect('punctuator', ')')) {
+    //       tokenStack.goForward()
+    //       break
+    //     }
+    //
+    //     if (tokenStack.expect('punctuator', ',')) {
+    //       tokenStack.goForward()
+    //       continue
+    //     }
+    //
+    //     if (tokenStack.expect('identifier')) {
+    //       this.params.push(this.createNodeItem(tokenStack))
+    //       continue
+    //     }
+    //
+    //     this.syntaxError('Identifier expected', tokenStack.current())
+    //   }
+    // } else {
+    //   this.syntaxError('Function arguments expected', tokenStack.current())
+    // }
 
     this.body = this.createBlockStatementNode(tokenStack)
   }

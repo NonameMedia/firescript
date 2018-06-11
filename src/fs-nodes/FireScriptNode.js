@@ -344,15 +344,30 @@ class FireScriptNode {
 
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
-      const node = this.createFullNode(tokenStack)
-      console.log('WRAP NODE', node.type)
-      if (tokenStack.expect('punctuator', ')')) {
-        console.log('CLOSING BRACE')
-        tokenStack.goForward()
-      }
 
-      console.log('WRAP NODE END', node.type)
-      return node
+      const nodeList = []
+      while (true) {
+        const node = this.createFullNode(tokenStack)
+        // console.log('WRAP NODE', node.type)
+        if (tokenStack.expect('punctuator', ')')) {
+          // console.log('CLOSING BRACE')
+          tokenStack.goForward()
+
+          return node
+        }
+
+        if (tokenStack.expect('punctuator', ',')) {
+          nodeList.push(node)
+          continue
+        }
+
+        if (tokenStack.expect('operator', '=>')) {
+          nodeList.push(node)
+          return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
+        }
+
+        this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
+      }
     }
 
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
@@ -416,7 +431,7 @@ class FireScriptNode {
       }
     }
 
-    console.log('TYPE', this.type)
+    // console.log('TYPE', this.type)
     if (this.isBlockScope && this.type !== 'Property' && constants.BLOCK_SCOPE_WRAP_EXPRESSIONS.includes(node.type)) {
       node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
     }
