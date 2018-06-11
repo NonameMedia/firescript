@@ -1,2 +1,2 @@
-=> async (a, b)
+async (a, b) =>
   return 'foo'

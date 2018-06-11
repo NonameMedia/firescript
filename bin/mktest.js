@@ -8,7 +8,7 @@ const FireScriptTokenizer = require('../src/FireScriptTokenizer')
 const FireScriptParser = require('../src/FireScriptParser')
 const JSTranspiler = require('../src/JSTranspiler')
 
-const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/syntax/')
+const TEST_CASE_PATH = path.join(__dirname, '../../firescript-xtest/syntax/')
 
 async function createProject (ctx) {
   const conf = await ctx
@@ -64,12 +64,12 @@ module.exports = (supershit) => {
     .description('Create a Firescript syntax test case')
     .option('-r,--rewrire', 'Rewrite existing test case after code change')
     .action(async (ctx, name) => {
-      // if (!await SuperFS.exists(TEST_CASE_PATH)) {
-      //   console.error('Firescript test repo not found! Please clone the firescript-test repo paralel to firescript repo')
-      //   console.error('$ cd ../')
-      //   console.error('$ git clone https://gitlab.noname-media.com/Firescript/firescript-test.git')
-      //   return
-      // }
+      if (!await SuperFS.exists(TEST_CASE_PATH)) {
+        console.error('Firescript test repo not found! Please clone the firescript-test repo paralel to firescript repo')
+        console.error('$ cd ../')
+        console.error('$ git clone https://gitlab.noname-media.com/Firescript/firescript-test.git')
+        return
+      }
 
       const { testCaseDir } = ctx.rewrire ? await rewriteProject(ctx) : await createProject(ctx)
       const fileSource = await SuperFS.readFile(path.join(TEST_CASE_PATH, testCaseDir, 'index.fire'))

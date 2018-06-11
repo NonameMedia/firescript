@@ -10,41 +10,44 @@ class ArrowFunctionExpression extends FireScriptNode {
     this.generator = false
     this.params = params || []
 
-    if (!tokenStack.expect('operator', '=>')) {
-      this.syntaxError('Unexpected token', tokenStack.current())
-    }
-
-    tokenStack.goForward()
-
     if (tokenStack.expect('keyword', 'async')) {
       this.async = true
       tokenStack.goForward()
     }
 
-    // if (tokenStack.expect('punctuator', '(')) {
-    //   tokenStack.goForward()
-    //
-    //   while (true) {
-    //     if (tokenStack.expect('punctuator', ')')) {
-    //       tokenStack.goForward()
-    //       break
-    //     }
-    //
-    //     if (tokenStack.expect('punctuator', ',')) {
-    //       tokenStack.goForward()
-    //       continue
-    //     }
-    //
-    //     if (tokenStack.expect('identifier')) {
-    //       this.params.push(this.createNodeItem(tokenStack))
-    //       continue
-    //     }
-    //
-    //     this.syntaxError('Identifier expected', tokenStack.current())
-    //   }
-    // } else {
-    //   this.syntaxError('Function arguments expected', tokenStack.current())
-    // }
+    if (!params) {
+      console.log('PARAMS')
+      if (tokenStack.expect('punctuator', '(')) {
+        tokenStack.goForward()
+
+        while (true) {
+          if (tokenStack.expect('punctuator', ')')) {
+            tokenStack.goForward()
+            break
+          }
+
+          if (tokenStack.expect('punctuator', ',')) {
+            tokenStack.goForward()
+            continue
+          }
+
+          if (tokenStack.expect('identifier')) {
+            this.params.push(this.createNodeItem(tokenStack))
+            continue
+          }
+
+          this.syntaxError('Identifier expected', tokenStack.current())
+        }
+      } else {
+        this.syntaxError('Function arguments expected', tokenStack.current())
+      }
+    }
+
+    if (!tokenStack.expect('operator', '=>')) {
+      this.syntaxError('Unexpected token', tokenStack.current())
+    }
+
+    tokenStack.goForward()
 
     this.body = this.createBlockStatementNode(tokenStack)
   }

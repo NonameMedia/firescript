@@ -210,6 +210,10 @@ class FireScriptNode {
         return this.getNodeInstance('ExportNamedDeclaration', tokenStack)
       }
 
+      if (nextToken.value === 'async' && tokenStack.lookForward('punctuator', '(')) {
+        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
+      }
+
       if (['func', 'async', 'gen'].includes(nextToken.value)) {
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
@@ -294,10 +298,6 @@ class FireScriptNode {
       if (constants.BINARY_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
-
-      if (nextToken.value === '=>') {
-        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
-      }
     }
 
     if (nextToken.type === 'identifier') {
@@ -353,17 +353,18 @@ class FireScriptNode {
           // console.log('CLOSING BRACE')
           tokenStack.goForward()
 
+          if (tokenStack.expect('operator', '=>')) {
+            nodeList.push(node)
+            return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
+          }
+
           return node
         }
 
         if (tokenStack.expect('punctuator', ',')) {
           nodeList.push(node)
+          tokenStack.goForward()
           continue
-        }
-
-        if (tokenStack.expect('operator', '=>')) {
-          nodeList.push(node)
-          return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
         }
 
         this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)

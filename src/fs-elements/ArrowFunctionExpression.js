@@ -29,11 +29,11 @@ class ArrowFunctionExpression extends FireScriptElement {
     const asyncfn = this.async ? 'async ' : ''
 
     return this.renderElement(
-      '=> ' +
       asyncfn +
       '(' +
       ctx.join(this.params, ', ') +
       ')' +
+      ' =>' +
       this.body.toFSString(ctx)
     )
   }
