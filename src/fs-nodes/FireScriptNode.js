@@ -347,27 +347,23 @@ class FireScriptNode {
 
       const nodeList = []
       while (true) {
-        const node = this.createFullNode(tokenStack)
-        // console.log('WRAP NODE', node.type)
         if (tokenStack.expect('punctuator', ')')) {
-          // console.log('CLOSING BRACE')
           tokenStack.goForward()
 
           if (tokenStack.expect('operator', '=>')) {
-            nodeList.push(node)
             return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
           }
 
-          return node
+          return nodeList.length === 0 ? null : nodeList[0]
         }
 
         if (tokenStack.expect('punctuator', ',')) {
-          nodeList.push(node)
           tokenStack.goForward()
           continue
         }
 
-        this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
+        nodeList.push(this.createFullNode(tokenStack))
+        // this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
       }
     }
 
