@@ -8,7 +8,15 @@ const FireScriptTokenizer = require('../src/FireScriptTokenizer')
 const FireScriptParser = require('../src/FireScriptParser')
 const JSTranspiler = require('../src/JSTranspiler')
 
-const TEST_CASE_PATH = path.join(__dirname, '../../firescript-xtest/syntax/')
+const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/syntax/')
+
+const testFiles = [
+  { file: 'index.fire', content: '', description: 'Firescript source' },
+  { file: 'fstoken.json', content: '{}', description: 'Firescript tokenize result', isRewritable: true },
+  { file: 'fsconf.json', content: '{}', description: 'Firescript parser config' },
+  { file: 'fsast.json', content: '{}', description: 'Firescript parser result', isRewritable: true },
+  { file: 'result.js', content: '', description: 'Firescript transpiler result', isRewritable: true }
+]
 
 async function createProject (ctx) {
   const conf = await ctx
@@ -18,15 +26,12 @@ async function createProject (ctx) {
   const testCaseDir = conf.title.replace(/\s+/g, '-').toLowerCase()
 
   const cf = colorfy()
-  cf.grey('creating new test: ').lime(testCaseDir).nl()
-
-  const testFiles = [
-    { file: 'index.fire', content: '', description: 'Firescript source' },
-    { file: 'fstoken.json', content: '{}', description: 'Firescript tokenize result' },
-    { file: 'fsconf.json', content: '{}', description: 'Firescript parser config' },
-    { file: 'fsast.json', content: '{}', description: 'Firescript parser result' },
-    { file: 'result.js', content: '', description: 'Firescript transpiler result' }
-  ]
+  if (await SuperFS.exists(path.join(TEST_CASE_PATH, testCaseDir))) {
+    cf.grey('Test case ').red(testCaseDir).grey(' already exists!').nl()
+    throw new Error(cf.colorfy())
+  } else {
+    cf.grey('creating new test: ').lime(testCaseDir).nl()
+  }
 
   for (const file of testFiles) {
     cf.grey('create file ').turq(file.file).ddgrey(` (${file.description}) `)
@@ -53,8 +58,23 @@ async function rewriteProject (ctx) {
     .ask({ name: 'testcase', question: 'Enter test case to rewrite' })
     .prompt()
 
+  const testCaseDir = conf.testcase.replace(/\s+/g, '-').toLowerCase()
+
+  const cf = colorfy()
+  for (const file of testFiles) {
+    if (!file.isRewritable) {
+      continue
+    }
+
+    cf.grey('rewrite file ').turq(file.file).ddgrey(` (${file.description}) `)
+    await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, file.file), file.content)
+    cf.lime('✔').nl()
+  }
+
+  cf.print()
+
   return {
-    testCaseDir: conf.testcase.replace(/\s+/g, '-').toLowerCase()
+    testCaseDir
   }
 }
 
