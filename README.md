@@ -6,26 +6,22 @@ FireScript is a language which gets transpiled into Javascript. A language which
 ```fs
 import Fruits from './fruits'
 
-interface Banana
-  str name
-  str color
-
 class Banana extends Fruits
-  def constructor () this
+  constructor ()
     super()
 
     this.name = 'Banana'
     this.color = 'yellow'
 
-  def getName () str
+  getName ()
     return this.name
 
-export default Banana
+export Banana
 ```
 
 ```fs
 import Banana from './banana'
 
-const Banana banana = new Banana()
+const banana = new Banana()
 print(banana.getName())
 ```
