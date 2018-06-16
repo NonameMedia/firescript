@@ -67,6 +67,15 @@ class ASTCreator {
     }
   }
 
+  static logicalExpression (operator, left, right) {
+    return {
+      type: 'LogicalExpression',
+      operator,
+      left,
+      right
+    }
+  }
+
   static binaryExpression (operator, left, right) {
     return {
       type: 'BinaryExpression',

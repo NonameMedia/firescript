@@ -3,7 +3,8 @@
   "dest": "dist/",
   "copy": [],
   "features": {
-    "esModules": true,
+    "esModules": false,
+    "esDefaultParameter": false,
     "esClasses": true,
     "esTemplates": true
   }

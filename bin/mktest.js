@@ -10,10 +10,15 @@ const JSTranspiler = require('../src/JSTranspiler')
 
 const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/syntax/')
 
+const defaultFeatureConf = JSON.stringify({
+  esModules: true,
+  esDefaultConf: true
+}, null, '  ')
+
 const testFiles = [
   { file: 'index.fire', content: '', description: 'Firescript source' },
   { file: 'fstoken.json', content: '{}', description: 'Firescript tokenize result', isRewritable: true },
-  { file: 'fsconf.json', content: '{}', description: 'Firescript parser config' },
+  { file: 'fsconf.json', content: defaultFeatureConf, description: 'Firescript parser config' },
   { file: 'fsast.json', content: '{}', description: 'Firescript parser result', isRewritable: true },
   { file: 'result.js', content: '', description: 'Firescript transpiler result', isRewritable: true }
 ]

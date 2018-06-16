@@ -41,10 +41,13 @@ class ObjectExpression extends JSElement {
   }
 
   renderInline (ctx) {
+    const braceSpacing = this.properties.length ? ' ' : ''
     return this.renderElement(
-      '{ ' +
+      '{' +
+      braceSpacing +
       ctx.join(this.properties, ', ') +
-      ' }'
+      braceSpacing +
+      '}'
     )
   }
 }

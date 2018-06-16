@@ -392,8 +392,12 @@ class FireScriptNode {
 
     while (true) {
       if (tokenStack.expect('operator', constants.ASSIGNMENT_OPERATORS)) {
-        node = this.getNodeInstance('AssignmentExpression', tokenStack, node)
-        node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
+        if (['FunctionDeclaration', 'FunctionExpression'].includes(this.type)) {
+          node = this.getNodeInstance('AssignmentPattern', tokenStack, node)
+        } else {
+          node = this.getNodeInstance('AssignmentExpression', tokenStack, node)
+          node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
+        }
       } else if (tokenStack.expect('operator', constants.BINARY_OPERATORS)) {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.LOGICAL_OPERATORS)) {
