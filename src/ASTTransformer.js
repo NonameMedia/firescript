@@ -32,7 +32,7 @@ class ASTTransformer {
       const transformed = transformationFn(ast)
       if (Array.isArray(transformed)) {
         return transformed
-      } else {
+      } else if (transformed !== ast) {
         ast = transformed
       }
     }

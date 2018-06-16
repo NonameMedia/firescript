@@ -5,38 +5,55 @@ const SuperFS = require('superfs')
 const FireScript = require('../src/app')
 const copy = require('./copy').copy
 
-async function transpileFile (filename, srcDir, destDir) {
-  const cf = colorfy()
-  if (path.extname(filename) !== '.fire') {
-    cf.ored(' ... skipping file ').lgrey(filename).print()
-    return
+const IGNORE_FILES = [
+  'node_modules'
+]
+
+class WatchCMD {
+  constructor (conf) {
+    this.conf = conf
   }
 
-  const infile = path.resolve(srcDir, filename)
-  const outfile = path.resolve(destDir, filename.replace(/\.fire$/, '.js'))
+  async transpileFile (filename, srcDir, destDir) {
+    const cf = colorfy()
+    if (path.extname(filename) !== '.fire') {
+      cf.ored(' ... skipping file ').lgrey(filename).print()
+      return
+    }
 
-  // cf.yellow(' ... write file ').lgrey(outfile).print()
-  cf.txt('transpile ').grey(infile).txt(' -> ').lime(outfile).nl().print()
+    const infile = path.resolve(srcDir, filename)
+    const outfile = path.resolve(destDir, filename.replace(/\.fire$/, '.js'))
 
-  const input = await SuperFS.readFile(infile)
+    // cf.yellow(' ... write file ').lgrey(outfile).print()
+    cf.txt('transpile ').grey(infile).txt(' -> ').lime(outfile).nl().print()
 
-  const source = FireScript.transpile(input, {
-    type: 'fire',
-    verbose: true
-  })
+    const input = await SuperFS.readFile(infile)
 
-  const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
-  return fl
-}
+    const source = FireScript.transpile(input, {
+      type: 'fire',
+      verbose: true
+    })
 
-async function preTranspile (src, dest) {
-  const files = await SuperFS.readDir(src, { recursive: true })
-  const fsFiles = files.filter((flw) => flw.ext === 'fire')
-  const cf = colorfy()
-  cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(src).txt(' to ').lime(dest).nl().print()
+    const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
+    return fl
+  }
 
-  for (const flw of fsFiles) {
-    await transpileFile(flw.relative, src, dest)
+  async preTranspile () {
+    const files = await SuperFS.readDir(this.srcDir, {
+      recursive: true,
+      ignore: this.getIgnoreFiles()
+    })
+    const fsFiles = files.filter((flw) => flw.ext === 'fire')
+    const cf = colorfy()
+    cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(this.srcDir).txt(' to ').lime(this.destDir).nl().print()
+
+    for (const flw of fsFiles) {
+      await this.transpileFile(flw.relative, this.srcDir, this.destDir)
+    }
+  }
+
+  getIgnoreFiles () {
+    return IGNORE_FILES.concat(this.conf.ignore || [], this.destDir)
   }
 }
 
@@ -51,30 +68,27 @@ module.exports = (supershit) => {
         dest: dest
       })
 
-      const srcDir = path.resolve(process.cwd(), conf.src)
-      const destDir = path.resolve(process.cwd(), conf.dest)
+      const watchCmd = new WatchCMD(conf)
+      watchCmd.srcDir = path.resolve(process.cwd(), conf.src)
+      watchCmd.destDir = path.resolve(process.cwd(), conf.dest)
 
       // console.log('CONF', conf)
       await copy()
-      await preTranspile(srcDir, destDir)
+      await watchCmd.preTranspile()
 
       const watchHandler = (flw) => {
         // console.log('FLW', flw)
         const relative = path.relative(flw.dir, flw.path)
-        transpileFile(path.join(relative, flw.changedFile), srcDir, destDir).then((res) => {
-          console.log('RES', res)
+        watchCmd.transpileFile(path.join(relative, flw.changedFile), watchCmd.srcDir, watchCmd.destDir).then((res) => {
         }).catch((err) => {
           console.error('ERR', err)
         })
       }
 
-      SuperFS.watch(srcDir, {
-        ignore: [
-          'node_modules',
-          destDir
-        ]
+      SuperFS.watch(watchCmd.srcDir, {
+        ignore: watchCmd.getIgnoreFiles()
       }, watchHandler)
 
-      console.log(`Watching directory '${srcDir}' ...`)
+      console.log(`Watching directory '${watchCmd.srcDir}' ...`)
     })
 }

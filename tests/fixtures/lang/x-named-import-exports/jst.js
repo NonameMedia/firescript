@@ -9,3 +9,4 @@ module.exports.Coconut = class Coconut {
 };
 let peach = 'Peach';
 module.exports.peach = peach;
+module.exports.__esModule = true;

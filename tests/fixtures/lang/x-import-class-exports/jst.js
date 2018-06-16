@@ -4,3 +4,4 @@ module.exports.Banana = class Banana {
     return banana;
   }
 };
+module.exports.__esModule = true;

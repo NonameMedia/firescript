@@ -303,6 +303,10 @@ class FireScriptNode {
       if (constants.BINARY_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('BinaryExpression', tokenStack)
       }
+
+      if (constants.UNARY_OPERATORS.includes(nextToken.value)) {
+        return this.getNodeInstance('UnaryExpression', tokenStack)
+      }
     }
 
     if (nextToken.type === 'identifier') {
@@ -392,9 +396,9 @@ class FireScriptNode {
         node = this.getNodeInstance('ExpressionStatement', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.BINARY_OPERATORS)) {
         node = this.getNodeInstance('BinaryExpression', tokenStack, node)
-      } else if (tokenStack.expect('punctuator', '.')) {
-        node = this.getNodeInstance('MemberExpression', tokenStack, node)
-      } else if (tokenStack.expect('punctuator', '[')) {
+      } else if (tokenStack.expect('operator', constants.LOGICAL_OPERATORS)) {
+        node = this.getNodeInstance('LogicalExpression', tokenStack, node)
+      } else if (tokenStack.expect('punctuator', ['.', '['])) {
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)

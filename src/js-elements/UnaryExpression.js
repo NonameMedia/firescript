@@ -17,14 +17,13 @@ class UnaryExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element UnaryExpression is a DraftElement!`)
+    this.argument = this.createElement(ast.argument)
+    this.operator = ast.operator
   }
 
-  toString () {
+  toESString (ctx) {
     return this.renderElement(
-      `${this.callee}(${this.arguments.join(', ')});`
+      `${this.operator}${this.argument.toESString(ctx)}`
     )
   }
 }

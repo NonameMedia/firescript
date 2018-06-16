@@ -22,7 +22,7 @@ class FunctionExpression extends JSElement {
 
     this.id = ast.id ? this.createElement(ast.id) : null
     this.params = this.createElementList(ast.params)
-    this.body = this.createElement(ast.body, null)
+    this.body = ast.body ? this.createElement(ast.body) : null
     this.async = ast.async
     this.generator = ast.generator
   }
@@ -41,13 +41,14 @@ class FunctionExpression extends JSElement {
     const async = this.async ? 'async ' : ''
     const funcNameSpacing = func ? ' ' : ''
     const funcArgSpacing = id || (!func && !id) ? ' ' : ''
+    const body = this.body ? this.body.toESString(ctx) : '{}'
 
     return this.renderElement(
       async + func + generator + funcNameSpacing + id + funcArgSpacing +
       '(' +
       ctx.join(this.params, ', ') +
       ') ' +
-      this.body.toESString(ctx)
+      body
     )
   }
 }

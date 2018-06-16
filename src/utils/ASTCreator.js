@@ -31,7 +31,9 @@ class ASTCreator {
   }
 
   static literal (rawValue) {
-    const value = rawValue.replace(/^'|'$/g, '')
+    const value = typeof rawValue === 'string'
+      ? rawValue.replace(/^'|'$/g, '')
+      : rawValue.toString()
 
     return {
       type: 'Literal',

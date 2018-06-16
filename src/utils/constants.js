@@ -29,6 +29,9 @@ module.exports = {
     '=', '*=', '**=', '/=', '%=', '+=', '-=',
     '<<=', '>>=', '>>>=', '&=', '^=', '|='
   ],
+  LOGICAL_OPERATORS: [
+    '||', '&&'
+  ],
   BLOCK_SCOPE_WRAP_EXPRESSIONS: [
     'UpdateExpression',
     'CallExpression',

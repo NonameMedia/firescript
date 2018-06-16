@@ -6,10 +6,6 @@ It extends existing configurations. A configuration file can be a `json`, `yaml`
 
 **The loading order is:**
 
-* fire.json
-* fire.cson
-* fire.yaml
-* fire.yml
 * .firerc
 * .firerc.json
 * .firerc.cson

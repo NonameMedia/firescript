@@ -7,9 +7,9 @@ const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 module.exports = (supershit) => {
   return supershit
     .cmd('init')
-    .description('Create and initialize a .firerc configuration file under current working dir')
+    .description('Create and initialize a .firerc.json configuration file under current working dir')
     .action(async (ctx, name) => {
-      const configFile = path.join(process.cwd(), '.firerc')
+      const configFile = path.join(process.cwd(), '.firerc.json')
       const conf = superconf.merge(defaultConf, superconf('fire') || {})
 
       const res = await ctx
