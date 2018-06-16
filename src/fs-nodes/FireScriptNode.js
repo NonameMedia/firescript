@@ -405,7 +405,7 @@ class FireScriptNode {
       } else if (tokenStack.expect('punctuator', '(')) {
         const arrowFunctionNode = this.tryArrowFunctionExpression(tokenStack)
         if (arrowFunctionNode) {
-          if (node.type === 'Indentifier' && node.name === 'async') {
+          if (node.type === 'Identifier' && node.name === 'async') {
             arrowFunctionNode.async = true
           }
 
