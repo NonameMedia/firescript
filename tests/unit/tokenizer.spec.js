@@ -45,7 +45,6 @@ describe('Tokenizer', () => {
         { type: 'literal', value: 'true' },
         { type: 'indention', value: 0 },
         { type: 'keyword', value: 'export' },
-        { type: 'identifier', value: 'default' },
         { type: 'identifier', value: 'Banana' },
         { type: 'indention', value: 0 }
       ])
@@ -93,9 +92,8 @@ describe('Tokenizer', () => {
         { type: 'literal', value: 'true', range: [ 145, 149 ] },
         { type: 'indention', value: 0, range: [ 151, 151 ] },
         { type: 'keyword', value: 'export', range: [ 151, 157 ] },
-        { type: 'identifier', value: 'default', range: [ 158, 165 ] },
-        { type: 'identifier', value: 'Banana', range: [ 166, 172 ] },
-        { type: 'indention', value: 0, range: [ 173, 173 ] }
+        { type: 'identifier', value: 'Banana', range: [ 158, 164 ] },
+        { type: 'indention', value: 0, range: [ 165, 165 ] }
       ])
     })
 
@@ -141,8 +139,7 @@ describe('Tokenizer', () => {
         { type: 'literal', value: 'true', loc: { start: [ 8, 22 ], end: [ 8, 26 ] } },
         { type: 'indention', value: 0, loc: { start: [ 10, 0 ], end: [ 10, 0 ] } },
         { type: 'keyword', value: 'export', loc: { start: [ 10, 0 ], end: [ 10, 6 ] } },
-        { type: 'identifier', value: 'default', loc: { start: [ 10, 7 ], end: [ 10, 14 ] } },
-        { type: 'identifier', value: 'Banana', loc: { start: [ 10, 15 ], end: [ 10, 21 ] } },
+        { type: 'identifier', value: 'Banana', loc: { start: [ 10, 7 ], end: [ 10, 13 ] } },
         { type: 'indention', value: 0, loc: { start: [ 11, 0 ], end: [ 11, 0 ] } }
       ])
     })

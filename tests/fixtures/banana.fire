@@ -7,4 +7,4 @@ class Banana extends Fruits
   peel ()
     this.__isPeeled = true
 
-export default Banana
+export Banana

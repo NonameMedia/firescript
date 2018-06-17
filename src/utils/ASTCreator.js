@@ -33,12 +33,12 @@ class ASTCreator {
   static literal (rawValue) {
     const value = typeof rawValue === 'string'
       ? rawValue.replace(/^'|'$/g, '')
-      : rawValue.toString()
+      : rawValue
 
     return {
       type: 'Literal',
       value: value,
-      raw: rawValue
+      raw: rawValue.toString()
     }
   }
 
