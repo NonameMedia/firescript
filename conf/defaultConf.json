@@ -4,7 +4,7 @@
   "copy": [],
   "features": {
     "esModules": false,
-    "esDefaultParameter": false,
+    "esDefaultParams": false,
     "esClasses": true,
     "esTemplates": true
   }

@@ -20,4 +20,4 @@ Features
 | Promises            | esPromises         | F 29, C 32, E yy | no          | NodeJS only     |
 | Generator functions | esGenerators       | F 26, C 39, E 13 | no          | NodeJS only     |
 | Async await         | esAsync            | F 52, C 55, E ?? | no          | NodeJS only     |
-| Default parameter   | esDefaultParameter |                  | yes         | No              |
+| Default parameter   | esDefaultParams |                  | yes         | No              |

@@ -214,7 +214,9 @@ class FireSciptTokenizer {
       return this.lookBack('operator', '=>')
     }
 
-    if (['class', 'var', 'let', 'const', 'func', 'gen', 'async'].includes(keyWord) && this.lookBack('keyword', 'export')) {
+    if (['class', 'var', 'let', 'const', 'func', 'gen', 'async'].includes(keyWord) &&
+      (this.lookBack('keyword', 'export') ||
+      this.lookBack('operator', '='))) {
       return true
     }
 

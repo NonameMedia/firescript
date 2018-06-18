@@ -8,7 +8,7 @@ const FireScriptTokenizer = require('../src/FireScriptTokenizer')
 const FireScriptParser = require('../src/FireScriptParser')
 const JSTranspiler = require('../src/JSTranspiler')
 
-const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/syntax/')
+const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/')
 
 const defaultFeatureConf = JSON.stringify({
   esModules: true,
@@ -31,7 +31,7 @@ async function createProject (ctx) {
   const testCaseDir = conf.title.replace(/\s+/g, '-').toLowerCase()
 
   const cf = colorfy()
-  if (await SuperFS.exists(path.join(TEST_CASE_PATH, testCaseDir))) {
+  if (await SuperFS.exists(path.join(ctx.testCaseRoot, testCaseDir))) {
     cf.grey('Test case ').red(testCaseDir).grey(' already exists!').nl()
     throw new Error(cf.colorfy())
   } else {
@@ -40,7 +40,7 @@ async function createProject (ctx) {
 
   for (const file of testFiles) {
     cf.grey('create file ').turq(file.file).ddgrey(` (${file.description}) `)
-    await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, file.file), file.content)
+    await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, file.file), file.content)
     cf.lime('✔').nl()
   }
 
@@ -72,7 +72,7 @@ async function rewriteProject (ctx) {
     }
 
     cf.grey('rewrite file ').turq(file.file).ddgrey(` (${file.description}) `)
-    await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, file.file), file.content)
+    await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, file.file), file.content)
     cf.lime('✔').nl()
   }
 
@@ -88,6 +88,7 @@ module.exports = (supershit) => {
     .cmd('mktest')
     .description('Create a Firescript syntax test case')
     .option('-r,--rewrire', 'Rewrite existing test case after code change')
+    .option('-t,--transform', 'Setup as transform test')
     .action(async (ctx, name) => {
       if (!await SuperFS.exists(TEST_CASE_PATH)) {
         console.error('Firescript test repo not found! Please clone the firescript-test repo paralel to firescript repo')
@@ -96,21 +97,25 @@ module.exports = (supershit) => {
         return
       }
 
+      ctx.testCaseRoot = ctx.transform ? path.join(TEST_CASE_PATH, 'transform') : path.join(TEST_CASE_PATH, 'syntax')
       const { testCaseDir } = ctx.rewrire ? await rewriteProject(ctx) : await createProject(ctx)
-      const fileSource = await SuperFS.readFile(path.join(TEST_CASE_PATH, testCaseDir, 'index.fire'))
+      const fileSource = await SuperFS.readFile(path.join(ctx.testCaseRoot, testCaseDir, 'index.fire'))
 
       if (fileSource) {
         const tokenizer = new FireScriptTokenizer()
         const tokenstack = tokenizer.tokenize(fileSource)
-        await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, 'fstoken.json'), JSON.stringify(tokenstack, null, '  '))
+        await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'fstoken.json'), JSON.stringify(tokenstack, null, '  '))
 
         const parser = new FireScriptParser()
         const ast = parser.parse(fileSource)
-        await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, 'fsast.json'), JSON.stringify(ast, null, '  '))
+        await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'fsast.json'), JSON.stringify(ast, null, '  '))
 
-        const transpiler = new JSTranspiler()
+        const fsconf = require(path.join(ctx.testCaseRoot, testCaseDir, 'fsconf.json'))
+        const transpiler = new JSTranspiler({
+          features: fsconf
+        })
         const result = transpiler.transpile(ast)
-        await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, 'result.js'), result)
+        await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'result.js'), result)
       }
 
       // -----------------------------------------------------------------------

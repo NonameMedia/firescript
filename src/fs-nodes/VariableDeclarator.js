@@ -1,5 +1,14 @@
 const FireScriptNode = require('./FireScriptNode')
 
+const ALLOWED_CHILDS = [
+  'ThisExpression', 'Identifier', 'Literal',
+  'ArrayExpression', 'ObjectExpression', 'FunctionExpression', 'ArrowFunctionExpression', 'ClassExpression',
+  'TaggedTemplateExpression', 'MemberExpression', 'Super', 'MetaProperty',
+  'NewExpression', 'CallExpression', 'UpdateExpression', 'AwaitExpression', 'UnaryExpression',
+  'BinaryExpression', 'LogicalExpression', 'ConditionalExpression',
+  'YieldExpression', 'AssignmentExpression', 'SequenceExpression'
+]
+
 class VariableDeclarator extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
@@ -28,6 +37,7 @@ class VariableDeclarator extends FireScriptNode {
         }
       } else {
         this.init = this.createFullNode(tokenStack)
+        this.isAllowedNode(this.init, ALLOWED_CHILDS)
       }
     }
   }

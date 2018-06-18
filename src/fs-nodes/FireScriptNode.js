@@ -220,6 +220,10 @@ class FireScriptNode {
       }
 
       if (['func', 'async', 'gen'].includes(nextToken.value)) {
+        if (this.type === 'VariableDeclarator') {
+          return this.getNodeInstance('FunctionExpression', tokenStack)
+        }
+
         return this.getNodeInstance('FunctionDeclaration', tokenStack)
       }
 

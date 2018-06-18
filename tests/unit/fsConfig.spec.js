@@ -13,7 +13,7 @@ describe('FSConfig', () => {
         copy: [],
         features: {
           esModules: false,
-          esDefaultParameter: false,
+          esDefaultParams: false,
           esClasses: true,
           esTemplates: true
         }
@@ -31,7 +31,7 @@ describe('FSConfig', () => {
         copy: [],
         features: {
           esModules: false,
-          esDefaultParameter: false,
+          esDefaultParams: false,
           esClasses: true,
           esTemplates: true
         }
@@ -44,7 +44,7 @@ describe('FSConfig', () => {
     const conf = new FSConfig()
     inspect(conf.getConf('features')).isEql({
       esModules: false,
-      esDefaultParameter: false,
+      esDefaultParams: false,
       esClasses: true,
       esTemplates: true
     })
