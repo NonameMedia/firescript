@@ -43,7 +43,8 @@ describe('ForStatement', () => {
               type: 'Literal',
               raw: '0',
               value: 0
-            }
+            },
+            fsType: null
           }]
         },
         test: {

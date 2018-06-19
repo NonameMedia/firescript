@@ -31,7 +31,8 @@ describe('ForOfStatement', () => {
               type: 'Identifier',
               name: 'item'
             },
-            init: null
+            init: null,
+            fsType: null
           }]
         },
         right: {

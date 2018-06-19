@@ -24,7 +24,8 @@
                               "raw": "'Bar'"
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

@@ -29,7 +29,8 @@
                               "raw": "'Bla'"
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

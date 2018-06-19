@@ -12,7 +12,8 @@
                             "type": "Identifier",
                             "name": "prop"
                         },
-                        "init": null
+                        "init": null,
+                        "fsType": null
                     }
                 ],
                 "kind": "const"

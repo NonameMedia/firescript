@@ -17,7 +17,8 @@
                             "name": "Foo"
                         },
                         "arguments": []
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

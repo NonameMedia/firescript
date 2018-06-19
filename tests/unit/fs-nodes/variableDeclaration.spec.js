@@ -29,7 +29,8 @@ describe('VariableDeclaration', () => {
             type: 'Literal',
             raw: '\'bla\'',
             value: 'bla'
-          }
+          },
+          fsType: null
         }]
       })
     })

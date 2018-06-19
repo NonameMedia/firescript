@@ -15,10 +15,13 @@
                         "value": "Foo",
                         "raw": "'Foo'"
                     },
-                    "fsType": null
+                    "fsType": {
+                      "type": "FirescriptTypeBinding",
+                      "name": "str"
+                    }
                 }
             ],
-            "kind": "var"
+            "kind": "const"
         }
     ],
     "sourceType": "module"

@@ -6,17 +6,23 @@ const ALLOWED_CHILDS = [
   'TaggedTemplateExpression', 'MemberExpression', 'Super', 'MetaProperty',
   'NewExpression', 'CallExpression', 'UpdateExpression', 'AwaitExpression', 'UnaryExpression',
   'BinaryExpression', 'LogicalExpression', 'ConditionalExpression',
-  'YieldExpression', 'AssignmentExpression', 'SequenceExpression'
+  'YieldExpression', 'AssignmentExpression', 'SequenceExpression', 'TemplateLiteral'
 ]
 
 class VariableDeclarator extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 
+    this.fsType = null
+
     // TODO support binding patterns
     if (tokenStack.expect('punctuator', '[')) {
       this.id = this.createArrayPatternNode(tokenStack)
     } else {
+      if (tokenStack.expect('identifier') && tokenStack.lookForward('identifier') && !this.isForLoop()) {
+        this.fsType = this.createFirescriptTypeBindingNode(tokenStack)
+      }
+
       this.id = this.createIdentifierNode(tokenStack)
     }
 
@@ -42,6 +48,14 @@ class VariableDeclarator extends FireScriptNode {
     }
   }
 
+  isForLoop () {
+    return (
+      this.tokenStack.lookForward('identifier', 'in') && this.parent.parent.type === 'ForInStatement'
+    ) || (
+      this.tokenStack.lookForward('identifier', 'of') && this.parent.parent.type === 'ForOfStatement'
+    )
+  }
+
   tryObject (tokenStack) {
     return tokenStack.expect('indention') &&
       tokenStack.lookForward('identifier', null, 1) &&
@@ -58,7 +72,8 @@ class VariableDeclarator extends FireScriptNode {
     return this.createJSON({
       type: 'VariableDeclarator',
       id: this.id.toJSON(),
-      init: this.init ? this.init.toJSON() : null
+      init: this.init ? this.init.toJSON() : null,
+      fsType: this.fsType ? this.fsType.toJSON() : null
     })
   }
 }

@@ -28,7 +28,8 @@
                                 "raw": "'two'"
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

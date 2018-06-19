@@ -16,7 +16,8 @@
                             "type": "Literal",
                             "value": 0,
                             "raw": "0"
-                        }
+                        },
+                        "fsType": null
                     }
                 ],
                 "kind": "let"

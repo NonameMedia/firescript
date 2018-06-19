@@ -36,7 +36,8 @@
                                 "name": "name"
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"
@@ -118,7 +119,8 @@
                                 "name": "world"
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

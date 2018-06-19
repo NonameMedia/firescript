@@ -62,7 +62,8 @@
                                 "shorthand": false
                             }
                         ]
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

@@ -32,7 +32,8 @@ describe('BlockStatement', () => {
             init: {
               type: 'Identifier',
               name: 'num1'
-            }
+            },
+            fsType: null
           }]
         }]
       })
@@ -75,7 +76,8 @@ describe('BlockStatement', () => {
                 type: 'Identifier',
                 name: 'num1'
               }
-            }
+            },
+            fsType: null
           }]
         }]
       })

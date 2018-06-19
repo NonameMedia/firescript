@@ -9,7 +9,7 @@ const JSParser = require('../../').JSParser
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/')
 const steps = inspect.readDir(TEST_CASE_DIR)
 
-describe('Integrtion test runner', () => {
+describe.skip('Integrtion test runner', () => {
   steps.forEach((step) => {
     if (!step.isDirectory() || !step.name.startsWith('step')) {
       return

@@ -14,7 +14,8 @@
                         "type": "Literal",
                         "value": "Foo",
                         "raw": "'Foo'"
-                    }
+                    },
+                    "fsType": null
                 }
             ],
             "kind": "const"

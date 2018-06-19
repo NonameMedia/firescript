@@ -96,7 +96,8 @@ describe('ExportNamedDeclaration', () => {
               type: 'Identifier',
               name: 'foo'
             },
-            init: null
+            init: null,
+            fsType: null
           }]
         },
         specifiers: [],

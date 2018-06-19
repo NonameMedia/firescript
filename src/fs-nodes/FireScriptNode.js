@@ -136,6 +136,10 @@ class FireScriptNode {
     return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
   }
 
+  createFirescriptTypeBindingNode (tokenStack) {
+    return this.getNodeInstance('FirescriptTypeBinding', tokenStack)
+  }
+
   createNullNode (tokenStack) {
     const nextToken = tokenStack.current()
     const typeStr = nextToken ? `${nextToken.type} | ${nextToken.value}` : 'EOF'
