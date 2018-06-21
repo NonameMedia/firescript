@@ -1,12 +1,12 @@
 FireScript
 ==========
 
-FireScript is a language which gets transpiled into Javascript. A language which uses indention for block scoping, lesser code to write and an extra set of methods and utils. FireScript output is valid ES6 Javascript.
+FireScript is a language which gets transpiled into Javascript. A language which uses indention for block scoping, dynamic typing, lesser code to write. FireScript output is valid Javascript.
 
 Syntax
 ------
 
-```fs
+```ts
 import Fruits from './fruits'
 
 class Banana extends Fruits
@@ -19,10 +19,13 @@ class Banana extends Fruits
   getName ()
     return this.name
 
+  setName (str name)
+    return this.name = name
+
 export Banana
 ```
 
-```fs
+```ts
 import Banana from './banana'
 
 const banana = new Banana()
@@ -33,7 +36,8 @@ Getting started
 --------------
 
 The best way is to install Firescript globally. Run `npm install -g firescript`.
-Create your first Firescript project by using the `init` command. First, create a home for your project and run `fire init` to initialize a project.
+Firescript is accessable by `fire` command after installation.
+Create your first Firescript project by using the `init` command. Change into  your project root and run `fire init` to initialize a project.
 
 ```shell
 mkdir ~/Projects/myfsproject
@@ -41,4 +45,8 @@ cd myfsproject
 fire init
 ```
 
-You'll find a `.firerc.json` file within your project folder. The file contains a build configuration.
+You'll find a `.firerc.json` file within your project folder. This file contains build and feature configuration.
+
+Firescript uses `.fire` as file extension. The `build` command transpiles all `.fire` files found in the source folder and transpiles it into the destination folder. All other file are being ignored during the build process.
+
+Use the [Firescript Example]() project to play a little with it.
