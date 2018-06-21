@@ -31,7 +31,7 @@ module.exports = (transformer) => {
       for (let i = 0; i < ast.quasis.length; i++) {
         const literal = ast.quasis[i].value.raw
         if (ast.quasis[i] && literal !== '') {
-          expressions.push(ASTCreator.literal(`'${literal}'`))
+          expressions.push(ASTCreator.literal(literal))
         }
 
         if (ast.expressions[i]) {

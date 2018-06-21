@@ -22,7 +22,7 @@ class FunctionDeclaration extends JSElement {
 
     this.id = ast.id ? this.createElement(ast.id) : null
     this.params = this.createElementList(ast.params)
-    this.body = this.createElement(ast.body, null)
+    this.body = ast.body ? this.createElement(ast.body, null) : null
     this.async = ast.async
     this.generator = ast.generator
   }

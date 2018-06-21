@@ -24,6 +24,8 @@ class ASTCreator {
   }
 
   static identifier (name) {
+    if (typeof name === 'object') { return name }
+
     return {
       type: 'Identifier',
       name
@@ -31,14 +33,20 @@ class ASTCreator {
   }
 
   static literal (rawValue) {
+    if (typeof rawValue === 'object') { return rawValue }
+
     const value = typeof rawValue === 'string'
       ? rawValue.replace(/^'|'$/g, '')
       : rawValue
 
+    rawValue = typeof rawValue === 'string'
+      ? rawValue.replace(/^'?|'?$/g, '\'')
+      : rawValue.toString()
+
     return {
       type: 'Literal',
       value: value,
-      raw: rawValue.toString()
+      raw: rawValue
     }
   }
 
@@ -119,6 +127,36 @@ class ASTCreator {
   static thisExpression () {
     return {
       type: 'ThisExpression'
+    }
+  }
+
+  static importDefaultSpecifier (local) {
+    return {
+      type: 'ImportDefaultSpecifier',
+      local: ASTCreator.identifier(local)
+    }
+  }
+
+  static importSpecifier (imported, local) {
+    return {
+      type: 'ImportSpecifier',
+      local: ASTCreator.identifier(local),
+      imported: ASTCreator.identifier(imported)
+    }
+  }
+
+  static importDeclaration (declarations, source) {
+    const specifiers = declarations.map((declaration) => {
+      if (declaration[0] === '**') {
+        return ASTCreator.importDefaultSpecifier(declaration[1])
+      }
+      return ASTCreator.importSpecifier(...declaration)
+    })
+
+    return {
+      type: 'ImportDeclaration',
+      specifiers,
+      source: ASTCreator.literal(source)
     }
   }
 }

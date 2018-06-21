@@ -33,7 +33,7 @@ function findConstructor (superClass, classBody) {
 }
 
 function createClassMethod (className, methodDefinition) {
-  const proto = ASTCreator.memberExpression(
+  const proto = methodDefinition.static ? className : ASTCreator.memberExpression(
     className,
     ASTCreator.identifier('prototype')
   )
@@ -77,7 +77,7 @@ function createProperty (className, method, secondMethod) {
       className,
       ASTCreator.identifier('prototype')
     ),
-    ASTCreator.literal(`'${method.key.name}'`),
+    ASTCreator.literal(method.key.name),
     ASTCreator.objectExpression(methods)
   ]
 
@@ -96,8 +96,8 @@ function handleClassDeclaration (ast) {
 
   childs.push(ASTCreator.functionDeclaration(
     id,
-    fn.params,
-    fn.body
+    fn ? fn.params : [],
+    fn ? fn.body : null
   ))
 
   const proto = ASTCreator.memberExpression(

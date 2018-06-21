@@ -1,5 +1,6 @@
 const path = require('path')
 const superimport = require('superimport')
+const ASTCreator = require('./utils/ASTCreator')
 
 class ASTTransformer {
   constructor (ctx) {
@@ -8,7 +9,11 @@ class ASTTransformer {
   }
 
   add (type, fn) {
-    this.__transformers[type] = fn
+    if (!this.__transformers[type]) {
+      this.__transformers[type] = []
+    }
+
+    this.__transformers[type].push(fn)
   }
 
   get (type) {
@@ -24,12 +29,31 @@ class ASTTransformer {
     return fn(this.ctx)
   }
 
-  transform (ast, index, parent) {
+  transform (ast) {
+    const transformatedAst = this.transformItem(ast)
+    if (this.importRuntime) {
+      this.importModule([[ 'default', '__FS' ]], 'firescript-runtime', transformatedAst)
+    }
+
+    return transformatedAst
+  }
+
+  transformItem (ast, index, parent) {
     const transformatedAst = {}
 
-    const transformationFn = this.get(ast.type)
-    if (transformationFn) {
-      const transformed = transformationFn(ast)
+    const transformationFn = (funcs, ast) => {
+      let trans = ast
+      funcs.forEach((fn) => {
+        trans = Array.isArray(trans)
+          ? trans.map(fn)
+          : fn(trans)
+      })
+
+      return trans
+    }
+    const funcs = this.get(ast.type)
+    if (funcs) {
+      const transformed = transformationFn(funcs, ast)
       if (Array.isArray(transformed)) {
         return transformed
       } else if (transformed !== ast) {
@@ -42,22 +66,29 @@ class ASTTransformer {
       if (Array.isArray(ast[key])) {
         const childs = []
         ast[key].forEach((item, index, parent) => {
-          const transformed = this.transform(item, index, parent)
+          const transformed = this.transformItem(item, index, parent)
           if (Array.isArray(transformed)) {
-            transformed.forEach((child) => childs.push(this.transform(child)))
+            transformed.forEach((child) => childs.push(this.transformItem(child)))
           } else {
             childs.push(transformed)
           }
         })
         transformatedAst[key] = childs
       } else if (typeof ast[key] === 'object' && ast[key] !== null) {
-        transformatedAst[key] = this.transform(ast[key])
+        transformatedAst[key] = this.transformItem(ast[key])
       } else {
         transformatedAst[key] = ast[key]
       }
     }
 
     return transformatedAst
+  }
+
+  importModule (specifiers, moduleName, ast) {
+    const importDeclaration = ASTCreator.importDeclaration(specifiers, moduleName)
+
+    const runtimeImport = this.transformItem(importDeclaration)
+    ast.body.unshift(Array.isArray(runtimeImport) ? runtimeImport[0] : runtimeImport)
   }
 }
 

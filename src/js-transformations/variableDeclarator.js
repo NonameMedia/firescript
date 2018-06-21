@@ -19,6 +19,7 @@ function createTypeBindingNode (ast) {
 module.exports = (transformer) => {
   transformer.add('VariableDeclarator', (ast) => {
     if (ast.fsType) {
+      transformer.importRuntime = true
       ast.init = createTypeBindingNode(ast)
     }
 

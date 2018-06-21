@@ -31,6 +31,7 @@ class FunctionDeclaration extends FireScriptNode {
     }
 
     this.params = []
+    this.fsParamTypeings = []
 
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
@@ -45,9 +46,17 @@ class FunctionDeclaration extends FireScriptNode {
           tokenStack.goForward()
           continue
         }
+
+        let paramType = null
+        if (tokenStack.expect('identifier') && tokenStack.lookForward('identifier')) {
+          paramType = this.createFirescriptTypeBindingNode(tokenStack)
+        }
+
         const param = this.createFullNode(tokenStack)
+        param.fsType = paramType
         this.isAllowedNode(param, ALLOWED_PARAMS)
         this.params.push(param)
+        this.fsParamTypeings.push(paramType)
       }
     } else {
       this.syntaxError('Function arguments expected', tokenStack.current())
@@ -61,6 +70,7 @@ class FunctionDeclaration extends FireScriptNode {
       type: 'FunctionDeclaration',
       id: this.id.toJSON(),
       params: this.params.map((item) => item.toJSON()),
+      fsParamTypeings: this.fsParamTypeings.map((item) => item === null ? null : item.toJSON()),
       body: this.body.toJSON(),
       async: this.async,
       expression: this.expression,

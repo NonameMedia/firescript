@@ -41,7 +41,7 @@ class MethodDefinition extends FireScriptNode {
 
     if (tokenStack.expect('identifier', 'static') && tokenStack.lookForward('identifier')) {
       this.static = true
-      this.goForward()
+      tokenStack.goForward()
     }
 
     if (tokenStack.expect('identifier', ['get', 'set']) && tokenStack.lookForward('identifier')) {

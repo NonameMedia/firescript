@@ -24,12 +24,13 @@ class AssignmentExpression extends JSElement {
   }
 
   toESString (ctx) {
+    const right = this.right ? this.right.toESString(ctx) : null
     return this.renderElement(
       this.left.toESString(ctx) +
       ' ' +
       this.operator +
       ' ' +
-      this.right.toESString(ctx)
+      right
     )
   }
 }

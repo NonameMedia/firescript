@@ -51,7 +51,7 @@ async function createProject (ctx) {
     .ask({ name: 'source', question: 'index.fire', type: 'input', only: (answers) => answers.input })
     .prompt()
 
-  await SuperFS.writeFile(path.join(TEST_CASE_PATH, testCaseDir, 'index.fire'), sourceInput.source)
+  await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'index.fire'), sourceInput.source)
 
   return {
     testCaseDir
