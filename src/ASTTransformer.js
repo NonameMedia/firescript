@@ -32,7 +32,7 @@ class ASTTransformer {
   transform (ast) {
     const transformatedAst = this.transformItem(ast)
     if (this.importRuntime) {
-      this.importModule([[ 'default', '__FS' ]], 'firescript-runtime', transformatedAst)
+      this.importModule([[ '**', '__FS' ]], 'firescript-runtime', transformatedAst)
     }
 
     return transformatedAst

@@ -15,7 +15,10 @@
                         "value": "Foo",
                         "raw": "'Foo'"
                     },
-                    "fsType": null
+                    "fsTyping": {
+  "type": "FirescriptTyping",
+  "name": "any"
+}
                 }
             ],
             "kind": "var"

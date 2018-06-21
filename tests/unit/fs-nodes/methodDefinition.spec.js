@@ -36,6 +36,7 @@ describe('MethodDefinition', () => {
           generator: false,
           id: null,
           params: [],
+          fsParamTypings: [],
           type: 'FunctionExpression'
         }
       })
@@ -73,6 +74,7 @@ describe('MethodDefinition', () => {
           generator: false,
           id: null,
           params: [],
+          fsParamTypings: [],
           type: 'FunctionExpression'
         }
       })

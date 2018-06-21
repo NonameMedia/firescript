@@ -95,6 +95,7 @@
                 "type": "FunctionExpression",
                 "id": null,
                 "params": [],
+                "fsParamTypings": [],
                 "body": {
                   "type": "BlockStatement",
                   "body": [
@@ -143,7 +144,10 @@
               "value": "Peach",
               "raw": "'Peach'"
             },
-            "fsType": null
+            "fsTyping": {
+              "type": "FirescriptTyping",
+              "name": "any"
+            }
           }
         ],
         "kind": "let"

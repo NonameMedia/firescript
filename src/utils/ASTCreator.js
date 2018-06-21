@@ -53,8 +53,8 @@ class ASTCreator {
   static memberExpression (object, property) {
     return {
       type: 'MemberExpression',
-      object,
-      property,
+      object: typeof object === 'string' ? ASTCreator.identifier(object) : object,
+      property: typeof property === 'string' ? ASTCreator.identifier(property) : property,
       computed: false
     }
   }

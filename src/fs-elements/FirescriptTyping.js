@@ -1,17 +1,17 @@
 const FireScriptElement = require('./FireScriptElement')
 
 /**
- * FirescriptTypeBinding
+ * FirescriptTyping
  *
- * @class FirescriptTypeBinding
+ * @class FirescriptTyping
  * @extends FireScriptElement
  *
- * interface FirescriptTypeBinding {
- *   type: 'FirescriptTypeBinding';
+ * interface FirescriptTyping {
+ *   type: 'FirescriptTyping';
  *   name: string;
  * }
  */
-class FirescriptTypeBinding extends FireScriptElement {
+class FirescriptTyping extends FireScriptElement {
   constructor (ast) {
     super(ast)
 
@@ -27,4 +27,4 @@ class FirescriptTypeBinding extends FireScriptElement {
   }
 }
 
-module.exports = FirescriptTypeBinding
+module.exports = FirescriptTyping

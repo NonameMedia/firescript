@@ -44,7 +44,10 @@ describe('ForStatement', () => {
               raw: '0',
               value: 0
             },
-            fsType: null
+            fsTyping: {
+  type: 'FirescriptTyping',
+  name: 'any'
+}
           }]
         },
         test: {

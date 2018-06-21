@@ -18,7 +18,7 @@ class VariableDeclarator extends FireScriptElement {
 
     this.id = this.createElement(ast.id)
     this.init = ast.init ? this.createElement(ast.init) : null
-    this.fsType = ast.fsType ? this.createElement(ast.fsType) : null
+    this.fsTyping = ast.fsTyping ? this.createElement(ast.fsTyping) : null
   }
 
   toFSString (ctx) {
@@ -30,11 +30,12 @@ class VariableDeclarator extends FireScriptElement {
 
     const init = this.init.toFSString(ctx)
     const initSpacing = init.startsWith('\n') ? '' : ' '
-    const typeBinding = this.fsType ? this.fsType.toFSString(ctx) : ''
-    const typeSpacing = this.fsType ? ' ' : ''
+    const hasTyping = this.fsTyping && this.fsTyping.name !== 'any'
+    const fsTyping = hasTyping ? this.fsTyping.toFSString(ctx) : ''
+    const typeSpacing = hasTyping ? ' ' : ''
 
     return this.renderElement(
-      typeBinding +
+      fsTyping +
       typeSpacing +
       this.id.toFSString(ctx) +
       ' =' +

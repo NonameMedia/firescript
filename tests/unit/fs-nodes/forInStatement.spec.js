@@ -32,7 +32,10 @@ describe('ForInStatement', () => {
               name: 'item'
             },
             init: null,
-            fsType: null
+            fsTyping: {
+  type: 'FirescriptTyping',
+  name: 'any'
+}
           }]
         },
         right: {

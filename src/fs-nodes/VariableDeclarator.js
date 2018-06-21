@@ -13,14 +13,14 @@ class VariableDeclarator extends FireScriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 
-    this.fsType = null
-
     // TODO support binding patterns
     if (tokenStack.expect('punctuator', '[')) {
       this.id = this.createArrayPatternNode(tokenStack)
     } else {
       if (tokenStack.expect('identifier') && tokenStack.lookForward('identifier') && !this.isForLoop()) {
-        this.fsType = this.createFirescriptTypeBindingNode(tokenStack)
+        this.fsTyping = this.createFirescriptTypingNode(tokenStack)
+      } else {
+        this.fsTyping = this.createFirescriptTypingNode(tokenStack, 'any')
       }
 
       this.id = this.createIdentifierNode(tokenStack)
@@ -73,7 +73,7 @@ class VariableDeclarator extends FireScriptNode {
       type: 'VariableDeclarator',
       id: this.id.toJSON(),
       init: this.init ? this.init.toJSON() : null,
-      fsType: this.fsType ? this.fsType.toJSON() : null
+      fsTyping: this.fsTyping ? this.fsTyping.toJSON() : null
     })
   }
 }

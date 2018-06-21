@@ -15,8 +15,8 @@
                         "value": "Foo",
                         "raw": "'Foo'"
                     },
-                    "fsType": {
-                      "type": "FirescriptTypeBinding",
+                    "fsTyping": {
+                      "type": "FirescriptTyping",
                       "name": "str"
                     }
                 }

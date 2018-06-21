@@ -25,6 +25,7 @@ class FunctionExpression extends FireScriptNode {
     }
 
     this.params = []
+    this.fsParamTypings = []
 
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
@@ -38,6 +39,12 @@ class FunctionExpression extends FireScriptNode {
         if (tokenStack.expect('punctuator', ',')) {
           tokenStack.goForward()
           continue
+        }
+
+        if (tokenStack.expect('identifier') && tokenStack.lookForward('identifier')) {
+          this.fsParamTypings.push(this.createFirescriptTypingNode(tokenStack))
+        } else {
+          this.fsParamTypings.push(this.createFirescriptTypingNode(tokenStack, 'any'))
         }
 
         if (tokenStack.expect('identifier')) {
@@ -67,6 +74,7 @@ class FunctionExpression extends FireScriptNode {
       type: 'FunctionExpression',
       id: this.id ? this.id.toJSON() : this.id,
       params: this.params.map((item) => item.toJSON()),
+      fsParamTypings: this.fsParamTypings.map((item) => item.toJSON()),
       body: this.body.toJSON(),
       async: this.async,
       expression: this.expression,

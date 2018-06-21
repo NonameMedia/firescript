@@ -26,7 +26,10 @@ describe('VariableDeclarator', () => {
           raw: '\'bla\'',
           value: 'bla'
         },
-        fsType: null
+        fsTyping: {
+          type: 'FirescriptTyping',
+          name: 'any'
+        }
       })
     })
 
@@ -53,8 +56,8 @@ describe('VariableDeclarator', () => {
           raw: '\'bla\'',
           value: 'bla'
         },
-        fsType: {
-          type: 'FirescriptTypeBinding',
+        fsTyping: {
+          type: 'FirescriptTyping',
           name: 'str'
         }
       })

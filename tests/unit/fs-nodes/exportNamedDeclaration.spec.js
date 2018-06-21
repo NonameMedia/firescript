@@ -66,6 +66,7 @@ describe('ExportNamedDeclaration', () => {
           async: false,
           generator: false,
           params: [],
+          fsParamTypings: [],
           expression: false
         },
         specifiers: [],
@@ -97,7 +98,10 @@ describe('ExportNamedDeclaration', () => {
               name: 'foo'
             },
             init: null,
-            fsType: null
+            fsTyping: {
+              type: 'FirescriptTyping',
+              name: 'any'
+            }
           }]
         },
         specifiers: [],

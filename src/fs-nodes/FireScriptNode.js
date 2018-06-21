@@ -136,8 +136,8 @@ class FireScriptNode {
     return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
   }
 
-  createFirescriptTypeBindingNode (tokenStack) {
-    return this.getNodeInstance('FirescriptTypeBinding', tokenStack)
+  createFirescriptTypingNode (tokenStack, name) {
+    return this.getNodeInstance('FirescriptTyping', tokenStack, name)
   }
 
   createNullNode (tokenStack) {

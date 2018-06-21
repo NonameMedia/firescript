@@ -31,6 +31,10 @@ describe('Program', () => {
             type: 'Identifier',
             name: 'say'
           }],
+          fsParamTypings: [{
+            type: 'FirescriptTyping',
+            name: 'any'
+          }],
           body: {
             type: 'BlockStatement',
             body: []
@@ -68,6 +72,10 @@ describe('Program', () => {
           params: [{
             type: 'Identifier',
             name: 'say'
+          }],
+          fsParamTypings: [{
+            type: 'FirescriptTyping',
+            name: 'any'
           }],
           body: {
             type: 'BlockStatement',

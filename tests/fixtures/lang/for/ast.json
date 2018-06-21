@@ -17,7 +17,10 @@
                             "value": 0,
                             "raw": "0"
                         },
-                        "fsType": null
+                        "fsTyping": {
+  "type": "FirescriptTyping",
+  "name": "any"
+}
                     }
                 ],
                 "kind": "let"

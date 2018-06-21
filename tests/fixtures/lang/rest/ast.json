@@ -24,6 +24,20 @@
           }
         }
       ],
+      "fsParamTypings": [
+        {
+          "type": "FirescriptTyping",
+          "name": "any"
+        },
+        {
+          "type": "FirescriptTyping",
+          "name": "any"
+        },
+        {
+          "type": "FirescriptTyping",
+          "name": "any"
+        }
+      ],
       "body": {
         "type": "BlockStatement",
         "body": [

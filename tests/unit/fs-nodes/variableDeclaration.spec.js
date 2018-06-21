@@ -30,7 +30,10 @@ describe('VariableDeclaration', () => {
             raw: '\'bla\'',
             value: 'bla'
           },
-          fsType: null
+          fsTyping: {
+  type: 'FirescriptTyping',
+  name: 'any'
+}
         }]
       })
     })

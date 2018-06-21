@@ -27,6 +27,7 @@
           "name": "getBanana"
         },
         "params": [],
+        "fsParamTypings": [],
         "body": {
           "type": "BlockStatement",
           "body": [

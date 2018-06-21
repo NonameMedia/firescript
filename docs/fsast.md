@@ -1,12 +1,12 @@
 Firescript AST extenstions
 ==========================
 
-### FirescriptTypeBinding
+### FirescriptTyping
 
-Creates a FirescriptTypeBinding object which describes the datatype of a variable or a function parameter.
+Creates a FirescriptTyping object which describes the datatype of a variable or a function parameter.
 
 ```cson
-Interface FirescriptTypeBinding:
-  type: 'FirescriptTypeBinding'
+Interface FirescriptTyping:
+  type: 'FirescriptTyping'
   name: String
 ```

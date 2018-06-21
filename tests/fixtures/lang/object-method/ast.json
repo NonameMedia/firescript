@@ -40,6 +40,7 @@
                                     "type": "FunctionExpression",
                                     "id": null,
                                     "params": [],
+                                    "fsParamTypings": [],
                                     "body": {
                                         "type": "BlockStatement",
                                         "body": [
@@ -61,7 +62,10 @@
                             }
                         ]
                     },
-                    "fsType": null
+                    "fsTyping": {
+                      "type": "FirescriptTyping",
+                      "name": "any"
+                    }
                 }
             ],
             "kind": "const"

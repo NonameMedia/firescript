@@ -33,7 +33,10 @@ describe('BlockStatement', () => {
               type: 'Identifier',
               name: 'num1'
             },
-            fsType: null
+            'fsTyping': {
+              'type': 'FirescriptTyping',
+              'name': 'any'
+            }
           }]
         }]
       })
@@ -77,7 +80,10 @@ describe('BlockStatement', () => {
                 name: 'num1'
               }
             },
-            fsType: null
+            fsTyping: {
+  type: 'FirescriptTyping',
+  name: 'any'
+}
           }]
         }]
       })
