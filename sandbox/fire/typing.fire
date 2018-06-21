@@ -1,5 +1,0 @@
-const int num = 123
-const int num = getNumber()
-
-func getNumber (int num, bool convert?) int
-  return num
