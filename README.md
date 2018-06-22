@@ -32,8 +32,14 @@ const banana = new Banana()
 print(banana.getName())
 ```
 
+Requirements
+------------
+
+Firescript requires Node 8 or higher.
+
 Getting started
 --------------
+
 
 The best way is to install Firescript globally. Run `npm install -g firescript`.
 Firescript is accessable by `fire` command after installation.
