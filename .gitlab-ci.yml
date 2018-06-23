@@ -1,4 +1,9 @@
+stages:
+  - test
+  - publish
+
 .test: &test
+  stage: test
   script:
    - npm install
    - npm run test
@@ -14,3 +19,13 @@ Test Node 9:
 Test Node 10:
   image: node:10
   <<: *test
+
+Publish:
+  stage: publish
+  only:
+    - tags
+  script:
+    - echo "_auth=$NPM_AUTH" > ~/.npmrc
+    - echo "email=$NPM_AUTH_EMAIL" >> ~/.npmrc
+    - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
+    - npm publish
