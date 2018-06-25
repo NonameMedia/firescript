@@ -4,7 +4,7 @@ Data typing
 The `data typing` converts a value into a target datatype.
 Means, you can use `template strings` or `expressions` to define a value and convert it then into a final datatype.
 
-| Datatype | Descroiption                                 |
+| Datatype | Description                                 |
 | -------- | -------------------------------------------- |
 | `fmt`    | A formate strin literal                      |
 | `str`    | String or template literal                   |
