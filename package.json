@@ -1,7 +1,7 @@
 {
   "name": "firescript",
   "version": "0.0.0",
-  "description": "FireScript transpiler",
+  "description": "Firescript transpiler",
   "main": "src/app.js",
   "bin": {
     "fire": "./bin/fire"
