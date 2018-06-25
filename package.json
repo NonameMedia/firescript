@@ -7,9 +7,10 @@
     "fire": "./bin/fire"
   },
   "scripts": {
-    "test": "npm run test:unit && npm run test:integration",
+    "test": "npm run test:unit && npm run test:integration && npm run test:syntax",
     "test:unit": "mocha --reporter lagoon-reporter tests/unit/\\*\\*/\\*.spec.js",
-    "test:integration": "mocha --reporter lagoon-reporter tests/integration/\\*\\*/\\*.spec.js"
+    "test:integration": "mocha --reporter lagoon-reporter tests/integration/\\*\\*/\\*.spec.js",
+    "test:syntax": "node tests/syntax/testLoader.js"
   },
   "repository": {
     "type": "git",
