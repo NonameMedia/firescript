@@ -1,7 +1,7 @@
-image: node:6
+image: node:8
 stages:
   - test
-  # - publish
+  - publish
 
 test:
   stage: test
@@ -10,12 +10,14 @@ test:
   script:
     - npm run test
 
-# publish:
-#   stage: publish
-#   only:
-#     - /^v\d+\.\d+\.\d+$/
-#   script:
-#     - echo "_auth=$NPM_AUTH" > ~/.npmrc
-#     - echo "email=$NPM_AUTH_EMAIL" >> ~/.npmrc
-#     - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
-#     - npm publish
+publish:
+  stage: publish
+  only:
+    - /^v\d+\.\d+\.\d+$/
+  except:
+    - branches
+  script:
+    - echo "_auth=$NPM_AUTH" > ~/.npmrc
+    - echo "email=$NPM_AUTH_EMAIL" >> ~/.npmrc
+    - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
+    - npm publish
