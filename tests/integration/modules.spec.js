@@ -2,7 +2,7 @@ const inspect = require('inspect.js')
 const path = require('path')
 const firescript = require('../../')
 
-describe.only('Module loaging', () => {
+describe('Module loaging', () => {
   describe('named export', () => {
     before(() => {
       const fsSource = inspect.readFile(path.join(__dirname, '../fixtures/modules/fs/namedExport.fire'))

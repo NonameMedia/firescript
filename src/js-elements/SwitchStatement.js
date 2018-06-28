@@ -23,7 +23,7 @@ class SwitchStatement extends JSElement {
   toESString (ctx) {
     const indention = ctx.indent(1)
     const cases = ctx.each(this.cases, this.blockHandler, ctx.indent())
-    ctx.indent(-1)
+    const finalIndention = ctx.indent(-1)
 
     return this.renderElement(
       'switch (' +
@@ -31,6 +31,7 @@ class SwitchStatement extends JSElement {
       ') {' +
       indention +
       cases +
+      finalIndention +
       '}'
     )
   }

@@ -17,14 +17,13 @@ class UnaryExpression extends FireScriptElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element UnaryExpression is a DraftElement!`)
+    this.operator = ast.operator
+    this.argument = this.createElement(ast.argument)
   }
 
-  toString () {
+  toFSString () {
     return this.renderElement(
-      `${this.callee}(${this.arguments.join(', ')});`
+      `${this.operator} ${this.argument.toFSString()}`
     )
   }
 }

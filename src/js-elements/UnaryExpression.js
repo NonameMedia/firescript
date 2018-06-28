@@ -22,8 +22,9 @@ class UnaryExpression extends JSElement {
   }
 
   toESString (ctx) {
+    const operatorSpace = /^\w+$/.test(this.operator) ? ' ' : ''
     return this.renderElement(
-      `${this.operator}${this.argument.toESString(ctx)}`
+      `${this.operator}${operatorSpace}${this.argument.toESString(ctx)}`
     )
   }
 }

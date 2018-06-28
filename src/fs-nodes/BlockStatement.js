@@ -30,12 +30,15 @@ class BlockStatement extends FireScriptNode {
     this.isBlockScope = true
 
     const token = tokenStack.next()
+    this.body = []
+
+    if (token === null) {
+      return
+    }
 
     if (token.type !== 'indention') {
       this.syntaxError('Unexpected token', token)
     }
-
-    this.body = []
 
     while (true) {
       const nextToken = tokenStack.current()

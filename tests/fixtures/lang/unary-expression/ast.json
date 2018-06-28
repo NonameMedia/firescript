@@ -1,0 +1,32 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "IfStatement",
+            "test": {
+                "type": "BinaryExpression",
+                "operator": "===",
+                "left": {
+                    "type": "UnaryExpression",
+                    "operator": "typeof",
+                    "argument": {
+                        "type": "Identifier",
+                        "name": "str"
+                    },
+                    "prefix": true
+                },
+                "right": {
+                    "type": "Literal",
+                    "value": "string",
+                    "raw": "'string'"
+                }
+            },
+            "consequent": {
+                "type": "BlockStatement",
+                "body": []
+            },
+            "alternate": null
+        }
+    ],
+    "sourceType": "module"
+}

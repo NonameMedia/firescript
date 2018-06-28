@@ -25,7 +25,7 @@ class UnaryExpression extends FireScriptNode {
       this.syntaxError('Token is not a unary operator', token)
     }
 
-    this.argument = this.createFullNode(tokenStack)
+    this.argument = this.createNodeItem(tokenStack)
   }
 
   toJSON () {

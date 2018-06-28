@@ -275,6 +275,10 @@ class FireScriptNode {
         return this.getNodeInstance('WhileStatement', tokenStack)
       }
 
+      if (nextToken.value === 'throw') {
+        return this.getNodeInstance('ThrowStatement', tokenStack)
+      }
+
       if (nextToken.value === 'try') {
         return this.getNodeInstance('TryStatement', tokenStack)
       }

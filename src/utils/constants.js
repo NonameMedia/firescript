@@ -4,7 +4,7 @@ module.exports = {
     'continue', 'debugger', 'default', 'do',
     'elif', 'else', 'export', 'extends', 'for', 'func', 'gen',
     'if', 'import',
-    'let', 'new', 'return', 'switch', 'try',
+    'let', 'new', 'return', 'switch', 'try', 'throw',
     'var', 'while', 'yield'
   ],
   OPERATORS: [

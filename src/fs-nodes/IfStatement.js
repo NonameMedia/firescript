@@ -17,6 +17,9 @@ class IfStatement extends FireScriptNode {
     }
 
     this.consequent = this.createFullNode(tokenStack)
+    if (this.consequent.type === 'Null') {
+      this.consequent = this.createBlockStatementNode(tokenStack)
+    }
 
     if (tokenStack.expect('keyword', 'elif')) {
       this.alternate = this.createIfStatementNode(tokenStack, test)

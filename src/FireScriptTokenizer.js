@@ -111,6 +111,12 @@ class FireSciptTokenizer {
       }
 
       if (match[9] !== undefined) {
+        if (this.lookBack('identifier')) {
+          const prev = this.getPrev()
+          if (['typeof', 'delete', 'void'].includes(prev.value)) {
+            prev.type = 'operator'
+          }
+        }
         this.addToken('identifier', match[9])
         continue
       }
@@ -185,11 +191,16 @@ class FireSciptTokenizer {
       return false
     }
 
-    if (token.type === type && token.value === value) {
+    if (token.type === type && (value === undefined || token.value === value)) {
       return true
     }
 
     return false
+  }
+
+  getPrev (numItems) {
+    numItems = numItems || 0
+    return this.token[this.token.length - 1 - numItems]
   }
 
   handleAsKeyword (keyWord) {
