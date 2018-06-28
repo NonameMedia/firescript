@@ -30,7 +30,7 @@ class SwitchStatement extends JSElement {
       this.discriminant.toESString(ctx) +
       ') {' +
       indention +
-      cases +
+      cases.trim() +
       finalIndention +
       '}'
     )
