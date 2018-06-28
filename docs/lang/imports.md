@@ -38,7 +38,7 @@ import
 
 ### Import default export
 
-#### FireScript
+#### Firescript
 
 ```fire
 import banana from 'banana'
@@ -67,7 +67,7 @@ const identifier2 = __destruct001.identifier2;
 
 ### Import types
 
-| FireScript                  | Javascript                       |
+| Firescript                  | Javascript                       |
 | --------------------------- | -------------------------------- |
 | import ** as foo from 'foo' | import default as foo from 'foo' |
 | import * as foo from 'foo'  | import f * as oo from 'foo'      |

@@ -1,6 +1,6 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
-class NullNode extends FireScriptNode {
+class NullNode extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
     this.type = 'Null'

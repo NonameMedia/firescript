@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 
 module.exports = (supershit) => {
   return supershit
@@ -18,7 +18,7 @@ module.exports = (supershit) => {
       const astPath = path.join(__dirname, '../', slug, outfile || 'ast.json')
 
       const jsSource = fs.readFileSync(srcPath, { encoding: 'utf8' })
-      const ast = FireScript.parse(jsSource, {
+      const ast = Firescript.parse(jsSource, {
         type: 'js',
         comments: ctx.allowComments
       })

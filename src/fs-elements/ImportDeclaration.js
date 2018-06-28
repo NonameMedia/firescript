@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ImportDeclaration
  *
  * @class ImportDeclaration
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ImportDeclaration {
  *   type: 'ImportDeclaration'
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   source: Literal;
  * }
  */
-class ImportDeclaration extends FireScriptElement {
+class ImportDeclaration extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

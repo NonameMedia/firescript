@@ -1,16 +1,16 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * EmptyStatement
  *
  * @class EmptyStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface EmptyStatement {
     type: 'EmptyStatement';
 }
 */
-class EmptyStatement extends FireScriptElement {
+class EmptyStatement extends FirescriptElement {
   toFSString () {
     return ''
   }

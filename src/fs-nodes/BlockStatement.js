@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'BlockStatement',
@@ -24,7 +24,7 @@ const ALLOWED_CHILDS = [
   'WithStatement'
 ]
 
-class BlockStatement extends FireScriptNode {
+class BlockStatement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
     this.isBlockScope = true
@@ -38,6 +38,11 @@ class BlockStatement extends FireScriptNode {
 
     if (token.type !== 'indention') {
       this.syntaxError('Unexpected token', token)
+    }
+
+    if (token.value <= this.indention) {
+      // empty block, skipping
+      return
     }
 
     while (true) {

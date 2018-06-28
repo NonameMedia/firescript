@@ -3,7 +3,7 @@ const inspect = require('inspect.js')
 const RenderContext = require('../../src/RenderContext')
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/elements')
 
-describe('FireScriptElements', () => {
+describe('FirescriptElements', () => {
   describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -13,11 +13,11 @@ describe('FireScriptElements', () => {
         group = testCase.name
 
         if (group.charAt(0) === '_') {
-          it.skip(`${group.substr(1)} into FireScript from an AST snippet`)
+          it.skip(`${group.substr(1)} into Firescript from an AST snippet`)
           return
         }
 
-        it(`${group} into FireScript from an AST snippet`, () => {
+        it(`${group} into Firescript from an AST snippet`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = (
             inspect.readFile(`${testCase.path}/result.fire`, { silent: true }) ||

@@ -1,8 +1,8 @@
 const inspect = require('inspect.js')
 const TokenStack = require('../../src/TokenStack')
-const FireScriptNode = require('../../src/fs-nodes/FireScriptNode')
+const FirescriptNode = require('../../src/fs-nodes/FirescriptNode')
 
-describe('FireScriptNode', () => {
+describe('FirescriptNode', () => {
   describe('createNodeItem()', () => {
     it('creates a identifier node', () => {
       const tokenStack = new TokenStack([
@@ -10,7 +10,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -25,7 +25,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -39,7 +39,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -55,7 +55,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -73,7 +73,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -88,7 +88,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       fsn.indention = 0
       const node = fsn.createNodeItem(tokenStack)
 
@@ -109,7 +109,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -138,7 +138,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createNodeItem(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -159,7 +159,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -176,7 +176,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -207,7 +207,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({
@@ -244,7 +244,7 @@ describe('FireScriptNode', () => {
         { 'type': 'indention', 'value': 0 }
       ])
 
-      const fsn = new FireScriptNode(tokenStack, null)
+      const fsn = new FirescriptNode(tokenStack, null)
       const node = fsn.createFullNode(tokenStack)
 
       inspect(node.toJSON()).isEql({

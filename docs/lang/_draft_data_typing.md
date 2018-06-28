@@ -29,7 +29,7 @@ const myStr = str 'Hello string'
 const myReg = reg '[A-Za-z]'
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 

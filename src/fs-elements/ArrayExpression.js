@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ArrayExpression
  *
  * @class ArrayExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ArrayExpression {
  *   type: 'ArrayExpression';
  *   elements: ArrayExpressionElement[];
  * }
  */
-class ArrayExpression extends FireScriptElement {
+class ArrayExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

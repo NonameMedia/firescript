@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * TryStatement
  *
  * @class TryStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface TryStatement {
  *   type: 'TryStatement';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   finalizer: BlockStatement | null;
  * }
  */
-class TryStatement extends FireScriptElement {
+class TryStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

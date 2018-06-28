@@ -12,7 +12,7 @@ do
 while [test]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 do

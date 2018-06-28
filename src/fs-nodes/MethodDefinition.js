@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_KEYS = [
   // 'ThisExpression',
@@ -32,7 +32,7 @@ const ALLOWED_VALUES = [
   'Null'
 ]
 
-class MethodDefinition extends FireScriptNode {
+class MethodDefinition extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

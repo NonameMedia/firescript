@@ -1,8 +1,7 @@
-const fs = require('fs')
 const path = require('path')
 const colorfy = require('colorfy')
 const SuperFS = require('superfs')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 const copy = require('./copy').copy
 
 const IGNORE_FILES = [
@@ -17,21 +16,22 @@ class WatchCMD {
   async transpileFile (filename, srcDir, destDir) {
     const cf = colorfy()
     if (path.extname(filename) !== '.fire') {
-      cf.ored(' ... skipping file ').lgrey(filename).print()
+      cf.ored('Skipping file ').lgrey(filename).print()
       return
     }
 
     const infile = path.resolve(srcDir, filename)
     const outfile = path.resolve(destDir, filename.replace(/\.fire$/, '.js'))
+    const infileRelative = infile.replace(process.cwd(), '.')
+    const outfileRelative = outfile.replace(process.cwd(), '.')
 
-    // cf.yellow(' ... write file ').lgrey(outfile).print()
-    cf.txt('transpile ').grey(infile).txt(' -> ').lime(outfile).nl().print()
+    cf.txt('Transpile ').grey(infileRelative).txt(' -> ').lime(outfileRelative).print()
 
     const input = await SuperFS.readFile(infile)
 
-    const source = FireScript.transpile(input, {
+    const source = Firescript.transpile(input, {
       type: 'fire',
-      verbose: true
+      verbose: this.conf.verbose
     })
 
     const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
@@ -45,7 +45,7 @@ class WatchCMD {
     })
     const fsFiles = files.filter((flw) => flw.ext === 'fire')
     const cf = colorfy()
-    cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(this.srcDir).txt(' to ').lime(this.destDir).nl().print()
+    cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(this.srcDir).txt(' to ').lime(this.destDir).print()
 
     for (const flw of fsFiles) {
       await this.transpileFile(flw.relative, this.srcDir, this.destDir)
@@ -63,9 +63,10 @@ module.exports = (supershit) => {
     .option('-v, --verbose', 'Verbose log')
     .description('Watch a directory and starts transpilation if a files content changes')
     .action(async (ctx, src, dest) => {
-      const conf = FireScript.loadConf({
+      const conf = Firescript.loadConf({
         src: src,
-        dest: dest
+        dest: dest,
+        verbose: ctx.verbose
       })
 
       const watchCmd = new WatchCMD(conf)

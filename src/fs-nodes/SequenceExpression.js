@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'ThisExpression',
@@ -29,14 +29,14 @@ const ALLOWED_CHILDS = [
  * SequenceExpression
  *
  * @class SequenceExpression
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface SequenceExpression {
  *   type: 'SequenceExpression';
  *   expressions: Expression[];
  * }
  */
-class SequenceExpression extends FireScriptNode {
+class SequenceExpression extends FirescriptNode {
   constructor (tokenStack, parent, expression) {
     super(tokenStack, parent)
 

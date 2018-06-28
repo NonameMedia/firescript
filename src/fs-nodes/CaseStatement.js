@@ -1,6 +1,6 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
-class SwitchStatement extends FireScriptNode {
+class SwitchStatement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

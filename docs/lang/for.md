@@ -20,7 +20,7 @@ for [variable] in [object]
 for [variable] of [iterable]
   [body]
 ```
-### FireScript
+### Firescript
 
 ```fire
 for let i = 0; i < l; i++

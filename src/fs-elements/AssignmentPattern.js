@@ -1,4 +1,4 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 const ALLOWED_LEFT_CHILDS = [
   'Identifier',
@@ -24,7 +24,7 @@ const ALLOWED_RIGHTT_CHILDS = [
  * AssignmentPattern
  *
  * @class AssignmentPattern
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface AssignmentPattern {
  *   type: 'AssignmentPattern';
@@ -32,7 +32,7 @@ const ALLOWED_RIGHTT_CHILDS = [
  *   right: Expression;
  * }
  */
-class AssignmentPattern extends FireScriptElement {
+class AssignmentPattern extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

@@ -1,7 +1,7 @@
 Tokenization
 ============
 
-The FireScript parser converts the input in an array of tokens first and uses it for parsing.
+The Firescript parser converts the input in an array of tokens first and uses it for parsing.
 This step is called [lexical analysis](https://en.wikipedia.org/wiki/Lexical_analysi)
 
 ### Interface
@@ -9,17 +9,17 @@ This step is called [lexical analysis](https://en.wikipedia.org/wiki/Lexical_ana
 The Tokenizer interface is as follows:
 
 ```js
-const tokenizer = new FireScriptTokenizer(options)
+const tokenizer = new FirescriptTokenizer(options)
 const tokenStack = tokenizer.tokenize(input)
 
 // or a shorthand
 
-const tokenStack = FireScript.tokenize(input, options)
+const tokenStack = Firescript.tokenize(input, options)
 ```
 
 ### Tokens
 
-The FireScript tokenizer knows these tokens
+The Firescript Tokenizer knows these tokens
 
 Token name   | Description
 -------------|------------
@@ -47,7 +47,7 @@ console.log(greeding)
 const fs = require('fs')
 const helloWorld = fs.readFileSync('./helloWorld.fire')
 
-FireScript.tokenize(helloWorld)
+Firescript.tokenize(helloWorld)
 ```
 
 The output of `tokenize()` would be

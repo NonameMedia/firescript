@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_PARAMS = [
   'Identifier',
@@ -8,7 +8,7 @@ const ALLOWED_PARAMS = [
   'RestElement'
 ]
 
-class FunctionDeclaration extends FireScriptNode {
+class FunctionDeclaration extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

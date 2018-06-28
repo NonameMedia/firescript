@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 
 module.exports = (supershit) => {
   return supershit
@@ -14,7 +14,7 @@ module.exports = (supershit) => {
         ? require(file)
         : fs.readFileSync(file, { encoding: 'utf8' })
 
-      const source = FireScript.transpile(input, {
+      const source = Firescript.transpile(input, {
         type: /* ctx.type || */ path.extname(file) === '.fire' ? 'fire' : 'js',
         verbose: ctx.verbose
       })

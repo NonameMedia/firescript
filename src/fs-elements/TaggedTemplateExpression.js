@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * TaggedTemplateExpression
  *
  * @class TaggedTemplateExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface TaggedTemplateExpression {
  *   type: 'TaggedTemplateExpression';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   readonly quasi: TemplateLiteral;
  * }
  */
-class TaggedTemplateExpression extends FireScriptElement {
+class TaggedTemplateExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

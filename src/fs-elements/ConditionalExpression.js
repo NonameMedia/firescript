@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ConditionalExpression
  *
  * @class ConditionalExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ConditionalExpression {
  *   type: 'ConditionalExpression';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   alternate?: Statement;
  * }
  */
-class ConditionalExpression extends FireScriptElement {
+class ConditionalExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

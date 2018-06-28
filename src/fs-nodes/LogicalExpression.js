@@ -1,11 +1,11 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const LOGICAL_OPERATORS = ['||', '&&']
 /**
  * LogicalExpression
  *
  * @class LogicalExpression
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface LogicalExpression {
  *   type: 'LogicalExpression';
@@ -14,7 +14,7 @@ const LOGICAL_OPERATORS = ['||', '&&']
  *   right: Expression;
  * }
  */
-class LogicalExpression extends FireScriptNode {
+class LogicalExpression extends FirescriptNode {
   constructor (tokenStack, parent, left) {
     super(tokenStack, parent)
 

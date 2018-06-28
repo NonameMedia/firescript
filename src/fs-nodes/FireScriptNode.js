@@ -1,6 +1,6 @@
 const constants = require('../utils/constants')
 
-class FireScriptNode {
+class FirescriptNode {
   constructor (tokenStack, parent) {
     this.isBlockScope = false
     this.parent = parent || {
@@ -566,4 +566,4 @@ class FireScriptNode {
   }
 }
 
-module.exports = FireScriptNode
+module.exports = FirescriptNode

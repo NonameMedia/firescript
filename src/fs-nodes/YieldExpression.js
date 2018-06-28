@@ -1,10 +1,10 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * YieldExpression
  *
  * @class YieldExpression
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface YieldExpression {
  *   type: 'YieldExpression';
@@ -12,7 +12,7 @@ const FireScriptNode = require('./FireScriptNode')
  *   delegate: boolean;
  * }
  */
-class YieldExpression extends FireScriptNode {
+class YieldExpression extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

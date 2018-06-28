@@ -35,7 +35,7 @@ const obj = { [key]: [value], [key]: [value], [key]: [value] }
 The object expression is similar to Javascript. A curly brace wraps a list of key/value pairs. Each pair has to be in one line. A leading comma is not allowed. The curly braces are optional in variable declarations. An indention lower or equal to the declaratior signals the ending of an object block.
 Empty lines between properties possible, but not recommented.
 
-#### FireScript
+#### Firescript
 
 ```fire
 const foo =
@@ -54,7 +54,7 @@ const foo = {
 
 ### Inline syntax
 
-#### FireScript
+#### Firescript
 
 ```fire
 foo({ foo: 'Foo', bar: 'Bar' })
@@ -74,7 +74,7 @@ Examples
 
 This exmaple shows a complex object structure with different data types
 
-##### FireScript
+##### Firescript
 
 ```fire
 const obj =

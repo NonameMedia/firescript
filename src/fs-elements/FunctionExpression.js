@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * FunctionExpression
  *
  * @class FunctionExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface FunctionExpression {
  *   type: 'FunctionExpression';
@@ -16,7 +16,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   expression: boolean;
  * }
 */
-class FunctionExpression extends FireScriptElement {
+class FunctionExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

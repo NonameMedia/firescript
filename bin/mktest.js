@@ -4,8 +4,8 @@ const superconf = require('superconf')
 const colorfy = require('colorfy')
 const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 
-const FireScriptTokenizer = require('../src/FireScriptTokenizer')
-const FireScriptParser = require('../src/FireScriptParser')
+const FirescriptTokenizer = require('../src/FirescriptTokenizer')
+const FirescriptParser = require('../src/FirescriptParser')
 const JSTranspiler = require('../src/JSTranspiler')
 
 const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/')
@@ -102,11 +102,11 @@ module.exports = (supershit) => {
       const fileSource = await SuperFS.readFile(path.join(ctx.testCaseRoot, testCaseDir, 'index.fire'))
 
       if (fileSource) {
-        const tokenizer = new FireScriptTokenizer()
+        const tokenizer = new FirescriptTokenizer()
         const tokenstack = tokenizer.tokenize(fileSource)
         await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'fstoken.json'), JSON.stringify(tokenstack, null, '  '))
 
-        const parser = new FireScriptParser()
+        const parser = new FirescriptParser()
         const ast = parser.parse(fileSource)
         await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'fsast.json'), JSON.stringify(ast, null, '  '))
 

@@ -30,7 +30,7 @@ func [name] ([type] [param])
   [body]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 let num counter = 0

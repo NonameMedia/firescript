@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'Identifier'
@@ -8,7 +8,7 @@ const ALLOWED_CHILDS = [
  * MetaProperty
  *
  * @class MetaProperty
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface MetaProperty {
  *   type: 'MetaProperty';
@@ -16,7 +16,7 @@ const ALLOWED_CHILDS = [
  *   property: Identifier;
  * }
  */
-class MetaProperty extends FireScriptNode {
+class MetaProperty extends FirescriptNode {
   constructor (tokenStack, parent, meta) {
     super(tokenStack, parent)
 

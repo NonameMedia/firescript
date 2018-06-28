@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'ThisExpression',
@@ -37,7 +37,7 @@ const ALLOWED_CHILDS = [
  *   right: Expression;
  * }
  */
-class AssignmentPattern extends FireScriptNode {
+class AssignmentPattern extends FirescriptNode {
   constructor (tokenStack, parent, left) {
     super(tokenStack, parent)
 

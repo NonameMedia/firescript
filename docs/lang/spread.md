@@ -13,7 +13,7 @@ Syntax
 
 ### Function arguments
 
-#### FireScript
+#### Firescript
 
 ```fire
 foo(...args)
@@ -27,7 +27,7 @@ foo(...args);
 
 ### Objects
 
-#### FireScript
+#### Firescript
 
 ```fire
 const obj =

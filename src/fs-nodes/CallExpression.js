@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CALLEE_TYPES = [
   'ThisExpression',
@@ -9,6 +9,7 @@ const ALLOWED_CALLEE_TYPES = [
   'FunctionExpression',
   'ArrowFunctionExpression',
   'ClassExpression',
+  'TemplateLiteral',
   'TaggedTemplateExpression',
   'MemberExpression',
   'Super',
@@ -35,6 +36,7 @@ const ALLOWED_ARGUMENT_TYPES = [
   'FunctionExpression',
   'ArrowFunctionExpression',
   'ClassExpression',
+  'TemplateLiteral',
   'TaggedTemplateExpression',
   'MemberExpression',
   'Super',
@@ -53,7 +55,7 @@ const ALLOWED_ARGUMENT_TYPES = [
   'SpreadElement'
 ]
 
-class CallExpression extends FireScriptNode {
+class CallExpression extends FirescriptNode {
   constructor (tokenStack, parent, callee) {
     super(tokenStack, parent)
 

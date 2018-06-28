@@ -1,10 +1,10 @@
 const path = require('path')
 const inspect = require('inspect.js')
-const FireScriptTranspiler = require('../../').FireScriptTranspiler
+const FirescriptTranspiler = require('../../').FirescriptTranspiler
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 const featureConf = {}
 
-describe('FireScriptTranspiler', () => {
+describe('FirescriptTranspiler', () => {
   describe('transpile', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -18,11 +18,11 @@ describe('FireScriptTranspiler', () => {
           return
         }
 
-        it(`${group} into FireScript from AST`, () => {
+        it(`${group} into Firescript from AST`, () => {
           const ast = require(`${testCase.path}/ast.json`)
           const source = inspect.readFile(`${testCase.path}/result.fire`, { silent: true }) || inspect.readFile(`${testCase.path}/index.fire`)
 
-          const transpiler = new FireScriptTranspiler({
+          const transpiler = new FirescriptTranspiler({
             features: featureConf
           })
 

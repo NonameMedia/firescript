@@ -1,7 +1,7 @@
 Function declaration
 ====================
 
-FireScript knows three types of functions. These are common functions, async functions and generator functions. The **func** keyword defines a common function, **async** defines an async function and the **gen** keyword defines a generator function.
+Firescript knows three types of functions. These are common functions, async functions and generator functions. The **func** keyword defines a common function, **async** defines an async function and the **gen** keyword defines a generator function.
 
 The **return** statement stops the execution of a function and returns a value to the function caller. Return works in `func`, `async` and `gen` functions.
 
@@ -51,7 +51,7 @@ gen [name] (...[args])
 
 ### Function declaration
 
-#### FireScript
+#### Firescript
 
 ```fire
 func foo (num)
@@ -71,7 +71,7 @@ function foo (num) {
 
 ### Function expression
 
-#### FireScript
+#### Firescript
 
 ```fire
 const foo = func foo (num)
@@ -90,7 +90,7 @@ function foo (num) {
 
 ### Generator function
 
-#### FireScript
+#### Firescript
 
 ```fire
 gen foo (num)
@@ -119,7 +119,7 @@ function * foo (num) {
 
 ### Async function
 
-#### FireScript
+#### Firescript
 
 ```fire
 async foo (num)
@@ -140,7 +140,7 @@ function * foo (num) {
 
 Arrow functions are anonymous functions and they don't have their own *this*, *arguments*, *super*, or *new.target* arguments.
 
-#### FireScript
+#### Firescript
 
 ```fire
 (num) =>
@@ -161,7 +161,7 @@ Arrow functions are anonymous functions and they don't have their own *this*, *a
 
 A function call has the same syntax as in Javascript.
 
-#### FireScript
+#### Firescript
 
 ```fire
 foo('bar')

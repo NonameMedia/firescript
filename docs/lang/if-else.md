@@ -30,7 +30,7 @@ else
 
 ### if
 
-#### FireScript
+#### Firescript
 
 ```fire
 if foo
@@ -47,7 +47,7 @@ if (foo) {
 
 ### if...else
 
-#### FireScript
+#### Firescript
 
 ```fire
 if foo

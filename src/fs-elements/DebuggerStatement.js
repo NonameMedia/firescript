@@ -1,16 +1,16 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * DebuggerStatement
  *
  * @class DebuggerStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface DebuggerStatement {
  *   type: 'DebuggerStatement';
  * }
  */
-class DebuggerStatement extends FireScriptElement {
+class DebuggerStatement extends FirescriptElement {
   toFSString (ctx) {
     return this.renderElement('debugger')
   }

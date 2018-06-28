@@ -2,7 +2,7 @@ NewExpression
 =============
 
 The `new` keyword instantiates a class from a given `ClassName` and returns the newly created `instance`. It takes a list of `arguments` the constructor will be called with.
-The `()` braces are mandatory in FireScript.
+The `()` braces are mandatory in Firescript.
 
 Syntax
 ------
@@ -11,7 +11,7 @@ Syntax
 const [instance] = new [ClassName](...[args])
 ```
 
-#### FireScript
+#### Firescript
 
 This example creates an instance of `Foo`
 

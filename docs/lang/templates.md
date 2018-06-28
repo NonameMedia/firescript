@@ -18,7 +18,7 @@ const tmpl = 'Hello ${[expression]}'
 
 ### Template
 
-#### FireScript
+#### Firescript
 
 ```fire
 `${banana} is a tasty ${kind}`

@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * Literal
  *
  * @class Literal
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface Literal {
  *   type: 'Literal';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   regex?: { pattern: string, flags: string };
  * }
  */
-class Literal extends FireScriptElement {
+class Literal extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

@@ -1,9 +1,9 @@
 const path = require('path')
 const inspect = require('inspect.js')
 const SuperFS = require('superfs')
-const FireScriptTokenizer = require('../../').FireScriptTokenizer
-const FireScriptParser = require('../../').FireScriptParser
-const FireScriptTranspiler = require('../../').FireScriptTranspiler
+const FirescriptTokenizer = require('../../').FirescriptTokenizer
+const FirescriptParser = require('../../').FirescriptParser
+const FirescriptTranspiler = require('../../').FirescriptTranspiler
 const JSParser = require('../../').JSParser
 
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/')
@@ -38,7 +38,7 @@ describe.skip('Integrtion test runner', () => {
           })
 
           it(`Transpile AST into FS`, () => {
-            const transpiler = new FireScriptTranspiler()
+            const transpiler = new FirescriptTranspiler()
             fsSource = transpiler.transpile(jsAST)
             inspect(fsSource).isString()
           })
@@ -49,7 +49,7 @@ describe.skip('Integrtion test runner', () => {
           })
 
           it(`Tokenize FS`, () => {
-            const parser = new FireScriptTokenizer()
+            const parser = new FirescriptTokenizer()
             fsToken = parser.tokenize(fsSource)
             inspect(fsToken).isArray()
           })
@@ -60,7 +60,7 @@ describe.skip('Integrtion test runner', () => {
           })
 
           it(`Transpile FS into AST`, () => {
-            const parser = new FireScriptParser()
+            const parser = new FirescriptParser()
             fsAST = parser.parse(fsSource)
             inspect(fsAST).isObject()
           })
@@ -70,7 +70,7 @@ describe.skip('Integrtion test runner', () => {
           })
 
           it(`Transpile FS-AST into JS`, () => {
-            const parser = new FireScriptParser()
+            const parser = new FirescriptParser()
             fsAST = parser.parse(fsSource)
             inspect(fsAST).isObject()
           })

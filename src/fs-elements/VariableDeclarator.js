@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * VariableDeclarator
  *
  * @class VariableDeclarator
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface VariableDeclarator {
  *   type: 'VariableDeclarator';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   init: Expression | null;
  * }
 */
-class VariableDeclarator extends FireScriptElement {
+class VariableDeclarator extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

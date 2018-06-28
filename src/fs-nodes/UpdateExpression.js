@@ -1,7 +1,7 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 const constants = require('../utils/constants')
 
-class UpdateExpression extends FireScriptNode {
+class UpdateExpression extends FirescriptNode {
   constructor (tokenStack, parent, argument) {
     super(tokenStack, parent)
 

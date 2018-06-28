@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_PARAMS = [
   'Identifier',
@@ -10,7 +10,7 @@ const ALLOWED_PARAMS = [
  * CatchClause
  *
  * @class CatchClause
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface CatchClause {
  *   type: 'CatchClause';
@@ -18,7 +18,7 @@ const ALLOWED_PARAMS = [
  *   body: BlockStatement;
  * }
  */
-class CatchClause extends FireScriptNode {
+class CatchClause extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

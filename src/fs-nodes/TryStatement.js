@@ -1,10 +1,10 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * TryStatement
  *
  * @class TryStatement
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface TryStatement {
  *     type: 'TryStatement';
@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  *     finalizer: BlockStatement | null;
  * }
  */
-class TryStatement extends FireScriptNode {
+class TryStatement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

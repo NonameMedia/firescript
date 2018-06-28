@@ -1,9 +1,9 @@
 const path = require('path')
 const inspect = require('inspect.js')
-const FireScriptParser = require('../../src/FireScriptParser')
+const FirescriptParser = require('../../src/FirescriptParser')
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
-describe('FireScriptParser', () => {
+describe('FirescriptParser', () => {
   describe('parse', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -18,13 +18,13 @@ describe('FireScriptParser', () => {
         }
 
         it(`${group} .fire into an AST item`, () => {
-          const FireScript = new FireScriptParser()
+          const Firescript = new FirescriptParser()
           const source = inspect
             .readFile(`${testCase.path}/index.fire`)
             .replace(/EOF\s*$/, '')
           const ast = require(`${testCase.path}/ast.json`)
 
-          const res = FireScript.parse(source)
+          const res = Firescript.parse(source)
 
           inspect(res).isEql(ast)
         })

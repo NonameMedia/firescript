@@ -30,7 +30,7 @@ Each `value` has to be in one line. Leading commas are not allowed.
 ~~An indention lower or equal to the declaratior signals the ending of an object block.~~
 Empty lines between values possible, but not recommented.
 
-### FireScript
+### Firescript
 
 ```fire
 const arr = [ 'Foo', 'Bar' ]

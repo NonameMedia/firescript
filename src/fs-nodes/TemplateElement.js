@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * Tagged Template Expression
@@ -10,9 +10,9 @@ const FireScriptNode = require('./FireScriptNode')
  * }
  *
  * @class TemplateElement
- * @extends FireScriptNode
+ * @extends FirescriptNode
  */
-class TemplateElement extends FireScriptNode {
+class TemplateElement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

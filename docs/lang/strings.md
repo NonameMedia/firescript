@@ -1,7 +1,7 @@
 Strings
 =======
 
-Strings in FireScript are wrapped with `'`.
+Strings in Firescript are wrapped with `'`.
 There are no other supported quotes like `"` or `\`` like in Javascript. Firescript supports inline variables in the same way Javascript does.
 
 ```fs

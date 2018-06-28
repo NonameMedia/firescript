@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ContinueStatement
  *
  * @class ContinueStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ContinueStatement {
  *   type: 'ContinueStatement';
  *   label: Identifier | null;
  * }
  */
-class ContinueStatement extends FireScriptElement {
+class ContinueStatement extends FirescriptElement {
   toFSString (ctx) {
     return this.renderElement('continue')
   }

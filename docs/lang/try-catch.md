@@ -13,7 +13,7 @@ catch err
   [catch block]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 try

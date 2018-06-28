@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_ELEMENTS = [
   'ThisExpression',
@@ -27,7 +27,7 @@ const ALLOWED_ELEMENTS = [
   'SpreadElement'
 ]
 
-class ArrayExpression extends FireScriptNode {
+class ArrayExpression extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

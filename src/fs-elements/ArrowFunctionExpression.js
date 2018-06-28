@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ArrowFunctionExpression
  *
  * @class ArrowFunctionExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ArrowFunctionExpression {
  *   type: 'ArrowFunctionExpression';
@@ -15,7 +15,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   expression: boolean;
  * }
  */
-class ArrowFunctionExpression extends FireScriptElement {
+class ArrowFunctionExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

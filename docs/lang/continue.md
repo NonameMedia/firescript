@@ -10,7 +10,7 @@ Syntax
 continue [label]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 while num

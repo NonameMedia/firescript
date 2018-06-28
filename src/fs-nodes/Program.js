@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_SCRIPT_CHILDS = [
   'BlockStatement', 'BreakStatement', 'ContinueStatement',
@@ -19,7 +19,7 @@ const ALLOWED_MODULE_CHILDS = [
  * Program node
  *
  * @class Program
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface Program {
  *    type: 'Program';
@@ -33,7 +33,7 @@ const ALLOWED_MODULE_CHILDS = [
  *    body: ModuleItem[];
  *  }
  */
-class Program extends FireScriptNode {
+class Program extends FirescriptNode {
   constructor (tokenStack, parent, sourceType) {
     super(tokenStack, parent)
 

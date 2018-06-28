@@ -1,7 +1,7 @@
-Using FireScript
+Using Firescript
 ================
 
-FireScript comes with a CLI to transpile the sources into Javascipt.
+Firescript comes with a CLI to transpile the sources into Javascipt.
 Place a `.firescriptrc` file in your project root to set transpiler options.
 The file is interpreted as a `.cson` file.
 
@@ -32,7 +32,7 @@ Transpiler options
 
 Enable `import` and `export` statements.
 
-| Type           | FireScript                       | ESM                         | CommonJS                                |
+| Type           | Firescript                       | ESM                         | CommonJS                                |
 | -------------- | -------------------------------- | --------------------------- | --------------------------------------- |
 | Named import   | import banana from 'banana'      | import banana from 'banana' | const banana = require('banana').banana |
 | Default import | import default as banana from 'banana' |                             |                                         |

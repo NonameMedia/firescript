@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CALLEE_TYPES = [
   'ThisExpression',
@@ -26,7 +26,7 @@ const ALLOWED_CALLEE_TYPES = [
   // 'SequenceExpression'
 ]
 
-class NewExpression extends FireScriptNode {
+class NewExpression extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

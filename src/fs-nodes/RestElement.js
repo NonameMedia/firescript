@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'Identifier',
@@ -6,7 +6,7 @@ const ALLOWED_CHILDS = [
   'ObjectPattern'
 ]
 
-class RestElement extends FireScriptNode {
+class RestElement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

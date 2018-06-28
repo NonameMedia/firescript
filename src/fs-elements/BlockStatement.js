@@ -1,4 +1,4 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 const ALLOWED_CHILDS = [
   'ClassDeclaration', 'FunctionDeclaration', ' VariableDeclaration',
@@ -15,14 +15,14 @@ const ALLOWED_CHILDS = [
  * BlockStatement
  *
  * @class BlockStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface BlockStatement {
  *   type: 'BlockStatement';
  *   body: StatementListItem[];
  * }
 */
-class BlockStatement extends FireScriptElement {
+class BlockStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

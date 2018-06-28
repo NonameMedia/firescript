@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_EXPRESSIONS = [
   'ThisExpression',
@@ -36,9 +36,9 @@ const ALLOWED_EXPRESSIONS = [
  * }
  *
  * @class TemplateLiteral
- * @extends FireScriptNode
+ * @extends FirescriptNode
  */
-class TemplateLiteral extends FireScriptNode {
+class TemplateLiteral extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

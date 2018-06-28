@@ -20,7 +20,7 @@ class [name] extends [superClass]
 
 ### Class declaration
 
-#### FireScript
+#### Firescript
 
 ```fire
 class Foo
@@ -47,7 +47,7 @@ class Foo {
 
 ### Extends
 
-#### FireScript
+#### Firescript
 
 ```fire
 class Bla extends from Foo

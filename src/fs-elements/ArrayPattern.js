@@ -1,4 +1,4 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 const ALLOWED_CHILDS = [
   'AssignmentPattern',
@@ -13,14 +13,14 @@ const ALLOWED_CHILDS = [
  * ArrayPattern
  *
  * @class ArrayPattern
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ArrayPattern {
  *   type: 'ArrayPattern';
  *   elements: ArrayPatternElement[];
  * }
  */
-class ArrayPattern extends FireScriptElement {
+class ArrayPattern extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

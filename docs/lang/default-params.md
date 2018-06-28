@@ -14,7 +14,7 @@ func ([param] = [defaultValue])
   [body]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 func greet(msg = 'Hello World')

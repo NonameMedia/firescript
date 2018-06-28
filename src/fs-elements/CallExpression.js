@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * CallExpression
  *
  * @class CallExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface CallExpression {
  *   type: 'CallExpression';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   arguments: ArgumentListElement[];
  * }
  */
-class CallExpression extends FireScriptElement {
+class CallExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

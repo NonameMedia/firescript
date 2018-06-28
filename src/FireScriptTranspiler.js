@@ -2,11 +2,11 @@ const Program = require('./fs-elements/Program')
 const RenderContext = require('./RenderContext')
 
 /**
- * Transpiles an AST object into FireScript
+ * Transpiles an AST object into Firescript
  *
- * @class FireScriptTranspiler
+ * @class FirescriptTranspiler
  */
-class FireScriptTranspiler {
+class FirescriptTranspiler {
   // constructor (opts) {
   //   this.config = new FSConfig()
   //
@@ -31,4 +31,4 @@ class FireScriptTranspiler {
   }
 }
 
-module.exports = FireScriptTranspiler
+module.exports = FirescriptTranspiler

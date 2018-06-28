@@ -1,7 +1,7 @@
 debugger
 ========
 
-The `debugger` statement invokes any debugging functionality. FireScript itselfs hasn't got any debugging support. The statement gets transpiled into Javascript instead.
+The `debugger` statement invokes any debugging functionality. Firescript itselfs hasn't got any debugging support. The statement gets transpiled into Javascript instead.
 
 Syntax
 ------
@@ -10,7 +10,7 @@ Syntax
 debugger
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 debugger

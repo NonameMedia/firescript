@@ -1,6 +1,6 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
-class ArrowFunctionExpression extends FireScriptNode {
+class ArrowFunctionExpression extends FirescriptNode {
   constructor (tokenStack, parent, params) {
     super(tokenStack, parent)
 

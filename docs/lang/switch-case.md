@@ -18,7 +18,7 @@ swich [expression]
     [body]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 switch num

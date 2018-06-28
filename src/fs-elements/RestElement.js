@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * RestElement
  *
  * @class RestElement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface RestElement {
  *   type: 'RestElement';
  *   argument: Identifier | BindingPattern;
  * }
  */
-class RestElement extends FireScriptElement {
+class RestElement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

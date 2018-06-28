@@ -23,7 +23,7 @@ func print (msg)
   console.log(msg)
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 # Line comment

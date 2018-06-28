@@ -1,7 +1,7 @@
 const path = require('path')
 const colorfy = require('colorfy')
 const SuperFS = require('superfs')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 const copy = require('./copy').copy
 
 const IGNORE_FILES = [
@@ -29,7 +29,7 @@ class BuildCMD {
 
     const input = await SuperFS.readFile(infile)
 
-    const source = FireScript.transpile(input, {
+    const source = Firescript.transpile(input, {
       type: 'fire',
       verbose: this.conf.verbose
     })
@@ -63,7 +63,7 @@ module.exports = (supershit) => {
     .option('-v, --verbose', 'Verbose log')
     .description('Build project')
     .action(async (ctx, src, dest) => {
-      const conf = FireScript.loadConf({
+      const conf = Firescript.loadConf({
         src: src,
         dest: dest,
         verbose: ctx.verbose

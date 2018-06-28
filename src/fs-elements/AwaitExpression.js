@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * AwaitExpression
  *
  * @class AwaitExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface AwaitExpression {
  *   type: 'AwaitExpression';
  *   argument: Expression;
  * }
  */
-class AwaitExpression extends FireScriptElement {
+class AwaitExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

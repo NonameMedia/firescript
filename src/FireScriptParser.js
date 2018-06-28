@@ -1,7 +1,7 @@
-const Tokenizer = require('./FireScriptTokenizer')
+const Tokenizer = require('./FirescriptTokenizer')
 const Program = require('./fs-nodes/Program')
 
-class FireScriptParser {
+class FirescriptParser {
   constructor (conf) {
     conf = conf || {}
 
@@ -85,4 +85,4 @@ class FireScriptParser {
   }
 }
 
-module.exports = FireScriptParser
+module.exports = FirescriptParser

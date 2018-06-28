@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'Identifier',
@@ -10,14 +10,14 @@ const ALLOWED_CHILDS = [
  * SpreadElement
  *
  * @class SpreadElement
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface SpreadElement {
  *   type: 'SpreadElement';
  *   argument: Expression;
  * }
  */
-class SpreadElement extends FireScriptNode {
+class SpreadElement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ThrowStatement
  *
  * @class ThrowStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ThrowStatement {
  *   type: 'ThrowStatement';
  *   argument: Expression;
  * }
  */
-class ThrowStatement extends FireScriptElement {
+class ThrowStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * UnaryExpression
  *
  * @class UnaryExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface UnaryExpression {
     type: 'UnaryExpression';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
     prefix: true;
 }
 */
-class UnaryExpression extends FireScriptElement {
+class UnaryExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

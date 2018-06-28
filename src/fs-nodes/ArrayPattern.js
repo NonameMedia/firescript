@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_ELEMENTS = [
   'AssignmentPattern',
@@ -9,7 +9,7 @@ const ALLOWED_ELEMENTS = [
   'Null'
 ]
 
-class ArrayPattern extends FireScriptNode {
+class ArrayPattern extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

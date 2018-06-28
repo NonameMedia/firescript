@@ -10,7 +10,7 @@ Syntax
 ```
 [condition] ? [expression1] : [expression2]
 ```
-#### FireScript
+#### Firescript
 
 ```fire
 foo ? 'foo' : 'bar'

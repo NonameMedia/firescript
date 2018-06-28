@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * Program
  *
  * @class Program
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface Program {
  *   type: 'Program';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   body: ModuleItem[];
  * }
  */
-class Program extends FireScriptElement {
+class Program extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

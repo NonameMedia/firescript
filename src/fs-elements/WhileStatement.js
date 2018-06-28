@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * WhileStatement
  *
  * @class WhileStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface WhileStatement {
     type: 'WhileStatement';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
     body: Statement;
 }
 */
-class WhileStatement extends FireScriptElement {
+class WhileStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

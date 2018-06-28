@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_DECLARATIONS = [
   'ClassDeclaration',
@@ -13,7 +13,7 @@ const ALLOWED_SPECIFIERS = [
  * ExportNamedDeclaration description
  *
  * @class ExportNamedDeclaration
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface ExportNamedDeclaration {
  *   type: 'ExportNamedDeclaration';
@@ -22,7 +22,7 @@ const ALLOWED_SPECIFIERS = [
  *   source: Literal;
  * }
  */
-class ExportNamedDeclaration extends FireScriptNode {
+class ExportNamedDeclaration extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
     this.isBlockScope = true

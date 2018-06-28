@@ -1,10 +1,10 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * DoWhileStatement
  *
  * @class DoWhileStatement
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface DoWhileStatement {
  *   type: 'DoWhileStatement';
@@ -12,7 +12,7 @@ const FireScriptNode = require('./FireScriptNode')
  *   test: Expression;
  * }
  */
-class DoWhileStatement extends FireScriptNode {
+class DoWhileStatement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

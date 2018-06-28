@@ -1,11 +1,11 @@
 const SuperArray = require('superarr')
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * TemplateLiteral
  *
  * @class TemplateLiteral
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface TemplateLiteral {
  *   type: 'TemplateLiteral';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   expressions: Expression[];
  * }
  */
-class TemplateLiteral extends FireScriptElement {
+class TemplateLiteral extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

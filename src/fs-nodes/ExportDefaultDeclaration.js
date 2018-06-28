@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'BindingPattern',
@@ -32,14 +32,14 @@ const ALLOWED_CHILDS = [
  * ExportDefaultDeclaration description
  *
  * @class ExportDefaultDeclaration
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface ExportDefaultDeclaration {
  *   type: 'ExportDefaultDeclaration';
  *   declaration: Identifier | BindingPattern | ClassDeclaration | Expression | FunctionDeclaration;
  * }
  */
-class ExportDefaultDeclaration extends FireScriptNode {
+class ExportDefaultDeclaration extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

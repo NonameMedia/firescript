@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_KEYS = [
   'Identifier',
@@ -20,7 +20,7 @@ const ALLOWED_VALUES = [
  * Property node
  *
  * @class Property
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface Property {
  *   type: 'Property';
@@ -32,7 +32,7 @@ const ALLOWED_VALUES = [
  *   shorthand: boolean;
  * }
  */
-class Property extends FireScriptNode {
+class Property extends FirescriptNode {
   constructor (tokenStack, parent, key) {
     super(tokenStack, parent)
     this.isBlockScope = true

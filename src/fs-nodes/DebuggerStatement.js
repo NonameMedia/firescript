@@ -1,16 +1,16 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * DebuggerStatement
  *
  * @class DebuggerStatement
- * @extends FireScriptNo
+ * @extends FirescriptNo
  *
  * interface DebuggerStatement {
  *   type: 'DebuggerStatement';
  * }
  */
-class DebuggerStatement extends FireScriptNode {
+class DebuggerStatement extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

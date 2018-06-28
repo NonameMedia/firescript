@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * MetaProperty
  *
  * @class MetaProperty
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface MetaProperty {
  *   type: 'MetaProperty';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   property: Identifier;
  * }
  */
-class MetaProperty extends FireScriptElement {
+class MetaProperty extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

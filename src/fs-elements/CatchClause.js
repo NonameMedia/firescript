@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * CatchClause
  *
  * @class CatchClause
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface CatchClause {
  *   type: 'CatchClause';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   body: BlockStatement;
  * }
  */
-class CatchClause extends FireScriptElement {
+class CatchClause extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

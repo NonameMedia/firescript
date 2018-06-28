@@ -1,4 +1,4 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 const ALLOWED_KEY_NODES = [ 'Identifier', 'Literal' ]
 const ALLOWED_VALUE_NODES = [
@@ -14,7 +14,7 @@ const ALLOWED_VALUE_NODES = [
  * Property
  *
  * @class Property
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface Property {
  *   type: 'Property';
@@ -26,7 +26,7 @@ const ALLOWED_VALUE_NODES = [
  *   shorthand: boolean;
  * }
 */
-class Property extends FireScriptElement {
+class Property extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

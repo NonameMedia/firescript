@@ -1,11 +1,11 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 const constants = require('../utils/constants')
 
 /**
  * UnaryExpression
  *
  * @class UnaryExpression
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface UnaryExpression {
  *   type: 'UnaryExpression';
@@ -14,7 +14,7 @@ const constants = require('../utils/constants')
  *   prefix: true;
  * }
  */
-class UnaryExpression extends FireScriptNode {
+class UnaryExpression extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

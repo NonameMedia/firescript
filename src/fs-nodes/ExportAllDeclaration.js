@@ -1,17 +1,17 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * ExportAllDeclaration description
  *
  * @class ExportAllDeclaration
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface ExportAllDeclaration {
  *   type: 'ExportAllDeclaration';
  *   declaration: Identifier | BindingPattern | ClassDeclaration | Expression | FunctionDeclaration;
  * }
  */
-class ExportAllDeclaration extends FireScriptNode {
+class ExportAllDeclaration extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

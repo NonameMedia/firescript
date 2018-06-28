@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ExportAllDeclaration
  *
  * @class ExportAllDeclaration
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ExportAllDeclaration {
  *   type: 'ExportAllDeclaration';
  *   source: Literal;
  * }
  */
-class ExportAllDeclaration extends FireScriptElement {
+class ExportAllDeclaration extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

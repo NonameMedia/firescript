@@ -1,10 +1,10 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * ExportSpecifier
  *
  * @class ExportSpecifier
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface ExportSpecifier {
  *     type: 'ExportSpecifier'
@@ -12,7 +12,7 @@ const FireScriptNode = require('./FireScriptNode')
  *     exporte?: Identifier;
  * }
  */
-class ExportSpecifier extends FireScriptNode {
+class ExportSpecifier extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

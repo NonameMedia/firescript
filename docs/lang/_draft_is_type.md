@@ -10,7 +10,7 @@ Syntax
 [value] is [type]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 if foo is str

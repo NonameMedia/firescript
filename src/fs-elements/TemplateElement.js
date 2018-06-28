@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * TemplateElement
  *
  * @class TemplateElement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface TemplateElement {
  *   type: 'TemplateElement';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   tail: boolean;
  * }
  */
-class TemplateElement extends FireScriptElement {
+class TemplateElement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

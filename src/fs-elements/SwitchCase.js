@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * SwitchCase
  *
  * @class SwitchCase
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface SwitchCase {
  *   type: 'SwitchCase';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   consequent: Statement[];
  * }
  */
-class SwitchCase extends FireScriptElement {
+class SwitchCase extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

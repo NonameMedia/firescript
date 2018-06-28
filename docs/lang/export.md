@@ -12,7 +12,7 @@ export [statement]
 
 ### Default export
 
-#### FireScript
+#### Firescript
 
 ```fire
 export default foo
@@ -77,7 +77,7 @@ Examples
 
 ### Export types
 
-| FireScript            | >= ES7                 |
+| Firescript            | >= ES7                 |
 | --------------------- | ---------------------- |
 | export default banana | export default banana  |
 | export banana         | export { banana }      |

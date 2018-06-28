@@ -11,7 +11,7 @@ for [variable] in [object]
   [body]
 ```
 
-### FireScript
+### Firescript
 
 ```fire
 for let prop in obj

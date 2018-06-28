@@ -1,5 +1,5 @@
 const fs = require('fs')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 
 module.exports = (supershit) => {
   return supershit
@@ -10,7 +10,7 @@ module.exports = (supershit) => {
     .description('Tokenize a .fire or .js file')
     .action((ctx, file) => {
       const source = fs.readFileSync(file, { encoding: 'utf8' })
-      const tokenStack = FireScript.tokenize(source)
+      const tokenStack = Firescript.tokenize(source)
       const lines = []
       tokenStack.forEach((token) => {
         const keyQuote = ctx.js ? '' : '"'

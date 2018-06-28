@@ -1,9 +1,9 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 /**
  * ClassDeclaration
  *
- * @extends FireScriptNode
+ * @extends FirescriptNode
  * @class ClassDeclaration
  *
  * interface ClassDeclaration {
@@ -13,7 +13,7 @@ const FireScriptNode = require('./FireScriptNode')
  *   body: ClassBody;
  * }
  */
-class ClassDeclaration extends FireScriptNode {
+class ClassDeclaration extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

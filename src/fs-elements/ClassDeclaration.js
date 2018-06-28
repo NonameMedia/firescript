@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ClassDeclaration
  *
  * @class ClassDeclaration
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ClassDeclaration {
  *   type: 'ClassDeclaration';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   body: ClassBody;
  * }
  */
-class ClassDeclaration extends FireScriptElement {
+class ClassDeclaration extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

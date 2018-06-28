@@ -2,7 +2,7 @@ const NodeNotAllowedError = require('../errors/NodeNotAllowedError')
 const TemplateNotFoundError = require('../errors/TemplateNotFoundError')
 const templates = require('../js-templates/esx.js')
 
-class FireScriptElement {
+class FirescriptElement {
   constructor (ast) {
     this.parent = null
     this.type = ast.type
@@ -13,7 +13,7 @@ class FireScriptElement {
   }
 
   toFSString () {
-    throw new Error(`FireScript element ${this.type} not implemented yet!`)
+    throw new Error(`Firescript element ${this.type} not implemented yet!`)
   }
 
   indentionStr () {
@@ -113,4 +113,4 @@ class FireScriptElement {
   }
 }
 
-module.exports = FireScriptElement
+module.exports = FirescriptElement

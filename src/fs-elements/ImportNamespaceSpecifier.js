@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ImportNamespaceSpecifier
  *
  * @class ImportNamespaceSpecifier
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ImportNamespaceSpecifier {
  *   type: 'ImportNamespaceSpecifier'
  *   local: Identifier
  * }
  */
-class ImportNamespaceSpecifier extends FireScriptElement {
+class ImportNamespaceSpecifier extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

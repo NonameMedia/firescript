@@ -10,8 +10,8 @@ const helloWorldAST = require('../fixtures/helloWorldAST.json')
 describe('JSParser', () => {
   describe('parse()', () => {
     it('Parse a .js into AST', () => {
-      const FireScript = new JSParser()
-      const ast = FireScript.parse(helloWorldJS)
+      const Firescript = new JSParser()
+      const ast = Firescript.parse(helloWorldJS)
       inspect(ast).isObject()
       inspect(ast).isEql(helloWorldAST)
     })

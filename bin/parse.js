@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const FireScript = require('../src/app')
+const Firescript = require('../src/app')
 
 module.exports = (supershit) => {
   return supershit
@@ -10,7 +10,7 @@ module.exports = (supershit) => {
     .action((ctx, file, output) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       if (path.extname(file) === '.fire') {
-        const ast = FireScript.parse(fsSource, {
+        const ast = Firescript.parse(fsSource, {
           type: 'fire'
         })
 
@@ -22,7 +22,7 @@ module.exports = (supershit) => {
           console.log(source)
         }
       } else if (path.extname(file) === '.js') {
-        const ast = FireScript.parse(fsSource, {
+        const ast = Firescript.parse(fsSource, {
           type: 'js'
         })
 

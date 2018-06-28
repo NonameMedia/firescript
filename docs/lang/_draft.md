@@ -10,7 +10,7 @@ Syntax
 syntax
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 

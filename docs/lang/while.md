@@ -11,7 +11,7 @@ while [test]
   [body]
 ```
 
-#### FireScript
+#### Firescript
 
 ```fire
 while i < 100

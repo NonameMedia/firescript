@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * IfStatement
  *
  * @class IfStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface IfStatement {
  *   type: 'IfStatement';
@@ -13,7 +13,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   alternate?: Statement;
  * }
  */
-class IfStatement extends FireScriptElement {
+class IfStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

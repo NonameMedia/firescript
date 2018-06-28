@@ -3,7 +3,7 @@ Module loader
 
 ### Named imports/exports
 
-##### FireScript
+##### Firescript
 
 ```fire
 import banana, coconut as c1 from 'banana'
@@ -33,7 +33,7 @@ module.exports.coconut = c1
 
 ### Default imports/exports
 
-##### FireScript
+##### Firescript
 
 ```fire
 import ** as banana from 'banana'
@@ -59,7 +59,7 @@ module.exports = banana
 
 ### Module export
 
-##### FireScript
+##### Firescript
 
 ```fire
 export * from 'banana'
@@ -67,7 +67,7 @@ export * from 'banana'
 
 ### Import all
 
-##### FireScript
+##### Firescript
 
 ```fire
 import * as banana from 'banana'

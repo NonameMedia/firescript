@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_TEST_EXPRESSIONS = [
   'ThisExpression',
@@ -52,7 +52,7 @@ const ALLOWED_CHILDS = [
  * SwitchCase
  *
  * @class SwitchCase
- * @extends FireScriptNode
+ * @extends FirescriptNode
  *
  * interface SwitchStatement {
  *   type: 'SwitchStatement';
@@ -60,7 +60,7 @@ const ALLOWED_CHILDS = [
  *   cases: SwitchCase[];
  * }
  */
-class SwitchCase extends FireScriptNode {
+class SwitchCase extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
     this.isBlockScope = true

@@ -1,6 +1,6 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
-class IfStatement extends FireScriptNode {
+class IfStatement extends FirescriptNode {
   constructor (tokenStack, parent, test) {
     super(tokenStack, parent)
 

@@ -1,10 +1,10 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_ELEMENTS = [
   'Property'
 ]
 
-class ObjectExpression extends FireScriptNode {
+class ObjectExpression extends FirescriptNode {
   constructor (tokenStack, parent, property) {
     super(tokenStack, parent)
 

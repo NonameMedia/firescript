@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ForStatement
  *
  * @class ForStatement
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ForStatement {
  *   type: 'ForStatement';
@@ -14,7 +14,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   body: Statement;
  * }
  */
-class ForStatement extends FireScriptElement {
+class ForStatement extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

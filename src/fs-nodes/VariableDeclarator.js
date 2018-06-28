@@ -1,4 +1,4 @@
-const FireScriptNode = require('./FireScriptNode')
+const FirescriptNode = require('./FirescriptNode')
 
 const ALLOWED_CHILDS = [
   'ThisExpression', 'Identifier', 'Literal',
@@ -9,7 +9,7 @@ const ALLOWED_CHILDS = [
   'YieldExpression', 'AssignmentExpression', 'SequenceExpression', 'TemplateLiteral'
 ]
 
-class VariableDeclarator extends FireScriptNode {
+class VariableDeclarator extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
 

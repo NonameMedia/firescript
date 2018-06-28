@@ -1,7 +1,7 @@
-FireScript
+Firescript
 ==========
 
-FireScript is a language which gets transpiled into Javascript. A language which uses indention for block scoping, dynamic typing, lesser code to write. FireScript output is valid Javascript.
+Firescript is a language which gets transpiled into Javascript. A language which uses indention for block scoping, dynamic typing, lesser code to write. Firescript output is valid Javascript.
 
 Syntax
 ------

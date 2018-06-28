@@ -11,7 +11,7 @@ for [variable] of [iterable]
   [body]
 ```
 
-### FireScript
+### Firescript
 
 ```fire
 for let item of arr

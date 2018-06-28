@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ExportSpecifier
  *
  * @class ExportSpecifier
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ExportSpecifier {
  *   type: 'ExportSpecifier';
@@ -12,7 +12,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   local: Identifier;
  * }
  */
-class ExportSpecifier extends FireScriptElement {
+class ExportSpecifier extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

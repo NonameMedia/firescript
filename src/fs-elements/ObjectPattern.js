@@ -1,17 +1,17 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * ObjectPattern
  *
  * @class ObjectPattern
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ObjectPattern {
  *   type: 'ObjectPattern';
  *   properties: Property[];
  * }
  */
-class ObjectPattern extends FireScriptElement {
+class ObjectPattern extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

@@ -1,10 +1,10 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 /**
  * MethodDefinition
  *
  * @class MethodDefinition
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface MethodDefinition {
  *   type: 'MethodDefinition';
@@ -15,7 +15,7 @@ const FireScriptElement = require('./FireScriptElement')
  *   static: boolean;
  * }
  */
-class MethodDefinition extends FireScriptElement {
+class MethodDefinition extends FirescriptElement {
   constructor (ast) {
     super(ast)
 

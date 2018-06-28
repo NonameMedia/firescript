@@ -1,7 +1,7 @@
 const inspect = require('inspect.js')
 const path = require('path')
 
-const Tokenizer = require('../../src/FireScriptTokenizer')
+const Tokenizer = require('../../src/FirescriptTokenizer')
 
 describe('Tokenizer', () => {
   describe('tokenize()', () => {

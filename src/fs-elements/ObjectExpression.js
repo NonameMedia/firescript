@@ -1,18 +1,18 @@
-const FireScriptElement = require('./FireScriptElement')
+const FirescriptElement = require('./FirescriptElement')
 
 const ALLOWED_NODES = [ 'Property' ]
 /**
  * ObjectExpression
  *
  * @class ObjectExpression
- * @extends FireScriptElement
+ * @extends FirescriptElement
  *
  * interface ObjectExpression {
  *   type: 'ObjectExpression';
  *   properties: Property[];
  * }
 */
-class ObjectExpression extends FireScriptElement {
+class ObjectExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 
