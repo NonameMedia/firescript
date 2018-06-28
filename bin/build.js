@@ -16,21 +16,22 @@ class BuildCMD {
   async transpileFile (filename, srcDir, destDir) {
     const cf = colorfy()
     if (path.extname(filename) !== '.fire') {
-      cf.ored(' ... skipping file ').lgrey(filename).print()
+      cf.ored('Skipping file ').lgrey(filename).print()
       return
     }
 
     const infile = path.resolve(srcDir, filename)
     const outfile = path.resolve(destDir, filename.replace(/\.fire$/, '.js'))
+    const infileRelative = infile.replace(process.cwd(), '.')
+    const outfileRelative = outfile.replace(process.cwd(), '.')
 
-    // cf.yellow(' ... write file ').lgrey(outfile).print()
-    cf.txt('transpile ').grey(infile).txt(' -> ').lime(outfile).nl().print()
+    cf.txt('Transpile ').grey(infileRelative).txt(' -> ').lime(outfileRelative).print()
 
     const input = await SuperFS.readFile(infile)
 
     const source = FireScript.transpile(input, {
       type: 'fire',
-      verbose: true
+      verbose: this.conf.verbose
     })
 
     const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })
@@ -44,7 +45,7 @@ class BuildCMD {
     })
     const fsFiles = files.filter((flw) => flw.ext === 'fire')
     const cf = colorfy()
-    cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(this.srcDir).txt(' to ').lime(this.destDir).nl().print()
+    cf.txt('Transpile ').lime(String(fsFiles.length)).txt([' file from ', ' files from ', fsFiles.length]).grey(this.srcDir).txt(' to ').lime(this.destDir).print()
 
     for (const flw of fsFiles) {
       await this.transpileFile(flw.relative, this.srcDir, this.destDir)
@@ -64,7 +65,8 @@ module.exports = (supershit) => {
     .action(async (ctx, src, dest) => {
       const conf = FireScript.loadConf({
         src: src,
-        dest: dest
+        dest: dest,
+        verbose: ctx.verbose
       })
 
       const buildCMD = new BuildCMD(conf)

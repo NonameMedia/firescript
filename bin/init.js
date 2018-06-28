@@ -4,6 +4,15 @@ const superconf = require('superconf')
 const colorfy = require('colorfy')
 const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 
+function loadPkg () {
+  try {
+    return require('./package.json')
+  } catch (err) {
+    if (err.code === 100) { return {} }
+    throw err
+  }
+}
+
 module.exports = (supershit) => {
   return supershit
     .cmd('init')
@@ -38,5 +47,8 @@ module.exports = (supershit) => {
       cf.grey(prettyResult).print()
 
       await SuperFS.writeFile(configFile, prettyResult)
+
+      const pkg = loadPkg()
+      console.log('PKG', pkg)
     })
 }
