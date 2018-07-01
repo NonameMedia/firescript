@@ -11,18 +11,26 @@
             "name": "banana"
           },
           "init": {
-            "type": "CallExpression",
-            "callee": {
-              "type": "Identifier",
-              "name": "require"
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "require"
+              },
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "value": "banana",
+                  "raw": "'banana'"
+                }
+              ]
             },
-            "arguments": [
-              {
-                "type": "Literal",
-                "value": "banana",
-                "raw": "'banana'"
-              }
-            ]
+            "property": {
+              "type": "Identifier",
+              "name": "default"
+            }
           }
         }
       ],

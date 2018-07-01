@@ -6,9 +6,14 @@ function handleDefaultSpecifier (ast, source) {
     [source]
   )
 
+  const memberExpression = ASTCreator.memberExpression(
+    expression,
+    ASTCreator.identifier('default')
+  )
+
   const declarations = [ASTCreator.variableDeclarator(
     ast.local,
-    expression
+    memberExpression
   )]
 
   return ASTCreator.variableDeclaration('const', declarations)
