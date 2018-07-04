@@ -1,4 +1,5 @@
-
+const path = require('path')
+const fs = require('fs')
 const FirescriptTokenizer = require('./FirescriptTokenizer')
 const FirescriptParser = require('./FirescriptParser')
 const JSParser = require('./JSParser')
@@ -15,6 +16,12 @@ module.exports = {
   tokenize (input, opts) {
     const tokenizer = new FirescriptTokenizer(opts)
     return tokenizer.tokenize(input)
+  },
+  transpileFile (filename) {
+    const ext = path.extname(filename)
+    return this.transpile(fs.readFileSync(filename, 'utf8'), {
+      type: ext === '.fire' ? 'fire' : 'js'
+    })
   },
   transpile (input, opts) {
     opts = Object.assign({
