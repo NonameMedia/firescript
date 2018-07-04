@@ -2,7 +2,7 @@ Firescript
 ==========
 
 Firescript is a language which gets transpiled into Javascript.
-A language which uses indention for block scoping, has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. Firescript output is valid Javascript.
+A language which uses indention for block scoping, has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The transpiled output is clean and readable Javascript.
 
 Syntax
 ------
@@ -50,11 +50,34 @@ or for local usage
 
 Firescript is accessable on commandline by using the `fire` command.
 
+Usage
+-----
+
+### Command Line
+
+Firescript comes with a commandline. If you've installed Firescript globally, you should have access to it by the `fire` command. Run `fire help` to get an overview of all available sub-commands or run `fire help <command>` to get a command's help page.
+
+#### Commands
+
+| Command | Description |
+|----------|--|
+| `build` | Transpiles all `.fire` files and copies assets, reads project configuration from `.firerc.json` |
+| `copy` | Copies all assets, configured in `.firerc.json` by `copy` option to `dest` folder |
+| `init` | Initialize new Firescript project at current working dir |
+| `help` | Print a command overview |
+| `parse` | Parse a `.fire` or `.js` file into an AST tree |
+| `tokenize` | Tokenize a `.fire` or a `.js` file |
+| `transpile` | Transpiles a `.fire` file into Javascript or a `.js` file into Firescript |
+| `watch` | Watch `src` dir for changes und transpiles changed `.fire` files |
+
+
+
+
 Getting started
 --------------
 
 
-Create your first Firescript project by using the `init` command. Change into  your project root and run `fire init` to initialize a Firescript project.
+Create a Firescript project by using the `init` command. Create a project folder, change into it and run `fire init` to initialize a Firescript project.
 
 ```shell
 mkdir ~/Projects/myfsproject
