@@ -1,0 +1,27 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "CallExpression",
+            "callee": {
+              "type": "MemberExpression",
+              "object": {
+                "type": "Identifier",
+                "name": "console"
+              },
+              "property": {
+                "type": "Identifier",
+                "name": "log"
+              },
+              "computed": false
+            },
+            "arguments": [
+                {
+                    "type": "Identifier",
+                    "name": "banana"
+                }
+            ]
+        }
+    ],
+    "sourceType": "module"
+}
