@@ -3,7 +3,7 @@ module.exports = {
     'async', 'await', 'break', 'case', 'catch', 'class', 'const',
     'continue', 'debugger', 'default', 'do',
     'elif', 'else', 'export', 'extends', 'for', 'func', 'gen',
-    'if', 'import',
+    'if', 'import', 'log',
     'let', 'new', 'return', 'switch', 'try', 'throw',
     'var', 'while', 'yield'
   ],

@@ -8,7 +8,8 @@ const ALLOWED_SCRIPT_CHILDS = [
   'LabeledStatement', 'ReturnStatement', 'SwitchStatement',
   'ThrowStatement', 'TryStatement', 'VariableDeclaration',
   'WhileStatement', 'WithStatement', 'ClassDeclaration',
-  'FunctionDeclaration', ' VariableDeclaration'
+  'FunctionDeclaration', ' VariableDeclaration',
+  'FirescriptLogStatement'
 ]
 
 const ALLOWED_MODULE_CHILDS = [

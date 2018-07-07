@@ -1,0 +1,15 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "FirescriptLogStatement",
+            "arguments": [
+                {
+                    "type": "Identifier",
+                    "name": "banana"
+                }
+            ]
+        }
+    ],
+    "sourceType": "module"
+}

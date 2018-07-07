@@ -46,7 +46,8 @@ const ALLOWED_CHILDS = [
   'TryStatement',
   'VariableDeclaration',
   'WhileStatement',
-  'WithStatement'
+  'WithStatement',
+  'FirescriptLogStatement'
 ]
 /**
  * SwitchCase

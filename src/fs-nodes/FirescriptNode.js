@@ -303,6 +303,10 @@ class FirescriptNode {
         return this.getNodeInstance('ForStatement', tokenStack)
       }
 
+      if (nextToken.value === 'log') {
+        return this.getNodeInstance('FirescriptLogStatement', tokenStack)
+      }
+
       tokenStack.print()
       this.syntaxError('Unknown keyword!', nextToken)
     }
