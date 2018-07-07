@@ -9,6 +9,7 @@ class FireSciptTokenizer {
     this.keyWords = constants.KEYWORDS
     this.punctators = constants.PUNCTUATORS
     this.operators = constants.OPERATORS
+    this.regExpPattern = '\\/.+?\\/(?:[imsy]+)?'
     this.literalPattern = '(?:\'[^]*?(?:\\$\\{[^]+?\\}[^]*?)*?\')|"[^]+?"|true|false|null' // eslint-disable-line no-template-curly-in-string
     this.numericPattern = '-?\\d+'
     this.commentPattern = '#.*'
@@ -30,6 +31,7 @@ class FireSciptTokenizer {
       this.commentPattern,
       this.lineCommentPattern,
       `?:\\b(${this.keyWords.join('|')})\\b`,
+      this.regExpPattern,
       `${this.regExpEscape(this.operators).join('|')}`,
       `${this.regExpEscape(this.punctators).join('|')}`,
       `${this.literalPattern}`,
@@ -85,39 +87,44 @@ class FireSciptTokenizer {
       }
 
       if (match[5] !== undefined) {
-        this.addToken('operator', match[5])
+        this.addToken('literal', match[4])
         continue
       }
 
       if (match[6] !== undefined) {
-        this.addToken('punctuator', match[6])
+        this.addToken('operator', match[6])
         continue
       }
 
       if (match[7] !== undefined) {
-        if (this.isTemplate(match[7])) {
-          this.splitTemplateLiteral(match[7])
+        this.addToken('punctuator', match[7])
+        continue
+      }
+
+      if (match[8] !== undefined) {
+        if (this.isTemplate(match[8])) {
+          this.splitTemplateLiteral(match[8])
         } else {
-          this.addToken('literal', match[7])
-          this.lineNum += this.countLineBreaks(match[7])
+          this.addToken('literal', match[8])
+          this.lineNum += this.countLineBreaks(match[8])
         }
 
         continue
       }
 
-      if (match[8] !== undefined) {
-        this.addToken('numeric', match[8])
+      if (match[9] !== undefined) {
+        this.addToken('numeric', match[9])
         continue
       }
 
-      if (match[9] !== undefined) {
+      if (match[10] !== undefined) {
         if (this.lookBack('identifier')) {
           const prev = this.getPrev()
           if (['typeof', 'delete', 'void'].includes(prev.value)) {
             prev.type = 'operator'
           }
         }
-        this.addToken('identifier', match[9])
+        this.addToken('identifier', match[10])
         continue
       }
 
