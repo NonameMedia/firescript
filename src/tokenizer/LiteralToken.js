@@ -1,14 +1,21 @@
 const Token = require('./Token')
 const IdentifierToken = require('./IdentifierToken')
+const IndentionToken = require('./IndentionToken')
 
-class KeywordToken extends Token {
+class LiteralToken extends Token {
   constructor (parent, value) {
     super(parent, value)
-    this.type = 'keyword'
+    this.type = 'literal'
   }
 
   tokenize (match) {
-    console.log('KMATCH', match)
+    console.log('IMATCH', match)
+    if (match.indention) {
+      const token = new IndentionToken(this, match.indention)
+
+      return token
+    }
+
     if (match.identifier) {
       const token = new IdentifierToken(this, match.identifier)
 
@@ -17,4 +24,4 @@ class KeywordToken extends Token {
   }
 }
 
-module.exports = KeywordToken
+module.exports = LiteralToken
