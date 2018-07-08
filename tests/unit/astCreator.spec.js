@@ -1,6 +1,4 @@
 const inspect = require('inspect.js')
-const sinon = require('sinon')
-inspect.useSinon(sinon)
 
 const ASTCreator = require('../../src/utils/ASTCreator')
 

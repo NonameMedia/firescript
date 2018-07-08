@@ -1,3 +1,4 @@
+const IndentionToken = require('./tokenizer/IndentionToken')
 const TokenStack = require('./TokenStack')
 const constants = require('./utils/constants')
 
@@ -26,6 +27,8 @@ class FireSciptTokenizer {
   }
 
   tokenize (source) {
+    this.source = source
+
     const pattern = [
       `\\n\\s*`,
       this.commentPattern,
@@ -269,6 +272,11 @@ class FireSciptTokenizer {
     if (prefixNext) {
       this.addToken('template', '}')
     }
+  }
+
+  tokenize2 (source) {
+    const token = new IndentionToken()
+    return token.next(source)
   }
 }
 

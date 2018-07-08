@@ -32,7 +32,8 @@
     "mocha": "5.2.0",
     "shell-inspect": "1.2.0",
     "sinon": "6.1.0",
-    "superfs": "0.12.1"
+    "superfs": "0.12.1",
+    "superreg": "0.1.0"
   },
   "dependencies": {
     "colorfy": "^2.0.2",
