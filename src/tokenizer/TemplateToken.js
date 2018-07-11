@@ -1,10 +1,10 @@
 const Token = require('./Token')
 
-class KeywordToken extends Token {
+class TemplateToken extends Token {
   constructor (parent, value) {
     super(parent, value)
-    this.type = 'keyword'
+    this.type = 'template'
   }
 }
 
-module.exports = KeywordToken
+module.exports = TemplateToken

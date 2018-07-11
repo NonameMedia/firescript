@@ -1,6 +1,4 @@
 const Token = require('./Token')
-const KeywordToken = require('./KeywordToken')
-const IdentifierToken = require('./IdentifierToken')
 
 class IndentionToken extends Token {
   constructor (parent, value) {
@@ -8,18 +6,26 @@ class IndentionToken extends Token {
     this.type = 'indention'
   }
 
-  tokenize (match) {
-    if (match.keyword) {
-      const token = new KeywordToken(this, match.keyword)
+  parseValue (value) {
+    const indention = value.substr(value.lastIndexOf('\n') + 1)
+    this.lastEOLIndex = this.reg.lastIndex - value.length
+    this.lineNum += this.countLineBreaks(value)
+    return indention.length
+  }
 
-      return token
+  countLineBreaks (str) {
+    const reg = /\n/g
+    let lines = 0
+
+    while (true) {
+      if (!reg.exec(str)) {
+        break
+      }
+
+      lines += 1
     }
 
-    if (match.identifier) {
-      const token = new IdentifierToken(this, match.identifier)
-
-      return token
-    }
+    return lines
   }
 }
 

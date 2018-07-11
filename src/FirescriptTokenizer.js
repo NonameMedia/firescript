@@ -1,4 +1,5 @@
 const IndentionToken = require('./tokenizer/IndentionToken')
+const Token = require('./tokenizer/Token')
 const TokenStack = require('./TokenStack')
 const constants = require('./utils/constants')
 
@@ -26,7 +27,7 @@ class FireSciptTokenizer {
     }))
   }
 
-  tokenize (source) {
+  tokenizeSkip (source) {
     this.source = source
 
     const pattern = [
@@ -274,9 +275,15 @@ class FireSciptTokenizer {
     }
   }
 
-  tokenize2 (source) {
-    const token = new IndentionToken()
-    return token.next(source)
+  tokenize (source) {
+    const opts = {
+      setRange: this.setRange,
+      setLocation: this.setLocation
+    }
+
+    const token = new Token(opts)
+    const stack = token.next(source)
+    return new TokenStack(stack)
   }
 }
 
