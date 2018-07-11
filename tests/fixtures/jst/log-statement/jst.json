@@ -1,6 +1,9 @@
 {
     "type": "Program",
     "body": [
+      {
+        "type": "ExpressionStatement",
+        "expression":
         {
             "type": "CallExpression",
             "callee": {
@@ -21,6 +24,7 @@
                     "name": "banana"
                 }
             ]
+        }
         }
     ],
     "sourceType": "module"

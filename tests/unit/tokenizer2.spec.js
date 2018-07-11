@@ -3,7 +3,7 @@ const path = require('path')
 
 const Tokenizer = require('../../src/FirescriptTokenizer')
 
-describe.only('Tokenizer II', () => {
+describe.skip('Tokenizer II', () => {
   describe('tokenize()', () => {
     it('tokenize a .fire script', () => {
       const bananaSource = inspect.readFile(path.join(__dirname, '../fixtures/banana.fire'))
