@@ -90,7 +90,7 @@ class FireSciptTokenizer {
       }
 
       if (match[5] !== undefined) {
-        this.addToken('literal', match[4])
+        this.addToken('literal', match[5])
         continue
       }
 
