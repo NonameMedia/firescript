@@ -89,7 +89,8 @@ You'll find a `.firerc.json` file within your project folder. This file contains
 
 Firescript uses `.fire` as file extension. The `build` command transpiles all `.fire` files found in the source folder and writes the output to the destination folder. All other file are being ignored during the build process.
 
-Use the [Firescript Example]() project to play a little with it.
+Use the [Firescript Example](
+https://github.com/Andifeind/firescript-example) project to play a little with it.
 
 Code transpilation
 ------------------
