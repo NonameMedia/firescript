@@ -2,7 +2,7 @@ const IndentionToken = require('./tokenizer/IndentionToken')
 const TokenStack = require('./TokenStack')
 const constants = require('./utils/constants')
 
-class FireSciptTokenizer {
+class FirescriptTokenizer {
   constructor (opts) {
     opts = opts || {}
     this.setRange = opts.range || false
@@ -259,7 +259,7 @@ class FireSciptTokenizer {
       if (m.startsWith('${') && m.endsWith('}')) {
         prefixNext = true
         this.token[this.token.length - 1].value += '${'
-        const subToken = new FireSciptTokenizer()
+        const subToken = new FirescriptTokenizer()
         subToken.tokenize(m.slice(2, -1))
         subToken.token.forEach((token) => this.token.push(token))
         return
@@ -280,4 +280,4 @@ class FireSciptTokenizer {
   }
 }
 
-module.exports = FireSciptTokenizer
+module.exports = FirescriptTokenizer
