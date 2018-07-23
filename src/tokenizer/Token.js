@@ -20,15 +20,16 @@ const PATTERN_KEYS = ['indention', 'comment', 'blockComment', 'keyword', 'regexp
 
 class Token {
   constructor (parent, value) {
-    parent = parent || {}
+    this.parent = parent || {}
     this.reg = PATTERN
     this.patternKeys = PATTERN_KEYS
-    this.lastIndex = parent.lastIndex || 0
-    this.lineNum = parent.lineNum || 1
-    this.lastEOLIndex = parent.lastEOLIndex || 0
-    this.setLocation = parent.setLocation
-    this.setRange = parent.setRange
+    this.lastIndex = this.parent.lastIndex || 0
+    this.lastEOLIndex = this.parent.lastEOLIndex || 0
+    this.lineNum = this.parent.lineNum || 1
+    this.setLocation = this.parent.setLocation
+    this.setRange = this.parent.setRange
     this.value = this.parseValue(value)
+    this.type = 'None'
   }
 
   parseValue (value) {
@@ -48,9 +49,26 @@ class Token {
     return obj
   }
 
+  previousToken (type, value) {
+    return this.expect(type, value, this.parent)
+  }
+
+  expect (type, value, token) {
+    token = token || this
+    if (type && token.type !== type) {
+      return false
+    }
+
+    if (value && token.value !== value) {
+      return false
+    }
+
+    return true
+  }
+
   next (source) {
     const stack = []
-    if (this.value !== undefined) {
+    if (!this.subTokens && this.value !== undefined) {
       stack.push(this.createToken(this.type, this.value))
     }
 
@@ -63,13 +81,18 @@ class Token {
       }
 
       const token = this.tokenize(this.mapKeys(match))
-      // console.log('TOKEN', token)
-
-      // const indention = match.indention.substr(match.indention.lastIndexOf('\n') + 1)
-      // this.lastEOLIndex = this.reg.lastIndex - match.indention.length
+      token.previous = this
       this.lineNum += this.countLineBreaks(match[1])
 
-      return token ? stack.concat(token.next(source)) : stack
+      if (token) {
+        if (token.subTokens) {
+          return stack.concat(token.subTokens, token.next(source))
+        }
+
+        return stack.concat(token.next(source))
+      }
+
+      return stack
     }
 
     return stack
@@ -103,12 +126,21 @@ class Token {
 
     if (match.literal) {
       if (this.isTemplate(match.literal)) {
-
+        const TemplateToken = require('./TemplateToken')
+        const token = new TemplateToken(this, match.literal)
+        return token
       } else {
         const LiteralToken = require('./LiteralToken')
         const token = new LiteralToken(this, match.literal)
         return token
       }
+    }
+
+    if (match.regexp) {
+      const LiteralToken = require('./LiteralToken')
+      const token = new LiteralToken(this, match.regexp)
+
+      return token
     }
 
     if (match.punctuator) {
@@ -146,7 +178,14 @@ class Token {
       return token
     }
 
-    console.error('TOKEN', match)
+    if (match.numeric) {
+      const NumericToken = require('./NumericToken')
+      const token = new NumericToken(this, match.numeric)
+
+      return token
+    }
+
+    console.log('MATCH', match)
     throw new Error('Unexpected token!')
   }
 
@@ -196,14 +235,14 @@ class Token {
   splitTemplateLiteral (literal) {
     const match = literal.slice(1, -1).split(/(\${[^]+?\})/)
     let prefixNext = false
-    const token = []
+    const token = [this.createToken('template', 'literal')]
     match.forEach((m) => {
       if (m.startsWith('${') && m.endsWith('}')) {
         prefixNext = true
         token[token.length - 1].value += '${'
         const subToken = new FirescriptTokenizer()
         subToken.tokenize(m.slice(2, -1))
-        subToken.token.forEach((token) => token.push(token))
+        subToken.token.forEach((token) => token.push(token.toJSON()))
         return
       }
 
@@ -216,6 +255,13 @@ class Token {
     }
 
     return token
+  }
+
+  toJSON () {
+    return {
+      type: this.type,
+      value: this.value
+    }
   }
 }
 

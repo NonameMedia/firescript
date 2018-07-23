@@ -27,7 +27,7 @@ class FireSciptTokenizer {
     }))
   }
 
-  tokenizeSkip (source) {
+  xtokenize (source) {
     this.source = source
 
     const pattern = [
