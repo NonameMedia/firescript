@@ -2,27 +2,25 @@ const SuperReg = require('superreg')
 const constants = require('../utils/constants')
 const FirescriptTokenizer = require('../FirescriptTokenizer')
 
-const pattern = [
-  `\\n\\s*`,
-  constants.COMMENT_PATTERN,
-  constants.BLOCK_COMMENT_PATTERN,
-  `?:\\b(${constants.KEYWORDS.join('|')})\\b`,
-  constants.REGEXP_PATTERN,
-  `${constants.OPERATORS.map(SuperReg.escape).join('|')}`,
-  `${constants.PUNCTUATORS.map(SuperReg.escape).join('|')}`,
-  constants.LITERAL_PATTERN,
-  constants.NUMERIC_PATTERN,
-  `[a-zA-Z_][a-zA-Z0-9$_-]*`
-]
-
-const PATTERN = new RegExp(`(${pattern.join(')|(')})`, 'g')
 const PATTERN_KEYS = ['indention', 'comment', 'blockComment', 'keyword', 'regexp', 'operator', 'punctuator', 'literal', 'numeric', 'identifier']
 
 class Token {
   constructor (parent, value) {
     this.parent = parent || {}
-    this.reg = PATTERN
-    this.patternKeys = PATTERN_KEYS
+
+    this.rawPattern = {
+      indention: `\\n\\s*`,
+      comment: constants.COMMENT_PATTERN,
+      blockComment: constants.BLOCK_COMMENT_PATTERN,
+      keyword: `?:\\b(${constants.KEYWORDS.join('|')})\\b`,
+      regexp: constants.REGEXP_PATTERN,
+      operator: `${constants.OPERATORS.map(SuperReg.escape).join('|')}`,
+      punctuator: `${constants.PUNCTUATORS.map(SuperReg.escape).join('|')}`,
+      literal: constants.LITERAL_PATTERN,
+      numeric: constants.NUMERIC_PATTERN,
+      identifier: `[a-zA-Z_][a-zA-Z0-9$_-]*`
+    }
+
     this.lastIndex = this.parent.lastIndex || 0
     this.lastEOLIndex = this.parent.lastEOLIndex || 0
     this.lineNum = this.parent.lineNum || 1
@@ -30,6 +28,17 @@ class Token {
     this.setRange = this.parent.setRange
     this.value = this.parseValue(value)
     this.type = 'None'
+
+    this.setPattern(PATTERN_KEYS)
+  }
+
+  setPattern (keys) {
+    this.patternKeys = keys
+    const pattern = keys.map((key) => {
+      return this.rawPattern[key]
+    })
+
+    this.reg = new RegExp(`(${pattern.join(')|(')})`, 'g')
   }
 
   parseValue (value) {
