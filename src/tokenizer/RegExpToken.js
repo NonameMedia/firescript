@@ -1,6 +1,6 @@
 const Token = require('./Token')
 
-class LiteralToken extends Token {
+class RegExpToken extends Token {
   constructor (parent, value) {
     super(parent, value)
     this.type = 'literal'
@@ -12,4 +12,4 @@ class LiteralToken extends Token {
   }
 }
 
-module.exports = LiteralToken
+module.exports = RegExpToken

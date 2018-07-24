@@ -1,31 +1,30 @@
 {
-    "type": "Program",
-    "body": [
-      {
-        "type": "ExpressionStatement",
-        "expression":
-        {
-            "type": "CallExpression",
-            "callee": {
-              "type": "MemberExpression",
-              "object": {
-                "type": "Identifier",
-                "name": "console"
-              },
-              "property": {
-                "type": "Identifier",
-                "name": "log"
-              },
-              "computed": false
-            },
-            "arguments": [
-                {
-                    "type": "Identifier",
-                    "name": "banana"
-                }
-            ]
-        }
-        }
-    ],
-    "sourceType": "module"
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "object": {
+            "type": "Identifier",
+            "name": "console"
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "log"
+          },
+          "computed": false
+        },
+        "arguments": [
+          {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
 }

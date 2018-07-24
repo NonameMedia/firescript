@@ -34,11 +34,17 @@ class Literal extends FirescriptNode {
   }
 
   toJSON () {
-    return this.createJSON({
+    const data = {
       type: 'Literal',
       raw: this.raw,
       value: this.value
-    })
+    }
+
+    if (this.regex) {
+      data.regex = this.regex
+    }
+
+    return this.createJSON(data)
   }
 }
 

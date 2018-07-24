@@ -11,7 +11,7 @@ module.exports = {
     '!==', '!=', '!', '%=', '%', '&&', '&=', '&', '**', '*=', '*',
     '++', '+=', '+', '--', '-=', '-', '/=', '/', '<<=', '<<', '<=',
     '<', '=>', '===', '==', '=', '>>>=', '>>>', '>>=', '>>', '>=', '>',
-    '^=', '^', '|=', '||', '~'
+    '^=', '^', '|=', '||', '~', 'delete', 'void', 'typeof'
   ],
   PUNCTUATORS: [
     '...', '.', '=', '(', ')', '{', '}', '[', ']', ',', ':', ';', '?'
@@ -45,6 +45,6 @@ module.exports = {
   LITERAL_PATTERN: '(?:\'[^]*?(?:\\$\\{[^]+?\\}[^]*?)*?\')|"[^]+?"|true|false|null', // eslint-disable-line no-template-curly-in-string
   NUMERIC_PATTERN: '-?\\d+',
   COMMENT_PATTERN: '#.*',
-  LINE_COMMENT_PATTERN: '\\/\\*[^]*?\\*\\/',
+  BLOCK_COMMENT_PATTERN: '\\/\\*[^]*?\\*\\/',
   REGEXP_PATTERN: '\\/.+?\\/(?:[imsy]+)?'
 }
