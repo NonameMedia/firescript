@@ -6,7 +6,7 @@ const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 
 function loadPkg () {
   try {
-    return require('./package.json')
+    return require(path.join(process.cwd(), './package.json'))
   } catch (err) {
     if (err.code === 100) { return {} }
     throw err
