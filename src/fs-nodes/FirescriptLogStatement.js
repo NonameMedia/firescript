@@ -15,7 +15,7 @@ class FirescriptLogStatement extends FirescriptNode {
       const expression = this.createFullNode(tokenStack)
       this.arguments.push(expression)
 
-      if (tokenStack.isIndention('eq', this.indention)) {
+      if (tokenStack.isIndention('lte', this.indention)) {
         break
       }
     }

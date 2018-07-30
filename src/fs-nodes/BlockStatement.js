@@ -52,6 +52,10 @@ class BlockStatement extends FirescriptNode {
         break
       }
 
+      if (tokenStack.isIndention('lt', this.indention)) {
+        break
+      }
+
       if (tokenStack.isIndention('eq', this.indention)) {
         tokenStack.goForward()
         break
