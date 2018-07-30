@@ -5,7 +5,7 @@ const ALLOWED_VALUE_NODES = [
   'AssignmentPattern', 'Identifier', 'ArrayPattern',
   'ObjectPattern', 'FunctionExpression', 'null',
   'Literal', 'ArrayExpression', 'ObjectExpression',
-  'TemplateLiteral', 'CallExpression'
+  'TemplateLiteral', 'CallExpression', 'MemberExpression'
 ]
 
 /**
