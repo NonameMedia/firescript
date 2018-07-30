@@ -40,7 +40,8 @@ module.exports = {
     'ArrowFunctionExpression',
     'TemplateLiteral',
     'TaggedTemplateExpression',
-    'ConditionalExpression'
+    'ConditionalExpression',
+    'ObjectExpression'
   ],
   LITERAL_PATTERN: '(?:\'[^]*?(?:\\$\\{[^]+?\\}[^]*?)*?\')|"[^]+?"|true|false|null', // eslint-disable-line no-template-curly-in-string
   NUMERIC_PATTERN: '-?\\d+',

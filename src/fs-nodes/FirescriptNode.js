@@ -52,8 +52,8 @@ class FirescriptNode {
     return this.getNodeInstance('AssignmentExpression', tokenStack, left)
   }
 
-  createCallExpressionNode (tokenStack) {
-    return this.getNodeInstance('CallExpression', tokenStack)
+  createCallExpressionNode (tokenStack, callee) {
+    return this.getNodeInstance('CallExpression', tokenStack, callee)
   }
 
   createImportDefaultSpecifierNode (tokenStack) {

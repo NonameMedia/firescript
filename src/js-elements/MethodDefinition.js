@@ -30,9 +30,11 @@ class MethodDefinition extends JSElement {
     const key = this.kind === 'constructor'
       ? 'constructor' : this.key.toESString(ctx)
 
+    const staticMethod = this.static ? 'static ' : ''
     const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
 
     return this.renderElement(
+      staticMethod +
       kind +
       key +
       this.value.toESString(ctx)

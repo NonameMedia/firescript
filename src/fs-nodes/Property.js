@@ -13,6 +13,7 @@ const ALLOWED_VALUES = [
   'ObjectExpression',
   'ArrayExpression',
   'FunctionExpression',
+  'CallExpression',
   'null'
 ]
 
