@@ -26,12 +26,12 @@
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
     "firescript-runtime": "0.1.0",
-    "firescript-test": "0.4.0",
+    "firescript-test": "0.5.0",
     "inspect.js": "1.11.7",
     "lagoon-reporter": "0.4.0",
     "mocha": "5.2.0",
     "shell-inspect": "1.2.0",
-    "sinon": "6.1.4"
+    "sinon": "6.1.5"
   },
   "dependencies": {
     "colorfy": "2.0.2",
