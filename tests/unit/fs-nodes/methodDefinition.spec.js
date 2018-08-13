@@ -26,6 +26,7 @@ describe('MethodDefinition', () => {
           type: 'Identifier'
         },
         static: false,
+        async: false,
         value: {
           async: false,
           body: {
@@ -64,6 +65,7 @@ describe('MethodDefinition', () => {
           type: 'Identifier'
         },
         static: false,
+        async: false,
         value: {
           async: false,
           body: {

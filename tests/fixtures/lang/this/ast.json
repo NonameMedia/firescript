@@ -56,7 +56,8 @@
               "async": false
             },
             "kind": "constructor",
-            "static": false
+            "static": false,
+            "async": false
           },
           {
             "type": "MethodDefinition",
@@ -94,7 +95,8 @@
               "async": false
             },
             "kind": "method",
-            "static": false
+            "static": false,
+            "async": false
           }
         ]
       }
