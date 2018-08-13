@@ -37,10 +37,16 @@ class MethodDefinition extends FirescriptNode {
     super(tokenStack, parent)
 
     this.static = false
+    this.async = false
     this.kind = 'method'
 
-    if (tokenStack.expect('identifier', 'static') && tokenStack.lookForward('identifier')) {
+    if (tokenStack.expect('identifier', 'static') && (tokenStack.lookForward('identifier') || tokenStack.lookForward('keyword', 'async'))) {
       this.static = true
+      tokenStack.goForward()
+    }
+
+    if (tokenStack.expect('keyword', 'async') && tokenStack.lookForward('identifier')) {
+      this.async = true
       tokenStack.goForward()
     }
 
@@ -67,7 +73,8 @@ class MethodDefinition extends FirescriptNode {
       computed: false,
       value: this.value.toJSON(),
       kind: this.kind,
-      static: this.static
+      static: this.static,
+      async: this.async
     })
   }
 }

@@ -13,6 +13,7 @@ const JSElement = require('./JSElement')
  *   value: FunctionExpression | null;
  *   kind: 'method' | 'constructor';
  *   static: boolean;
+ *   async: boolean;
  * }
  */
 class MethodDefinition extends JSElement {
@@ -24,6 +25,7 @@ class MethodDefinition extends JSElement {
     this.value = this.createElement(ast.value)
     this.kind = ast.kind
     this.static = ast.static
+    this.async = ast.async
   }
 
   toESString (ctx) {
@@ -31,10 +33,12 @@ class MethodDefinition extends JSElement {
       ? 'constructor' : this.key.toESString(ctx)
 
     const staticMethod = this.static ? 'static ' : ''
+    const asyncMethod = this.async ? 'async ' : ''
     const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
 
     return this.renderElement(
       staticMethod +
+      asyncMethod +
       kind +
       key +
       this.value.toESString(ctx)
