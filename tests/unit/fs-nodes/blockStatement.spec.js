@@ -81,9 +81,9 @@ describe('BlockStatement', () => {
               }
             },
             fsTyping: {
-  type: 'FirescriptTyping',
-  name: 'any'
-}
+              type: 'FirescriptTyping',
+              name: 'any'
+            }
           }]
         }]
       })
