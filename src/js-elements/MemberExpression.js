@@ -38,6 +38,10 @@ class MemberExpression extends JSElement {
       )
     }
   }
+
+  getLength () {
+    return this.property.getLength() + this.object.getLength() + 1
+  }
 }
 
 module.exports = MemberExpression

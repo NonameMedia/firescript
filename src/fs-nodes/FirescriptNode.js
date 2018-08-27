@@ -179,7 +179,16 @@ class FirescriptNode {
 
     if (nextToken.type === 'indention') {
       if (this.indention < nextToken.value) {
-        // this.isExpectedNode(expectedNode, 'BlockStatement', tokenStack.current())
+        const objectNode = this.tryObjectExpression(tokenStack)
+        if (objectNode) {
+          return objectNode
+        }
+
+        const arrayNode = this.tryArrayExpression(tokenStack)
+        if (arrayNode) {
+          return arrayNode
+        }
+
         return this.getNodeInstance('BlockStatement', tokenStack)
       } else if (this.indention > nextToken.value) {
         tokenStack.goForward()

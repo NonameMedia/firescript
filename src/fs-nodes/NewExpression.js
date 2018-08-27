@@ -3,14 +3,14 @@ const FirescriptNode = require('./FirescriptNode')
 const ALLOWED_CALLEE_TYPES = [
   'ThisExpression',
   'Identifier',
-  'Literal'
+  'Literal',
   // 'ArrayExpression',
   // 'ObjectExpression',
   // 'FunctionExpression',
   // 'ArrowFunctionExpression',
   // 'ClassExpression',
   // 'TaggedTemplateExpression',
-  // 'MemberExpression',
+  'MemberExpression'
   // 'Super',
   // 'MetaProperty',
   // 'NewExpression',
@@ -57,7 +57,7 @@ class NewExpression extends FirescriptNode {
         continue
       }
 
-      this.arguments.push(this.createNodeItem(tokenStack))
+      this.arguments.push(this.createFullNode(tokenStack))
     }
   }
 
