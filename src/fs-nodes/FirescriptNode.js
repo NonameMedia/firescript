@@ -178,6 +178,12 @@ class FirescriptNode {
     }
 
     if (nextToken.type === 'indention') {
+      if (tokenStack.lookForward(['line-comment', 'comment'])) {
+        console.log('COMMENT')
+        tokenStack.goForward()
+        return this.createNodeItem(tokenStack)
+      }
+
       if (this.indention < nextToken.value) {
         const objectNode = this.tryObjectExpression(tokenStack)
         if (['AssignmentExpression'].includes(this.type)) {

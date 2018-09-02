@@ -40,7 +40,7 @@ class MemberExpression extends FirescriptNode {
 
     tokenStack.goForward()
 
-    this.property = this.createIdentifierNode(tokenStack)
+    this.property = this.createNodeItem(tokenStack)
 
     if (tokenStack.expect('punctuator', ']')) {
       this.computed = true

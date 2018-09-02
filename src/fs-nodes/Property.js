@@ -15,6 +15,7 @@ const ALLOWED_VALUES = [
   'FunctionExpression',
   'CallExpression',
   'MemberExpression',
+  'LogicalExpression',
   'null'
 ]
 
