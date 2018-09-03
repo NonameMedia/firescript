@@ -209,7 +209,6 @@ class FirescriptNode {
 
     if (nextToken.type === 'indention') {
       if (tokenStack.lookForward(['line-comment', 'comment'])) {
-        console.log('COMMENT')
         tokenStack.goForward()
         return this.createNodeItem(tokenStack)
       }
