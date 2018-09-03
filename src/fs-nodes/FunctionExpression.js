@@ -9,15 +9,24 @@ class FunctionExpression extends FirescriptNode {
     this.expression = false
     this.generator = false
 
-    if (!/^(MethodDefinition|Property)$/.test(this.parent.type)) {
-      let token = tokenStack.next()
-      if (token.value === 'async') {
-        this.async = true
-      } else if (token.value === 'gen') {
-        this.generator = true
-      } else if (!token.value === 'func') {
-        this.syntaxError('Unexpected token', token)
-      }
+    // if (!/^(MethodDefinition|Property)$/.test(this.parent.type)) {
+    //   let token = tokenStack.next()
+    //   if (token.value === 'async') {
+    //     this.async = true
+    //   } else if (token.value === 'gen') {
+    //     this.generator = true
+    //   } else if (!token.value === 'func') {
+    //     this.syntaxError('Unexpected token', token)
+    //   }
+    // }
+    if (tokenStack.expect('keyword', 'async')) {
+      tokenStack.goForward()
+      this.async = true
+    } else if (tokenStack.expect('keyword', 'gen')) {
+      tokenStack.goForward()
+      this.generator = true
+    } else if (tokenStack.expect('keyword', 'func')) {
+      tokenStack.goForward()
     }
 
     if (this.async || tokenStack.expect('identifier')) {
@@ -58,7 +67,7 @@ class FunctionExpression extends FirescriptNode {
       this.syntaxError('Function arguments expected', tokenStack.current())
     }
 
-    this.body = this.createFullNode(tokenStack)
+    this.body = this.createBlockStatementNode(tokenStack)
   }
 
   parseClassMethod () {

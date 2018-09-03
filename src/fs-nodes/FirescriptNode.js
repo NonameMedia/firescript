@@ -273,7 +273,7 @@ class FirescriptNode {
       }
 
       if (['func', 'async', 'gen'].includes(nextToken.value)) {
-        if (this.type === 'VariableDeclarator') {
+        if ([ 'VariableDeclarator', 'Property' ].includes(this.type)) {
           return this.getNodeInstance('FunctionExpression', tokenStack)
         }
 
