@@ -79,7 +79,8 @@ class FirescriptParser {
       return `${lineNum} | ${line}\n`
     }).join('').concat(`${' '.repeat(token.loc.start[1] + String(endLine).length + 3)}^\n`)
 
-    err.message = `${err.message}\n\n${preview}`
+    const callTree = err.callTree ? JSON.stringify(err.callTree, null, 2) : ''
+    err.message = `${err.message}\n\n${preview}\n\n${callTree}`
     err.stack = '\n\n' + err.callStack.join('\n') + '\n\n' + err.stack
     throw err
   }

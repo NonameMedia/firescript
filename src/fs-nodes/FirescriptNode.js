@@ -148,6 +148,21 @@ class FirescriptNode {
     return new Node(tokenStack, this)
   }
 
+  createSyntaxError (message, token) {
+    const lineNum = token && token.loc ? token.loc.start[0] : ''
+    const colNum = token && token.loc ? token.loc.start[1] : ''
+    const errMessage = lineNum ? `${message} at line ${lineNum} at column ${colNum + 1}` : message
+    // const err = new SyntaxError(errMessage)
+    // err.token = token || this.tokenStack.current() || this.tokenStack.previous()
+    // err.callStack = this.callStack
+
+    const node = this.getNodeInstance('FirescriptSyntaxError', this.tokenStack)
+    node.error = errMessage
+    node.line = lineNum
+    node.token = token
+    return node
+  }
+
   syntaxError (message, token) {
     const lineNum = token && token.loc ? token.loc.start[0] : ''
     const colNum = token && token.loc ? token.loc.start[1] : ''
@@ -155,7 +170,22 @@ class FirescriptNode {
     const err = new SyntaxError(errMessage)
     err.token = token || this.tokenStack.current() || this.tokenStack.previous()
     err.callStack = this.callStack
+    err.callTree = this.dump(5)
     throw err
+  }
+
+  dump (dept) {
+    const tree = {
+      name: this.type
+    }
+
+    if (this.parent && dept > 0) {
+      const parentTree = this.parent.dump(dept -= 1)
+      parentTree.child = tree
+      return parentTree
+    }
+
+    return tree
   }
 
   getNodeInstance (nodeName, tokenStack, subNode) {
