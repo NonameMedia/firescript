@@ -3,7 +3,8 @@ const JSElement = require('./JSElement')
 const ALLOWED_KEY_NODES = [ 'Identifier', 'Literal' ]
 const ALLOWED_VALUE_NODES = [
   'AssignmentPattern', 'Identifier', 'ArrayPattern',
-  'ObjectPattern', 'FunctionExpression', 'null',
+  'ObjectPattern',
+  'ArrowFunctionExpression', 'FunctionExpression', 'null',
   'Literal', 'ArrayExpression', 'ObjectExpression',
   'TemplateLiteral', 'CallExpression', 'MemberExpression', 'LogicalExpression'
 ]

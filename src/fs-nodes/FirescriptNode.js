@@ -13,6 +13,7 @@ class FirescriptNode {
     this.type = this.constructor.name
     this.indentionSize = 2
     this.tokenStack = tokenStack
+    this.firstToken = tokenStack.current()
   }
 
   addLeadingComment (comment) {
@@ -170,18 +171,20 @@ class FirescriptNode {
     const err = new SyntaxError(errMessage)
     err.token = token || this.tokenStack.current() || this.tokenStack.previous()
     err.callStack = this.callStack
-    err.callTree = this.dump(5)
+    err.callTree = this.dump(10)
+    err.tryErrors = this.tryErrors
     throw err
   }
 
-  dump (dept) {
+  dump (dept, child) {
     const tree = {
-      name: this.type
+      name: this.type,
+      value: this.firstToken.value,
+      child
     }
 
-    if (this.parent && dept > 0) {
-      const parentTree = this.parent.dump(dept -= 1)
-      parentTree.child = tree
+    if (this.parent.type !== 'None' && dept > 0) {
+      const parentTree = this.parent.dump(dept -= 1, tree)
       return parentTree
     }
 
@@ -573,11 +576,25 @@ class FirescriptNode {
     }
   }
 
+  isObjectExpression (tokenStack) {
+    return tokenStack.expect('indention') &&
+      tokenStack.lookForward([ 'identifier', 'literal' ], null, 1) &&
+      tokenStack.lookForward('punctuator', ':', 2)
+  }
+
+  isArrayExpression (tokenStack) {
+    return tokenStack.expect('indention') &&
+      tokenStack.lookForward([ 'identifier', 'literal' ], null, 1) &&
+      tokenStack.lookForward('punctuator', ':', 2)
+  }
+
   tryObjectExpression (tokenStack) {
     const curIndex = tokenStack.index
     try {
       return this.createObjectExpressionNode(tokenStack)
     } catch (err) {
+      this.tryErrors = this.tryErrors || []
+      this.tryErrors.push(['TryObjectExpression', err])
       tokenStack.index = curIndex
       return null
     }
@@ -588,6 +605,8 @@ class FirescriptNode {
     try {
       return this.createArrayExpressionNode(tokenStack)
     } catch (err) {
+      this.tryErrors = this.tryErrors || []
+      this.tryErrors.push(['TryArrayExpression', err])
       tokenStack.index = curIndex
       return null
     }

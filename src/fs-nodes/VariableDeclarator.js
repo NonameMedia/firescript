@@ -30,9 +30,12 @@ class VariableDeclarator extends FirescriptNode {
       tokenStack.goForward()
 
       if (tokenStack.expect('indention')) {
-        const objectExpressionNode = this.tryObjectExpression(tokenStack)
-        if (objectExpressionNode) {
-          this.init = objectExpressionNode
+        if (this.isObjectExpression(tokenStack)) {
+          this.init = this.createObjectExpressionNode(tokenStack)
+        // }
+        // const objectExpressionNode = this.tryObjectExpression(tokenStack)
+        // if (objectExpressionNode) {
+        //   this.init = objectExpressionNode
         } else {
           const arrayExpressionNode = this.tryArrayExpression(tokenStack)
           if (arrayExpressionNode) {

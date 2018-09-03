@@ -71,17 +71,21 @@ class FirescriptParser {
   syntaxError (err) {
     const token = err.token
     const source = this.__input.split(/\n/g)
-    const startLine = Math.max(0, token.loc.start[0] - 3)
+    const startLine = Math.max(0, token.loc.start[0] - 12)
     const endLine = Math.max(0, token.loc.start[0])
     const previewArr = source.slice(startLine, endLine)
     const preview = previewArr.map((line, index) => {
-      const lineNum = ` ${startLine + index + 1}`.slice(String(endLine).length)
+      const lineNum = ` ${startLine + index + 1}`.slice(-String(endLine).length)
       return `${lineNum} | ${line}\n`
     }).join('').concat(`${' '.repeat(token.loc.start[1] + String(endLine).length + 3)}^\n`)
 
     const callTree = err.callTree ? JSON.stringify(err.callTree, null, 2) : ''
-    err.message = `${err.message}\n\n${preview}\n\n${callTree}`
+    const tryErrors = err.tryErrors ? '\n\n' + err.tryErrors.map((tryErr) => {
+      return `${tryErr[0]}: ${tryErr[1]}`
+    }).join('\n\n') : ''
+    err.message = `${err.message}\n\n${preview}\n\n${callTree}${tryErrors}`
     err.stack = '\n\n' + err.callStack.join('\n') + '\n\n' + err.stack
+
     throw err
   }
 }

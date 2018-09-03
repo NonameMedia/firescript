@@ -13,6 +13,7 @@ const ALLOWED_VALUES = [
   'ObjectExpression',
   'ArrayExpression',
   'FunctionExpression',
+  'ArrowFunctionExpression',
   'CallExpression',
   'MemberExpression',
   'LogicalExpression',
@@ -55,9 +56,13 @@ class Property extends FirescriptNode {
     if (this.method) {
       this.value = this.createFunctionExpressionNode(tokenStack)
     } else if (tokenStack.isIndention('gt', this.indention)) {
-      const objectExpression = this.tryObjectExpression(tokenStack)
-      if (objectExpression) {
-        this.value = objectExpression
+      if (this.isObjectExpression(tokenStack)) {
+        this.value = this.createObjectExpressionNode(tokenStack)
+      // }
+      //
+      // const objectExpression = this.tryObjectExpression(tokenStack)
+      // if (objectExpression) {
+      //   this.value = objectExpression
       } else {
         const arrayExpression = this.tryArrayExpression(tokenStack)
 
