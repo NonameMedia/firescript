@@ -41,6 +41,7 @@ class Program extends FirescriptNode {
     this.isBlockScope = true
     this.sourceType = sourceType || 'module'
     this.body = []
+    const comments = []
 
     const ALLOWED_CHILDS = this.sourceType === 'module' ? ALLOWED_SCRIPT_CHILDS.concat(ALLOWED_MODULE_CHILDS) : ALLOWED_SCRIPT_CHILDS
 
@@ -50,12 +51,26 @@ class Program extends FirescriptNode {
         break
       }
 
+      if (node.type === 'Comment') {
+        comments.push(node)
+        continue
+      }
+
       this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
+
+      if (comments.length) {
+        node.leadingComments = comments.splice(0, Infinity)
+      }
+
       this.body.push(node)
 
       if (tokenStack.expect('indention')) {
         tokenStack.goForward()
       }
+    }
+
+    if (comments.length) {
+      this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
   }
 

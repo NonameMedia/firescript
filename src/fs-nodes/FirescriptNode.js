@@ -7,30 +7,12 @@ class FirescriptNode {
       type: 'None'
     }
 
-    this.childreen = []
     this.indention = tokenStack.getIndention(-1) || 0
     this.callStack = parent ? parent.callStack : []
     this.type = this.constructor.name
     this.indentionSize = 2
     this.tokenStack = tokenStack
     this.firstToken = tokenStack.current()
-  }
-
-  addLeadingComment (comment) {
-    if (!this.leadingComments) {
-      this.leadingComments = []
-    }
-
-    this.leadingComments.unshift(comment)
-  }
-
-  addTrailingComment (comment) {
-    const lastChild = this.childreen[this.childreen.length - 1]
-    if (!lastChild.trailingComments) {
-      lastChild.trailingComments = []
-    }
-
-    lastChild.trailingComments.push(comment)
   }
 
   createVariableDeclaratorNode (tokenStack) {
@@ -198,9 +180,6 @@ class FirescriptNode {
     }
     const Node = require(`./${nodeName}`)
     const node = new Node(tokenStack, this, subNode)
-    if (nodeName !== 'Comment') {
-      this.childreen.push(node)
-    }
     return node
   }
 
@@ -211,10 +190,10 @@ class FirescriptNode {
     }
 
     if (nextToken.type === 'indention') {
-      if (tokenStack.lookForward(['line-comment', 'comment'])) {
-        tokenStack.goForward()
-        return this.createNodeItem(tokenStack)
-      }
+      // if (tokenStack.lookForward(['line-comment', 'comment'])) {
+      //   tokenStack.goForward()
+      //   return this.createNodeItem(tokenStack)
+      // }
 
       if (this.indention < nextToken.value) {
         const objectNode = this.tryObjectExpression(tokenStack)
@@ -241,14 +220,7 @@ class FirescriptNode {
     }
 
     if (nextToken.type === 'comment' || nextToken.type === 'block-comment') {
-      const comment = this.getNodeInstance('Comment', tokenStack)
-      const node = this.createNodeItem(tokenStack)
-      if (node.type === 'Null') {
-        this.addTrailingComment(comment)
-      } else {
-        node.addLeadingComment(comment)
-      }
-      return node
+      return this.getNodeInstance('Comment', tokenStack)
     }
 
     if (nextToken.type === 'keyword') {

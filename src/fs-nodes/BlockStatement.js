@@ -32,6 +32,7 @@ class BlockStatement extends FirescriptNode {
 
     const token = tokenStack.next()
     this.body = []
+    const comments = []
 
     if (token === null) {
       return
@@ -67,12 +68,25 @@ class BlockStatement extends FirescriptNode {
       }
 
       const child = this.createFullNode(tokenStack)
+      if (child.type === 'Comment') {
+        comments.push(child)
+        continue
+      }
+
       if (!child || child.type === 'Null') {
         break
       }
 
+      if (comments.length) {
+        child.leadingComments = comments.splice(0, Infinity)
+      }
+
       this.isAllowedNode(child, ALLOWED_CHILDS, tokenStack.current())
       this.body.push(child)
+    }
+
+    if (comments.length) {
+      this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
   }
 
