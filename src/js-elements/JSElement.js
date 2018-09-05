@@ -59,6 +59,11 @@ class JSElement {
       child.trailingComments = ast.trailingComments
     }
 
+    if (ast.innerComments) {
+      const Comment = require('./Comment')
+      child.innerComments = ast.innerComments.map((item) => new Comment(item))
+    }
+
     return child
   }
 

@@ -36,7 +36,10 @@ class BlockStatement extends JSElement {
       ctx.join(this.body, ctx.indent()) +
       ctx.indent(-1)
 
+    const innerComments = this.innerComments ? ctx.join(this.innerComments, ctx.indent()) : ''
+
     return this.renderElement('{' +
+      innerComments +
       body +
       '}')
   }

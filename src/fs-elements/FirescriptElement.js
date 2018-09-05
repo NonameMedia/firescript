@@ -63,6 +63,10 @@ class FirescriptElement {
       child.trailingComments = ast.trailingComments
     }
 
+    if (ast.innerComments) {
+      child.innerComments = ast.innerComments
+    }
+
     return child
   }
 

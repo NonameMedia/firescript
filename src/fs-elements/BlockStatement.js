@@ -30,8 +30,11 @@ class BlockStatement extends FirescriptElement {
   }
 
   toFSString (ctx) {
+    const innerComments = this.innerComments ? ctx.join(this.innerComments, ctx.indent()) : ''
+
     return this.renderElement(
       ctx.indent(1) +
+      innerComments +
       ctx.join(this.body, ctx.indent()) +
       ctx.indent(-1)
     )

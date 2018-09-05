@@ -603,6 +603,10 @@ class FirescriptNode {
       obj.leadingComments = this.leadingComments.map((item) => item.toJSON())
     }
 
+    if (this.innerComments) {
+      obj.innerComments = this.innerComments.map((item) => item.toJSON())
+    }
+
     return obj
   }
 }

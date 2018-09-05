@@ -70,7 +70,9 @@ class Program extends FirescriptNode {
     }
 
     if (comments.length) {
-      this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
+      this.body.length === 0
+        ? this.innerComments = comments.splice(0, Infinity)
+        : this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
   }
 
