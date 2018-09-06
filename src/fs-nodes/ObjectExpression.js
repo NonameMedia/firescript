@@ -40,6 +40,10 @@ class ObjectExpression extends FirescriptNode {
         break
       }
 
+      if (this.isOutdented()) {
+        break
+      }
+
       if (tokenStack.isIndention('lt', childIndention)) {
         tokenStack.goForward()
         if (tokenStack.expect('punctuator', ['}', ']'])) {

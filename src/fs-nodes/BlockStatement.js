@@ -53,6 +53,10 @@ class BlockStatement extends FirescriptNode {
         break
       }
 
+      if (this.isOutdented()) {
+        break
+      }
+
       if (tokenStack.isIndention('lt', this.indention)) {
         break
       }

@@ -560,6 +560,10 @@ class FirescriptNode {
       tokenStack.lookForward('punctuator', ':', 2)
   }
 
+  isOutdented (indention) {
+    return this.tokenStack.isIndention('lt', indention || this.indention)
+  }
+
   tryObjectExpression (tokenStack) {
     const curIndex = tokenStack.index
     try {
