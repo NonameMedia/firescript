@@ -72,7 +72,8 @@ class JSElement {
   }
 
   getLength () {
-    throw new Error(`getLength method not implemented for element ${this.type}`)
+    console.warn(`getLength method not implemented for element ${this.type}`)
+    return 0
   }
 
   renderComments (comments, isTrailing) {
