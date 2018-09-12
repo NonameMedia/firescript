@@ -26,7 +26,7 @@
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
     "firescript-runtime": "0.1.0",
-    "firescript-test": "^0.6.1",
+    "firescript-test": "^0.6.2",
     "inspect.js": "1.11.7",
     "lagoon-reporter": "0.4.0",
     "mocha": "5.2.0",
@@ -41,6 +41,6 @@
     "superfs": "0.12.1",
     "superimport": "1.3.0",
     "superreg": "0.1.0",
-    "supershit": "^0.5.4"
+    "supershit": "^0.5.5"
   }
 }
