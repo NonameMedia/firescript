@@ -18,6 +18,10 @@ class ThisExpression extends JSElement {
   toESString () {
     return this.renderElement('this')
   }
+
+  getLength () {
+    return 4
+  }
 }
 
 module.exports = ThisExpression
