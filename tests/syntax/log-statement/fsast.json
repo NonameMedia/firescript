@@ -1,0 +1,16 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "FirescriptLogStatement",
+      "arguments": [
+        {
+          "type": "Literal",
+          "raw": "'I like bananas!'",
+          "value": "I like bananas!"
+        }
+      ]
+    }
+  ]
+}

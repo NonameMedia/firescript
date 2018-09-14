@@ -1,0 +1,2 @@
+func getBananas(num amount)
+  return 3

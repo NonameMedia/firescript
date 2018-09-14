@@ -1,0 +1,38 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "identifier",
+    "value": "bar"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "bla"
+  },
+  {
+    "type": "punctuator",
+    "value": "["
+  },
+  {
+    "type": "numeric",
+    "value": "0"
+  },
+  {
+    "type": "punctuator",
+    "value": "]"
+  }
+]

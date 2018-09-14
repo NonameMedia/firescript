@@ -1,0 +1,62 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "color"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "literal",
+    "value": "'yellow'"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "taste"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "getTaste"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  }
+]

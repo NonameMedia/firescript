@@ -1,0 +1,58 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "str"
+          },
+          "init": {
+            "type": "TemplateLiteral",
+            "quasis": [
+              {
+                "type": "TemplateElement",
+                "value": {
+                  "cooked": "",
+                  "raw": ""
+                },
+                "tail": false
+              },
+              {
+                "type": "TemplateElement",
+                "value": {
+                  "cooked": "",
+                  "raw": ""
+                },
+                "tail": true
+              }
+            ],
+            "expressions": [
+              {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "foo"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "bar"
+                }
+              }
+            ]
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    }
+  ]
+}

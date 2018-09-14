@@ -1,0 +1,26 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "str"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "literal",
+    "value": "'Banana'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

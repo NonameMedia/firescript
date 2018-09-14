@@ -1,0 +1,38 @@
+[
+  {
+    "type": "keyword",
+    "value": "func"
+  },
+  {
+    "type": "identifier",
+    "value": "getBananas"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "num"
+  },
+  {
+    "type": "identifier",
+    "value": "amount"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "numeric",
+    "value": "3"
+  }
+]

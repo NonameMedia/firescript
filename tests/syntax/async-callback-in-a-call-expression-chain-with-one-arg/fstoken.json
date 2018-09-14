@@ -1,0 +1,66 @@
+[
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "bar"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "async"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "done"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "operator",
+    "value": "=>"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "literal",
+    "value": "true"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

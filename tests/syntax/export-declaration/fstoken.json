@@ -1,0 +1,34 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "literal",
+    "value": "'Banana'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  },
+  {
+    "type": "keyword",
+    "value": "export"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

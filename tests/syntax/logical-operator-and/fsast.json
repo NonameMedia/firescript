@@ -1,0 +1,35 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "bla"
+          },
+          "init": {
+            "type": "LogicalExpression",
+            "operator": "&&",
+            "left": {
+              "type": "Identifier",
+              "name": "foo"
+            },
+            "right": {
+              "type": "Identifier",
+              "name": "bar"
+            }
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    }
+  ]
+}

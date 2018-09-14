@@ -1,0 +1,58 @@
+[
+  {
+    "type": "keyword",
+    "value": "switch"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "type"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "keyword",
+    "value": "case"
+  },
+  {
+    "type": "literal",
+    "value": "'fs-str'"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "operator",
+    "value": "typeof"
+  },
+  {
+    "type": "identifier",
+    "value": "value"
+  },
+  {
+    "type": "operator",
+    "value": "==="
+  },
+  {
+    "type": "literal",
+    "value": "'string'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

@@ -1,0 +1,46 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "SwitchStatement",
+      "discriminant": {
+        "type": "Identifier",
+        "name": "type"
+      },
+      "cases": [
+        {
+          "type": "SwitchCase",
+          "test": {
+            "type": "Literal",
+            "raw": "'fs-str'",
+            "value": "fs-str"
+          },
+          "consequent": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "BinaryExpression",
+                "operator": "===",
+                "left": {
+                  "type": "UnaryExpression",
+                  "operator": "typeof",
+                  "argument": {
+                    "type": "Identifier",
+                    "name": "value"
+                  },
+                  "prefix": true
+                },
+                "right": {
+                  "type": "Literal",
+                  "raw": "'string'",
+                  "value": "string"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

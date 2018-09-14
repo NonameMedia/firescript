@@ -1,0 +1,10 @@
+[
+  {
+    "type": "keyword",
+    "value": "log"
+  },
+  {
+    "type": "literal",
+    "value": "'I like bananas!'"
+  }
+]

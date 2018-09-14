@@ -1,0 +1,22 @@
+[
+  {                        
+    "type": "keyword",
+    "value": "export"
+  },
+  {
+    "type": "operator",
+    "value": "*"
+  },
+  {
+    "type": "identifier",
+    "value": "from"
+  },
+  {
+    "type": "literal",
+    "value": "'banana'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

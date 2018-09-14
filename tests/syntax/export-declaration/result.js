@@ -1,0 +1,2 @@
+const banana = 'Banana';
+export { banana };

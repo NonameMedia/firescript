@@ -42,10 +42,8 @@ describe('Module loaging', () => {
     it('import FS into a CommonJS module (default-import)', () => {
       const cjs = require('../fixtures/modules/cjs/defaultImport')
 
-      inspect(cjs).isEql({
-        default: 'Banana',
-        __esModule: true
-      })
+      const res = 'Banana'
+      inspect(cjs).isEql(res)
     })
   })
 

@@ -1,0 +1,35 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "getBanana"
+        },
+        "params": [],
+        "fsParamTypings": [],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ReturnStatement",
+              "argument": {
+                "type": "Identifier",
+                "name": "banana"
+              }
+            }
+          ]
+        },
+        "async": false,
+        "expression": false,
+        "generator": false
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ]
+}

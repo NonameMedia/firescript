@@ -1,0 +1,46 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          },
+          "exported": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "peach"
+          },
+          "exported": {
+            "type": "Identifier",
+            "name": "peach"
+          }
+        },
+        {
+          "type": "ExportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "coconut"
+          },
+          "exported": {
+            "type": "Identifier",
+            "name": "c"
+          }
+        }
+      ],
+      "source": null
+    }
+  ]
+}

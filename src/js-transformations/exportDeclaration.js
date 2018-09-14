@@ -42,13 +42,23 @@ module.exports = (transformer) => {
     transformer.add('ExportDefaultDeclaration', (ast) => {
       const property = ASTCreator.identifier('default')
       const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
+      const commonJSExpression = ASTCreator.expressionStatement(
+        ASTCreator.assignmentExpression('=',
+          getExportsExpression(),
+          ast.declaration
+        )
+      )
+
       const expression = ASTCreator.expressionStatement(
         ASTCreator.assignmentExpression('=',
           memberExpression,
           ast.declaration
         )
       )
-      return expression
+      return [
+        commonJSExpression,
+        expression
+      ]
     })
 
     transformer.add('ExportNamedDeclaration', (ast) => {
@@ -61,17 +71,12 @@ module.exports = (transformer) => {
           return handleFunctionOrClassExpression(ast.declaration)
         }
       } else {
-        const properties = ast.specifiers.map((specifier) => {
-          return ASTCreator.property('init', specifier.local, specifier.exported)
+        return ast.specifiers.map((specifier) => {
+          return ASTCreator.expressionStatement(ASTCreator.assignmentExpression('=',
+            ASTCreator.memberExpression(getExportsExpression(), specifier.local),
+            specifier.exported
+          ))
         })
-
-        const objectExpression = ASTCreator.objectExpression(properties)
-        return ASTCreator.expressionStatement(
-          ASTCreator.assignmentExpression('=',
-            getExportsExpression(),
-            objectExpression
-          )
-        )
       }
 
       return ast

@@ -1,0 +1,5 @@
+# A function
+func foo ()
+  # Returns foo
+  # End of comment
+  return 'foo'

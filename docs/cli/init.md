@@ -33,3 +33,7 @@ array of file patterns to be copied from `src` to `dest` by using the `copy` or 
 #### `features` - Feature configuration
 
 Takes an object of transformer features. See [Transformer](../transformer.md) for a list of all supported features.
+
+#### `ignore` - Ignore files/dir from build
+
+Takes an array of file pattern to be ignored from build

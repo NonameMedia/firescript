@@ -1,0 +1,31 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "hello"
+      },
+      "params": [],
+      "fsParamTypings": [],
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ReturnStatement",
+            "argument": {
+              "type": "Literal",
+              "raw": "'Hello World'",
+              "value": "Hello World"
+            }
+          }
+        ]
+      },
+      "async": false,
+      "expression": false,
+      "generator": false
+    }
+  ]
+}

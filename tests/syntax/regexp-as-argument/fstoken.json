@@ -1,0 +1,30 @@
+[
+  {
+    "type": "identifier",
+    "value": "str"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "match"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "literal",
+    "value": "/[a-zA-Z]/"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

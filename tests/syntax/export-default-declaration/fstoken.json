@@ -1,0 +1,14 @@
+[
+  {
+    "type": "keyword",
+    "value": "export"
+  },
+  {
+    "type": "operator",
+    "value": "**"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  }
+]

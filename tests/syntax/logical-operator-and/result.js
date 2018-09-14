@@ -1,0 +1,1 @@
+const bla = foo && bar;

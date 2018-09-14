@@ -1,0 +1,18 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "reg"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "literal",
+    "value": "/banana/"
+  }
+]

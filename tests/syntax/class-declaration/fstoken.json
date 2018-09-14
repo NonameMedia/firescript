@@ -1,0 +1,86 @@
+[
+  {
+    "type": "keyword",
+    "value": "class"
+  },
+  {
+    "type": "identifier",
+    "value": "Banana"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "constructor"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "identifier",
+    "value": "this"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "literal",
+    "value": "'foo'"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "bla"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "identifier",
+    "value": "this"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  }
+]

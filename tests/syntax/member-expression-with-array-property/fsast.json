@@ -1,0 +1,44 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "init": {
+            "type": "MemberExpression",
+            "computed": true,
+            "object": {
+              "type": "MemberExpression",
+              "computed": false,
+              "object": {
+                "type": "Identifier",
+                "name": "bar"
+              },
+              "property": {
+                "type": "Identifier",
+                "name": "bla"
+              }
+            },
+            "property": {
+              "type": "Literal",
+              "raw": "0",
+              "value": 0
+            }
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    }
+  ]
+}

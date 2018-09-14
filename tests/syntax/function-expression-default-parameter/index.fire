@@ -1,0 +1,2 @@
+const getFoo = func getFoo (foo = {})
+  return foo

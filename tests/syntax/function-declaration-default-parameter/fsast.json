@@ -1,0 +1,45 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "getFoo"
+      },
+      "params": [
+        {
+          "type": "AssignmentPattern",
+          "left": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "right": {
+            "type": "ObjectExpression",
+            "properties": []
+          }
+        }
+      ],
+      "fsParamTypings": [{
+        "type": "FirescriptTyping",
+        "name": "any"
+      }],
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ReturnStatement",
+            "argument": {
+              "type": "Identifier",
+              "name": "foo"
+            }
+          }
+        ]
+      },
+      "async": false,
+      "expression": false,
+      "generator": false
+    }
+  ]
+}

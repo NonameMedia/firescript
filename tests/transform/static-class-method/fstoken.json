@@ -1,0 +1,46 @@
+[
+  {
+    "type": "keyword",
+    "value": "class"
+  },
+  {
+    "type": "identifier",
+    "value": "Banana"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "static"
+  },
+  {
+    "type": "identifier",
+    "value": "countBananas"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "numeric",
+    "value": "3"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]
