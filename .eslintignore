@@ -2,3 +2,4 @@ tests/fixtures/elements
 tests/fixtures/language
 tests/syntax
 tests/transform
+tests/features/import-export/
