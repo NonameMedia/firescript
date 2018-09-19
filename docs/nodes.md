@@ -103,6 +103,15 @@ Identifier
 5) JSTranspiler can transpile it into FS
 ----------------------------------------
 
+6) Syntax highlighter
+---------------------
+
+7) Syntax highlighter
+---------------------
+
+8) Docs page
+------------
+
 --
 
 ## Expressions and Patterns

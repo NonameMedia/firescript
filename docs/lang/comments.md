@@ -11,6 +11,15 @@ Syntax
 The `#` char is used for line comments and `/* ... */` indicates a block comment.
 
 ```
+#[comment]EOL
+
+/*[comment]*/
+```
+
+Examples
+--------
+
+```
 # I'm a line comment
 console.log('Hello World!')
 ```
