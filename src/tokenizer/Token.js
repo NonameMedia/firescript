@@ -2,7 +2,7 @@ const SuperReg = require('superreg')
 const constants = require('../utils/constants')
 const FirescriptTokenizer = require('../FirescriptTokenizer')
 
-const PATTERN_KEYS = ['indention', 'comment', 'blockComment', 'keyword', 'regexp', 'operator', 'punctuator', 'literal', 'numeric', 'identifier']
+const PATTERN_KEYS = ['indention', 'comment', 'blockComment', 'keyword', 'regexp', 'numeric', 'operator', 'punctuator', 'literal', 'identifier']
 
 class Token {
   constructor (parent, value) {

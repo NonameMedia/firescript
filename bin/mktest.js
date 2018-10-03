@@ -8,7 +8,7 @@ const FirescriptTokenizer = require('../src/FirescriptTokenizer')
 const FirescriptParser = require('../src/FirescriptParser')
 const JSTranspiler = require('../src/JSTranspiler')
 
-const TEST_CASE_PATH = path.join(__dirname, '../../firescript-test/')
+const TEST_CASE_PATH = path.join(__dirname, '../tests/')
 
 const defaultFeatureConf = JSON.stringify({
   esModules: true,
