@@ -1,0 +1,18 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "num"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "numeric",
+    "value": "-123"
+  }
+]

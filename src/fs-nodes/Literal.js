@@ -8,9 +8,9 @@ class Literal extends FirescriptNode {
     this.raw = token.value
 
     if (token.type === 'numeric') {
-      if (/^\d+$/.test(token.value)) {
+      if (/^-?\d+$/.test(token.value)) {
         this.value = parseInt(token.value, 10)
-      } else if (/^\d+\.\d+$/.test(token.value)) {
+      } else if (/^-?\d+\.\d+$/.test(token.value)) {
         this.value = parseFloat(token.value, 10)
       }
     } else if (/^["'`]/.test(token.value)) {
