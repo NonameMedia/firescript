@@ -42,23 +42,13 @@ module.exports = (transformer) => {
     transformer.add('ExportDefaultDeclaration', (ast) => {
       const property = ASTCreator.identifier('default')
       const memberExpression = ASTCreator.memberExpression(getExportsExpression(), property)
-      const commonJSExpression = ASTCreator.expressionStatement(
-        ASTCreator.assignmentExpression('=',
-          getExportsExpression(),
-          ast.declaration
-        )
-      )
-
       const expression = ASTCreator.expressionStatement(
         ASTCreator.assignmentExpression('=',
           memberExpression,
           ast.declaration
         )
       )
-      return [
-        commonJSExpression,
-        expression
-      ]
+      return expression
     })
 
     transformer.add('ExportNamedDeclaration', (ast) => {

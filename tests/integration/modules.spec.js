@@ -43,7 +43,7 @@ describe('Module loaging', () => {
       const cjs = require('../fixtures/modules/cjs/defaultImport')
 
       const res = 'Banana'
-      inspect(cjs).isEql(res)
+      inspect(cjs.default).isEql(res)
     })
   })
 
