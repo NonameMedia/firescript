@@ -1,5 +1,13 @@
 const FirescriptNode = require('./FirescriptNode')
 
+const ALLOWED_PARAMS = [
+  'Identifier',
+  'AssignmentPattern',
+  'ArrayPattern',
+  'ObjectPattern',
+  'RestElement'
+]
+
 class FunctionExpression extends FirescriptNode {
   constructor (tokenStack, parent) {
     super(tokenStack, parent)
@@ -56,12 +64,9 @@ class FunctionExpression extends FirescriptNode {
           this.fsParamTypings.push(this.createFirescriptTypingNode(tokenStack, 'any'))
         }
 
-        if (tokenStack.expect('identifier')) {
-          this.params.push(this.createFullNode(tokenStack))
-          continue
-        }
-
-        this.syntaxError('Identifier expected', tokenStack.current())
+        const param = this.createFullNode(tokenStack)
+        this.isAllowedNode(param, ALLOWED_PARAMS)
+        this.params.push(param)
       }
     } else {
       this.syntaxError('Function arguments expected', tokenStack.current())

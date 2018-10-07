@@ -1,0 +1,42 @@
+[
+  {
+    "type": "keyword",
+    "value": "class"
+  },
+  {
+    "type": "identifier",
+    "value": "Foo"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "bar"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "one"
+  },
+  {
+    "type": "punctuator",
+    "value": ","
+  },
+  {
+    "type": "punctuator",
+    "value": "..."
+  },
+  {
+    "type": "identifier",
+    "value": "more"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  }
+]

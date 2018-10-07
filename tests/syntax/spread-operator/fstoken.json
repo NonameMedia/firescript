@@ -1,0 +1,46 @@
+[
+  {
+    "type": "keyword",
+    "value": "func"
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": ","
+  },
+  {
+    "type": "punctuator",
+    "value": "..."
+  },
+  {
+    "type": "identifier",
+    "value": "bar"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "keyword",
+    "value": "return"
+  },
+  {
+    "type": "identifier",
+    "value": "bar"
+  }
+]

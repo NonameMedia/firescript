@@ -3,7 +3,8 @@ const FirescriptNode = require('./FirescriptNode')
 const ALLOWED_KEYS = [
   // 'ThisExpression',
   'Identifier',
-  'Literal'
+  'Literal',
+  'SpreadElement'
   // 'ArrayExpression',
   // 'ObjectExpression',
   // 'FunctionExpression',
