@@ -15,7 +15,8 @@ describe('FSConfig', () => {
           esModules: false,
           esDefaultParams: false,
           esClasses: true,
-          esTemplates: true
+          esTemplates: true,
+          extendRegExp: true
         }
       })
     })
@@ -33,7 +34,8 @@ describe('FSConfig', () => {
           esModules: false,
           esDefaultParams: false,
           esClasses: true,
-          esTemplates: true
+          esTemplates: true,
+          extendRegExp: true
         }
       })
     })
@@ -46,7 +48,8 @@ describe('FSConfig', () => {
       esModules: false,
       esDefaultParams: false,
       esClasses: true,
-      esTemplates: true
+      esTemplates: true,
+      extendRegExp: true
     })
   })
 })

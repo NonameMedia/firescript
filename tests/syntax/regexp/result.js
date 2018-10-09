@@ -1,1 +1,1 @@
-const reg = /banana/;
+const reg = __FS.reg(/banana/);

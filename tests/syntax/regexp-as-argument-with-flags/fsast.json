@@ -21,16 +21,12 @@
         "arguments": [
           {
             "type": "Literal",
-            "raw": "/[a-zA-Z]/",
-            "value": "/[a-zA-Z]/",
+            "raw": "/[a-zA-Z]/gi",
+            "value": "/[a-zA-Z]/gi",
             "regex": {
               "pattern": "[a-zA-Z]",
-              "flags": ""
+              "flags": "gi"
             }
-          },
-          {
-            "type": "Identifier",
-            "name": "gi"
           }
         ]
       }

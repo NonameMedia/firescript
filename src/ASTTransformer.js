@@ -40,6 +40,9 @@ class ASTTransformer {
 
   transformItem (ast, index, parent) {
     const transformatedAst = {}
+    if (ast.FS_skipTransform) {
+      return ast.FS_skipTransform
+    }
 
     const transformationFn = (funcs, ast) => {
       let trans = ast

@@ -17,11 +17,7 @@
   },
   {
     "type": "literal",
-    "value": "/[a-zA-Z]/"
-  },
-  {
-    "type": "identifier",
-    "value": "gi"
+    "value": "/[a-zA-Z]/gi"
   },
   {
     "type": "punctuator",

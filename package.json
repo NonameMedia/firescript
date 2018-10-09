@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "colorfy": "2.0.2",
+    "eslint-plugin-node": "^7.0.1",
     "esprima": "4.0.1",
     "superarr": "0.1.0",
     "superconf": "^1.2.0",

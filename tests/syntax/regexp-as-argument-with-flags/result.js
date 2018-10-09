@@ -1,1 +1,1 @@
-str.match(/[a-zA-Z]/, gi);
+str.match(__FS.reg(/[a-zA-Z]/gi));

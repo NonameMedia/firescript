@@ -47,5 +47,5 @@ module.exports = {
   NUMERIC_PATTERN: '-?\\d+',
   COMMENT_PATTERN: '#.*',
   BLOCK_COMMENT_PATTERN: '\\/\\*[^]*?\\*\\/',
-  REGEXP_PATTERN: '\\/.+?\\/(?:[imsy]+)?'
+  REGEXP_PATTERN: '\\/.+?\\/(?:[gimsy]+)?'
 }
