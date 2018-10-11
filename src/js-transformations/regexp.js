@@ -4,7 +4,7 @@ module.exports = (transformer) => {
   if (transformer.test((ctx) => ctx.extendRegExp === true)) {
     transformer.add('Literal', (ast) => {
       if (ast.regex) {
-        console.log('AST', ast)
+        transformer.importRuntime = true
         return ASTCreator.callExpression(
           ASTCreator.memberExpression(
             ASTCreator.identifier('__FS'),

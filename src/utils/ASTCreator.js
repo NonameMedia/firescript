@@ -140,7 +140,7 @@ class ASTCreator {
   static importSpecifier (imported, local) {
     return {
       type: 'ImportSpecifier',
-      local: ASTCreator.identifier(local),
+      local: ASTCreator.identifier(local || imported),
       imported: ASTCreator.identifier(imported)
     }
   }
