@@ -8,11 +8,12 @@ The file is interpreted as a `.cson` file.
 Transpiler options
 ------------------
 
-| Option       | Default value | Description                                   |
-| ------------ | ------------- | --------------------------------------------- |
-| dest         | `lib/`        | Destination folder for transpiled `.js` files |
-| src          | `src/`        | Source folder, where the `.fire` files are    |
-| features          | `{}`        | Configuration object for language features. See [Langauage features](#Language%20features) |
+| Option   | Default value | Description                                                                                |
+| -------- | ------------- | ------------------------------------------------------------------------------------------ |
+| dest     | `lib/`        | Destination folder for transpiled `.js` files                                              |
+| src      | `src/`        | Source folder, where the `.fire` files are                                                 |
+| features | `{}`          | Configuration object for language features. See [Langauage features](#Language%20features) |
+| copy     | `[]`          | Copy files from `src` or `$ROOT` to `dest`                                                 |
 
 
 ### Language features
