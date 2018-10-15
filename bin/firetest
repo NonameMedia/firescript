@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+const FireTest = require('../src/FireTest').FireTest
+const args = require('args')
+const colorfy = require('colorfy')
+
+args
+  .option('bail', 'Cancel tests on first error')
+
+const flags = args.parse(process.argv)
+const fireTest = new FireTest(flags)
+const cf = colorfy()
+
+cf.lime('Start firetest runner').print()
+
+fireTest.on('runner:init', () => {
+  cf.azure(fireTest.files.length).grey(' files loaded').print()
+})
+
+fireTest.on('runner:success', () => {
+  cf.green('Done').print()
+})
+
+fireTest.on('runner:fail', () => {
+  cf.green('Failed').print()
+})
+
+fireTest.run().then(() => {
+
+}).catch((err) => {
+  cf.red('Failed with error:').grey(err.message).print()
+  if (flags.stack) {
+    cf.ddgrey(err.stack).print()
+  }
+
+  process.exit(1)
+})
