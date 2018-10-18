@@ -4,7 +4,8 @@
   "description": "Firescript transpiler",
   "main": "src/app.js",
   "bin": {
-    "fire": "./bin/fire"
+    "fire": "./bin/fire",
+    "firetest": "./bin/firetest"
   },
   "scripts": {
     "test": "npm run test:unit && npm run test:integration && npm run test:syntax && npm run test:transform",
@@ -34,6 +35,7 @@
     "sinon": "^6.1.5"
   },
   "dependencies": {
+    "args": "^5.0.0",
     "colorfy": "2.0.2",
     "eslint-plugin-node": "^7.0.1",
     "esprima": "4.0.1",
