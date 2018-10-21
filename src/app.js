@@ -44,7 +44,7 @@ module.exports = {
   },
   parse (input, opts) {
     opts = opts || {}
-    const parser = opts.type === 'js' ? new JSParser() : new FirescriptParser()
+    const parser = opts.type === 'js' ? new JSParser(opts) : new FirescriptParser(opts)
     return parser.parse(input)
   },
   loadConf (customConf) {

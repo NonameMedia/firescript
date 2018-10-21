@@ -67,8 +67,8 @@ class FirescriptNode {
     return this.getNodeInstance('MethodDefinition', tokenStack)
   }
 
-  createMemberExpressionNode (tokenStack) {
-    return this.getNodeInstance('MemberExpression', tokenStack)
+  createMemberExpressionNode (tokenStack, node) {
+    return this.getNodeInstance('MemberExpression', tokenStack, node)
   }
 
   createFunctionExpressionNode (tokenStack) {
@@ -143,6 +143,8 @@ class FirescriptNode {
     node.error = errMessage
     node.line = lineNum
     node.token = token
+
+    this.tokenStack.hasError = true
     return node
   }
 
@@ -469,10 +471,11 @@ class FirescriptNode {
 
         break
       } else if (tokenStack.expect('template')) {
-        if (['TaggedTemplateExpression', 'TemplateLiteral'].includes(this.type)) {
+        if (['TaggedTemplateExpression', 'TemplateLiteral', 'MemberExpression'].includes(this.type)) {
           break
         }
-        if (node.type === 'Identifier') {
+
+        if (node.type === 'Identifier' && ['Program', 'BlockStatement'].includes(this.type)) {
           node = this.getNodeInstance('TaggedTemplateExpression', tokenStack, node)
         } else {
           node = this.getNodeInstance('TemplateLiteral', tokenStack, node)
@@ -578,22 +581,26 @@ class FirescriptNode {
 
   tryArrayExpression (tokenStack) {
     const curIndex = tokenStack.index
+    const stackSize = this.callStack.length
     try {
       return this.createArrayExpressionNode(tokenStack)
     } catch (err) {
       this.tryErrors = this.tryErrors || []
       this.tryErrors.push(['TryArrayExpression', err])
       tokenStack.index = curIndex
+      this.callStack.splice(stackSize)
       return null
     }
   }
 
   tryArrowFunctionExpression (tokenStack) {
     const curIndex = tokenStack.index
+    const stackSize = this.callStack.length
     try {
       return this.createArrowFunctionExpression(tokenStack)
     } catch (err) {
       tokenStack.index = curIndex
+      this.callStack.splice(stackSize)
       return null
     }
   }

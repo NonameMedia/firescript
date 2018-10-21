@@ -6,6 +6,7 @@ const colorfy = require('colorfy')
 
 args
   .option('bail', 'Cancel tests on first error')
+  .option('verbose', 'Enable verbose log')
 
 const flags = args.parse(process.argv)
 const fireTest = new FireTest(flags)

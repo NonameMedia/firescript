@@ -15,6 +15,7 @@ class FirescriptParser {
     this.showIndex = conf.index === undefined ? true : conf.index
     this.showLines = conf.lines === undefined ? true : conf.line
     this.callStack = []
+    this.sourceType = conf.sourceType
   }
 
   tokenize (source) {
@@ -31,12 +32,13 @@ class FirescriptParser {
     this.__input = source
 
     try {
-      const ast = new Program(token)
+      const ast = new Program(token, null, this.sourceType)
       return ast.toJSON()
     } catch (err) {
       if (!err.token) {
         throw err
       }
+
       this.syntaxError(err)
     }
   }
@@ -71,13 +73,17 @@ class FirescriptParser {
   syntaxError (err) {
     const token = err.token
     const source = this.__input.split(/\n/g)
-    const startLine = Math.max(0, token.loc.start[0] - 12)
-    const endLine = Math.max(0, token.loc.start[0])
-    const previewArr = source.slice(startLine, endLine)
-    const preview = previewArr.map((line, index) => {
-      const lineNum = ` ${startLine + index + 1}`.slice(-String(endLine).length)
-      return `${lineNum} | ${line}\n`
-    }).join('').concat(`${' '.repeat(token.loc.start[1] + String(endLine).length + 3)}^\n`)
+    let preview = ''
+
+    if (token.loc) {
+      const startLine = Math.max(0, token.loc.start[0] - 12)
+      const endLine = Math.max(0, token.loc.start[0])
+      const previewArr = source.slice(startLine, endLine)
+      preview = previewArr.map((line, index) => {
+        const lineNum = ` ${startLine + index + 1}`.slice(-String(endLine).length)
+        return `${lineNum} | ${line}\n`
+      }).join('').concat(`${' '.repeat(token.loc.start[1] + String(endLine).length + 3)}^\n`)
+    }
 
     const callTree = err.callTree ? JSON.stringify(err.callTree, null, 2) : ''
     const tryErrors = err.tryErrors ? '\n\n' + err.tryErrors.map((tryErr) => {

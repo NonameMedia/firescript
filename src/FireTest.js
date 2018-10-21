@@ -16,6 +16,7 @@ class FireTest extends EventEmitter {
     this.filePatterns = ['tests/**/*.spec.fire', 'tests/**/*.spec.js']
     this.workingDir = process.cwd()
     this.files = []
+    this.verbose = opts.verbose
 
     if (opts.grep) {
       this.mocha.grep(opts.grep)

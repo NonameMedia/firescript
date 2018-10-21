@@ -40,6 +40,7 @@ class Program extends FirescriptNode {
 
     this.isBlockScope = true
     this.sourceType = sourceType || 'module'
+
     this.body = []
     const comments = []
 
@@ -56,7 +57,9 @@ class Program extends FirescriptNode {
         continue
       }
 
-      this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
+      if (this.sourceType !== 'snippet') {
+        this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
+      }
 
       if (comments.length) {
         node.leadingComments = comments.splice(0, Infinity)

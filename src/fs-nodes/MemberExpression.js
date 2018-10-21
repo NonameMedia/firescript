@@ -38,14 +38,26 @@ class MemberExpression extends FirescriptNode {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    tokenStack.goForward()
-
-    this.property = this.createNodeItem(tokenStack)
-
-    if (tokenStack.expect('punctuator', ']')) {
+    if (tokenStack.expect('punctuator', '[')) {
       this.computed = true
       tokenStack.goForward()
+      this.property = this.createFullNode(tokenStack)
+
+      if (tokenStack.expect('punctuator', ']')) {
+        tokenStack.goForward()
+      }
+    } else {
+      tokenStack.goForward()
+      if (tokenStack.expect(['numeric', 'literal'])) {
+        this.property = this.createLiteralNode(tokenStack)
+      } else {
+        this.property = this.createIdentifierNode(tokenStack)
+      }
     }
+
+    // if (tokenStack.expect('punctuator', ['['])) {
+    //   this.property = this.createMemberExpressionNode(tokenStack, this.property)
+    // }
 
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
   }

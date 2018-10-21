@@ -17,7 +17,7 @@ class TemplateElement extends FirescriptNode {
     super(tokenStack, parent)
 
     if (!tokenStack.expect('template')) {
-      this.syntaxError('Unexpected token! Tempalte literal expected')
+      this.syntaxError('Unexpected token! Template literal expected')
     }
 
     this.tail = true
