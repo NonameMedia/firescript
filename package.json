@@ -27,7 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
-    "firescript-runtime": "^0.2.5",
+    "fireio": "^0.1.0",
     "inspect.js": "^1.11.8",
     "lagoon-reporter": "^0.5.0",
     "mocha": "5.2.0",

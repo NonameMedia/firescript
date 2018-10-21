@@ -1,2 +1,2 @@
-import { __FS } from 'firescript-runtime';
-const banana = __FS.typing(__FS.TYPE_STR, 'Banana');
+import { FireIO } from 'fireio';
+const banana = FireIO.typing(FireIO.TYPE_STR, 'Banana');

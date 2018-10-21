@@ -1,2 +1,2 @@
-import { __FS } from 'firescript-runtime';
-str.match(__FS.reg(/[a-zA-Z]/gi));
+import { FireIO } from 'fireio';
+str.match(FireIO.reg(/[a-zA-Z]/gi));

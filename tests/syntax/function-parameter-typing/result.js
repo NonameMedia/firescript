@@ -1,5 +1,5 @@
-import { __FS } from 'firescript-runtime';
+import { FireIO } from 'fireio';
 function getBananas (amount) {
-  __FS.typing(__FS.TYPE_NUM, amount);
+  FireIO.typing(FireIO.TYPE_NUM, amount);
   return 3;
 }

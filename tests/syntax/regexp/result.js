@@ -1,2 +1,2 @@
-import { __FS } from 'firescript-runtime';
-const reg = __FS.reg(/banana/);
+import { FireIO } from 'fireio';
+const reg = FireIO.reg(/banana/);

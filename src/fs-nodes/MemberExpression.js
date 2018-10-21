@@ -55,10 +55,6 @@ class MemberExpression extends FirescriptNode {
       }
     }
 
-    // if (tokenStack.expect('punctuator', ['['])) {
-    //   this.property = this.createMemberExpressionNode(tokenStack, this.property)
-    // }
-
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
   }
 
