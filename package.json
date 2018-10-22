@@ -28,13 +28,13 @@
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
     "fireio": "^0.1.0",
-    "inspect.js": "^1.11.8",
-    "lagoon-reporter": "^0.5.0",
-    "mocha": "5.2.0",
     "shell-inspect": "1.2.0",
     "sinon": "^7.0.0"
   },
   "dependencies": {
+    "inspect.js": "^1.11.8",
+    "lagoon-reporter": "^0.5.0",
+    "mocha": "5.2.0",
     "args": "^5.0.0",
     "colorfy": "^2.0.4",
     "eslint-plugin-node": "^7.0.1",
