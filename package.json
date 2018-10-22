@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "npm run test:unit && npm run test:integration && npm run test:syntax && npm run test:transform",
-    "test:unit": "mocha --reporter lagoon-reporter tests/unit/\\*\\*/\\*.spec.js",
-    "test:integration": "mocha --reporter lagoon-reporter tests/integration/\\*\\*/\\*.spec.js",
-    "test:syntax": "mocha --reporter lagoon-reporter tests/syntax/\\*\\*/\\*.spec.js",
-    "test:transform": "mocha --reporter lagoon-reporter tests/transform/\\*\\*/\\*.spec.js"
+    "test:unit": "firetest tests/unit/\\*\\*/\\*.spec.js",
+    "test:integration": "firetest tests/integration/\\*\\*/\\*.spec.js",
+    "test:syntax": "firetest tests/syntax/\\*\\*/\\*.spec.js",
+    "test:transform": "firetest tests/transform/\\*\\*/\\*.spec.js"
   },
   "repository": {
     "type": "git",
