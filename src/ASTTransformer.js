@@ -31,8 +31,8 @@ class ASTTransformer {
 
   transform (ast) {
     const transformatedAst = this.transformItem(ast)
-    if (this.importRuntime) {
-      this.importModule([[ 'FireIO' ]], 'fireio', transformatedAst)
+    if (this.importRuntime && this.ctx.noIncludeFireIO !== true) {
+      this.importModule([[ 'FireIO' ]], this.ctx.fireIOModuleName || 'fireio', transformatedAst)
     }
 
     return transformatedAst
