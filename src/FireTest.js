@@ -13,7 +13,7 @@ class FireTest extends EventEmitter {
     this.mocha.reporter('lagoon-reporter')
     this.mocha.useInlineDiffs(true)
     this.mocha.suite.timeout(2000)
-    this.filePatterns = ['tests/**/*.spec.fire', 'tests/**/*.spec.js']
+    this.filePatterns = opts.files || ['tests/**/*.spec.fire', 'tests/**/*.spec.js']
     this.workingDir = process.cwd()
     this.files = []
     this.verbose = opts.verbose

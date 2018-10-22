@@ -9,6 +9,10 @@ args
   .option('verbose', 'Enable verbose log')
 
 const flags = args.parse(process.argv)
+if (args.sub) {
+  flags.files = args.sub
+}
+
 const fireTest = new FireTest(flags)
 const cf = colorfy()
 
