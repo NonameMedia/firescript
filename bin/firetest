@@ -9,7 +9,7 @@ args
   .option('verbose', 'Enable verbose log')
 
 const flags = args.parse(process.argv)
-if (args.sub) {
+if (args.sub.length) {
   flags.files = args.sub
 }
 
