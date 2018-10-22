@@ -8,6 +8,7 @@
     "esClasses": true,
     "esTemplates": true,
     "extendRegExp": true,
-    "noIncludeFireIO": false
+    "notIncludeFireIO": false,
+    "fireIOModuleName": "fireio"
   }
 }

@@ -16,7 +16,9 @@ describe('FSConfig', () => {
           esDefaultParams: false,
           esClasses: true,
           esTemplates: true,
-          extendRegExp: true
+          extendRegExp: true,
+          notIncludeFireIO: false,
+          fireIOModuleName: 'fireio'
         }
       })
     })
@@ -35,7 +37,9 @@ describe('FSConfig', () => {
           esDefaultParams: false,
           esClasses: true,
           esTemplates: true,
-          extendRegExp: true
+          extendRegExp: true,
+          notIncludeFireIO: false,
+          fireIOModuleName: 'fireio'
         }
       })
     })
@@ -49,7 +53,9 @@ describe('FSConfig', () => {
       esDefaultParams: false,
       esClasses: true,
       esTemplates: true,
-      extendRegExp: true
+      extendRegExp: true,
+      notIncludeFireIO: false,
+      fireIOModuleName: 'fireio'
     })
   })
 })
