@@ -1,0 +1,46 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "obj"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "?"
+  },
+  {
+    "type": "numeric",
+    "value": "1"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "numeric",
+    "value": "2"
+  }
+]
