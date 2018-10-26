@@ -1,0 +1,56 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "obj"
+          },
+          "init": {
+            "type": "ObjectExpression",
+            "properties": [
+              {
+                "type": "Property",
+                "key": {
+                  "type": "Identifier",
+                  "name": "foo"
+                },
+                "value": {
+                  "type": "ConditionalExpression",
+                  "test": {
+                    "type": "Identifier",
+                    "name": "foo"
+                  },
+                  "consequent": {
+                    "type": "Literal",
+                    "raw": "1",
+                    "value": 1
+                  },
+                  "alternate": {
+                    "type": "Literal",
+                    "raw": "2",
+                    "value": 2
+                  }
+                },
+                "shorthand": false,
+                "computed": false,
+                "kind": "init",
+                "method": false
+              }
+            ]
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    }
+  ]
+}
