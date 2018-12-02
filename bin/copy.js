@@ -15,13 +15,14 @@ async function copy () {
 
   const srcDir = path.resolve(process.cwd(), conf.src)
   const destDir = path.resolve(process.cwd(), conf.dest)
-  const files = await SuperFS.readDir(srcDir, {
-    filter: conf.copy.filter(f => !f.startsWith('$ROOT/')),
+  const projectFiles = conf.copy.filter(f => !f.startsWith('$ROOT/'))
+  const files = projectFiles.lenght ? await SuperFS.readDir(srcDir, {
+    filter: projectFiles,
     recursive: true,
     ignore: [
       'node_modules'
     ]
-  })
+  }) : []
 
   // copy from root
   const rootFiles = await SuperFS.readDir(projectRoot, {
