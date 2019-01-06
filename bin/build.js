@@ -74,9 +74,22 @@ module.exports = (supershit) => {
       buildCMD.destDir = path.resolve(process.cwd(), conf.dest)
 
       // console.log('CONF', conf)
+
       await copy()
       await buildCMD.transpile()
 
       console.log(`Build directory '${buildCMD.srcDir}' ...`)
+
+      if (conf.binSrc) {
+        const binDest = conf.binDest || path.join(buildCMD.destDir, 'bin')
+
+        const binBuildCMD = new BuildCMD(conf)
+        binBuildCMD.srcDir = path.resolve(process.cwd(), conf.binSrc)
+        binBuildCMD.destDir = path.resolve(process.cwd(), binDest)
+
+        await binBuildCMD.transpile()
+
+        console.log('Build bin dir to', binDest)
+      }
     })
 }
