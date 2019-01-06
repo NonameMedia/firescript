@@ -6,6 +6,8 @@ stages:
 .test: &test
   stage: test
   script:
+   - pwd
+   - ls -la .
    - npm install
    - npm run test
 
