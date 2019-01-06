@@ -9,6 +9,7 @@ stages:
    - pwd
    - whoami
    - ls -la .
+   - rm package-lock.json
    - npm install
    - npm run test
 
