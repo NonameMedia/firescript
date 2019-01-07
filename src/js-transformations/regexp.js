@@ -7,7 +7,7 @@ module.exports = (transformer) => {
         transformer.importRuntime = true
         return ASTCreator.callExpression(
           ASTCreator.memberExpression(
-            ASTCreator.identifier('FireIO'),
+            ASTCreator.identifier('FirescriptRuntime'),
             ASTCreator.identifier('reg')
           ),
           [
