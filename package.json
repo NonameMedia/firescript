@@ -27,17 +27,17 @@
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
     "shell-inspect": "1.2.0",
-    "sinon": "^7.1.0"
+    "sinon": "^7.2.2"
   },
   "dependencies": {
     "args": "^5.0.0",
     "colorfy": "^2.0.4",
-    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-node": "^8.0.1",
     "esprima": "4.0.1",
-    "firescript-runtime": "^0.1.0",
+    "firescript-runtime": "^0.3.1",
     "firescript-test": "^0.7.1",
     "superarr": "0.1.0",
-    "superconf": "^1.2.0",
+    "superconf": "^1.2.1",
     "superfs": "^0.12.2",
     "superimport": "^1.4.0",
     "superreg": "^0.2.1",
