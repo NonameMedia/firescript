@@ -55,12 +55,12 @@ This would check if `banana` is an instance of `Banana`
 #### Javascript
 
 ```js
-const counter = FireIO.typing('num', 0)
+const counter = FirescriptRuntime.typing('num', 0)
 ```
 
 ```js
 function count (counter) {
-  FireIO.typing('num', counter)
+  FirescriptRuntime.typing('num', counter)
   return counter += 1
 }
 ```

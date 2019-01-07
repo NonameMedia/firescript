@@ -1,2 +1,2 @@
-import { FireIO } from 'fireio';
-str.match(FireIO.reg(/[a-zA-Z]/));
+import { FirescriptRuntime } from 'firescript-runtime';
+str.match(FirescriptRuntime.reg(/[a-zA-Z]/));

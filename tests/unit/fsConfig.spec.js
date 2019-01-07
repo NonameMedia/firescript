@@ -17,8 +17,8 @@ describe('FSConfig', () => {
           esClasses: true,
           esTemplates: true,
           extendRegExp: true,
-          notIncludeFireIO: false,
-          fireIOModuleName: 'fireio'
+          notIncludeFireRT: false,
+          fireRTModuleName: 'firescript-runtime'
         }
       })
     })
@@ -38,8 +38,8 @@ describe('FSConfig', () => {
           esClasses: true,
           esTemplates: true,
           extendRegExp: true,
-          notIncludeFireIO: false,
-          fireIOModuleName: 'fireio'
+          notIncludeFireRT: false,
+          fireRTModuleName: 'firescript-runtime'
         }
       })
     })
@@ -54,8 +54,8 @@ describe('FSConfig', () => {
       esClasses: true,
       esTemplates: true,
       extendRegExp: true,
-      notIncludeFireIO: false,
-      fireIOModuleName: 'fireio'
+      notIncludeFireRT: false,
+      fireRTModuleName: 'firescript-runtime'
     })
   })
 })

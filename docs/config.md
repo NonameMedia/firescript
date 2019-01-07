@@ -9,7 +9,7 @@ Firescript config properties
 
 ### Development
 
-| Name             | Default  | Description                                 |
-| ---------------- | -------- | ------------------------------------------- |
-| fireIOModuleName | ´fireio` | Overwrite FireIO module name                |
-| noIncludeFireIO  | `false`  | Not include of FireIO in transpiled sources |
+| Name             | Default              | Description                                 |
+| ---------------- | -------------------- | ------------------------------------------- |
+| fireRTModuleName | ´firescript-runtime` | Overwrite FirescriptRuntime module name                |
+| noIncludeFireRT  | `false`              | Not include of FirescriptRuntime in transpiled sources |

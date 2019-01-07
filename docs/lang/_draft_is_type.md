@@ -19,7 +19,7 @@ if foo is str
 #### Javascript
 
 ```js
-if (FireIO.isTypeof(FireIO.TYPE_STR, foo)) {
+if (FirescriptRuntime.isTypeof(FirescriptRuntime.TYPE_STR, foo)) {
 
 }
 ```
