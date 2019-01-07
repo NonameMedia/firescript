@@ -6,10 +6,6 @@ stages:
 .test: &test
   stage: test
   script:
-   - pwd
-   - whoami
-   - ls -la .
-   - rm package-lock.json
    - npm install
    - npm run test
 
