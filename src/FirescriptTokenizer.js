@@ -6,6 +6,7 @@ class FirescriptTokenizer {
     opts = opts || {}
     this.setRange = opts.range || false
     this.setLocation = opts.loc || false
+    this.indentionSize = opts.indentionSize || 2
   }
 
   tokenize (source) {
@@ -16,7 +17,9 @@ class FirescriptTokenizer {
 
     const token = new Token(opts)
     const stack = token.next(source)
-    return new TokenStack(stack)
+    const tokenStack = new TokenStack(stack)
+    tokenStack.indentionSize = this.indentionSize
+    return tokenStack
   }
 }
 

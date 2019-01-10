@@ -7,11 +7,10 @@ class FirescriptParser {
 
     this.setLocation = conf.loc || false
     this.setRange = conf.range || false
-
+    this.indentionSize = conf.indention || 2
     this.keyWords = 'import|func|class|const|let|var|return'
     this.literalPattern = '\'[^]+?\'|\\d+'
     this.binaryOperatorPattern = /^[+*/&-]$/
-    this.indentionStr = '  '
     this.showIndex = conf.index === undefined ? true : conf.index
     this.showLines = conf.lines === undefined ? true : conf.line
     this.callStack = []
@@ -21,7 +20,8 @@ class FirescriptParser {
   tokenize (source) {
     const tokenizer = new Tokenizer({
       range: this.setRange || false,
-      loc: true
+      loc: true,
+      indentionSize: this.indentionSize
     })
 
     return tokenizer.tokenize(source)

@@ -1,0 +1,102 @@
+[
+  {
+    "type": "keyword",
+    "value": "class"
+  },
+  {
+    "type": "identifier",
+    "value": "HelloWorld"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "identifier",
+    "value": "constructor"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "msg"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 8
+  },
+  {
+    "type": "identifier",
+    "value": "this"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "greeting"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "identifier",
+    "value": "msg"
+  },
+  {
+    "type": "indention",
+    "value": 4
+  },
+  {
+    "type": "identifier",
+    "value": "print"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 8
+  },
+  {
+    "type": "keyword",
+    "value": "log"
+  },
+  {
+    "type": "template",
+    "value": "Hello ${"
+  },
+  {
+    "type": "identifier",
+    "value": "this"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "greeting"
+  },
+  {
+    "type": "template",
+    "value": "}"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

@@ -6,6 +6,7 @@ class TokenStack extends Array {
       items.forEach((item) => this.push(item))
     }
     this.index = 0
+    this.indentionSize = 2
   }
 
   next () {

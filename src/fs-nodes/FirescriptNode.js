@@ -10,7 +10,7 @@ class FirescriptNode {
     this.indention = tokenStack.getIndention(-1) || 0
     this.callStack = parent ? parent.callStack : []
     this.type = this.constructor.name
-    this.indentionSize = 2
+    this.indentionSize = tokenStack.indentionSize
     this.tokenStack = tokenStack
     this.firstToken = tokenStack.current()
   }

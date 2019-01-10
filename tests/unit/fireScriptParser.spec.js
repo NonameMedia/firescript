@@ -4,6 +4,21 @@ const FirescriptParser = require('../../src/FirescriptParser')
 const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
 
 describe('FirescriptParser', () => {
+  describe('instance', () => {
+    it('set indention size to 2 as fallback', () => {
+      const parser = new FirescriptParser()
+      inspect(parser.indentionSize).isEql(2)
+    })
+
+    it('set indention size to config value', () => {
+      const parser = new FirescriptParser({
+        indention: 4
+      })
+
+      inspect(parser.indentionSize).isEql(4)
+    })
+  })
+
   describe('parse', () => {
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
