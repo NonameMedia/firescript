@@ -3,6 +3,8 @@ Firescript config properties
 
 ## Parser
 
+`indention` Change indention size, default is `2`
+
 ## Language Features
 
 ### Language behavior
