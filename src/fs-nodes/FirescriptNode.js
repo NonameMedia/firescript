@@ -1,4 +1,5 @@
 const constants = require('../utils/constants')
+const nodeDefinitions = require('../utils/nodeDefinitions')
 
 class FirescriptNode {
   constructor (tokenStack, parent) {
@@ -149,6 +150,7 @@ class FirescriptNode {
   }
 
   syntaxError (message, token) {
+    token = token || this.tokenStack.current()
     const lineNum = token && token.loc ? token.loc.start[0] : ''
     const colNum = token && token.loc ? token.loc.start[1] : ''
     const errMessage = lineNum ? `${message} at line ${lineNum} at column ${colNum + 1}` : message
@@ -188,15 +190,25 @@ class FirescriptNode {
   createNodeItem (tokenStack) {
     const nextToken = tokenStack.current()
     if (!nextToken) {
-      return this.createNullNode(tokenStack)
+      return this.createNullNode(tokenStack, tokenStack)
     }
 
-    if (nextToken.type === 'indention') {
-      // if (tokenStack.lookForward(['line-comment', 'comment'])) {
-      //   tokenStack.goForward()
-      //   return this.createNodeItem(tokenStack)
-      // }
+    const definition = nodeDefinitions.find((mapping) => {
+      if (!mapping.test(tokenStack)) {
+        return false
+      }
 
+      return !mapping.scopes || mapping.scopes.includes(this.name)
+    })
+
+    if (definition) {
+      // console.log('DETECTED DEFINITION', definition.name)
+      return this.getNodeInstance(definition.name, tokenStack)
+    }
+
+    // -- old shit
+
+    if (nextToken.type === 'indention') {
       if (this.indention < nextToken.value) {
         const objectNode = this.tryObjectExpression(tokenStack)
         if (['AssignmentExpression'].includes(this.type)) {
@@ -219,10 +231,6 @@ class FirescriptNode {
       }
 
       return this.createNodeItem(tokenStack)
-    }
-
-    if (nextToken.type === 'comment' || nextToken.type === 'block-comment') {
-      return this.getNodeInstance('Comment', tokenStack)
     }
 
     if (nextToken.type === 'keyword') {
@@ -346,18 +354,6 @@ class FirescriptNode {
       if (constants.UNARY_OPERATORS.includes(nextToken.value)) {
         return this.getNodeInstance('UnaryExpression', tokenStack)
       }
-    }
-
-    if (nextToken.type === 'identifier') {
-      if (nextToken.value === 'this') {
-        return this.getNodeInstance('ThisExpression', tokenStack)
-      }
-
-      if (nextToken.value === 'super') {
-        return this.getNodeInstance('Super', tokenStack)
-      }
-
-      return this.getNodeInstance('Identifier', tokenStack)
     }
 
     if (nextToken.type === 'literal') {

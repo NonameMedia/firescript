@@ -20,7 +20,7 @@
     "value": "("
   },
   {
-    "type": "identifier",
+    "type": "keyword",
     "value": "async"
   },
   {

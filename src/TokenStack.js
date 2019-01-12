@@ -88,6 +88,10 @@ class TokenStack extends Array {
       : token.type === type
   }
 
+  match (type, value, offset) {
+    return this.expect(type, value, this.index + offset)
+  }
+
   lastIndention (mode, indention) {
     indention = Math.max(indention, 0)
 

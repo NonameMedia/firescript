@@ -18,7 +18,11 @@ class ClassBody extends FirescriptNode {
         break
       }
 
-      this.body.push(this.createMethodDefinitionNode(tokenStack))
+      if (tokenStack.expect('comment')) {
+        this.body.push(this.createCommentNode(tokenStack))
+      } else {
+        this.body.push(this.createMethodDefinitionNode(tokenStack))
+      }
     }
   }
 

@@ -4,7 +4,8 @@ const ALLOWED_KEYS = [
   // 'ThisExpression',
   'Identifier',
   'Literal',
-  'SpreadElement'
+  'SpreadElement',
+  'Comment'
   // 'ArrayExpression',
   // 'ObjectExpression',
   // 'FunctionExpression',
@@ -30,7 +31,8 @@ const ALLOWED_KEYS = [
 
 const ALLOWED_VALUES = [
   'FunctionExpression',
-  'Null'
+  'Null',
+  'Comment'
 ]
 
 class MethodDefinition extends FirescriptNode {

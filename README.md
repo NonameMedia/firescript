@@ -41,10 +41,11 @@ Firescript requires Node.js 8 or higher.
 Install
 -------
 
-Install firescript globaly using **npm**.  
+There are two options to install firescript. The most common option is to install it globaly using **npm**.  
+
 `npm install -g firescript`
 
-or for local usage
+We recommend to install firescript localy. This installs an executable in `./node_modules/.bin` which makes Firescript accessable for NPM. Adding `../node_modules/.bin` to yout `$PATH` in your `.bashrc` makes the Firescript CLI executable by the command `fire` from the project root.  
 
 `npm install firescript`
 

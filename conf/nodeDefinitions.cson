@@ -1,0 +1,23 @@
+nodes:
+  'block-comment':
+    name: 'Comment'
+
+  'comment':
+    name: 'Comment'
+
+  'identifier "static" > identifier > punctuator "("':
+    name: 'MethodDefinition'
+    scopes: [ 'ClassBody' ]
+
+  'identifier > punctuator "("':
+    name: 'MethodDefinition'
+    scopes: [ 'ClassBody' ]
+
+  'identifier "this"':
+    name: 'ThisExpression'
+
+  'identifier "super"':
+    name: 'Super'
+
+  'identifier':
+    name: 'Identifier'
