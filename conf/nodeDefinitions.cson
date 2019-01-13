@@ -6,12 +6,12 @@ nodes:
     name: 'Comment'
 
   'identifier "static" > identifier > punctuator "("':
-    name: 'MethodDefinition'
-    scopes: [ 'ClassBody' ]
+    scopes:
+      'ClassBody': 'MethodDefinition'
 
   'identifier > punctuator "("':
-    name: 'MethodDefinition'
-    scopes: [ 'ClassBody' ]
+    scopes:
+      'ClassBody': 'MethodDefinition'
 
   'identifier "this"':
     name: 'ThisExpression'
@@ -21,3 +21,30 @@ nodes:
 
   'identifier':
     name: 'Identifier'
+
+  'keyword "import"':
+    name: 'ImportDeclaration'
+
+  'keyword "export" > operator "**"':
+    name: 'ExportDefaultDeclaration'
+
+  'keyword "export" > operator "*"':
+    name: 'ExportAllDeclaration'
+
+  'keyword "export"':
+    name: 'ExportNamedDeclaration'
+
+  'literal':
+    name: 'Literal'
+
+  'template':
+    name: 'TemplateLiteral'
+
+  'numeric':
+    name: 'Literal'
+
+  'punctuator "..."':
+    name: 'SpreadElement'
+    scopes:
+      'FunctionDeclaration': 'RestElement'
+      'FunctionExpression': 'RestElement'

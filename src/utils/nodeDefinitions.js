@@ -28,6 +28,13 @@ function parse (definitionPattern) {
 
 const definitionMappings = Object.entries(nodeDefinitions.nodes).map(([ mapping, definition ]) => {
   return Object.assign(parse(mapping), definition)
+}).sort((a, b) => {
+  console.log(a)
+  if (a.mappings.length > b.mappings.length) {
+    return 1
+  }
+
+  return -1
 })
 
 module.exports = definitionMappings

@@ -198,11 +198,15 @@ class FirescriptNode {
         return false
       }
 
-      return !mapping.scopes || mapping.scopes.includes(this.name)
+      return (!mapping.scopes && mapping.name) || mapping.scopes[this.name] || mapping.name
     })
 
     if (definition) {
-      // console.log('DETECTED DEFINITION', definition.name)
+      // console.log('DETECTED DEFINITION', definition)
+      if (definition.scopes && definition.scopes[this.type]) {
+        return this.getNodeInstance(definition.scopes[this.type], tokenStack)
+      }
+
       return this.getNodeInstance(definition.name, tokenStack)
     }
 
@@ -234,22 +238,6 @@ class FirescriptNode {
     }
 
     if (nextToken.type === 'keyword') {
-      if (nextToken.value === 'import') {
-        return this.getNodeInstance('ImportDeclaration', tokenStack)
-      }
-
-      if (nextToken.value === 'export') {
-        if (tokenStack.lookForward('operator', '**', 1)) {
-          return this.getNodeInstance('ExportDefaultDeclaration', tokenStack)
-        }
-
-        if (tokenStack.lookForward('operator', '*', 1)) {
-          return this.getNodeInstance('ExportAllDeclaration', tokenStack)
-        }
-
-        return this.getNodeInstance('ExportNamedDeclaration', tokenStack)
-      }
-
       if (nextToken.value === 'async' && tokenStack.lookForward('punctuator', '(', 1)) {
         return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
       }
@@ -356,18 +344,6 @@ class FirescriptNode {
       }
     }
 
-    if (nextToken.type === 'literal') {
-      return this.getNodeInstance('Literal', tokenStack)
-    }
-
-    if (nextToken.type === 'template') {
-      return this.getNodeInstance('TemplateLiteral', tokenStack)
-    }
-
-    if (nextToken.type === 'numeric') {
-      return this.getNodeInstance('Literal', tokenStack)
-    }
-
     if (nextToken.type === 'punctuator') {
       if (nextToken.value === '{') {
         return this.getNodeInstance('ObjectExpression', tokenStack)
@@ -377,13 +353,13 @@ class FirescriptNode {
         return this.getNodeInstance('ArrayExpression', tokenStack)
       }
 
-      if (nextToken.value === '...') {
-        if (['FunctionDeclaration', 'FunctionExpression'].includes(this.type)) {
-          return this.getNodeInstance('RestElement', tokenStack)
-        }
-
-        return this.getNodeInstance('SpreadElement', tokenStack)
-      }
+      // if (nextToken.value === '...') {
+      //   if (['FunctionDeclaration', 'FunctionExpression'].includes(this.type)) {
+      //     return this.getNodeInstance('RestElement', tokenStack)
+      //   }
+      //
+      //   return this.getNodeInstance('SpreadElement', tokenStack)
+      // }
     }
 
     if (tokenStack.expect('punctuator', '(')) {
