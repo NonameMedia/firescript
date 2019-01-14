@@ -26,16 +26,40 @@ function parse (definitionPattern) {
   }
 }
 
-const definitionMappings = Object.entries(nodeDefinitions.nodes).map(([ mapping, definition ]) => {
-  return Object.assign(parse(mapping), definition)
-}).sort((a, b) => {
-  console.log(a)
-  if (a.mappings.length > b.mappings.length) {
-    return 1
-  }
+/**
+ * Sort definitions
+ *
+ * higher count of ">"
+ * has key + value
+ */
+function parseDefinitions (nodeDefinitions) {
+  return Object.entries(nodeDefinitions.nodes).map(([ mapping, definition ]) => {
+    return Object.assign(parse(mapping), definition)
+  }).sort((a, b) => {
+    if (a.mapping.length > b.mapping.length) {
+      return -1
+    }
 
-  return -1
-})
+    if (a.mapping.length === b.mapping.length) {
+      for (let i = 0; i < a.mapping.length; i++) {
+        if (a.mapping[i].value && !b.mapping[i].value) {
+          return -1
+        }
+
+        if (!a.mapping[i].value && b.mapping[i].value) {
+          return 1
+        }
+      }
+
+      return 0
+    }
+
+    return 1
+  })
+}
+
+const definitionMappings = parseDefinitions(nodeDefinitions)
 
 module.exports = definitionMappings
 module.exports.parse = parse
+module.exports.parseDefinitions = parseDefinitions

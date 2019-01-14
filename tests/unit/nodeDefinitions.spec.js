@@ -6,11 +6,11 @@ const NodeDefinitions = require('../../src/utils/nodeDefinitions')
 const TokenStack = require('../../src//TokenStack')
 
 describe('Node definitions', () => {
-  describe('parse()', () => {
-    it('parse definition pattern', () => {
+  describe('parseItem()', () => {
+    it('parseItem definition pattern', () => {
       const definitionPattern = 'identifier "static" > identifier > punctuator "("'
 
-      const definition = NodeDefinitions.parse(definitionPattern)
+      const definition = NodeDefinitions.parseItem(definitionPattern)
       inspect(definition).isObject()
       inspect(definition.test).isFunction()
       inspect(definition.mapping).isEql([
@@ -18,6 +18,64 @@ describe('Node definitions', () => {
         { type: 'identifier', value: undefined },
         { type: 'punctuator', value: '(' }
       ])
+    })
+  })
+
+  describe.only('parse()', () => {
+    it('return a sorted node mapping array', () => {
+      const nodeDefinitions = {
+        nodes: {
+          'identifier': { name: 'TestOne' },
+          'identifier > itentifier': { name: 'TestTwo' }
+        }
+      }
+
+      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
+      inspect(nodeMappings[0].name).isEql('TestTwo')
+      inspect(nodeMappings[1].name).isEql('TestOne')
+    })
+
+    it('it sorts key+value mappings higher', () => {
+      const nodeDefinitions = {
+        nodes: {
+          'identifier': { name: 'TestOne' },
+          'identifier "test"': { name: 'TestTwo' }
+        }
+      }
+
+      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
+      inspect(nodeMappings[0].name).isEql('TestTwo')
+      inspect(nodeMappings[1].name).isEql('TestOne')
+    })
+
+    it('it sorts nested key+value mappings higher', () => {
+      const nodeDefinitions = {
+        nodes: {
+          'identifier': { name: 'TestOne' },
+          'identifier > identifier': { name: 'TestTwo' },
+          'identifier > identifier "test"': { name: 'TestThree' }
+        }
+      }
+
+      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
+      inspect(nodeMappings[0].name).isEql('TestThree')
+      inspect(nodeMappings[1].name).isEql('TestTwo')
+      inspect(nodeMappings[2].name).isEql('TestOne')
+    })
+
+    it('it sorts nested key+value mappings higher', () => {
+      const nodeDefinitions = {
+        nodes: {
+          'identifier': { name: 'TestOne' },
+          'identifier "test" > identifier': { name: 'TestTwo' },
+          'identifier "test" > identifier "test"': { name: 'TestThree' }
+        }
+      }
+
+      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
+      inspect(nodeMappings[0].name).isEql('TestThree')
+      inspect(nodeMappings[1].name).isEql('TestTwo')
+      inspect(nodeMappings[2].name).isEql('TestOne')
     })
   })
 
