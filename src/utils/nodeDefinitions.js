@@ -49,6 +49,17 @@ function parseDefinitions (nodeDefinitions) {
         if (!a.mapping[i].value && b.mapping[i].value) {
           return 1
         }
+
+        // sort longer value up
+        if (a.mapping[i].value && b.mapping[i].value) {
+          if (a.mapping[i].value.length > b.mapping[i].value.length) {
+            return -1
+          }
+
+          if (a.mapping[i].value.length < b.mapping[i].value.length) {
+            return 1
+          }
+        }
       }
 
       return 0

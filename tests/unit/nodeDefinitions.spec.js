@@ -77,6 +77,21 @@ describe('Node definitions', () => {
       inspect(nodeMappings[1].name).isEql('TestTwo')
       inspect(nodeMappings[2].name).isEql('TestOne')
     })
+
+    it('it sorts longer values up', () => {
+      const nodeDefinitions = {
+        nodes: {
+          'identifier': { name: 'TestOne' },
+          'identifier "test" > identifier "test123"': { name: 'TestTwo' },
+          'identifier "test" > identifier "test"': { name: 'TestThree' }
+        }
+      }
+
+      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
+      inspect(nodeMappings[0].name).isEql('TestTwo')
+      inspect(nodeMappings[1].name).isEql('TestThree')
+      inspect(nodeMappings[2].name).isEql('TestOne')
+    })
   })
 
   describe('TestNode', () => {
