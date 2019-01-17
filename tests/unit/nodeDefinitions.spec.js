@@ -6,22 +6,87 @@ const NodeDefinitions = require('../../src/utils/nodeDefinitions')
 const TokenStack = require('../../src//TokenStack')
 
 describe('Node definitions', () => {
-  describe('parseItem()', () => {
-    it('parseItem definition pattern', () => {
+  describe('parse()', () => {
+    it('parse definition pattern', () => {
       const definitionPattern = 'identifier "static" > identifier > punctuator "("'
 
-      const definition = NodeDefinitions.parseItem(definitionPattern)
+      const definition = NodeDefinitions.parse(definitionPattern)
       inspect(definition).isObject()
       inspect(definition.test).isFunction()
       inspect(definition.mapping).isEql([
         { type: 'identifier', value: 'static' },
-        { type: 'identifier', value: undefined },
+        { type: 'identifier', value: null },
+        { type: 'punctuator', value: '(' }
+      ])
+    })
+
+    it('parse definition pattern with an array item', () => {
+      const definitionPattern = 'identifier [static,async] > identifier > punctuator "("'
+
+      const definition = NodeDefinitions.parse(definitionPattern)
+      inspect(definition).isObject()
+      inspect(definition.test).isFunction()
+      inspect(definition.mapping).isEql([
+        { type: 'identifier', value: ['static', 'async'] },
+        { type: 'identifier', value: null },
+        { type: 'punctuator', value: '(' }
+      ])
+    })
+
+    it('parse definition pattern with a regexp item', () => {
+      const definitionPattern = 'identifier /^(gen|func|async)$/ > identifier > punctuator "("'
+
+      const definition = NodeDefinitions.parse(definitionPattern)
+      inspect(definition).isObject()
+      inspect(definition.test).isFunction()
+      inspect(definition.mapping).isEql([
+        { type: 'identifier', value: /^(gen|func|async)$/ },
+        { type: 'identifier', value: null },
+        { type: 'punctuator', value: '(' }
+      ])
+    })
+
+    it('split not on ecaped ">" chars', () => {
+      const definitionPattern = 'identifier > identifier ">" > punctuator "("'
+
+      const definition = NodeDefinitions.parse(definitionPattern)
+      inspect(definition).isObject()
+      inspect(definition.test).isFunction()
+      inspect(definition.mapping).isEql([
+        { type: 'identifier', value: null },
+        { type: 'identifier', value: '>' },
+        { type: 'punctuator', value: '(' }
+      ])
+    })
+
+    it('split not on arrays', () => {
+      const definitionPattern = 'identifier > identifier [>] > punctuator "("'
+
+      const definition = NodeDefinitions.parse(definitionPattern)
+      inspect(definition).isObject()
+      inspect(definition.test).isFunction()
+      inspect(definition.mapping).isEql([
+        { type: 'identifier', value: null },
+        { type: 'identifier', value: ['>'] },
+        { type: 'punctuator', value: '(' }
+      ])
+    })
+
+    it('split not on regexps', () => {
+      const definitionPattern = 'identifier > identifier />/ > punctuator "("'
+
+      const definition = NodeDefinitions.parse(definitionPattern)
+      inspect(definition).isObject()
+      inspect(definition.test).isFunction()
+      inspect(definition.mapping).isEql([
+        { type: 'identifier', value: null },
+        { type: 'identifier', value: />/ },
         { type: 'punctuator', value: '(' }
       ])
     })
   })
 
-  describe.only('parse()', () => {
+  describe('parse()', () => {
     it('return a sorted node mapping array', () => {
       const nodeDefinitions = {
         nodes: {
@@ -75,21 +140,6 @@ describe('Node definitions', () => {
       const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
       inspect(nodeMappings[0].name).isEql('TestThree')
       inspect(nodeMappings[1].name).isEql('TestTwo')
-      inspect(nodeMappings[2].name).isEql('TestOne')
-    })
-
-    it('it sorts longer values up', () => {
-      const nodeDefinitions = {
-        nodes: {
-          'identifier': { name: 'TestOne' },
-          'identifier "test" > identifier "test123"': { name: 'TestTwo' },
-          'identifier "test" > identifier "test"': { name: 'TestThree' }
-        }
-      }
-
-      const nodeMappings = NodeDefinitions.parseDefinitions(nodeDefinitions)
-      inspect(nodeMappings[0].name).isEql('TestTwo')
-      inspect(nodeMappings[1].name).isEql('TestThree')
       inspect(nodeMappings[2].name).isEql('TestOne')
     })
   })

@@ -187,14 +187,15 @@ class FirescriptNode {
     return node
   }
 
-  createNodeItem (tokenStack) {
-    const nextToken = tokenStack.current()
+  getNextNodeType () {
+    const nextToken = this.tokenStack.current()
+    // this.tokenStack.print()
     if (!nextToken) {
-      return this.createNullNode(tokenStack, tokenStack)
+      return 'NullNode'
     }
 
-    const definition = nodeDefinitions.find((mapping) => {
-      if (!mapping.test(tokenStack)) {
+    const definition = nodeDefinitions.find((mapping, index) => {
+      if (!mapping.test(this.tokenStack)) {
         return false
       }
 
@@ -202,15 +203,27 @@ class FirescriptNode {
     })
 
     if (definition) {
-      // console.log('DETECTED DEFINITION', definition)
       if (definition.scopes && definition.scopes[this.type]) {
-        return this.getNodeInstance(definition.scopes[this.type], tokenStack)
+        return definition.scopes[this.type]
       }
 
-      return this.getNodeInstance(definition.name, tokenStack)
+      return definition.name
+    }
+  }
+
+  createNodeItem (tokenStack) {
+    const nodeName = this.getNextNodeType()
+
+    if (nodeName) {
+      // console.log('DETECTED DEFINITION', nodeName)
+      return this.getNodeInstance(nodeName, tokenStack)
     }
 
     // -- old shit
+    const nextToken = tokenStack.current()
+    if (!nextToken) {
+      return this.createNullNode(tokenStack)
+    }
 
     if (nextToken.type === 'indention') {
       if (this.indention < nextToken.value) {
@@ -238,128 +251,8 @@ class FirescriptNode {
     }
 
     if (nextToken.type === 'keyword') {
-      if (nextToken.value === 'async' && tokenStack.lookForward('punctuator', '(', 1)) {
-        return this.getNodeInstance('ArrowFunctionExpression', tokenStack)
-      }
-
-      if (['func', 'async', 'gen'].includes(nextToken.value)) {
-        if ([ 'VariableDeclarator', 'Property' ].includes(this.type)) {
-          return this.getNodeInstance('FunctionExpression', tokenStack)
-        }
-
-        return this.getNodeInstance('FunctionDeclaration', tokenStack)
-      }
-
-      if (nextToken.value === 'class') {
-        return this.getNodeInstance(this.isBlockScope ? 'ClassDeclaration' : 'ClassExpression', tokenStack)
-      }
-
-      if (['var', 'const', 'let'].includes(nextToken.value)) {
-        return this.getNodeInstance('VariableDeclaration', tokenStack)
-      }
-
-      if (nextToken.value === 'return') {
-        return this.getNodeInstance('ReturnStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'await') {
-        return this.getNodeInstance('AwaitExpression', tokenStack)
-      }
-
-      if (nextToken.value === 'yield') {
-        return this.getNodeInstance('YieldExpression', tokenStack)
-      }
-
-      if (nextToken.value === 'new') {
-        return this.getNodeInstance('NewExpression', tokenStack)
-      }
-
-      if (nextToken.value === 'if') {
-        return this.getNodeInstance('IfStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'break') {
-        return this.getNodeInstance('BreakStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'continue') {
-        return this.getNodeInstance('ContinueStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'switch') {
-        return this.getNodeInstance('SwitchStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'while') {
-        return this.getNodeInstance('WhileStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'throw') {
-        return this.getNodeInstance('ThrowStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'try') {
-        return this.getNodeInstance('TryStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'do') {
-        return this.getNodeInstance('DoWhileStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'debugger') {
-        return this.getNodeInstance('DebuggerStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'for') {
-        if (tokenStack.lookForward('identifier', 'in', 2)) {
-          return this.getNodeInstance('ForInStatement', tokenStack)
-        }
-
-        if (tokenStack.lookForward('identifier', 'of', 2)) {
-          return this.getNodeInstance('ForOfStatement', tokenStack)
-        }
-
-        return this.getNodeInstance('ForStatement', tokenStack)
-      }
-
-      if (nextToken.value === 'log') {
-        return this.getNodeInstance('FirescriptLogStatement', tokenStack)
-      }
-
       tokenStack.print()
       this.syntaxError('Unknown keyword!', nextToken)
-    }
-
-    if (nextToken.type === 'operator') {
-      if (constants.UPDATE_OPERATORS.includes(nextToken.value)) {
-        return this.getNodeInstance('UpdateExpression', tokenStack)
-      }
-
-      if (constants.BINARY_OPERATORS.includes(nextToken.value)) {
-        return this.getNodeInstance('BinaryExpression', tokenStack)
-      }
-
-      if (constants.UNARY_OPERATORS.includes(nextToken.value)) {
-        return this.getNodeInstance('UnaryExpression', tokenStack)
-      }
-    }
-
-    if (nextToken.type === 'punctuator') {
-      if (nextToken.value === '{') {
-        return this.getNodeInstance('ObjectExpression', tokenStack)
-      }
-
-      if (nextToken.value === '[') {
-        return this.getNodeInstance('ArrayExpression', tokenStack)
-      }
-
-      // if (nextToken.value === '...') {
-      //   if (['FunctionDeclaration', 'FunctionExpression'].includes(this.type)) {
-      //     return this.getNodeInstance('RestElement', tokenStack)
-      //   }
-      //
-      //   return this.getNodeInstance('SpreadElement', tokenStack)
-      // }
     }
 
     if (tokenStack.expect('punctuator', '(')) {

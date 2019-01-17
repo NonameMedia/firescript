@@ -36,7 +36,6 @@ ConditionalExpression:
 ClassDeclaration:
 ClassExpression:
 ClassBody:
-Super:
 MethodDefinition:
 IfStatement:
 WhileStatement:

@@ -6,13 +6,61 @@ const nodeDefinitions = superconf('nodeDefinitions', {
 })
 
 function parse (definitionPattern) {
-  const patterns = definitionPattern.split(/>/g)
+  // const patterns = definitionPattern.split(/(?<!(".+"))>/g)
+  let startIndex = 0
+  const len = definitionPattern.length
+  const patterns = []
+  let goTo = null
+
+  for (let i = 0; i < len; i++) {
+    if (goTo) {
+      if (definitionPattern.charAt(i) === goTo) {
+        goTo = null
+      }
+
+      continue
+    }
+
+    if (definitionPattern.charAt(i) === '>') {
+      patterns.push(definitionPattern.slice(startIndex, i - 1).trim())
+      startIndex = i + 1
+    }
+
+    if (definitionPattern.charAt(i) === '\\') {
+      continue
+    }
+
+    if (definitionPattern.charAt(i) === '"') {
+      goTo = '"'
+      continue
+    }
+
+    if (definitionPattern.charAt(i) === '/') {
+      goTo = '/'
+      continue
+    }
+
+    if (definitionPattern.charAt(i) === '[') {
+      goTo = ']'
+      continue
+    }
+  }
+
+  if (startIndex < len) {
+    patterns.push(definitionPattern.slice(startIndex))
+  }
 
   const mapping = patterns.map((pat) => {
-    const nodeDefinition = pat.trim().match(/([a-z-]+)(?:\s+"(.+?)")?/)
+    const nodeDefinition = pat.trim().match(/([a-z-]+)(?:\s+(?:"(.+?)"|\[(.+?)\]|\/(.+)\/))?/)
+    // console.log('NDD', nodeDefinition)
+    const value = nodeDefinition[2]
+      ? nodeDefinition[2] : nodeDefinition[3]
+        ? nodeDefinition[3].split(/,/g) : nodeDefinition[4]
+          ? new RegExp(nodeDefinition[4]) : null
+
     return {
       type: nodeDefinition[1],
-      value: nodeDefinition[2]
+      value: value
     }
   })
 
@@ -21,7 +69,7 @@ function parse (definitionPattern) {
   return {
     mapping: mapping,
     test: (tokenStack) => mapping.every((definition, offset) => {
-      return tokenStack.expect(definition.type, definition.value, offset)
+      return tokenStack.match(definition.type, definition.value || definition.valueReg, offset)
     })
   }
 }

@@ -3,6 +3,46 @@ const TokenStack = require('../../src/TokenStack')
 const FirescriptNode = require('../../src/fs-nodes/FirescriptNode')
 
 describe('FirescriptNode', () => {
+  describe('getNextNodeType()', () => {
+    it('detects an ExportDefaultDeclaration', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'export' },
+        { 'type': 'operator', 'value': '**' },
+        { 'type': 'identifier', 'value': 'foo' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const definition = firescriptNode.getNextNodeType()
+      inspect(definition).isEql('ExportDefaultDeclaration')
+    })
+
+    it('detects an ExportAllDeclaration', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'export' },
+        { 'type': 'operator', 'value': '*' },
+        { 'type': 'identifier', 'value': 'foo' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const definition = firescriptNode.getNextNodeType()
+      inspect(definition).isEql('ExportAllDeclaration')
+    })
+
+    it('detects an ExportNamedDeclaration', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'keyword', 'value': 'export' },
+        { 'type': 'identifier', 'value': 'foo' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const definition = firescriptNode.getNextNodeType()
+      inspect(definition).isEql('ExportNamedDeclaration')
+    })
+  })
+
   describe('createNodeItem()', () => {
     it('creates a identifier node', () => {
       const tokenStack = new TokenStack([

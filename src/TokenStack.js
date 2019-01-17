@@ -79,6 +79,8 @@ class TokenStack extends Array {
 
     if (value && Array.isArray(value)) {
       return value.indexOf(token.value) >= 0
+    } else if (value && value instanceof RegExp) {
+      return value.test(token.value)
     } else if (value && token.value !== value) {
       return false
     }
