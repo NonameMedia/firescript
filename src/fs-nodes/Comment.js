@@ -15,7 +15,8 @@ class Comment extends FirescriptNode {
 
   toJSON () {
     return {
-      type: this.commentType,
+      type: 'Comment',
+      commentType: this.commentType,
       value: this.value
     }
   }

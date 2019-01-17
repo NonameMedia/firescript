@@ -6,7 +6,8 @@ const ALLOWED_VALUE_NODES = [
   'ObjectPattern',
   'ArrowFunctionExpression', 'FunctionExpression', 'null',
   'Literal', 'ArrayExpression', 'ObjectExpression',
-  'TemplateLiteral', 'CallExpression', 'MemberExpression', 'LogicalExpression', 'ConditionalExpression'
+  'TemplateLiteral', 'CallExpression', 'MemberExpression', 'LogicalExpression',
+  'BinaryExpression', 'ConditionalExpression'
 ]
 
 /**

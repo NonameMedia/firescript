@@ -18,6 +18,7 @@ const ALLOWED_VALUES = [
   'MemberExpression',
   'LogicalExpression',
   'ConditionalExpression',
+  'BinaryExpression',
   'null'
 ]
 

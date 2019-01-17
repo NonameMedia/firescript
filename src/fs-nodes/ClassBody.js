@@ -11,18 +11,35 @@ class ClassBody extends FirescriptNode {
     }
 
     const token = tokenStack.next()
-    const indention = token.value
+    this.indention = token.value
 
     while (true) {
-      if (tokenStack.lastIndention('lte', indention - this.indentionSize, tokenStack.getIndention())) {
+      if (this.isOutdented()) {
         break
       }
 
-      if (tokenStack.expect('comment')) {
-        this.body.push(this.createCommentNode(tokenStack))
-      } else {
-        this.body.push(this.createMethodDefinitionNode(tokenStack))
+      if (tokenStack.isIndention('lt', this.indention)) {
+        break
       }
+
+      if (tokenStack.isIndention('gte', this.indention)) {
+        tokenStack.goForward()
+        continue
+      }
+
+      tokenStack.print()
+      const node = this.createNodeItem(tokenStack)
+      if (!node) {
+        break
+      }
+
+      this.isAllowedNode(node, [
+        'Comment',
+        'MethodDefinition'
+      ])
+
+      console.log('NEXT NODE', node.type)
+      this.body.push(node)
     }
   }
 
