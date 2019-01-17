@@ -12,7 +12,7 @@ class Token {
       indention: `\\n\\s*`,
       comment: constants.COMMENT_PATTERN,
       blockComment: constants.BLOCK_COMMENT_PATTERN,
-      keyword: `?:\\b(${constants.KEYWORDS.join('|')})\\b`,
+      keyword: `?:\\b(${constants.KEYWORDS.join('|')})(?!:)\\b`,
       regexp: constants.REGEXP_PATTERN,
       operator: `${constants.OPERATORS.map(SuperReg.escape).join('|')}`,
       punctuator: `${constants.PUNCTUATORS.map(SuperReg.escape).join('|')}`,
