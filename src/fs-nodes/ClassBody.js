@@ -27,7 +27,6 @@ class ClassBody extends FirescriptNode {
         continue
       }
 
-      tokenStack.print()
       const node = this.createNodeItem(tokenStack)
       if (!node) {
         break
@@ -38,7 +37,6 @@ class ClassBody extends FirescriptNode {
         'MethodDefinition'
       ])
 
-      console.log('NEXT NODE', node.type)
       this.body.push(node)
     }
   }

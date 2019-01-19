@@ -199,7 +199,6 @@ class FirescriptNode {
         return false
       }
 
-      console.log('CUR SCOPE NAME', this.type)
       return (!mapping.scopes && mapping.name) || mapping.scopes[this.type] || mapping.name
     })
 
