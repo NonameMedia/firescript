@@ -1,0 +1,38 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "obj"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "keyword",
+    "value": "new"
+  },
+  {
+    "type": "identifier",
+    "value": "Foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "Bar"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  }
+]

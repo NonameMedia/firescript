@@ -4,6 +4,7 @@ const ALLOWED_ELEMENTS = [
   'ThisExpression',
   'Identifier',
   'Literal',
+  'TemplateLiteral',
   'ArrayExpression',
   'ObjectExpression',
   'FunctionExpression',

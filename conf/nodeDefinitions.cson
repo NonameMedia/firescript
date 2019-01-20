@@ -22,6 +22,14 @@ nodes:
   'identifier':
     name: 'Identifier'
 
+  'identifier "this" > punctuator "."':
+    scopes:
+      'NewExpression': 'MemberExpression'
+
+  'identifier > punctuator "."':
+    scopes:
+      'NewExpression': 'MemberExpression'
+
   'keyword "import"':
     name: 'ImportDeclaration'
 
@@ -36,6 +44,18 @@ nodes:
 
   'keyword "async" > punctuator "("':
      name: 'ArrowFunctionExpression'
+
+  'keyword "async" > identifier':
+    scopes:
+      'ClassBody': 'MethodDefinition'
+
+  'identifier [get,set] > identifier':
+    scopes:
+      'ClassBody': 'MethodDefinition'
+
+  'identifier "static" > keyword "async" > identifier':
+    scopes:
+      'ClassBody': 'MethodDefinition'
 
   'keyword [func,async,gen]':
     scopes:

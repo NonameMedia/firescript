@@ -30,7 +30,7 @@ class MemberExpression extends FirescriptNode {
   constructor (tokenStack, parent, object) {
     super(tokenStack, parent)
 
-    this.object = object || this.createIdentifierNode(tokenStack)
+    this.object = object || this.createNodeItem(tokenStack)
     this.computed = false
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
 

@@ -9,14 +9,13 @@ class Comment extends FirescriptNode {
     }
 
     const token = tokenStack.next()
-    this.commentType = token.type === 'comment' ? 'Line' : 'Block'
+    this.commentType = token.type === 'comment' ? 'line' : 'block'
     this.value = token.value
   }
 
   toJSON () {
     return {
-      type: 'Comment',
-      commentType: this.commentType,
+      type: this.commentType === 'line' ? 'Line' : 'Block',
       value: this.value
     }
   }

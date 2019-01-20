@@ -19,16 +19,17 @@ class ClassBody extends FirescriptNode {
       }
 
       if (tokenStack.isIndention('lt', this.indention)) {
+        tokenStack.goForward()
         break
       }
 
-      if (tokenStack.isIndention('gte', this.indention)) {
+      if (tokenStack.isIndention('gt', this.indention)) {
         tokenStack.goForward()
         continue
       }
 
       const node = this.createNodeItem(tokenStack)
-      if (!node) {
+      if (!node || node.type === 'Null') {
         break
       }
 

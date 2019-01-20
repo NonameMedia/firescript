@@ -36,7 +36,7 @@ class NewExpression extends FirescriptNode {
 
     tokenStack.goForward()
 
-    this.callee = this.createIdentifierNode(tokenStack)
+    this.callee = this.createNodeItem(tokenStack)
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES, tokenStack.current())
     this.arguments = []
 

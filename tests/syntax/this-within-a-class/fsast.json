@@ -1,5 +1,6 @@
 {
   "type": "Program",
+  "sourceType": "module",
   "body": [
     {
       "type": "ClassDeclaration",
@@ -7,7 +8,6 @@
         "type": "Identifier",
         "name": "Foo"
       },
-      "superClass": null,
       "body": {
         "type": "ClassBody",
         "body": [
@@ -44,16 +44,16 @@
                       },
                       "right": {
                         "type": "Literal",
-                        "value": "Foo",
-                        "raw": "'Foo'"
+                        "raw": "'Foo'",
+                        "value": "Foo"
                       }
                     }
                   }
                 ]
               },
-              "generator": false,
+              "async": false,
               "expression": false,
-              "async": false
+              "generator": false
             },
             "kind": "constructor",
             "static": false,
@@ -90,17 +90,17 @@
                   }
                 ]
               },
-              "generator": false,
+              "async": false,
               "expression": false,
-              "async": false
+              "generator": false
             },
             "kind": "method",
             "static": false,
             "async": false
           }
         ]
-      }
+      },
+      "superClass": null
     }
-  ],
-  "sourceType": "module"
+  ]
 }

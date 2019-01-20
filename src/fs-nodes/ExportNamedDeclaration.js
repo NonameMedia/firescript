@@ -35,7 +35,7 @@ class ExportNamedDeclaration extends FirescriptNode {
     tokenStack.goForward()
     this.specifiers = []
 
-    if (tokenStack.expect('keyword', ['class', 'func', 'var', 'let', 'const'])) {
+    if (tokenStack.expect('keyword', ['class', 'async', 'func', 'var', 'let', 'const'])) {
       this.declaration = this.createFullNode(tokenStack)
       this.isAllowedNode(this.declaration, ALLOWED_DECLARATIONS)
     } else {
