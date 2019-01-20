@@ -70,6 +70,11 @@ class CallExpression extends FirescriptNode {
     tokenStack.goForward()
 
     while (true) {
+      if (tokenStack.isIndention('gte', this.indention)) {
+        tokenStack.goForward()
+        continue
+      }
+
       if (tokenStack.expect('punctuator', ')')) {
         tokenStack.goForward()
         break
@@ -81,6 +86,11 @@ class CallExpression extends FirescriptNode {
       }
 
       const node = this.createFullNode(tokenStack)
+      if (node.type === 'Comment') {
+        // TODO implement -> this.addComment(node)
+        continue
+      }
+
       this.isAllowedNode(node, ALLOWED_ARGUMENT_TYPES, tokenStack.current())
       this.arguments.push(node)
     }

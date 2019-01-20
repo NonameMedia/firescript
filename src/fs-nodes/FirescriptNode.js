@@ -258,31 +258,41 @@ class FirescriptNode {
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
 
-      const nodeList = []
-      while (true) {
-        if (tokenStack.expect('punctuator', ')')) {
-          tokenStack.goForward()
-
-          if (tokenStack.expect('operator', '=>')) {
-            return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
-          }
-
-          return nodeList.length === 0 ? null : nodeList[0]
-        }
-
-        if (tokenStack.expect('punctuator', ',')) {
-          tokenStack.goForward()
-          continue
-        }
-
-        nodeList.push(this.createFullNode(tokenStack))
-        // this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
+      const subNode = this.parseSubNode(tokenStack)
+      if (subNode) {
+        return subNode
       }
+
+      tokenStack.print()
+      this.syntaxError('Unexpected token, could not create node item!', nextToken)
     }
 
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
       tokenStack.print()
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
+    }
+  }
+
+  parseSubNode (tokenStack) {
+    const nodeList = []
+    while (true) {
+      if (tokenStack.expect('punctuator', ')')) {
+        tokenStack.goForward()
+
+        if (tokenStack.expect('operator', '=>')) {
+          return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
+        }
+
+        return nodeList.length === 0 ? null : nodeList[0]
+      }
+
+      if (tokenStack.expect('punctuator', ',')) {
+        tokenStack.goForward()
+        continue
+      }
+
+      nodeList.push(this.createFullNode(tokenStack))
+      // this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
     }
   }
 
