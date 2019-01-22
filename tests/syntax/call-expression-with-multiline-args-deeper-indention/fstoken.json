@@ -9,7 +9,7 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 4
   },
   {
     "type": "literal",
@@ -17,35 +17,11 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 4
   },
   {
     "type": "literal",
     "value": "'blub'"
-  },
-  {
-    "type": "indention",
-    "value": 2
-  },
-  {
-    "type": "comment",
-    "value": " comment between"
-  },
-  {
-    "type": "indention",
-    "value": 2
-  },
-  {
-    "type": "punctuator",
-    "value": "("
-  },
-  {
-    "type": "punctuator",
-    "value": ")"
-  },
-  {
-    "type": "operator",
-    "value": "=>"
   },
   {
     "type": "indention",

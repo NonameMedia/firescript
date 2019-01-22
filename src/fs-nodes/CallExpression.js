@@ -67,24 +67,7 @@ class CallExpression extends FirescriptNode {
       this.syntaxError('Unexpected token', tokenStack.current())
     }
 
-    tokenStack.goForward()
-
-    while (true) {
-      if (tokenStack.isIndention('gte', this.indention)) {
-        tokenStack.goForward()
-        continue
-      }
-
-      if (tokenStack.expect('punctuator', ')')) {
-        tokenStack.goForward()
-        break
-      }
-
-      if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.goForward()
-        continue
-      }
-
+    for (const scope of this.walkScope()) { // eslint-disable-line no-unused-vars
       const node = this.createFullNode(tokenStack)
       if (node.type === 'Comment') {
         // TODO implement -> this.addComment(node)
