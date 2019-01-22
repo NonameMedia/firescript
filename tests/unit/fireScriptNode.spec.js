@@ -301,4 +301,248 @@ describe('FirescriptNode', () => {
       })
     })
   })
+
+  describe('walkScope()', () => {
+    it('walk through a block scope', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope, exit if indention is to low', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('throws an indention error if indention is higher', () => {
+      const tokenStack = new TokenStack([
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 6 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+
+      try {
+        for (const scope of firescriptNode.walkScope()) {
+          res.push(scope.next())
+        }
+
+        inspect.fail('Should fail, but test passed!')
+      } catch (err) {
+        inspect(err).isInstanceOf(Error)
+        inspect(err.message).doesContain('Indention error')
+      }
+    })
+
+    it('walk through a block scope enclosed by `{}`', () => {
+      // const foo = {
+      //   banana: 'banana'
+      //   apple: 'apple'
+      // }
+
+      const tokenStack = new TokenStack([
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': '}' }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope enclosed by `[]`', () => {
+      // const foo = [
+      //   'banana'
+      //   'apple'
+      // ]
+
+      const tokenStack = new TokenStack([
+        { 'type': 'punctuator', 'value': '[' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': ']' }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope enclosed by `()`', () => {
+      // foo(
+      //   'banana'
+      //   'apple'
+      // )
+
+      const tokenStack = new TokenStack([
+        { 'type': 'punctuator', 'value': '(' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': ')' }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a multiline block scope enclosed by `{}`', () => {
+      // const foo = { banana: 'banana', coconut: 'coconute'
+      //               apple: 'apple', pear: 'pear' }
+
+      const tokenStack = new TokenStack([
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'pear' },
+        { 'type': 'punctuator', 'value': '}' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' },
+        { type: 'identifier', value: 'pear' }
+      ])
+    })
+
+    it('support trailing commas in a block scope', () => {
+      // const foo = { banana: 'banana', coconut: 'coconute',
+      //               apple: 'apple', pear: 'pear' }
+
+      const tokenStack = new TokenStack([
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'pear' },
+        { 'type': 'punctuator', 'value': '}' },
+        { 'type': 'indention', 'value': 2 }
+      ])
+
+      const firescriptNode = new FirescriptNode(tokenStack)
+      const res = []
+      for (const scope of firescriptNode.walkScope()) {
+        res.push(scope.next())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' },
+        { type: 'identifier', value: 'pear' }
+      ])
+    })
+  })
 })

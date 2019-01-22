@@ -80,11 +80,34 @@ This exmaple shows a complex object structure with different data types
 const obj =
   foo:
     bar: 'Bar'
-    bla: []
+    bla: [
       'bli'
       'bla'
       'blu'
-      blobber: 'blubber'
+      {
+        blobber: 'blubber'
+      }
+    ]
+    blobber: true
+```
+
+```fire
+const obj =
+  foo:
+    bar: 'Bar'
+    bla: [
+      'bli'
+      'bla'
+      'blu'
+      {
+        foo: 'foo'
+        bar: 'bar'
+      }
+      {
+        foo: 'foo'
+        bar: 'bar'
+      }
+    ]
     blobber: true
 ```
 
@@ -101,7 +124,11 @@ const obj = {
       'bla',
       'blu',
       {
-        blobber: 'blubber'
+        foo: 'foo'
+        bar: 'bar'
+      }, {
+        foo: 'foo'
+        bar: 'bar'
       }
     ],
     {

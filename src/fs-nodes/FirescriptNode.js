@@ -258,41 +258,31 @@ class FirescriptNode {
     if (tokenStack.expect('punctuator', '(')) {
       tokenStack.goForward()
 
-      const subNode = this.parseSubNode(tokenStack)
-      if (subNode) {
-        return subNode
-      }
+      const nodeList = []
+      while (true) {
+        if (tokenStack.expect('punctuator', ')')) {
+          tokenStack.goForward()
 
-      tokenStack.print()
-      this.syntaxError('Unexpected token, could not create node item!', nextToken)
+          if (tokenStack.expect('operator', '=>')) {
+            return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
+          }
+
+          return nodeList.length === 0 ? null : nodeList[0]
+        }
+
+        if (tokenStack.expect('punctuator', ',')) {
+          tokenStack.goForward()
+          continue
+        }
+
+        nodeList.push(this.createFullNode(tokenStack))
+        // this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
+      }
     }
 
     if (nextToken.type === 'punctuator' || nextToken.type === 'operator') {
       tokenStack.print()
       this.syntaxError('Unexpected token, could not create node item!', nextToken)
-    }
-  }
-
-  parseSubNode (tokenStack) {
-    const nodeList = []
-    while (true) {
-      if (tokenStack.expect('punctuator', ')')) {
-        tokenStack.goForward()
-
-        if (tokenStack.expect('operator', '=>')) {
-          return this.getNodeInstance('ArrowFunctionExpression', tokenStack, nodeList)
-        }
-
-        return nodeList.length === 0 ? null : nodeList[0]
-      }
-
-      if (tokenStack.expect('punctuator', ',')) {
-        tokenStack.goForward()
-        continue
-      }
-
-      nodeList.push(this.createFullNode(tokenStack))
-      // this.syntaxError('Unexpected token, could not resolve grouping syntax!', nextToken)
     }
   }
 
@@ -494,6 +484,78 @@ class FirescriptNode {
     }
 
     return obj
+  }
+
+  walkScope () {
+    let scopeIndention = this.indention
+    let scopeEnd = null
+
+    if (this.tokenStack.expect('punctuator', [ '{', '[', '(' ])) {
+      const token = this.tokenStack.next()
+      scopeEnd = constants.SCOPE_DELIMITER[token.value]
+      scopeIndention = null
+    }
+
+    if (this.tokenStack.expect('indention')) {
+      const token = this.tokenStack.next()
+      scopeIndention = token.value
+    }
+
+    // console.log('INITIAL INDENTION', scopeIndention)
+
+    return {
+      [ Symbol.iterator ]: () => {
+        return {
+          next: () => {
+            if (this.tokenStack.expect('indention')) {
+              const token = this.tokenStack.current()
+              if (scopeIndention === null) {
+                scopeIndention = token.value
+              }
+
+              if (token.value === scopeIndention) {
+                this.tokenStack.goForward()
+                return { done: false, value: this.tokenStack }
+              }
+
+              if (!scopeEnd && token.value > scopeIndention) {
+                this.syntaxError('Indention error!')
+              }
+
+              if (scopeEnd) {
+                this.tokenStack.goForward()
+                if (this.tokenStack.expect('punctuator', scopeEnd)) {
+                  this.tokenStack.goForward()
+                } else {
+                  this.tokenStack.print()
+                  this.syntaxError('Unexpected scope end or invalid indention!')
+                }
+              }
+
+              return { done: true, value: this.tokenStack }
+            } else if (scopeEnd && this.tokenStack.expect('punctuator', ',')) {
+              this.tokenStack.goForward()
+              if (this.tokenStack.expect('indention')) {
+                const token = this.tokenStack.current()
+                if (scopeIndention === null) {
+                  scopeIndention = token.value
+                  this.tokenStack.goForward()
+                } else if (token.value === scopeIndention) {
+                  this.tokenStack.goForward()
+                } else {
+                  this.syntaxError('Indention error!')
+                }
+              }
+            } else if (scopeEnd && this.tokenStack.expect('punctuator', scopeEnd)) {
+              this.tokenStack.goForward()
+              return { done: true, value: this.tokenStack }
+            }
+
+            return { done: this.tokenStack.lastItem(), value: this.tokenStack }
+          }
+        }
+      }
+    }
   }
 }
 

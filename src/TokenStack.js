@@ -168,6 +168,10 @@ class TokenStack extends Array {
       console.log(`${arrow}| ${item.type} ${item.value}`)
     })
   }
+
+  lastItem () {
+    return this.index >= this.length - 1
+  }
 }
 
 module.exports = TokenStack
