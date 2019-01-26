@@ -121,6 +121,8 @@ nodes:
     name: 'ForStatement'
 
   'keyword "log"':
+    scopes:
+      'ClassBody': 'MethodDefinition'
     name: 'FirescriptLogStatement'
 
   'literal':

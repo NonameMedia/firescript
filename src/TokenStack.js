@@ -172,6 +172,10 @@ class TokenStack extends Array {
   lastItem () {
     return this.index >= this.length - 1
   }
+
+  changeType (type) {
+    this[this.index].type = type
+  }
 }
 
 module.exports = TokenStack

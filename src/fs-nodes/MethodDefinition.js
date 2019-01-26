@@ -58,6 +58,10 @@ class MethodDefinition extends FirescriptNode {
       this.kind = next.value
     }
 
+    if (tokenStack.expect('keyword', ['log'])) {
+      tokenStack.changeType('identifier')
+    }
+
     this.key = this.createNodeItem(tokenStack)
     if (this.key.type === 'Identifier' && this.key.name === 'constructor') {
       this.kind = 'constructor'
