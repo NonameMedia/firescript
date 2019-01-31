@@ -1,0 +1,30 @@
+[
+  {
+    "type": "keyword",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "obj"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "log"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "literal",
+    "value": "'log'"
+  }
+]
