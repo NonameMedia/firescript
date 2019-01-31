@@ -26,5 +26,9 @@
   {
     "type": "literal",
     "value": "'log'"
+  },
+  {
+    "type": "indention",
+    "value": 0
   }
 ]
