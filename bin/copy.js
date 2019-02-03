@@ -20,7 +20,8 @@ async function copy () {
     filter: projectFiles,
     recursive: true,
     ignore: [
-      'node_modules'
+      'node_modules',
+      '.git'
     ]
   }) : []
 
@@ -29,7 +30,8 @@ async function copy () {
     filter: conf.copy.filter(f => f.startsWith('$ROOT/')).map(f => f.substr(6)),
     recursive: true,
     ignore: [
-      'node_modules'
+      'node_modules',
+      '.git'
     ]
   })
 
