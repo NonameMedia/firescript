@@ -14,6 +14,11 @@ class FirescriptNode {
     this.indentionSize = tokenStack.indentionSize
     this.tokenStack = tokenStack
     this.firstToken = tokenStack.current()
+    if (parent) {
+      parent.lastToken = tokenStack.previous()
+    } else {
+      this.lastToken = tokenStack.current()
+    }
   }
 
   createVariableDeclaratorNode (tokenStack) {
@@ -489,11 +494,14 @@ class FirescriptNode {
     }
 
     if (ctx.setLocation) {
-      obj.loc = this.firstToken.loc
+      obj.loc = {
+        start: this.firstToken.loc.start,
+        end: this.firstToken.loc.end
+      }
     }
 
     if (ctx.setRange) {
-      obj.range = this.firstToken.range
+      obj.range = [this.firstToken.range[0], this.lastToken.range[1]]
     }
 
     return obj

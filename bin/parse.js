@@ -16,8 +16,8 @@ module.exports = (fireio) => {
         const ast = Firescript.parse(fsSource, {
           type: 'fire',
           includeComments: ctx.comments,
-          loc: !!ctx.location,
-          range: !!ctx.range
+          setLocation: !!ctx.location,
+          setRange: !!ctx.range
         })
 
         const source = JSON.stringify(ast, null, '  ')
@@ -30,7 +30,9 @@ module.exports = (fireio) => {
       } else if (path.extname(file) === '.js') {
         const ast = Firescript.parse(fsSource, {
           type: 'js',
-          includeComments: ctx.comments
+          includeComments: ctx.comments,
+          setLocation: !!ctx.location,
+          setRange: !!ctx.range
         })
 
         const source = JSON.stringify(ast, null, '  ')

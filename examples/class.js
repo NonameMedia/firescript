@@ -1,0 +1,12 @@
+// simple class example
+class Banana {
+  constructor () {
+    // set color
+    this.color = 'yellow';
+  }
+
+  getColor () {
+    /* retunr the shit */
+    return this.color;
+  }
+}

@@ -8,8 +8,8 @@ class FirescriptParser {
 
     console.log('PRS', conf)
 
-    this.setLocation = conf.loc || false
-    this.setRange = conf.range || false
+    this.setLocation = conf.setLocation || false
+    this.setRange = conf.setRange || false
     this.indentionSize = conf.indention || 2
     this.keyWords = 'import|func|class|const|let|var|return'
     this.literalPattern = '\'[^]+?\'|\\d+'
