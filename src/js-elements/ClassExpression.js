@@ -25,6 +25,7 @@ class ClassExpression extends JSElement {
   toESString (ctx) {
     const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
 
+    const item = ctx.registerItem(this)
     return this.renderElement(
       'class ' +
       this.id.toESString(ctx) +

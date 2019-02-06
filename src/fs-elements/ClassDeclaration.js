@@ -25,12 +25,16 @@ class ClassDeclaration extends FirescriptElement {
   toFSString (ctx) {
     const superClass = this.superClass ? ' extends ' + this.superClass.toFSString(ctx) : ''
 
-    return this.renderElement(
+    // const item = ctx.createItem(this)
+    const str = this.renderElement(
       'class ' +
       this.id.toFSString(ctx) +
       superClass +
       this.body.toFSString(ctx)
     )
+
+    // item.setLen(str.length)
+    return str
   }
 }
 

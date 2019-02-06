@@ -1,0 +1,7 @@
+func makeError()
+  const banana = 'yellow'
+
+  throw new Error('BananaError')
+
+# call error
+makeError()

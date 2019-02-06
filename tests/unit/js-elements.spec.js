@@ -31,4 +31,15 @@ describe('JSElements', () => {
       }
     })
   })
+
+  describe.only('renderStack', () => {
+    it('has a render stack', () => {
+      const ast = require(`${TEST_CASE_DIR}/class-declaration/ast.json`)
+      const ctx = new RenderContext()
+      const Element = require(`../../src/js-elements/${ast.type}`)
+      const jse = new Element(ast)
+      const res = jse.toESString(ctx)
+      console.log(ctx.renderStack)
+    })
+  })
 })

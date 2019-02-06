@@ -1,9 +1,12 @@
 const Tokenizer = require('./FirescriptTokenizer')
 const Program = require('./fs-nodes/Program')
+const ParserContext = require('./ParserContext')
 
 class FirescriptParser {
   constructor (conf) {
     conf = conf || {}
+
+    console.log('PRS', conf)
 
     this.setLocation = conf.loc || false
     this.setRange = conf.range || false
@@ -33,7 +36,12 @@ class FirescriptParser {
 
     try {
       const ast = new Program(token, null, this.sourceType)
-      return ast.toJSON()
+      const ctx = new ParserContext({
+        setLocation: this.setLocation,
+        setRange: this.setRange
+      })
+
+      return ast.toJSON(ctx)
     } catch (err) {
       if (!err.token) {
         throw err

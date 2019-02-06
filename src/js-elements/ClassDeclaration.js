@@ -25,13 +25,17 @@ class ClassDeclaration extends JSElement {
   toESString (ctx) {
     const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
 
-    return this.renderElement(
+    const item = ctx.registerItem(this)
+    const str = this.renderElement(
       'class ' +
       this.id.toESString(ctx) +
       superClass +
       ' ' +
       this.body.toESString(ctx)
     )
+
+    item.setLen(str.length)
+    return str
   }
 }
 

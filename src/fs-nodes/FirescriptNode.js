@@ -470,17 +470,30 @@ class FirescriptNode {
     }
   }
 
-  createJSON (obj) {
+  createJSON (ctx, obj) {
+    if (!obj) {
+      obj = ctx
+      ctx = {}
+    }
+
     if (this.trailingComments) {
-      obj.trailingComments = this.trailingComments.map((item) => item.toJSON())
+      obj.trailingComments = this.trailingComments.map((item) => item.toJSON(ctx))
     }
 
     if (this.leadingComments) {
-      obj.leadingComments = this.leadingComments.map((item) => item.toJSON())
+      obj.leadingComments = this.leadingComments.map((item) => item.toJSON(ctx))
     }
 
     if (this.innerComments) {
-      obj.innerComments = this.innerComments.map((item) => item.toJSON())
+      obj.innerComments = this.innerComments.map((item) => item.toJSON(ctx))
+    }
+
+    if (ctx.setLocation) {
+      obj.loc = this.firstToken.loc
+    }
+
+    if (ctx.setRange) {
+      obj.range = this.firstToken.range
     }
 
     return obj
