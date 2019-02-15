@@ -77,6 +77,8 @@ class Program extends FirescriptNode {
         ? this.innerComments = comments.splice(0, Infinity)
         : this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
+
+    this.tearDown()
   }
 
   toJSON (ctx) {

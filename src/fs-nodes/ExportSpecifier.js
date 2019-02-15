@@ -26,11 +26,11 @@ class ExportSpecifier extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ExportSpecifier',
-      local: this.local.toJSON(),
-      exported: this.exported.toJSON()
+      local: this.local.toJSON(ctx),
+      exported: this.exported.toJSON(ctx)
     })
   }
 }

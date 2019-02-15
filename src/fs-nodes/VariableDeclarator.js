@@ -71,12 +71,12 @@ class VariableDeclarator extends FirescriptNode {
       tokenStack.lookForward('punctuator', ':', 2)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'VariableDeclarator',
-      id: this.id.toJSON(),
-      init: this.init ? this.init.toJSON() : null,
-      fsTyping: this.fsTyping ? this.fsTyping.toJSON() : null
+      id: this.id.toJSON(ctx),
+      init: this.init ? this.init.toJSON(ctx) : null,
+      fsTyping: this.fsTyping ? this.fsTyping.toJSON(ctx) : null
     })
   }
 }

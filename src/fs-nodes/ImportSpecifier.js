@@ -26,11 +26,11 @@ class ImportSpecifier extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ImportSpecifier',
-      local: this.local.toJSON(),
-      imported: this.imported.toJSON()
+      local: this.local.toJSON(ctx),
+      imported: this.imported.toJSON(ctx)
     })
   }
 }

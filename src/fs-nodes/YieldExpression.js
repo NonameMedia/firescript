@@ -30,10 +30,10 @@ class YieldExpression extends FirescriptNode {
     this.argument = this.createFullNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'YieldExpression',
-      argument: this.argument.toJSON(),
+      argument: this.argument.toJSON(ctx),
       delegate: this.delegate
     })
   }

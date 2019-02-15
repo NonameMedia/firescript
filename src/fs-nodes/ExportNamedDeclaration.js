@@ -68,12 +68,12 @@ class ExportNamedDeclaration extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ExportNamedDeclaration',
-      declaration: this.declaration ? this.declaration.toJSON() : null,
-      specifiers: this.specifiers.map((item) => item.toJSON()),
-      source: this.source ? this.source.toJSON() : null
+      declaration: this.declaration ? this.declaration.toJSON(ctx) : null,
+      specifiers: this.specifiers.map((item) => item.toJSON(ctx)),
+      source: this.source ? this.source.toJSON(ctx) : null
     })
   }
 }

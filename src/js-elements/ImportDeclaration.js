@@ -20,6 +20,15 @@ class ImportDeclaration extends JSElement {
     this.source = this.createElement(ast.source)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'import')
+    buffer.write('import ')
+    buffer.loop(this.specifiers, ', ')
+    buffer.write(' from ')
+    buffer.write(this.source)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     if (ctx.esModules) {
       return this.useESModules(ctx)

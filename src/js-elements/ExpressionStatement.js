@@ -19,6 +19,11 @@ class ExpressionStatement extends JSElement {
     this.expression = this.createElement(ast.expression)
   }
 
+  compile (buffer) {
+    buffer.write(this.expression)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.expression.toESString(ctx) +

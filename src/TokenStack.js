@@ -37,6 +37,23 @@ class TokenStack extends Array {
     return token
   }
 
+  previousToken () {
+    let index = this.index - 1
+    while (true) {
+      const token = this[index]
+      if (!token) {
+        return null
+      }
+
+      if (token.type === 'indention') {
+        index -= 1
+        continue
+      }
+
+      return token
+    }
+  }
+
   goForward (numItems) {
     this.index += (numItems || 1)
   }

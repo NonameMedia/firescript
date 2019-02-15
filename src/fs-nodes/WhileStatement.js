@@ -13,11 +13,11 @@ class WhileStatement extends FirescriptNode {
     this.body = this.createBlockStatementNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'WhileStatement',
-      test: this.test.toJSON(),
-      body: this.body.toJSON()
+      test: this.test.toJSON(ctx),
+      body: this.body.toJSON(ctx)
     })
   }
 }

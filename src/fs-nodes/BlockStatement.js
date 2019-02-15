@@ -94,12 +94,14 @@ class BlockStatement extends FirescriptNode {
         ? this.innerComments = comments.splice(0, Infinity)
         : this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'BlockStatement',
-      body: this.body.map((item) => item.toJSON())
+      body: this.body.map((item) => item.toJSON(ctx))
     })
   }
 }

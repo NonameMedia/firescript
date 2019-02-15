@@ -22,6 +22,19 @@ class MemberExpression extends JSElement {
     this.computed = ast.computed
   }
 
+  compile (buffer) {
+    if (this.computed) {
+      buffer.write(this.object)
+      buffer.write('[')
+      buffer.write(this.property)
+      buffer.write(']')
+    } else {
+      buffer.write(this.object)
+      buffer.write('.')
+      buffer.write(this.property)
+    }
+  }
+
   toESString (ctx) {
     if (this.computed) {
       return this.renderElement(

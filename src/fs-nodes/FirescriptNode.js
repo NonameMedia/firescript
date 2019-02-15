@@ -14,11 +14,17 @@ class FirescriptNode {
     this.indentionSize = tokenStack.indentionSize
     this.tokenStack = tokenStack
     this.firstToken = tokenStack.current()
-    if (parent) {
-      parent.lastToken = tokenStack.previous()
-    } else {
-      this.lastToken = tokenStack.current()
-    }
+  }
+
+  setParentToken (parent, token) {
+    // parent.lastToken = this.tokenStack.previous()
+    // if (parent.parent) {
+    //   parent.setParentToken(parent.parent)
+    // }
+  }
+
+  tearDown () {
+    this.lastToken = this.tokenStack.previousToken()
   }
 
   createVariableDeclaratorNode (tokenStack) {
@@ -189,6 +195,12 @@ class FirescriptNode {
     }
     const Node = require(`./${nodeName}`)
     const node = new Node(tokenStack, this, subNode)
+    // this.lastToken = this.tokenStack.previous()
+
+    if (subNode) {
+      node.firstToken = subNode.firstToken
+    }
+
     return node
   }
 
@@ -476,11 +488,6 @@ class FirescriptNode {
   }
 
   createJSON (ctx, obj) {
-    if (!obj) {
-      obj = ctx
-      ctx = {}
-    }
-
     if (this.trailingComments) {
       obj.trailingComments = this.trailingComments.map((item) => item.toJSON(ctx))
     }
@@ -493,10 +500,10 @@ class FirescriptNode {
       obj.innerComments = this.innerComments.map((item) => item.toJSON(ctx))
     }
 
-    if (ctx.setLocation) {
+    if (ctx.setLocation && this.firstToken) {
       obj.loc = {
         start: this.firstToken.loc.start,
-        end: this.firstToken.loc.end
+        end: this.lastToken ? this.lastToken.loc.end : this.firstToken.loc.end
       }
     }
 

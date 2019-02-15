@@ -13,11 +13,15 @@ class Identifier extends FirescriptNode {
 
       const token = tokenStack.next()
       this.name = token.value
+
+      this.tearDown()
     }
+
+    this.setParentToken(parent)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'Identifier',
       name: this.name
     })

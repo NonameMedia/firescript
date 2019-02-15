@@ -71,14 +71,16 @@ class MethodDefinition extends FirescriptNode {
 
     this.value = this.createFunctionExpressionNode(tokenStack)
     this.isAllowedNode(this.value, ALLOWED_VALUES)
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'MethodDefinition',
-      key: this.key.toJSON(),
+      key: this.key.toJSON(ctx),
       computed: false,
-      value: this.value.toJSON(),
+      value: this.value.toJSON(ctx),
       kind: this.kind,
       static: this.static,
       async: this.async

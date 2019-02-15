@@ -36,14 +36,16 @@ class ClassDeclaration extends FirescriptNode {
     }
 
     this.body = this.createClassBodyNode(tokenStack)
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ClassDeclaration',
-      id: this.id ? this.id.toJSON() : null,
-      body: this.body.toJSON(),
-      superClass: this.superClass ? this.superClass.toJSON() : null
+      id: this.id ? this.id.toJSON(ctx) : null,
+      body: this.body.toJSON(ctx),
+      superClass: this.superClass ? this.superClass.toJSON(ctx) : null
     })
   }
 }

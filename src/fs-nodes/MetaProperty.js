@@ -43,11 +43,11 @@ class MetaProperty extends FirescriptNode {
     this.isAllowedNode(this.property, ALLOWED_CHILDS, tokenStack.current())
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'MetaProperty',
-      meta: this.meta.toJSON(),
-      property: this.property.toJSON()
+      meta: this.meta.toJSON(ctx),
+      property: this.property.toJSON(ctx)
     })
   }
 }

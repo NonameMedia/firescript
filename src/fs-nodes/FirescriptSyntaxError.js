@@ -7,8 +7,8 @@ class FirescriptSyntaxError extends FirescriptNode {
     this.error = error
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'FirescriptSyntaxError',
       error: this.error
     })

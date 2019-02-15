@@ -31,11 +31,11 @@ class DoWhileStatement extends FirescriptNode {
     this.test = this.createFullNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'DoWhileStatement',
-      test: this.test.toJSON(),
-      body: this.body.toJSON()
+      test: this.test.toJSON(ctx),
+      body: this.body.toJSON(ctx)
     })
   }
 }

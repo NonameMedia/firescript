@@ -61,6 +61,14 @@ describe('Firescript Syntax Check', () => {
           inspect(res).isString()
           inspect(res).isEql(jsresult)
         })
+
+        it.skip(`generate location map for a .fire file`, () => {
+          const parser = new FirescriptParser()
+          const res = parser.parse(fssource)
+
+          inspect(res).isObject()
+          inspect(res).isEql(fsast)
+        })
       })
     }
   })

@@ -31,9 +31,13 @@ class Literal extends FirescriptNode {
     } else {
       this.value = token.value
     }
+
+    this.setParentToken(parent)
+
+    this.tearDown()
   }
 
-  toJSON () {
+  toJSON (ctx) {
     const data = {
       type: 'Literal',
       raw: this.raw,
@@ -44,7 +48,7 @@ class Literal extends FirescriptNode {
       data.regex = this.regex
     }
 
-    return this.createJSON(data)
+    return this.createJSON(ctx, data)
   }
 }
 

@@ -64,13 +64,13 @@ class FunctionDeclaration extends FirescriptNode {
     this.body = this.createFullNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'FunctionDeclaration',
-      id: this.id.toJSON(),
-      params: this.params.map((item) => item.toJSON()),
-      fsParamTypings: this.fsParamTypings.map((item) => item.toJSON()),
-      body: this.body.toJSON(),
+      id: this.id.toJSON(ctx),
+      params: this.params.map((item) => item.toJSON(ctx)),
+      fsParamTypings: this.fsParamTypings.map((item) => item.toJSON(ctx)),
+      body: this.body.toJSON(ctx),
       async: this.async,
       expression: this.expression,
       generator: this.generator

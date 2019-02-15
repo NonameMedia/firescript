@@ -5,7 +5,11 @@
             "type": "ClassDeclaration",
             "id": {
                 "type": "Identifier",
-                "name": "Foo"
+                "name": "Foo",
+                "loc": {
+                  "start": [1, 6],
+                  "end": [1, 9]
+                }
             },
             "superClass": null,
             "body": {
@@ -15,7 +19,11 @@
                         "type": "MethodDefinition",
                         "key": {
                             "type": "Identifier",
-                            "name": "constructor"
+                            "name": "constructor",
+                            "loc": {
+                              "start": [2, 2],
+                              "end": [2, 13]
+                            }
                         },
                         "computed": false,
                         "value": {
@@ -35,35 +43,75 @@
                                                 "type": "MemberExpression",
                                                 "computed": false,
                                                 "object": {
-                                                    "type": "ThisExpression"
+                                                    "type": "ThisExpression",
+                                                    "loc": {
+                                                      "start": [3, 4],
+                                                      "end": [3, 8]
+                                                    }
                                                 },
                                                 "property": {
                                                     "type": "Identifier",
-                                                    "name": "value"
+                                                    "name": "value",
+                                                    "loc": {
+                                                      "start": [3, 9],
+                                                      "end": [3, 14]
+                                                    }
+                                                },
+                                                "loc": {
+                                                  "start": [3, 4],
+                                                  "end": [3, 14]
                                                 }
                                             },
                                             "right": {
                                                 "type": "Literal",
                                                 "value": "foo",
-                                                "raw": "'foo'"
+                                                "raw": "'foo'",
+                                                "loc": {
+                                                  "start": [3, 17],
+                                                  "end": [3, 22]
+                                                }
+                                            },
+                                            "loc": {
+                                              "start": [3, 4],
+                                              "end": [3, 22]
                                             }
+                                        },
+                                        "loc": {
+                                          "start": [3, 4],
+                                          "end": [3, 22]
                                         }
                                     }
-                                ]
+                                ],
+                                "loc": {
+                                  "start": [3, 0],
+                                  "end": [3, 22]
+                                }
                             },
                             "generator": false,
                             "expression": false,
-                            "async": false
+                            "async": false,
+                            "loc": {
+                              "start": [2, 14],
+                              "end": [3, 22]
+                            }
                         },
                         "kind": "constructor",
                         "static": false,
-                        "async": false
+                        "async": false,
+                        "loc": {
+                          "start": [2, 2],
+                          "end": [3, 22]
+                        }
                     },
                     {
                         "type": "MethodDefinition",
                         "key": {
                             "type": "Identifier",
-                            "name": "bla"
+                            "name": "bla",
+                            "loc": {
+                              "start": [5, 2],
+                              "end": [5, 5]
+                            }
                         },
                         "computed": false,
                         "value": {
@@ -80,27 +128,67 @@
                                             "type": "MemberExpression",
                                             "computed": false,
                                             "object": {
-                                                "type": "ThisExpression"
+                                                "type": "ThisExpression",
+                                                "loc": {
+                                                  "start": [6, 11],
+                                                  "end": [6, 15]
+                                                }
                                             },
                                             "property": {
                                                 "type": "Identifier",
-                                                "name": "value"
+                                                "name": "value",
+                                                "loc": {
+                                                  "start": [6, 16],
+                                                  "end": [6, 21]
+                                                }
+                                            },
+                                            "loc": {
+                                              "start": [6, 11],
+                                              "end": [6, 21]
                                             }
+                                        },
+                                        "loc": {
+                                          "start": [6, 4],
+                                          "end": [6, 21]
                                         }
                                     }
-                                ]
+                                ],
+                                "loc": {
+                                  "start": [6, 0],
+                                  "end": [6, 21]
+                                }
                             },
                             "generator": false,
                             "expression": false,
-                            "async": false
+                            "async": false,
+                            "loc": {
+                              "start": [5, 6],
+                              "end": [6, 21]
+                            }
                         },
                         "kind": "method",
                         "static": false,
-                        "async": false
+                        "async": false,
+                        "loc": {
+                          "start": [5, 2],
+                          "end": [6, 21]
+                        }
                     }
-                ]
+                ],
+                "loc": {
+                  "start": [2, 0],
+                  "end": [6, 21]
+                }
+            },
+            "loc": {
+              "start": [1, 0],
+              "end": [6, 21]
             }
         }
     ],
-    "sourceType": "module"
+    "sourceType": "module",
+    "loc": {
+      "start": [1, 0],
+      "end": [6, 21]
+    }
 }

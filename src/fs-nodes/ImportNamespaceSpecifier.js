@@ -24,10 +24,10 @@ class ImportNamespaceSpecifier extends FirescriptNode {
     this.local = this.createIdentifierNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ImportNamespaceSpecifier',
-      local: this.local.toJSON()
+      local: this.local.toJSON(ctx)
     })
   }
 }

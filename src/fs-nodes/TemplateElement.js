@@ -37,10 +37,12 @@ class TemplateElement extends FirescriptNode {
     this.raw = value
       .replace(/\\/, '\\\\')
       .replace(/`/, '\\`')
+
+    this.setParentToken(parent)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'TemplateElement',
       value: {
         cooked: this.cooked,

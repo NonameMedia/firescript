@@ -27,11 +27,11 @@ class VariableDeclaration extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'VariableDeclaration',
       kind: this.kind,
-      declarations: this.declarations.map((item) => item.toJSON())
+      declarations: this.declarations.map((item) => item.toJSON(ctx))
     })
   }
 }

@@ -63,10 +63,10 @@ class ArrayPattern extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ArrayPattern',
-      elements: this.elements.map((item) => item.toJSON())
+      elements: this.elements.map((item) => item.toJSON(ctx))
     })
   }
 }

@@ -109,11 +109,11 @@ class SwitchCase extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'SwitchCase',
-      test: this.test ? this.test.toJSON() : null,
-      consequent: this.consequent.map((item) => item.toJSON())
+      test: this.test ? this.test.toJSON(ctx) : null,
+      consequent: this.consequent.map((item) => item.toJSON(ctx))
     })
   }
 }

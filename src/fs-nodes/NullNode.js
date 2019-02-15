@@ -6,7 +6,7 @@ class NullNode extends FirescriptNode {
     this.type = 'Null'
   }
 
-  toJSON () {
+  toJSON (ctx) {
     return null
   }
 }

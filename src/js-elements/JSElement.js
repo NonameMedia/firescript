@@ -10,6 +10,11 @@ class JSElement {
     this.indention = 0
     this.__indention = 0
     this.indentionSize = 2
+    this.location = ast.loc ? ast.loc.start : null
+  }
+
+  compile () {
+    throw new Error(`Element ${this.type} has no compile method implementd!`)
   }
 
   indentionStr () {
@@ -101,6 +106,12 @@ class JSElement {
   }
 
   renderElement (str) {
+    if (this.location) {
+      this.renderTree.push({
+        location: this.location
+      })
+    }
+
     return (this.leadingComments ? this.renderComments(this.leadingComments, false) : '') +
     str +
     (this.trailingComments ? '\n\n' + this.renderComments(this.trailingComments, true) : '')

@@ -194,7 +194,6 @@ class Token {
       return token
     }
 
-    console.log('MATCH', match)
     throw new Error('Unexpected token!')
   }
 

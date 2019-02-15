@@ -28,11 +28,11 @@ class UnaryExpression extends FirescriptNode {
     this.argument = this.createNodeItem(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'UnaryExpression',
       operator: this.operator,
-      argument: this.argument.toJSON(),
+      argument: this.argument.toJSON(ctx),
       prefix: true
     })
   }

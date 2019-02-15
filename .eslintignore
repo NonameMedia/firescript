@@ -1,5 +1,6 @@
 tests/fixtures/elements
 tests/fixtures/language
+tests/fixtures/sources
 tests/fixtures/error-handling
 tests/syntax
 tests/transform

@@ -32,11 +32,11 @@ class CatchClause extends FirescriptNode {
     this.body = this.createBlockStatementNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'CatchClause',
-      body: this.body.toJSON(),
-      param: this.param.toJSON()
+      body: this.body.toJSON(ctx),
+      param: this.param.toJSON(ctx)
     })
   }
 }

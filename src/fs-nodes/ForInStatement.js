@@ -21,12 +21,12 @@ class ForInStatement extends FirescriptNode {
     this.body = this.createBlockStatementNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ForInStatement',
-      left: this.left.toJSON(),
-      right: this.right.toJSON(),
-      body: this.body.toJSON()
+      left: this.left.toJSON(ctx),
+      right: this.right.toJSON(ctx),
+      body: this.body.toJSON(ctx)
     })
   }
 }

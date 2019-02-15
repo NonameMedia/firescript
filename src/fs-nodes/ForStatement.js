@@ -34,13 +34,13 @@ class ForStatement extends FirescriptNode {
     this.body = this.createBlockStatementNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ForStatement',
-      init: this.init.toJSON(),
-      test: this.test.toJSON(),
-      update: this.update.toJSON(),
-      body: this.body.toJSON()
+      init: this.init.toJSON(ctx),
+      test: this.test.toJSON(ctx),
+      update: this.update.toJSON(ctx),
+      body: this.body.toJSON(ctx)
     })
   }
 }

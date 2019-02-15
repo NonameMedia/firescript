@@ -34,6 +34,22 @@ class FunctionExpression extends JSElement {
       parent.method === true))
   }
 
+  compile (buffer) {
+    const generator = this.generator ? ' *' : ''
+    const func = this.isPropertyMethod() ? '' : 'function'
+    const async = this.async ? 'async ' : ''
+    const funcNameSpacing = func ? ' ' : ''
+    const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
+
+    buffer.registerItem(this.location)
+    buffer.write(async + func + generator + funcNameSpacing)
+    buffer.write(this.id)
+    buffer.write(funcArgSpacing + '(')
+    buffer.loop(this.params, ', ')
+    buffer.write(') ')
+    buffer.write(this.body, '{}')
+  }
+
   toESString (ctx) {
     const id = this.id ? this.id.toESString(ctx) : ''
     const generator = this.generator ? ' *' : ''

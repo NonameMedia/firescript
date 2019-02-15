@@ -60,10 +60,10 @@ class SequenceExpression extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'SequenceExpression',
-      expressions: this.expressions.map((item) => item.toJSON())
+      expressions: this.expressions.map((item) => item.toJSON(ctx))
     })
   }
 }

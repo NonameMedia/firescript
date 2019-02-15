@@ -56,14 +56,16 @@ class MemberExpression extends FirescriptNode {
     }
 
     this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'MemberExpression',
       computed: this.computed,
-      object: this.object.toJSON(),
-      property: this.property.toJSON()
+      object: this.object.toJSON(ctx),
+      property: this.property.toJSON(ctx)
     })
   }
 }

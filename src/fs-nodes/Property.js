@@ -82,11 +82,11 @@ class Property extends FirescriptNode {
     this.isAllowedNode(this.value, ALLOWED_VALUES)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'Property',
-      key: this.key.toJSON(),
-      value: this.value.toJSON(),
+      key: this.key.toJSON(ctx),
+      value: this.value.toJSON(ctx),
       shorthand: false,
       computed: false,
       kind: 'init',

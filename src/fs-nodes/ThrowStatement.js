@@ -23,10 +23,10 @@ class ThrowStatement extends FirescriptNode {
     this.argument = this.createFullNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ThrowStatement',
-      argument: this.argument.toJSON()
+      argument: this.argument.toJSON(ctx)
     })
   }
 }

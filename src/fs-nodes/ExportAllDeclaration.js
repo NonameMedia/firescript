@@ -36,10 +36,10 @@ class ExportAllDeclaration extends FirescriptNode {
     this.source = this.createLiteralNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ExportAllDeclaration',
-      source: this.source.toJSON()
+      source: this.source.toJSON(ctx)
     })
   }
 }

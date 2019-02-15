@@ -23,7 +23,9 @@ class JSTranspiler {
       const jse = new Program(tast, this.config.getConf('features'))
 
       const ctx = new RenderContext(this.config.getConf('features'))
-      return jse.toESString(ctx)
+      const buffer = new SourceBuffer()
+
+      return jse.compile(buffer)
     } catch (err) {
       if (!err.token) {
         throw err

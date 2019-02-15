@@ -23,6 +23,13 @@ class AssignmentExpression extends JSElement {
     this.operator = ast.operator
   }
 
+  compile (buffer) {
+    // buffer.registerItem(this.location)
+    buffer.write(this.left)
+    buffer.write(' ' + this.operator + ' ')
+    buffer.write(this.right)
+  }
+
   toESString (ctx) {
     const right = this.right ? this.right.toESString(ctx) : null
     return this.renderElement(

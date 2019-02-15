@@ -31,10 +31,10 @@ class SpreadElement extends FirescriptNode {
     this.isAllowedNode(this.argument, ALLOWED_CHILDS)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'SpreadElement',
-      argument: this.argument.toJSON()
+      argument: this.argument.toJSON(ctx)
     })
   }
 }

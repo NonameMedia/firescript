@@ -15,12 +15,13 @@ class ThisExpression extends JSElement {
     super(ast)
   }
 
-  toESString () {
-    return this.renderElement('this')
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('this')
   }
 
-  getLength () {
-    return 4
+  toESString () {
+    return this.renderElement('this')
   }
 }
 

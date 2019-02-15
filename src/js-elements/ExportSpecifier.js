@@ -20,6 +20,14 @@ class ExportSpecifier extends JSElement {
     this.local = this.createElement(ast.local)
   }
 
+  compile (buffer) {
+    buffer.write(this.exported)
+    if (this.exported.name !== this.local.name) {
+      buffer.write(' as ')
+      buffer.write(this.local)
+    }
+  }
+
   toESString (ctx) {
     const local = this.exported.name === this.local.name
       ? ''

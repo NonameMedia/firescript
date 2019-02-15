@@ -73,6 +73,7 @@ class FunctionExpression extends FirescriptNode {
     }
 
     this.body = this.createBlockStatementNode(tokenStack)
+    this.tearDown()
   }
 
   parseClassMethod () {
@@ -83,13 +84,13 @@ class FunctionExpression extends FirescriptNode {
 
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'FunctionExpression',
-      id: this.id ? this.id.toJSON() : this.id,
-      params: this.params.map((item) => item.toJSON()),
-      fsParamTypings: this.fsParamTypings.map((item) => item.toJSON()),
-      body: this.body.toJSON(),
+      id: this.id ? this.id.toJSON(ctx) : this.id,
+      params: this.params.map((item) => item.toJSON(ctx)),
+      fsParamTypings: this.fsParamTypings.map((item) => item.toJSON(ctx)),
+      body: this.body.toJSON(ctx),
       async: this.async,
       expression: this.expression,
       generator: this.generator

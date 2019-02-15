@@ -59,10 +59,10 @@ class ExportDefaultDeclaration extends FirescriptNode {
     this.isAllowedNode(this.declaration, ALLOWED_CHILDS)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ExportDefaultDeclaration',
-      declaration: this.declaration.toJSON()
+      declaration: this.declaration.toJSON(ctx)
     })
   }
 }

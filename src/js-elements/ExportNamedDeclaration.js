@@ -22,6 +22,22 @@ class ExportNamedDeclaration extends JSElement {
     this.source = ast.source ? this.createElement(ast.source) : null
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'export')
+    buffer.write('export ')
+    if (this.declaration) {
+      buffer.write(this.declaration)
+      if (this.source) {
+        buffer.write(' from ')
+        buffer.write(this.source)
+      }
+    } else if (this.specifiers) {
+      buffer.write('{ ')
+      buffer.loop(this.specifiers, ', ')
+      buffer.write(' }')
+    }
+  }
+
   toESString (ctx) {
     if (this.declaration) {
       return this.renderElement(
@@ -35,8 +51,6 @@ class ExportNamedDeclaration extends JSElement {
   }
 
   renderDeclaration (ctx) {
-    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
-
     return 'export ' +
       this.declaration.toESString(ctx) +
       source +

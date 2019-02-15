@@ -13,7 +13,7 @@ class Comment extends FirescriptNode {
     this.value = token.value
   }
 
-  toJSON () {
+  toJSON (ctx) {
     return {
       type: this.commentType === 'line' ? 'Line' : 'Block',
       value: this.value

@@ -51,12 +51,12 @@ class ArrowFunctionExpression extends FirescriptNode {
     this.body = this.createBlockStatementNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ArrowFunctionExpression',
       id: null,
-      params: this.params.map((item) => item.toJSON()),
-      body: this.body.toJSON(),
+      params: this.params.map((item) => item.toJSON(ctx)),
+      body: this.body.toJSON(ctx),
       async: this.async,
       expression: this.expression,
       generator: this.generator

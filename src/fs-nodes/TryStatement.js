@@ -30,12 +30,12 @@ class TryStatement extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'TryStatement',
-      block: this.block.toJSON(),
-      handler: this.handler ? this.handler.toJSON() : null,
-      finalizer: this.finalizer ? this.finalizer.toJSON() : null
+      block: this.block.toJSON(ctx),
+      handler: this.handler ? this.handler.toJSON(ctx) : null,
+      finalizer: this.finalizer ? this.finalizer.toJSON(ctx) : null
     })
   }
 }

@@ -5,12 +5,14 @@ class ExpressionStatement extends FirescriptNode {
     super(tokenStack, parent)
 
     this.expression = expression
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ExpressionStatement',
-      expression: this.expression.toJSON()
+      expression: this.expression.toJSON(ctx)
     })
   }
 }

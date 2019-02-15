@@ -21,8 +21,8 @@ class DebuggerStatement extends FirescriptNode {
     tokenStack.goForward()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'DebuggerStatement'
     })
   }

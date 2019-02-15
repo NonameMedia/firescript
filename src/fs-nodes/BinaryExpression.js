@@ -27,12 +27,12 @@ class BinaryExpression extends FirescriptNode {
     this.right = this.createFullNode(tokenStack)
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'BinaryExpression',
       operator: this.operator,
-      left: this.left.toJSON(),
-      right: this.right.toJSON()
+      left: this.left.toJSON(ctx),
+      right: this.right.toJSON(ctx)
     })
   }
 }

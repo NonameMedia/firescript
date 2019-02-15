@@ -14,14 +14,16 @@ class AssignmentExpression extends FirescriptNode {
 
     this.operator = token.value
     this.right = this.createFullNode(tokenStack)
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'AssignmentExpression',
       operator: this.operator,
-      left: this.left.toJSON(),
-      right: this.right.toJSON()
+      left: this.left.toJSON(ctx),
+      right: this.right.toJSON(ctx)
     })
   }
 }

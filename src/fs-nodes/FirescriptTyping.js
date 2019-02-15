@@ -14,10 +14,12 @@ class FirescriptTyping extends FirescriptNode {
       const token = tokenStack.next()
       this.name = token.value
     }
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'FirescriptTyping',
       name: this.name
     })

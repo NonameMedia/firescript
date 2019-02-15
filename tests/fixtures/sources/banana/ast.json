@@ -1,0 +1,174 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "source": {
+        "type": "Literal",
+        "raw": "'./Fruits'",
+        "value": "./Fruits"
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Fruits"
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "Fruits"
+          }
+        }
+      ]
+    },
+    {
+      "type": "ClassDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "Banana"
+      },
+      "body": {
+        "type": "ClassBody",
+        "body": [
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "constructor"
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "name": "opts"
+                }
+              ],
+              "fsParamTypings": [
+                {
+                  "type": "FirescriptTyping",
+                  "name": "any"
+                }
+              ],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "isSweet"
+                        }
+                      },
+                      "right": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "Identifier",
+                          "name": "opts"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "isSweet"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "async": false,
+              "expression": false,
+              "generator": false
+            },
+            "kind": "constructor",
+            "static": false,
+            "async": false
+          },
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "peel"
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [],
+              "fsParamTypings": [],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "__isPeeled"
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "raw": "true",
+                        "value": true
+                      }
+                    }
+                  }
+                ]
+              },
+              "async": false,
+              "expression": false,
+              "generator": false
+            },
+            "kind": "method",
+            "static": false,
+            "async": false
+          }
+        ]
+      },
+      "superClass": {
+        "type": "Identifier",
+        "name": "Fruits"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Banana"
+          },
+          "exported": {
+            "type": "Identifier",
+            "name": "Banana"
+          }
+        }
+      ],
+      "source": null
+    }
+  ]
+}

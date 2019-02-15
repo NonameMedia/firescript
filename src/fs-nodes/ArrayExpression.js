@@ -48,6 +48,8 @@ class ArrayExpression extends FirescriptNode {
     } else {
       this.syntaxError('Array declaration expected', tokenStack.current())
     }
+
+    this.tearDown()
   }
 
   parseElements (tokenStack, childIndention) {
@@ -98,10 +100,10 @@ class ArrayExpression extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ArrayExpression',
-      elements: this.elements.map((item) => item.toJSON())
+      elements: this.elements.map((item) => item.toJSON(ctx))
     })
   }
 }

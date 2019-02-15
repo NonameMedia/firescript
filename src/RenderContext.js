@@ -5,6 +5,9 @@ class RenderContext {
     Object.assign(this, features)
     this.renderMethod = type === 'fire' ? 'toFSString' : 'toESString'
     this.renderStack = []
+    this.buffer = []
+    this.lines = 0
+    this.columns = 0
   }
 
   indent (size, noReturn) {
@@ -21,21 +24,21 @@ class RenderContext {
     return arr.map((item, index, arr) => fn(item[this.renderMethod](this), item, index, arr)).join(joiner)
   }
 
-  registerItem (origPos) {
+  registerItem (obj) {
+    if (!obj.location) {
+      return this
+    }
+
     const item = {
       index: this.stackLength,
       len: 0,
-      origPos: origPos
+      srcLocation: obj.location.join(':'),
+      destLocation: `${this.lines}:${this.columns}`
     }
 
     this.renderStack.push(item)
 
-    return {
-      setLen: (len) => {
-        this.stackLength += len
-        item.len = len
-      }
-    }
+    return this
   }
 }
 

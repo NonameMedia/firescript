@@ -62,11 +62,11 @@ class TemplateLiteral extends FirescriptNode {
     }
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'TemplateLiteral',
-      quasis: this.quasis.map((item) => item.toJSON()),
-      expressions: this.expressions.map((item) => item.toJSON())
+      quasis: this.quasis.map((item) => item.toJSON(ctx)),
+      expressions: this.expressions.map((item) => item.toJSON(ctx))
     })
   }
 }

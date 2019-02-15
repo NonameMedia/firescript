@@ -40,12 +40,14 @@ class ClassBody extends FirescriptNode {
 
       this.body.push(node)
     }
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ClassBody',
-      body: this.body.map((item) => item.toJSON())
+      body: this.body.map((item) => item.toJSON(ctx))
     })
   }
 }

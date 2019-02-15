@@ -22,6 +22,11 @@ class Literal extends JSElement {
     this.isString = /(^"[^]*"$)|(^'[^]*'$)/.test(ast.raw)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write(this.isString ? `'${this.value}'` : this.raw)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.isString ? `'${this.value}'` : this.value

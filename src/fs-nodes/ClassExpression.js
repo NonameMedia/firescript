@@ -23,6 +23,8 @@ class ClassExpression extends FirescriptNode {
     }
 
     this.body = this.createClassBodyNode(tokenStack)
+
+    this.tearDown()
   }
 
   toJSON (ctx) {

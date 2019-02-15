@@ -29,6 +29,29 @@ class BlockStatement extends JSElement {
     this.body = this.createElementList(ast.body, ALLOWED_CHILDS)
   }
 
+  compile (buffer) {
+    buffer.write('{')
+    buffer.indent(1)
+    buffer.loop(this.innerComments, buffer.getIndent())
+    this.body.forEach((item, index) => {
+      item.compile(buffer)
+      buffer.nl(this.addEmptyLine(item, this.body[index + 1]) ? 1 : 0)
+    })
+
+    buffer.indent(-1)
+    buffer.write('}')
+  }
+
+  addEmptyLine (item, next) {
+    if (!next) {
+      return false
+    }
+
+    return (
+      item.type === 'ClassDeclaration' && next
+    )
+  }
+
   toESString (ctx) {
     const body = this.body.length === 0
       ? ''

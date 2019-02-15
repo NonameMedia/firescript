@@ -34,6 +34,7 @@ describe('FirescriptParser', () => {
 
         it(`${group} .fire into an AST item`, () => {
           const Firescript = new FirescriptParser()
+
           const source = inspect
             .readFile(`${testCase.path}/index.fire`)
             .replace(/EOF\s*$/, '')
@@ -47,7 +48,7 @@ describe('FirescriptParser', () => {
     })
   })
 
-  describe.only('parse with setLocation enabled', () => {
+  describe('parse with setLocation enabled', () => {
     const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang-with-loc')
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -62,8 +63,8 @@ describe('FirescriptParser', () => {
         }
 
         it(`${group} .fire into an AST item`, () => {
-          const Firescript = new FirescriptParser({
-            loc: true
+          const firescript = new FirescriptParser({
+            setLocation: true
           })
 
           const source = inspect
@@ -71,7 +72,7 @@ describe('FirescriptParser', () => {
             .replace(/EOF\s*$/, '')
           const ast = require(`${testCase.path}/ast.json`)
 
-          const res = Firescript.parse(source)
+          const res = firescript.parse(source)
 
           inspect(res).isEql(ast)
         })

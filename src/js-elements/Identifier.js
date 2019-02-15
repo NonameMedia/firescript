@@ -18,12 +18,13 @@ class Identifier extends JSElement {
     this.name = ast.name
   }
 
-  toESString (ctx) {
-    return this.renderElement(this.name)
+  compile (buffer) {
+    buffer.registerItem(this.location, this.name)
+    buffer.write(this.name)
   }
 
-  getLength () {
-    return this.name.length
+  toESString (ctx) {
+    return this.renderElement(this.name)
   }
 }
 

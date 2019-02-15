@@ -11,12 +11,14 @@ class ReturnStatement extends FirescriptNode {
     }
 
     this.argument = this.createFullNode(tokenStack)
+
+    this.tearDown()
   }
 
-  toJSON () {
-    return this.createJSON({
+  toJSON (ctx) {
+    return this.createJSON(ctx, {
       type: 'ReturnStatement',
-      argument: this.argument.toJSON()
+      argument: this.argument.toJSON(ctx)
     })
   }
 }

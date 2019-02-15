@@ -28,6 +28,20 @@ class MethodDefinition extends JSElement {
     this.async = ast.async
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write(this.static ? 'static ' : '')
+    buffer.write(this.async ? 'async ' : '')
+    buffer.write(['get', 'set'].includes(this.kind) ? this.kind + ' ' : '')
+    if (this.kind === 'constructor') {
+      buffer.write('constructor')
+    } else {
+      this.key.compile(buffer)
+    }
+
+    this.value.compile(buffer)
+  }
+
   toESString (ctx) {
     const key = this.kind === 'constructor'
       ? 'constructor' : this.key.toESString(ctx)
