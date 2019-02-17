@@ -40,6 +40,13 @@ class AssignmentPattern extends JSElement {
     this.right = this.createElement(ast.right, ALLOWED_RIGHTT_CHILDS)
   }
 
+  compile (buffer) {
+    // buffer.registerItem(this.location)
+    buffer.write(this.left)
+    buffer.write(' = ')
+    buffer.write(this.right)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.left.toESString(ctx) +

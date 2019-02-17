@@ -25,6 +25,17 @@ class ArrowFunctionExpression extends JSElement {
     this.expression = ast.expression
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+
+    const asyncfn = this.async ? 'async ' : ''
+    buffer.write(asyncfn)
+    buffer.write('(')
+    buffer.loop(this.params, ', ')
+    buffer.write(') => ')
+    buffer.write(this.body)
+  }
+
   toESString (ctx) {
     const asyncfn = this.async ? 'async ' : ''
 

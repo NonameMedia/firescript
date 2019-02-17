@@ -37,6 +37,27 @@ class Property extends JSElement {
     this.shorthand = ast.shorthand
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, this.key)
+
+    if (this.shorthand) {
+      buffer.write(this.key)
+    }
+
+    if (this.method) {
+      buffer.write(this.key)
+      buffer.write(this.value)
+      return
+    }
+
+    const kind = this.kind === 'init' ? '' : ' ' + this.kind
+
+    buffer.write(kind)
+    buffer.write(this.key)
+    buffer.write(':')
+    buffer.write(this.value)
+  }
+
   toESString (ctx) {
     if (this.shorthand) {
       return this.renderElement(

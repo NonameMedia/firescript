@@ -18,6 +18,13 @@ class ThrowStatement extends JSElement {
     this.argument = this.createElement(ast.argument)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'throw')
+    buffer.write('throw')
+    buffer.write(this.argument)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'throw ' +

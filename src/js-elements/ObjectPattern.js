@@ -18,6 +18,14 @@ class ObjectPattern extends JSElement {
     this.properties = this.createElementList(ast.properties)
   }
 
+  compile (buffer) {
+    // buffer.registerItem(this.location, this.id)
+
+    buffer.write('{ ')
+    buffer.loop(this.properties, `, `)
+    buffer.write(' }')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       '{ ' +

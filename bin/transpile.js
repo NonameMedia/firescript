@@ -8,6 +8,7 @@ module.exports = (supershit) => {
     .description('Read a file and transpiles it into FireScipt or Javascript')
     .option('-v,--verbose', 'Verbose log')
     .option('-t,--type <type>', 'Set the source type. (fire|js)')
+    .option('-l, --location', 'Add location')
     .action((ctx, file, output) => {
       file = path.resolve(process.cwd(), file)
       const input = path.extname(file) === '.json'
@@ -16,6 +17,7 @@ module.exports = (supershit) => {
 
       const source = Firescript.transpile(input, {
         type: /* ctx.type || */ path.extname(file) === '.fire' ? 'fire' : 'js',
+        setLocation: !!ctx.location,
         verbose: ctx.verbose
       })
 

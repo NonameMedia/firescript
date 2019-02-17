@@ -54,6 +54,7 @@ class ASTTransformer {
 
       return trans
     }
+
     const funcs = this.get(ast.type)
     if (funcs) {
       const transformed = transformationFn(funcs, ast)
@@ -69,11 +70,15 @@ class ASTTransformer {
       if (Array.isArray(ast[key])) {
         const childs = []
         ast[key].forEach((item, index, parent) => {
-          const transformed = this.transformItem(item, index, parent)
-          if (Array.isArray(transformed)) {
-            transformed.forEach((child) => childs.push(this.transformItem(child)))
+          if (item && typeof item === 'object') {
+            const transformed = this.transformItem(item, index, parent)
+            if (Array.isArray(transformed)) {
+              transformed.forEach((child) => childs.push(this.transformItem(child)))
+            } else {
+              childs.push(transformed)
+            }
           } else {
-            childs.push(transformed)
+            childs.push(item)
           }
         })
         transformatedAst[key] = childs

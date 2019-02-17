@@ -18,6 +18,13 @@ class ExportAllDeclaration extends JSElement {
     this.source = this.createElement(ast.source)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'export')
+    buffer.write('export * from ')
+    buffer.write(this.source)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     return this.renderElement('export * from ' +
       this.source.toESString(ctx) +

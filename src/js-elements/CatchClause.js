@@ -20,6 +20,14 @@ class CatchClause extends JSElement {
     this.body = this.createElement(ast.body)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'catch')
+    buffer.write('catch (')
+    buffer.write(this.param)
+    buffer.write(')')
+    buffer.write(this.body)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'catch (' +

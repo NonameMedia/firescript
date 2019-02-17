@@ -18,6 +18,11 @@ class ImportNamespaceSpecifier extends JSElement {
     this.local = this.createElement(ast.local)
   }
 
+  compile (buffer) {
+    buffer.write('* as  ')
+    buffer.write(this.local)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       '* as ' +

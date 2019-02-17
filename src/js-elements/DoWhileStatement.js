@@ -20,6 +20,15 @@ class DoWhileStatement extends JSElement {
     this.test = this.createElement(ast.test)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'do')
+    buffer.write('do ')
+    buffer.write(this.body)
+    buffer.write('while (')
+    buffer.write(this.test)
+    buffer.write(');')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'do ' +

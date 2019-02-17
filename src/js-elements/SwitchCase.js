@@ -20,6 +20,14 @@ class SwitchCase extends JSElement {
     this.consequent = this.createElementList(ast.consequent)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'case')
+    buffer.write(this.callee)
+    buffer.write('(')
+    buffer.loop(this.arguments, ', ')
+    buffer.write(')')
+  }
+
   toESString (ctx) {
     const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
 

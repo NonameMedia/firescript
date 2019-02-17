@@ -77,7 +77,7 @@ class JSElement {
   }
 
   getLength () {
-    console.warn(`getLength method not implemented for element ${this.type}`)
+    // console.warn(`getLength method not implemented for element ${this.type}`)
     return 0
   }
 

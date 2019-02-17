@@ -20,6 +20,13 @@ class SequenceExpression extends JSElement {
     throw new Error(`Element SequenceExpression is a DraftElement!`)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write(this.callee)
+    buffer.loop(this.arguments, ', ')
+    buffer.write(';')
+  }
+
   toString () {
     return this.renderElement(
       `${this.callee}(${this.arguments.join(', ')});`

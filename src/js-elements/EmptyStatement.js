@@ -16,6 +16,10 @@ class EmptyStatement extends JSElement {
       ''
     )
   }
+
+  compile (buffer) {
+    // do nothing
+  }
 }
 
 module.exports = EmptyStatement

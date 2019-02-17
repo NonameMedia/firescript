@@ -18,6 +18,12 @@ class AwaitExpression extends JSElement {
     this.argument = this.createElement(ast.argument)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'await')
+    buffer.write('await ')
+    buffer.write(this.argument)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'await ' +

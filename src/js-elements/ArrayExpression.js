@@ -18,6 +18,21 @@ class ArrayExpression extends JSElement {
     this.elements = this.createElementList(ast.elements)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    if (this.useMultiline()) {
+      buffer.write('[')
+      buffer.indent(1)
+      buffer.write(this.elements, ', ' + buffer.getIndent())
+      buffer.indent(-1)
+      buffer.write(']')
+    } else {
+      buffer.write('[ ')
+      buffer.write(this.elements, ', ')
+      buffer.write(' ]')
+    }
+  }
+
   toESString (ctx) {
     if (this.useMultiline()) {
       return this.renderElement(this.renderMultiline(ctx))

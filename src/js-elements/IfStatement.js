@@ -22,6 +22,20 @@ class IfStatement extends JSElement {
     this.alternate = ast.alternate ? this.createElement(ast.alternate) : null
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'if')
+    buffer.write('if (')
+    buffer.write(this.test)
+    buffer.write(')')
+    buffer.write(this.consequent)
+
+    if (this.alternate) {
+      buffer.registerItem(this.location, 'else')
+      buffer.write(' else ')
+      buffer.write(this.alternate)
+    }
+  }
+
   toESString (ctx) {
     const alternate = this.alternate ? ' else ' + this.alternate.toESString(ctx) : ''
 

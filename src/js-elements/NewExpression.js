@@ -20,6 +20,15 @@ class NewExpression extends JSElement {
     this.arguments = this.createElementList(ast.arguments)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'new')
+    buffer.write('new')
+    buffer.write(this.callee)
+    buffer.write('(')
+    buffer.loop(this.arguments, ', ')
+    buffer.write(')')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'new ' +

@@ -18,6 +18,13 @@ class ExportDefaultDeclaration extends JSElement {
     this.declaration = this.createElement(ast.declaration)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'export')
+    buffer.write('export default ')
+    buffer.write(this.declaration)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'export default ' +

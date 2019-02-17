@@ -6,6 +6,7 @@ class FirescriptParser {
   constructor (conf) {
     conf = conf || {}
 
+    console.log('CONF', conf)
     this.setLocation = conf.setLocation || false
     this.setRange = conf.setRange || false
     this.indentionSize = conf.indention || 2

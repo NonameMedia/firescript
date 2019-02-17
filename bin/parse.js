@@ -8,7 +8,7 @@ module.exports = (fireio) => {
     .option('-c, --comments', 'Include comments')
     .option('-v, --verbose', 'Verbose log')
     .option('-l, --location', 'Add location')
-    .option('-r, --range', 'Add range')
+    // .option('-r, --range', 'Add range')
     .description('Parse a .fire or .js file into an AST tree')
     .action((ctx, file, output) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })

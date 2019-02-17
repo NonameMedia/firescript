@@ -24,6 +24,18 @@ class ForStatement extends JSElement {
     this.body = this.createElement(ast.body)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'for')
+    buffer.write('for (')
+    buffer.write(this.init)
+    buffer.write('; ')
+    buffer.write(this.test)
+    buffer.write('; ')
+    buffer.write(this.update)
+    buffer.write(')')
+    buffer.write(this.body)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'for (' +

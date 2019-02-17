@@ -20,6 +20,13 @@ class VariableDeclaration extends JSElement {
     this.declarations = this.createElementList(ast.declarations)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, this.kind)
+    buffer.write(`${this.kind} `)
+    buffer.loop(this.declarations, ', ')
+    buffer.write(this.hasClosingSemicolon() ? ';' : '')
+  }
+
   toESString (ctx) {
     const semi = this.hasClosingSemicolon() ? ';' : ''
 

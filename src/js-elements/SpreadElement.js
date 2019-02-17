@@ -18,6 +18,12 @@ class SpreadElement extends JSElement {
     this.argument = this.createElement(ast.argument)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('...')
+    buffer.write(this.argument)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       '...' +

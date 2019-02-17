@@ -59,13 +59,16 @@ class SourceBuffer {
     return '\n' + ' '.repeat(this.indention * this.indentionSize)
   }
 
-  indent (size) {
+  indent (size, noWrite) {
     this.line += 1
     this.column = 1
 
     size = size || 0
     this.indention += size
-    this.write(this.getIndent())
+
+    if (!noWrite) {
+      this.write(this.getIndent())
+    }
   }
 
   item (node) {
@@ -91,10 +94,12 @@ class SourceBuffer {
     if (origLocation) {
       const map = [
         origLocation[0],
-        origLocation[1] + 1
-      ].concat(this.getLocation())
+        origLocation[1] + 1,
+        this.line,
+        this.column
+      ]
 
-      if (name) {
+      if (typeof name === 'string') {
         map.push(name)
       }
 
@@ -106,6 +111,24 @@ class SourceBuffer {
 
   toString () {
     return this.buffer.join('')
+  }
+
+  createLocationMap () {
+    if (this.locationMap.length === 0) {
+      return
+    }
+
+    this.write('module.exports.__fsLocationMap = [')
+    this.write(this.locationMap.map((item) => {
+      const args = item.slice(0, 4)
+      if (item[4]) {
+        args.push(`'${item[4].replace(/'/g, '\\\'')}'`)
+      }
+
+      return `[${args.join(', ')}]`
+    }).join(', '))
+
+    this.write('];')
   }
 }
 

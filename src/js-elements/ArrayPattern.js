@@ -27,6 +27,13 @@ class ArrayPattern extends JSElement {
     this.elements = this.createElementList(ast.elements, ALLOWED_CHILDS)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('[ ')
+    buffer.write(this.elements, ', ')
+    buffer.write(' ]')
+  }
+
   toESString (ctx) {
     return this.renderElement(
       '[ ' +
