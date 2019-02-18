@@ -12,7 +12,11 @@ const Comment = require('./Comment')
  * }
  */
 class Block extends Comment {
-
+  compile (buffer) {
+    buffer.write('/*')
+    buffer.write(this.value)
+    buffer.write('*/')
+  }
 }
 
 module.exports = Block

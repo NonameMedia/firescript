@@ -4,6 +4,8 @@ const ObjectPattern = require('../../../src/fs-nodes/ObjectPattern')
 
 describe('ObjectPattern', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an object node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'punctuator', 'value': '{' },
@@ -23,7 +25,7 @@ describe('ObjectPattern', () => {
       inspect(node.type).isEql('ObjectPattern')
       inspect(node.properties).isArray()
       inspect(node.properties).hasLength(2)
-      inspect(node.properties[0].toJSON()).isEql({
+      inspect(node.properties[0].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -40,7 +42,7 @@ describe('ObjectPattern', () => {
         shorthand: false
       })
 
-      inspect(node.properties[1].toJSON()).isEql({
+      inspect(node.properties[1].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -77,7 +79,7 @@ describe('ObjectPattern', () => {
       inspect(node.type).isEql('ObjectPattern')
       inspect(node.properties).isArray()
       inspect(node.properties).hasLength(2)
-      inspect(node.properties[0].toJSON()).isEql({
+      inspect(node.properties[0].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -94,7 +96,7 @@ describe('ObjectPattern', () => {
         shorthand: false
       })
 
-      inspect(node.properties[1].toJSON()).isEql({
+      inspect(node.properties[1].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',

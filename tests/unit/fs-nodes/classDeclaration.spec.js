@@ -4,6 +4,8 @@ const ClassDeclaration = require('../../../src/fs-nodes/ClassDeclaration')
 
 describe('ClassDeclaration', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ClassDeclaration node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'class' },
@@ -16,7 +18,7 @@ describe('ClassDeclaration', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('ClassDeclaration')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'bla'
       })

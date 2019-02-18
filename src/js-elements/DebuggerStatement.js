@@ -17,8 +17,7 @@ class DebuggerStatement extends JSElement {
 
   compile (buffer) {
     buffer.registerItem(this.location, 'debugger')
-    buffer.write('debugger ')
-    buffer.write(this.argument)
+    buffer.write('debugger;')
   }
 }
 

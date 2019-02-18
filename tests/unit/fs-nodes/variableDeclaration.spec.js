@@ -4,6 +4,8 @@ const VariableDeclaration = require('../../../src/fs-nodes/VariableDeclaration')
 
 describe('VariableDeclaration', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a arrow function expression node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'const' },
@@ -16,7 +18,7 @@ describe('VariableDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('VariableDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'VariableDeclaration',
         kind: 'const',
         declarations: [{
@@ -31,9 +33,9 @@ describe('VariableDeclaration', () => {
             value: 'bla'
           },
           fsTyping: {
-  type: 'FirescriptTyping',
-  name: 'any'
-}
+            type: 'FirescriptTyping',
+            name: 'any'
+          }
         }]
       })
     })

@@ -24,7 +24,7 @@ class DoWhileStatement extends JSElement {
     buffer.registerItem(this.location, 'do')
     buffer.write('do ')
     buffer.write(this.body)
-    buffer.write('while (')
+    buffer.write(' while (')
     buffer.write(this.test)
     buffer.write(');')
   }

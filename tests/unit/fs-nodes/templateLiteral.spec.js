@@ -4,6 +4,8 @@ const TemplateLiteral = require('../../../src/fs-nodes/TemplateLiteral')
 
 describe('TemplateLiteral', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a TemplateLiteral node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'template', 'value': 'Hello `${' },
@@ -15,7 +17,7 @@ describe('TemplateLiteral', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('TemplateLiteral')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'TemplateLiteral',
         quasis: [{
           type: 'TemplateElement',

@@ -4,6 +4,8 @@ const ClassBody = require('../../../src/fs-nodes/ClassBody')
 
 describe('ClassBody', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ClassBody node', () => {
       const tokenStack = new TokenStack([
         { type: 'indention', value: 2 },
@@ -34,11 +36,11 @@ describe('ClassBody', () => {
       inspect(node.type).isEql('ClassBody')
       inspect(node.body).isArray()
       inspect(node.body).hasLength(2)
-      inspect(node.body[0].toJSON()).hasProps({
+      inspect(node.body[0].toJSON(ctx)).hasProps({
         type: 'MethodDefinition'
       })
 
-      inspect(node.body[1].toJSON()).hasProps({
+      inspect(node.body[1].toJSON(ctx)).hasProps({
         type: 'MethodDefinition'
       })
     })

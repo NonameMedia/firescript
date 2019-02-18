@@ -5,6 +5,8 @@ const ConditionalExpression = require('../../../src/fs-nodes/ConditionalExpressi
 
 describe('ConditionalExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an ConditionalExpression', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'banana' },
@@ -19,7 +21,7 @@ describe('ConditionalExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ConditionalExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ConditionalExpression',
         test: {
           type: 'Identifier',
@@ -51,7 +53,7 @@ describe('ConditionalExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ConditionalExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ConditionalExpression',
         test: {
           type: 'Identifier',

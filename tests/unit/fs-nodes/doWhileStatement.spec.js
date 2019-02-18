@@ -4,6 +4,8 @@ const DoWhileStatement = require('../../../src/fs-nodes/DoWhileStatement')
 
 describe('DoWhileStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an DoWhileStatement', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'do' },
@@ -20,7 +22,7 @@ describe('DoWhileStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('DoWhileStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'DoWhileStatement',
         test: {
           type: 'Identifier',

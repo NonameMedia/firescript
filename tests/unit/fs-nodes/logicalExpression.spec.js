@@ -9,6 +9,8 @@ const ASSIGNMENT_OPERASTORS = [
 
 describe('LogicalExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     ASSIGNMENT_OPERASTORS.forEach((operator) => {
       it(`returns a LogicalExpression, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
@@ -21,7 +23,7 @@ describe('LogicalExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('LogicalExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'LogicalExpression',
           operator: operator,
           left: {
@@ -51,7 +53,7 @@ describe('LogicalExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('LogicalExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'LogicalExpression',
           operator: operator,
           left: {

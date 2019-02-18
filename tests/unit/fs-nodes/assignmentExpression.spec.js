@@ -10,6 +10,8 @@ const ASSIGNMENT_OPERASTORS = [
 
 describe('AssignmentExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     ASSIGNMENT_OPERASTORS.forEach((operator) => {
       it(`returns a AssignmentExpression, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
@@ -22,7 +24,7 @@ describe('AssignmentExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('AssignmentExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'AssignmentExpression',
           operator: operator,
           left: {
@@ -52,7 +54,7 @@ describe('AssignmentExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('AssignmentExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'AssignmentExpression',
           operator: operator,
           left: {

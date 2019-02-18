@@ -5,6 +5,8 @@ const MemberExpression = require('../../../src/fs-nodes/MemberExpression')
 
 describe('CallExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a call expression node', () => {
       const tokenStack = new TokenStack([
         { type: 'identifier', value: 'bla' },
@@ -18,7 +20,7 @@ describe('CallExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('CallExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'CallExpression',
         callee: {
           type: 'Identifier',
@@ -47,7 +49,7 @@ describe('CallExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('CallExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'CallExpression',
         callee: {
           type: 'Identifier',
@@ -77,7 +79,7 @@ describe('CallExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('CallExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'CallExpression',
         callee: {
           type: 'Identifier',
@@ -103,7 +105,7 @@ describe('CallExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('CallExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'CallExpression',
         callee: {
           type: 'MemberExpression',

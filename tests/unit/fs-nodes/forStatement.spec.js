@@ -4,6 +4,8 @@ const ForStatement = require('../../../src/fs-nodes/ForStatement')
 
 describe('ForStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an ForStatement', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'for' },
@@ -28,7 +30,7 @@ describe('ForStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ForStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ForStatement',
         init: {
           type: 'VariableDeclaration',
@@ -45,9 +47,9 @@ describe('ForStatement', () => {
               value: 0
             },
             fsTyping: {
-  type: 'FirescriptTyping',
-  name: 'any'
-}
+              type: 'FirescriptTyping',
+              name: 'any'
+            }
           }]
         },
         test: {

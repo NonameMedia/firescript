@@ -42,6 +42,7 @@ class Property extends JSElement {
 
     if (this.shorthand) {
       buffer.write(this.key)
+      return
     }
 
     if (this.method) {
@@ -54,7 +55,7 @@ class Property extends JSElement {
 
     buffer.write(kind)
     buffer.write(this.key)
-    buffer.write(':')
+    buffer.write(': ')
     buffer.write(this.value)
   }
 

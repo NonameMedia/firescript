@@ -4,6 +4,8 @@ const CatchClause = require('../../../src/fs-nodes/CatchClause')
 
 describe('CatchClause', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a CatchClause node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'catch' },
@@ -16,7 +18,7 @@ describe('CatchClause', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('CatchClause')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'CatchClause',
         param: {
           type: 'Identifier',

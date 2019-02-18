@@ -32,6 +32,8 @@ class ClassExpression extends JSElement {
       this.superClass.compile(buffer)
     }
 
+    buffer.write(' ')
+
     this.body.compile(buffer)
   }
 

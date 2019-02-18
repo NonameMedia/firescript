@@ -4,6 +4,8 @@ const AwaitExpression = require('../../../src/fs-nodes/AwaitExpression')
 
 describe('AwaitExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a AwaitExpression node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'await' },
@@ -15,7 +17,7 @@ describe('AwaitExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('AwaitExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'AwaitExpression',
         argument: {
           type: 'Identifier',

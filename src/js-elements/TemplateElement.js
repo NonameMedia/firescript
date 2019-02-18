@@ -21,6 +21,13 @@ class TemplateElement extends JSElement {
     this.head = false
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write(this.head ? '' : '}')
+    buffer.write(this.value.raw)
+    buffer.write(this.tail ? '' : '${')
+  }
+
   toESString (ctx) {
     const head = this.head ? '' : '}'
     const tail = this.tail ? '' : '${'

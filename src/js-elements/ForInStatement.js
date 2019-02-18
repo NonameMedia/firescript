@@ -28,7 +28,7 @@ class ForInStatement extends JSElement {
     buffer.write(this.left)
     buffer.write(' in ')
     buffer.write(this.right)
-    buffer.write(')')
+    buffer.write(') ')
     buffer.write(this.body)
   }
 

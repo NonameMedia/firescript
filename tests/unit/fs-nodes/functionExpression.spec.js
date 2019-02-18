@@ -4,6 +4,8 @@ const FunctionExpression = require('../../../src/fs-nodes/FunctionExpression')
 
 describe('FunctionExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a function expression node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'func' },
@@ -29,7 +31,7 @@ describe('FunctionExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('FunctionExpression')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'bla'
       })
@@ -98,7 +100,7 @@ describe('FunctionExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('FunctionExpression')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'blub'
       })
@@ -167,7 +169,7 @@ describe('FunctionExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('FunctionExpression')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'blub'
       })

@@ -4,6 +4,8 @@ const ImportSpecifier = require('../../../src/fs-nodes/ImportSpecifier')
 
 describe('ImportSpecifier', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ImportSpecifier node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'foo' },
@@ -15,7 +17,7 @@ describe('ImportSpecifier', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportSpecifier')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportSpecifier',
         imported: {
           type: 'Identifier',
@@ -38,7 +40,7 @@ describe('ImportSpecifier', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportSpecifier')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportSpecifier',
         imported: {
           type: 'Identifier',

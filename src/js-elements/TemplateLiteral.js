@@ -21,14 +21,13 @@ class TemplateLiteral extends JSElement {
     this.expressions = this.createElementList(ast.expressions)
   }
 
-  toESString (ctx) {
+  compile (buffer) {
+    buffer.registerItem(this.location, 'class')
+    buffer.write('`')
     const elements = SuperArray.merge(this.quasis, this.expressions)
     elements[0].head = true
-    return this.renderElement(
-      '`' +
-      ctx.join(elements, '') +
-      '`'
-    )
+    buffer.loop(elements)
+    buffer.write('`')
   }
 }
 

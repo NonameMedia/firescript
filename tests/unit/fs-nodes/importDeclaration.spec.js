@@ -4,6 +4,8 @@ const ImportDeclaration = require('../../../src/fs-nodes/ImportDeclaration')
 
 describe('ImportDeclaration', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ImportDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'import' },
@@ -18,7 +20,7 @@ describe('ImportDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDeclaration',
         specifiers: [{
           type: 'ImportDefaultSpecifier',
@@ -49,7 +51,7 @@ describe('ImportDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDeclaration',
         specifiers: [{
           type: 'ImportSpecifier',
@@ -86,7 +88,7 @@ describe('ImportDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDeclaration',
         specifiers: [{
           type: 'ImportSpecifier',
@@ -121,7 +123,7 @@ describe('ImportDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDeclaration',
         specifiers: [{
           type: 'ImportNamespaceSpecifier',
@@ -148,7 +150,7 @@ describe('ImportDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDeclaration',
         specifiers: [],
         source: {

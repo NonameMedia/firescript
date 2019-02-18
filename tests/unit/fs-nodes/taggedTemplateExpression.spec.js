@@ -4,6 +4,8 @@ const TaggedTemplateExpression = require('../../../src/fs-nodes/TaggedTemplateEx
 
 describe('TaggedTemplateExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a TaggedTemplateExpression node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'say' },
@@ -16,7 +18,7 @@ describe('TaggedTemplateExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('TaggedTemplateExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'TaggedTemplateExpression',
         tag: {
           type: 'Identifier',

@@ -4,6 +4,8 @@ const SpreadElement = require('../../../src/fs-nodes/SpreadElement')
 
 describe('SpreadElement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     const tokenStack = new TokenStack([
       { 'type': 'punctuator', 'value': '...' },
       { 'type': 'identifier', 'value': 'args' }
@@ -14,7 +16,7 @@ describe('SpreadElement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SpreadElement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SpreadElement',
         argument: {
           type: 'Identifier',

@@ -4,6 +4,8 @@ const RestElement = require('../../../src/fs-nodes/RestElement')
 
 describe('RestElement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     const tokenStack = new TokenStack([
       { 'type': 'punctuator', 'value': '...' },
       { 'type': 'identifier', 'value': 'args' }
@@ -14,7 +16,7 @@ describe('RestElement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('RestElement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'RestElement',
         argument: {
           type: 'Identifier',

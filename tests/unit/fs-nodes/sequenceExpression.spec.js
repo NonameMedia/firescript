@@ -5,6 +5,8 @@ const SequenceExpression = require('../../../src/fs-nodes/SequenceExpression')
 
 describe('SequenceExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it(`returns an SequenceExpression`, () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'foo' },
@@ -20,7 +22,7 @@ describe('SequenceExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SequenceExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SequenceExpression',
         expressions: [{
           type: 'CallExpression',
@@ -56,7 +58,7 @@ describe('SequenceExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SequenceExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SequenceExpression',
         expressions: [{
           type: 'CallExpression',

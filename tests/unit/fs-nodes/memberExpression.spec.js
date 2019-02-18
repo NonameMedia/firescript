@@ -4,6 +4,8 @@ const MemberExpression = require('../../../src/fs-nodes/MemberExpression')
 
 describe('MemberExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a member expression node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'bla' },
@@ -17,12 +19,12 @@ describe('MemberExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('MemberExpression')
       inspect(node.object).isObject()
-      inspect(node.object.toJSON()).isEql({
+      inspect(node.object.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'bla'
       })
       inspect(node.property).isObject()
-      inspect(node.property.toJSON()).isEql({
+      inspect(node.property.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'blub'
       })
@@ -44,7 +46,7 @@ describe('MemberExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('MemberExpression')
       inspect(node.object).isObject()
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'MemberExpression',
         computed: false,
         object: {

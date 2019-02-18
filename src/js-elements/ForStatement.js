@@ -32,7 +32,7 @@ class ForStatement extends JSElement {
     buffer.write(this.test)
     buffer.write('; ')
     buffer.write(this.update)
-    buffer.write(')')
+    buffer.write(') ')
     buffer.write(this.body)
   }
 

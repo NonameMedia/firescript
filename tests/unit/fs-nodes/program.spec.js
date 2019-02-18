@@ -4,6 +4,8 @@ const Program = require('../../../src/fs-nodes/Program')
 
 describe('Program', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a Program node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'func' },
@@ -18,7 +20,7 @@ describe('Program', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('Program')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'Program',
         sourceType: 'module',
         body: [{
@@ -60,7 +62,7 @@ describe('Program', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('Program')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'Program',
         sourceType: 'script',
         body: [{

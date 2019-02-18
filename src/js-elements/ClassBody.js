@@ -19,7 +19,6 @@ class ClassBody extends JSElement {
   }
 
   compile (buffer) {
-    // buffer.registerItem(this.location)
     if (this.body.length === 0) {
       buffer.write('{}')
       return

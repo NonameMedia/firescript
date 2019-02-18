@@ -4,6 +4,8 @@ const ArrayExpression = require('../../../src/fs-nodes/ArrayExpression')
 
 describe('ArrayExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an ArrayExpression node, using inline syntax', () => {
       const tokenStack = new TokenStack([
         { 'type': 'punctuator', 'value': '[' },
@@ -19,13 +21,13 @@ describe('ArrayExpression', () => {
       inspect(node.type).isEql('ArrayExpression')
       inspect(node.elements).isArray()
       inspect(node.elements).hasLength(2)
-      inspect(node.elements[0].toJSON()).isEql({
+      inspect(node.elements[0].toJSON(ctx)).isEql({
         'type': 'Literal',
         'value': 1,
         'raw': '1'
       })
 
-      inspect(node.elements[1].toJSON()).isEql({
+      inspect(node.elements[1].toJSON(ctx)).isEql({
         'type': 'Literal',
         'value': 2,
         'raw': '2'
@@ -46,13 +48,13 @@ describe('ArrayExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('ArrayExpression')
       inspect(node.elements).hasLength(2)
-      inspect(node.elements[0].toJSON()).isEql({
+      inspect(node.elements[0].toJSON(ctx)).isEql({
         'type': 'Literal',
         'value': 1,
         'raw': '1'
       })
 
-      inspect(node.elements[1].toJSON()).isEql({
+      inspect(node.elements[1].toJSON(ctx)).isEql({
         'type': 'Literal',
         'value': 2,
         'raw': '2'
@@ -102,7 +104,7 @@ describe('ArrayExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ArrayExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         'type': 'ArrayExpression',
         'elements': [{
           'type': 'Literal',

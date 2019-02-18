@@ -4,6 +4,8 @@ const ArrayPattern = require('../../../src/fs-nodes/ArrayPattern')
 
 describe('ArrayPattern', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an ArrayPattern node, using inline syntax', () => {
       const tokenStack = new TokenStack([
         { 'type': 'punctuator', 'value': '[' },
@@ -19,12 +21,12 @@ describe('ArrayPattern', () => {
       inspect(node.type).isEql('ArrayPattern')
       inspect(node.elements).isArray()
       inspect(node.elements).hasLength(2)
-      inspect(node.elements[0].toJSON()).isEql({
+      inspect(node.elements[0].toJSON(ctx)).isEql({
         'type': 'Identifier',
         'name': 'a'
       })
 
-      inspect(node.elements[1].toJSON()).isEql({
+      inspect(node.elements[1].toJSON(ctx)).isEql({
         'type': 'Identifier',
         'name': 'b'
       })

@@ -4,6 +4,8 @@ const NewExpression = require('../../../src/fs-nodes/NewExpression')
 
 describe('NewExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a call expression node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'new' },
@@ -18,7 +20,7 @@ describe('NewExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('NewExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'NewExpression',
         callee: {
           type: 'Identifier',
@@ -48,7 +50,7 @@ describe('NewExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('NewExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'NewExpression',
         callee: {
           type: 'Identifier',
@@ -79,7 +81,7 @@ describe('NewExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('NewExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'NewExpression',
         callee: {
           type: 'Identifier',
@@ -105,7 +107,7 @@ describe('NewExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('NewExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'NewExpression',
         callee: {
           type: 'Identifier',

@@ -4,6 +4,8 @@ const VariableDeclarator = require('../../../src/fs-nodes/VariableDeclarator')
 
 describe('VariableDeclarator', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a variable declarator node', () => {
       const tokenStack = new TokenStack([
         { type: 'identifier', value: 'res' },
@@ -15,7 +17,7 @@ describe('VariableDeclarator', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('VariableDeclarator')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'VariableDeclarator',
         id: {
           type: 'Identifier',
@@ -45,7 +47,7 @@ describe('VariableDeclarator', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('VariableDeclarator')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'VariableDeclarator',
         id: {
           type: 'Identifier',

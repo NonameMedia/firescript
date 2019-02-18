@@ -5,6 +5,8 @@ const UpdateExpression = require('../../../src/fs-nodes/UpdateExpression')
 
 describe('UpdateExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an UpdateExpression node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'identifier', 'value': 'num' },
@@ -16,7 +18,7 @@ describe('UpdateExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('UpdateExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'UpdateExpression',
         argument: {
           type: 'Identifier',
@@ -39,7 +41,7 @@ describe('UpdateExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('UpdateExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'UpdateExpression',
         argument: {
           type: 'Identifier',
@@ -61,7 +63,7 @@ describe('UpdateExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('UpdateExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'UpdateExpression',
         argument: {
           type: 'Identifier',

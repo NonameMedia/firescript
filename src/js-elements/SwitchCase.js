@@ -22,10 +22,21 @@ class SwitchCase extends JSElement {
 
   compile (buffer) {
     buffer.registerItem(this.location, 'case')
-    buffer.write(this.callee)
-    buffer.write('(')
-    buffer.loop(this.arguments, ', ')
-    buffer.write(')')
+    if (this.test) {
+      buffer.write('case ')
+      buffer.write(this.test)
+    } else {
+      buffer.write('default')
+    }
+
+    buffer.write(':')
+
+    if (this.consequent.length > 0) {
+      buffer.indent(1)
+      buffer.loop(this.consequent, buffer.getIndent())
+      buffer.indent(-1, true)
+      // buffer.nl()
+    }
   }
 
   toESString (ctx) {

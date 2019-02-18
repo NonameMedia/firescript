@@ -23,12 +23,12 @@ class ArrayExpression extends JSElement {
     if (this.useMultiline()) {
       buffer.write('[')
       buffer.indent(1)
-      buffer.write(this.elements, ', ' + buffer.getIndent())
+      buffer.loop(this.elements, ',' + buffer.getIndent())
       buffer.indent(-1)
       buffer.write(']')
     } else {
       buffer.write('[ ')
-      buffer.write(this.elements, ', ')
+      buffer.loop(this.elements, ', ')
       buffer.write(' ]')
     }
   }

@@ -4,6 +4,8 @@ const ReturnStatement = require('../../../src/fs-nodes/ReturnStatement')
 
 describe('ReturnStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     const tokenStack = new TokenStack([
       { 'type': 'keyword', 'value': 'return' },
       { 'type': 'identifier', 'value': 'banana' },
@@ -15,7 +17,7 @@ describe('ReturnStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ReturnStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ReturnStatement',
         argument: {
           type: 'Identifier',

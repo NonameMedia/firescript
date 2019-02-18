@@ -1,4 +1,4 @@
-import Fruits from './Fruits';
+import { Fruits } from './Fruits';
 
 class Banana extends Fruits {
   constructor (opts) {
@@ -10,4 +10,4 @@ class Banana extends Fruits {
   }
 }
 
-export { Banana }
+export { Banana };

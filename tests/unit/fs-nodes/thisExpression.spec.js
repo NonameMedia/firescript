@@ -4,6 +4,8 @@ const ThisExpression = require('../../../src/fs-nodes/ThisExpression')
 
 describe('ThisExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     const tokenStack = new TokenStack([
       { 'type': 'identifier', 'value': 'this' }
     ])

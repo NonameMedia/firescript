@@ -4,6 +4,8 @@ const ImportDefaultSpecifier = require('../../../src/fs-nodes/ImportDefaultSpeci
 
 describe('ImportDefaultSpecifier', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ImportDefaultSpecifier node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'operator', 'value': '**' },
@@ -16,7 +18,7 @@ describe('ImportDefaultSpecifier', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDefaultSpecifier')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDefaultSpecifier',
         local: {
           type: 'Identifier',
@@ -37,7 +39,7 @@ describe('ImportDefaultSpecifier', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportDefaultSpecifier')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportDefaultSpecifier',
         local: {
           type: 'Identifier',

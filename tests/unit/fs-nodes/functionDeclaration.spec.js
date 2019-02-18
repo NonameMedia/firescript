@@ -4,6 +4,8 @@ const FunctionDeclaration = require('../../../src/fs-nodes/FunctionDeclaration')
 
 describe('FunctionDeclaration', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a FunctionDeclaration node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'func' },
@@ -29,7 +31,7 @@ describe('FunctionDeclaration', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('FunctionDeclaration')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'bla'
       })

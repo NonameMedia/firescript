@@ -81,6 +81,51 @@ class JSElement {
     return 0
   }
 
+  addComments (arr) {
+    const Comment = require('./Comment')
+    if (this.leadingComments) {
+      arr.unshift.apply(arr, this.leadingComments.map((item) => new Comment(item)))
+    }
+
+    if (this.trailingComments) {
+      arr.push.apply(arr, this.trailingComments.map((item) => new Comment(item)))
+    }
+
+    if (this.innerComments) {
+      arr.push.apply(arr, this.innerComments)
+    }
+
+    return arr
+  }
+
+  renderLeadingComments () {
+    return this.renderComments(this.leadingComments, false)
+  }
+
+  renderTrailingComments () {
+    return this.renderComments(this.trailingComments, true)
+  }
+
+  renderInnerComments () {
+    return this.renderComments(this.innerComments, false)
+  }
+
+  wrapComments (arr) {
+    if (this.leadingComments) {
+      arr.unshift(this.renderLeadingComments())
+    }
+
+    if (this.trailingComments) {
+      arr.push(this.renderTrailingComments())
+    }
+
+    if (this.innerComments) {
+      arr.push(this.renderInnerComments())
+    }
+
+    return arr
+  }
+
   renderComments (comments, isTrailing) {
     if (!comments) return ''
 

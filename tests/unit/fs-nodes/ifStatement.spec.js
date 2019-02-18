@@ -4,6 +4,8 @@ const IfStatement = require('../../../src/fs-nodes/IfStatement')
 
 describe('IfStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an IfStatement', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'if' },
@@ -18,7 +20,7 @@ describe('IfStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('IfStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'IfStatement',
         test: {
           type: 'Identifier',
@@ -57,7 +59,7 @@ describe('IfStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('IfStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'IfStatement',
         test: {
           type: 'Identifier',
@@ -106,7 +108,7 @@ describe('IfStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('IfStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'IfStatement',
         test: {
           type: 'Identifier',
@@ -168,7 +170,7 @@ describe('IfStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('IfStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'IfStatement',
         test: {
           type: 'Identifier',

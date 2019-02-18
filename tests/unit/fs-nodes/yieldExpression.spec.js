@@ -4,6 +4,7 @@ const YieldExpression = require('../../../src/fs-nodes/YieldExpression')
 
 describe('YieldExpression', () => {
   describe('instance', () => {
+    const ctx = {}
     it('returns a YieldExpression node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'yield' },
@@ -15,7 +16,7 @@ describe('YieldExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('YieldExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'YieldExpression',
         argument: {
           type: 'Identifier',
@@ -37,7 +38,7 @@ describe('YieldExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('YieldExpression')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'YieldExpression',
         argument: {
           type: 'Identifier',

@@ -9,6 +9,8 @@ const ASSIGNMENT_OPERASTORS = [
 
 describe('AssignmentPattern', () => {
   describe('instance', () => {
+    const ctx = {}
+
     ASSIGNMENT_OPERASTORS.forEach((operator) => {
       it(`returns a AssignmentPattern, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
@@ -21,7 +23,7 @@ describe('AssignmentPattern', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('AssignmentPattern')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'AssignmentPattern',
           left: {
             type: 'Literal',
@@ -50,7 +52,7 @@ describe('AssignmentPattern', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('AssignmentPattern')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'AssignmentPattern',
           left: {
             type: 'Literal',

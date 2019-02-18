@@ -30,7 +30,7 @@ class ArrayPattern extends JSElement {
   compile (buffer) {
     buffer.registerItem(this.location)
     buffer.write('[ ')
-    buffer.write(this.elements, ', ')
+    buffer.loop(this.elements, ', ')
     buffer.write(' ]')
   }
 

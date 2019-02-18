@@ -4,6 +4,8 @@ const WhileStatement = require('../../../src/fs-nodes/WhileStatement')
 
 describe('WhileStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an WhileStatement', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'while' },
@@ -18,7 +20,7 @@ describe('WhileStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('WhileStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'WhileStatement',
         test: {
           type: 'Identifier',

@@ -4,6 +4,8 @@ const TemplateElement = require('../../../src/fs-nodes/TemplateElement')
 
 describe('TemplateElement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a TemplateElement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'template', 'value': 'Hello `${' },
@@ -15,7 +17,7 @@ describe('TemplateElement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('TemplateElement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'TemplateElement',
         value: {
           cooked: 'Hello `',

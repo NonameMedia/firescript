@@ -11,6 +11,8 @@ const BINARY_OPERASTORS = [
 
 describe('BinaryExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     BINARY_OPERASTORS.forEach((operator) => {
       it(`returns a BinaryExpression, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
@@ -23,7 +25,7 @@ describe('BinaryExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('BinaryExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'BinaryExpression',
           operator: operator,
           left: {
@@ -53,7 +55,7 @@ describe('BinaryExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('BinaryExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'BinaryExpression',
           operator: operator,
           left: {

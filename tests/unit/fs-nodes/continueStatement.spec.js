@@ -4,6 +4,8 @@ const ContinueStatement = require('../../../src/fs-nodes/ContinueStatement')
 
 describe('ContinueStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ContinueStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'continue' },
@@ -14,7 +16,7 @@ describe('ContinueStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ContinueStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ContinueStatement',
         label: null
       })
@@ -31,7 +33,7 @@ describe('ContinueStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ContinueStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ContinueStatement',
         label: null
       })

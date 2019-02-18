@@ -28,19 +28,27 @@ class FunctionDeclaration extends JSElement {
   }
 
   compile (buffer) {
-    const generator = this.generator ? ' *' : ''
+    const generator = this.generator ? '* ' : ''
     const func = this.id ? 'function ' : ''
     const async = this.async ? 'async ' : ''
-    const funcNameSpacing = func ? ' ' : ''
     const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
     buffer.registerItem(this.location)
-    buffer.write(async + func + generator + funcNameSpacing)
+
+    buffer.write(this.renderLeadingComments())
+    buffer.write(async + func + generator)
     buffer.write(this.id)
     buffer.write(funcArgSpacing + '(')
     buffer.loop(this.params, ', ')
     buffer.write(') ')
-    buffer.write(this.body, '{}')
+    if (this.body) {
+      buffer.write(this.body)
+    } else {
+      buffer.write('{')
+      buffer.write(this.renderInnerComments())
+      buffer.write('}')
+    }
+    buffer.write(this.renderTrailingComments())
   }
 
   toESString (ctx) {

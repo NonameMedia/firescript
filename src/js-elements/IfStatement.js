@@ -26,7 +26,7 @@ class IfStatement extends JSElement {
     buffer.registerItem(this.location, 'if')
     buffer.write('if (')
     buffer.write(this.test)
-    buffer.write(')')
+    buffer.write(') ')
     buffer.write(this.consequent)
 
     if (this.alternate) {

@@ -4,6 +4,8 @@ const SwitchCase = require('../../../src/fs-nodes/SwitchCase')
 
 describe('SwitchCase', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an SwitchCase', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'case' },
@@ -21,7 +23,7 @@ describe('SwitchCase', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SwitchCase')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SwitchCase',
         test: {
           type: 'Identifier',

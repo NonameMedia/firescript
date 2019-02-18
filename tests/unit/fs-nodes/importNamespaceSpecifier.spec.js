@@ -4,6 +4,8 @@ const ImportNamespaceSpecifier = require('../../../src/fs-nodes/ImportNamespaceS
 
 describe('ImportNamespaceSpecifier', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ImportNamespaceSpecifier node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'operator', 'value': '*' },
@@ -16,7 +18,7 @@ describe('ImportNamespaceSpecifier', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ImportNamespaceSpecifier')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ImportNamespaceSpecifier',
         local: {
           type: 'Identifier',

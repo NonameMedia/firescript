@@ -4,6 +4,8 @@ const BreakStatement = require('../../../src/fs-nodes/BreakStatement')
 
 describe('BreakStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a BreakStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'break' },
@@ -14,7 +16,7 @@ describe('BreakStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('BreakStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'BreakStatement',
         label: null
       })
@@ -31,7 +33,7 @@ describe('BreakStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('BreakStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'BreakStatement',
         label: null
       })

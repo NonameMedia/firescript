@@ -4,6 +4,8 @@ const ClassExpression = require('../../../src/fs-nodes/ClassExpression')
 
 describe('ClassExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ClassExpression node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'class' },
@@ -16,7 +18,7 @@ describe('ClassExpression', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('ClassExpression')
       inspect(node.id).isObject()
-      inspect(node.id.toJSON()).isEql({
+      inspect(node.id.toJSON(ctx)).isEql({
         type: 'Identifier',
         name: 'bla'
       })

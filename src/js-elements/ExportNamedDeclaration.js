@@ -34,7 +34,7 @@ class ExportNamedDeclaration extends JSElement {
     } else if (this.specifiers) {
       buffer.write('{ ')
       buffer.loop(this.specifiers, ', ')
-      buffer.write(' }')
+      buffer.write(' };')
     }
   }
 

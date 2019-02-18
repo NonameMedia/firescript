@@ -4,6 +4,8 @@ const ThrowStatement = require('../../../src/fs-nodes/ThrowStatement')
 
 describe('ThrowStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ThrowStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'throw' },
@@ -15,7 +17,7 @@ describe('ThrowStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ThrowStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ThrowStatement',
         argument: {
           type: 'Identifier',

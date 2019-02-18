@@ -60,13 +60,13 @@ class SourceBuffer {
   }
 
   indent (size, noWrite) {
-    this.line += 1
     this.column = 1
 
     size = size || 0
     this.indention += size
 
     if (!noWrite) {
+      this.line += 1
       this.write(this.getIndent())
     }
   }
@@ -76,14 +76,30 @@ class SourceBuffer {
     return this
   }
 
-  loop (arr, joiner = '') {
+  loop (arr, joiner = '', fn) {
     if (arr) {
       arr.forEach((item, index) => {
+        if (item.leadingComments) {
+          this.write(item.renderLeadingComments())
+        }
+
+        if (item.innerComments) {
+          this.write(item.renderInnerComments())
+        }
+
         if (index) {
           this.write(joiner)
         }
 
         item.compile(this)
+
+        if (item.trailingComments) {
+          this.write(item.renderTrailingComments())
+        }
+
+        if (fn && fn(item, arr[index + 1])) {
+          this.nl()
+        }
       })
     }
 

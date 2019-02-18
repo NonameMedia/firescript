@@ -28,7 +28,7 @@ class ForOfStatement extends JSElement {
     buffer.write(this.left)
     buffer.write(' of ')
     buffer.write(this.right)
-    buffer.write(')')
+    buffer.write(') ')
     buffer.write(this.body)
   }
 

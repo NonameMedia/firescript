@@ -4,6 +4,8 @@ const ExportDefaultDeclaration = require('../../../src/fs-nodes/ExportDefaultDec
 
 describe('ExportDefaultDeclaration', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a ExportDefaultDeclaration node with an ImportDefaultSpecifier', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'export' },
@@ -16,7 +18,7 @@ describe('ExportDefaultDeclaration', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ExportDefaultDeclaration')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ExportDefaultDeclaration',
         declaration: {
           type: 'Identifier',

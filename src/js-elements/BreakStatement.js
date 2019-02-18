@@ -18,8 +18,13 @@ class BreakStatement extends JSElement {
 
   compile (buffer) {
     buffer.registerItem(this.location, 'break')
-    buffer.write('break ')
-    buffer.write(this.argument)
+    buffer.write('break')
+    if (this.label) {
+      buffer.write(' ')
+      buffer.write(this.label)
+    }
+
+    buffer.write(';')
   }
 }
 

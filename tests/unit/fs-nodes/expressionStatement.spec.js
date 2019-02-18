@@ -5,6 +5,8 @@ const ExpressionStatement = require('../../../src/fs-nodes/ExpressionStatement')
 
 describe('AssignmentExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it(`returns an ExpressionStatement`, () => {
       const tokenStack = new TokenStack([
         { 'type': 'numeric', 'value': '6' },
@@ -17,7 +19,7 @@ describe('AssignmentExpression', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('ExpressionStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'ExpressionStatement',
         expression: {
           type: 'AssignmentExpression',

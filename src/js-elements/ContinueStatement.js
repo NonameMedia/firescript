@@ -18,8 +18,13 @@ class ContinueStatement extends JSElement {
 
   compile (buffer) {
     buffer.registerItem(this.location, 'continue')
-    buffer.write('continue ')
-    buffer.write(this.argument)
+    buffer.write('continue')
+    if (this.label) {
+      buffer.write(' ')
+      buffer.write(this.label)
+    }
+
+    buffer.write(';')
   }
 }
 

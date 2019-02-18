@@ -4,6 +4,8 @@ const DebuggerStatement = require('../../../src/fs-nodes/DebuggerStatement')
 
 describe('DebuggerStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a DebuggerStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'debugger' },
@@ -14,7 +16,7 @@ describe('DebuggerStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('DebuggerStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'DebuggerStatement'
       })
     })

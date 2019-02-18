@@ -4,6 +4,8 @@ const ObjectExpression = require('../../../src/fs-nodes/ObjectExpression')
 
 describe('ObjectExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an object node, using inline syntax', () => {
       const tokenStack = new TokenStack([
         { 'type': 'punctuator', 'value': '{' },
@@ -23,7 +25,7 @@ describe('ObjectExpression', () => {
       inspect(node.type).isEql('ObjectExpression')
       inspect(node.properties).isArray()
       inspect(node.properties).hasLength(2)
-      inspect(node.properties[0].toJSON()).isEql({
+      inspect(node.properties[0].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -40,7 +42,7 @@ describe('ObjectExpression', () => {
         shorthand: false
       })
 
-      inspect(node.properties[1].toJSON()).isEql({
+      inspect(node.properties[1].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -80,7 +82,7 @@ describe('ObjectExpression', () => {
       inspect(node.type).isEql('ObjectExpression')
       inspect(node.properties).isArray()
       inspect(node.properties).hasLength(2)
-      inspect(node.properties[0].toJSON()).isEql({
+      inspect(node.properties[0].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -97,7 +99,7 @@ describe('ObjectExpression', () => {
         shorthand: false
       })
 
-      inspect(node.properties[1].toJSON()).isEql({
+      inspect(node.properties[1].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -134,7 +136,7 @@ describe('ObjectExpression', () => {
       inspect(node.type).isEql('ObjectExpression')
       inspect(node.properties).isArray()
       inspect(node.properties).hasLength(2)
-      inspect(node.properties[0].toJSON()).isEql({
+      inspect(node.properties[0].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',
@@ -151,7 +153,7 @@ describe('ObjectExpression', () => {
         shorthand: false
       })
 
-      inspect(node.properties[1].toJSON()).isEql({
+      inspect(node.properties[1].toJSON(ctx)).isEql({
         type: 'Property',
         key: {
           type: 'Identifier',

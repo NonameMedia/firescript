@@ -4,6 +4,8 @@ const FirescriptLogStatement = require('../../../src/fs-nodes/FirescriptLogState
 
 describe('FirescriptLogStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a FirescriptLogStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'log' },
@@ -14,7 +16,7 @@ describe('FirescriptLogStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('FirescriptLogStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'FirescriptLogStatement',
         arguments: [
           {

@@ -4,6 +4,8 @@ const BlockStatement = require('../../../src/fs-nodes/BlockStatement')
 
 describe('BlockStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a block statement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'indention', 'value': 2 },
@@ -18,7 +20,7 @@ describe('BlockStatement', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('BlockStatement')
       inspect(node.body).isArray()
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'BlockStatement',
         body: [{
           type: 'VariableDeclaration',
@@ -58,7 +60,7 @@ describe('BlockStatement', () => {
       inspect(node).isObject()
       inspect(node.type).isEql('BlockStatement')
       inspect(node.body).isArray()
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'BlockStatement',
         body: [{
           type: 'VariableDeclaration',

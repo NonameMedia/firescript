@@ -4,7 +4,7 @@ inspect.useSinon(sinon)
 
 const SourceBuffer = require('../../src/SourceBuffer')
 
-describe.only('SourceBuffer', () => {
+describe('SourceBuffer', () => {
   describe('class', () => {
     it('returns a instance', () => {
       const buffer = new SourceBuffer()

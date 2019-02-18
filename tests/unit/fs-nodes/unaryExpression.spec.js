@@ -8,6 +8,8 @@ const UNARY_OPERATORS = [
 
 describe('UnaryExpression', () => {
   describe('instance', () => {
+    const ctx = {}
+
     UNARY_OPERATORS.forEach((operator) => {
       it(`returns a UnaryExpression, using '${operator}'`, () => {
         const tokenStack = new TokenStack([
@@ -19,7 +21,7 @@ describe('UnaryExpression', () => {
 
         inspect(node).isObject()
         inspect(node.type).isEql('UnaryExpression')
-        inspect(node.toJSON()).isEql({
+        inspect(node.toJSON(ctx)).isEql({
           type: 'UnaryExpression',
           operator: operator,
           argument: {

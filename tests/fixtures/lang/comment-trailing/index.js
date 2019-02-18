@@ -3,6 +3,4 @@
 // Third comment
 function foo () {
   return 'foo';
-}
-
-// Trailing comment
+}// Trailing comment

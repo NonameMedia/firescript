@@ -30,14 +30,15 @@ class BlockStatement extends JSElement {
   }
 
   compile (buffer) {
+    const body = this.addComments(this.body)
+    if (this.body.length === 0) {
+      buffer.write('{}')
+      return
+    }
+
     buffer.write('{')
     buffer.indent(1)
-    buffer.loop(this.innerComments, buffer.getIndent())
-    this.body.forEach((item, index) => {
-      item.compile(buffer)
-      buffer.nl(this.addEmptyLine(item, this.body[index + 1]) ? 1 : 0)
-    })
-
+    buffer.loop(body, buffer.getIndent())
     buffer.indent(-1)
     buffer.write('}')
   }

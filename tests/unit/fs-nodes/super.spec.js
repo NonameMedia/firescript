@@ -4,6 +4,8 @@ const Super = require('../../../src/fs-nodes/Super')
 
 describe('Super', () => {
   describe('instance', () => {
+    const ctx = {}
+
     const tokenStack = new TokenStack([
       { 'type': 'identifier', 'value': 'super' }
     ])

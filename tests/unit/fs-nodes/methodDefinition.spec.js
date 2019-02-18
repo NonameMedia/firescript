@@ -4,6 +4,8 @@ const MethodDefinition = require('../../../src/fs-nodes/MethodDefinition')
 
 describe('MethodDefinition', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a MethodDefinition node', () => {
       const tokenStack = new TokenStack([
         { type: 'identifier', value: 'constructor' },
@@ -17,7 +19,7 @@ describe('MethodDefinition', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('MethodDefinition')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'MethodDefinition',
         computed: false,
         kind: 'constructor',
@@ -56,7 +58,7 @@ describe('MethodDefinition', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('MethodDefinition')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'MethodDefinition',
         computed: false,
         kind: 'method',

@@ -20,6 +20,14 @@ class WhileStatement extends JSElement {
     this.body = this.createElement(ast.body)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'while')
+    buffer.write('while (')
+    buffer.write(this.test)
+    buffer.write(') ')
+    buffer.write(this.body)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       'while (' +

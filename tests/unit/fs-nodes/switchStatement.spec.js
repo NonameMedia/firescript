@@ -4,6 +4,8 @@ const SwitchStatement = require('../../../src/fs-nodes/SwitchStatement')
 
 describe('SwitchStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns an SwitchStatement', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'switch' },
@@ -24,7 +26,7 @@ describe('SwitchStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SwitchStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SwitchStatement',
         discriminant: {
           type: 'Identifier',
@@ -84,7 +86,7 @@ describe('SwitchStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('SwitchStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'SwitchStatement',
         discriminant: {
           type: 'Identifier',

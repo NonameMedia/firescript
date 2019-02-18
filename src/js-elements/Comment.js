@@ -20,7 +20,7 @@ class Comment extends JSElement {
   }
 
   compile (buffer) {
-    const commentStr = this.commentType === 'line' ? ['//', '\n'] : ['/*', '*/']
+    const commentStr = this.commentType === 'line' ? ['//', ''] : ['/*', '*/']
     buffer.write(commentStr[0] +
       this.value +
       commentStr[1])

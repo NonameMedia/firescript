@@ -19,7 +19,7 @@ class ImportNamespaceSpecifier extends JSElement {
   }
 
   compile (buffer) {
-    buffer.write('* as  ')
+    buffer.write('* as ')
     buffer.write(this.local)
   }
 

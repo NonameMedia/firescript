@@ -1,4 +1,3 @@
 case obj:
   one();
-  break;
-EOF
+  break;EOF

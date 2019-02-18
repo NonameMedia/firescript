@@ -5,6 +5,8 @@ const MetaProperty = require('../../../src/fs-nodes/MetaProperty')
 
 describe('MetaProperty', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a call expression node', () => {
       const tokenStack = new TokenStack([
         { type: 'keyword', value: 'new' },
@@ -16,7 +18,7 @@ describe('MetaProperty', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('MetaProperty')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'MetaProperty',
         meta: {
           type: 'Identifier',
@@ -40,7 +42,7 @@ describe('MetaProperty', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('MetaProperty')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'MetaProperty',
         meta: {
           type: 'Identifier',

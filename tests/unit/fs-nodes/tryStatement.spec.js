@@ -4,6 +4,8 @@ const TryStatement = require('../../../src/fs-nodes/TryStatement')
 
 describe('TryStatement', () => {
   describe('instance', () => {
+    const ctx = {}
+
     it('returns a TryStatement node', () => {
       const tokenStack = new TokenStack([
         { 'type': 'keyword', 'value': 'try' },
@@ -19,7 +21,7 @@ describe('TryStatement', () => {
 
       inspect(node).isObject()
       inspect(node.type).isEql('TryStatement')
-      inspect(node.toJSON()).isEql({
+      inspect(node.toJSON(ctx)).isEql({
         type: 'TryStatement',
         block: {
           type: 'BlockStatement',
