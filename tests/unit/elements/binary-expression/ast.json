@@ -1,0 +1,13 @@
+{
+  "type": "BinaryExpression",
+  "operator": ">=",
+  "left": {
+    "type": "Identifier",
+    "name": "num"
+  },
+  "right": {
+    "type": "Literal",
+    "value": 100,
+    "raw": "100"
+  }
+}

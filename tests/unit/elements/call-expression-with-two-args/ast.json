@@ -1,0 +1,16 @@
+{
+  "type": "CallExpression",
+  "callee": {
+    "type": "Identifier",
+    "name": "banana"
+  },
+  "arguments": [{
+    "type": "Literal",
+    "raw": "'yellow'",
+    "value": "yellow"
+  }, {
+    "type": "Literal",
+    "raw": "'fruit'",
+    "value": "fruit"
+  }]
+}

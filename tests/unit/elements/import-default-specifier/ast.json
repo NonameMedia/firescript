@@ -1,0 +1,7 @@
+{
+  "type": "ImportDefaultSpecifier",
+  "local": {
+    "type": "Identifier",
+    "name": "foo"
+  }
+}

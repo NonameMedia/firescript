@@ -26,13 +26,6 @@ class Comment extends JSElement {
       commentStr[1])
   }
 
-  toESString (ctx) {
-    const commentStr = this.commentType === 'line' ? ['//', '\n'] : ['/*', '*/']
-    return commentStr[0] +
-      this.value +
-      commentStr[1]
-  }
-
   getLength () {
     return this.value.length + (this.commentType === 'line' ? 2 : 4)
   }

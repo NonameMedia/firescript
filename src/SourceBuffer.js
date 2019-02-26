@@ -26,7 +26,8 @@ class SourceBuffer {
     if (lastIndex === -1) {
       this.column += str.length
     } else {
-      this.column += str.length - lastIndex - 1
+      // console.log('COL', this.column, str.length, lastIndex)
+      this.column = str.length - lastIndex
       this.line += (str.split('\n').length - 1)
     }
 
@@ -60,13 +61,10 @@ class SourceBuffer {
   }
 
   indent (size, noWrite) {
-    this.column = 1
-
     size = size || 0
     this.indention += size
 
     if (!noWrite) {
-      this.line += 1
       this.write(this.getIndent())
     }
   }

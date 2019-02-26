@@ -26,7 +26,8 @@ class AwaitExpression extends FirescriptNode {
   toJSON (ctx) {
     return this.createJSON(ctx, {
       type: 'AwaitExpression',
-      argument: this.argument.toJSON(ctx)
+      argument: this.argument.toJSON(ctx),
+      delegate: false
     })
   }
 }

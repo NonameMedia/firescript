@@ -1,0 +1,17 @@
+{
+  "type": "ArrayPattern",
+  "elements": [
+    {
+      "type": "Identifier",
+      "name": "one"
+    },
+    {
+      "type": "Identifier",
+      "name": "two"
+    },
+    {
+      "type": "Identifier",
+      "name": "three"
+    }
+  ]
+}
