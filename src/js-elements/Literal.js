@@ -33,7 +33,7 @@ class Literal extends JSElement {
     )
   }
 
-  getLength () {
+  getLineLength () {
     return this.raw.length
   }
 }

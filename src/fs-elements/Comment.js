@@ -26,7 +26,7 @@ class Comment extends FirescriptElement {
       commentStr[1]
   }
 
-  getLength () {
+  getLineLength () {
     return this.value.length + (this.commentType === 'line' ? 2 : 4)
   }
 }

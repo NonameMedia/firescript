@@ -59,7 +59,7 @@ class ArrayExpression extends JSElement {
       ' ]'
   }
 
-  getLength () {
+  getLineLength () {
     if (this.useMultiline()) {
       return 1
     }
@@ -67,7 +67,7 @@ class ArrayExpression extends JSElement {
     const len = 4
 
     return this.elements.reduce((num, item) => {
-      return num + item.getLength()
+      return num + item.getLineLength()
     }, len + (this.elements.length - 1) * 2)
   }
 }

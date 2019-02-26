@@ -74,8 +74,8 @@ class FirescriptElement {
     return ast.map((child) => this.createElement(child, ALLOWED_NODES, indentionSize))
   }
 
-  getLength () {
-    throw new Error(`getLength method not implemented for element ${this.type}`)
+  getLineLength () {
+    throw new Error(`getLineLength method not implemented for element ${this.type}`)
   }
 
   renderComments (comments, isTrailing) {

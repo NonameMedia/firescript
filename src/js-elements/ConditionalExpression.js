@@ -25,7 +25,7 @@ class ConditionalExpression extends JSElement {
   compile (buffer) {
     buffer.registerItem(this.location)
 
-    const useMultiline = this.getLength() > 80
+    const useMultiline = this.getLineLength() > 80
 
     buffer.write(this.test)
 
@@ -47,7 +47,7 @@ class ConditionalExpression extends JSElement {
   }
 
   toESString (ctx) {
-    const useMultiline = this.getLength() > 80
+    const useMultiline = this.getLineLength() > 80
     if (useMultiline) {
       return this.renderElement(this.renderMultiline(ctx))
     } else {
@@ -84,10 +84,10 @@ class ConditionalExpression extends JSElement {
       alternate
   }
 
-  getLength () {
-    return this.test.getLength() +
-      this.consequent.getLength() +
-      this.alternate.getLength() +
+  getLineLength () {
+    return this.test.getLineLength() +
+      this.consequent.getLineLength() +
+      this.alternate.getLineLength() +
       6
   }
 }

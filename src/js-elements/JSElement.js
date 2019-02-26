@@ -76,8 +76,8 @@ class JSElement {
     return ast.map((child) => this.createElement(child, ALLOWED_NODES, indentionSize))
   }
 
-  getLength () {
-    // console.warn(`getLength method not implemented for element ${this.type}`)
+  getLineLength () {
+    // console.warn(`getLineLength method not implemented for element ${this.type}`)
     return 0
   }
 

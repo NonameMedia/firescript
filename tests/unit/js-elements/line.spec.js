@@ -34,7 +34,7 @@ describe('Comment', () => {
     })
   })
 
-  describe('getLength()', () => {
+  describe('getLineLength()', () => {
     it('returns length of a line comment', () => {
       const ast = {
         type: 'Line',
@@ -42,7 +42,7 @@ describe('Comment', () => {
       }
 
       const el = new Comment(ast)
-      inspect(el.getLength()).isEql(17)
+      inspect(el.getLineLength()).isEql(17)
     })
 
     it('returns length of a block comment', () => {
@@ -52,7 +52,7 @@ describe('Comment', () => {
       }
 
       const el = new Comment(ast)
-      inspect(el.getLength()).isEql(20)
+      inspect(el.getLineLength()).isEql(20)
     })
   })
 })

@@ -75,7 +75,7 @@ describe('Elements', () => {
         it('(4) get length of source', () => {
           const Element = require(`../../src/js-elements/${ast.type}`)
           const jse = new Element(ast)
-          const len = jse.getLength()
+          const len = jse.getLineLength()
           inspect(`${len}`).isEql(`${metaFile.sourceLength}`)
         })
 
