@@ -161,6 +161,10 @@ class JSElement {
     str +
     (this.trailingComments ? '\n\n' + this.renderComments(this.trailingComments, true) : '')
   }
+
+  isParent (type) {
+    return this.parent && this.parent.type === type
+  }
 }
 
 module.exports = JSElement

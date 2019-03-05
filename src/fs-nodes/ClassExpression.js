@@ -30,7 +30,8 @@ class ClassExpression extends FirescriptNode {
   toJSON (ctx) {
     return this.createJSON(ctx, {
       type: 'ClassExpression',
-      body: this.body.map((item) => item.toJSON(ctx)),
+      id: this.id ? this.id.toJSON(ctx) : null,
+      body: this.body ? this.body.toJSON(ctx) : null,
       superClass: this.superClass ? this.superClass.toJSON(ctx) : null
     })
   }

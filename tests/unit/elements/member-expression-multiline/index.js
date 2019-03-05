@@ -1,1 +1,5 @@
-console.logEOF
+tree
+  .banana
+  .fruit
+  .color
+EOF

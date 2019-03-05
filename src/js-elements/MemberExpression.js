@@ -20,6 +20,7 @@ class MemberExpression extends JSElement {
     this.object = this.createElement(ast.object)
     this.property = this.createElement(ast.property)
     this.computed = ast.computed
+    this.__multilineEnabled = false
   }
 
   compile (buffer) {
@@ -28,6 +29,11 @@ class MemberExpression extends JSElement {
       buffer.write('[')
       buffer.write(this.property)
       buffer.write(']')
+    } else if (this.useMultiLine()) {
+      buffer.write(this.object)
+      buffer.indent()
+      buffer.write('.')
+      buffer.write(this.property)
     } else {
       buffer.write(this.object)
       buffer.write('.')
@@ -35,20 +41,26 @@ class MemberExpression extends JSElement {
     }
   }
 
-  toESString (ctx) {
-    if (this.computed) {
-      return this.renderElement(
-        this.object.toESString(ctx) +
-        '[' +
-        this.property.toESString(ctx) +
-        ']'
-      )
-    } else {
-      return this.renderElement(
-        this.object.toESString(ctx) +
-        '.' +
-        this.property.toESString(ctx)
-      )
+  useMultiLine () {
+    if (this.isParent('MemberExpression')) {
+      return this.__multilineEnabled
+    }
+
+    let dept = 1
+    let item = this
+    while (item.object.type === 'MemberExpression') {
+      dept += 1
+      item = item.object
+    }
+
+    this.__multilineEnabled = dept >= 3
+
+    if (dept >= 3) {
+      let item = this
+      while (item.object.type === 'MemberExpression') {
+        item.__multilineEnabled = true
+        item = item.object
+      }
     }
   }
 

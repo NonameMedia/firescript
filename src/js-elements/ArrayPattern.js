@@ -34,12 +34,12 @@ class ArrayPattern extends JSElement {
     buffer.write(' ]')
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      '[ ' +
-      ctx.join(this.elements, ', ') +
-      ' ]'
-    )
+  getLineLength () {
+    const len = 4
+
+    return this.elements.reduce((num, item) => {
+      return num + item.getLineLength()
+    }, len + (this.elements.length - 1) * 2)
   }
 }
 

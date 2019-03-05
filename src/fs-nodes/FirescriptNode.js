@@ -324,6 +324,7 @@ class FirescriptNode {
       } else if (tokenStack.expect('operator', constants.LOGICAL_OPERATORS)) {
         node = this.getNodeInstance('LogicalExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', ['.', '['])) {
+        console.log('TYPE', this.type, node.type)
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)
@@ -338,7 +339,11 @@ class FirescriptNode {
         } else {
           node = this.getNodeInstance('CallExpression', tokenStack, node)
         }
-      } else if (tokenStack.expect('punctuator', '?') && this.type !== 'ConditionalExpression') {
+      } else if (tokenStack.expect('punctuator', '?')) {
+        if (this.type === 'ConditionalExpression') {
+          return node
+        }
+
         node = this.getNodeInstance('ConditionalExpression', tokenStack, node)
         break
       } else if (tokenStack.expect('punctuator', ':')) {

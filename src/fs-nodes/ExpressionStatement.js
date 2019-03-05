@@ -4,7 +4,7 @@ class ExpressionStatement extends FirescriptNode {
   constructor (tokenStack, parent, expression) {
     super(tokenStack, parent)
 
-    this.expression = expression
+    this.expression = expression || this.createFullNode(tokenStack)
 
     this.tearDown()
   }

@@ -19,12 +19,22 @@ class ConditionalExpression extends FirescriptNode {
 
     this.test = test || this.createFullNode(tokenStack)
 
+    tokenStack.print('CONDEXP')
+
+    if (tokenStack.expect('indention')) {
+      tokenStack.goForward()
+    }
+
     if (!tokenStack.expect('punctuator', '?')) {
       this.syntaxError('Unexpected token! ? punctuator expected', tokenStack.current())
     }
 
     tokenStack.goForward()
     this.consequent = this.createFullNode(tokenStack)
+
+    if (tokenStack.expect('indention')) {
+      tokenStack.goForward()
+    }
 
     if (!tokenStack.expect('punctuator', ':')) {
       this.syntaxError('Unexpected token! : punctuator expected', tokenStack.current())

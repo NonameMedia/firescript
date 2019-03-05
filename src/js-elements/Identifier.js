@@ -19,12 +19,16 @@ class Identifier extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, this.name)
+    buffer.registerItem(this.location)
     buffer.write(this.name)
   }
 
   toESString (ctx) {
     return this.renderElement(this.name)
+  }
+
+  getLineLength () {
+    return this.name.length
   }
 }
 

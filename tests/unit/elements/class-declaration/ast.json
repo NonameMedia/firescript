@@ -1,5 +1,5 @@
 {
-  "type": "ClassExpression",
+  "type": "ClassDeclaration",
   "id": {
     "type": "Identifier",
     "name": "Banana"
