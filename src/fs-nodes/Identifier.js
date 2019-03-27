@@ -7,6 +7,10 @@ class Identifier extends FirescriptNode {
     if (name) {
       this.name = name
     } else {
+      if (tokenStack.expect('operator', ['delete', 'void', 'typeof'])) {
+        tokenStack.changeType('identifier')
+      }
+
       if (!tokenStack.expect('identifier')) {
         this.syntaxError('Unexpected Token! Identifier expected', tokenStack.current())
       }

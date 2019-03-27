@@ -84,6 +84,16 @@ function parseDefinitions (nodeDefinitions) {
   return Object.entries(nodeDefinitions.nodes).map(([ mapping, definition ]) => {
     return Object.assign(parse(mapping), definition)
   }).sort((a, b) => {
+    const aWeight = a.weight || 0
+    const bWeight = b.weight || 0
+    if (aWeight > bWeight) {
+      return -1
+    }
+
+    if (aWeight < bWeight) {
+      return 1
+    }
+
     if (a.mapping.length > b.mapping.length) {
       return -1
     }
