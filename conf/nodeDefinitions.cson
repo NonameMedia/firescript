@@ -152,5 +152,11 @@ nodes:
   'operator [instanceof,in,+,-,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
     name: 'BinaryExpression'
 
+  'operator [delete,void,typeof]':
+    weight: 1
+    scopes:
+      'ClassBody': 'MethodDefinition'
+      'MethodDefinition': 'Identifier'
+
   'operator [+,-,~,!,delete,void,typeof]':
     name: 'UnaryExpression'
