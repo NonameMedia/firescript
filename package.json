@@ -26,6 +26,7 @@
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "1.1.0",
+    "inspect.js": "^1.11.8",
     "shell-inspect": "1.2.0",
     "sinon": "^7.3.1"
   },
