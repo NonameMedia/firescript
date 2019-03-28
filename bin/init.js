@@ -13,8 +13,8 @@ function loadPkg () {
   }
 }
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('init')
     .description('Create and initialize a .firerc.json configuration file under current working dir')
     .action(async (ctx, name) => {

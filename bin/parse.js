@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const Firescript = require('../src/app')
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('parse <file> [output]')
     .option('-c,--comments', 'Include comments')
     .option('-v,--verbose', 'Verbose log')

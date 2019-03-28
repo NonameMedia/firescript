@@ -57,8 +57,8 @@ class WatchCMD {
   }
 }
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('watch [src] [dest]')
     .option('-v, --verbose', 'Verbose log')
     .description('Watch a directory and starts transpilation if a files content changes')

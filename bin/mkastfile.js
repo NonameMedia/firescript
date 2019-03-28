@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const Firescript = require('../src/app')
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('mkastfile <slug> [outfile]')
     .description('Creates an AST file from <input>')
     .option('-c, --allow-comments', 'Allow comments')

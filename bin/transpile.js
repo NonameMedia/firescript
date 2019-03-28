@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const Firescript = require('../src/app')
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('transpile <file> [output]')
     .description('Read a file and transpiles it into FireScipt or Javascript')
     .option('-v,--verbose', 'Verbose log')

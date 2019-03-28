@@ -1,8 +1,8 @@
 const fs = require('fs')
 const Firescript = require('../src/app')
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('tokenize <file>')
     .option('-j,--js', 'Format as JS instead of JSON')
     .option('-l,--location', 'Show location')

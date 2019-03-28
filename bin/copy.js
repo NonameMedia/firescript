@@ -53,8 +53,8 @@ async function copy () {
   cf.print()
 }
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('copy')
     .description('Copies files as configured by copy flag')
     .action(async (ctx) => {

@@ -83,8 +83,8 @@ async function rewriteProject (ctx) {
   }
 }
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('mktest')
     .description('Create a Firescript syntax test case')
     .option('-r,--rewrire', 'Rewrite existing test case after code change')

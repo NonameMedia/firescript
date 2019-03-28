@@ -1,8 +1,8 @@
 const Firescript = require('../src/app')
 const fsDump = require('../src/utils/fsDump')
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('try <code>')
     .option('-c,--comments', 'Include comments')
     .option('-v,--verbose', 'Verbose log')

@@ -57,8 +57,8 @@ class BuildCMD {
   }
 }
 
-module.exports = (supershit) => {
-  return supershit
+module.exports = (fireio) => {
+  return fireio
     .cmd('build [src] [dest]')
     .option('-v, --verbose', 'Verbose log')
     .description('Build project')
