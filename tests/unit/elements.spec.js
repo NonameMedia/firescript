@@ -13,7 +13,7 @@ describe('Elements', () => {
     if (testCase.isDirectory()) {
       group = testCase.name
 
-      describe.only(group, () => {
+      describe(group, () => {
         if (group.charAt(0) === '_') {
           it.skip(`${group.substr(1)} elements tests`)
           return

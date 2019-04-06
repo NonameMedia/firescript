@@ -1,0 +1,24 @@
+const path = require('path')
+const inspect = require('inspect.js')
+const sinon = require('sinon')
+inspect.useSinon(sinon)
+
+const FirescriptParser = require('../../src/FirescriptParser2').FirescriptParser
+
+describe('VariableDeclaration (const)', () => {
+  describe('next()', () => {
+    let parser
+
+    before(() => {
+      parser = new Parser({
+        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+      })
+
+      parser.parse('const banana = \'Banana\'')
+    })
+
+    it('returns a identifier item', () => {
+      const parser = new FirescriptParser();
+      const fsSource = parser.parse('const banana = \'Banana\'')
+      inspect(fsSource).isEql()
+    })

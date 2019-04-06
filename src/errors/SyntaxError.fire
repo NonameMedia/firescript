@@ -1,0 +1,17 @@
+/*
+  140 |           const res = siap.getTransfers()
+  141 |           inspect(res).isPromise()
+  142 |           inspect(await res).isEql([{
+      |                   ^
+  143 |
+  144 |           }])
+  145 |         });
+
+
+  Better error view:
+
+  * Simple syntax highlighter
+  * Mark errored object
+  * Show line nums
+
+ */

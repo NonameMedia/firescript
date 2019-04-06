@@ -1,0 +1,12 @@
+definition:
+  'keyword "const"':
+    name: 'VariableDeclaration'
+
+  'identifier':
+    name: 'Identifier'
+
+  'operator "="':
+    name: 'AssignmentOperator'
+
+  'literal':
+    name: 'Literal'
