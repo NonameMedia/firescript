@@ -32,8 +32,6 @@ class Literal extends FirescriptNode {
       this.value = token.value
     }
 
-    this.setParentToken(parent)
-
     this.tearDown()
   }
 

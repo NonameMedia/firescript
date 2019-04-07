@@ -3,22 +3,22 @@ const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
 
-const Parser = require('../../src/Parser').Parser
+const Parser = require('../../src/Parser')
 
 describe.only('Parser', () => {
-  describe('next()', () => {
+  describe('nextToken()', () => {
     let parser
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('const banana = \'Banana\'')
     })
 
     it('returns a identifier item', () => {
-      const next = parser.next()
+      const next = parser.nextToken()
       inspect(next).isEql({
         type: 'keyword',
         value: 'const',
@@ -30,7 +30,7 @@ describe.only('Parser', () => {
     })
 
     it('returns an identifier item', () => {
-      const next = parser.next()
+      const next = parser.nextToken()
       inspect(next).isEql({
         type: 'identifier',
         value: 'banana',
@@ -42,7 +42,7 @@ describe.only('Parser', () => {
     })
 
     it('returns a punctuator item', () => {
-      const next = parser.next()
+      const next = parser.nextToken()
       inspect(next).isEql({
         type: 'punctuator',
         value: '=',
@@ -54,7 +54,7 @@ describe.only('Parser', () => {
     })
 
     it('returns a literal item', () => {
-      const next = parser.next()
+      const next = parser.nextToken()
       inspect(next).isEql({
         type: 'literal',
         value: '\'Banana\'',
@@ -71,7 +71,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('banana.getItem()')
@@ -95,7 +95,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('const banana = 1')
@@ -119,7 +119,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('\'foo\' + foo')
@@ -143,7 +143,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('{ one: 1 }')
@@ -167,7 +167,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('-123')
@@ -191,7 +191,7 @@ describe.only('Parser', () => {
 
     before(() => {
       parser = new Parser({
-        definitionFile: path.join(__dirname, '../../conf/codeDefinition.cson')
+        confDir: path.join(__dirname, '../../src/fs-parser/')
       })
 
       parser.parse('/* comment */ const foo = bla')
@@ -207,6 +207,122 @@ describe.only('Parser', () => {
 
     it('throws an syntax error if item is not an comment', () => {
       inspect(parser.getComment.bind(parser)).doesThrow(SyntaxError)
+    })
+  })
+
+  describe('indention token', () => {
+    let parser
+
+    before(() => {
+      parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/')
+      })
+
+      parser.parse(
+        'import\n' +
+        '  banana\n'
+      )
+    })
+
+    it('returns an indention item', () => {
+      parser.nextToken()
+      const token = parser.nextToken()
+      inspect(token).hasProps({
+        type: 'indention',
+        value: 1,
+        index: 7,
+        length: 2,
+        column: 1,
+        line: 2
+      })
+    })
+  })
+
+  describe('checkIndention()', () => {
+    it('passes all indention tests', () => {
+      const parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/'),
+        indentionSize: 2
+      })
+
+      parser.parse(
+        'const banana =\n' +
+        '  fruit: \'Banana\'\n' +
+        '  color: \'yellow\'\n'
+      )
+
+      while (true) {
+        const token = parser.nextToken()
+        if (!token) {
+          break
+        }
+      }
+    })
+
+    it('allow double indentions', () => {
+      const parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/'),
+        indentionSize: 2
+      })
+
+      parser.parse(
+        'const banana =\n' +
+        '    fruit: \'Banana\'\n' +
+        '    color: \'yellow\'\n'
+      )
+
+      while (true) {
+        const token = parser.nextToken()
+        if (!token) {
+          break
+        }
+      }
+    })
+
+    it('fail on odd indentions', () => {
+      const parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/'),
+        indentionSize: 2
+      })
+
+      parser.parse(
+        'const banana =\n' +
+        '   fruit: \'Banana\'\n' +
+        '   color: \'yellow\'\n'
+      )
+
+      try {
+        while (true) {
+          const token = parser.nextToken()
+          if (!token) {
+            break
+          }
+        }
+
+        this.fail('Test should fail, but it passed!')
+      } catch (err) {
+        inspect(err).isInstanceOf(Error)
+        inspect(err).doesMatch(/Unexpected indention/)
+      }
+    })
+  })
+
+  describe('nextNode()', () => {
+    let parser
+
+    before(() => {
+      parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/')
+      })
+
+      parser.parse('const banana = \'Banana\'')
+    })
+
+    it('returns a VariableDeclaration node', () => {
+      const next = parser.nextNode()
+      inspect(next).hasProps({
+        type: 'VariableDeclaration'
+      })
     })
   })
 })

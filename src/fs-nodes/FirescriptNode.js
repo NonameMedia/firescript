@@ -16,13 +16,6 @@ class FirescriptNode {
     this.firstToken = tokenStack.current()
   }
 
-  setParentToken (parent, token) {
-    // parent.lastToken = this.tokenStack.previous()
-    // if (parent.parent) {
-    //   parent.setParentToken(parent.parent)
-    // }
-  }
-
   tearDown () {
     this.lastToken = this.tokenStack.previousToken()
   }

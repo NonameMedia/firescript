@@ -48,11 +48,11 @@ class Program extends FirescriptNode {
 
     while (true) {
       const node = parser.next()
-      if (!node || node.type === 'Null') {
+      if (!node) {
         break
       }
 
-      if (node.type === 'Comment') {
+      if (node.type === 'comment') {
         comments.push(node)
         continue
       }

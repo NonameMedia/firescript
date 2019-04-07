@@ -37,6 +37,7 @@
     "fireio": "^0.2.1",
     "firescript-runtime": "^0.3.1",
     "firescript-test": "^0.7.1",
+    "inspect.js": "^1.11.8",
     "superarr": "0.1.0",
     "superconf": "^1.2.1",
     "superfs": "^0.12.2",

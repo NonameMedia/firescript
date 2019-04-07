@@ -1,4 +1,7 @@
 definition:
+  'block-comment':
+    name: 'Comment'
+
   'comment':
     name: 'Comment'
 
@@ -26,6 +29,10 @@ definition:
   'identifier > punctuator "."':
     scopes:
       'NewExpression': 'MemberExpression'
+
+  'identifier [str,bool,arr,obj,num] > identifier':
+    scopes:
+      'VariableDeclaration': 'FirescriptTyping'
 
   'keyword "import"':
     name: 'ImportDeclaration'

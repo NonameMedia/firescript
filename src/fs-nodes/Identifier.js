@@ -20,8 +20,6 @@ class Identifier extends FirescriptNode {
 
       this.tearDown()
     }
-
-    this.setParentToken(parent)
   }
 
   toJSON (ctx) {

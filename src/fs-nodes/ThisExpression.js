@@ -10,8 +10,6 @@ class ThisExpression extends FirescriptNode {
       this.syntaxError(`ThisExpression expected, but a ${token.type} was given`, token)
     }
 
-    this.setParentToken(parent)
-
     this.tearDown()
   }
 

@@ -9,8 +9,6 @@ class Super extends FirescriptNode {
     }
 
     tokenStack.goForward()
-
-    this.setParentToken(parent)
   }
 
   toJSON (ctx) {
