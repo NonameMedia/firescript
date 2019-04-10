@@ -79,22 +79,26 @@ class NodeDefinition {
 
     return {
       mapping: mapping,
-      test: (token) => mapping.every((definition, offset) => {
-        if (!token) {
-          return false
-        }
-
-        if (definition.value && Array.isArray(definition.value)) {
-          return definition.value.indexOf(token.value) >= 0
-        } else if (definition.value && definition.value instanceof RegExp) {
-          return definition.value.test(token.value)
-        } else if (definition.value && token.value !== definition.value) {
-          return false
-        }
-
-        return Array.isArray(definition.type)
-          ? definition.type.some((t) => t === token.type)
-          : token.type === definition.type
+      // test: (token) => mapping.every((definition, offset) => {
+      //   if (!token) {
+      //     return false
+      //   }
+      //
+      //   if (definition.value && Array.isArray(definition.value)) {
+      //     return definition.value.indexOf(token.value) >= 0
+      //   } else if (definition.value && definition.value instanceof RegExp) {
+      //     return definition.value.test(token.value)
+      //   } else if (definition.value && token.value !== definition.value) {
+      //     return false
+      //   }
+      //
+      //   return Array.isArray(definition.type)
+      //     ? definition.type.some((t) => t === token.type)
+      //     : token.type === definition.type
+      // })
+      test: (tokenBuffer) => mapping.every((definition, offset) => {
+        // console.log('TESTMATCH', definition, offset)
+        return tokenBuffer.match(definition.type, definition.value || definition.valueReg, offset)
       })
     }
   }
@@ -152,9 +156,9 @@ class NodeDefinition {
     })
   }
 
-  resolve (token) {
+  resolve (tokenBuffer) {
     const definition = this.nodeDefinition.find((mapping, index) => {
-      if (!mapping.test(token)) {
+      if (!mapping.test(tokenBuffer)) {
         return false
       }
 

@@ -1,10 +1,12 @@
 const Node = require('./Node')
 
 class VariableDeclaration extends Node {
-  constructor (parser, token) {
-    super(parser, token)
+  constructor (parser) {
+    super(parser)
 
-    this.kind = token.value || parser.getIdentifireValue()
+    const token = parser.nextToken()
+    this.kind = token.value
+
     if (!['var', 'let', 'const'].includes(this.kind)) {
       parser.syntaxError('Unexpected token, keyword var let or const expected')
     }
@@ -12,8 +14,7 @@ class VariableDeclaration extends Node {
     this.declarations = []
 
     while (true) {
-      const nextToken = parser.nextToken()
-      this.declarations.push(parser.createNode('VariableDeclarator', nextToken))
+      this.declarations.push(parser.createNode('VariableDeclarator'))
       if (parser.expect('punctuator', ',')) {
         parser.nextToken()
         continue

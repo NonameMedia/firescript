@@ -1,8 +1,9 @@
 const superconf = require('superconf')
+const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 
 class Parser {
-  constructor (opts) {
+  constructor (opts = {}) {
     this.indentionSize = opts.indentionSize || 2
     this.confDir = opts.confDir
 
@@ -14,7 +15,7 @@ class Parser {
       confDir: this.confDir
     })
 
-    this.tokenBuffer = null
+    this.tokenBuffer = new TokenBuffer()
 
     // console.log('DEFINITIONS', this.definitionFile)
     // console.log('DEFINITIONS', this.definition)
@@ -72,11 +73,9 @@ class Parser {
    * @method  nextToken
    * @returns {[type]} [description]
    */
-  nextToken () {
-    if (this.tokenBuffer) {
-      const token = this.tokenBuffer
-      this.tokenBuffer = null
-      return token
+  nextToken (skipBuffer) {
+    if (!skipBuffer && this.tokenBuffer.length) {
+      return this.tokenBuffer.shift()
     }
 
     let res = null
@@ -97,29 +96,36 @@ class Parser {
   }
 
   nextNode () {
-    const token = this.nextToken()
-    return this.resolveToken(token)
+    return this.resolveToken()
   }
 
-  resolveToken (token) {
+  resolveToken () {
+    const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
+      return Math.max(num, item.mapping.length)
+    }, 0)
+
+    // console.log('BUFFERFILLSIZE', bufferFillSize)
+    const tokenBuffer = this.fillBuffer(bufferFillSize)
+    const nodeName = this.nodeDefinition.resolve(tokenBuffer)
+    // console.log('NODENAME', nodeName)
+    if (!nodeName) {
+      this.syntaxError('Unexpected token')
+    }
+
+    const token = this.nextToken()
     if (token === null) {
       return null
     }
 
-    const nodeName = this.nodeDefinition.resolve(token)
-    console.log('NODENAME', nodeName)
     const node = this.createNode(nodeName, token)
-    console.log('NODE', node)
+    // console.log('NODE', node)
     return node
   }
 
   createNode (nodeName, token) {
-    if (!token) {
-      token = this.nextToken()
-    }
-
+    console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
     const Node = require(`${this.confDir}nodes/${nodeName}`)
-    const node = new Node(this, token)
+    const node = new Node(this)
     return node
   }
 
@@ -222,19 +228,20 @@ class Parser {
     }
   }
 
-  sourcePreview () {
-    const startLine = Math.max(0, this.line - 3)
-    const endLine = Math.max(0, this.line)
+  sourcePreview (token) {
+    const startLine = Math.max(0, token.line - 3)
+    const endLine = Math.max(0, token.line)
     const source = this.source.split('\n')
     const previewArr = source.slice(startLine, endLine)
     return previewArr.map((line, index) => {
       const lineNum = ` ${startLine + index + 1}`.slice(-String(endLine).length)
       return `${lineNum} | ${line}\n`
-    }).join('').concat(`${' '.repeat(this.column + String(endLine).length + 2)}^\n`)
+    }).join('').concat(`${' '.repeat(token.column + String(endLine).length + 2)}^\n`)
   }
 
-  syntaxError (msg) {
-    throw new SyntaxError(`${msg} ${this.sourcePreview()}`)
+  syntaxError (msg, token) {
+    token = token || this.tokenBuffer[0]
+    throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}\n${this.sourcePreview(token)}`)
   }
 
   getIdentifier () {
@@ -303,8 +310,8 @@ class Parser {
   }
 
   expect (type, value) {
-    const token = this.nextToken()
-    this.tokenBuffer = token
+    const tokenBuffer = this.fillBuffer(1)
+    const token = tokenBuffer[0]
     if (!token) {
       return false
     }
@@ -320,6 +327,93 @@ class Parser {
     return Array.isArray(type)
       ? type.some((t) => t === token.type)
       : token.type === type
+  }
+
+  match (matchString) {
+    // const reg = this.parseMatchString(matchString)
+    // const matchItem = matchString.split('>').map((match) => {
+    //   return match.trim()
+    // })
+
+    const matchDefinition = this.nodeDefinition.parse(matchString)
+
+    const tokenBuffer = this.fillBuffer(matchDefinition.mapping.length)
+    return matchDefinition.test(tokenBuffer)
+  }
+
+  // parseMatchString (matchString) {
+  //   const match = matchString.split('>').map((item) => {
+  //     const match = item.match(/(\w+)?(?:\s+"(\w+)")?(?:\s+\[(.+)\])?/)
+  //     console.log('MATCH', match)
+  //     if (match[2]) {
+  //       return match[2]
+  //     }
+  //
+  //     if (match[3]) {
+  //       return match[3].replace(/,/g, '|')
+  //     }
+  //
+  //     if (match[1] === 'identifier') {
+  //       return '\\w+'
+  //     }
+  //
+  //     if (match[1] === 'keyword') {
+  //       return this.keyWords.join('|')
+  //     }
+  //
+  //     if (match[1] === 'operator') {
+  //
+  //     }
+  //   }).join(')|()')
+  //
+  //   return new RegExp(`(${match})`)
+  // }
+
+  /**
+   * Fills the token buffer with `numItems` items
+   *
+   * @param  {number} numItems Number of items the buffer should be filled with
+   * @return {object} Returns the filled buffer
+   */
+  fillBuffer (numItems) {
+    for (let i = this.tokenBuffer.length; i < numItems; i++) {
+      const token = this.nextToken(true)
+      if (!token) {
+        break
+      }
+
+      this.tokenBuffer.push(token)
+    }
+
+    return this.tokenBuffer
+  }
+
+  /**
+   * Returns the position of the next token
+   *
+   * {
+   *   index: {number}
+   *   length: {number}
+   *   line: {number}
+   *   column: {number}
+   *   indention: {number}
+   * }
+   *
+   * @return {object} Returns a object
+   */
+  getPosition () {
+    if (this.tokenBuffer.length === 0) {
+      this.fillBuffer(1)
+    }
+
+    const token = this.tokenBuffer[0]
+    return {
+      index: token.index,
+      length: token.length,
+      line: token.line,
+      column: token.column,
+      indention: token.indention
+    }
   }
 }
 

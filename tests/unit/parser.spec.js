@@ -318,11 +318,116 @@ describe.only('Parser', () => {
       parser.parse('const banana = \'Banana\'')
     })
 
-    it('returns a VariableDeclaration node', () => {
+    it.only('returns a VariableDeclaration node', () => {
       const next = parser.nextNode()
-      inspect(next).hasProps({
-        type: 'VariableDeclaration'
+      inspect.print(next)
+      const node = next.resolve()
+      inspect(node).hasProps({
+        type: 'VariableDeclaration',
+        kind: 'const'
       })
+    })
+  })
+
+  describe.skip('parseMatchString()', () => {
+    const parser = new Parser({
+      confDir: path.join(__dirname, '../../src/fs-parser/')
+    })
+
+    parser.keyWords = ['foo', 'bar', 'bla']
+
+    it('should match a keyword word', () => {
+      const reg = parser.parseMatchString('identifier "static"')
+      inspect(reg).isEql(/(static)/)
+    })
+
+    it('should match a keyword word list', () => {
+      const reg = parser.parseMatchString('identifier [get,set]')
+      inspect(reg).isEql(/(get|set)/)
+    })
+
+    it('should match an identifier', () => {
+      const reg = parser.parseMatchString('identifier')
+      inspect(reg).isEql(/(\w+)/)
+    })
+
+    it('should match a keyword', () => {
+      const reg = parser.parseMatchString('keyword')
+      inspect(reg).isEql(/(foo|bar|bla)/)
+    })
+  })
+
+  describe('fillBuffer()', () => {
+    it('should fill the buffer with three items', () => {
+      const parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/')
+      })
+
+      parser.parse('const banana = \'Banana\'')
+      parser.fillBuffer(3)
+
+      inspect(parser.tokenBuffer).isArray()
+      inspect(parser.tokenBuffer).hasLength(3)
+      inspect(parser.tokenBuffer).getItem(0).hasProps({
+        type: 'keyword',
+        value: 'const'
+      })
+
+      inspect(parser.tokenBuffer).getItem(1).hasProps({
+        type: 'identifier',
+        value: 'banana'
+      })
+
+      inspect(parser.tokenBuffer).getItem(2).hasProps({
+        type: 'punctuator',
+        value: '='
+      })
+    })
+
+    it('should never overload the buffer', () => {
+      const parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/')
+      })
+
+      parser.parse('const banana = \'Banana\'')
+      parser.fillBuffer(7)
+
+      inspect(parser.tokenBuffer).isArray()
+      inspect(parser.tokenBuffer).hasLength(4)
+      inspect(parser.tokenBuffer).getItem(0).hasProps({
+        type: 'keyword',
+        value: 'const'
+      })
+
+      inspect(parser.tokenBuffer).getItem(1).hasProps({
+        type: 'identifier',
+        value: 'banana'
+      })
+
+      inspect(parser.tokenBuffer).getItem(2).hasProps({
+        type: 'punctuator',
+        value: '='
+      })
+    })
+  })
+
+  describe('match()', () => {
+    const parser = new Parser({
+      confDir: path.join(__dirname, '../../src/fs-parser/')
+    })
+
+    parser.keyWords = ['foo', 'bar', 'bla']
+
+    it('match an identifier', () => {
+      parser.parse('get banana()')
+      const match = parser.match('identifier "get" > identifier')
+      inspect(match).isTrue()
+    })
+
+    it('matches a "=" punctuator', () => {
+      parser.parse('= foo')
+      const match = parser.match('punctuator "="')
+      inspect(match).isTrue()
     })
   })
 })

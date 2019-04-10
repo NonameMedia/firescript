@@ -1,4 +1,4 @@
-const FirescriptNode = require('./FirescriptNode')
+const Node = require('./Node')
 
 const ALLOWED_CHILDS = [
   'ThisExpression', 'Identifier', 'Literal',
@@ -9,9 +9,15 @@ const ALLOWED_CHILDS = [
   'YieldExpression', 'AssignmentExpression', 'SequenceExpression', 'TemplateLiteral'
 ]
 
-class VariableDeclarator extends FirescriptNode {
+class VariableDeclarator extends Node {
   constructor (parser, token) {
     super(parser, token)
+
+    console.log('VARDCSS', token)
+
+    if (!this.expect('identifier')) {
+      this.syntaxError('Unexpected token, identifier expected')
+    }
 
     // TODO support binding patterns
     // if (parser.expect('punctuator', '[')) {
@@ -34,28 +40,30 @@ class VariableDeclarator extends FirescriptNode {
       this.id = node
     }
 
-    if (parser.expect('operator', '=')) {
-      tokenStack.goForward()
+    if (parser.match('punctuator "="')) {
+      parser.nextNode()
 
-      if (parser.expect('indention')) {
-        if (this.isObjectExpression(tokenStack)) {
-          this.init = this.createObjectExpressionNode(tokenStack)
-        // }
-        // const objectExpressionNode = this.tryObjectExpression(tokenStack)
-        // if (objectExpressionNode) {
-        //   this.init = objectExpressionNode
-        } else {
-          const arrayExpressionNode = this.tryArrayExpression(tokenStack)
-          if (arrayExpressionNode) {
-            this.init = arrayExpressionNode
-          } else {
-            this.syntaxError('Unexpected token!', tokenStack.current())
-          }
-        }
-      } else {
-        this.init = this.createFullNode(tokenStack)
-        this.isAllowedNode(this.init, ALLOWED_CHILDS)
-      }
+      this.init = parser.nextNode()
+      this.isAllowedNode(this.init, ALLOWED_CHILDS)
+      // if (parser.expect('indention')) {
+      //   if (this.isObjectExpression(tokenStack)) {
+      //     this.init = this.createObjectExpressionNode(tokenStack)
+      //   // }
+      //   // const objectExpressionNode = this.tryObjectExpression(tokenStack)
+      //   // if (objectExpressionNode) {
+      //   //   this.init = objectExpressionNode
+      //   } else {
+      //     const arrayExpressionNode = this.tryArrayExpression(tokenStack)
+      //     if (arrayExpressionNode) {
+      //       this.init = arrayExpressionNode
+      //     } else {
+      //       this.syntaxError('Unexpected token!', tokenStack.current())
+      //     }
+      //   }
+      // } else {
+      //   this.init = this.createFullNode(tokenStack)
+      //   this.isAllowedNode(this.init, ALLOWED_CHILDS)
+      // }
     }
   }
 
