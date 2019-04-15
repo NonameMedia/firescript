@@ -310,21 +310,65 @@ describe.only('Parser', () => {
   describe('nextNode()', () => {
     let parser
 
-    before(() => {
+    beforeEach(() => {
       parser = new Parser({
         confDir: path.join(__dirname, '../../src/fs-parser/')
       })
-
-      parser.parse('const banana = \'Banana\'')
     })
 
-    it.only('returns a VariableDeclaration node', () => {
+    it('returns a VariableDeclaration node', () => {
+      parser.parse('const banana = \'Banana\'')
       const next = parser.nextNode()
       inspect.print(next)
       const node = next.resolve()
       inspect(node).hasProps({
         type: 'VariableDeclaration',
         kind: 'const'
+      })
+    })
+
+    it('returns a MemberExpression node', () => {
+      parser.parse('fruits.banana = \'Banana\'')
+      const next = parser.nextNode()
+      inspect.print(next)
+      const node = next.resolve()
+      inspect.print(node)
+      inspect(node).hasProps({
+        type: 'MemberExpression',
+        object: {
+          type: 'Identifier',
+          name: 'fruits'
+        },
+        property: {
+          type: 'Identifier',
+          name: 'banana'
+        }
+      })
+    })
+
+    it.only('returns a MemberExpression node', () => {
+      parser.parse('tree.fruits.banana = \'Banana\'')
+      const next = parser.nextNode()
+      inspect.print(next)
+      const node = next.resolve()
+      inspect.print(node)
+      inspect(node).hasProps({
+        type: 'MemberExpression',
+        object: {
+          type: 'MemberExpression',
+          object: {
+            type: 'Identifier',
+            name: 'tree'
+          },
+          property: {
+            type: 'Identifier',
+            name: 'fruits'
+          }
+        },
+        property: {
+          type: 'Identifier',
+          name: 'banana'
+        }
       })
     })
   })

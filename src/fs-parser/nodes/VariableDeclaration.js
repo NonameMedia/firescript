@@ -15,7 +15,7 @@ class VariableDeclaration extends Node {
 
     while (true) {
       this.declarations.push(parser.createNode('VariableDeclarator'))
-      if (parser.expect('punctuator', ',')) {
+      if (parser.match('punctuator ","')) {
         parser.nextToken()
         continue
       }

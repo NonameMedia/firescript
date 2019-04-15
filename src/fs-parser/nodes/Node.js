@@ -1,6 +1,6 @@
 class Node {
   constructor (parser) {
-    const pos = this.getPosition()
+    const pos = parser.getPosition()
 
     this.type = this.constructor.name
     this.index = pos.index
@@ -8,6 +8,19 @@ class Node {
     this.line = pos.line
     this.column = pos.column
     this.indention = pos.indention
+    // this.parse()
+    this.syntaxError = parser.syntaxError.bind(parser)
+  }
+
+  isAllowedNode (child, validTokens) {
+    const type = child === null ? 'null' : child.type
+    if (!validTokens.includes(type)) {
+      if (child.type === null) {
+        this.syntaxError(`Unexpected EOF`)
+      }
+
+      this.syntaxError(`Token ${type} not allowed within a ${this.type}`)
+    }
   }
 
   createJSON (ctx, obj) {
@@ -35,6 +48,11 @@ class Node {
     // }
 
     return obj
+  }
+
+  toJSON () {
+    console.log('TOJSON')
+    return this.resolve()
   }
 }
 

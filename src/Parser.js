@@ -1,4 +1,3 @@
-const superconf = require('superconf')
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 
@@ -99,6 +98,10 @@ class Parser {
     return this.resolveToken()
   }
 
+  skipNext () {
+    return this.tokenBuffer.shift()
+  }
+
   resolveToken () {
     const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
       return Math.max(num, item.mapping.length)
@@ -108,16 +111,15 @@ class Parser {
     const tokenBuffer = this.fillBuffer(bufferFillSize)
     const nodeName = this.nodeDefinition.resolve(tokenBuffer)
     // console.log('NODENAME', nodeName)
+    if (tokenBuffer.length === 0) {
+      return null
+    }
+
     if (!nodeName) {
       this.syntaxError('Unexpected token')
     }
 
-    const token = this.nextToken()
-    if (token === null) {
-      return null
-    }
-
-    const node = this.createNode(nodeName, token)
+    const node = this.createNode(nodeName)
     // console.log('NODE', node)
     return node
   }
@@ -309,25 +311,25 @@ class Parser {
     this.syntaxError('Comment token expected')
   }
 
-  expect (type, value) {
-    const tokenBuffer = this.fillBuffer(1)
-    const token = tokenBuffer[0]
-    if (!token) {
-      return false
-    }
-
-    if (value && Array.isArray(value)) {
-      return value.indexOf(token.value) >= 0
-    } else if (value && value instanceof RegExp) {
-      return value.test(token.value)
-    } else if (value && token.value !== value) {
-      return false
-    }
-
-    return Array.isArray(type)
-      ? type.some((t) => t === token.type)
-      : token.type === type
-  }
+  // expect (type, value) {
+  //   const tokenBuffer = this.fillBuffer(1)
+  //   const token = tokenBuffer[0]
+  //   if (!token) {
+  //     return false
+  //   }
+  //
+  //   if (value && Array.isArray(value)) {
+  //     return value.indexOf(token.value) >= 0
+  //   } else if (value && value instanceof RegExp) {
+  //     return value.test(token.value)
+  //   } else if (value && token.value !== value) {
+  //     return false
+  //   }
+  //
+  //   return Array.isArray(type)
+  //     ? type.some((t) => t === token.type)
+  //     : token.type === type
+  // }
 
   match (matchString) {
     // const reg = this.parseMatchString(matchString)

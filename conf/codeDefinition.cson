@@ -19,13 +19,8 @@ definition:
   'identifier':
     name: 'Identifier'
 
-  'identifier "this" > punctuator "."':
-    scopes:
-      'NewExpression': 'MemberExpression'
-
   'identifier > punctuator "."':
-    scopes:
-      'NewExpression': 'MemberExpression'
+    name: 'MemberExpression'
 
   'keyword "import"':
     name: 'ImportDeclaration'
