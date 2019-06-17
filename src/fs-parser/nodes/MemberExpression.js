@@ -27,35 +27,50 @@ const ALLOWED_CHILDS = [
 ]
 
 class MemberExpression extends Node {
-  constructor (parser, object) {
+  constructor (parser, object, property) {
     super(parser)
 
-    this.object = object || parser.nextNode()
-    this.computed = false
-    // this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
-    //
-    if (parser.match('indention')) {
-      parser.nextToken()
-    }
-
-    if (parser.match('punctuator "["')) {
-      this.computed = true
-      parser.nextToken()
-      this.property = parser.nextNode()
-
-      if (parser.match('punctuator', ']')) {
-        parser.nextToken()
-      } else {
-        parser.syntaxError('Unexpected token')
-      }
-    } else if (parser.match('punctuator "."')) {
-      parser.nextToken()
-      this.property = parser.nextNode()
+    if (object) {
+      this.object = object
     } else {
-      parser.syntaxError('Unexpected token')
+      const memberExpressionStack = []
+      while (parser.match('identifier > punctuator "."')) {
+        memberExpressionStack.push(parser.nextToken())
+      }
+
+      console.log('MEMSTACK', memberExpressionStack)
+      while (memberExpressionStack.length > 0) {
+        const property = memberExpressionStack.pop()
+      }
     }
-    //
-    // this.isAllowedNode(this.object, ALLOWED_CHILDS, tokenStack.current())
+    this.computed = false
+    this.isAllowedNode(this.object, ALLOWED_CHILDS)
+
+    // if (tokenStack.expect('indention')) {
+    //   tokenStack.goForward()
+    // }
+
+    // if (!tokenStack.expect('punctuator', ['.', '['])) {
+    //   this.syntaxError('Unexpected token', tokenStack.current())
+    // }
+
+    if (parser.match('punctuator "."')) {
+      parser.skipNext()
+      this.property = parser.nextNode()
+    } else if (parser.match('punctuator "["')) {
+      this.computed = true
+      parser.skipNext()
+      this.property = parser.nextNode()
+      if (!parser.match('punctuator "]"')) {
+        this.syntaxError('Unexpected token, `]` char expected')
+      }
+
+      parser.skipNext()
+    } else {
+      this.syntaxError('Unexpected token')
+    }
+
+    this.isAllowedNode(this.object, ALLOWED_CHILDS)
   }
 
   resolve (ctx) {

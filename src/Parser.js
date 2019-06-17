@@ -1,4 +1,3 @@
-const superconf = require('superconf')
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 const NodeMapping = require('./NodeMapping')
@@ -118,6 +117,10 @@ class Parser {
     return this.resolveToken()
   }
 
+  skipNext () {
+    return this.tokenBuffer.shift()
+  }
+
   resolveNodeName () {
     const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
       return Math.max(num, item.mapping.length)
@@ -130,11 +133,11 @@ class Parser {
   resolveToken () {
     const nodeName = this.resolveNodeName()
     // console.log('NODENAME', nodeName)
-    if (!nodeName) {
-      if (this.tokenBuffer.length === 0) {
-        return null
-      }
+    if (this.tokenBuffer.length === 0) {
+      return null
+    }
 
+    if (!nodeName) {
       this.syntaxError('Unexpected token')
     }
 
@@ -348,25 +351,25 @@ class Parser {
     this.syntaxError('Comment token expected', token)
   }
 
-  expect (type, value) {
-    const tokenBuffer = this.fillBuffer(1)
-    const token = tokenBuffer[0]
-    if (!token) {
-      return false
-    }
-
-    if (value && Array.isArray(value)) {
-      return value.indexOf(token.value) >= 0
-    } else if (value && value instanceof RegExp) {
-      return value.test(token.value)
-    } else if (value && token.value !== value) {
-      return false
-    }
-
-    return Array.isArray(type)
-      ? type.some((t) => t === token.type)
-      : token.type === type
-  }
+  // expect (type, value) {
+  //   const tokenBuffer = this.fillBuffer(1)
+  //   const token = tokenBuffer[0]
+  //   if (!token) {
+  //     return false
+  //   }
+  //
+  //   if (value && Array.isArray(value)) {
+  //     return value.indexOf(token.value) >= 0
+  //   } else if (value && value instanceof RegExp) {
+  //     return value.test(token.value)
+  //   } else if (value && token.value !== value) {
+  //     return false
+  //   }
+  //
+  //   return Array.isArray(type)
+  //     ? type.some((t) => t === token.type)
+  //     : token.type === type
+  // }
 
   match (matchString) {
     // const reg = this.parseMatchString(matchString)

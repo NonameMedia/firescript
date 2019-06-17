@@ -13,8 +13,20 @@ class VariableDeclarator extends Node {
   constructor (parser) {
     super(parser)
 
-    if (!parser.match('identifier')) {
-      this.syntaxError('Unexpected token, identifier expected')
+    this.fsTyping = null
+
+    if (parser.match('identifier')) {
+      if (parser.match('identifier > identifier')) {
+        this.fsTyping = parser.createNode('FirescriptTyping')
+      }
+
+      this.id = parser.createNode('Identifier')
+    } else if (parser.match('punctuator', '[')) {
+      this.id = parser.createNode('ArrayPattern')
+    } else if (parser.match('punctuator', '{')) {
+      this.id = parser.createNode('ObjectPattern')
+    } else {
+      parser.syntaxError('Unexpected token, identifier expected')
     }
 
     // TODO support binding patterns
@@ -30,16 +42,16 @@ class VariableDeclarator extends Node {
     //
     // }
 
-    const node = parser.nextNode()
-    if (node.type === 'FirescriptTyping') {
-      this.fsTyping = node
-      this.id = parser.nextNode()
-    } else {
-      this.id = node
-    }
+    // const node = parser.nextNode()
+    // if (node.type === 'FirescriptTyping') {
+    //   this.fsTyping = node
+    //   this.id = parser.nextNode()
+    // } else {
+    //   this.id = node
+    // }
 
     if (parser.match('punctuator "="')) {
-      parser.nextToken()
+      parser.skipNext()
 
       this.init = parser.nextNode()
       this.isAllowedNode(this.init, ALLOWED_CHILDS)
@@ -65,25 +77,25 @@ class VariableDeclarator extends Node {
     }
   }
 
-  isForLoop () {
-    return (
-      this.tokenStack.lookForward('identifier', 'in') && this.parent.parent.type === 'ForInStatement'
-    ) || (
-      this.tokenStack.lookForward('identifier', 'of') && this.parent.parent.type === 'ForOfStatement'
-    )
-  }
-
-  tryObject (tokenStack) {
-    return tokenStack.expect('indention') &&
-      tokenStack.lookForward('identifier', null, 1) &&
-      tokenStack.lookForward('punctuator', ':', 2)
-  }
-
-  tryArray (tokenStack) {
-    return tokenStack.expect('indention') &&
-      tokenStack.lookForward('identifier', null, 1) &&
-      tokenStack.lookForward('punctuator', ':', 2)
-  }
+  // isForLoop () {
+  //   return (
+  //     this.tokenStack.lookForward('identifier', 'in') && this.parent.parent.type === 'ForInStatement'
+  //   ) || (
+  //     this.tokenStack.lookForward('identifier', 'of') && this.parent.parent.type === 'ForOfStatement'
+  //   )
+  // }
+  //
+  // tryObject (tokenStack) {
+  //   return tokenStack.expect('indention') &&
+  //     tokenStack.lookForward('identifier', null, 1) &&
+  //     tokenStack.lookForward('punctuator', ':', 2)
+  // }
+  //
+  // tryArray (tokenStack) {
+  //   return tokenStack.expect('indention') &&
+  //     tokenStack.lookForward('identifier', null, 1) &&
+  //     tokenStack.lookForward('punctuator', ':', 2)
+  // }
 
   resolve (ctx) {
     return this.createJSON(ctx, {

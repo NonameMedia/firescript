@@ -4,17 +4,17 @@ class Literal extends Node {
   constructor (parser) {
     super(parser)
 
+    if (!parser.match('literal')) {
+      parser.syntaxError('Unexpected token, literal expected')
+    }
+
     const token = parser.nextToken()
     this.raw = token.value
 
-    if (token.type === 'numeric') {
-      if (/^0[box]/.test(token.value)) {
-        this.value = Number(token.value)
-      } else if (/^\d+(e\d+)?$/.test(token.value)) {
-        this.value = parseInt(token.value, 10)
-      } else if (/^\d+\.\d+(e\d+)?$/.test(token.value)) {
-        this.value = parseFloat(token.value, 10)
-      }
+    if (/^-?\d+$/.test(token.value)) {
+      this.value = parseInt(token.value, 10)
+    } else if (/^-?\d+\.\d+$/.test(token.value)) {
+      this.value = parseFloat(token.value, 10)
     } else if (/^["'`]/.test(token.value)) {
       this.value = token.value.slice(1, -1)
     } else if (token.value === 'true') {
