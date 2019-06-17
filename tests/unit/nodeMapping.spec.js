@@ -5,7 +5,7 @@ inspect.useSinon(sinon)
 
 const NodeMapping = require('../../src/NodeMapping')
 
-describe.only('Node mappings', () => {
+describe('Node mappings', () => {
   describe('instance', () => {
     it('initialize and parse a node mapping', () => {
       const nodeMapping = new NodeMapping({

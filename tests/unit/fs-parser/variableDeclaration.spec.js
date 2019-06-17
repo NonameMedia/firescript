@@ -6,7 +6,7 @@ inspect.useSinon(sinon)
 
 const Parser = require('../../../src/Parser')
 
-describe.only('VariableDeclaration (const)', () => {
+describe('VariableDeclaration (const)', () => {
   describe('resolveNodeName()', () => {
     let parser
 

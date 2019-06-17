@@ -104,10 +104,19 @@ class NodeMapping {
       //     ? definition.type.some((t) => t === token.type)
       //     : token.type === definition.type
       // })
-      test: (node, tokenBuffer) => mapping.every((definition, offset) => {
-        // console.log('TESTMATCH', definition, offset)
-        return node.type === definition.node && tokenBuffer.match(definition.type, definition.value || definition.valueReg, offset)
-      })
+      test: (node, tokenBuffer) => {
+        let bufferOffset = 0
+        mapping.every((definition, offset) => {
+          console.log('TESTMATCH', node.type, definition, offset, bufferOffset)
+          if (definition.node) {
+            return node.type === definition.node
+          } else {
+            bufferOffset += 1
+          }
+
+          return tokenBuffer.match(definition.type, definition.value || definition.valueReg, bufferOffset)
+        })
+      }
     }
   }
 
@@ -172,6 +181,8 @@ class NodeMapping {
 
       return (!mapping.scopes && mapping.name) || mapping.scopes[this.type] || mapping.name
     })
+
+    console.log('NODE MAPPING', node, tokenBuffer, definition)
 
     if (definition) {
       if (definition.scopes && definition.scopes[this.type]) {

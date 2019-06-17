@@ -30,19 +30,22 @@ class MemberExpression extends Node {
   constructor (parser, object, property) {
     super(parser)
 
-    if (object) {
-      this.object = object
-    } else {
-      const memberExpressionStack = []
-      while (parser.match('identifier > punctuator "."')) {
-        memberExpressionStack.push(parser.nextToken())
-      }
+    console.log('MEMEXP', object, property)
 
-      console.log('MEMSTACK', memberExpressionStack)
-      while (memberExpressionStack.length > 0) {
-        const property = memberExpressionStack.pop()
-      }
-    }
+    // if (object) {
+    //   this.object = object
+    // } else {
+    //   const memberExpressionStack = []
+    //   while (parser.match('identifier > punctuator "."')) {
+    //     memberExpressionStack.push(parser.nextToken())
+    //   }
+    //
+    //   console.log('MEMSTACK', memberExpressionStack)
+    //   while (memberExpressionStack.length > 0) {
+    //     const property = memberExpressionStack.pop()
+    //   }
+    // }
+
     this.computed = false
     this.isAllowedNode(this.object, ALLOWED_CHILDS)
 

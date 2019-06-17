@@ -51,7 +51,7 @@ class Node {
   }
 
   toJSON () {
-    console.log('TOJSON')
+    console.log('TOJSON in', this.type)
     return this.resolve()
   }
 }

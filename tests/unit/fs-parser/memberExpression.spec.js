@@ -23,7 +23,7 @@ describe.only('MemberExpression', () => {
     })
   })
 
-  describe('createNode()', () => {
+  describe('nextNode()', () => {
     let parser
 
     beforeEach(() => {
@@ -34,7 +34,7 @@ describe.only('MemberExpression', () => {
 
     it('returns a MemberExpression item', () => {
       parser.parse('fruits.banana')
-      const node = parser.createNode('MemberExpression')
+      const node = parser.nextNode()
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,
@@ -51,7 +51,7 @@ describe.only('MemberExpression', () => {
 
     it('returns a MemberExpression with a MemberExpression', () => {
       parser.parse('fruits.banana.color')
-      const node = parser.createNode('MemberExpression')
+      const node = parser.nextNode('MemberExpression')
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,

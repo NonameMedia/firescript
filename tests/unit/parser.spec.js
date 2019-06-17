@@ -346,7 +346,7 @@ describe('Parser', () => {
       })
     })
 
-    it.only('returns a MemberExpression node', () => {
+    it.skip('returns a MemberExpression node', () => {
       parser.parse('tree.fruits.banana = \'Banana\'')
       const next = parser.nextNode()
       inspect.print(next)

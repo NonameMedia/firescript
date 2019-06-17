@@ -133,11 +133,12 @@ class Parser {
   resolveToken () {
     const nodeName = this.resolveNodeName()
     // console.log('NODENAME', nodeName)
-    if (this.tokenBuffer.length === 0) {
-      return null
-    }
 
     if (!nodeName) {
+      if (this.tokenBuffer.length === 0) {
+        return null
+      }
+
       this.syntaxError('Unexpected token')
     }
 
@@ -157,6 +158,7 @@ class Parser {
     const node = new Node(this)
 
     const wrapNodeName = this.nodeMapping.resolve(node, this.tokenBuffer)
+    console.log('WRAP NODE', nodeName, wrapNodeName)
     if (!wrapNodeName) {
       return node
     }

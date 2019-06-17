@@ -22,8 +22,8 @@ definition:
   'identifier':
     name: 'Identifier'
 
-  'identifier > punctuator "."':
-    name: 'MemberExpression'
+  # 'identifier > punctuator "."':
+  #   name: 'MemberExpression'
 
   'identifier [str,bool,arr,obj,num] > identifier':
     scopes:
