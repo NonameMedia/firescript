@@ -35,8 +35,8 @@ const ALLOWED_MODULE_CHILDS = [
  *  }
  */
 class Program extends FirescriptNode {
-  constructor (parser, parent, sourceType) {
-    super(parser, parent)
+  constructor (tokenStack, parent, sourceType) {
+    super(tokenStack, parent)
 
     this.isBlockScope = true
     this.sourceType = sourceType || 'module'
@@ -47,7 +47,7 @@ class Program extends FirescriptNode {
     const ALLOWED_CHILDS = this.sourceType === 'module' ? ALLOWED_SCRIPT_CHILDS.concat(ALLOWED_MODULE_CHILDS) : ALLOWED_SCRIPT_CHILDS
 
     while (true) {
-      const node = parser.next()
+      const node = tokenStack.next()
       if (!node) {
         break
       }

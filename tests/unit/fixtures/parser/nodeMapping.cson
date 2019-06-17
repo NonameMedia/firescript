@@ -1,0 +1,3 @@
+mapping:
+  'FunctionExpression > punctuator "."':
+    name: 'MemberExpression'

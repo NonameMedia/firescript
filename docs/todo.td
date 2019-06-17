@@ -49,7 +49,7 @@ block scoping                           [ (*) syntax, (*) docs, (*) highlighter 
 Tests:
 ------
 
-ArrayExpression                             [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
+ArrayExpression                             [ (*) FSN (/) JSE (/) FSE (*) Syntax ]
 ArrayPattern                                [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ArrowFunctionExpression                     [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 AssignmentExpression                        [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
@@ -83,13 +83,13 @@ ForOfStatement                              [ (*) FSN (*) JSE (*) FSE (*) Syntax
 ForStatement                                [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 FunctionDeclaration                         [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 FunctionExpression                          [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
-Identifier                                  [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
+Identifier                                  [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 IfStatement                                 [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportDeclaration                           [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportDefaultSpecifier                      [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportNamespaceSpecifier                    [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportSpecifier                             [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
-Literal                                     [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
+Literal                                     [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 LogicalExpression                           [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 MemberExpression                            [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 MetaProperty                                [ (*) FSN (*) JSE (*) FSE (*) Syntax ]

@@ -1,6 +1,7 @@
 const superconf = require('superconf')
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
+const NodeMapping = require('./NodeMapping')
 
 class Parser {
   constructor (opts = {}) {
@@ -12,6 +13,10 @@ class Parser {
     }
 
     this.nodeDefinition = new NodeDefinition({
+      confDir: this.confDir
+    })
+
+    this.nodeMapping = new NodeMapping({
       confDir: this.confDir
     })
 
@@ -36,6 +41,24 @@ class Parser {
       end: '\'',
       escape: '\\'
     }, {
+      type: 'numeric',
+      pattern: /(0b[01]+)|(0x[a-f0-9]+)|(0o\d+)/i
+    }, {
+      type: 'numeric',
+      pattern: /\d+(\.\d+)?(e\d+)?/
+    }, {
+      type: 'literal',
+      pattern: /(true|false|null)/i
+    }, {
+      type: 'comment',
+      begin: /\/\*/,
+      end: /\*\//
+    }, {
+      type: 'literal',
+      begin: /\//,
+      end: /\/[gmsiy]*/,
+      escape: '\\'
+    }, {
       type: 'identifier',
       pattern: /\w+/
     }, {
@@ -44,10 +67,6 @@ class Parser {
     }, {
       type: 'operator',
       pattern: /\+|-/
-    }, {
-      type: 'comment',
-      begin: /\/\*/,
-      end: /\*\//
     }, {
       type: 'comment',
       pattern: /#.*$/
@@ -99,26 +118,33 @@ class Parser {
     return this.resolveToken()
   }
 
-  resolveToken () {
+  resolveNodeName () {
     const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
       return Math.max(num, item.mapping.length)
     }, 0)
 
-    // console.log('BUFFERFILLSIZE', bufferFillSize)
     const tokenBuffer = this.fillBuffer(bufferFillSize)
-    const nodeName = this.nodeDefinition.resolve(tokenBuffer)
+    return this.nodeDefinition.resolve(tokenBuffer)
+  }
+
+  resolveToken () {
+    const nodeName = this.resolveNodeName()
     // console.log('NODENAME', nodeName)
     if (!nodeName) {
+      if (this.tokenBuffer.length === 0) {
+        return null
+      }
+
       this.syntaxError('Unexpected token')
     }
 
-    const token = this.nextToken()
-    if (token === null) {
-      return null
-    }
-
-    const node = this.createNode(nodeName, token)
+    const node = this.createNode(nodeName)
     // console.log('NODE', node)
+
+    // if (this.match('punctuator > "."')) {
+    //   return this.createNode('MemberExpression', node)
+    // }
+
     return node
   }
 
@@ -126,7 +152,17 @@ class Parser {
     console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
     const Node = require(`${this.confDir}nodes/${nodeName}`)
     const node = new Node(this)
-    return node
+
+    const wrapNodeName = this.nodeMapping.resolve(node, this.tokenBuffer)
+    if (!wrapNodeName) {
+      return node
+    }
+
+    const WrapNode = require(`${this.confDir}nodes/${wrapNodeName}`)
+    const wrapNode = new WrapNode(this, node)
+    console.log('WRAPNODE', node.type, ' => ', wrapNodeName)
+
+    return wrapNode
   }
 
   createMatcher (arr) {
@@ -240,7 +276,11 @@ class Parser {
   }
 
   syntaxError (msg, token) {
-    token = token || this.tokenBuffer[0]
+    if (!token) {
+      this.fillBuffer(1)
+      token = this.tokenBuffer[0]
+    }
+
     throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}\n${this.sourcePreview(token)}`)
   }
 
@@ -251,7 +291,7 @@ class Parser {
       return token
     }
 
-    this.syntaxError('Identifier token expected')
+    this.syntaxError('Identifier token expected', token)
   }
 
   getIdentifierValue () {
@@ -266,7 +306,7 @@ class Parser {
       return token
     }
 
-    this.syntaxError('Keyword token expected')
+    this.syntaxError('Keyword token expected', token)
   }
 
   getLiteral () {
@@ -276,7 +316,7 @@ class Parser {
       return token
     }
 
-    this.syntaxError('Literal token expected')
+    this.syntaxError('Literal token expected', token)
   }
 
   getPunctuator () {
@@ -286,7 +326,7 @@ class Parser {
       return token
     }
 
-    this.syntaxError('Punctuator token expected')
+    this.syntaxError('Punctuator token expected', token)
   }
 
   getOperator () {
@@ -296,17 +336,16 @@ class Parser {
       return token
     }
 
-    this.syntaxError('Operator token expected')
+    this.syntaxError('Operator token expected', token)
   }
 
   getComment () {
     const token = this.nextToken()
-    // console.log('TOKEN', token, this.index)
     if (token.type === 'comment') {
       return token
     }
 
-    this.syntaxError('Comment token expected')
+    this.syntaxError('Comment token expected', token)
   }
 
   expect (type, value) {

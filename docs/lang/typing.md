@@ -1,7 +1,7 @@
 Typing
 ======
 
-Firescript has dynamic typing support. Dynamic typing checks data types during runtime of a program. Static typing is planned and might be comming soon.
+Firescript has dynamic typing support. Dynamic typing checks data types during runtime of a program. Static typing is planned but not implemented yet.
 
 Firescript supports typing on declaring variables and in function arguments. Typing can be a keyword from list below to set a data type or a class name to check for class instances
 

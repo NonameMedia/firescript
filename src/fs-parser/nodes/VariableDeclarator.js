@@ -10,12 +10,10 @@ const ALLOWED_CHILDS = [
 ]
 
 class VariableDeclarator extends Node {
-  constructor (parser, token) {
-    super(parser, token)
+  constructor (parser) {
+    super(parser)
 
-    console.log('VARDCSS', token)
-
-    if (!this.expect('identifier')) {
+    if (!parser.match('identifier')) {
       this.syntaxError('Unexpected token, identifier expected')
     }
 
@@ -41,7 +39,7 @@ class VariableDeclarator extends Node {
     }
 
     if (parser.match('punctuator "="')) {
-      parser.nextNode()
+      parser.nextToken()
 
       this.init = parser.nextNode()
       this.isAllowedNode(this.init, ALLOWED_CHILDS)
@@ -87,12 +85,12 @@ class VariableDeclarator extends Node {
       tokenStack.lookForward('punctuator', ':', 2)
   }
 
-  toJSON (ctx) {
+  resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'VariableDeclarator',
-      id: this.id.toJSON(ctx),
-      init: this.init ? this.init.toJSON(ctx) : null,
-      fsTyping: this.fsTyping ? this.fsTyping.toJSON(ctx) : null
+      id: this.id.resolve(ctx),
+      init: this.init ? this.init.resolve(ctx) : null,
+      fsTyping: this.fsTyping ? this.fsTyping.resolve(ctx) : null
     })
   }
 }

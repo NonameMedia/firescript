@@ -5,7 +5,7 @@ inspect.useSinon(sinon)
 
 const Parser = require('../../src/Parser')
 
-describe.only('Parser', () => {
+describe('Parser', () => {
   describe('nextToken()', () => {
     let parser
 
@@ -301,6 +301,7 @@ describe.only('Parser', () => {
 
         this.fail('Test should fail, but it passed!')
       } catch (err) {
+        console.log('ERR', err)
         inspect(err).isInstanceOf(Error)
         inspect(err).doesMatch(/Unexpected indention/)
       }
@@ -318,9 +319,8 @@ describe.only('Parser', () => {
       parser.parse('const banana = \'Banana\'')
     })
 
-    it.only('returns a VariableDeclaration node', () => {
+    it('returns a VariableDeclaration node', () => {
       const next = parser.nextNode()
-      inspect.print(next)
       const node = next.resolve()
       inspect(node).hasProps({
         type: 'VariableDeclaration',
@@ -412,11 +412,15 @@ describe.only('Parser', () => {
   })
 
   describe('match()', () => {
-    const parser = new Parser({
-      confDir: path.join(__dirname, '../../src/fs-parser/')
-    })
+    let parser
 
-    parser.keyWords = ['foo', 'bar', 'bla']
+    beforeEach(() => {
+      parser = new Parser({
+        confDir: path.join(__dirname, '../../src/fs-parser/')
+      })
+
+      parser.keyWords = ['foo', 'bar', 'bla']
+    })
 
     it('match an identifier', () => {
       parser.parse('get banana()')

@@ -1,6 +1,6 @@
 class Node {
   constructor (parser) {
-    const pos = this.getPosition()
+    const pos = parser.getPosition()
 
     this.type = this.constructor.name
     this.index = pos.index
@@ -35,6 +35,17 @@ class Node {
     // }
 
     return obj
+  }
+
+  isAllowedNode (child, validTokens) {
+    const type = child === null ? 'null' : child.type
+    if (!validTokens.includes(type)) {
+      if (child.type === 'Null') {
+        this.syntaxError(`Unexpected EOF`)
+      }
+
+      this.syntaxError(`Token ${type} not allowed within a ${this.type}`)
+    }
   }
 }
 
