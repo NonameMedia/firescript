@@ -46,44 +46,55 @@ class MemberExpression extends Node {
     }
 
     if (object) {
-      memberExpressionStack.push(object)
+      memberExpressionStack.push([object, false])
     }
 
     while (true) {
       if (parser.match('punctuator "."')) {
         parser.skipNext()
-        memberExpressionStack.push(parser.nextRealNode())
+        memberExpressionStack.push([parser.nextRealNode(), false])
       } else if (parser.match('punctuator "["')) {
         parser.skipNext()
-        memberExpressionStack.push(parser.nextRealNode())
+        memberExpressionStack.push([parser.nextRealNode(), true])
         if (!parser.match('punctuator "]"')) {
           this.syntaxError('Unexpected token, `]` char expected')
         }
+
+        parser.skipNext()
       } else {
         break
       }
     }
 
     if (memberExpressionStack.length === 2) {
-      this.object = memberExpressionStack.shift()
-      this.property = memberExpressionStack.shift()
-      this.computed = this.property.type === 'Literal'
-      return
-    }
+      const obj = memberExpressionStack.shift()
+      this.object = obj[0]
 
-    this.property = memberExpressionStack.pop()
-
-    let obj
-    let child
-    while (memberExpressionStack.length > 0) {
-      obj = obj || memberExpressionStack.shift()
       const prop = memberExpressionStack.shift()
-      child = new MemberExpression(parser, obj, prop)
-      obj = child
-    }
+      this.property = prop[0]
+      this.computed = prop[1]
+    } else {
+      const prop = memberExpressionStack.pop()
+      this.property = prop[0]
+      this.computed = prop[1]
 
-    this.object = obj
-    this.isAllowedNode(this.object, ALLOWED_CHILDS)
+      let obj
+      let child
+      while (memberExpressionStack.length > 0) {
+        if (!obj) {
+          const item = memberExpressionStack.shift()
+          obj = item[0]
+        }
+
+        const prop = memberExpressionStack.shift()
+        child = new MemberExpression(parser, obj, prop[0])
+        child.computed = prop[1]
+        obj = child
+      }
+
+      this.object = obj
+      this.isAllowedNode(this.object, ALLOWED_CHILDS)
+    }
   }
 
   resolve (ctx) {

@@ -9,7 +9,6 @@ class NodeMapping {
       throw new Error('The Parser.confDir parameter must be set!')
     }
 
-    console.log('PATH', this.confDir)
     const nodeMapping = superconf('nodeMapping', {
       cwd: this.confDir
     })
@@ -107,17 +106,12 @@ class NodeMapping {
       test: (node, tokenBuffer) => {
         let bufferOffset = -1
         return mapping.every((definition) => {
-          console.log('TESTMATCH', node.type, definition, bufferOffset)
           if (definition.node) {
-            console.log('TEST1', node.type === definition.node)
             return node.type === definition.node
           } else {
             bufferOffset += 1
           }
 
-          console.log('TEST2', definition.type, definition.value, definition.valueReg, bufferOffset)
-          console.log('TEST2', tokenBuffer.match(definition.type, definition.value || definition.valueReg, bufferOffset))
-          console.log('BUFFER', bufferOffset, tokenBuffer)
           return tokenBuffer.match(definition.type, definition.value || definition.valueReg, bufferOffset)
         })
       }
@@ -185,8 +179,6 @@ class NodeMapping {
 
       return (!mapping.scopes && mapping.name) || mapping.scopes[this.type] || mapping.name
     })
-
-    console.log('NODE MAPPING', node, tokenBuffer, definition)
 
     if (definition) {
       if (definition.scopes && definition.scopes[this.type]) {

@@ -47,7 +47,6 @@ describe.only('MemberExpression', () => {
     it('returns a MemberExpression with a MemberExpression', () => {
       parser.parse('fruits.banana.color')
       const node = parser.nextNode('MemberExpression')
-      console.log('MEMEXNODE', node)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,
@@ -106,7 +105,6 @@ describe.only('MemberExpression', () => {
     it('returns a MemberExpression item, computed syntax', () => {
       parser.parse('fruits[\'banana\']')
       const node = parser.nextNode()
-      console.log('MEMEXNODE 1', node)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': true,
@@ -125,7 +123,6 @@ describe.only('MemberExpression', () => {
     it('returns a MemberExpression with a MemberExpression', () => {
       parser.parse('fruits[\'banana\'][\'color\']')
       const node = parser.nextNode('MemberExpression')
-      console.log('MEMEXNODE 2', node)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': true,
@@ -189,7 +186,6 @@ describe.only('MemberExpression', () => {
     it.skip('returns a MemberExpression item with a function expression', () => {
       parser.parse('fruits.getBanana()')
       const node = parser.nextNode()
-      console.log('MEMNODE', node)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,
@@ -207,7 +203,6 @@ describe.only('MemberExpression', () => {
     it.skip('returns a MemberExpression with a MemberExpression', () => {
       parser.parse('fruits.banana.color')
       const node = parser.nextNode('MemberExpression')
-      console.log('MEMEXNODE', node)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,

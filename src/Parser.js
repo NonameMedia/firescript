@@ -32,9 +32,6 @@ class Parser {
     })
 
     this.tokenBuffer = new TokenBuffer()
-
-    // console.log('DEFINITIONS', this.definitionFile)
-    // console.log('DEFINITIONS', this.definition)
   }
 
   parse (source) {
@@ -131,11 +128,10 @@ class Parser {
 
   showNext () {
     this.fillBuffer(1)
-    console.log('NEXT BUFFER ITEM', this.buffer[0])
   }
 
   createNode (nodeName, token, skipWrapNode) {
-    console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
+    // console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
     const Node = require(path.join(this.confDir, `nodes/${nodeName}`))
     const node = new Node(this)
 
@@ -144,14 +140,14 @@ class Parser {
     }
 
     const wrapNodeName = this.nodeMapping.resolve(node, this.tokenBuffer)
-    console.log('WRAP NODE', nodeName, wrapNodeName)
+    // console.log('WRAP NODE', nodeName, wrapNodeName)
     if (!wrapNodeName) {
       return node
     }
 
     const WrapNode = require(path.join(this.confDir, `nodes/${wrapNodeName}`))
     const wrapNode = new WrapNode(this, node)
-    console.log('WRAPNODE', node.type, ' => ', wrapNodeName)
+    // console.log('WRAPNODE', node.type, ' => ', wrapNodeName)
 
     return wrapNode
   }
@@ -445,6 +441,11 @@ class Parser {
       column: token.column,
       indention: token.indention
     }
+  }
+
+  print () {
+    this.fillBuffer(5)
+    console.log(this.tokenBuffer)
   }
 }
 
