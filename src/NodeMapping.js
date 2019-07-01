@@ -83,7 +83,7 @@ class NodeMapping {
       }
     })
 
-    this.mapping = mapping
+    // this.mapping = mapping
 
     return {
       mapping: mapping,
@@ -105,15 +105,19 @@ class NodeMapping {
       //     : token.type === definition.type
       // })
       test: (node, tokenBuffer) => {
-        let bufferOffset = 0
-        mapping.every((definition, offset) => {
-          console.log('TESTMATCH', node.type, definition, offset, bufferOffset)
+        let bufferOffset = -1
+        return mapping.every((definition) => {
+          console.log('TESTMATCH', node.type, definition, bufferOffset)
           if (definition.node) {
+            console.log('TEST1', node.type === definition.node)
             return node.type === definition.node
           } else {
             bufferOffset += 1
           }
 
+          console.log('TEST2', definition.type, definition.value, definition.valueReg, bufferOffset)
+          console.log('TEST2', tokenBuffer.match(definition.type, definition.value || definition.valueReg, bufferOffset))
+          console.log('BUFFER', bufferOffset, tokenBuffer)
           return tokenBuffer.match(definition.type, definition.value || definition.valueReg, bufferOffset)
         })
       }

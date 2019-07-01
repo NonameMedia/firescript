@@ -1,3 +1,5 @@
+const path = require('path')
+
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 const NodeMapping = require('./NodeMapping')
@@ -6,9 +8,19 @@ class Parser {
   constructor (opts = {}) {
     this.indentionSize = opts.indentionSize || 2
     this.confDir = opts.confDir
+    this.matcherConf = opts.matcher
+    this.keyWords = opts.keyWords
 
     if (!this.confDir) {
       throw new Error('The Parser.confDir parameter must be set!')
+    }
+
+    if (!this.matcherConf) {
+      throw new Error('The Parser.matcher parameter must be set!')
+    }
+
+    if (!this.keyWords) {
+      throw new Error('The Parser.keyWords parameter must be set!')
     }
 
     this.nodeDefinition = new NodeDefinition({
@@ -32,47 +44,8 @@ class Parser {
     this.indention = 0
     this.source = source
     this.length = source.length
-    this.keyWords = ['const']
 
-    this.parserFuncs = this.createMatcher([{
-      type: 'literal',
-      begin: '\'',
-      end: '\'',
-      escape: '\\'
-    }, {
-      type: 'numeric',
-      pattern: /(0b[01]+)|(0x[a-f0-9]+)|(0o\d+)/i
-    }, {
-      type: 'numeric',
-      pattern: /\d+(\.\d+)?(e\d+)?/
-    }, {
-      type: 'literal',
-      pattern: /(true|false|null)/i
-    }, {
-      type: 'comment',
-      begin: /\/\*/,
-      end: /\*\//
-    }, {
-      type: 'literal',
-      begin: /\//,
-      end: /\/[gmsiy]*/,
-      escape: '\\'
-    }, {
-      type: 'identifier',
-      pattern: /\w+/
-    }, {
-      type: 'punctuator',
-      pattern: /=|\.|\{|\}|:/
-    }, {
-      type: 'operator',
-      pattern: /\+|-/
-    }, {
-      type: 'comment',
-      pattern: /#.*$/
-    }, {
-      type: 'indention',
-      pattern: /\n\s*/
-    }])
+    this.parserFuncs = this.createMatcher(this.matcherConf)
   }
 
   /**
@@ -117,6 +90,10 @@ class Parser {
     return this.resolveToken()
   }
 
+  nextRealNode () {
+    return this.resolveToken(true)
+  }
+
   skipNext () {
     return this.tokenBuffer.shift()
   }
@@ -130,7 +107,7 @@ class Parser {
     return this.nodeDefinition.resolve(tokenBuffer)
   }
 
-  resolveToken () {
+  resolveToken (skipWrapNode) {
     const nodeName = this.resolveNodeName()
     // console.log('NODENAME', nodeName)
 
@@ -142,7 +119,7 @@ class Parser {
       this.syntaxError('Unexpected token')
     }
 
-    const node = this.createNode(nodeName)
+    const node = this.createNode(nodeName, null, skipWrapNode)
     // console.log('NODE', node)
 
     // if (this.match('punctuator > "."')) {
@@ -152,10 +129,19 @@ class Parser {
     return node
   }
 
-  createNode (nodeName, token) {
+  showNext () {
+    this.fillBuffer(1)
+    console.log('NEXT BUFFER ITEM', this.buffer[0])
+  }
+
+  createNode (nodeName, token, skipWrapNode) {
     console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
-    const Node = require(`${this.confDir}nodes/${nodeName}`)
+    const Node = require(path.join(this.confDir, `nodes/${nodeName}`))
     const node = new Node(this)
+
+    if (skipWrapNode) {
+      return node
+    }
 
     const wrapNodeName = this.nodeMapping.resolve(node, this.tokenBuffer)
     console.log('WRAP NODE', nodeName, wrapNodeName)
@@ -163,7 +149,7 @@ class Parser {
       return node
     }
 
-    const WrapNode = require(`${this.confDir}nodes/${wrapNodeName}`)
+    const WrapNode = require(path.join(this.confDir, `nodes/${wrapNodeName}`))
     const wrapNode = new WrapNode(this, node)
     console.log('WRAPNODE', node.type, ' => ', wrapNodeName)
 
@@ -270,6 +256,7 @@ class Parser {
   }
 
   sourcePreview (token) {
+    token = token || this
     const startLine = Math.max(0, token.line - 3)
     const endLine = Math.max(0, token.line)
     const source = this.source.split('\n')
@@ -283,7 +270,7 @@ class Parser {
   syntaxError (msg, token) {
     if (!token) {
       this.fillBuffer(1)
-      token = this.tokenBuffer[0]
+      token = this.tokenBuffer[0] || this
     }
 
     throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}\n${this.sourcePreview(token)}`)

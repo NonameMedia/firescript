@@ -4,15 +4,14 @@ const sinon = require('sinon')
 inspect.useSinon(sinon)
 
 const Parser = require('../../src/Parser')
+const parserConf = require('../../src/fs-parser/parserConf')
 
 describe('Parser', () => {
   describe('nextToken()', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('const banana = \'Banana\'')
     })
@@ -70,9 +69,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('banana.getItem()')
     })
@@ -94,9 +91,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('const banana = 1')
     })
@@ -118,9 +113,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('\'foo\' + foo')
     })
@@ -142,9 +135,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('{ one: 1 }')
     })
@@ -166,9 +157,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('-123')
     })
@@ -190,9 +179,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse('/* comment */ const foo = bla')
     })
@@ -214,9 +201,7 @@ describe('Parser', () => {
     let parser
 
     before(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.parse(
         'import\n' +
@@ -312,9 +297,7 @@ describe('Parser', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
     })
 
     it('returns a VariableDeclaration node', () => {
@@ -374,9 +357,7 @@ describe('Parser', () => {
   })
 
   describe.skip('parseMatchString()', () => {
-    const parser = new Parser({
-      confDir: path.join(__dirname, '../../src/fs-parser/')
-    })
+    const parser = new Parser(parserConf)
 
     parser.keyWords = ['foo', 'bar', 'bla']
 
@@ -403,9 +384,7 @@ describe('Parser', () => {
 
   describe('fillBuffer()', () => {
     it('should fill the buffer with three items', () => {
-      const parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      const parser = new Parser(parserConf)
 
       parser.parse('const banana = \'Banana\'')
       parser.fillBuffer(3)
@@ -429,9 +408,7 @@ describe('Parser', () => {
     })
 
     it('should never overload the buffer', () => {
-      const parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      const parser = new Parser(parserConf)
 
       parser.parse('const banana = \'Banana\'')
       parser.fillBuffer(7)
@@ -459,9 +436,7 @@ describe('Parser', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
 
       parser.keyWords = ['foo', 'bar', 'bla']
     })

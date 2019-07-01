@@ -14,6 +14,7 @@ class NodeDefinition {
     })
 
     this.nodeDefinition = this.parseDefinition(nodeDefinition.definition)
+    this.keywords = nodeDefinition.keywords
   }
 
   parse (definitionPattern) {

@@ -28,51 +28,61 @@ const ALLOWED_CHILDS = [
 
 class MemberExpression extends Node {
   constructor (parser, object, property) {
-    super(parser)
+    super(parser, object)
 
-    console.log('MEMEXP', object, property)
+    // console.log('MEMEXP', object, property)
 
-    // if (object) {
-    //   this.object = object
-    // } else {
-    //   const memberExpressionStack = []
-    //   while (parser.match('identifier > punctuator "."')) {
-    //     memberExpressionStack.push(parser.nextToken())
-    //   }
-    //
-    //   console.log('MEMSTACK', memberExpressionStack)
-    //   while (memberExpressionStack.length > 0) {
-    //     const property = memberExpressionStack.pop()
-    //   }
-    // }
-
+    const memberExpressionStack = []
     this.computed = false
-    this.isAllowedNode(this.object, ALLOWED_CHILDS)
 
-    // if (tokenStack.expect('indention')) {
-    //   tokenStack.goForward()
-    // }
+    if (object && property) {
+      this.object = object
+      this.property = property
 
-    // if (!tokenStack.expect('punctuator', ['.', '['])) {
-    //   this.syntaxError('Unexpected token', tokenStack.current())
-    // }
-
-    if (parser.match('punctuator "."')) {
-      parser.skipNext()
-      this.property = parser.nextNode()
-    } else if (parser.match('punctuator "["')) {
-      this.computed = true
-      parser.skipNext()
-      this.property = parser.nextNode()
-      if (!parser.match('punctuator "]"')) {
-        this.syntaxError('Unexpected token, `]` char expected')
+      if (property.type === 'Literal') {
+        this.computed = true
       }
-
-      parser.skipNext()
-    } else {
-      this.syntaxError('Unexpected token')
+      return
     }
 
+    if (object) {
+      memberExpressionStack.push(object)
+    }
+
+    while (true) {
+      if (parser.match('punctuator "."')) {
+        parser.skipNext()
+        memberExpressionStack.push(parser.nextRealNode())
+      } else if (parser.match('punctuator "["')) {
+        parser.skipNext()
+        memberExpressionStack.push(parser.nextRealNode())
+        if (!parser.match('punctuator "]"')) {
+          this.syntaxError('Unexpected token, `]` char expected')
+        }
+      } else {
+        break
+      }
+    }
+
+    if (memberExpressionStack.length === 2) {
+      this.object = memberExpressionStack.shift()
+      this.property = memberExpressionStack.shift()
+      this.computed = this.property.type === 'Literal'
+      return
+    }
+
+    this.property = memberExpressionStack.pop()
+
+    let obj
+    let child
+    while (memberExpressionStack.length > 0) {
+      obj = obj || memberExpressionStack.shift()
+      const prop = memberExpressionStack.shift()
+      child = new MemberExpression(parser, obj, prop)
+      obj = child
+    }
+
+    this.object = obj
     this.isAllowedNode(this.object, ALLOWED_CHILDS)
   }
 

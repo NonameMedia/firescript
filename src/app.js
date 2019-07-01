@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const FirescriptTokenizer = require('./FirescriptTokenizer')
 const FirescriptParser = require('./FirescriptParser')
+const Parser = require('./Parser')
 const JSParser = require('./JSParser')
 const FirescriptTranspiler = require('./FirescriptTranspiler')
 const JSTranspiler = require('./JSTranspiler')
@@ -13,6 +14,7 @@ module.exports = {
   FirescriptTranspiler,
   JSTranspiler,
   JSParser,
+  Parser,
   tokenize (input, opts) {
     const tokenizer = new FirescriptTokenizer(opts)
     return tokenizer.tokenize(input)

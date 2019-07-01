@@ -7,7 +7,7 @@ const NodeMapping = require('../../src/NodeMapping')
 
 describe('Node mappings', () => {
   describe('instance', () => {
-    it('initialize and parse a node mapping', () => {
+    it.only('initialize and parse a node mapping', () => {
       const nodeMapping = new NodeMapping({
         confDir: path.join(__dirname, './fixtures/parser/')
       })

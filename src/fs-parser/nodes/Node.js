@@ -1,6 +1,6 @@
 class Node {
-  constructor (parser) {
-    const pos = parser.getPosition()
+  constructor (parser, child) {
+    const pos = child || parser.getPosition()
 
     this.type = this.constructor.name
     this.index = pos.index

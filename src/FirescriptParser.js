@@ -1,8 +1,7 @@
-const path = require('path')
-
 const Program = require('./fs-nodes/Program')
 const ParserContext = require('./ParserContext')
 const Parser = require('./Parser')
+const parserConf = require('./fs-parser/parserConf')
 
 class FirescriptParser {
   constructor (opts) {
@@ -23,10 +22,7 @@ class FirescriptParser {
 
   parse (source) {
     try {
-      const parser = new Parser({
-        confDir: path.join(__dirname, './fs-parser/')
-      })
-
+      const parser = new Parser(parserConf)
       parser.parse(source)
 
       const ast = new Program(parser, null, this.sourceType)

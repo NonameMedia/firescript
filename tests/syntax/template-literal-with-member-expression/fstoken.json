@@ -13,7 +13,7 @@
   },
   {
     "type": "template",
-    "value": "${"
+    "value": "'${"
   },
   {
     "type": "identifier",
@@ -29,7 +29,7 @@
   },
   {
     "type": "template",
-    "value": "}"
+    "value": "}'"
   },
   {
     "type": "indention",
