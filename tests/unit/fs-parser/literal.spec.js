@@ -5,15 +5,14 @@ const sinon = require('sinon')
 inspect.useSinon(sinon)
 
 const Parser = require('../../../src/Parser')
+const parserConf = require('../../../src/fs-parser/parserConf')
 
 describe('Literal', () => {
   describe('resolveNodeName()', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
     })
 
     it('resolves a node name from a string', () => {
@@ -93,9 +92,7 @@ describe('Literal', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
     })
 
     it('returns an literal item', () => {

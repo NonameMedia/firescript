@@ -1,6 +1,6 @@
 [
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "class"
   },
   {
@@ -9,7 +9,7 @@
   },
   {
     "type": "indention",
-    "value": 8
+    "value": 4
   },
   {
     "type": "identifier",
@@ -29,7 +29,7 @@
   },
   {
     "type": "indention",
-    "value": 16
+    "value": 8
   },
   {
     "type": "identifier",
@@ -53,7 +53,7 @@
   },
   {
     "type": "indention",
-    "value": 8
+    "value": 4
   },
   {
     "type": "identifier",
@@ -69,15 +69,15 @@
   },
   {
     "type": "indention",
-    "value": 16
+    "value": 8
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "log"
   },
   {
     "type": "template",
-    "value": "Hello ${"
+    "value": "'Hello ${"
   },
   {
     "type": "identifier",
@@ -93,7 +93,7 @@
   },
   {
     "type": "template",
-    "value": "}"
+    "value": "}'"
   },
   {
     "type": "indention",

@@ -1,6 +1,6 @@
 [
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "const"
   },
   {

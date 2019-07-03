@@ -34,9 +34,9 @@ describe('Firescript Syntax Check', () => {
           return
         }
 
-        if (filter && testCase.name.indexOf(filter) === -1) {
-          return
-        }
+        // if (filter && testCase.name.indexOf(filter) === -1) {
+        //   return
+        // }
 
         const fssource = inspect.readFile(`${testCase.path}/index.fire`)
         const fstoken = require(`${testCase.path}/fstoken.json`)
@@ -45,7 +45,6 @@ describe('Firescript Syntax Check', () => {
         const jsresult = inspect.readFile(`${testCase.path}/result.js`)
 
         it(`tokenize .fire script`, () => {
-          console.log('PARSERCONF', parserConf)
           const parser = new Parser(parserConf)
 
           parser.parse(fssource)

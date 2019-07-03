@@ -4,7 +4,7 @@ class VariableDeclaration extends Node {
   constructor (parser) {
     super(parser)
 
-    const token = parser.nextToken()
+    const token = parser.getKeyword()
     this.kind = token.value
 
     if (!['var', 'let', 'const'].includes(this.kind)) {

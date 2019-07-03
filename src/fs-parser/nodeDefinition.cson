@@ -1,7 +1,4 @@
 definition:
-  'block-comment':
-    name: 'Comment'
-
   'comment':
     name: 'Comment'
 

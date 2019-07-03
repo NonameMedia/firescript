@@ -5,15 +5,14 @@ const sinon = require('sinon')
 inspect.useSinon(sinon)
 
 const Parser = require('../../../src/Parser')
+const parserConf = require('../../../src/fs-parser/parserConf')
 
 describe('Identifier', () => {
   describe('resolveNodeName()', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
     })
 
     it('resolves an identifier', () => {
@@ -33,9 +32,7 @@ describe('Identifier', () => {
     let parser
 
     beforeEach(() => {
-      parser = new Parser({
-        confDir: path.join(__dirname, '../../../src/fs-parser/')
-      })
+      parser = new Parser(parserConf)
     })
 
     it('returns an identifier item', () => {

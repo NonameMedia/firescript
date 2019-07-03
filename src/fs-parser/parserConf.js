@@ -28,8 +28,7 @@ module.exports = {
 
   matcher: [{
     type: 'template',
-    begin: /(?<!\\)'(?=(?<!\\).*\$\{)|(?<!\\)\}/,
-    end: /(?<=(?<!\\)\}.*)'|(?<!\\)\$\{/,
+    pattern: /((?<!\\)'.*\$\{)|(\}.*\$\{)|((?<!\\)\}.*')/,
     escape: '\\'
   }, {
     type: 'literal',
@@ -55,17 +54,17 @@ module.exports = {
     end: /\/[gmsiy]*/,
     escape: '\\'
   }, {
+    type: 'operator',
+    pattern: new RegExp(OPERATORS.map((reg) => escapeReg(reg)).join('|'))
+  }, {
     type: 'identifier',
     pattern: /\w+/
   }, {
     type: 'punctuator',
     pattern: new RegExp(PUNCTUATORS.map((reg) => escapeReg(reg)).join('|'))
   }, {
-    type: 'operator',
-    pattern: new RegExp(OPERATORS.map((reg) => escapeReg(reg)).join('|'))
-  }, {
     type: 'comment',
-    pattern: /#.*$/
+    pattern: /#.*/
   }, {
     type: 'indention',
     pattern: /\n\s*/

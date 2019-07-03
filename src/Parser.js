@@ -214,9 +214,7 @@ class Parser {
 
     this.column += length
 
-    if (type === 'identifier' && this.keyWords.includes(value)) {
-      type = 'keyword'
-    } else if (type === 'indention') {
+    if (type === 'indention') {
       const split = value.split('\n')
       const item = split.pop()
       length = item.length
@@ -290,7 +288,8 @@ class Parser {
   getKeyword () {
     const token = this.nextToken()
     // console.log('TOKEN', token, this.index)
-    if (token.type === 'keyword') {
+    if (token.type === 'identifier' && this.keyWords.includes(token.value)) {
+      token.type = 'keyword'
       return token
     }
 
