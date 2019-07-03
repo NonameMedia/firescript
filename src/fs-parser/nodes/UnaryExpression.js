@@ -1,11 +1,11 @@
-const FirescriptNode = require('./FirescriptNode')
-const constants = require('../utils/constants')
+const Node = require('./Node')
+const constants = require('../../utils/constants')
 
 /**
  * UnaryExpression
  *
  * @class UnaryExpression
- * @extends FirescriptNode
+ * @extends Node
  *
  * interface UnaryExpression {
  *   type: 'UnaryExpression';
@@ -14,25 +14,25 @@ const constants = require('../utils/constants')
  *   prefix: true;
  * }
  */
-class UnaryExpression extends FirescriptNode {
-  constructor (tokenStack, parent) {
-    super(tokenStack, parent)
+class UnaryExpression extends Node {
+  constructor (parser) {
+    super(parser)
 
-    const token = tokenStack.next()
+    const token = parser.getOperator()
     this.operator = token.value
 
     if (!constants.UNARY_OPERATORS.includes(token.value)) {
       this.syntaxError('Token is not a unary operator', token)
     }
 
-    this.argument = this.createNodeItem(tokenStack)
+    this.argument = parser.nextNode()
   }
 
-  toJSON (ctx) {
+  resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'UnaryExpression',
       operator: this.operator,
-      argument: this.argument.toJSON(ctx),
+      argument: this.argument.resolve(ctx),
       prefix: true
     })
   }

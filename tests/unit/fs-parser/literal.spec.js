@@ -1,5 +1,3 @@
-const path = require('path')
-
 const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
@@ -97,6 +95,7 @@ describe('Literal', () => {
 
     it('returns an literal item', () => {
       parser.parse('\'banana\'')
+      parser.print()
       const node = parser.createNode('Literal')
       inspect(node).hasProps({
         type: 'Literal',
@@ -161,6 +160,36 @@ describe('Literal', () => {
       inspect(node).hasProps({
         type: 'Literal',
         raw: '0xffab01',
+        value: 16755457
+      })
+    })
+
+    it('returns an literal item from a uppercase binary number', () => {
+      parser.parse('0B010110')
+      const node = parser.createNode('Literal')
+      inspect(node).hasProps({
+        type: 'Literal',
+        raw: '0B010110',
+        value: 22
+      })
+    })
+
+    it('returns an literal item from a uppercase octal number', () => {
+      parser.parse('0O644')
+      const node = parser.createNode('Literal')
+      inspect(node).hasProps({
+        type: 'Literal',
+        raw: '0O644',
+        value: 420
+      })
+    })
+
+    it('returns an literal item from a uppercase hex number', () => {
+      parser.parse('0XFFAB01')
+      const node = parser.createNode('Literal')
+      inspect(node).hasProps({
+        type: 'Literal',
+        raw: '0XFFAB01',
         value: 16755457
       })
     })

@@ -145,7 +145,7 @@ definition:
   'operator [++,--]':
     name: 'UpdateExpression'
 
-  'operator [instanceof,in,+,-,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
+  'operator [instanceof,in,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
     name: 'BinaryExpression'
 
   'operator [delete,void,typeof]':

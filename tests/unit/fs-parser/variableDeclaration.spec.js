@@ -1,5 +1,3 @@
-const path = require('path')
-
 const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
@@ -7,7 +5,7 @@ inspect.useSinon(sinon)
 const Parser = require('../../../src/Parser')
 const parserConf = require('../../../src/fs-parser/parserConf')
 
-describe.only('VariableDeclaration (const)', () => {
+describe('VariableDeclaration (const)', () => {
   describe('resolveNodeName()', () => {
     let parser
 

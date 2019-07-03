@@ -1,5 +1,3 @@
-const path = require('path')
-
 const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)

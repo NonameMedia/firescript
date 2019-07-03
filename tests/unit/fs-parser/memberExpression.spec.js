@@ -5,7 +5,7 @@ inspect.useSinon(sinon)
 const Parser = require('../../../src/Parser')
 const parserConf = require('../../../src/fs-parser/parserConf')
 
-describe.only('MemberExpression', () => {
+describe('MemberExpression', () => {
   describe('resolveNodeName()', () => {
     let parser
 

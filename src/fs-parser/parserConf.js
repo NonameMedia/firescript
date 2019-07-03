@@ -37,7 +37,7 @@ module.exports = {
     escape: '\\'
   }, {
     type: 'numeric',
-    pattern: /(0b[01]+)|(0x[a-f0-9]+)|(0o\d+)/i
+    pattern: /(0[bB][01]+)|(0[xX][a-fA-F0-9]+)|(0[oO]\d+)/i
   }, {
     type: 'numeric',
     pattern: /\d+(\.\d+)?(e\d+)?/
