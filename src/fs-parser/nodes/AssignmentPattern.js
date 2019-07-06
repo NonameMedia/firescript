@@ -1,4 +1,5 @@
-const FirescriptNode = require('./FirescriptNode')
+const Node = require('./Node')
+const constants = require('../../utils/constants')
 
 const ALLOWED_CHILDS = [
   'ThisExpression',
@@ -26,38 +27,28 @@ const ALLOWED_CHILDS = [
   'SequenceExpression'
 ]
 
-/**
- * AssignmentPattern class
- *
- * @class AssignmentPattern
- *
- * interface AssignmentPattern {
- *   type: 'AssignmentPattern';
- *   left: Identifier | BindingPattern;
- *   right: Expression;
- * }
- */
-class AssignmentPattern extends FirescriptNode {
-  constructor (tokenStack, parent, left) {
-    super(tokenStack, parent)
+class AssignmentPattern extends Node {
+  constructor (parser, left) {
+    super(parser)
 
-    this.left = left || this.createNodeItem(tokenStack)
+    this.left = left || parser.nextNode(this)
+    const token = parser.nextToken()
 
-    if (!tokenStack.expect('operator', '=')) {
-      this.syntaxError('Unexpected token!')
+    if (token.type !== 'operator' && !constants.ASSIGNMENT_OPERATORS.includes(token.value)) {
+      this.syntaxError('Token is not a assignment operator', token)
     }
 
-    tokenStack.goForward()
-
-    this.right = this.createFullNode(tokenStack)
+    this.operator = token.value
+    this.right = parser.nextNode(this)
     this.isAllowedNode(this.right, ALLOWED_CHILDS)
   }
 
-  toJSON (ctx) {
+  resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'AssignmentPattern',
-      left: this.left.toJSON(ctx),
-      right: this.right.toJSON(ctx)
+      operator: this.operator,
+      left: this.left.resolve(ctx),
+      right: this.right.resolve(ctx)
     })
   }
 }

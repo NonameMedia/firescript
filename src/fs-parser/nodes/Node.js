@@ -19,7 +19,7 @@ class Node {
         this.syntaxError(`Unexpected EOF`)
       }
 
-      this.syntaxError(`Token ${type} not allowed within a ${this.type}`)
+      this.syntaxError(`Token ${type} not allowed within a ${this.type}`, child)
     }
   }
 
@@ -36,16 +36,16 @@ class Node {
       obj.innerComments = this.innerComments.map((item) => item.toJSON(ctx))
     }
 
-    // if (ctx.setLocation && this.firstToken) {
-    //   obj.loc = {
-    //     start: this.token.index,
-    //     end: this.lastToken ? this.lastToken.loc.end : this.firstToken.loc.end
-    //   }
-    // }
+    if (ctx.setLocation) {
+      obj.loc = {
+        start: this.index,
+        end: this.index + this.length
+      }
+    }
 
-    // if (ctx.setRange) {
-    //   obj.range = [this.firstToken.range[0], this.lastToken.range[1]]
-    // }
+    if (ctx.setRange) {
+      obj.range = [[this.column, this.line], [this.column + this.length, this.line]]
+    }
 
     return obj
   }

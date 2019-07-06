@@ -36,6 +36,15 @@ class ArrowFunctionExpression extends JSElement {
     buffer.write(this.body)
   }
 
+  getLineLength () {
+    const bodyLen = this.body.getLineLength()
+    const paramLen = this.params.reduce((num, item) => {
+      return num + item.getLineLength()
+    }, Math.max(0, (this.params.length - 1) * 2))
+    const len = this.async ? 12 : 6
+    return len + paramLen + bodyLen
+  }
+
   toESString (ctx) {
     const asyncfn = this.async ? 'async ' : ''
 

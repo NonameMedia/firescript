@@ -25,7 +25,7 @@ class UnaryExpression extends Node {
       this.syntaxError('Token is not a unary operator', token)
     }
 
-    this.argument = parser.nextNode()
+    this.argument = parser.nextNode(this)
   }
 
   resolve (ctx) {

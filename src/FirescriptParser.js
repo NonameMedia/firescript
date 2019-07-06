@@ -1,4 +1,4 @@
-const Program = require('./fs-nodes/Program')
+const Program = require('./fs-parser/nodes/Program')
 const ParserContext = require('./ParserContext')
 const Parser = require('./Parser')
 const parserConf = require('./fs-parser/parserConf')
@@ -25,13 +25,13 @@ class FirescriptParser {
       const parser = new Parser(parserConf)
       parser.parse(source)
 
-      const ast = new Program(parser, null, this.sourceType)
+      const ast = new Program(parser, this.sourceType)
       const ctx = new ParserContext({
         setLocation: this.setLocation,
         setRange: this.setRange
       })
 
-      return ast.toJSON(ctx)
+      return ast.resolve(ctx)
     } catch (err) {
       if (!err.token) {
         throw err

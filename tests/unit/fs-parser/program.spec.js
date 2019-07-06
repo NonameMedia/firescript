@@ -1,11 +1,9 @@
 const inspect = require('inspect.js')
-const sinon = require('sinon')
-inspect.useSinon(sinon)
 
 const Parser = require('../../../src/Parser')
 const parserConf = require('../../../src/fs-parser/parserConf')
 
-describe('VariableDeclarator', () => {
+describe('Program', () => {
   describe('resolveNodeName()', () => {
     let parser
 
@@ -13,10 +11,10 @@ describe('VariableDeclarator', () => {
       parser = new Parser(parserConf)
     })
 
-    it('resolves a node name', () => {
-      parser.parse('banana = \'Banana\'')
-      const nodeName = parser.resolveNodeName()
-      inspect(nodeName).isEql('Identifier')
+    it('resolves an identifier', () => {
+      parser.parse('const banana = foo')
+      const nodeName = parser.createNode('Program')
+      inspect(nodeName).isEql('Program')
     })
   })
 
@@ -27,11 +25,15 @@ describe('VariableDeclarator', () => {
       parser = new Parser(parserConf)
     })
 
-    it('returns a VariableDeclarator item', () => {
-      parser.parse('banana = \'Banana\'')
-      const node = parser.createNode('VariableDeclarator')
+    it('returns an identifier item', () => {
+      parser.parse('const banana = foo')
+      const node = parser.createNode('Program')
       inspect(node).hasProps({
-        type: 'VariableDeclarator'
+        type: 'Program',
+        body: [{
+          type: 'VariableDeclarator',
+          kind: 'const'
+        }]
       })
     })
   })

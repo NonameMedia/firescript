@@ -55,7 +55,7 @@ describe('Firescript Syntax Check', () => {
           })
         })
 
-        it.skip(`parse .fire script into FS-AST`, () => {
+        it(`parse .fire script into FS-AST`, () => {
           const parser = new FirescriptParser()
           const res = parser.parse(fssource)
 

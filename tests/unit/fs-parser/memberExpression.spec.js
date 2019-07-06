@@ -20,7 +20,7 @@ describe('MemberExpression', () => {
     })
   })
 
-  describe('nextNode()', () => {
+  describe('nextNode(this)', () => {
     let parser
 
     beforeEach(() => {
@@ -29,7 +29,7 @@ describe('MemberExpression', () => {
 
     it('returns a MemberExpression item', () => {
       parser.parse('fruits.banana')
-      const node = parser.nextNode()
+      const node = parser.nextNode(this)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,
@@ -104,7 +104,7 @@ describe('MemberExpression', () => {
 
     it('returns a MemberExpression item, computed syntax', () => {
       parser.parse('fruits[\'banana\']')
-      const node = parser.nextNode()
+      const node = parser.nextNode(this)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': true,
@@ -185,7 +185,7 @@ describe('MemberExpression', () => {
 
     it.skip('returns a MemberExpression item with a function expression', () => {
       parser.parse('fruits.getBanana()')
-      const node = parser.nextNode()
+      const node = parser.nextNode(this)
       inspect(node).hasProps({
         'type': 'MemberExpression',
         'computed': false,

@@ -80,25 +80,7 @@ class NodeDefinition {
 
     return {
       mapping: mapping,
-      // test: (token) => mapping.every((definition, offset) => {
-      //   if (!token) {
-      //     return false
-      //   }
-      //
-      //   if (definition.value && Array.isArray(definition.value)) {
-      //     return definition.value.indexOf(token.value) >= 0
-      //   } else if (definition.value && definition.value instanceof RegExp) {
-      //     return definition.value.test(token.value)
-      //   } else if (definition.value && token.value !== definition.value) {
-      //     return false
-      //   }
-      //
-      //   return Array.isArray(definition.type)
-      //     ? definition.type.some((t) => t === token.type)
-      //     : token.type === definition.type
-      // })
       test: (tokenBuffer) => mapping.every((definition, offset) => {
-        // console.log('TESTMATCH', definition, offset)
         return tokenBuffer.match(definition.type, definition.value || definition.valueReg, offset)
       })
     }
@@ -150,6 +132,12 @@ class NodeDefinition {
           }
         }
 
+        if (a.mapping[0].value === 'keyword' && b.mapping[0].value === 'identifier') {
+          return -1
+        } else if (a.mapping[0].value === 'identifier' && b.mapping[0].value === 'keyword') {
+          return 1
+        }
+
         return 0
       }
 
@@ -157,18 +145,22 @@ class NodeDefinition {
     })
   }
 
-  resolve (tokenBuffer) {
+  resolve (tokenBuffer, scope = {}) {
     const definition = this.nodeDefinition.find((mapping, index) => {
       if (!mapping.test(tokenBuffer)) {
         return false
       }
 
-      return (!mapping.scopes && mapping.name) || mapping.scopes[this.type] || mapping.name
+      return (!mapping.scopes && mapping.name) || mapping.scopes[scope.type] || mapping.name
     })
 
     if (definition) {
-      if (definition.scopes && definition.scopes[this.type]) {
-        return definition.scopes[this.type]
+      if (definition.scopes && definition.scopes[scope.type]) {
+        if (!scope.type) {
+          throw new Error('Scope is not set!')
+        }
+
+        return definition.scopes[scope.type]
       }
 
       return definition.name

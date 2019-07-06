@@ -10,6 +10,7 @@ class Parser {
     this.confDir = opts.confDir
     this.matcherConf = opts.matcher
     this.keyWords = opts.keyWords
+    this.scopeDelimiter = opts.scopeDelimiter
 
     if (!this.confDir) {
       throw new Error('The Parser.confDir parameter must be set!')
@@ -21,6 +22,10 @@ class Parser {
 
     if (!this.keyWords) {
       throw new Error('The Parser.keyWords parameter must be set!')
+    }
+
+    if (!this.scopeDelimiter) {
+      throw new Error('The Parser.scopeDelimiter parameter must be set!')
     }
 
     this.nodeDefinition = new NodeDefinition({
@@ -83,34 +88,38 @@ class Parser {
     return res
   }
 
-  nextNode () {
-    return this.resolveToken()
+  nextNode (scope) {
+    return this.resolveToken(scope, false)
   }
 
-  nextRealNode () {
-    return this.resolveToken(true)
+  nextRealNode (scope) {
+    return this.resolveToken(scope, true)
   }
 
   skipNext () {
     return this.tokenBuffer.shift()
   }
 
-  resolveNodeName () {
+  resolveNodeName (scope) {
     const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
       return Math.max(num, item.mapping.length)
     }, 0)
 
     const tokenBuffer = this.fillBuffer(bufferFillSize)
-    return this.nodeDefinition.resolve(tokenBuffer)
+    return this.nodeDefinition.resolve(tokenBuffer, scope)
   }
 
-  resolveToken (skipWrapNode) {
-    const nodeName = this.resolveNodeName()
-    // console.log('NODENAME', nodeName)
+  resolveToken (scope, skipWrapNode) {
+    const nodeName = this.resolveNodeName(scope)
+    // console.log('NodeName', nodeName)
 
     if (!nodeName) {
       if (this.tokenBuffer.length === 0) {
         return null
+      }
+
+      if (this.tokenBuffer[0].type === 'indention') {
+        this.syntaxError('Unhandeled indention detected!')
       }
 
       this.syntaxError('Unexpected token')
@@ -126,14 +135,14 @@ class Parser {
     return node
   }
 
-  showNext () {
+  showNextToken () {
     this.fillBuffer(1)
+    return this.tokenBuffer[0]
   }
 
-  createNode (nodeName, token, skipWrapNode) {
-    // console.log('CREATE NODE', nodeName, token ? '!!!TOKEN' : '')
+  createNode (nodeName, childNode, skipWrapNode) {
     const Node = require(path.join(this.confDir, `nodes/${nodeName}`))
-    const node = new Node(this)
+    const node = new Node(this, childNode)
 
     if (skipWrapNode) {
       return node
@@ -211,8 +220,13 @@ class Parser {
     let line = this.line
     let column = this.column
     let length = value.length
+    let isKeyword = false
 
     this.column += length
+
+    if (type === 'identifier') {
+      isKeyword = this.keyWords.includes(value)
+    }
 
     if (type === 'indention') {
       const split = value.split('\n')
@@ -232,6 +246,7 @@ class Parser {
         }
 
         value = parseInt(length / this.indentionSize)
+        this.indention = value
       }
     }
 
@@ -245,7 +260,8 @@ class Parser {
       index: index,
       length: length,
       line: line,
-      column: column
+      column: column,
+      isKeyword: isKeyword
     }
   }
 
@@ -285,7 +301,7 @@ class Parser {
     return token.value
   }
 
-  getKeyword () {
+  getKeyword (value) {
     const token = this.nextToken()
     // console.log('TOKEN', token, this.index)
     if (token.type === 'identifier' && this.keyWords.includes(token.value)) {
@@ -438,13 +454,146 @@ class Parser {
       length: token.length,
       line: token.line,
       column: token.column,
-      indention: token.indention
+      indention: this.indention
     }
+  }
+
+  /**
+   * Checks if a new child scope is comming
+   *
+   * @method isInnerScope
+   * @returns {Boolean} Returns true if current token is type of indention and indention size is greater then current indention
+   */
+  isInnerScope (parentIndention) {
+    parentIndention = parentIndention || this.indention
+    if (this.tokenBuffer.length === 0) {
+      this.fillBuffer(1)
+    }
+
+    const token = this.tokenBuffer[0]
+    if (token.type !== 'indention') {
+      return false
+    }
+
+    return parentIndention < token.value
+  }
+
+  isOuterScope (parentIndention) {
+    parentIndention = parentIndention || this.indention
+    if (this.tokenBuffer.length === 0) {
+      this.fillBuffer(1)
+    }
+
+    const token = this.tokenBuffer[0]
+    if (!token.type === 'indention') {
+      return false
+    }
+
+    return parentIndention > token.value
+  }
+
+  isSameScope (parentIndention) {
+    parentIndention = parentIndention || this.indention
+    if (this.tokenBuffer.length === 0) {
+      this.fillBuffer(1)
+    }
+
+    const token = this.tokenBuffer[0]
+    if (!token.type === 'indention') {
+      return false
+    }
+
+    return parentIndention === token.value
+  }
+
+  /**
+   * Checks if file end was reached
+   *
+   * @method  isEOF
+   * @returns {Boolean} Returns true if end of file was reached
+   */
+  isEOF () {
+    if (this.tokenBuffer.length === 0) {
+      this.fillBuffer(1)
+    }
+
+    return this.tokenBuffer.length === 0
   }
 
   print () {
     this.fillBuffer(5)
     console.log(this.tokenBuffer)
+  }
+
+  walkScope () {
+    let scopeIndention = this.indention
+    let scopeEnd = null
+
+    if (this.match('punctuator [{,[,(]')) {
+      const token = this.nextToken()
+      scopeEnd = this.scopeDelimiter[token.value]
+      scopeIndention = null
+    }
+
+    if (this.match('indention')) {
+      const token = this.nextToken()
+      scopeIndention = token.value
+    }
+
+    // console.log('INITIAL INDENTION', scopeIndention)
+
+    return {
+      [ Symbol.iterator ]: () => {
+        return {
+          next: () => {
+            if (this.match('indention')) {
+              const token = this.showNextToken()
+              if (scopeIndention === null) {
+                scopeIndention = token.value
+              }
+
+              if (token.value === scopeIndention) {
+                this.skipNext()
+                return { done: false, value: this }
+              }
+
+              if (!scopeEnd && token.value > scopeIndention) {
+                this.syntaxError('Indention error!')
+              }
+
+              if (scopeEnd) {
+                this.skipNext()
+                if (this.match(`punctuator "${scopeEnd}"`)) {
+                  this.skipNext()
+                } else {
+                  this.syntaxError('Unexpected scope end or invalid indention!')
+                }
+              }
+
+              return { done: true, value: this }
+            } else if (scopeEnd && this.match('punctuator ","')) {
+              this.skipNext()
+              if (this.match('indention')) {
+                const token = this.showNextToken()
+                if (scopeIndention === null) {
+                  scopeIndention = token.value
+                  this.skipNext()
+                } else if (token.value === scopeIndention) {
+                  this.skipNext()
+                } else {
+                  this.syntaxError('Indention error!')
+                }
+              }
+            } else if (scopeEnd && this.match(`punctuator "${scopeEnd}"`)) {
+              this.skipNext()
+              return { done: true, value: this }
+            }
+
+            return { done: this.isEOF(), value: this }
+          }
+        }
+      }
+    }
   }
 }
 

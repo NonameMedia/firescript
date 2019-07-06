@@ -16,12 +16,6 @@ definition:
   'identifier "super"':
     name: 'Super'
 
-  'identifier':
-    name: 'Identifier'
-
-  # 'identifier > punctuator "."':
-  #   name: 'MemberExpression'
-
   'identifier [str,bool,arr,obj,num] > identifier':
     scopes:
       'VariableDeclaration': 'FirescriptTyping'
@@ -120,6 +114,9 @@ definition:
     scopes:
       'ClassBody': 'MethodDefinition'
     name: 'FirescriptLogStatement'
+
+  'identifier':
+    name: 'Identifier'
 
   'literal':
     name: 'Literal'

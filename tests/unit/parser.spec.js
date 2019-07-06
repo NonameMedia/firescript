@@ -293,7 +293,7 @@ describe('Parser', () => {
     })
   })
 
-  describe('nextNode()', () => {
+  describe('nextNode(this)', () => {
     let parser
 
     beforeEach(() => {
@@ -302,7 +302,7 @@ describe('Parser', () => {
 
     it('returns a VariableDeclaration node', () => {
       parser.parse('const banana = \'Banana\'')
-      const next = parser.nextNode()
+      const next = parser.nextNode(this)
       const node = next.resolve()
       inspect(node).hasProps({
         type: 'VariableDeclaration',
@@ -312,7 +312,7 @@ describe('Parser', () => {
 
     it('returns a MemberExpression node', () => {
       parser.parse('fruits.banana = \'Banana\'')
-      const next = parser.nextNode()
+      const next = parser.nextNode(this)
       inspect.print(next)
       const node = next.resolve()
       inspect.print(node)
@@ -331,7 +331,7 @@ describe('Parser', () => {
 
     it.skip('returns a MemberExpression node', () => {
       parser.parse('tree.fruits.banana = \'Banana\'')
-      const next = parser.nextNode()
+      const next = parser.nextNode(this)
       inspect.print(next)
       const node = next.resolve()
       inspect.print(node)
@@ -451,6 +451,228 @@ describe('Parser', () => {
       parser.parse('= foo')
       const match = parser.match('punctuator "="')
       inspect(match).isTrue()
+    })
+  })
+
+  describe('walkScope()', () => {
+    let parser
+
+    beforeEach(() => {
+      parser = new Parser(parserConf)
+      parser.source = ''
+    })
+
+    it('walk through a block scope', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope, exit if indention is to low', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('throws an indention error if indention is higher', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 6 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 6 }
+      )
+
+      const res = []
+
+      try {
+        for (const scope of parser.walkScope()) {
+          res.push(scope.nextToken())
+        }
+
+        inspect.fail('Should fail, but test passed!')
+      } catch (err) {
+        inspect(err).isInstanceOf(Error)
+        inspect(err.message).doesContain('Indention error')
+      }
+    })
+
+    it('walk through a block scope enclosed by `{}`', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': '}' }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope enclosed by `[]`', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'punctuator', 'value': '[' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': ']' }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a block scope enclosed by `()`', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'punctuator', 'value': '(' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'indention', 'value': 2 },
+        { 'type': 'punctuator', 'value': ')' }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' }
+      ])
+    })
+
+    it('walk through a multiline block scope enclosed by `{}`', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'pear' },
+        { 'type': 'punctuator', 'value': '}' },
+        { 'type': 'indention', 'value': 2 }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' },
+        { type: 'identifier', value: 'pear' }
+      ])
+    })
+
+    it('support trailing commas in a block scope', () => {
+      parser.tokenBuffer.push(
+        { 'type': 'punctuator', 'value': '{' },
+        { 'type': 'identifier', 'value': 'banana' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'coconut' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'indention', 'value': 4 },
+        { 'type': 'identifier', 'value': 'pineapple' },
+        { 'type': 'punctuator', 'value': ',' },
+        { 'type': 'identifier', 'value': 'pear' },
+        { 'type': 'punctuator', 'value': '}' },
+        { 'type': 'indention', 'value': 2 }
+      )
+
+      const res = []
+      for (const scope of parser.walkScope()) {
+        res.push(scope.nextToken())
+      }
+
+      inspect(res).isEql([
+        { type: 'identifier', value: 'banana' },
+        { type: 'identifier', value: 'coconut' },
+        { type: 'identifier', value: 'pineapple' },
+        { type: 'identifier', value: 'pear' }
+      ])
     })
   })
 })

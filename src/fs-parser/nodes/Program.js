@@ -1,4 +1,4 @@
-const FirescriptNode = require('./FirescriptNode')
+const Node = require('./Node')
 
 const ALLOWED_SCRIPT_CHILDS = [
   'BlockStatement', 'BreakStatement', 'ContinueStatement',
@@ -16,11 +16,37 @@ const ALLOWED_MODULE_CHILDS = [
   'ImportDeclaration', 'ExportAllDeclaration', 'ExportDefaultDeclaration', 'ExportNamedDeclaration'
 ]
 
+const WRAP_EXPRESSIONS = [
+  'ThisExpression',
+  'Identifier',
+  'Literal',
+  'ArrayExpression',
+  'ObjectExpression',
+  'FunctionExpression',
+  'ArrowFunctionExpression',
+  'ClassExpression',
+  'TaggedTemplateExpression',
+  'MemberExpression',
+  'Super',
+  'MetaProperty',
+  'NewExpression',
+  'CallExpression',
+  'UpdateExpression',
+  'AwaitExpression',
+  'UnaryExpression',
+  'BinaryExpression',
+  'LogicalExpression',
+  'ConditionalExpression',
+  'YieldExpression',
+  'AssignmentExpression',
+  'SequenceExpression'
+]
+
 /**
  * Program node
  *
  * @class Program
- * @extends FirescriptNode
+ * @extends Node
  *
  * interface Program {
  *    type: 'Program';
@@ -34,9 +60,9 @@ const ALLOWED_MODULE_CHILDS = [
  *    body: ModuleItem[];
  *  }
  */
-class Program extends FirescriptNode {
-  constructor (tokenStack, parent, sourceType) {
-    super(tokenStack, parent)
+class Program extends Node {
+  constructor (parser, sourceType) {
+    super(parser)
 
     this.isBlockScope = true
     this.sourceType = sourceType || 'module'
@@ -47,19 +73,21 @@ class Program extends FirescriptNode {
     const ALLOWED_CHILDS = this.sourceType === 'module' ? ALLOWED_SCRIPT_CHILDS.concat(ALLOWED_MODULE_CHILDS) : ALLOWED_SCRIPT_CHILDS
 
     while (true) {
-      const node = tokenStack.next()
-      if (!node) {
+      const nextNode = parser.nextNode(this)
+      if (!nextNode) {
         break
       }
+
+      const node = WRAP_EXPRESSIONS.includes(nextNode.type)
+        ? parser.createNode('ExpressionStatement', nextNode)
+        : nextNode
 
       if (node.type === 'comment') {
         comments.push(node)
         continue
       }
 
-      if (this.sourceType !== 'snippet') {
-        this.isAllowedNode(node, ALLOWED_CHILDS, tokenStack.current())
-      }
+      this.isAllowedNode(node, ALLOWED_CHILDS)
 
       if (comments.length) {
         node.leadingComments = comments.splice(0, Infinity)
@@ -67,8 +95,8 @@ class Program extends FirescriptNode {
 
       this.body.push(node)
 
-      if (tokenStack.expect('indention')) {
-        tokenStack.goForward()
+      if (parser.match('indention')) {
+        parser.skipNext()
       }
     }
 
@@ -77,15 +105,14 @@ class Program extends FirescriptNode {
         ? this.innerComments = comments.splice(0, Infinity)
         : this.body[this.body.length - 1].trailingComments = comments.splice(0, Infinity)
     }
-
-    this.tearDown()
   }
 
-  toJSON (ctx) {
+  resolve (ctx) {
+    console.log(this.body)
     return this.createJSON(ctx, {
       type: 'Program',
       sourceType: this.sourceType,
-      body: this.body.map((item) => item.toJSON(ctx))
+      body: this.body.map((item) => item.resolve(ctx))
     })
   }
 }

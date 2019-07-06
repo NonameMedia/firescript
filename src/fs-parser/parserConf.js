@@ -68,5 +68,11 @@ module.exports = {
   }, {
     type: 'indention',
     pattern: /\n\s*/
-  }]
+  }],
+
+  scopeDelimiter: {
+    '{': '}',
+    '[': ']',
+    '(': ')'
+  }
 }

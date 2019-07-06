@@ -42,18 +42,18 @@ class VariableDeclarator extends Node {
     //
     // }
 
-    // const node = parser.nextNode()
+    // const node = parser.nextNode(this)
     // if (node.type === 'FirescriptTyping') {
     //   this.fsTyping = node
-    //   this.id = parser.nextNode()
+    //   this.id = parser.nextNode(this)
     // } else {
     //   this.id = node
     // }
 
-    if (parser.match('punctuator "="')) {
+    if (parser.match('operator "="')) {
       parser.skipNext()
 
-      this.init = parser.nextNode()
+      this.init = parser.nextNode(this)
       this.isAllowedNode(this.init, ALLOWED_CHILDS)
       // if (parser.expect('indention')) {
       //   if (this.isObjectExpression(tokenStack)) {

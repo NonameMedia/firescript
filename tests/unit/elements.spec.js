@@ -2,8 +2,10 @@ const path = require('path')
 const inspect = require('inspect.js')
 const SourceBuffer = require('../../src/SourceBuffer')
 const ParserContext = require('../../src/ParserContext')
-const Tokenizer = require('../../src/FirescriptTokenizer')
+const Parser = require('../../src/Parser')
 const RenderContext = require('../../src/RenderContext')
+
+const parserConf = require('../../src/fs-parser/parserConf')
 const TEST_CASE_DIR = path.join(__dirname, 'elements')
 
 describe('Elements', () => {
@@ -33,19 +35,23 @@ describe('Elements', () => {
           .replace(/EOF\s*$/, '')
 
         it('(1) parse Firescript into AST', () => {
-          const tokenizer = new Tokenizer({
-            loc: true
-          })
+          // const tokenizer = new Tokenizer({
+          //   loc: true
+          // })
 
-          const token = tokenizer.tokenize(fssource)
+          // const token = tokenizer.tokenize(fssource)
 
           const ctx = new ParserContext({
             setLocation: true
           })
 
-          const Node = require(`../../src/fs-nodes/${ast.type}`)
-          const node = new Node(token)
-          const fsast = node.toJSON(ctx)
+          const parser = new Parser(parserConf)
+          parser.parse(fssource)
+
+          const Node = require(`../../src/fs-parser/nodes/${ast.type}`)
+          const node = new Node(parser)
+          const fsast = node.resolve(ctx)
+          console.log('NODE', fsast)
           inspect(fsast).hasProps(ast)
         })
 
@@ -72,27 +78,24 @@ describe('Elements', () => {
           return
         }
 
-        it('(4) get length of source', () => {
+        it.skip('(4) get length of source', () => {
           const Element = require(`../../src/js-elements/${ast.type}`)
           const jse = new Element(ast)
           const len = jse.getLineLength()
           inspect(`${len}`).isEql(`${metaFile.sourceLength}`)
         })
 
-        it('(5) generate location-map', () => {
-          const tokenizer = new Tokenizer({
-            loc: true
-          })
-
-          const token = tokenizer.tokenize(fssource)
-
+        it.skip('(5) generate location-map', () => {
           const ctx = new ParserContext({
             setLocation: true
           })
 
-          const Node = require(`../../src/fs-nodes/${ast.type}`)
-          const node = new Node(token)
-          const fsast = node.toJSON(ctx)
+          const parser = new Parser(parserConf)
+          parser.parse(fssource)
+
+          const Node = require(`../../src/fs-parser/nodes/${ast.type}`)
+          const node = new Node(parser)
+          const fsast = node.resolve(ctx)
 
           const buffer = new SourceBuffer()
           const Element = require(`../../src/js-elements/${fsast.type}`)
@@ -101,6 +104,7 @@ describe('Elements', () => {
           const res = buffer.toString()
           inspect(res).isEql(jssource)
 
+          console.log('BUFFER', buffer, metaFile)
           inspect(buffer).hasKey('locationMap')
           inspect(buffer.locationMap).isEql(metaFile.locationMap)
         })

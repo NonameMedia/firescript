@@ -30,7 +30,7 @@ class MemberExpression extends Node {
   constructor (parser, object, property) {
     super(parser, object)
 
-    // console.log('MEMEXP', object, property)
+    console.log('MEMEXP', object, property)
 
     const memberExpressionStack = []
     this.computed = false
@@ -50,6 +50,11 @@ class MemberExpression extends Node {
     }
 
     while (true) {
+      if (parser.isInnerScope(this.indention) || parser.isSameScope(this.indention)) {
+        console.log('SKIP INDENTION')
+        parser.skipNext()
+      }
+
       if (parser.match('punctuator "."')) {
         parser.skipNext()
         memberExpressionStack.push([parser.nextRealNode(), false])
@@ -66,6 +71,7 @@ class MemberExpression extends Node {
       }
     }
 
+    console.log('STACK', memberExpressionStack)
     if (memberExpressionStack.length === 2) {
       const obj = memberExpressionStack.shift()
       this.object = obj[0]

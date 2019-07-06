@@ -171,13 +171,14 @@ class NodeMapping {
     })
   }
 
-  resolve (node, tokenBuffer) {
+  resolve (node, tokenBuffer, scope) {
     const definition = this.nodeMapping.find((mapping, index) => {
       if (!mapping.test(node, tokenBuffer)) {
         return false
       }
 
-      return (!mapping.scopes && mapping.name) || mapping.scopes[this.type] || mapping.name
+      console.log('MAPPINGTYPE', scope)
+      return (!mapping.scopes && mapping.name) || mapping.scopes[scope] || mapping.name
     })
 
     if (definition) {

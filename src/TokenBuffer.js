@@ -90,7 +90,7 @@ class TokenBuffer extends Array {
 
   match (type, value, index) {
     const token = this[index]
-    // console.log('MATCH INDEX', token, index)
+    // console.log('MATCH INDEX', token, type, value, index)
     if (!token) {
       return false
     }
@@ -104,8 +104,16 @@ class TokenBuffer extends Array {
     }
 
     return Array.isArray(type)
-      ? type.some((t) => t === token.type)
-      : token.type === type
+      ? type.some((t) => this.matchType(token, t))
+      : this.matchType(token, type)
+  }
+
+  matchType (token, type) {
+    if (type === 'keyword') {
+      return token.type === 'identifier' && token.isKeyword
+    }
+
+    return token.type === type
   }
 
   // match (type, value, offset) {

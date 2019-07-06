@@ -1,6 +1,10 @@
 mapping:
   'Identifier > punctuator "."':
     name: 'MemberExpression'
+  'Identifier > punctuator "("':
+    name: 'CallExpression'
+  'Identifier > indention > punctuator "."':
+    name: 'MemberExpression'
   'Identifier > punctuator "["':
     name: 'MemberExpression'
   'FunctionExpression > punctuator "."':
