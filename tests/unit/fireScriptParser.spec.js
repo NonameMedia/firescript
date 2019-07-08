@@ -18,7 +18,7 @@ describe('FirescriptParser', () => {
     })
   })
 
-  describe('parse', () => {
+  describe.skip('parse', () => {
     const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang')
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group
@@ -48,7 +48,7 @@ describe('FirescriptParser', () => {
     })
   })
 
-  describe('parse with setLocation enabled', () => {
+  describe.skip('parse with setLocation enabled', () => {
     const TEST_CASE_DIR = path.join(__dirname, '../fixtures/lang-with-loc')
     const testCases = inspect.readDir(TEST_CASE_DIR)
     let group

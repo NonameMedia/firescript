@@ -101,8 +101,8 @@ class SwitchCase extends Node {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'SwitchCase',
-      test: this.test ? this.test.toJSON(ctx) : null,
-      consequent: this.consequent.map((item) => item.toJSON(ctx))
+      test: this.test ? this.test.resolve(ctx) : null,
+      consequent: this.consequent.map((item) => item.resolve(ctx))
     })
   }
 }

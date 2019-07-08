@@ -10,7 +10,7 @@ class FirescriptParser {
 
     // this.setLocation = conf.setLocation || false
     // this.setRange = conf.setRange || false
-    // this.indentionSize = conf.indention || 2
+    this.indentionSize = opts.indention || 2
     // this.keyWords = 'import|func|class|const|let|var|return'
     // this.literalPattern = '\'[^]+?\'|\\d+'
     // this.binaryOperatorPattern = /^[+*/&-]$/
@@ -22,6 +22,7 @@ class FirescriptParser {
 
   parse (source) {
     try {
+      parserConf.indentionSize = this.indentionSize
       const parser = new Parser(parserConf)
       parser.parse(source)
 

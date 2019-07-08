@@ -29,14 +29,14 @@ const ALLOWED_CHILDS = [
  * SequenceExpression
  *
  * @class SequenceExpression
- * @extends FirescriptNode
+ * @extends Node
  *
  * interface SequenceExpression {
  *   type: 'SequenceExpression';
  *   expressions: Expression[];
  * }
  */
-class SequenceExpression extends FirescriptNode {
+class SequenceExpression extends Node {
   constructor (parser, expression) {
     super(parser)
 
@@ -51,7 +51,7 @@ class SequenceExpression extends FirescriptNode {
       this.isAllowedNode(expression, ALLOWED_CHILDS)
       this.expressions.push(expression)
 
-      if (tokenStack.expect('punctuator', ',')) {
+      if (parser.match('punctuator ","')) {
         parser.skipNext()
         continue
       }
@@ -63,7 +63,7 @@ class SequenceExpression extends FirescriptNode {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'SequenceExpression',
-      expressions: this.expressions.map((item) => item.toJSON(ctx))
+      expressions: this.expressions.map((item) => item.resolve(ctx))
     })
   }
 }

@@ -15,7 +15,7 @@ class ObjectPattern extends Node {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'ObjectPattern',
-      properties: this.properties.map((item) => item.toJSON(ctx))
+      properties: this.properties.map((item) => item.resolve(ctx))
     })
   }
 }

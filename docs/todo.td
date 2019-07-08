@@ -116,4 +116,4 @@ UpdateExpression                            [ (/) FSN (*) JSE (*) FSE (*) Syntax
 VariableDeclaration                         [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 VariableDeclarator                          [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 WhileStatement                              [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
-YieldExpression                             [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
+YieldExpression                             [ (/) FSN (*) JSE (*) FSE (*) Syntax ]

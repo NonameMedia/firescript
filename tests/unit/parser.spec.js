@@ -19,12 +19,13 @@ describe('Parser', () => {
     it('returns a identifier item', () => {
       const next = parser.nextToken()
       inspect(next).isEql({
-        type: 'keyword',
+        type: 'identifier',
         value: 'const',
         index: 0,
         length: 5,
         line: 1,
-        column: 1
+        column: 1,
+        isKeyword: true
       })
     })
 
@@ -36,19 +37,21 @@ describe('Parser', () => {
         index: 6,
         length: 6,
         line: 1,
-        column: 7
+        column: 7,
+        isKeyword: false
       })
     })
 
-    it('returns a punctuator item', () => {
+    it('returns a operator item', () => {
       const next = parser.nextToken()
       inspect(next).isEql({
-        type: 'punctuator',
+        type: 'operator',
         value: '=',
         index: 13,
         length: 1,
         line: 1,
-        column: 14
+        column: 14,
+        isKeyword: false
       })
     })
 
@@ -60,7 +63,8 @@ describe('Parser', () => {
         index: 15,
         length: 8,
         line: 1,
-        column: 16
+        column: 16,
+        isKeyword: false
       })
     })
   })
@@ -225,10 +229,7 @@ describe('Parser', () => {
 
   describe('checkIndention()', () => {
     it('passes all indention tests', () => {
-      const parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/'),
-        indentionSize: 2
-      })
+      const parser = new Parser(parserConf)
 
       parser.parse(
         'const banana =\n' +
@@ -245,10 +246,7 @@ describe('Parser', () => {
     })
 
     it('allow double indentions', () => {
-      const parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/'),
-        indentionSize: 2
-      })
+      const parser = new Parser(parserConf)
 
       parser.parse(
         'const banana =\n' +
@@ -265,10 +263,7 @@ describe('Parser', () => {
     })
 
     it('fail on odd indentions', () => {
-      const parser = new Parser({
-        confDir: path.join(__dirname, '../../src/fs-parser/'),
-        indentionSize: 2
-      })
+      const parser = new Parser(parserConf)
 
       parser.parse(
         'const banana =\n' +
@@ -303,7 +298,8 @@ describe('Parser', () => {
     it('returns a VariableDeclaration node', () => {
       parser.parse('const banana = \'Banana\'')
       const next = parser.nextNode(this)
-      const node = next.resolve()
+      const ctx = {}
+      const node = next.resolve(ctx)
       inspect(node).hasProps({
         type: 'VariableDeclaration',
         kind: 'const'
@@ -311,10 +307,11 @@ describe('Parser', () => {
     })
 
     it('returns a MemberExpression node', () => {
-      parser.parse('fruits.banana = \'Banana\'')
+      parser.parse('fruits.banana')
       const next = parser.nextNode(this)
       inspect.print(next)
-      const node = next.resolve()
+      const ctx = {}
+      const node = next.resolve(ctx)
       inspect.print(node)
       inspect(node).hasProps({
         type: 'MemberExpression',
@@ -329,11 +326,12 @@ describe('Parser', () => {
       })
     })
 
-    it.skip('returns a MemberExpression node', () => {
-      parser.parse('tree.fruits.banana = \'Banana\'')
+    it('returns a MemberExpression node', () => {
+      parser.parse('tree.fruits.banana')
       const next = parser.nextNode(this)
       inspect.print(next)
-      const node = next.resolve()
+      const ctx = {}
+      const node = next.resolve(ctx)
       inspect.print(node)
       inspect(node).hasProps({
         type: 'MemberExpression',
@@ -392,8 +390,9 @@ describe('Parser', () => {
       inspect(parser.tokenBuffer).isArray()
       inspect(parser.tokenBuffer).hasLength(3)
       inspect(parser.tokenBuffer).getItem(0).hasProps({
-        type: 'keyword',
-        value: 'const'
+        type: 'identifier',
+        value: 'const',
+        isKeyword: true
       })
 
       inspect(parser.tokenBuffer).getItem(1).hasProps({
@@ -402,7 +401,7 @@ describe('Parser', () => {
       })
 
       inspect(parser.tokenBuffer).getItem(2).hasProps({
-        type: 'punctuator',
+        type: 'operator',
         value: '='
       })
     })
@@ -416,8 +415,9 @@ describe('Parser', () => {
       inspect(parser.tokenBuffer).isArray()
       inspect(parser.tokenBuffer).hasLength(4)
       inspect(parser.tokenBuffer).getItem(0).hasProps({
-        type: 'keyword',
-        value: 'const'
+        type: 'identifier',
+        value: 'const',
+        isKeyword: true
       })
 
       inspect(parser.tokenBuffer).getItem(1).hasProps({
@@ -426,7 +426,7 @@ describe('Parser', () => {
       })
 
       inspect(parser.tokenBuffer).getItem(2).hasProps({
-        type: 'punctuator',
+        type: 'operator',
         value: '='
       })
     })
@@ -447,9 +447,9 @@ describe('Parser', () => {
       inspect(match).isTrue()
     })
 
-    it('matches a "=" punctuator', () => {
+    it('matches a "=" operator', () => {
       parser.parse('= foo')
-      const match = parser.match('punctuator "="')
+      const match = parser.match('operator "="')
       inspect(match).isTrue()
     })
   })

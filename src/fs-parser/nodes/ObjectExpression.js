@@ -16,7 +16,7 @@ class ObjectExpression extends Node {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'ObjectExpression',
-      properties: this.properties.map((item) => item.toJSON(ctx))
+      properties: this.properties.map((item) => item.resolve(ctx))
     })
   }
 }

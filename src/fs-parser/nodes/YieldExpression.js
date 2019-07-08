@@ -4,7 +4,7 @@ const Node = require('./Node')
  * YieldExpression
  *
  * @class YieldExpression
- * @extends FirescriptNode
+ * @extends Node
  *
  * interface YieldExpression {
  *   type: 'YieldExpression';
@@ -12,17 +12,17 @@ const Node = require('./Node')
  *   delegate: boolean;
  * }
  */
-class YieldExpression extends FirescriptNode {
+class YieldExpression extends Node {
   constructor (parser) {
     super(parser)
 
-    if (!tokenStack.expect('keyword', 'yield')) {
-      this.syntaxError('Unexpected token, yield keyword expected', tokenStack)
+    if (!parser.match('keyword "yield"')) {
+      parser.syntaxError('Unexpected token, yield keyword expected')
     }
 
     parser.skipNext()
     this.delegate = false
-    if (tokenStack.expect('operator', '*')) {
+    if (parser.match('operator "*"')) {
       this.delegate = true
       parser.skipNext()
     }
@@ -33,7 +33,7 @@ class YieldExpression extends FirescriptNode {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'YieldExpression',
-      argument: this.argument.toJSON(ctx),
+      argument: this.argument.resolve(ctx),
       delegate: this.delegate
     })
   }

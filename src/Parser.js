@@ -95,7 +95,7 @@ class Parser {
     }
 
     const mapNode = this.resolveMapping(node, scope)
-    console.log('MAPNODE', mapNode)
+    // console.log('MAPNODE', mapNode)
     return mapNode
   }
 
@@ -171,7 +171,7 @@ class Parser {
 
       const MapNode = require(path.join(this.confDir, `nodes/${mapNodeName}`))
       mapNode = new MapNode(this, mapNode)
-      console.log('MAPNODE', mapNode.type, ' => ', mapNodeName)
+      // console.log('MAPNODE', mapNode.type, ' => ', mapNodeName)
     }
 
     // console.log('END')

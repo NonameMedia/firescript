@@ -82,8 +82,8 @@ class CallExpression extends Node {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'CallExpression',
-      callee: this.callee.toJSON(ctx),
-      arguments: this.arguments.map((item) => item.toJSON(ctx))
+      callee: this.callee.resolve(ctx),
+      arguments: this.arguments.map((item) => item.resolve(ctx))
     })
   }
 }
