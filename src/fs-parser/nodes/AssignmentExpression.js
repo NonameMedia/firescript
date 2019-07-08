@@ -5,7 +5,7 @@ class AssignmentExpression extends Node {
   constructor (parser, left) {
     super(parser)
 
-    this.left = left || parser.nextNode(this)
+    this.left = left || parser.nextRealNode(this)
     const token = parser.nextToken()
 
     if (token.type !== 'operator' && !constants.ASSIGNMENT_OPERATORS.includes(token.value)) {

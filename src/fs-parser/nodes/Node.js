@@ -50,9 +50,9 @@ class Node {
     return obj
   }
 
-  toJSON () {
+  toJSON (ctx) {
     console.log('TOJSON in', this.type)
-    return this.resolve()
+    return this.resolve(ctx)
   }
 }
 

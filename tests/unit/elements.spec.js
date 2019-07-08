@@ -26,6 +26,7 @@ describe('Elements', () => {
         })
 
         const ast = require(`${testCase.path}/ast.json`)
+        const fsNodeType = metaFile && metaFile.fsNode ? metaFile.fsNode : ast.type
         const jssource = inspect
           .readFile(`${testCase.path}/index.js`)
           .replace(/EOF\s*$/, '')
@@ -42,13 +43,14 @@ describe('Elements', () => {
           // const token = tokenizer.tokenize(fssource)
 
           const ctx = new ParserContext({
-            setLocation: true
+            setLocation: true,
+            setRange: true
           })
 
           const parser = new Parser(parserConf)
           parser.parse(fssource)
 
-          const Node = require(`../../src/fs-parser/nodes/${ast.type}`)
+          const Node = require(`../../src/fs-parser/nodes/${fsNodeType}`)
           const node = new Node(parser)
           const fsast = node.resolve(ctx)
           console.log('NODE', fsast)
@@ -57,7 +59,7 @@ describe('Elements', () => {
 
         it('(2) transpile AST into Javascript', () => {
           const buffer = new SourceBuffer()
-          const Element = require(`../../src/js-elements/${ast.type}`)
+          const Element = require(`../../src/js-elements/${fsNodeType}`)
           const jse = new Element(ast)
           jse.compile(buffer)
           inspect(buffer.toString()).isEql(jssource)
@@ -65,8 +67,8 @@ describe('Elements', () => {
 
         // it.skip('TODO: (3) parse Javascript into AST')
 
-        it('(3) transpile AST into Firescript', () => {
-          const Element = require(`../../src/fs-elements/${ast.type}`)
+        it.skip('(3) transpile AST into Firescript', () => {
+          const Element = require(`../../src/fs-elements/${fsNodeType}`)
           const fse = new Element(ast)
           const ctx = new RenderContext({}, 'fire')
           const res = fse.toFSString(ctx)
@@ -79,7 +81,7 @@ describe('Elements', () => {
         }
 
         it.skip('(4) get length of source', () => {
-          const Element = require(`../../src/js-elements/${ast.type}`)
+          const Element = require(`../../src/js-elements/${fsNodeType}`)
           const jse = new Element(ast)
           const len = jse.getLineLength()
           inspect(`${len}`).isEql(`${metaFile.sourceLength}`)
@@ -93,7 +95,7 @@ describe('Elements', () => {
           const parser = new Parser(parserConf)
           parser.parse(fssource)
 
-          const Node = require(`../../src/fs-parser/nodes/${ast.type}`)
+          const Node = require(`../../src/fs-parser/nodes/${fsNodeType}`)
           const node = new Node(parser)
           const fsast = node.resolve(ctx)
 

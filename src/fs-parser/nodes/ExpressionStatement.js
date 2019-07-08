@@ -30,8 +30,8 @@ class ExpressionStatement extends Node {
   constructor (parser, expression) {
     super(parser, expression)
 
-    this.isAllowedNode(expression, ALLOWED_CHILDS)
-    this.expression = expression
+    this.expression = expression || parser.nextRealNode(this)
+    this.isAllowedNode(this.expression, ALLOWED_CHILDS)
   }
 
   resolve (ctx) {

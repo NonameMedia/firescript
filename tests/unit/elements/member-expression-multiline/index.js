@@ -1,5 +1,4 @@
 tree
   .banana
   .fruit
-  .color
-EOF
+  .colorEOF

@@ -59,11 +59,7 @@ class CallExpression extends Node {
   constructor (parser, callee) {
     super(parser)
 
-    if (!callee) {
-      throw new Error('Callee argument is not set!')
-    }
-
-    this.callee = callee
+    this.callee = callee || parser.createNode('Identifier')
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES)
     this.arguments = []
 
@@ -83,7 +79,7 @@ class CallExpression extends Node {
     }
   }
 
-  toJSON (ctx) {
+  resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'CallExpression',
       callee: this.callee.toJSON(ctx),

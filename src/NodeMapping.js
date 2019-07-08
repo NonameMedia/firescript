@@ -173,17 +173,23 @@ class NodeMapping {
 
   resolve (node, tokenBuffer, scope) {
     const definition = this.nodeMapping.find((mapping, index) => {
+      // console.log('FIND', scope.type, mapping.name, node.type)
+      if (mapping.name === node.type || mapping.name === scope.type) {
+        // console.log('IGNORE')
+        return false
+      }
+
       if (!mapping.test(node, tokenBuffer)) {
         return false
       }
 
-      console.log('MAPPINGTYPE', scope)
-      return (!mapping.scopes && mapping.name) || mapping.scopes[scope] || mapping.name
+      // console.log('MAPPINGTYPE', scope)
+      return (!mapping.scopes && mapping.name) || mapping.scopes[scope.type] || mapping.name
     })
 
     if (definition) {
-      if (definition.scopes && definition.scopes[this.type]) {
-        return definition.scopes[this.type]
+      if (definition.scopes && definition.scopes[scope.type]) {
+        return definition.scopes[scope.type]
       }
 
       return definition.name

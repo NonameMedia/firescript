@@ -30,6 +30,7 @@ class MemberExpression extends JSElement {
       buffer.write(this.property)
       buffer.write(']')
     } else if (this.useMultiLine()) {
+      buffer.indent(this.isParent('MemberExpression') ? 0 : 1, true)
       buffer.write(this.object)
       buffer.indent()
       buffer.write('.')
@@ -53,14 +54,15 @@ class MemberExpression extends JSElement {
       item = item.object
     }
 
-    this.__multilineEnabled = dept >= 3
-
     if (dept >= 3) {
+      this.__multilineEnabled = true
       let item = this
       while (item.object.type === 'MemberExpression') {
-        item.__multilineEnabled = true
         item = item.object
+        item.__multilineEnabled = true
       }
+
+      return true
     }
   }
 

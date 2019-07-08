@@ -1,0 +1,103 @@
+{
+    "type": "IfStatement",
+    "test": {
+        "type": "Identifier",
+        "name": "foo"
+    },
+    "consequent": {
+        "type": "BlockStatement",
+        "body": [
+            {
+                "type": "ExpressionStatement",
+                "expression": {
+                    "type": "CallExpression",
+                    "callee": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                            "type": "Identifier",
+                            "name": "console"
+                        },
+                        "property": {
+                            "type": "Identifier",
+                            "name": "log"
+                        }
+                    },
+                    "arguments": [
+                        {
+                            "type": "Identifier",
+                            "name": "foo"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "alternate": {
+        "type": "IfStatement",
+        "test": {
+            "type": "Identifier",
+            "name": "bar"
+        },
+        "consequent": {
+            "type": "BlockStatement",
+            "body": [
+                {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                                "type": "Identifier",
+                                "name": "console"
+                            },
+                            "property": {
+                                "type": "Identifier",
+                                "name": "log"
+                            }
+                        },
+                        "arguments": [
+                            {
+                                "type": "Identifier",
+                                "name": "bar"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "alternate": {
+            "type": "BlockStatement",
+            "body": [
+                {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                                "type": "Identifier",
+                                "name": "console"
+                            },
+                            "property": {
+                                "type": "Identifier",
+                                "name": "log"
+                            }
+                        },
+                        "arguments": [
+                            {
+                                "type": "Literal",
+                                "raw": "'Else'",
+                                "value": "Else"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+
+}

@@ -15,6 +15,11 @@ class VariableDeclarator extends Node {
 
     this.fsTyping = null
 
+    if (parser.match('identifier > identifier [in,of]')) {
+      this.id = parser.createNode('Identifier')
+      return
+    }
+
     if (parser.match('identifier')) {
       if (parser.match('identifier > identifier')) {
         this.fsTyping = parser.createNode('FirescriptTyping')
@@ -71,7 +76,7 @@ class VariableDeclarator extends Node {
       //     }
       //   }
       // } else {
-      //   this.init = this.createFullNode(tokenStack)
+      //   this.init = parser.nextNode(this)
       //   this.isAllowedNode(this.init, ALLOWED_CHILDS)
       // }
     }

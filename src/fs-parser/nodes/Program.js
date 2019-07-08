@@ -1,4 +1,5 @@
 const Node = require('./Node')
+const constants = require('../../utils/constants')
 
 const ALLOWED_SCRIPT_CHILDS = [
   'BlockStatement', 'BreakStatement', 'ContinueStatement',
@@ -9,37 +10,11 @@ const ALLOWED_SCRIPT_CHILDS = [
   'ThrowStatement', 'TryStatement', 'VariableDeclaration',
   'WhileStatement', 'WithStatement', 'ClassDeclaration',
   'FunctionDeclaration', ' VariableDeclaration',
-  'FirescriptLogStatement'
+  'FirescriptLogStatement', 'Comment'
 ]
 
 const ALLOWED_MODULE_CHILDS = [
   'ImportDeclaration', 'ExportAllDeclaration', 'ExportDefaultDeclaration', 'ExportNamedDeclaration'
-]
-
-const WRAP_EXPRESSIONS = [
-  'ThisExpression',
-  'Identifier',
-  'Literal',
-  'ArrayExpression',
-  'ObjectExpression',
-  'FunctionExpression',
-  'ArrowFunctionExpression',
-  'ClassExpression',
-  'TaggedTemplateExpression',
-  'MemberExpression',
-  'Super',
-  'MetaProperty',
-  'NewExpression',
-  'CallExpression',
-  'UpdateExpression',
-  'AwaitExpression',
-  'UnaryExpression',
-  'BinaryExpression',
-  'LogicalExpression',
-  'ConditionalExpression',
-  'YieldExpression',
-  'AssignmentExpression',
-  'SequenceExpression'
 ]
 
 /**
@@ -78,11 +53,11 @@ class Program extends Node {
         break
       }
 
-      const node = WRAP_EXPRESSIONS.includes(nextNode.type)
+      const node = constants.EXPRESSIONS.includes(nextNode.type)
         ? parser.createNode('ExpressionStatement', nextNode)
         : nextNode
 
-      if (node.type === 'comment') {
+      if (node.type === 'Comment') {
         comments.push(node)
         continue
       }

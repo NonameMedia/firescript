@@ -52,5 +52,31 @@ module.exports = {
     '{': '}',
     '[': ']',
     '(': ')'
-  }
+  },
+
+  EXPRESSIONS: [
+    'ThisExpression',
+    'Identifier',
+    'Literal',
+    'ArrayExpression',
+    'ObjectExpression',
+    'FunctionExpression',
+    'ArrowFunctionExpression',
+    'ClassExpression',
+    'TaggedTemplateExpression',
+    'MemberExpression',
+    'Super',
+    'MetaProperty',
+    'NewExpression',
+    'CallExpression',
+    'UpdateExpression',
+    'AwaitExpression',
+    'UnaryExpression',
+    'BinaryExpression',
+    'LogicalExpression',
+    'ConditionalExpression',
+    'YieldExpression',
+    'AssignmentExpression',
+    'SequenceExpression'
+  ]
 }

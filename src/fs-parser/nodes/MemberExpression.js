@@ -32,11 +32,12 @@ class MemberExpression extends Node {
 
     console.log('MEMEXP', object, property)
 
+    this.object = object || parser.nextRealNode(this)
+
     const memberExpressionStack = []
     this.computed = false
 
-    if (object && property) {
-      this.object = object
+    if (this.object && property) {
       this.property = property
 
       if (property.type === 'Literal') {
@@ -45,8 +46,8 @@ class MemberExpression extends Node {
       return
     }
 
-    if (object) {
-      memberExpressionStack.push([object, false])
+    if (this.object) {
+      memberExpressionStack.push([this.object, false])
     }
 
     while (true) {
@@ -57,10 +58,10 @@ class MemberExpression extends Node {
 
       if (parser.match('punctuator "."')) {
         parser.skipNext()
-        memberExpressionStack.push([parser.nextRealNode(), false])
+        memberExpressionStack.push([parser.nextRealNode(this), false])
       } else if (parser.match('punctuator "["')) {
         parser.skipNext()
-        memberExpressionStack.push([parser.nextRealNode(), true])
+        memberExpressionStack.push([parser.nextRealNode(this), true])
         if (!parser.match('punctuator "]"')) {
           this.syntaxError('Unexpected token, `]` char expected')
         }

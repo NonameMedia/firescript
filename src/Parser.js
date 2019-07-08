@@ -89,11 +89,18 @@ class Parser {
   }
 
   nextNode (scope) {
-    return this.resolveToken(scope, false)
+    const node = this.resolveToken(scope)
+    if (!node) {
+      return null
+    }
+
+    const mapNode = this.resolveMapping(node, scope)
+    console.log('MAPNODE', mapNode)
+    return mapNode
   }
 
   nextRealNode (scope) {
-    return this.resolveToken(scope, true)
+    return this.resolveToken(scope)
   }
 
   skipNext () {
@@ -109,7 +116,7 @@ class Parser {
     return this.nodeDefinition.resolve(tokenBuffer, scope)
   }
 
-  resolveToken (scope, skipWrapNode) {
+  resolveToken (scope) {
     const nodeName = this.resolveNodeName(scope)
     // console.log('NodeName', nodeName)
 
@@ -125,13 +132,8 @@ class Parser {
       this.syntaxError('Unexpected token')
     }
 
-    const node = this.createNode(nodeName, null, skipWrapNode)
+    const node = this.createNode(nodeName, null, scope)
     // console.log('NODE', node)
-
-    // if (this.match('punctuator > "."')) {
-    //   return this.createNode('MemberExpression', node)
-    // }
-
     return node
   }
 
@@ -140,25 +142,40 @@ class Parser {
     return this.tokenBuffer[0]
   }
 
-  createNode (nodeName, childNode, skipWrapNode) {
+  createNode (nodeName, childNode) {
     const Node = require(path.join(this.confDir, `nodes/${nodeName}`))
     const node = new Node(this, childNode)
 
-    if (skipWrapNode) {
-      return node
+    return node
+  }
+
+  resolveMapping (node, scope) {
+    let mapNode = node
+    const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
+      return Math.max(num, item.mapping.length)
+    }, 0)
+
+    while (true) {
+      this.fillBuffer(bufferFillSize)
+
+      const mapNodeName = this.nodeMapping.resolve(mapNode, this.tokenBuffer, scope)
+      // console.log('WRAP NODE', nodeName, mapNodeName)
+      if (!mapNodeName) {
+        // console.log('BREAK')
+        break
+      }
+
+      if (mapNodeName === '$origin') {
+        return node
+      }
+
+      const MapNode = require(path.join(this.confDir, `nodes/${mapNodeName}`))
+      mapNode = new MapNode(this, mapNode)
+      console.log('MAPNODE', mapNode.type, ' => ', mapNodeName)
     }
 
-    const wrapNodeName = this.nodeMapping.resolve(node, this.tokenBuffer)
-    // console.log('WRAP NODE', nodeName, wrapNodeName)
-    if (!wrapNodeName) {
-      return node
-    }
-
-    const WrapNode = require(path.join(this.confDir, `nodes/${wrapNodeName}`))
-    const wrapNode = new WrapNode(this, node)
-    // console.log('WRAPNODE', node.type, ' => ', wrapNodeName)
-
-    return wrapNode
+    // console.log('END')
+    return mapNode
   }
 
   createMatcher (arr) {
@@ -465,13 +482,13 @@ class Parser {
    * @returns {Boolean} Returns true if current token is type of indention and indention size is greater then current indention
    */
   isInnerScope (parentIndention) {
-    parentIndention = parentIndention || this.indention
+    parentIndention = Number.isInteger(parentIndention) ? parentIndention : this.indention
     if (this.tokenBuffer.length === 0) {
       this.fillBuffer(1)
     }
 
     const token = this.tokenBuffer[0]
-    if (token.type !== 'indention') {
+    if (!token || token.type !== 'indention') {
       return false
     }
 
@@ -485,7 +502,7 @@ class Parser {
     }
 
     const token = this.tokenBuffer[0]
-    if (!token.type === 'indention') {
+    if (!token || !token.type === 'indention') {
       return false
     }
 
@@ -499,7 +516,7 @@ class Parser {
     }
 
     const token = this.tokenBuffer[0]
-    if (!token.type === 'indention') {
+    if (!token || !token.type === 'indention') {
       return false
     }
 
@@ -520,8 +537,12 @@ class Parser {
     return this.tokenBuffer.length === 0
   }
 
-  print () {
+  print (msg) {
     this.fillBuffer(5)
+    if (msg) {
+      console.log(msg)
+    }
+
     console.log(this.tokenBuffer)
   }
 

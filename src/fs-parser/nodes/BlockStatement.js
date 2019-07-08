@@ -1,4 +1,5 @@
 const Node = require('./Node')
+const constants = require('../../utils/constants')
 
 const ALLOWED_CHILDS = [
   'BlockStatement',
@@ -45,15 +46,19 @@ class BlockStatement extends Node {
     // const bodyIndention = this.indention
 
     for (const scope of parser.walkScope()) {
-      const child = scope.nextNode(this)
-      if (child.type === 'Comment') {
-        comments.push(child)
+      const nextNode = scope.nextNode(this)
+      if (nextNode.type === 'Comment') {
+        comments.push(nextNode)
         continue
       }
 
-      if (!child) {
+      if (!nextNode) {
         break
       }
+
+      const child = constants.EXPRESSIONS.includes(nextNode.type)
+        ? parser.createNode('ExpressionStatement', nextNode)
+        : nextNode
 
       if (comments.length) {
         child.leadingComments = comments.splice(0, Infinity)
