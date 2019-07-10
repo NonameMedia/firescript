@@ -11,7 +11,29 @@ describe('Node mappings', () => {
       const nodeMapping = new NodeMapping({
         confDir: path.join(__dirname, './fixtures/parser/')
       })
-      console.log('NodeMapping', nodeMapping)
+
+      inspect(nodeMapping).isEql({
+        confDir: path.join(__dirname, './fixtures/parser/'),
+        nodeMapping: [{
+          mapping: [{
+            node: 'Identifier'
+          }, {
+            type: 'punctuator',
+            value: '.'
+          }],
+          test: inspect.match.func,
+          name: 'MemberExpression'
+        }, {
+          mapping: [{
+            node: 'FunctionExpression'
+          }, {
+            type: 'punctuator',
+            value: '.'
+          }],
+          test: inspect.match.func,
+          name: 'MemberExpression'
+        }]
+      })
     })
   })
   // describe('parse()', () => {

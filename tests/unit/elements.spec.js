@@ -36,12 +36,6 @@ describe('Elements', () => {
           .replace(/EOF\s*$/, '')
 
         it('(1) parse Firescript into AST', () => {
-          // const tokenizer = new Tokenizer({
-          //   loc: true
-          // })
-
-          // const token = tokenizer.tokenize(fssource)
-
           const ctx = new ParserContext({
             setLocation: true,
             setRange: true

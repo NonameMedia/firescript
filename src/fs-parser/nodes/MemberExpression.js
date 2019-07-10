@@ -60,7 +60,13 @@ class MemberExpression extends Node {
         memberExpressionStack.push([parser.nextRealNode(this), false])
       } else if (parser.match('punctuator "["')) {
         parser.skipNext()
-        memberExpressionStack.push([parser.nextRealNode(this), true])
+        const node = parser.nextNode(this)
+        if (parser.match('punctuator "["')) {
+          memberExpressionStack.push([parser.createNode('MemberExpression', node), true])
+        } else {
+          memberExpressionStack.push([node, true])
+        }
+        parser.print('++MEMEXP')
         if (!parser.match('punctuator "]"')) {
           this.syntaxError('Unexpected token, `]` char expected')
         }

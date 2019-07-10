@@ -58,21 +58,12 @@ class Property extends Node {
     if (this.method) {
       this.value = parser.createNode('FunctionExpression')
     } else if (parser.isInnerScope(this.indention)) {
-      if (this.isObjectExpression()) {
-        this.value = this.createObjectExpressionNode()
-      // }
-      //
-      // const objectExpression = this.tryObjectExpression(tokenStack)
-      // if (objectExpression) {
-      //   this.value = objectExpression
+      if (parser.match('indention > identifier > punctuator ":"')) {
+        this.value = parser.createNode('ObjectExpression')
+      } else if (parser.match('indention > literal > punctuator ":"')) {
+        this.value = parser.createNode('ObjectExpression')
       } else {
-        const arrayExpression = this.tryArrayExpression()
-
-        if (arrayExpression) {
-          this.value = arrayExpression
-        } else {
-          this.syntaxError('Indention error')
-        }
+        this.value = parser.createNode('ArrayExpression')
       }
     } else if (parser.match('punctuator ","') || parser.match('punctuator "}"')) {
       this.value = null

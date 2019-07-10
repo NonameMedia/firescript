@@ -25,7 +25,9 @@ describe('Parser', () => {
         length: 5,
         line: 1,
         column: 1,
-        isKeyword: true
+        isKeyword: true,
+        lineLength: 1,
+        indention: 0
       })
     })
 
@@ -38,7 +40,9 @@ describe('Parser', () => {
         length: 6,
         line: 1,
         column: 7,
-        isKeyword: false
+        isKeyword: false,
+        lineLength: 1,
+        indention: 0
       })
     })
 
@@ -51,7 +55,9 @@ describe('Parser', () => {
         length: 1,
         line: 1,
         column: 14,
-        isKeyword: false
+        isKeyword: false,
+        lineLength: 1,
+        indention: 0
       })
     })
 
@@ -64,7 +70,9 @@ describe('Parser', () => {
         length: 8,
         line: 1,
         column: 16,
-        isKeyword: false
+        isKeyword: false,
+        lineLength: 1,
+        indention: 0
       })
     })
   })
@@ -309,10 +317,8 @@ describe('Parser', () => {
     it('returns a MemberExpression node', () => {
       parser.parse('fruits.banana')
       const next = parser.nextNode(this)
-      inspect.print(next)
       const ctx = {}
       const node = next.resolve(ctx)
-      inspect.print(node)
       inspect(node).hasProps({
         type: 'MemberExpression',
         object: {
@@ -329,10 +335,8 @@ describe('Parser', () => {
     it('returns a MemberExpression node', () => {
       parser.parse('tree.fruits.banana')
       const next = parser.nextNode(this)
-      inspect.print(next)
       const ctx = {}
       const node = next.resolve(ctx)
-      inspect.print(node)
       inspect(node).hasProps({
         type: 'MemberExpression',
         object: {

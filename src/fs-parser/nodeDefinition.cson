@@ -114,6 +114,7 @@ definition:
     scopes:
       'ClassBody': 'MethodDefinition'
       'MemberExpression': 'Identifier'
+      'Property': 'Identifier'
     name: 'FirescriptLogStatement'
 
   'identifier':
@@ -139,6 +140,9 @@ definition:
 
   'punctuator "["':
     name: 'ArrayExpression'
+
+  'punctuator "("':
+    name: 'ArrowFunctionExpression'
 
   'operator [++,--]':
     name: 'UpdateExpression'

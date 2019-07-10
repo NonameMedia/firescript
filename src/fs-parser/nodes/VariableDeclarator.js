@@ -58,7 +58,16 @@ class VariableDeclarator extends Node {
     if (parser.match('operator "="')) {
       parser.skipNext()
 
-      this.init = parser.nextNode(this)
+      if (parser.isInnerScope(this.indention)) {
+        if (parser.match('indention > identifier > punctuator ":"') || parser.match('indention > literal > punctuator ":"')) {
+          this.init = parser.createNode('ObjectExpression')
+        } else {
+          this.init = parser.createNode('ArrayExpression')
+        }
+      } else {
+        this.init = parser.nextNode(this)
+      }
+
       this.isAllowedNode(this.init, ALLOWED_CHILDS)
       // if (parser.expect('indention')) {
       //   if (this.isObjectExpression(tokenStack)) {

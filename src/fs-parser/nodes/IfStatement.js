@@ -3,6 +3,7 @@ const Node = require('./Node')
 class IfStatement extends Node {
   constructor (parser) {
     super(parser)
+    parser.print()
 
     if (parser.match('keyword "if"')) {
       parser.skipNext()
@@ -17,7 +18,7 @@ class IfStatement extends Node {
     }
 
     if (!parser.isInnerScope(this.indention)) {
-      this.syntaxError('Unexpected token! Indention expected!')
+      this.syntaxError('Unexpected token, indention expected!')
     }
 
     this.consequent = parser.createNode('BlockStatement')

@@ -4,16 +4,8 @@
     "value": "switch"
   },
   {
-    "type": "punctuator",
-    "value": "("
-  },
-  {
     "type": "identifier",
     "value": "type"
-  },
-  {
-    "type": "punctuator",
-    "value": ")"
   },
   {
     "type": "indention",

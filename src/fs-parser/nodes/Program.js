@@ -83,7 +83,6 @@ class Program extends Node {
   }
 
   resolve (ctx) {
-    console.log(this.body)
     return this.createJSON(ctx, {
       type: 'Program',
       sourceType: this.sourceType,

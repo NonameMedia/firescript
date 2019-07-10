@@ -12,6 +12,10 @@ class FirescriptLogStatement extends Node {
 
     this.arguments = []
     for (const scope of parser.walkScope()) {
+      if (parser.match('punctuator ","')) {
+        parser.skipNext()
+      }
+
       const expression = scope.nextNode(this)
       this.arguments.push(expression)
     }

@@ -118,7 +118,6 @@ class Parser {
 
   resolveToken (scope) {
     const nodeName = this.resolveNodeName(scope)
-    // console.log('NodeName', nodeName)
 
     if (!nodeName) {
       if (this.tokenBuffer.length === 0) {
@@ -238,6 +237,8 @@ class Parser {
     let column = this.column
     let length = value.length
     let isKeyword = false
+    let lineLength = 1
+    let tokenIndention = this.indention
 
     this.column += length
 
@@ -265,6 +266,9 @@ class Parser {
         value = parseInt(length / this.indentionSize)
         this.indention = value
       }
+    } else if (type === 'literal') {
+      const split = value.split('\n')
+      lineLength = split.length
     }
 
     if (type !== 'indention') {
@@ -276,9 +280,11 @@ class Parser {
       value: value,
       index: index,
       length: length,
+      lineLength: lineLength,
       line: line,
       column: column,
-      isKeyword: isKeyword
+      isKeyword: isKeyword,
+      indention: tokenIndention
     }
   }
 
@@ -465,13 +471,14 @@ class Parser {
       this.fillBuffer(1)
     }
 
-    const token = this.tokenBuffer[0]
+    const token = this.tokenBuffer[0] || this
+
     return {
       index: token.index,
       length: token.length,
       line: token.line,
       column: token.column,
-      indention: this.indention
+      indention: token.indention
     }
   }
 
@@ -562,6 +569,7 @@ class Parser {
     }
 
     // console.log('INITIAL INDENTION', scopeIndention)
+    // console.log('ENTER SCOPE', scopeEnd, scopeIndention, this.showNextToken())
 
     return {
       [ Symbol.iterator ]: () => {
@@ -575,11 +583,21 @@ class Parser {
 
               if (token.value === scopeIndention) {
                 this.skipNext()
-                return { done: false, value: this }
+                if (scopeEnd && this.match(`punctuator "${scopeEnd}"`)) {
+                  this.skipNext()
+                  // console.log('UNWALK DONE 1', scopeIndention, scopeEnd)
+                  return { done: true, value: this }
+                }
+                // console.log('UNWALK CONTINUE', scopeIndention, scopeEnd, this.showNextToken())
+                return { done: this.isEOF(), value: this }
               }
 
               if (!scopeEnd && token.value > scopeIndention) {
                 this.syntaxError('Indention error!')
+              }
+
+              if (!scopeEnd && token.value < scopeIndention) {
+                // console.log('UNSCOPE!')
               }
 
               if (scopeEnd) {
@@ -591,6 +609,7 @@ class Parser {
                 }
               }
 
+              // console.log('UNWALK DONE 2', scopeIndention, scopeEnd)
               return { done: true, value: this }
             } else if (scopeEnd && this.match('punctuator ","')) {
               this.skipNext()
@@ -607,9 +626,11 @@ class Parser {
               }
             } else if (scopeEnd && this.match(`punctuator "${scopeEnd}"`)) {
               this.skipNext()
+              // console.log('UNWALK DONE 3', scopeIndention, scopeEnd)
               return { done: true, value: this }
             }
 
+            // console.log('UNWALK DONE 2', scopeIndention, scopeEnd, this.showNextToken())
             return { done: this.isEOF(), value: this }
           }
         }

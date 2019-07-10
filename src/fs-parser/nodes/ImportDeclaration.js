@@ -44,11 +44,11 @@ class ImportDeclaration extends Node {
 
           this.specifiers.push(parser.createNode('ImportSpecifier'))
         }
-      } else if (parser.match('operator', '*')) {
-        this.specifiers.push(parser.createNode('ImportNamespaceSpecifier'))
-      } else if (parser.match('operator', '**')) {
+      } else if (parser.match('operator "**"')) {
         this.specifiers.push(parser.createNode('ImportDefaultSpecifier'))
-      } else if (parser.match('punctuator', ',')) {
+      } else if (parser.match('operator "*"')) {
+        this.specifiers.push(parser.createNode('ImportNamespaceSpecifier'))
+      } else if (parser.match('punctuator ","')) {
         parser.skipNext()
         continue
       } else if (parser.match('identifier')) {

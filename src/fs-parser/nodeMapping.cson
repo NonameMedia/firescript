@@ -13,6 +13,7 @@ mapping:
     name: 'CallExpression'
     scopes:
       'Property': 'FunctionExpression'
+      'NewExpression': '$origin'
   'Identifier > punctuator ":"':
     name: 'ObjectExpression'
     scopes:
@@ -23,10 +24,19 @@ mapping:
       'ConditionalExpression': '$origin'
   'MemberExpression > punctuator "("':
     name: 'CallExpression'
+    scopes:
+      'NewExpression': '$origin'
   'operator [=,*=,**=,/=,%=,+=,-=,
   <<=,>>=,>>>=,&=,^=,|=]':
     name: 'AssignmentExpression'
+    scopes:
+      'FunctionDeclaration': 'AssignmentPattern'
+      'FunctionExpression': 'AssignmentPattern'
   'operator [instanceof,in,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
     name: 'BinaryExpression'
   'operator [++,--]':
     name: 'UpdateExpression'
+  'operator [||,&&]':
+    name: 'LogicalExpression'
+  'punctuator "?"':
+    name: 'ConditionalExpression'

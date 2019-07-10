@@ -317,7 +317,7 @@ class FirescriptNode {
       } else if (tokenStack.expect('operator', constants.LOGICAL_OPERATORS)) {
         node = this.getNodeInstance('LogicalExpression', tokenStack, node)
       } else if (tokenStack.expect('punctuator', ['.', '['])) {
-        console.log('TYPE', this.type, node.type)
+        // console.log('TYPE', this.type, node.type)
         node = this.getNodeInstance('MemberExpression', tokenStack, node)
       } else if (tokenStack.expect('operator', constants.UPDATE_OPERATORS)) {
         node = this.getNodeInstance('UpdateExpression', tokenStack, node)
@@ -487,15 +487,15 @@ class FirescriptNode {
 
   createJSON (ctx, obj) {
     if (this.trailingComments) {
-      obj.trailingComments = this.trailingComments.map((item) => item.toJSON(ctx))
+      obj.trailingComments = this.trailingComments.map((item) => item.resolve(ctx))
     }
 
     if (this.leadingComments) {
-      obj.leadingComments = this.leadingComments.map((item) => item.toJSON(ctx))
+      obj.leadingComments = this.leadingComments.map((item) => item.resolve(ctx))
     }
 
     if (this.innerComments) {
-      obj.innerComments = this.innerComments.map((item) => item.toJSON(ctx))
+      obj.innerComments = this.innerComments.map((item) => item.resolve(ctx))
     }
 
     if (ctx.setLocation && this.firstToken) {

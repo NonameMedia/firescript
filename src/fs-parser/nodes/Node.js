@@ -25,15 +25,15 @@ class Node {
 
   createJSON (ctx, obj) {
     if (this.trailingComments) {
-      obj.trailingComments = this.trailingComments.map((item) => item.toJSON(ctx))
+      obj.trailingComments = this.trailingComments.map((item) => item.resolve(ctx))
     }
 
     if (this.leadingComments) {
-      obj.leadingComments = this.leadingComments.map((item) => item.toJSON(ctx))
+      obj.leadingComments = this.leadingComments.map((item) => item.resolve(ctx))
     }
 
     if (this.innerComments) {
-      obj.innerComments = this.innerComments.map((item) => item.toJSON(ctx))
+      obj.innerComments = this.innerComments.map((item) => item.resolve(ctx))
     }
 
     if (ctx.setLocation) {

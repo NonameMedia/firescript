@@ -60,7 +60,7 @@ describe('Firescript Syntax Check', () => {
           const res = parser.parse(fssource)
 
           inspect(res).isObject()
-          inspect(res).isEql(fsast)
+          inspect(res).hasProps(fsast)
         })
 
         it.skip(`transpile FS-AST into JS`, () => {

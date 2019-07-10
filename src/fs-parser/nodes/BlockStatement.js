@@ -31,78 +31,41 @@ class BlockStatement extends Node {
     super(parser)
     this.isBlockScope = true
 
-    // const token = parser.nextToken()
     this.body = []
     const comments = []
 
-    // if (token === null) {
-    //   return
-    // }
-    //
+    if (parser.isEOF()) {
+      return
+    }
+
     if (!parser.match('indention')) {
       this.syntaxError('Unexpected token, indention expected')
     }
 
-    // const bodyIndention = this.indention
+    if (parser.isInnerScope(this.indention)) {
+      for (const scope of parser.walkScope()) {
+        const nextNode = scope.nextNode(this)
+        if (nextNode.type === 'Comment') {
+          comments.push(nextNode)
+          continue
+        }
 
-    for (const scope of parser.walkScope()) {
-      const nextNode = scope.nextNode(this)
-      if (nextNode.type === 'Comment') {
-        comments.push(nextNode)
-        continue
+        if (!nextNode) {
+          break
+        }
+
+        const child = constants.EXPRESSIONS.includes(nextNode.type)
+          ? parser.createNode('ExpressionStatement', nextNode)
+          : nextNode
+
+        if (comments.length) {
+          child.leadingComments = comments.splice(0, Infinity)
+        }
+
+        this.isAllowedNode(child, ALLOWED_CHILDS)
+        this.body.push(child)
       }
-
-      if (!nextNode) {
-        break
-      }
-
-      const child = constants.EXPRESSIONS.includes(nextNode.type)
-        ? parser.createNode('ExpressionStatement', nextNode)
-        : nextNode
-
-      if (comments.length) {
-        child.leadingComments = comments.splice(0, Infinity)
-      }
-
-      this.isAllowedNode(child, ALLOWED_CHILDS)
-      this.body.push(child)
     }
-
-    // while (true) {
-    //   if (parser.isEOF()) {
-    //     break
-    //   }
-    //
-    //   if (parser.isOuterScope(bodyIndention)) {
-    //     break
-    //   }
-    //
-    //   if (parser.isInnerScope(bodyIndention)) {
-    //     parser.syntaxError(`Indention error! Indention of ${bodyIndention} expected but ${parser.indention} was detected!`)
-    //   }
-    //
-    //   if (parser.isSameScope(bodyIndention)) {
-    //     parser.skipNext()
-    //     continue
-    //   }
-    //
-    //   const child = parser.nextNode(this)
-    //   if (child.type === 'Comment') {
-    //     comments.push(child)
-    //     continue
-    //   }
-    //
-    //   if (!child) {
-    //     break
-    //   }
-    //
-    //   if (comments.length) {
-    //     child.leadingComments = comments.splice(0, Infinity)
-    //   }
-    //
-    //   this.isAllowedNode(child, ALLOWED_CHILDS)
-    //   this.body.push(child)
-    // }
 
     if (comments.length) {
       this.body.length === 0

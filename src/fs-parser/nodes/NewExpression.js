@@ -13,7 +13,7 @@ class NewExpression extends Node {
 
     parser.skipNext()
 
-    this.callee = parser.nextRealNode(this)
+    this.callee = parser.nextNode(this)
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES)
     this.arguments = []
 
