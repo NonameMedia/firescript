@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const FirescriptTokenizer = require('./FirescriptTokenizer')
 const FirescriptParser = require('./FirescriptParser')
 const Parser = require('./Parser')
 const JSParser = require('./JSParser')
@@ -9,15 +8,26 @@ const JSTranspiler = require('./JSTranspiler')
 const FSConfig = require('./utils/FSConfig')
 
 module.exports = {
-  FirescriptTokenizer,
   FirescriptParser,
   FirescriptTranspiler,
   JSTranspiler,
   JSParser,
   Parser,
   tokenize (input, opts) {
-    const tokenizer = new FirescriptTokenizer(opts)
-    return tokenizer.tokenize(input)
+    const parser = new FirescriptParser(opts)
+    parser.parse(input)
+
+    const tokens = []
+    while (true) {
+      const token = parser.nextToken()
+      if (!token) {
+        break
+      }
+
+      tokens.push(token)
+    }
+
+    return tokens
   },
   transpileFile (filename, opts = {}) {
     const ext = path.extname(filename)

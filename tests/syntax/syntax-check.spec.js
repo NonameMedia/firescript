@@ -4,7 +4,6 @@ const inspect = require('inspect.js')
 const {
   FirescriptParser,
   FirescriptTranspiler,
-  FirescriptTokenizer,
   JSTranspiler,
   Parser
 } = require('../../')

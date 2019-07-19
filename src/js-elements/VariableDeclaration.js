@@ -21,10 +21,20 @@ class VariableDeclaration extends JSElement {
   }
 
   compile (buffer) {
+    if (this.leadingComments) {
+      buffer.writeComments(this.leadingComments)
+      buffer.indent()
+    }
+
     buffer.registerItem(this.location, this.kind)
     buffer.write(`${this.kind} `)
     buffer.loop(this.declarations, ', ')
     buffer.write(this.hasClosingSemicolon() ? ';' : '')
+
+    if (this.trailingComments) {
+      buffer.indent()
+      buffer.writeComments(this.trailingComments)
+    }
   }
 
   toESString (ctx) {

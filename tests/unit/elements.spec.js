@@ -27,6 +27,8 @@ describe('Elements', () => {
 
         const ast = require(`${testCase.path}/ast.json`)
         const fsNodeType = metaFile && metaFile.fsNode ? metaFile.fsNode : ast.type
+        const jsNodeType = metaFile && metaFile.jsNode ? metaFile.jsNode : ast.type
+        const skipJS = !!(metaFile && metaFile.skipJS)
         const jssource = inspect
           .readFile(`${testCase.path}/index.js`)
           .replace(/EOF\s*$/, '')
@@ -51,23 +53,25 @@ describe('Elements', () => {
           inspect(fsast).hasProps(ast)
         })
 
-        it.skip('(2) transpile AST into Javascript', () => {
-          const buffer = new SourceBuffer()
-          const Element = require(`../../src/js-elements/${fsNodeType}`)
-          const jse = new Element(ast)
-          jse.compile(buffer)
-          inspect(buffer.toString()).isEql(jssource)
-        })
+        if (!skipJS) {
+          it('(2) transpile AST into Javascript', () => {
+            console.log('AST', ast)
+            const buffer = new SourceBuffer()
+            const Element = require(`../../src/js-elements/${jsNodeType}`)
+            const jse = new Element(ast)
+            jse.compile(buffer)
+            inspect(buffer.toString()).isEql(jssource)
+          })
 
-        // it.skip('TODO: (3) parse Javascript into AST')
-
-        it.skip('(3) transpile AST into Firescript', () => {
-          const Element = require(`../../src/fs-elements/${fsNodeType}`)
-          const fse = new Element(ast)
-          const ctx = new RenderContext({}, 'fire')
-          const res = fse.toFSString(ctx)
-          inspect(res).isEql(fssource)
-        })
+          it.skip('(3) transpile AST into Firescript', () => {
+            const Element = require(`../../src/fs-elements/${fsNodeType}`)
+            console.log(ast)
+            const fse = new Element(ast)
+            const ctx = new RenderContext({}, 'fire')
+            const res = fse.toFSString(ctx)
+            inspect(res).isEql(fssource)
+          })
+        }
 
         if (!metaFile) {
           it.skip('skipped, missing metafile')
@@ -75,7 +79,7 @@ describe('Elements', () => {
         }
 
         it.skip('(4) get length of source', () => {
-          const Element = require(`../../src/js-elements/${fsNodeType}`)
+          const Element = require(`../../src/js-elements/${jsNodeType}`)
           const jse = new Element(ast)
           const len = jse.getLineLength()
           inspect(`${len}`).isEql(`${metaFile.sourceLength}`)

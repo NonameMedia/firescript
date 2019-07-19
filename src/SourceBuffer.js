@@ -35,6 +35,15 @@ class SourceBuffer {
     return this
   }
 
+  writeComments (comments) {
+    if (comments && comments.length > 0) {
+      comments.forEach((comment) => {
+        console.log('COMMENT', comment)
+        this.write(comment)
+      })
+    }
+  }
+
   nl (num = 1) {
     this.line += num
     this.column = 1

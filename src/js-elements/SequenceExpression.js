@@ -15,22 +15,13 @@ class SequenceExpression extends JSElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element SequenceExpression is a DraftElement!`)
+    this.expressions = this.createElementList(ast.expressions)
   }
 
   compile (buffer) {
     buffer.registerItem(this.location)
-    buffer.write(this.callee)
-    buffer.loop(this.arguments, ', ')
-    buffer.write(';')
-  }
-
-  toString () {
-    return this.renderElement(
-      `${this.callee}(${this.arguments.join(', ')});`
-    )
+    buffer.loop(this.expressions, ', ')
+    // buffer.write(';')
   }
 }
 

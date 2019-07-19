@@ -17,15 +17,22 @@ class LogicalExpression extends FirescriptElement {
   constructor (ast) {
     super(ast)
 
-    this.callee = this.createElement(ast.callee)
-    this.arguments = this.createElementList(ast.arguments)
-    throw new Error(`Element LogicalExpression is a DraftElement!`)
+    this.left = this.createElement(ast.left)
+    this.right = this.createElement(ast.right)
+    this.operator = ast.operator
   }
 
-  toString () {
+  toFSString (ctx) {
     return this.renderElement(
-      `${this.callee}(${this.arguments.join(', ')});`
+      `${this.left.toFSString(ctx)} ${this.operator} ${this.right.toFSString(ctx)}`
     )
+  }
+
+  getLineLength () {
+    return this.left.getLineLength() +
+      this.operator.length +
+      this.right.getLineLength() +
+      3
   }
 }
 

@@ -11,6 +11,10 @@ class JSElement {
     this.__indention = 0
     this.indentionSize = 2
     this.location = ast.loc ? ast.loc.start : null
+
+    // this.leadingComments = ast.leadingComments ? ast.leadingComments.map((comment) => this.createElement(comment)) : null
+    // this.trailingComments = ast.trailingComments ? ast.trailingComments.map((comment) => this.createElement(comment)) : null
+    // this.innerComments = ast.innerComments ? ast.innerComments.map((comment) => this.createElement(comment)) : null
   }
 
   compile () {
@@ -56,17 +60,16 @@ class JSElement {
 
     child.parent = this
     child.indention = indentionSize ? this.indention + indentionSize : this.indention
-    if (ast.leadingComments) {
-      child.leadingComments = ast.leadingComments
+    if (ast.leadingComments && ast.leadingComments.length) {
+      child.leadingComments = ast.leadingComments.map((item) => this.createElement(item))
     }
 
-    if (ast.trailingComments) {
-      child.trailingComments = ast.trailingComments
+    if (ast.trailingComments && ast.trailingComments.length) {
+      child.trailingComments = ast.trailingComments.map((item) => this.createElement(item))
     }
 
-    if (ast.innerComments) {
-      const Comment = require('./Comment')
-      child.innerComments = ast.innerComments.map((item) => new Comment(item))
+    if (ast.innerComments && ast.innerComments.length) {
+      child.innerComments = ast.innerComments.map((item) => this.createElement(item))
     }
 
     return child
