@@ -25,7 +25,6 @@ class BinaryExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, this.id)
     buffer.write(this.left)
     buffer.write(` ${this.operator} `)
     buffer.write(this.right)

@@ -19,7 +19,7 @@ class AwaitExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'await')
+    buffer.registerItem(this.location)
     buffer.write('await ')
     buffer.write(this.argument)
   }
