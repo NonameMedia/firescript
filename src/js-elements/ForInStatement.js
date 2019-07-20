@@ -31,16 +31,6 @@ class ForInStatement extends JSElement {
     buffer.write(') ')
     buffer.write(this.body)
   }
-
-  toESString (ctx) {
-    return this.renderElement('for (' +
-      this.left.toESString(ctx) +
-      ' in ' +
-      this.right.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
-    )
-  }
 }
 
 module.exports = ForInStatement

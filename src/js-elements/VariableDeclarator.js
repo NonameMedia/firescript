@@ -21,7 +21,6 @@ class VariableDeclarator extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, this.id)
     buffer.write(this.id)
 
     if (this.init) {

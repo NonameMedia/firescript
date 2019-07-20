@@ -1,20 +1,31 @@
 {
-  "type": "ArrayExpression",
-  "elements": [
-    {
-      "type": "Literal",
-      "value": "banana",
-      "raw": "'banana'"
+  "type": "VariableDeclaration",
+  "kind": "const",
+  "declarations": [{
+    "type": "VariableDeclarator",
+    "id": {
+      "type": "Identifier",
+      "name": "arr"
     },
-    {
-      "type": "Literal",
-      "value": "mango",
-      "raw": "'mango'"
-    },
-    {
-      "type": "Literal",
-      "value": "peach",
-      "raw": "'peach'"
+    "init": {
+      "type": "ArrayExpression",
+      "elements": [
+        {
+          "type": "Literal",
+          "value": "banana",
+          "raw": "'banana'"
+        },
+        {
+          "type": "Literal",
+          "value": "mango",
+          "raw": "'mango'"
+        },
+        {
+          "type": "Literal",
+          "value": "peach",
+          "raw": "'peach'"
+        }
+      ]
     }
-  ]
+  }]
 }

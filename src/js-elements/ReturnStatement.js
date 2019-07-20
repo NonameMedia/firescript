@@ -19,7 +19,7 @@ class ReturnStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'return')
+    buffer.registerItem(this.location)
     buffer.write('return')
     buffer.write(this.argument ? ' ' : '')
     buffer.write(this.argument)

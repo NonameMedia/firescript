@@ -36,22 +36,6 @@ class ClassDeclaration extends JSElement {
 
     this.body.compile(buffer)
   }
-
-  toESString (ctx) {
-    const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
-
-    const item = ctx.registerItem(this)
-    const str = this.renderElement(
-      'class ' +
-      this.id.toESString(ctx) +
-      superClass +
-      ' ' +
-      this.body.toESString(ctx)
-    )
-
-    item.setLen(str.length)
-    return str
-  }
 }
 
 module.exports = ClassDeclaration

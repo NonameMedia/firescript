@@ -36,18 +36,6 @@ class ArrayExpression extends JSElement {
   useMultiline () {
     return this.elements.length > 2 || this.elements.some((item) => item.method)
   }
-
-  getLineLength () {
-    if (this.useMultiline()) {
-      return 1
-    }
-
-    const len = 4
-
-    return this.elements.reduce((num, item) => {
-      return num + item.getLineLength()
-    }, len + (this.elements.length - 1) * 2)
-  }
 }
 
 module.exports = ArrayExpression

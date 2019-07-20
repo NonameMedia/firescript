@@ -46,6 +46,7 @@ class Parser {
     this.indention = 0
     this.source = source
     this.length = source.length
+    this.lineLength = 0
 
     this.parserFuncs = this.createMatcher(this.matcherConf)
   }
@@ -252,10 +253,11 @@ class Parser {
   createToken (type, value, nextIndex) {
     let index = this.index
     let line = this.line
+    let lineEnd = this.line
     let column = this.column
+    let columnEnd = this.columnEnd + this.length
     let length = value.length
     let isKeyword = false
-    let lineLength = 1
     let tokenIndention = this.indention
 
     this.column += length
@@ -286,7 +288,12 @@ class Parser {
       }
     } else if (type === 'literal') {
       const split = value.split('\n')
-      lineLength = split.length
+      const lineLength = split.length
+      const lastLine = split.pop()
+      if (split.length > 1) {
+        lineEnd += (lineLength - 1)
+        columnEnd += lastLine.length
+      }
     }
 
     if (type !== 'indention') {
@@ -298,9 +305,10 @@ class Parser {
       value: value,
       index: index,
       length: length,
-      lineLength: lineLength,
       line: line,
+      lineEnd: lineEnd,
       column: column,
+      columnEnd: columnEnd,
       isKeyword: isKeyword,
       indention: tokenIndention
     }
@@ -495,6 +503,7 @@ class Parser {
       index: token.index,
       length: token.length,
       line: token.line,
+      lineLength: token.lineLength,
       column: token.column,
       indention: token.indention
     }

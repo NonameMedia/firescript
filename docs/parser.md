@@ -1,39 +1,55 @@
 Parser
 ======
 
+The Parser class parse a source file into an AST. Firescript is compatible with the Esprima AST to make it compatible to other tools like linters or source formaters. Firescript AST, called FAST, is an extended AST. It has a few `fs` profixed properties and its own nodes like `FirescriptLogStatement` or `FirescriptTyping`.
+
+## Usage
+
 ```js
-const definition = {
-  'keyword "const"': {
-    name: 'VariableDeclaration'
-  }
-
-  'identifier': {
-    name: 'Identifier'
-  }
-
-  'operator "="' {
-    name: 'AssignmentOperator'
-  }
-
-  'literal': {
-    name: 'Literal'
-  }
-}
-
-const parser = new Parse({
-  indentionSize: 4,
-  codeDefinition: definition
+const parser = new Parser({
+  // parser config
 })
 
-const source = 'const banana = \'Banana\''
+parser.parse('const banana = \'banana\'')
 
-parser.parse(source)
-```
+// get next token
+const token = parser.nextToken()
 
-### Source
+{
+  "type": "identifier",
+  "value": "const",
+  "isKeyword": true,
+  "index": 0,
+  "length": 5,
+  "lineLength": 1,
+  "line": 1,
+  "column": 1,
+  "isKeyword": true,
+  "indention": 0
+}
 
-```js
-const banana = 'Banana'
+
+// get next node
+const node = parser.nextNode()
+
+{
+  "type": "VariableDeclaration",
+  "declarations": [
+    {
+      "type": "VariableDeclarator",
+      "id": {
+        "type": "Identifier",
+        "name": "banana"
+      },
+      "init": {
+        "type": "Literal",
+        "value": "banana",
+        "raw": "'banana'"
+      }
+    }
+  ],
+  "kind": "const"
+}
 ```
 
 ### Parser setup
@@ -52,46 +68,37 @@ const banana = 'Banana'
   name: 'Literal'
 ```
 
-`parser.next()` returns the next possible item
+`parser.nextToken()` returns the next token  
 
-`keyword` = type identifier && is defined as keyword
+`parser.nextNode()` returns the next node
 
-`parser.next()` returns:
 
-```js
-{
-  type: 'keyword',
-  value: 'const',
-  col: 1,
-  line: 1,
-  index: 0,
-  length: 5
-}
-```
+
+#### Parser step by step
 
 ```js
 const banana = 'Banana'
 ```
 
-1) Parser detects an identifier with value `const`.
-2) `const` is declared as a keyword. It returns a keyword.
-3) Keyword `const` should be resolved with `VariableDeclaration`
-4) Within the `VariableDeclaration` class, and identifier is required.
-5) `VariableDeclaration` asks parser for an identifier by using `parser.getIdentifier()`
-6) Parser returns an identifier with the value `banana`
-7) `VariableDeclaration` requires an `punctuator` of type `=`
-8) Parser returns an punctuator with the value `=`
-9) `VariableDeclaration` requires any value from `parser.next()`
-10) `VariableDeclaration` accepts value
+1) Parser detects an identifier token with value `const`.  
+2) `const` is declared as a keyword. It returns an identifier token with `isKeyword` flag set to `true`.  
+3) Identifier `const` should be resolved with `VariableDeclaration` class located in `src/fs-parser/nodes/`.  
+4) Within the `VariableDeclaration` class, and identifier is required.  
+5) `VariableDeclaration` asks parser for an identifier by using `parser.getIdentifier()`  
+6) Parser returns an identifier with the value `banana`  
+7) `VariableDeclaration` requires an `punctuator` of type `=`  
+8) Parser returns an punctuator with the value `=`  
+9) `VariableDeclaration` requires any value from `parser.next()`  
+10) `VariableDeclaration` accepts value  
 
 * Parser throws an `SyntaxError` if value doesn't match the required type.
 
 Parser Methods
 --------------
 
-### next()
+### nextNode()
 
-**Returns next item based on declarations conf**
+**Returns next node based on declarations conf**
 
 ### getIdentifier([*str* match | *arr[str]* match])
 
@@ -234,7 +241,7 @@ Returns an `boolean`
 
 
 
-### syntaxError([*str* message])
+### syntaxError([*str* message], [token])
 
 **Throws a SyntaxError**
 

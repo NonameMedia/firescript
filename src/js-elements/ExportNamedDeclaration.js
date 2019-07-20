@@ -37,35 +37,6 @@ class ExportNamedDeclaration extends JSElement {
       buffer.write(' };')
     }
   }
-
-  toESString (ctx) {
-    if (this.declaration) {
-      return this.renderElement(
-        this.renderDeclaration(ctx)
-      )
-    } else {
-      return this.renderElement(
-        this.renderSpecifiers(ctx)
-      )
-    }
-  }
-
-  renderDeclaration (ctx) {
-    return 'export ' +
-      this.declaration.toESString(ctx) +
-      source +
-      ''
-  }
-
-  renderSpecifiers (ctx) {
-    const source = this.source ? ' from ' + this.source.toESString(ctx) : ''
-
-    return 'export { ' +
-      ctx.join(this.specifiers, ', ') +
-      ' }' +
-      source +
-      ';'
-  }
 }
 
 module.exports = ExportNamedDeclaration

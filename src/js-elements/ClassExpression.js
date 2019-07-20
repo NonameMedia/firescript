@@ -36,18 +36,6 @@ class ClassExpression extends JSElement {
 
     this.body.compile(buffer)
   }
-
-  toESString (ctx) {
-    const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
-
-    return this.renderElement(
-      'class ' +
-      this.id.toESString(ctx) +
-      superClass +
-      ' ' +
-      this.body.toESString(ctx)
-    )
-  }
 }
 
 module.exports = ClassExpression

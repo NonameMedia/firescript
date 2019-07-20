@@ -24,14 +24,6 @@ class ExportDefaultDeclaration extends JSElement {
     buffer.write(this.declaration)
     buffer.write(';')
   }
-
-  toESString (ctx) {
-    return this.renderElement(
-      'export default ' +
-      this.declaration.toESString(ctx) +
-      ';'
-    )
-  }
 }
 
 module.exports = ExportDefaultDeclaration

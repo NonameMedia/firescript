@@ -46,15 +46,6 @@ class ConditionalExpression extends JSElement {
     }
   }
 
-  toESString (ctx) {
-    const useMultiline = this.getLineLength() > 80
-    if (useMultiline) {
-      return this.renderElement(this.renderMultiline(ctx))
-    } else {
-      return this.renderElement(this.renderInline(ctx))
-    }
-  }
-
   renderMultiline (ctx) {
     const test = this.test.toESString(ctx)
     const indention = ctx.indent(1)

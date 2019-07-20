@@ -27,17 +27,6 @@ class ExportSpecifier extends JSElement {
       buffer.write(this.local)
     }
   }
-
-  toESString (ctx) {
-    const local = this.exported.name === this.local.name
-      ? ''
-      : ' as ' + this.local.toESString()
-
-    return this.renderElement(
-      this.exported.toESString(ctx) +
-      local
-    )
-  }
 }
 
 module.exports = ExportSpecifier

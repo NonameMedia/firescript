@@ -51,20 +51,6 @@ class ClassBody extends JSElement {
       item.type === 'MethodDefinition' && next
     )
   }
-
-  toESString (ctx) {
-    if (this.body.length === 0) {
-      return '{}'
-    }
-
-    return this.renderElement(
-      '{' +
-      ctx.indent(1) +
-      ctx.join(this.body, '\n' + ctx.indent()) +
-      ctx.indent(-1) +
-      '}'
-    )
-  }
 }
 
 module.exports = ClassBody

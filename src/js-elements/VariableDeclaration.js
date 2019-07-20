@@ -26,7 +26,7 @@ class VariableDeclaration extends JSElement {
       buffer.indent()
     }
 
-    buffer.registerItem(this.location, this.kind)
+    buffer.registerItem(this.location)
     buffer.write(`${this.kind} `)
     buffer.loop(this.declarations, ', ')
     buffer.write(this.hasClosingSemicolon() ? ';' : '')

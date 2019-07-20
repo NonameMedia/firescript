@@ -26,7 +26,7 @@ class SourceBuffer {
     if (lastIndex === -1) {
       this.column += str.length
     } else {
-      // console.log('COL', this.column, str.length, lastIndex)
+      console.log('COL', this.column, str.length, lastIndex)
       this.column = str.length - lastIndex
       this.line += (str.split('\n').length - 1)
     }
@@ -38,7 +38,7 @@ class SourceBuffer {
   writeComments (comments) {
     if (comments && comments.length > 0) {
       comments.forEach((comment) => {
-        console.log('COMMENT', comment)
+        // console.log('COMMENT', comment)
         this.write(comment)
       })
     }
@@ -116,8 +116,8 @@ class SourceBuffer {
   registerItem (origLocation, name) {
     if (origLocation) {
       const map = [
-        origLocation[0],
-        origLocation[1] + 1,
+        origLocation.line,
+        origLocation.column,
         this.line,
         this.column
       ]

@@ -44,18 +44,6 @@ class ArrowFunctionExpression extends JSElement {
     const len = this.async ? 12 : 6
     return len + paramLen + bodyLen
   }
-
-  toESString (ctx) {
-    const asyncfn = this.async ? 'async ' : ''
-
-    return this.renderElement(
-      asyncfn +
-      '(' +
-      ctx.join(this.params, ', ') +
-      ') => ' +
-      this.body.toESString(ctx)
-    )
-  }
 }
 
 module.exports = ArrowFunctionExpression

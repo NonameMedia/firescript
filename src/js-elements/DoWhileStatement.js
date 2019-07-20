@@ -28,16 +28,6 @@ class DoWhileStatement extends JSElement {
     buffer.write(this.test)
     buffer.write(');')
   }
-
-  toESString (ctx) {
-    return this.renderElement(
-      'do ' +
-      this.body.toESString(ctx) +
-      ' while (' +
-      this.test.toESString(ctx) +
-      ');'
-    )
-  }
 }
 
 module.exports = DoWhileStatement

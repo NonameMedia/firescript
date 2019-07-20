@@ -27,15 +27,6 @@ class CatchClause extends JSElement {
     buffer.write(') ')
     buffer.write(this.body)
   }
-
-  toESString (ctx) {
-    return this.renderElement(
-      'catch (' +
-      this.param.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
-    )
-  }
 }
 
 module.exports = CatchClause

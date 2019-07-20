@@ -24,13 +24,6 @@ class ExportAllDeclaration extends JSElement {
     buffer.write(this.source)
     buffer.write(';')
   }
-
-  toESString (ctx) {
-    return this.renderElement('export * from ' +
-      this.source.toESString(ctx) +
-      ';'
-    )
-  }
 }
 
 module.exports = ExportAllDeclaration

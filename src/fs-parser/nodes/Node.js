@@ -38,13 +38,19 @@ class Node {
 
     if (ctx.setLocation) {
       obj.loc = {
-        start: this.index,
-        end: this.index + this.length
+        start: {
+          line: this.line,
+          column: this.column
+        },
+        end: {
+          line: this.lineEnd,
+          column: this.columnEnd
+        }
       }
     }
 
     if (ctx.setRange) {
-      obj.range = [[this.column, this.line], [this.column + this.length, this.line]]
+      obj.range = [ this.index, this.index + this.length ]
     }
 
     return obj
