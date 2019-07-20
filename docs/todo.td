@@ -49,10 +49,10 @@ block scoping                           [ (*) syntax, (*) docs, (*) highlighter 
 Tests:
 ------
 
-ArrayExpression                             [ (/) FSN (/) JSE (/) FSE (/) Syntax ]
-ArrayPattern                                [ (/) FSN (/) JSE (/) FSE (/) Syntax ]
-ArrowFunctionExpression                     [ (/) FSN (/) JSE (/) FSE (/) Syntax ]
-AssignmentExpression                        [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+ArrayExpression                             [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
+ArrayPattern                                [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
+ArrowFunctionExpression                     [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
+AssignmentExpression                        [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 AssignmentPattern                           [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 AwaitExpression                             [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 BinaryExpression                            [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
