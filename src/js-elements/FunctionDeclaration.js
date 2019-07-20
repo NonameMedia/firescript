@@ -33,8 +33,6 @@ class FunctionDeclaration extends JSElement {
     const async = this.async ? 'async ' : ''
     const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
-    buffer.registerItem(this.location)
-
     buffer.write(this.renderLeadingComments())
     buffer.write(async + func + generator)
     buffer.write(this.id)
@@ -49,22 +47,6 @@ class FunctionDeclaration extends JSElement {
       buffer.write('}')
     }
     buffer.write(this.renderTrailingComments())
-  }
-
-  toESString (ctx) {
-    const id = this.id ? this.id.toESString(ctx) : ''
-    const generator = this.generator ? '* ' : ''
-    const func = this.id ? 'function ' : ''
-    const async = this.async ? 'async ' : ''
-    const body = this.body ? this.body.toESString(ctx) : '{}'
-
-    return this.renderElement(
-      async + func + generator + id +
-      ' (' +
-      ctx.join(this.params, ', ') +
-      ') ' +
-      body
-    )
   }
 }
 

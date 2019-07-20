@@ -21,20 +21,10 @@ class CallExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
     buffer.write(this.callee)
     buffer.write('(')
     buffer.loop(this.arguments, ', ')
     buffer.write(')')
-  }
-
-  toESString (ctx) {
-    return this.renderElement(
-      this.callee.toESString(ctx) +
-      '(' +
-      ctx.join(this.arguments, ', ') +
-      ')'
-    )
   }
 }
 

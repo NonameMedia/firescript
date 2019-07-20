@@ -17,7 +17,7 @@ class BreakStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'break')
+    buffer.registerItem(this.location)
     buffer.write('break')
     if (this.label) {
       buffer.write(' ')
