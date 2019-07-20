@@ -39,7 +39,6 @@ class ExportNamedDeclaration extends Node {
       this.isAllowedNode(this.declaration, ALLOWED_DECLARATIONS)
     } else {
       for (const scope of parser.walkScope()) {
-        parser.print('++EXPO')
         if (parser.match('punctuator ","')) {
           parser.skipNext()
         }

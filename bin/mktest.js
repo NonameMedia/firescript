@@ -47,7 +47,7 @@ async function createProject (ctx) {
   cf.print()
 
   const sourceInput = await ctx
-    .ask({ name: 'input', question: 'Do you want enter source file?', type: 'boolean' })
+    .ask({ name: 'input', question: 'Do you want to enter any test code now?', type: 'boolean' })
     .ask({ name: 'source', question: 'index.fire', type: 'input', only: (answers) => answers.input })
     .prompt()
 
@@ -89,13 +89,13 @@ module.exports = (supershit) => {
     .description('Create a Firescript syntax test case')
     .option('-r,--rewrire', 'Rewrite existing test case after code change')
     .option('-t,--transform', 'Setup as transform test')
-    .action(async (ctx, name) => {
-      if (!await SuperFS.exists(TEST_CASE_PATH)) {
-        console.error('Firescript test repo not found! Please clone the firescript-test repo paralel to firescript repo')
-        console.error('$ cd ../')
-        console.error('$ git clone https://gitlab.noname-media.com/Firescript/firescript-test.git')
-        return
-      }
+    .action(async (ctx) => {
+      // if (!await SuperFS.exists(TEST_CASE_PATH)) {
+      //   console.error('Firescript test repo not found! Please clone the firescript-test repo paralel to firescript repo')
+      //   console.error('$ cd ../')
+      //   console.error('$ git clone https://gitlab.noname-media.com/Firescript/firescript-test.git')
+      //   return
+      // }
 
       ctx.testCaseRoot = ctx.transform ? path.join(TEST_CASE_PATH, 'transform') : path.join(TEST_CASE_PATH, 'syntax')
       const { testCaseDir } = ctx.rewrire ? await rewriteProject(ctx) : await createProject(ctx)

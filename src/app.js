@@ -15,19 +15,7 @@ module.exports = {
   Parser,
   tokenize (input, opts) {
     const parser = new FirescriptParser(opts)
-    parser.parse(input)
-
-    const tokens = []
-    while (true) {
-      const token = parser.nextToken()
-      if (!token) {
-        break
-      }
-
-      tokens.push(token)
-    }
-
-    return tokens
+    return parser.tokenize(input)
   },
   transpileFile (filename, opts = {}) {
     const ext = path.extname(filename)

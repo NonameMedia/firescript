@@ -41,6 +41,13 @@ class FirescriptParser {
       this.syntaxError(err)
     }
   }
+
+  tokenize (source) {
+    parserConf.indentionSize = this.indentionSize
+    const parser = new Parser(parserConf)
+    parser.parse(source)
+    return parser.tokenize()
+  }
 }
 
 module.exports = FirescriptParser

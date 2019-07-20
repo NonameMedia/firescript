@@ -1,7 +1,8 @@
 [
   {
-    "type": "keyword",
-    "value": "import"
+    "type": "identifier",
+    "value": "import",
+    "isKeyword": true
   },
   {
     "type": "operator",

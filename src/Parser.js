@@ -50,6 +50,24 @@ class Parser {
     this.parserFuncs = this.createMatcher(this.matcherConf)
   }
 
+  tokenize (source) {
+    if (source) {
+      this.parse(source)
+    }
+
+    const tokens = []
+    while (true) {
+      const token = this.nextToken()
+      if (!token) {
+        break
+      }
+
+      tokens.push(token)
+    }
+
+    return tokens
+  }
+
   /**
    * Parse next token
    *

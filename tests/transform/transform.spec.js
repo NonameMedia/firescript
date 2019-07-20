@@ -4,7 +4,6 @@ const inspect = require('inspect.js')
 const {
   FirescriptParser,
   FirescriptTranspiler,
-  FirescriptTokenizer,
   JSTranspiler
 } = require('../../')
 
@@ -37,11 +36,13 @@ describe('Firescript Transform', () => {
         const jsresult = inspect.readFile(`${testCase.path}/result.js`)
 
         it(`tokenize .fire script`, () => {
-          const tokenizer = new FirescriptTokenizer()
-          const res = tokenizer.tokenize(fssource)
+          const parser = new FirescriptParser()
+          const res = parser.tokenize(fssource)
 
           inspect(res).isArray()
-          inspect(res).isEql(fstoken)
+          res.forEach((item, index) => {
+            inspect(item).hasProps(fstoken[index])
+          })
         })
 
         it(`parse .fire script into FS-AST`, () => {

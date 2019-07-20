@@ -1,11 +1,13 @@
 [
   {
-    "type": "keyword",
-    "value": "export"
+    "type": "identifier",
+    "value": "export",
+    "isKeyword": true
   },
   {
-    "type": "keyword",
-    "value": "class"
+    "type": "identifier",
+    "value": "class",
+    "isKeyword": true
   },
   {
     "type": "identifier",
@@ -13,7 +15,7 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "identifier",
@@ -29,11 +31,12 @@
   },
   {
     "type": "indention",
-    "value": 4
+    "value": 2
   },
   {
-    "type": "keyword",
-    "value": "return"
+    "type": "identifier",
+    "value": "return",
+    "isKeyword": true
   },
   {
     "type": "identifier",
