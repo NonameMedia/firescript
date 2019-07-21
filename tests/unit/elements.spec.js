@@ -81,29 +81,31 @@ describe('Elements', () => {
           return
         }
 
-        it('(4) generate location-map', () => {
-          const ctx = new ParserContext({
-            setLocation: true
+        if (!skipJS) {
+          it('(4) generate location-map', () => {
+            const ctx = new ParserContext({
+              setLocation: true
+            })
+
+            const parser = new Parser(parserConf)
+            parser.parse(fssource)
+
+            const Node = require(`../../src/fs-parser/nodes/${fsNodeType}`)
+            const node = new Node(parser)
+            const fsast = node.resolve(ctx)
+
+            const buffer = new SourceBuffer()
+            const Element = require(`../../src/js-elements/${fsast.type}`)
+            const jse = new Element(fsast)
+            jse.compile(buffer)
+            const res = buffer.toString()
+            inspect(res).isEql(jssource)
+
+            console.log('BUFFER', buffer, metaFile)
+            inspect(buffer).hasKey('locationMap')
+            inspect(buffer.locationMap).isEql(metaFile.locationMap)
           })
-
-          const parser = new Parser(parserConf)
-          parser.parse(fssource)
-
-          const Node = require(`../../src/fs-parser/nodes/${fsNodeType}`)
-          const node = new Node(parser)
-          const fsast = node.resolve(ctx)
-
-          const buffer = new SourceBuffer()
-          const Element = require(`../../src/js-elements/${fsast.type}`)
-          const jse = new Element(fsast)
-          jse.compile(buffer)
-          const res = buffer.toString()
-          inspect(res).isEql(jssource)
-
-          console.log('BUFFER', buffer, metaFile)
-          inspect(buffer).hasKey('locationMap')
-          inspect(buffer.locationMap).isEql(metaFile.locationMap)
-        })
+        }
       })
     }
   })
