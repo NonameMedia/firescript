@@ -23,8 +23,6 @@ class ConditionalExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
-
     const useMultiline = this.getLineLength() > 80
 
     buffer.write(this.test)
