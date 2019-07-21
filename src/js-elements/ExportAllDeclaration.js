@@ -19,8 +19,13 @@ class ExportAllDeclaration extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'export')
-    buffer.write('export * from ')
+    buffer.registerItem(this.location)
+    buffer.write('export * ')
+
+    const loc = Object.assign({}, this.location)
+    loc.column += 9
+    buffer.registerItem(loc)
+    buffer.write('from ')
     buffer.write(this.source)
     buffer.write(';')
   }

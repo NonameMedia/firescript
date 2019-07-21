@@ -19,7 +19,7 @@ class ExportDefaultDeclaration extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'export')
+    buffer.registerItem(this.location)
     buffer.write('export default ')
     buffer.write(this.declaration)
     buffer.write(';')

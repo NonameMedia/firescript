@@ -23,7 +23,7 @@ class ExportNamedDeclaration extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'export')
+    buffer.registerItem(this.location)
     buffer.write('export ')
     if (this.declaration) {
       buffer.write(this.declaration)
