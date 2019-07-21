@@ -29,7 +29,10 @@ class MethodDefinition extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
+    if (this.static || this.async || ['get', 'set', 'constructor'].includes(this.kind)) {
+      buffer.registerItem(this.location)
+    }
+
     buffer.write(this.static ? 'static ' : '')
     buffer.write(this.async ? 'async ' : '')
     buffer.write(['get', 'set'].includes(this.kind) ? this.kind + ' ' : '')

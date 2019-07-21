@@ -23,7 +23,7 @@ class ClassDeclaration extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'class')
+    buffer.registerItem(this.location)
     buffer.write('class ')
     this.id.compile(buffer)
 
