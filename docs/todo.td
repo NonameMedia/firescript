@@ -59,7 +59,7 @@ BinaryExpression                            [ (/) FSN (/) JSE (/) FSE (*) Syntax
 BlockStatement                              [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 BreakStatement                              [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 CallExpression                              [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
-CatchClause                                 [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+CatchClause                                 [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 ClassBody                                   [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ClassDeclaration                            [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ClassExpression                             [ (/) FSN (*) JSE (*) FSE (*) Syntax ]

@@ -19,7 +19,7 @@ class ThrowStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'throw')
+    buffer.registerItem(this.location)
     buffer.write('throw ')
     buffer.write(this.argument)
     buffer.write(';')

@@ -21,7 +21,7 @@ class CatchClause extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'catch')
+    buffer.registerItem(this.location)
     buffer.write('catch (')
     buffer.write(this.param)
     buffer.write(') ')
