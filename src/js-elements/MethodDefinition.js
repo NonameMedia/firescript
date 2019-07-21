@@ -25,7 +25,8 @@ class MethodDefinition extends JSElement {
     this.value = this.createElement(ast.value)
     this.kind = ast.kind
     this.static = ast.static
-    this.async = ast.async
+    this.async = this.value.async
+    this.value.async = false
   }
 
   compile (buffer) {
@@ -43,23 +44,6 @@ class MethodDefinition extends JSElement {
     }
 
     this.value.compile(buffer)
-  }
-
-  toESString (ctx) {
-    const key = this.kind === 'constructor'
-      ? 'constructor' : this.key.toESString(ctx)
-
-    const staticMethod = this.static ? 'static ' : ''
-    const asyncMethod = this.async ? 'async ' : ''
-    const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
-
-    return this.renderElement(
-      staticMethod +
-      asyncMethod +
-      kind +
-      key +
-      this.value.toESString(ctx)
-    )
   }
 }
 

@@ -26,7 +26,7 @@ class SourceBuffer {
     if (lastIndex === -1) {
       this.column += str.length
     } else {
-      console.log('COL', this.column, str.length, lastIndex)
+      // console.log('COL', this.column, str.length, lastIndex)
       this.column = str.length - lastIndex
       this.line += (str.split('\n').length - 1)
     }

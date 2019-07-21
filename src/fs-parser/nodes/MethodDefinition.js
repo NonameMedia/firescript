@@ -53,7 +53,8 @@ class MethodDefinition extends Node {
       parser.skipNext()
     }
 
-    if (parser.match('identifier [get, set] > identifier')) {
+    if (parser.match('identifier [get,set] > identifier')) {
+      console.log('GETSET')
       const next = parser.nextToken()
       this.kind = next.value
     }
@@ -70,15 +71,20 @@ class MethodDefinition extends Node {
   }
 
   resolve (ctx) {
-    return this.createJSON(ctx, {
+    const json = this.createJSON(ctx, {
       type: 'MethodDefinition',
       key: this.key.resolve(ctx),
       computed: false,
       value: this.value.resolve(ctx),
       kind: this.kind,
-      static: this.static,
-      async: this.async
+      static: this.static
     })
+
+    if (this.async) {
+      json.value.async = true
+    }
+
+    return json
   }
 }
 

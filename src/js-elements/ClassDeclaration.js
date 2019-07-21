@@ -28,8 +28,15 @@ class ClassDeclaration extends JSElement {
     this.id.compile(buffer)
 
     if (this.superClass) {
-      buffer.write(' extends ')
-      this.superClass.compile(buffer)
+      const loc = this.superClass ? Object.assign({}, this.superClass.location) : null
+      if (loc) {
+        loc.column -= 8
+      }
+
+      buffer.write(' ')
+      buffer.registerItem(loc)
+      buffer.write('extends ')
+      buffer.write(this.superClass)
     }
 
     buffer.write(' ')
