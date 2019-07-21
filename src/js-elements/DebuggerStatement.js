@@ -12,7 +12,7 @@ const JSElement = require('./JSElement')
  */
 class DebuggerStatement extends JSElement {
   compile (buffer) {
-    buffer.registerItem(this.location, 'debugger')
+    buffer.registerItem(this.location)
     buffer.write('debugger;')
   }
 }

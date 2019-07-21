@@ -123,6 +123,7 @@ class Parser {
   }
 
   skipNext () {
+    this.fillBuffer(1)
     return this.tokenBuffer.shift()
   }
 
@@ -272,8 +273,8 @@ class Parser {
       length = item.length
 
       this.line += split.length
-      this.column = item.length + 1
       line += split.length
+      this.column = item.length + 1
       column = 1
       index += value.length - item.length
       this.index = nextIndex

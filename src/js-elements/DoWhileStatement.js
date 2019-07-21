@@ -21,10 +21,15 @@ class DoWhileStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'do')
+    buffer.registerItem(this.location)
     buffer.write('do ')
     buffer.write(this.body)
-    buffer.write(' while (')
+
+    buffer.write(' ')
+    const loc = Object.assign({}, this.test.location)
+    loc.column -= 8
+    buffer.registerItem(loc)
+    buffer.write('while (')
     buffer.write(this.test)
     buffer.write(');')
   }
