@@ -65,7 +65,7 @@ ClassDeclaration                            [ (/) FSN (/) JSE (/) FSE (*) Syntax
 ClassExpression                             [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 Comment                                     [ (/) FSN (/) JSE (*) FSE (*) Syntax ]
 ConditionalExpression                       [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
-ContinueStatement                           [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+ContinueStatement                           [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 DebuggerStatement                           [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 DoWhileStatement                            [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ExportAllDeclaration                        [ (/) FSN (*) JSE (*) FSE (*) Syntax ]

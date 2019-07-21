@@ -13,7 +13,7 @@ const JSElement = require('./JSElement')
  */
 class ContinueStatement extends JSElement {
   compile (buffer) {
-    buffer.registerItem(this.location, 'continue')
+    buffer.registerItem(this.location)
     buffer.write('continue')
     if (this.label) {
       buffer.write(' ')
