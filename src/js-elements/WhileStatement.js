@@ -21,7 +21,7 @@ class WhileStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'while')
+    buffer.registerItem(this.location)
     buffer.write('while (')
     buffer.write(this.test)
     buffer.write(') ')

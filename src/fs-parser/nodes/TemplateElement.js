@@ -23,7 +23,7 @@ class TemplateElement extends Node {
     this.tail = true
 
     const token = parser.nextToken()
-    let value = token.value
+    let value = token.value.replace(/^'|'$/, '')
     if (value.startsWith('}')) {
       value = value.slice(1)
     }

@@ -16,7 +16,7 @@ class Super extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'super')
+    buffer.registerItem(this.location)
     buffer.write('super')
   }
 }

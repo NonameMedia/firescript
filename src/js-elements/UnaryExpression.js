@@ -24,6 +24,7 @@ class UnaryExpression extends JSElement {
   compile (buffer) {
     const operatorSpace = /^\w+$/.test(this.operator) ? ' ' : ''
 
+    buffer.registerItem(this.location)
     buffer.write(this.operator)
     buffer.write(operatorSpace)
     buffer.write(this.argument)

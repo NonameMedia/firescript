@@ -46,7 +46,8 @@ class Parser {
     this.indention = 0
     this.source = source
     this.length = source.length
-    this.lineLength = 0
+    this.lineEnd = 0
+    this.columnEnd = 0
 
     this.parserFuncs = this.createMatcher(this.matcherConf)
   }
@@ -256,8 +257,8 @@ class Parser {
     let line = this.line
     let lineEnd = this.line
     let column = this.column
-    let columnEnd = this.columnEnd + this.length
     let length = value.length
+    let columnEnd = column + length - 1
     let isKeyword = false
     let tokenIndention = this.indention
 
@@ -287,13 +288,14 @@ class Parser {
         value = parseInt(length / this.indentionSize)
         this.indention = value
       }
-    } else if (type === 'literal') {
+    } else if (['literal', 'comment', 'template'].includes(type)) {
       const split = value.split('\n')
       const lineLength = split.length
       const lastLine = split.pop()
+      this.line += split.length
       if (split.length > 1) {
         lineEnd += (lineLength - 1)
-        columnEnd += lastLine.length
+        columnEnd = lastLine.length
       }
     }
 

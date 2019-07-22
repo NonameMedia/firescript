@@ -22,7 +22,7 @@ class TemplateLiteral extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'class')
+    buffer.registerItem(this.location)
     buffer.write('`')
     const elements = SuperArray.merge(this.quasis, this.expressions)
     elements[0].head = true

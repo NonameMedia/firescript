@@ -23,7 +23,7 @@ class TryStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'try')
+    buffer.registerItem(this.location)
     buffer.write('try ')
     buffer.write(this.block)
     buffer.write(' ')

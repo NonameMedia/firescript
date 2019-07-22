@@ -21,7 +21,7 @@ class YieldExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'yield')
+    buffer.registerItem(this.location)
     buffer.write('yield ')
     buffer.write(this.delegate ? '* ' : '')
     buffer.write(this.argument)

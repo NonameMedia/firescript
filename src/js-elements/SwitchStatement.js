@@ -21,7 +21,7 @@ class SwitchStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'switch')
+    buffer.registerItem(this.location)
 
     buffer.write('switch (')
     buffer.write(this.discriminant)

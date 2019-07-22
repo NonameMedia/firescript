@@ -22,18 +22,9 @@ class TemplateElement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
     buffer.write(this.head ? '' : '}')
     buffer.write(this.value.raw)
     buffer.write(this.tail ? '' : '${')
-  }
-
-  toESString (ctx) {
-    const head = this.head ? '' : '}'
-    const tail = this.tail ? '' : '${'
-    return this.renderElement(
-      head + this.value.raw + tail
-    )
   }
 }
 

@@ -27,12 +27,6 @@ class Literal extends JSElement {
     buffer.write(this.isString ? `'${this.value}'` : this.raw)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      this.isString ? `'${this.value}'` : this.value
-    )
-  }
-
   getLineLength () {
     return this.raw.length
   }

@@ -31,21 +31,10 @@ class VariableDeclaration extends JSElement {
     buffer.loop(this.declarations, ', ')
     buffer.write(this.hasClosingSemicolon() ? ';' : '')
 
-    if (this.trailingComments) {
+    if (this.trailingComments && this.trailingComments.length) {
       buffer.indent()
       buffer.writeComments(this.trailingComments)
     }
-  }
-
-  toESString (ctx) {
-    const semi = this.hasClosingSemicolon() ? ';' : ''
-
-    return this.renderElement(
-      this.kind +
-      ' ' +
-      ctx.join(this.declarations, ', ') +
-      semi
-    )
   }
 
   hasClosingSemicolon () {

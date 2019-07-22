@@ -19,7 +19,6 @@ class RestElement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
     buffer.write('...')
     buffer.write(this.argument)
   }

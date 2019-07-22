@@ -28,20 +28,6 @@ class VariableDeclarator extends JSElement {
       buffer.write(this.init)
     }
   }
-
-  toESString (ctx) {
-    if (!this.init) {
-      return this.renderElement(
-        this.id.toESString(ctx)
-      )
-    }
-
-    return this.renderElement(
-      this.id.toESString(ctx) +
-      ' = ' +
-      this.init.toESString(ctx)
-    )
-  }
 }
 
 module.exports = VariableDeclarator

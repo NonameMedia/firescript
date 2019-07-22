@@ -26,7 +26,8 @@ describe('Parser', () => {
         line: 1,
         column: 1,
         isKeyword: true,
-        lineLength: 1,
+        lineEnd: 1,
+        columnEnd: 5,
         indention: 0
       })
     })
@@ -41,7 +42,8 @@ describe('Parser', () => {
         line: 1,
         column: 7,
         isKeyword: false,
-        lineLength: 1,
+        lineEnd: 1,
+        columnEnd: 12,
         indention: 0
       })
     })
@@ -56,7 +58,8 @@ describe('Parser', () => {
         line: 1,
         column: 14,
         isKeyword: false,
-        lineLength: 1,
+        lineEnd: 1,
+        columnEnd: 14,
         indention: 0
       })
     })
@@ -71,7 +74,8 @@ describe('Parser', () => {
         line: 1,
         column: 16,
         isKeyword: false,
-        lineLength: 1,
+        lineEnd: 1,
+        columnEnd: 23,
         indention: 0
       })
     })

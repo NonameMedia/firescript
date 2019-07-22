@@ -21,7 +21,7 @@ class SwitchCase extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'case')
+    buffer.registerItem(this.location)
     if (this.test) {
       buffer.write('case ')
       buffer.write(this.test)
@@ -37,29 +37,6 @@ class SwitchCase extends JSElement {
       buffer.indent(-1, true)
       // buffer.nl()
     }
-  }
-
-  toESString (ctx) {
-    const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
-
-    if (this.consequent.length === 0) {
-      return this.renderElement(
-        test +
-        ':'
-      )
-    }
-
-    const indent = ctx.indent(1)
-    const consequent = ctx.join(this.consequent, ctx.indent())
-    ctx.indent(-1)
-
-    return this.renderElement(
-      test +
-      ':' +
-      indent +
-      consequent +
-      '\n'
-    )
   }
 }
 

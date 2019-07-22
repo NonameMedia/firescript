@@ -19,9 +19,7 @@ class SequenceExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
     buffer.loop(this.expressions, ', ')
-    // buffer.write(';')
   }
 }
 

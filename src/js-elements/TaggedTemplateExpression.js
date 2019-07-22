@@ -21,18 +21,9 @@ class TaggedTemplateExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'class')
     buffer.write(this.tag)
     buffer.write(' ')
     buffer.write(this.quasi)
-  }
-
-  toESString (ctx) {
-    return this.renderElement(
-      this.tag.toESString(ctx) +
-      ' ' +
-      this.quasi.toESString(ctx)
-    )
   }
 }
 
