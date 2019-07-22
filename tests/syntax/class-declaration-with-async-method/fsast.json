@@ -118,7 +118,7 @@
                   }
                 ]
               },
-              "async": false,
+              "async": true,
               "expression": false,
               "generator": false
             },
