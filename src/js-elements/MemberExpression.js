@@ -65,10 +65,6 @@ class MemberExpression extends JSElement {
       return true
     }
   }
-
-  getLineLength () {
-    return this.property.getLineLength() + this.object.getLineLength() + 1
-  }
 }
 
 module.exports = MemberExpression

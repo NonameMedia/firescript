@@ -66,7 +66,6 @@ class MemberExpression extends Node {
         } else {
           memberExpressionStack.push([node, true])
         }
-        parser.print('++MEMEXP')
         if (!parser.match('punctuator "]"')) {
           this.syntaxError('Unexpected token, `]` char expected')
         }
