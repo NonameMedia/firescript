@@ -54,7 +54,6 @@ class MethodDefinition extends Node {
     }
 
     if (parser.match('identifier [get,set] > identifier')) {
-      console.log('GETSET')
       const next = parser.nextToken()
       this.kind = next.value
     }

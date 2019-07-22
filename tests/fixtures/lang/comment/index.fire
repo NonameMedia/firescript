@@ -1,5 +1,0 @@
-# Line comment
-# Second comment
-# Third comment
-func foo ()
-  return 'foo'

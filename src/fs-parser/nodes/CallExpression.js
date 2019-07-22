@@ -59,9 +59,6 @@ class CallExpression extends Node {
   constructor (parser, callee) {
     super(parser)
 
-    console.log('CALLEE', callee)
-    parser.print('++CALEXP')
-
     this.callee = callee || parser.createNode('Identifier')
     this.isAllowedNode(this.callee, ALLOWED_CALLEE_TYPES)
     this.arguments = []

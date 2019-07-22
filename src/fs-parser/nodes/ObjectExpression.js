@@ -8,7 +8,6 @@ class ObjectExpression extends Node {
 
     for (const scope of parser.walkScope()) {
       const property = scope.createNode('Property')
-      parser.print()
       this.properties.push(property)
     }
   }

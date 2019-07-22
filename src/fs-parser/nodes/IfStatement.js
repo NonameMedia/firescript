@@ -3,7 +3,6 @@ const Node = require('./Node')
 class IfStatement extends Node {
   constructor (parser) {
     super(parser)
-    parser.print()
 
     if (parser.match('keyword "if"')) {
       parser.skipNext()

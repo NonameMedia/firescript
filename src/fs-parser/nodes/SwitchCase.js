@@ -82,7 +82,6 @@ class SwitchCase extends Node {
 
     this.consequent = []
 
-    parser.print()
     if (!parser.match('indention')) {
       this.syntaxError('Unexpected token')
     }

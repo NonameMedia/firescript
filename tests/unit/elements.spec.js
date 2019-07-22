@@ -56,7 +56,7 @@ describe('Elements', () => {
 
         if (!skipJS) {
           it('(2) transpile AST into Javascript', () => {
-            console.log('AST', ast)
+            // console.log('AST', ast)
             const buffer = new SourceBuffer()
             const Element = require(`../../src/js-elements/${jsNodeType}`)
             const jse = new Element(ast)
@@ -68,7 +68,7 @@ describe('Elements', () => {
         if (!skipFS) {
           it('(3) transpile AST into Firescript', () => {
             const Element = require(`../../src/fs-elements/${fsNodeType}`)
-            console.log('AST', ast)
+            // console.log('AST', ast)
             const fse = new Element(ast)
             const ctx = new RenderContext({}, 'fire')
             const res = fse.toFSString(ctx)
@@ -101,7 +101,6 @@ describe('Elements', () => {
             const res = buffer.toString()
             inspect(res).isEql(jssource)
 
-            console.log('BUFFER', buffer.locationMap, metaFile.locationMap)
             inspect(buffer).hasKey('locationMap')
             inspect(buffer.locationMap).isEql(metaFile.locationMap)
           })

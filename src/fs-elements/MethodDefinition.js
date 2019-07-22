@@ -36,7 +36,6 @@ class MethodDefinition extends FirescriptElement {
     const asyncstr = this.async ? 'async ' : ''
     const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
 
-    console.log('ASYNC', asyncstr, this)
     return this.renderElement(
       staticstr +
       asyncstr +
