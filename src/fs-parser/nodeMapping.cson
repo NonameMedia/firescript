@@ -26,6 +26,8 @@ mapping:
     name: 'CallExpression'
     scopes:
       'NewExpression': '$origin'
+  'CallExpression > punctuator "."':
+    name: 'MemberExpression'
   'operator [=,*=,**=,/=,%=,+=,-=,
   <<=,>>=,>>>=,&=,^=,|=]':
     name: 'AssignmentExpression'
