@@ -95,7 +95,7 @@ MethodDefinition                            [ (/) FSN (/) JSE (/) FSE (*) Syntax
 NewExpression                               [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 ObjectExpression                            [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 ObjectPattern                               [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
-Program                                     [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+Program                                     [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 Property                                    [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 RestElement                                 [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ReturnStatement                             [ (/) FSN (*) JSE (*) FSE (*) Syntax ]

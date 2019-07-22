@@ -46,6 +46,7 @@ class Property extends Node {
     this.key = key || parser.nextRealNode(this)
     this.isAllowedNode(this.key, ALLOWED_KEYS)
     this.method = false
+    this.shorthand = false
 
     if (parser.match('punctuator ":"')) {
       parser.skipNext()
@@ -66,7 +67,8 @@ class Property extends Node {
         this.value = parser.createNode('ArrayExpression')
       }
     } else if (parser.match('punctuator ","') || parser.match('punctuator "}"')) {
-      this.value = null
+      this.value = this.key
+      this.shorthand = true
     } else {
       const property = parser.nextNode(this)
       this.value = property
@@ -80,7 +82,7 @@ class Property extends Node {
       type: 'Property',
       key: this.key.resolve(ctx),
       value: this.value ? this.value.resolve(ctx) : null,
-      shorthand: false,
+      shorthand: this.shorthand,
       computed: false,
       kind: 'init',
       method: this.method

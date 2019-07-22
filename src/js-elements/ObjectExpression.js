@@ -20,8 +20,6 @@ class ObjectExpression extends JSElement {
   }
 
   compile (buffer) {
-    // buffer.registerItem(this.location, this.id)
-
     const multiline = this.useMultiline()
     buffer.write('{')
     if (multiline) {
@@ -38,36 +36,8 @@ class ObjectExpression extends JSElement {
     buffer.write('}')
   }
 
-  toESString (ctx) {
-    const useMultiline = this.useMultiline()
-    if (useMultiline) {
-      return this.renderMultiline(ctx)
-    }
-
-    return this.renderInline(ctx)
-  }
-
   useMultiline () {
     return this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value.type))
-  }
-
-  renderMultiline (buffer) {
-    return '{' +
-      ctx.indent(+1) +
-      ctx.join(this.properties, `,${ctx.indent()}`) +
-      ctx.indent(-1) +
-      '}'
-  }
-
-  renderInline (buffer) {
-    const braceSpacing = this.properties.length ? ' ' : ''
-    return this.renderElement(
-      '{' +
-      braceSpacing +
-      ctx.join(this.properties, ', ') +
-      braceSpacing +
-      '}'
-    )
   }
 }
 

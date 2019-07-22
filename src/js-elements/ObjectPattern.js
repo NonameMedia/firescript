@@ -19,19 +19,9 @@ class ObjectPattern extends JSElement {
   }
 
   compile (buffer) {
-    // buffer.registerItem(this.location, this.id)
-
     buffer.write('{ ')
     buffer.loop(this.properties, `, `)
     buffer.write(' }')
-  }
-
-  toESString (ctx) {
-    return this.renderElement(
-      '{ ' +
-      ctx.join(this.properties, ', ') +
-      ' }'
-    )
   }
 }
 

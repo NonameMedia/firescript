@@ -38,8 +38,6 @@ class Property extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, this.key)
-
     if (this.shorthand) {
       buffer.write(this.key)
       return
