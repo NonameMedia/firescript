@@ -22,16 +22,26 @@ class ClassDeclaration extends JSElement {
     this.body = ast.body ? this.createElement(ast.body) : null
   }
 
-  toESString (ctx) {
-    const superClass = this.superClass ? ' extends ' + this.superClass.toESString(ctx) : ''
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('class ')
+    this.id.compile(buffer)
 
-    return this.renderElement(
-      'class ' +
-      this.id.toESString(ctx) +
-      superClass +
-      ' ' +
-      this.body.toESString(ctx)
-    )
+    if (this.superClass) {
+      const loc = this.superClass ? Object.assign({}, this.superClass.location) : null
+      if (loc) {
+        loc.column -= 8
+      }
+
+      buffer.write(' ')
+      buffer.registerItem(loc)
+      buffer.write('extends ')
+      buffer.write(this.superClass)
+    }
+
+    buffer.write(' ')
+
+    this.body.compile(buffer)
   }
 }
 

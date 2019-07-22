@@ -28,7 +28,7 @@ class Literal extends FirescriptElement {
     )
   }
 
-  getLength () {
+  getLineLength () {
     return this.raw.length
   }
 }

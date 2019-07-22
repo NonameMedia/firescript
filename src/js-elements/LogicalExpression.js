@@ -22,10 +22,10 @@ class LogicalExpression extends JSElement {
     this.operator = ast.operator
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      `${this.left.toESString(ctx)} ${this.operator} ${this.right.toESString(ctx)}`
-    )
+  compile (buffer) {
+    buffer.write(this.left)
+    buffer.write(` ${this.operator} `)
+    buffer.write(this.right)
   }
 }
 

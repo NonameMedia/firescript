@@ -27,20 +27,27 @@ class FunctionDeclaration extends JSElement {
     this.generator = ast.generator
   }
 
-  toESString (ctx) {
-    const id = this.id ? this.id.toESString(ctx) : ''
+  compile (buffer) {
     const generator = this.generator ? '* ' : ''
     const func = this.id ? 'function ' : ''
     const async = this.async ? 'async ' : ''
-    const body = this.body ? this.body.toESString(ctx) : '{}'
+    const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
-    return this.renderElement(
-      async + func + generator + id +
-      ' (' +
-      ctx.join(this.params, ', ') +
-      ') ' +
-      body
-    )
+    buffer.registerItem(this.location)
+    buffer.write(this.renderLeadingComments())
+    buffer.write(async + func + generator)
+    buffer.write(this.id)
+    buffer.write(funcArgSpacing + '(')
+    buffer.loop(this.params, ', ')
+    buffer.write(') ')
+    if (this.body) {
+      buffer.write(this.body)
+    } else {
+      buffer.write('{')
+      buffer.write(this.renderInnerComments())
+      buffer.write('}')
+    }
+    buffer.write(this.renderTrailingComments())
   }
 }
 

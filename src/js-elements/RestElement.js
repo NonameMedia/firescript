@@ -18,6 +18,11 @@ class RestElement extends JSElement {
     this.argument = this.createElement(ast.argument)
   }
 
+  compile (buffer) {
+    buffer.write('...')
+    buffer.write(this.argument)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       '...' +

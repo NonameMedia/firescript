@@ -20,6 +20,28 @@ class SwitchStatement extends JSElement {
     this.cases = this.createElementList(ast.cases)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+
+    buffer.write('switch (')
+    buffer.write(this.discriminant)
+    buffer.write(') {')
+    buffer.indent(1)
+    buffer.loop(this.cases, buffer.getIndent(), this.addBlankLine)
+    buffer.indent(-1)
+    buffer.write('}')
+  }
+
+  addBlankLine (cur, next) {
+    if (!next) {
+      return false
+    }
+
+    return (
+      (cur.type === 'SwitchCase' && next.type === 'SwitchCase' && cur.consequent.length > 0)
+    )
+  }
+
   toESString (ctx) {
     const indention = ctx.indent(1)
     const cases = ctx.each(this.cases, this.blockHandler, ctx.indent())

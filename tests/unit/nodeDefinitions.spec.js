@@ -3,7 +3,7 @@ const sinon = require('sinon')
 inspect.useSinon(sinon)
 
 const NodeDefinitions = require('../../src/utils/nodeDefinitions')
-const TokenStack = require('../../src//TokenStack')
+const TokenBuffer = require('../../src/TokenBuffer')
 
 describe('Node definitions', () => {
   describe('parse()', () => {
@@ -145,41 +145,42 @@ describe('Node definitions', () => {
   })
 
   describe('TestNode', () => {
-    const tokenStack = new TokenStack([
+    const tokenBuffer = new TokenBuffer()
+    tokenBuffer.push(
       { type: 'identifier', value: 'test' },
       { type: 'literal', value: '\'Banana\'' },
       { type: 'identifier', value: 'coconut' },
       { type: 'punctuator', value: ':' }
-    ])
+    )
 
     it('identifier > "test" shouls pass', () => {
       const definition = NodeDefinitions.parse('identifier "test"')
-      inspect(definition.test(tokenStack)).isTrue()
+      inspect(definition.test(tokenBuffer)).isTrue()
     })
 
     it('identifier > "foo" should fail', () => {
       const definition = NodeDefinitions.parse('identifier "foo"')
-      inspect(definition.test(tokenStack)).isFalse()
+      inspect(definition.test(tokenBuffer)).isFalse()
     })
 
     it('identifier > "test" shouls pass', () => {
       const definition = NodeDefinitions.parse('identifier "test" > literal')
-      inspect(definition.test(tokenStack)).isTrue()
+      inspect(definition.test(tokenBuffer)).isTrue()
     })
 
     it('identifier > "foo" should fail', () => {
       const definition = NodeDefinitions.parse('identifier "foo" > identifier')
-      inspect(definition.test(tokenStack)).isFalse()
+      inspect(definition.test(tokenBuffer)).isFalse()
     })
 
     it('identifier > "test" shouls pass', () => {
       const definition = NodeDefinitions.parse('identifier "test" > literal > identifier "coconut"')
-      inspect(definition.test(tokenStack)).isTrue()
+      inspect(definition.test(tokenBuffer)).isTrue()
     })
 
     it('identifier > "foo" should fail', () => {
       const definition = NodeDefinitions.parse('identifier "foo" > literal > punctuator ":"')
-      inspect(definition.test(tokenStack)).isFalse()
+      inspect(definition.test(tokenBuffer)).isFalse()
     })
   })
 })

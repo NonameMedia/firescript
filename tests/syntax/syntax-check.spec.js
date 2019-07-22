@@ -4,9 +4,11 @@ const inspect = require('inspect.js')
 const {
   FirescriptParser,
   FirescriptTranspiler,
-  FirescriptTokenizer,
-  JSTranspiler
+  JSTranspiler,
+  Parser
 } = require('../../')
+
+const parserConf = require('../../src/fs-parser/parserConf')
 
 describe('Firescript Syntax Check', () => {
   /**
@@ -20,6 +22,7 @@ describe('Firescript Syntax Check', () => {
    */
   const TEST_CASE_DIR = path.join(__dirname, './')
   const testCases = inspect.readDir(TEST_CASE_DIR)
+  const filter = process.argv[3]
 
   testCases.forEach((testCase) => {
     if (testCase.isDirectory()) {
@@ -30,6 +33,10 @@ describe('Firescript Syntax Check', () => {
           return
         }
 
+        // if (filter && testCase.name.indexOf(filter) === -1) {
+        //   return
+        // }
+
         const fssource = inspect.readFile(`${testCase.path}/index.fire`)
         const fstoken = require(`${testCase.path}/fstoken.json`)
         const fsast = require(`${testCase.path}/fsast.json`)
@@ -37,11 +44,14 @@ describe('Firescript Syntax Check', () => {
         const jsresult = inspect.readFile(`${testCase.path}/result.js`)
 
         it(`tokenize .fire script`, () => {
-          const tokenizer = new FirescriptTokenizer()
-          const res = tokenizer.tokenize(fssource)
+          const parser = new Parser(parserConf)
 
-          inspect(res).isArray()
-          inspect(res).isEql(fstoken)
+          parser.parse(fssource)
+          fstoken.forEach((item) => {
+            const token = parser.nextToken()
+            // console.log('TOKEN', token, item)
+            inspect(token).hasProps(item)
+          })
         })
 
         it(`parse .fire script into FS-AST`, () => {
@@ -49,10 +59,10 @@ describe('Firescript Syntax Check', () => {
           const res = parser.parse(fssource)
 
           inspect(res).isObject()
-          inspect(res).isEql(fsast)
+          inspect(res).hasProps(fsast)
         })
 
-        it(`transpile FS-AST into JS`, () => {
+        it.skip(`transpile FS-AST into JS`, () => {
           const transpiler = new JSTranspiler({
             features: fsconf
           })
@@ -60,6 +70,14 @@ describe('Firescript Syntax Check', () => {
 
           inspect(res).isString()
           inspect(res).isEql(jsresult)
+        })
+
+        it.skip(`generate location map for a .fire file`, () => {
+          const parser = new FirescriptParser()
+          const res = parser.parse(fssource)
+
+          inspect(res).isObject()
+          inspect(res).isEql(fsast)
         })
       })
     }

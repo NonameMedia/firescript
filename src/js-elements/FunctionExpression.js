@@ -34,22 +34,23 @@ class FunctionExpression extends JSElement {
       parent.method === true))
   }
 
-  toESString (ctx) {
-    const id = this.id ? this.id.toESString(ctx) : ''
+  compile (buffer) {
     const generator = this.generator ? ' *' : ''
     const func = this.isPropertyMethod() ? '' : 'function'
     const async = this.async ? 'async ' : ''
     const funcNameSpacing = func ? ' ' : ''
-    const funcArgSpacing = id || (!func && !id) ? ' ' : ''
-    const body = this.body ? this.body.toESString(ctx) : '{}'
+    const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
-    return this.renderElement(
-      async + func + generator + funcNameSpacing + id + funcArgSpacing +
-      '(' +
-      ctx.join(this.params, ', ') +
-      ') ' +
-      body
-    )
+    if (!this.isPropertyMethod()) {
+      buffer.registerItem(this.location)
+    }
+
+    buffer.write(async + func + generator + funcNameSpacing)
+    buffer.write(this.id)
+    buffer.write(funcArgSpacing + '(')
+    buffer.loop(this.params, ', ')
+    buffer.write(') ')
+    buffer.write(this.body, '{}')
   }
 }
 

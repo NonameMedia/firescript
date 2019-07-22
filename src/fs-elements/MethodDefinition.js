@@ -24,15 +24,21 @@ class MethodDefinition extends FirescriptElement {
     this.value = this.createElement(ast.value)
     this.kind = ast.kind
     this.static = ast.static
+    this.async = this.value.async
+    this.value.async = false
   }
 
   toFSString (ctx) {
     const key = this.kind === 'constructor'
       ? 'constructor' : this.key.toFSString(ctx)
 
+    const staticstr = this.static ? 'static ' : ''
+    const asyncstr = this.async ? 'async ' : ''
     const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
 
     return this.renderElement(
+      staticstr +
+      asyncstr +
       kind +
       key +
       ' ' +

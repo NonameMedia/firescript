@@ -20,14 +20,18 @@ class DoWhileStatement extends JSElement {
     this.test = this.createElement(ast.test)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      'do ' +
-      this.body.toESString(ctx) +
-      ' while (' +
-      this.test.toESString(ctx) +
-      ');'
-    )
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('do ')
+    buffer.write(this.body)
+
+    buffer.write(' ')
+    const loc = Object.assign({}, this.test.location)
+    loc.column -= 8
+    buffer.registerItem(loc)
+    buffer.write('while (')
+    buffer.write(this.test)
+    buffer.write(');')
   }
 }
 

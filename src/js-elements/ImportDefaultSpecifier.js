@@ -18,6 +18,10 @@ class ImportDefaultSpecifier extends JSElement {
     this.local = this.createElement(ast.local)
   }
 
+  compile (buffer) {
+    buffer.write(this.local)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.local.toESString(ctx)

@@ -1,7 +1,8 @@
 [
   {
-    "type": "keyword",
-    "value": "const"
+    "type": "identifier",
+    "value": "const",
+    "isKeyword": true
   },
   {
     "type": "identifier",
@@ -20,8 +21,9 @@
     "value": 0
   },
   {
-    "type": "keyword",
-    "value": "export"
+    "type": "identifier",
+    "value": "export",
+    "isKeyword": true
   },
   {
     "type": "identifier",

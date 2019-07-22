@@ -11,10 +11,8 @@ const JSElement = require('./JSElement')
 }
 */
 class EmptyStatement extends JSElement {
-  toESString () {
-    return this.renderElement(
-      ''
-    )
+  compile (buffer) {
+    // do nothing
   }
 }
 

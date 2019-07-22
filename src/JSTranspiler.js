@@ -1,5 +1,5 @@
 const Program = require('./js-elements/Program')
-const RenderContext = require('./RenderContext')
+const SourceBuffer = require('./SourceBuffer')
 const FSConfig = require('./utils/FSConfig')
 const ASTTransformer = require('./ASTTransformer')
 
@@ -22,8 +22,11 @@ class JSTranspiler {
       const tast = astTransformer.transform(ast)
       const jse = new Program(tast, this.config.getConf('features'))
 
-      const ctx = new RenderContext(this.config.getConf('features'))
-      return jse.toESString(ctx)
+      const buffer = new SourceBuffer()
+      jse.compile(buffer)
+      buffer.createLocationMap()
+
+      return buffer.toString()
     } catch (err) {
       if (!err.token) {
         throw err

@@ -25,24 +25,25 @@ class MethodDefinition extends JSElement {
     this.value = this.createElement(ast.value)
     this.kind = ast.kind
     this.static = ast.static
-    this.async = ast.async
+    this.async = this.value.async
+    this.value.async = false
   }
 
-  toESString (ctx) {
-    const key = this.kind === 'constructor'
-      ? 'constructor' : this.key.toESString(ctx)
+  compile (buffer) {
+    if (this.static || this.async || ['get', 'set', 'constructor'].includes(this.kind)) {
+      buffer.registerItem(this.location)
+    }
 
-    const staticMethod = this.static ? 'static ' : ''
-    const asyncMethod = this.async ? 'async ' : ''
-    const kind = ['get', 'set'].includes(this.kind) ? this.kind + ' ' : ''
+    buffer.write(this.static ? 'static ' : '')
+    buffer.write(this.async ? 'async ' : '')
+    buffer.write(['get', 'set'].includes(this.kind) ? this.kind + ' ' : '')
+    if (this.kind === 'constructor') {
+      buffer.write('constructor')
+    } else {
+      this.key.compile(buffer)
+    }
 
-    return this.renderElement(
-      staticMethod +
-      asyncMethod +
-      kind +
-      key +
-      this.value.toESString(ctx)
-    )
+    this.value.compile(buffer)
   }
 }
 

@@ -22,12 +22,25 @@ class ConditionalExpression extends JSElement {
     this.alternate = this.createElement(ast.alternate)
   }
 
-  toESString (ctx) {
-    const useMultiline = this.getLength() > 80
+  compile (buffer) {
+    const useMultiline = this.getLineLength() > 80
+
+    buffer.write(this.test)
+
     if (useMultiline) {
-      return this.renderElement(this.renderMultiline(ctx))
+      buffer.indent(1)
+      buffer.write('? ')
+      buffer.write(this.consequent)
+      buffer.indent()
+      buffer.write(': ')
+      buffer.write(this.alternate)
+      buffer.indent(-1, true)
+      buffer.nl()
     } else {
-      return this.renderElement(this.renderInline(ctx))
+      buffer.write(' ? ')
+      buffer.write(this.consequent)
+      buffer.write(' : ')
+      buffer.write(this.alternate)
     }
   }
 
@@ -60,10 +73,10 @@ class ConditionalExpression extends JSElement {
       alternate
   }
 
-  getLength () {
-    return this.test.getLength() +
-      this.consequent.getLength() +
-      this.alternate.getLength() +
+  getLineLength () {
+    return this.test.getLineLength() +
+      this.consequent.getLineLength() +
+      this.alternate.getLineLength() +
       6
   }
 }

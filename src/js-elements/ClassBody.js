@@ -18,17 +18,37 @@ class ClassBody extends JSElement {
     this.body = this.createElementList(ast.body)
   }
 
-  toESString (ctx) {
+  compile (buffer) {
     if (this.body.length === 0) {
-      return '{}'
+      buffer.write('{}')
+      return
     }
 
-    return this.renderElement(
-      '{' +
-      ctx.indent(1) +
-      ctx.join(this.body, '\n' + ctx.indent()) +
-      ctx.indent(-1) +
-      '}'
+    buffer.write('{')
+    buffer.indent(1)
+    this.body.forEach((item, index) => {
+      if (index) {
+        buffer.indent()
+      }
+
+      item.compile(buffer)
+
+      if (this.addEmptyLine(item, this.body[index + 1])) {
+        buffer.nl()
+      }
+    })
+
+    buffer.indent(-1)
+    buffer.write('}')
+  }
+
+  addEmptyLine (item, next) {
+    if (!next) {
+      return false
+    }
+
+    return (
+      item.type === 'MethodDefinition' && next
     )
   }
 }

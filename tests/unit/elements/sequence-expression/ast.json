@@ -1,0 +1,13 @@
+{
+  "type": "SequenceExpression",
+  "expressions": [
+    {
+      "type": "Identifier",
+      "name": "one"
+    },
+    {
+      "type": "Identifier",
+      "name": "two"
+    }
+  ]
+}

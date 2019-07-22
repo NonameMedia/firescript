@@ -22,6 +22,16 @@ class UpdateExpression extends JSElement {
     this.prefix = ast.prefix
   }
 
+  compile (buffer) {
+    if (this.prefix) {
+      buffer.write(this.operator)
+      buffer.write(this.argument)
+    } else {
+      buffer.write(this.argument)
+      buffer.write(this.operator)
+    }
+  }
+
   toESString (ctx) {
     if (this.prefix) {
       return this.renderElement(

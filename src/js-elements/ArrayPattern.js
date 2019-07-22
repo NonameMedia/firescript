@@ -27,12 +27,19 @@ class ArrayPattern extends JSElement {
     this.elements = this.createElementList(ast.elements, ALLOWED_CHILDS)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      '[ ' +
-      ctx.join(this.elements, ', ') +
-      ' ]'
-    )
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('[ ')
+    buffer.loop(this.elements, ', ')
+    buffer.write(' ]')
+  }
+
+  getLineLength () {
+    const len = 4
+
+    return this.elements.reduce((num, item) => {
+      return num + item.getLineLength()
+    }, len + (this.elements.length - 1) * 2)
   }
 }
 

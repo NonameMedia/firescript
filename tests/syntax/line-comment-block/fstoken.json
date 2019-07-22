@@ -1,14 +1,14 @@
 [
   {
     "type": "comment",
-    "value": " A function"
+    "value": "# A function"
   },
   {
     "type": "indention",
     "value": 0
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "func"
   },
   {
@@ -25,26 +25,26 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "comment",
-    "value": " Returns foo"
+    "value": "# Returns foo"
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "comment",
-    "value": " End of comment"
+    "value": "# End of comment"
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "return"
   },
   {

@@ -12,7 +12,11 @@ const Comment = require('./Comment')
  * }
  */
 class Line extends Comment {
-
+  compile (buffer) {
+    buffer.write('//')
+    buffer.write(this.value)
+    buffer.nl()
+  }
 }
 
 module.exports = Line

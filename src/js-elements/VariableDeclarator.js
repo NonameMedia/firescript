@@ -20,18 +20,13 @@ class VariableDeclarator extends JSElement {
     this.init = ast.init ? this.createElement(ast.init) : null
   }
 
-  toESString (ctx) {
-    if (!this.init) {
-      return this.renderElement(
-        this.id.toESString(ctx)
-      )
-    }
+  compile (buffer) {
+    buffer.write(this.id)
 
-    return this.renderElement(
-      this.id.toESString(ctx) +
-      ' = ' +
-      this.init.toESString(ctx)
-    )
+    if (this.init) {
+      buffer.write(' = ')
+      buffer.write(this.init)
+    }
   }
 }
 

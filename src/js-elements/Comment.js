@@ -19,14 +19,14 @@ class Comment extends JSElement {
     this.commentType = ast.type.toLowerCase()
   }
 
-  toESString (ctx) {
-    const commentStr = this.commentType === 'line' ? ['//', '\n'] : ['/*', '*/']
-    return commentStr[0] +
+  compile (buffer) {
+    const commentStr = this.commentType === 'line' ? ['//', ''] : ['/*', '*/']
+    buffer.write(commentStr[0] +
       this.value +
-      commentStr[1]
+      commentStr[1])
   }
 
-  getLength () {
+  getLineLength () {
     return this.value.length + (this.commentType === 'line' ? 2 : 4)
   }
 }

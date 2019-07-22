@@ -1,0 +1,17 @@
+{
+    "type": "ConditionalExpression",
+    "test": {
+        "type": "Identifier",
+        "name": "banana"
+    },
+    "consequent": {
+        "type": "Literal",
+        "value": "I am going to eat a couple of fresh bananas",
+        "raw": "'I am going to eat a couple of fresh bananas'"
+    },
+    "alternate": {
+        "type": "Literal",
+        "value": "I am going to eat a couple of fresh pears",
+        "raw": "'I am going to eat a couple of fresh pears'"
+    }
+}

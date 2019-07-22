@@ -20,6 +20,13 @@ class YieldExpression extends JSElement {
     this.delegate = ast.delegate
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('yield ')
+    buffer.write(this.delegate ? '* ' : '')
+    buffer.write(this.argument)
+  }
+
   toESString (ctx) {
     const delegate = this.delegate ? '* ' : ''
     return this.renderElement(

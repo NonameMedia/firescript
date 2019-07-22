@@ -1,7 +1,8 @@
 [
   {
-    "type": "keyword",
-    "value": "const"
+    "type": "identifier",
+    "value": "const",
+    "isKeyword": true
   },
   {
     "type": "identifier",
@@ -12,8 +13,9 @@
     "value": "="
   },
   {
-    "type": "keyword",
-    "value": "func"
+    "type": "identifier",
+    "value": "func",
+    "isKeyword": true
   },
   {
     "type": "identifier",
@@ -45,11 +47,12 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
-    "type": "keyword",
-    "value": "return"
+    "type": "identifier",
+    "value": "return",
+    "isKeyword": true
   },
   {
     "type": "identifier",

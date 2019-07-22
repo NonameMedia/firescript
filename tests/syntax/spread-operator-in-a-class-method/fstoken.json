@@ -1,6 +1,6 @@
 [
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "class"
   },
   {
@@ -9,7 +9,7 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "identifier",

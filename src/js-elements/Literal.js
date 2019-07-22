@@ -22,13 +22,12 @@ class Literal extends JSElement {
     this.isString = /(^"[^]*"$)|(^'[^]*'$)/.test(ast.raw)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      this.isString ? `'${this.value}'` : this.value
-    )
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write(this.isString ? `'${this.value}'` : this.raw)
   }
 
-  getLength () {
+  getLineLength () {
     return this.raw.length
   }
 }

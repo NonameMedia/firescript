@@ -1,0 +1,17 @@
+{
+    "type": "ConditionalExpression",
+    "test": {
+        "type": "Identifier",
+        "name": "banana"
+    },
+    "consequent": {
+        "type": "Literal",
+        "value": "banana",
+        "raw": "'banana'"
+    },
+    "alternate": {
+        "type": "Literal",
+        "value": "pear",
+        "raw": "'pear'"
+    }
+}

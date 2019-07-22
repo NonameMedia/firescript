@@ -12,8 +12,15 @@ const JSElement = require('./JSElement')
  * }
  */
 class ContinueStatement extends JSElement {
-  toESString (ctx) {
-    return this.renderElement('continue;')
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('continue')
+    if (this.label) {
+      buffer.write(' ')
+      buffer.write(this.label)
+    }
+
+    buffer.write(';')
   }
 }
 

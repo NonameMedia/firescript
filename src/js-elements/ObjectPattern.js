@@ -18,12 +18,10 @@ class ObjectPattern extends JSElement {
     this.properties = this.createElementList(ast.properties)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      '{ ' +
-      ctx.join(this.properties, ', ') +
-      ' }'
-    )
+  compile (buffer) {
+    buffer.write('{ ')
+    buffer.loop(this.properties, `, `)
+    buffer.write(' }')
   }
 }
 

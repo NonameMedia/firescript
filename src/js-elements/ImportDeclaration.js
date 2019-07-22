@@ -20,6 +20,34 @@ class ImportDeclaration extends JSElement {
     this.source = this.createElement(ast.source)
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location, 'import')
+    buffer.write('import ')
+
+    let prevSpecifier = null
+    this.specifiers.forEach((item, index) => {
+      if (item.type === 'ImportSpecifier' && prevSpecifier !== 'ImportSpecifier') {
+        buffer.write('{ ')
+        prevSpecifier = 'ImportSpecifier'
+      }
+
+      buffer.write(item)
+
+      if (item.type === 'ImportSpecifier') {
+        const nextItem = this.specifiers[index + 1]
+        if (!nextItem || nextItem.type !== 'ImportSpecifier') {
+          buffer.write(' }')
+        } else if (!nextItem || nextItem.type === 'ImportSpecifier') {
+          buffer.write(', ')
+        }
+      }
+    })
+
+    buffer.write(' from ')
+    buffer.write(this.source)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     if (ctx.esModules) {
       return this.useESModules(ctx)
@@ -38,42 +66,27 @@ class ImportDeclaration extends JSElement {
     )
   }
 
-  useCommonModules (ctx) {
-    // return this.renderElement(
-    //   'const ' +
-    //   this.renderSpecifiers(ctx) +
-    //   ' from ' +
-    //   this.source.toESString(ctx) +
-    //   ';'
-    // )
-  }
-
-  renderSpecifiers (ctx) {
+  renderSpecifiers (buffer) {
     let prevSpecifier = null
     let specifiers = []
     let nextIndex = 0
 
     for (const item of this.specifiers) {
-      let curSpecifier = ''
       nextIndex += 1
-      let closer = ''
 
       if (item.type === 'ImportSpecifier' && prevSpecifier !== 'ImportSpecifier') {
-        curSpecifier = '{ '
+        buffer.write('{ ')
         prevSpecifier = 'ImportSpecifier'
       }
+
+      buffer.write(item)
 
       if (item.type === 'ImportSpecifier') {
         const nextItem = this.specifiers[nextIndex]
         if (!nextItem || nextItem.type !== 'ImportSpecifier') {
-          closer = ' }'
+          buffer.write(' }')
         }
       }
-
-      curSpecifier += item.toESString(ctx)
-      curSpecifier += closer
-
-      specifiers.push(curSpecifier)
     }
 
     return specifiers.join(', ')

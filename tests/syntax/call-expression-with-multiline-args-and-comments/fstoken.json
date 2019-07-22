@@ -9,7 +9,7 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "literal",
@@ -17,7 +17,7 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "literal",
@@ -25,15 +25,15 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "comment",
-    "value": " comment between"
+    "value": "# comment between"
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
     "type": "punctuator",

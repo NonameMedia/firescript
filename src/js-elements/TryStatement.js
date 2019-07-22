@@ -22,6 +22,15 @@ class TryStatement extends JSElement {
     this.finalizer = ast.finalizer ? this.createElement(ast.finalizer) : null
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('try ')
+    buffer.write(this.block)
+    buffer.write(' ')
+    buffer.write(this.handler)
+    buffer.write(this.finalizer)
+  }
+
   toESString (ctx) {
     const finalizer = this.finalizer ? this.finalizer.toESString(ctx) : ''
 

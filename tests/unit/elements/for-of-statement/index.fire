@@ -1,0 +1,3 @@
+for val of arr
+  console.log(val)
+EOF

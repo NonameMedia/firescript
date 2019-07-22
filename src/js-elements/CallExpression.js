@@ -20,13 +20,11 @@ class CallExpression extends JSElement {
     this.arguments = this.createElementList(ast.arguments)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      this.callee.toESString(ctx) +
-      '(' +
-      ctx.join(this.arguments, ', ') +
-      ')'
-    )
+  compile (buffer) {
+    buffer.write(this.callee)
+    buffer.write('(')
+    buffer.loop(this.arguments, ', ')
+    buffer.write(')')
   }
 }
 

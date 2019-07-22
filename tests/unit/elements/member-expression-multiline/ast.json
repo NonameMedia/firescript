@@ -1,0 +1,28 @@
+{
+  "type": "MemberExpression",
+  "computed": false,
+  "object": {
+    "type": "MemberExpression",
+    "computed": false,
+    "object": {
+      "type": "MemberExpression",
+      "computed": false,
+      "object": {
+        "type": "Identifier",
+        "name": "tree"
+      },
+      "property": {
+        "type": "Identifier",
+        "name": "banana"
+      }
+    },
+    "property": {
+      "type": "Identifier",
+      "name": "fruit"
+    }
+  },
+  "property": {
+    "type": "Identifier",
+    "name": "color"
+  }
+}

@@ -11,8 +11,9 @@ const JSElement = require('./JSElement')
  * }
  */
 class DebuggerStatement extends JSElement {
-  toESString (ctx) {
-    return this.renderElement('debugger;')
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('debugger;')
   }
 }
 

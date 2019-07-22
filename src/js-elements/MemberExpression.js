@@ -20,27 +20,50 @@ class MemberExpression extends JSElement {
     this.object = this.createElement(ast.object)
     this.property = this.createElement(ast.property)
     this.computed = ast.computed
+    this.__multilineEnabled = false
   }
 
-  toESString (ctx) {
+  compile (buffer) {
     if (this.computed) {
-      return this.renderElement(
-        this.object.toESString(ctx) +
-        '[' +
-        this.property.toESString(ctx) +
-        ']'
-      )
+      buffer.write(this.object)
+      buffer.write('[')
+      buffer.write(this.property)
+      buffer.write(']')
+    } else if (this.useMultiLine()) {
+      buffer.indent(this.isParent('MemberExpression') ? 0 : 1, true)
+      buffer.write(this.object)
+      buffer.indent()
+      buffer.write('.')
+      buffer.write(this.property)
     } else {
-      return this.renderElement(
-        this.object.toESString(ctx) +
-        '.' +
-        this.property.toESString(ctx)
-      )
+      buffer.write(this.object)
+      buffer.write('.')
+      buffer.write(this.property)
     }
   }
 
-  getLength () {
-    return this.property.getLength() + this.object.getLength() + 1
+  useMultiLine () {
+    if (this.isParent('MemberExpression')) {
+      return this.__multilineEnabled
+    }
+
+    let dept = 1
+    let item = this
+    while (item.object.type === 'MemberExpression') {
+      dept += 1
+      item = item.object
+    }
+
+    if (dept >= 3) {
+      this.__multilineEnabled = true
+      let item = this
+      while (item.object.type === 'MemberExpression') {
+        item = item.object
+        item.__multilineEnabled = true
+      }
+
+      return true
+    }
   }
 }
 

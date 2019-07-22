@@ -22,16 +22,21 @@ class IfStatement extends JSElement {
     this.alternate = ast.alternate ? this.createElement(ast.alternate) : null
   }
 
-  toESString (ctx) {
-    const alternate = this.alternate ? ' else ' + this.alternate.toESString(ctx) : ''
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('if (')
+    buffer.write(this.test)
+    buffer.write(') ')
+    buffer.write(this.consequent)
 
-    return this.renderElement(
-      'if (' +
-      this.test.toESString(ctx) +
-      ') ' +
-      this.consequent.toESString(ctx) +
-      alternate
-    )
+    if (this.alternate) {
+      const loc = Object.assign({}, this.alternate.location)
+      loc.column -= 6
+      buffer.write(' ')
+      // buffer.registerItem(loc)
+      buffer.write('else ')
+      buffer.write(this.alternate)
+    }
   }
 }
 

@@ -21,11 +21,13 @@ class UnaryExpression extends JSElement {
     this.operator = ast.operator
   }
 
-  toESString (ctx) {
+  compile (buffer) {
     const operatorSpace = /^\w+$/.test(this.operator) ? ' ' : ''
-    return this.renderElement(
-      `${this.operator}${operatorSpace}${this.argument.toESString(ctx)}`
-    )
+
+    buffer.registerItem(this.location)
+    buffer.write(this.operator)
+    buffer.write(operatorSpace)
+    buffer.write(this.argument)
   }
 }
 

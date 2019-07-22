@@ -1,10 +1,10 @@
 [
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "throw"
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "new"
   },
   {

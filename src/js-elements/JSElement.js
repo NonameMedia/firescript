@@ -10,6 +10,15 @@ class JSElement {
     this.indention = 0
     this.__indention = 0
     this.indentionSize = 2
+    this.location = ast.loc ? ast.loc.start : null
+
+    // this.leadingComments = ast.leadingComments ? ast.leadingComments.map((comment) => this.createElement(comment)) : null
+    // this.trailingComments = ast.trailingComments ? ast.trailingComments.map((comment) => this.createElement(comment)) : null
+    // this.innerComments = ast.innerComments ? ast.innerComments.map((comment) => this.createElement(comment)) : null
+  }
+
+  compile () {
+    throw new Error(`Element ${this.type} has no compile method implementd!`)
   }
 
   indentionStr () {
@@ -51,17 +60,16 @@ class JSElement {
 
     child.parent = this
     child.indention = indentionSize ? this.indention + indentionSize : this.indention
-    if (ast.leadingComments) {
-      child.leadingComments = ast.leadingComments
+    if (ast.leadingComments && ast.leadingComments.length) {
+      child.leadingComments = ast.leadingComments.map((item) => this.createElement(item))
     }
 
-    if (ast.trailingComments) {
-      child.trailingComments = ast.trailingComments
+    if (ast.trailingComments && ast.trailingComments.length) {
+      child.trailingComments = ast.trailingComments.map((item) => this.createElement(item))
     }
 
-    if (ast.innerComments) {
-      const Comment = require('./Comment')
-      child.innerComments = ast.innerComments.map((item) => new Comment(item))
+    if (ast.innerComments && ast.innerComments.length) {
+      child.innerComments = ast.innerComments.map((item) => this.createElement(item))
     }
 
     return child
@@ -71,9 +79,54 @@ class JSElement {
     return ast.map((child) => this.createElement(child, ALLOWED_NODES, indentionSize))
   }
 
-  getLength () {
-    console.warn(`getLength method not implemented for element ${this.type}`)
+  getLineLength () {
+    // console.warn(`getLineLength method not implemented for element ${this.type}`)
     return 0
+  }
+
+  addComments (arr) {
+    const Comment = require('./Comment')
+    if (this.leadingComments) {
+      arr.unshift.apply(arr, this.leadingComments.map((item) => new Comment(item)))
+    }
+
+    if (this.trailingComments) {
+      arr.push.apply(arr, this.trailingComments.map((item) => new Comment(item)))
+    }
+
+    if (this.innerComments) {
+      arr.push.apply(arr, this.innerComments)
+    }
+
+    return arr
+  }
+
+  renderLeadingComments () {
+    return this.renderComments(this.leadingComments, false)
+  }
+
+  renderTrailingComments () {
+    return this.renderComments(this.trailingComments, true)
+  }
+
+  renderInnerComments () {
+    return this.renderComments(this.innerComments, false)
+  }
+
+  wrapComments (arr) {
+    if (this.leadingComments) {
+      arr.unshift(this.renderLeadingComments())
+    }
+
+    if (this.trailingComments) {
+      arr.push(this.renderTrailingComments())
+    }
+
+    if (this.innerComments) {
+      arr.push(this.renderInnerComments())
+    }
+
+    return arr
   }
 
   renderComments (comments, isTrailing) {
@@ -101,9 +154,19 @@ class JSElement {
   }
 
   renderElement (str) {
+    if (this.location) {
+      this.renderTree.push({
+        location: this.location
+      })
+    }
+
     return (this.leadingComments ? this.renderComments(this.leadingComments, false) : '') +
     str +
     (this.trailingComments ? '\n\n' + this.renderComments(this.trailingComments, true) : '')
+  }
+
+  isParent (type) {
+    return this.parent && this.parent.type === type
   }
 }
 

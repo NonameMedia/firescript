@@ -22,7 +22,7 @@ class FirescriptTyping extends FirescriptElement {
     return this.renderElement(this.name)
   }
 
-  getLength () {
+  getLineLength () {
     return this.name.length
   }
 }

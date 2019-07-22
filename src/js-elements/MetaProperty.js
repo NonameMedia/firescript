@@ -20,6 +20,12 @@ class MetaProperty extends JSElement {
     this.property = this.createElement(ast.property)
   }
 
+  compile (buffer) {
+    buffer.write(this.meta)
+    buffer.write('.')
+    buffer.write(this.property)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.meta.toESString(ctx) +

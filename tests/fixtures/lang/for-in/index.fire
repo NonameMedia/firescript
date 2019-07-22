@@ -1,2 +1,0 @@
-for prop in obj
-  console.log(obj[prop])

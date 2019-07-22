@@ -24,6 +24,12 @@ class BinaryExpression extends JSElement {
     this.operator = ast.operator
   }
 
+  compile (buffer) {
+    buffer.write(this.left)
+    buffer.write(` ${this.operator} `)
+    buffer.write(this.right)
+  }
+
   toESString (ctx) {
     return this.renderElement(
       this.left.toESString(ctx) +

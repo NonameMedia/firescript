@@ -20,12 +20,10 @@ class TaggedTemplateExpression extends JSElement {
     this.quasi = this.createElement(ast.quasi)
   }
 
-  toESString (ctx) {
-    return this.renderElement(
-      this.tag.toESString(ctx) +
-      ' ' +
-      this.quasi.toESString(ctx)
-    )
+  compile (buffer) {
+    buffer.write(this.tag)
+    buffer.write(' ')
+    buffer.write(this.quasi)
   }
 }
 

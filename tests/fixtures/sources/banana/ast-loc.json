@@ -1,0 +1,544 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "source": {
+        "type": "Literal",
+        "raw": "'./Fruits'",
+        "value": "./Fruits",
+        "loc": {
+          "start": [
+            1,
+            19
+          ],
+          "end": [
+            1,
+            29
+          ]
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Fruits",
+            "loc": {
+              "start": [
+                1,
+                7
+              ],
+              "end": [
+                1,
+                13
+              ]
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "Fruits",
+            "loc": {
+              "start": [
+                1,
+                7
+              ],
+              "end": [
+                1,
+                13
+              ]
+            }
+          },
+          "loc": {
+            "start": [
+              1,
+              7
+            ],
+            "end": [
+              1,
+              13
+            ]
+          }
+        }
+      ],
+      "loc": {
+        "start": [
+          1,
+          0
+        ],
+        "end": [
+          1,
+          6
+        ]
+      }
+    },
+    {
+      "type": "ClassDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "Banana",
+        "loc": {
+          "start": [
+            3,
+            6
+          ],
+          "end": [
+            3,
+            12
+          ]
+        }
+      },
+      "body": {
+        "type": "ClassBody",
+        "body": [
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "constructor",
+              "loc": {
+                "start": [
+                  4,
+                  2
+                ],
+                "end": [
+                  4,
+                  13
+                ]
+              }
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "name": "opts",
+                  "loc": {
+                    "start": [
+                      4,
+                      15
+                    ],
+                    "end": [
+                      4,
+                      19
+                    ]
+                  }
+                }
+              ],
+              "fsParamTypings": [
+                {
+                  "type": "FirescriptTyping",
+                  "name": "any"
+                }
+              ],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "loc": {
+                            "start": [
+                              5,
+                              4
+                            ],
+                            "end": [
+                              5,
+                              8
+                            ]
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "isSweet",
+                          "loc": {
+                            "start": [
+                              5,
+                              9
+                            ],
+                            "end": [
+                              5,
+                              16
+                            ]
+                          }
+                        },
+                        "loc": {
+                          "start": [
+                            5,
+                            4
+                          ],
+                          "end": [
+                            5,
+                            16
+                          ]
+                        }
+                      },
+                      "right": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "Identifier",
+                          "name": "opts",
+                          "loc": {
+                            "start": [
+                              5,
+                              19
+                            ],
+                            "end": [
+                              5,
+                              23
+                            ]
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "isSweet",
+                          "loc": {
+                            "start": [
+                              5,
+                              24
+                            ],
+                            "end": [
+                              5,
+                              31
+                            ]
+                          }
+                        },
+                        "loc": {
+                          "start": [
+                            5,
+                            19
+                          ],
+                          "end": [
+                            5,
+                            31
+                          ]
+                        }
+                      },
+                      "loc": {
+                        "start": [
+                          5,
+                          4
+                        ],
+                        "end": [
+                          5,
+                          31
+                        ]
+                      }
+                    },
+                    "loc": {
+                      "start": [
+                        5,
+                        4
+                      ],
+                      "end": [
+                        5,
+                        31
+                      ]
+                    }
+                  }
+                ],
+                "loc": {
+                  "start": [
+                    5,
+                    0
+                  ],
+                  "end": [
+                    5,
+                    31
+                  ]
+                }
+              },
+              "async": false,
+              "expression": false,
+              "generator": false,
+              "loc": {
+                "start": [
+                  4,
+                  14
+                ],
+                "end": [
+                  5,
+                  31
+                ]
+              }
+            },
+            "kind": "constructor",
+            "static": false,
+            "async": false,
+            "loc": {
+              "start": [
+                4,
+                2
+              ],
+              "end": [
+                5,
+                31
+              ]
+            }
+          },
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "peel",
+              "loc": {
+                "start": [
+                  7,
+                  2
+                ],
+                "end": [
+                  7,
+                  6
+                ]
+              }
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [],
+              "fsParamTypings": [],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "loc": {
+                            "start": [
+                              8,
+                              4
+                            ],
+                            "end": [
+                              8,
+                              8
+                            ]
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "__isPeeled",
+                          "loc": {
+                            "start": [
+                              8,
+                              9
+                            ],
+                            "end": [
+                              8,
+                              19
+                            ]
+                          }
+                        },
+                        "loc": {
+                          "start": [
+                            8,
+                            4
+                          ],
+                          "end": [
+                            8,
+                            19
+                          ]
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "raw": "true",
+                        "value": true,
+                        "loc": {
+                          "start": [
+                            8,
+                            22
+                          ],
+                          "end": [
+                            8,
+                            26
+                          ]
+                        }
+                      },
+                      "loc": {
+                        "start": [
+                          8,
+                          4
+                        ],
+                        "end": [
+                          8,
+                          26
+                        ]
+                      }
+                    },
+                    "loc": {
+                      "start": [
+                        8,
+                        4
+                      ],
+                      "end": [
+                        8,
+                        26
+                      ]
+                    }
+                  }
+                ],
+                "loc": {
+                  "start": [
+                    8,
+                    0
+                  ],
+                  "end": [
+                    8,
+                    26
+                  ]
+                }
+              },
+              "async": false,
+              "expression": false,
+              "generator": false,
+              "loc": {
+                "start": [
+                  7,
+                  7
+                ],
+                "end": [
+                  8,
+                  26
+                ]
+              }
+            },
+            "kind": "method",
+            "static": false,
+            "async": false,
+            "loc": {
+              "start": [
+                7,
+                2
+              ],
+              "end": [
+                8,
+                26
+              ]
+            }
+          }
+        ],
+        "loc": {
+          "start": [
+            4,
+            0
+          ],
+          "end": [
+            8,
+            26
+          ]
+        }
+      },
+      "superClass": {
+        "type": "Identifier",
+        "name": "Fruits",
+        "loc": {
+          "start": [
+            3,
+            21
+          ],
+          "end": [
+            3,
+            27
+          ]
+        }
+      },
+      "loc": {
+        "start": [
+          3,
+          0
+        ],
+        "end": [
+          8,
+          26
+        ]
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Banana",
+            "loc": {
+              "start": [
+                10,
+                7
+              ],
+              "end": [
+                10,
+                13
+              ]
+            }
+          },
+          "exported": {
+            "type": "Identifier",
+            "name": "Banana",
+            "loc": {
+              "start": [
+                10,
+                7
+              ],
+              "end": [
+                10,
+                13
+              ]
+            }
+          },
+          "loc": {
+            "start": [
+              10,
+              7
+            ],
+            "end": [
+              10,
+              13
+            ]
+          }
+        }
+      ],
+      "source": null,
+      "loc": {
+        "start": [
+          10,
+          0
+        ],
+        "end": [
+          10,
+          6
+        ]
+      }
+    }
+  ],
+  "loc": {
+    "start": [
+      1,
+      0
+    ],
+    "end": [
+      10,
+      13
+    ]
+  }
+}

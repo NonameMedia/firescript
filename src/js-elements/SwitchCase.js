@@ -20,27 +20,23 @@ class SwitchCase extends JSElement {
     this.consequent = this.createElementList(ast.consequent)
   }
 
-  toESString (ctx) {
-    const test = this.test ? 'case ' + this.test.toESString(ctx) : 'default'
-
-    if (this.consequent.length === 0) {
-      return this.renderElement(
-        test +
-        ':'
-      )
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    if (this.test) {
+      buffer.write('case ')
+      buffer.write(this.test)
+    } else {
+      buffer.write('default')
     }
 
-    const indent = ctx.indent(1)
-    const consequent = ctx.join(this.consequent, ctx.indent())
-    ctx.indent(-1)
+    buffer.write(':')
 
-    return this.renderElement(
-      test +
-      ':' +
-      indent +
-      consequent +
-      '\n'
-    )
+    if (this.consequent.length > 0) {
+      buffer.indent(1)
+      buffer.loop(this.consequent, buffer.getIndent())
+      buffer.indent(-1, true)
+      // buffer.nl()
+    }
   }
 }
 

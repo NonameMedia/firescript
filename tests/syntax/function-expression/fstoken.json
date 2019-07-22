@@ -1,6 +1,6 @@
 [
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "const"
   },
   {
@@ -12,7 +12,7 @@
     "value": "="
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "func"
   },
   {
@@ -29,10 +29,10 @@
   },
   {
     "type": "indention",
-    "value": 2
+    "value": 1
   },
   {
-    "type": "keyword",
+    "type": "identifier",
     "value": "return"
   },
   {

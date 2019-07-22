@@ -20,6 +20,21 @@ class ImportSpecifier extends JSElement {
     this.imported = ast.imported ? this.createElement(ast.imported) : null
   }
 
+  compile (buffer) {
+    // buffer.registerItem(this.location)
+    if (this.imported) {
+      if (this.imported.name === this.local.name) {
+        buffer.write(this.local)
+        return
+      }
+
+      buffer.write(this.imported)
+      buffer.write(' as ')
+    }
+
+    buffer.write(this.local)
+  }
+
   toESString (ctx) {
     if (this.imported) {
       if (this.imported.name === this.local.name) {

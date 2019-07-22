@@ -23,7 +23,7 @@ class ConditionalExpression extends FirescriptElement {
   }
 
   toFSString (ctx) {
-    const useMultiline = this.getLength() > 80
+    const useMultiline = this.getLineLength() > 80
     if (useMultiline) {
       return this.renderElement(this.renderMultiline(ctx))
     } else {
@@ -60,10 +60,10 @@ class ConditionalExpression extends FirescriptElement {
       alternate
   }
 
-  getLength () {
-    return this.test.getLength() +
-      this.consequent.getLength() +
-      this.alternate.getLength() +
+  getLineLength () {
+    return this.test.getLineLength() +
+      this.consequent.getLineLength() +
+      this.alternate.getLineLength() +
       6
   }
 }

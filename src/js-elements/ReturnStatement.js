@@ -18,6 +18,14 @@ class ReturnStatement extends JSElement {
     this.argument = ast.argument ? this.createElement(ast.argument) : null
   }
 
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('return')
+    buffer.write(this.argument ? ' ' : '')
+    buffer.write(this.argument)
+    buffer.write(';')
+  }
+
   toESString (ctx) {
     const arg = this.argument === null ? '' : this.argument.toESString(ctx)
     const argSpacing = arg ? ' ' : ''

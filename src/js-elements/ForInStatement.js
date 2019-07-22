@@ -22,14 +22,14 @@ class ForInStatement extends JSElement {
     this.body = this.createElement(ast.body)
   }
 
-  toESString (ctx) {
-    return this.renderElement('for (' +
-      this.left.toESString(ctx) +
-      ' in ' +
-      this.right.toESString(ctx) +
-      ') ' +
-      this.body.toESString(ctx)
-    )
+  compile (buffer) {
+    buffer.registerItem(this.location)
+    buffer.write('for (')
+    buffer.write(this.left)
+    buffer.write(' in ')
+    buffer.write(this.right)
+    buffer.write(') ')
+    buffer.write(this.body)
   }
 }
 
