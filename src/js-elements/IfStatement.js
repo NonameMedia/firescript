@@ -23,29 +23,20 @@ class IfStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'if')
+    buffer.registerItem(this.location)
     buffer.write('if (')
     buffer.write(this.test)
     buffer.write(') ')
     buffer.write(this.consequent)
 
     if (this.alternate) {
-      buffer.registerItem(this.location, 'else')
-      buffer.write(' else ')
+      const loc = Object.assign({}, this.alternate.location)
+      loc.column -= 6
+      buffer.write(' ')
+      // buffer.registerItem(loc)
+      buffer.write('else ')
       buffer.write(this.alternate)
     }
-  }
-
-  toESString (ctx) {
-    const alternate = this.alternate ? ' else ' + this.alternate.toESString(ctx) : ''
-
-    return this.renderElement(
-      'if (' +
-      this.test.toESString(ctx) +
-      ') ' +
-      this.consequent.toESString(ctx) +
-      alternate
-    )
   }
 }
 
