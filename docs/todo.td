@@ -81,7 +81,7 @@ ForOfStatement                              [ (/) FSN (/) JSE (/) FSE (*) Syntax
 ForStatement                                [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 FunctionDeclaration                         [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 FunctionExpression                          [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
-Identifier                                  [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+Identifier                                  [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 IfStatement                                 [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportDeclaration                           [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ImportDefaultSpecifier                      [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
