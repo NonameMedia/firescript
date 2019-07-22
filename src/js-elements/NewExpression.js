@@ -21,7 +21,7 @@ class NewExpression extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'new')
+    buffer.registerItem(this.location)
     buffer.write('new ')
     buffer.write(this.callee)
     buffer.write('(')
