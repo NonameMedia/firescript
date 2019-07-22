@@ -1,0 +1,11 @@
+{
+    "type": "NewExpression",
+    "callee": {
+        "type": "Identifier",
+        "name": "Fruit"
+    },
+    "arguments": [{
+        "type": "Identifier",
+        "name": "banana"
+    }]
+}

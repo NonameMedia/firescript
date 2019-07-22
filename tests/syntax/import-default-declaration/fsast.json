@@ -1,0 +1,23 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "source": {
+        "type": "Literal",
+        "raw": "'./banana'",
+        "value": "./banana"
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "banana"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "LogicalExpression",
+  "operator": "||",
+  "left": {
+    "type": "Identifier",
+    "name": "one"
+  },
+  "right": {
+    "type": "Identifier",
+    "name": "two"
+  }
+}

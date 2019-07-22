@@ -1,0 +1,14 @@
+{
+  "body": [
+    {                                 
+      "source": {
+        "raw": "'banana'",
+        "type": "Literal",
+        "value": "banana"
+      },
+      "type": "ExportAllDeclaration"
+    }
+  ],
+  "sourceType": "module",
+  "type": "Program"
+}

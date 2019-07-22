@@ -1,0 +1,56 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "bar"
+          }
+        },
+        "arguments": [
+          {
+            "type": "ArrowFunctionExpression",
+            "id": null,
+            "params": [
+              {
+                "type": "Identifier",
+                "name": "err"
+              },
+              {
+                "type": "Identifier",
+                "name": "done"
+              }
+            ],
+            "body": {
+              "type": "BlockStatement",
+              "body": [
+                {
+                  "type": "ReturnStatement",
+                  "argument": {
+                    "type": "Literal",
+                    "raw": "true",
+                    "value": true
+                  }
+                }
+              ]
+            },
+            "async": true,
+            "expression": false,
+            "generator": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "type": "identifier",
+    "value": "log"
+  },
+  {
+    "type": "literal",
+    "value": "'I like bananas!'"
+  }
+]

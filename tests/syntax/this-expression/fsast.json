@@ -1,0 +1,29 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "ThisExpression"
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "foo"
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "raw": "'Foo'",
+          "value": "Foo"
+        }
+      }
+    }
+  ]
+}

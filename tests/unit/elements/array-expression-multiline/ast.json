@@ -1,0 +1,31 @@
+{
+  "type": "VariableDeclaration",
+  "kind": "const",
+  "declarations": [{
+    "type": "VariableDeclarator",
+    "id": {
+      "type": "Identifier",
+      "name": "arr"
+    },
+    "init": {
+      "type": "ArrayExpression",
+      "elements": [
+        {
+          "type": "Literal",
+          "value": "banana",
+          "raw": "'banana'"
+        },
+        {
+          "type": "Literal",
+          "value": "mango",
+          "raw": "'mango'"
+        },
+        {
+          "type": "Literal",
+          "value": "peach",
+          "raw": "'peach'"
+        }
+      ]
+    }
+  }]
+}

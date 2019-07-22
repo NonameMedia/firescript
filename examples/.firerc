@@ -1,0 +1,9 @@
+{
+  "src": "src/",
+  "dest": "dist/",
+  "copy": "",
+  "features": {
+    "esModules": false,
+    "esClasses": true
+  }
+}

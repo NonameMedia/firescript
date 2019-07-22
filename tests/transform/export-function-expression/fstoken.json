@@ -1,0 +1,37 @@
+[
+  {
+    "type": "identifier",
+    "value": "export",
+    "isKeyword": true
+  },
+  {
+    "type": "identifier",
+    "value": "func",
+    "isKeyword": true
+  },
+  {
+    "type": "identifier",
+    "value": "getBanana"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "return",
+    "isKeyword": true
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  }
+]

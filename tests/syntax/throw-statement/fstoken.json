@@ -1,0 +1,26 @@
+[
+  {
+    "type": "identifier",
+    "value": "throw"
+  },
+  {
+    "type": "identifier",
+    "value": "new"
+  },
+  {
+    "type": "identifier",
+    "value": "Error"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "literal",
+    "value": "'System error'"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "body": [
+    {
+      "source": {
+        "raw": "'print'",
+        "type": "Literal",
+        "value": "print"
+      },
+      "specifiers": [
+        {
+          "local": {
+            "name": "print",
+            "type": "Identifier"
+          },
+          "type": "ImportDefaultSpecifier"
+        }
+      ],
+      "type": "ImportDeclaration"
+    },
+    {
+      "expression": {
+        "arguments": [
+          {
+            "raw": "'Hello World!'",
+            "type": "Literal",
+            "value": "Hello World!"
+          }
+        ],
+        "callee": {
+          "name": "print",
+          "type": "Identifier"
+        },
+        "type": "CallExpression"
+      },
+      "type": "ExpressionStatement"
+    }
+  ],
+  "sourceType": "module",
+  "type": "Program"
+}

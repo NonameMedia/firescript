@@ -1,0 +1,8 @@
+{
+    "type": "AwaitExpression",
+    "argument": {
+        "type": "Identifier",
+        "name": "banana"
+    },
+    "delegate": false
+}

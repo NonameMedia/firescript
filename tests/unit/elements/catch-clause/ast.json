@@ -1,0 +1,17 @@
+{
+  "type": "CatchClause",
+  "param": {
+    "type": "Identifier",
+    "name": "err"
+  },
+  "body": {
+    "type": "BlockStatement",
+    "body": [{
+      "type": "ThrowStatement",
+      "argument": {
+        "type": "Identifier",
+        "name": "err"
+      }
+    }]
+  }
+}

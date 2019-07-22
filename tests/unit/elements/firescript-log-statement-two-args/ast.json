@@ -1,0 +1,16 @@
+{
+  "type": "FirescriptLogStatement",
+  "arguments": [{
+    "type": "Literal",
+    "raw": "'banana'",
+    "value": "banana"
+  }, {
+    "type": "Literal",
+    "raw": "'coconut'",
+    "value": "coconut"
+  }, {
+    "type": "Literal",
+    "raw": "'pear'",
+    "value": "pear"
+  }]
+}

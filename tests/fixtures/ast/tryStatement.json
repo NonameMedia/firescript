@@ -1,0 +1,39 @@
+{
+  "type": "TryStatement",
+  "block": {
+    "type": "BlockStatement",
+    "body": [
+      {
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "CallExpression",
+          "callee": {
+            "type": "Identifier",
+            "name": "banana"
+          },
+          "arguments": []
+        }
+      }
+    ]
+  },
+  "handler": {
+    "type": "CatchClause",
+    "param": {
+      "type": "Identifier",
+      "name": "err"
+    },
+    "body": {
+      "type": "BlockStatement",
+      "body": [
+        {
+          "type": "ThrowStatement",
+          "argument": {
+            "type": "Identifier",
+            "name": "err"
+          }
+        }
+      ]
+    }
+  },
+  "finalizer": null
+}

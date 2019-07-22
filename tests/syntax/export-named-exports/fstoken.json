@@ -1,0 +1,34 @@
+[
+  {
+    "type": "identifier",
+    "value": "export"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "punctuator",
+    "value": ","
+  },
+  {
+    "type": "identifier",
+    "value": "peach"
+  },
+  {
+    "type": "punctuator",
+    "value": ","
+  },
+  {
+    "type": "identifier",
+    "value": "c"
+  },
+  {
+    "type": "identifier",
+    "value": "as"
+  },
+  {
+    "type": "identifier",
+    "value": "coconut"
+  }
+]

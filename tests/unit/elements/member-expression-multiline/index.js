@@ -1,0 +1,4 @@
+tree
+  .banana
+  .fruit
+  .colorEOF

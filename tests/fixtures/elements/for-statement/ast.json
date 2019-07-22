@@ -1,0 +1,72 @@
+{
+  "type": "ForStatement",
+  "init": {
+    "type": "VariableDeclaration",
+    "declarations": [
+      {
+        "type": "VariableDeclarator",
+        "id": {
+          "type": "Identifier",
+          "name": "i"
+        },
+        "init": {
+          "type": "Literal",
+          "value": 0,
+          "raw": "0"
+        }
+      }
+    ],
+    "kind": "let"
+  },
+  "test": {
+    "type": "BinaryExpression",
+    "operator": "<",
+    "left": {
+      "type": "Identifier",
+      "name": "i"
+    },
+    "right": {
+      "type": "Literal",
+      "value": 100,
+      "raw": "100"
+    }
+  },
+  "update": {
+    "type": "UpdateExpression",
+    "operator": "++",
+    "argument": {
+      "type": "Identifier",
+      "name": "i"
+    },
+    "prefix": false
+  },
+  "body": {
+    "type": "BlockStatement",
+    "body": [
+      {
+        "type": "ExpressionStatement",
+        "expression": {
+          "type": "CallExpression",
+          "callee": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "console"
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "log"
+            }
+          },
+          "arguments": [
+            {
+              "type": "Identifier",
+              "name": "i"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

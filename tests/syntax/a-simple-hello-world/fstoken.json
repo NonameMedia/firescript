@@ -1,0 +1,34 @@
+[
+  {
+    "type": "identifier",
+    "value": "func"
+  },
+  {
+    "type": "identifier",
+    "value": "hello"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "return"
+  },
+  {
+    "type": "literal",
+    "value": "'Hello World'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

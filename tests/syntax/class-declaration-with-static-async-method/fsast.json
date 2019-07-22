@@ -1,0 +1,134 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ClassDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "Banana"
+      },
+      "body": {
+        "type": "ClassBody",
+        "body": [
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "constructor"
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [],
+              "fsParamTypings": [],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression"
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "foo"
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "raw": "'foo'",
+                        "value": "foo"
+                      }
+                    }
+                  }
+                ]
+              },
+              "async": false,
+              "expression": false,
+              "generator": false
+            },
+            "kind": "constructor",
+            "static": false,
+            "async": false
+          },
+          {
+            "type": "MethodDefinition",
+            "key": {
+              "type": "Identifier",
+              "name": "bar"
+            },
+            "computed": false,
+            "value": {
+              "type": "FunctionExpression",
+              "id": null,
+              "params": [],
+              "fsParamTypings": [],
+              "body": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "VariableDeclaration",
+                    "kind": "const",
+                    "declarations": [
+                      {
+                        "type": "VariableDeclarator",
+                        "id": {
+                          "type": "Identifier",
+                          "name": "bar"
+                        },
+                        "init": {
+                          "type": "AwaitExpression",
+                          "argument": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "ThisExpression"
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "bla"
+                              }
+                            },
+                            "arguments": []
+                          }
+                        },
+                        "fsTyping": {
+                          "type": "FirescriptTyping",
+                          "name": "any"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "Identifier",
+                      "name": "bar"
+                    }
+                  }
+                ]
+              },
+              "async": true,
+              "expression": false,
+              "generator": false
+            },
+            "kind": "method",
+            "static": true,
+            "async": true
+          }
+        ]
+      },
+      "superClass": null
+    }
+  ]
+}

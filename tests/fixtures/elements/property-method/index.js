@@ -1,0 +1,3 @@
+getFruits () {
+  return this;
+}EOF

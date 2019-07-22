@@ -1,0 +1,41 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "getBananas"
+      },
+      "params": [
+        {
+          "type": "Identifier",
+          "name": "amount"
+        }
+      ],
+      "fsParamTypings": [
+        {
+          "type": "FirescriptTyping",
+          "name": "num"
+        }
+      ],
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ReturnStatement",
+            "argument": {
+              "type": "Literal",
+              "raw": "3",
+              "value": 3
+            }
+          }
+        ]
+      },
+      "async": false,
+      "expression": false,
+      "generator": false
+    }
+  ]
+}

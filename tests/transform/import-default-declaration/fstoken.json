@@ -1,0 +1,27 @@
+[
+  {
+    "type": "identifier",
+    "value": "import",
+    "isKeyword": true
+  },
+  {
+    "type": "operator",
+    "value": "**"
+  },
+  {
+    "type": "identifier",
+    "value": "as"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "identifier",
+    "value": "from"
+  },
+  {
+    "type": "literal",
+    "value": "'./banana'"
+  }
+]

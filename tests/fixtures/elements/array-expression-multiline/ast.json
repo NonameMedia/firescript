@@ -1,0 +1,20 @@
+{
+  "type": "ArrayExpression",
+  "elements": [
+    {
+      "type": "Literal",
+      "value": "banana",
+      "raw": "'banana'"
+    },
+    {
+      "type": "Literal",
+      "value": "mango",
+      "raw": "'mango'"
+    },
+    {
+      "type": "Literal",
+      "value": "peach",
+      "raw": "'peach'"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "type": "identifier",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "options"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "encoding"
+  },
+  {
+    "type": "punctuator",
+    "value": ":"
+  },
+  {
+    "type": "identifier",
+    "value": "opts"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "encoding"
+  },
+  {
+    "type": "operator",
+    "value": "||"
+  },
+  {
+    "type": "literal",
+    "value": "'utf8'"
+  }
+]

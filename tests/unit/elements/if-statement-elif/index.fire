@@ -1,0 +1,5 @@
+if foo
+  console.log(foo)
+elif bar
+  console.log(bar)
+EOF

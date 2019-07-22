@@ -1,0 +1,8 @@
+{
+  "type": "TemplateElement",
+  "value": {
+    "raw": "Hello ",
+    "cooked": "Hello "
+  },
+  "tail": false
+}

@@ -1,0 +1,23 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ThrowStatement",
+      "argument": {
+        "type": "NewExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "Error"
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "raw": "'System error'",
+            "value": "System error"
+          }
+        ]
+      }
+    }
+  ]
+}

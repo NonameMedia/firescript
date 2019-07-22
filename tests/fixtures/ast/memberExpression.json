@@ -1,0 +1,12 @@
+{
+  "type": "MemberExpression",
+  "computed": false,
+  "object": {
+    "type": "Identifier",
+    "name": "console"
+  },
+  "property": {
+    "type": "Identifier",
+    "name": "log"
+  }
+}

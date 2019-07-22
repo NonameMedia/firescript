@@ -1,0 +1,14 @@
+{
+  "src": "./",
+  "dest": "dist/",
+  "copy": [],
+  "features": {
+    "esModules": false,
+    "esDefaultParams": false,
+    "esClasses": true,
+    "esTemplates": true,
+    "extendRegExp": true,
+    "notIncludeFireRT": false,
+    "fireRTModuleName": "firescript-runtime"
+  }
+}

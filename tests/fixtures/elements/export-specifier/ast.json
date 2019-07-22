@@ -1,0 +1,11 @@
+{
+  "type": "ExportSpecifier",
+  "exported": {
+    "type": "Identifier",
+    "name": "banana"
+  },
+  "local": {
+    "type": "Identifier",
+    "name": "b1"
+  }
+}

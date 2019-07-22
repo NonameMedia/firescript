@@ -1,0 +1,54 @@
+[
+  {
+    "type": "comment",
+    "value": "# A function"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  },
+  {
+    "type": "identifier",
+    "value": "func"
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "comment",
+    "value": "# Returns foo"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "comment",
+    "value": "# End of comment"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  },
+  {
+    "type": "comment",
+    "value": "# End of function"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

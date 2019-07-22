@@ -1,0 +1,46 @@
+[
+  {
+    "type": "identifier",
+    "value": "export"
+  },
+  {
+    "type": "identifier",
+    "value": "class"
+  },
+  {
+    "type": "identifier",
+    "value": "Banana"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "constructor"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "return"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

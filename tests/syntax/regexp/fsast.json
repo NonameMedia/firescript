@@ -1,0 +1,32 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "reg"
+          },
+          "init": {
+            "type": "Literal",
+            "raw": "/banana/",
+            "value": "/banana/",
+            "regex": {
+              "pattern": "banana",
+              "flags": ""
+            }
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    }
+  ]
+}

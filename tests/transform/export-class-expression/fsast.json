@@ -1,0 +1,55 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "Banana"
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor"
+              },
+              "computed": false,
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "fsParamTypings": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "Identifier",
+                        "name": "banana"
+                      }
+                    }
+                  ]
+                },
+                "async": false,
+                "expression": false,
+                "generator": false
+              },
+              "kind": "constructor",
+              "static": false
+            }
+          ]
+        },
+        "superClass": null
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ]
+}

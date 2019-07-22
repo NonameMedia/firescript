@@ -1,0 +1,10 @@
+{
+    "type": "ExpressionStatement",
+    "expression": {
+        "type": "AwaitExpression",
+        "argument": {
+            "type": "Identifier",
+            "name": "banana"
+        }
+    }
+}

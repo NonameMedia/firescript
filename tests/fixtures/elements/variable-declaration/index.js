@@ -1,0 +1,1 @@
+const res = 'bla';EOF

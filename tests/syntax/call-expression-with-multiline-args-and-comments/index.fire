@@ -1,0 +1,6 @@
+foo(
+  'bla'
+  'blub'
+  # comment between
+  () =>
+)

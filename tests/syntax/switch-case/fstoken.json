@@ -1,0 +1,38 @@
+[
+  {
+    "type": "identifier",
+    "value": "switch"
+  },
+  {
+    "type": "identifier",
+    "value": "type"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "case"
+  },
+  {
+    "type": "literal",
+    "value": "'fs-str'"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "return"
+  },
+  {
+    "type": "literal",
+    "value": "'string'"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

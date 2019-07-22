@@ -1,0 +1,7 @@
+{
+  "type": "RestElement",
+  "argument": {
+    "type": "Identifier",
+    "name": "args"
+  }
+}
