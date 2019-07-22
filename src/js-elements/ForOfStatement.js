@@ -23,7 +23,7 @@ class ForOfStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'for')
+    buffer.registerItem(this.location)
     buffer.write('for (')
     buffer.write(this.left)
     buffer.write(' of ')

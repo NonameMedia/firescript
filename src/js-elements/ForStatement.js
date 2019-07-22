@@ -25,7 +25,7 @@ class ForStatement extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location, 'for')
+    buffer.registerItem(this.location)
     buffer.write('for (')
     buffer.write(this.init)
     buffer.write('; ')

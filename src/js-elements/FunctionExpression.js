@@ -41,6 +41,10 @@ class FunctionExpression extends JSElement {
     const funcNameSpacing = func ? ' ' : ''
     const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
+    if (!this.isPropertyMethod()) {
+      buffer.registerItem(this.location)
+    }
+
     buffer.write(async + func + generator + funcNameSpacing)
     buffer.write(this.id)
     buffer.write(funcArgSpacing + '(')

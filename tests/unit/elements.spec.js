@@ -101,7 +101,7 @@ describe('Elements', () => {
             const res = buffer.toString()
             inspect(res).isEql(jssource)
 
-            console.log('BUFFER', buffer, metaFile)
+            console.log('BUFFER', buffer.locationMap, metaFile.locationMap)
             inspect(buffer).hasKey('locationMap')
             inspect(buffer.locationMap).isEql(metaFile.locationMap)
           })
