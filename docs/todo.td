@@ -90,7 +90,7 @@ ImportSpecifier                             [ (/) FSN (/) JSE (/) FSE (*) Syntax
 Literal                                     [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 LogicalExpression                           [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 MemberExpression                            [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
-MetaProperty                                [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
+MetaProperty                                [ (/) FSN (/) JSE (/) FSE (*) Syntax ]
 MethodDefinition                            [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 NewExpression                               [ (/) FSN (*) JSE (*) FSE (*) Syntax ]
 ObjectExpression                            [ (/) FSN (*) JSE (*) FSE (*) Syntax ]

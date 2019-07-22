@@ -21,7 +21,6 @@ class MetaProperty extends JSElement {
   }
 
   compile (buffer) {
-    buffer.registerItem(this.location)
     buffer.write(this.meta)
     buffer.write('.')
     buffer.write(this.property)
