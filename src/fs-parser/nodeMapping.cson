@@ -11,6 +11,7 @@ mapping:
     name: 'MemberExpression'
   'Identifier > punctuator "("':
     name: 'CallExpression'
+    allowNested: true
     scopes:
       'Property': 'FunctionExpression'
       'NewExpression': '$origin'

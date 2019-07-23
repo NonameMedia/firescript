@@ -174,8 +174,7 @@ class NodeMapping {
   resolve (node, tokenBuffer, scope) {
     const definition = this.nodeMapping.find((mapping, index) => {
       // console.log('FIND', scope.type, mapping.name, node.type)
-      if (mapping.name === node.type || mapping.name === scope.type) {
-        // console.log('IGNORE')
+      if (!mapping.allowNested && (mapping.name === node.type || mapping.name === scope.type)) {
         return false
       }
 
