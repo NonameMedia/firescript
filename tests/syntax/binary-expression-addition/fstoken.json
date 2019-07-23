@@ -1,0 +1,18 @@
+[
+  {
+    "type": "identifier",
+    "value": "num"
+  },
+  {
+    "type": "operator",
+    "value": "+"
+  },
+  {
+    "type": "numeric",
+    "value": "1"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

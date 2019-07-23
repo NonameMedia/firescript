@@ -36,7 +36,7 @@ mapping:
     scopes:
       'FunctionDeclaration': 'AssignmentPattern'
       'FunctionExpression': 'AssignmentPattern'
-  'operator [instanceof,in,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
+  'operator [instanceof,in,+,-,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
     name: 'BinaryExpression'
   'operator [++,--]':
     name: 'UpdateExpression'
