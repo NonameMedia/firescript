@@ -178,8 +178,9 @@ class Parser {
     while (true) {
       this.fillBuffer(bufferFillSize)
 
+      // console.log('LOOKUP', mapNode.type, scope, this.tokenBuffer[0])
       const mapNodeName = this.nodeMapping.resolve(mapNode, this.tokenBuffer, scope)
-      // console.log('WRAP NODE', nodeName, mapNodeName)
+      // console.log('RESULT', mapNodeName)
       if (!mapNodeName) {
         // console.log('BREAK')
         break

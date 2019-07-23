@@ -25,6 +25,7 @@ mapping:
       'ConditionalExpression': '$origin'
   'MemberExpression > punctuator "("':
     name: 'CallExpression'
+    allowNested: true
     scopes:
       'NewExpression': '$origin'
   'CallExpression > punctuator "."':
