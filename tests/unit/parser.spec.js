@@ -1,4 +1,3 @@
-const path = require('path')
 const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
@@ -293,7 +292,7 @@ describe('Parser', () => {
 
         this.fail('Test should fail, but it passed!')
       } catch (err) {
-        console.log('ERR', err)
+        // console.log('ERR', err)
         inspect(err).isInstanceOf(Error)
         inspect(err).doesMatch(/Unexpected indention/)
       }

@@ -592,14 +592,13 @@ class Parser {
       scopeEnd = this.scopeDelimiter[token.value]
       scopeIndention = null
     }
+    // console.log('INITIAL INDENTION', scopeIndention)
+    // console.log('ENTER SCOPE', scopeEnd, scopeIndention, this.showNextToken())
 
     if (this.match('indention')) {
       const token = this.nextToken()
       scopeIndention = token.value
     }
-
-    // console.log('INITIAL INDENTION', scopeIndention)
-    // console.log('ENTER SCOPE', scopeEnd, scopeIndention, this.showNextToken())
 
     return {
       [ Symbol.iterator ]: () => {
