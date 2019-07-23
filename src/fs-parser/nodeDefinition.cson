@@ -92,7 +92,7 @@ definition:
   'keyword "throw"':
     name: 'ThrowStatement'
 
-  'keyword try""':
+  'keyword "try"':
     name: 'TryStatement'
 
   'keyword "do"':

@@ -1,0 +1,74 @@
+[
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "operator",
+    "value": "=>"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "try"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "catch"
+  },
+  {
+    "type": "identifier",
+    "value": "err"
+  },
+  {
+    "type": "indention",
+    "value": 2
+  },
+  {
+    "type": "identifier",
+    "value": "throw"
+  },
+  {
+    "type": "identifier",
+    "value": "err"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]
