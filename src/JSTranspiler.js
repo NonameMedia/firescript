@@ -26,7 +26,8 @@ class JSTranspiler {
       jse.compile(buffer)
       buffer.createLocationMap()
 
-      return buffer.toString()
+      const source = buffer.toString()
+      return source.replace(/\s*$/, '\n')
     } catch (err) {
       if (!err.token) {
         throw err

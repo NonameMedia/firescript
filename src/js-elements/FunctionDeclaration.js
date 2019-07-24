@@ -34,7 +34,7 @@ class FunctionDeclaration extends JSElement {
     const funcArgSpacing = this.id || (!func && !this.id) ? ' ' : ''
 
     buffer.registerItem(this.location)
-    buffer.write(this.renderLeadingComments())
+    buffer.writeComments(this.leadingComments)
     buffer.write(async + func + generator)
     buffer.write(this.id)
     buffer.write(funcArgSpacing + '(')
@@ -44,10 +44,10 @@ class FunctionDeclaration extends JSElement {
       buffer.write(this.body)
     } else {
       buffer.write('{')
-      buffer.write(this.renderInnerComments())
+      // buffer.writeComments(this.innerComments)
       buffer.write('}')
     }
-    buffer.write(this.renderTrailingComments())
+    buffer.writeComments(this.trailingComments)
   }
 }
 

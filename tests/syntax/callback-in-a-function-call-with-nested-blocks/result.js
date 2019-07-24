@@ -4,4 +4,4 @@ foo(() => {
   } catch (err) {
     throw err;
   }
-})
+});

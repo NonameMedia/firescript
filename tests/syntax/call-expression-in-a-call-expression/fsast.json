@@ -12,14 +12,12 @@
         },
         "arguments": [
           {
-            "type": "Literal",
-            "raw": "'bla'",
-            "value": "bla"
-          },
-          {
-            "type": "Literal",
-            "raw": "'blub'",
-            "value": "blub"
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "bar"
+            },
+            "arguments": []
           }
         ]
       }

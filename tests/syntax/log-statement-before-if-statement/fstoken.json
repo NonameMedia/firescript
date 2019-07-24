@@ -1,0 +1,15 @@
+[
+  {
+    "type": "identifier",
+    "value": "log"
+  },
+  {
+    "type": "literal",
+    "value": "'I like bananas!'"
+  },
+  {
+    "type": "identifier",
+    "value": "if"
+  }
+
+]

@@ -62,7 +62,7 @@ describe('Firescript Syntax Check', () => {
           inspect(res).hasProps(fsast)
         })
 
-        it.skip(`transpile FS-AST into JS`, () => {
+        it(`transpile FS-AST into JS`, () => {
           const transpiler = new JSTranspiler({
             features: fsconf
           })

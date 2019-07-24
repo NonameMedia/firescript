@@ -19,18 +19,49 @@
               "type": "BlockStatement",
               "body": [
                 {
-                  "type": "ReturnStatement",
-                  "argument": {
-                    "type": "Literal",
-                    "raw": "true",
-                    "value": true
-                  }
+                  "type": "TryStatement",
+                  "block": {
+                    "type": "BlockStatement",
+                    "body": [
+                      {
+                        "type": "ExpressionStatement",
+                        "expression": {
+                          "type": "CallExpression",
+                          "callee": {
+                            "type": "Identifier",
+                            "name": "foo"
+                          },
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "handler": {
+                    "type": "CatchClause",
+                    "param": {
+                      "type": "Identifier",
+                      "name": "err"
+                    },
+                    "body": {
+                      "type": "BlockStatement",
+                      "body": [
+                        {
+                          "type": "ThrowStatement",
+                          "argument": {
+                            "type": "Identifier",
+                            "name": "err"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "finalizer": null
                 }
               ]
             },
-            "async": false,
+            "generator": false,
             "expression": false,
-            "generator": false
+            "async": false
           }
         ]
       }

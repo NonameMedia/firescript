@@ -15,7 +15,6 @@ class Line extends Comment {
   compile (buffer) {
     buffer.write('//')
     buffer.write(this.value)
-    buffer.nl()
   }
 }
 

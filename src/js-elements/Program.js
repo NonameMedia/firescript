@@ -36,13 +36,6 @@ class Program extends JSElement {
       (!item.type.startsWith('Export') && next.type.startsWith('Export'))
     )
   }
-
-  toESString (ctx) {
-    return this.renderElement(
-      ctx.join(this.body, '\n') +
-      '\n'
-    )
-  }
 }
 
 module.exports = Program

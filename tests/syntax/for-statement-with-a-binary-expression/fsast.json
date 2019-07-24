@@ -3,19 +3,82 @@
   "sourceType": "module",
   "body": [
     {
-      "type": "ExpressionStatement",
-      "expression": {
+      "type": "ForStatement",
+      "init": {
+        "type": "VariableDeclaration",
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "i"
+            },
+            "init": {
+              "type": "BinaryExpression",
+              "operator": "-",
+              "left": {
+                "type": "Identifier",
+                "name": "num"
+              },
+              "right": {
+                "type": "Literal",
+                "value": 1,
+                "raw": "1"
+              }
+            }
+          }
+        ],
+        "kind": "let"
+      },
+      "test": {
         "type": "BinaryExpression",
-        "operator": "-",
+        "operator": "<",
         "left": {
           "type": "Identifier",
-          "name": "num"
+          "name": "i"
         },
         "right": {
-          "type": "Literal",
-          "value": 1,
-          "raw": "1"
+          "type": "Identifier",
+          "name": "len"
         }
+      },
+      "update": {
+        "type": "UpdateExpression",
+        "operator": "++",
+        "argument": {
+          "type": "Identifier",
+          "name": "i"
+        },
+        "prefix": false
+      },
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ExpressionStatement",
+            "expression": {
+              "type": "CallExpression",
+              "callee": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "console"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "log"
+                }
+              },
+              "arguments": [
+                {
+                  "type": "Identifier",
+                  "name": "i"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]

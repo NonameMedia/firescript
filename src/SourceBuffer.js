@@ -34,11 +34,11 @@ class SourceBuffer {
     return this
   }
 
-  writeComments (comments) {
+  writeComments (comments, joiner) {
     if (comments && comments.length > 0) {
       comments.forEach((comment) => {
-        // console.log('COMMENT', comment)
         this.write(comment)
+        joiner === undefined ? this.indent() : this.write(joiner)
       })
     }
   }
@@ -65,6 +65,7 @@ class SourceBuffer {
   // }
 
   getIndent () {
+    // console.log('INDENT', this.indention, this.indentionSize, `"${' '.repeat(this.indention * this.indentionSize)}"`)
     return '\n' + ' '.repeat(this.indention * this.indentionSize)
   }
 
@@ -86,7 +87,8 @@ class SourceBuffer {
     if (arr) {
       arr.forEach((item, index) => {
         if (item.leadingComments) {
-          this.write(item.renderLeadingComments())
+          // this.write(item.renderLeadingComments())
+          this.writeComments(item.leadingComments)
         }
 
         if (item.innerComments) {
@@ -133,6 +135,10 @@ class SourceBuffer {
 
   toString () {
     return this.buffer.join('')
+  }
+
+  print () {
+    console.log(this.buffer.slice(-5))
   }
 
   createLocationMap () {

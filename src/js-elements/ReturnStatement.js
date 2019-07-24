@@ -20,22 +20,12 @@ class ReturnStatement extends JSElement {
 
   compile (buffer) {
     buffer.registerItem(this.location)
+    // buffer.writeComments(this.leadingComments)
     buffer.write('return')
     buffer.write(this.argument ? ' ' : '')
     buffer.write(this.argument)
     buffer.write(';')
-  }
-
-  toESString (ctx) {
-    const arg = this.argument === null ? '' : this.argument.toESString(ctx)
-    const argSpacing = arg ? ' ' : ''
-
-    return this.renderElement(
-      'return' +
-      argSpacing +
-      arg +
-      ';'
-    )
+    // buffer.writeComments(this.trailingComments)
   }
 }
 

@@ -6,15 +6,20 @@
       "type": "ExpressionStatement",
       "expression": {
         "type": "BinaryExpression",
-        "operator": "-",
+        "operator": "!==",
         "left": {
           "type": "Identifier",
           "name": "num"
         },
         "right": {
-          "type": "Literal",
-          "value": 1,
-          "raw": "1"
+          "type": "UnaryExpression",
+          "operator": "-",
+          "argument": {
+            "type": "Literal",
+            "value": 1,
+            "raw": "1"
+          },
+          "prefix": true
         }
       }
     }
