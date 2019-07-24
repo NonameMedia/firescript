@@ -1,1 +1,1 @@
-banana().getFruit()
+banana().getFruit();

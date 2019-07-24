@@ -9,7 +9,11 @@
   },
   {
     "type": "identifier",
-    "value": "if"
+    "value": "foo"
+  },
+  {
+    "type": "indention",
+    "value": 0
   }
 
 ]
