@@ -58,7 +58,7 @@ describe('Firescript Syntax Check', () => {
           const parser = new FirescriptParser()
           const res = parser.parse(fssource)
 
-          inspect.print(fsast)
+          // inspect.print(fsast)
           inspect(res).isObject()
           inspect(res).hasProps(fsast)
         })
