@@ -94,7 +94,6 @@ describe('NodeDefinition', () => {
       })
 
       const res = nodeDefinition.resolve(tokenBuffer)
-      console.log('RES', res)
       inspect(res).isString()
       inspect(res).isEql('Banana')
     })
@@ -117,9 +116,8 @@ describe('NodeDefinition', () => {
       })
 
       const res = nodeDefinition.resolve(tokenBuffer)
-      console.log('RES', res)
       inspect(res).isString()
-      inspect(res).isEql('Banana')
+      inspect(res).isEql('Coconut')
     })
   })
 })

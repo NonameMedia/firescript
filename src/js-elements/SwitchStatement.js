@@ -27,7 +27,7 @@ class SwitchStatement extends JSElement {
     buffer.write(this.discriminant)
     buffer.write(') {')
     buffer.indent(1)
-    buffer.loop(this.cases, buffer.getIndent(), this.addBlankLine)
+    buffer.loop(this.cases, '\n' + buffer.getIndent(), this.addBlankLine)
     buffer.indent(-1)
     buffer.write('}')
   }

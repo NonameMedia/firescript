@@ -21,7 +21,7 @@ class Program extends JSElement {
 
   compile (buffer) {
     this.body.forEach((item, index) => {
-      item.compile(buffer)
+      buffer.writeItem(item)
       buffer.nl(this.addEmptyLine(item, this.body[index + 1]) ? 2 : 1)
     })
   }

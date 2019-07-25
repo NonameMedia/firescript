@@ -39,7 +39,7 @@ class BlockStatement extends JSElement {
           buffer.indent()
           buffer.write(comment)
         }
-        // buffer.writeComments(this.innerComments)
+
         buffer.indent(-1)
       }
       buffer.write('}')
@@ -48,15 +48,8 @@ class BlockStatement extends JSElement {
     }
 
     buffer.write('{')
-    buffer.indent(1, true)
-    for (const item of body) {
-      buffer.indent()
-      buffer.writeComments(item.leadingComments)
-      buffer.writeComments(item.innerComments)
-      buffer.write(item)
-      buffer.writeComments(item.trailingComments)
-    }
-    // buffer.loop(body, buffer.getIndent())
+    buffer.indent(1)
+    buffer.loop(body)
     buffer.indent(-1)
     buffer.write('}')
   }

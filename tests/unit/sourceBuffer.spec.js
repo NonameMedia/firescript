@@ -59,7 +59,7 @@ describe('SourceBuffer', () => {
     })
   })
 
-  describe.only('writeComments()', () => {
+  describe('writeComments()', () => {
     it('writes into the buffer', () => {
       const buffer = new SourceBuffer()
       buffer.writeComments([new Comment({
@@ -73,7 +73,7 @@ describe('SourceBuffer', () => {
     })
   })
 
-  describe.only('writeItem()', () => {
+  describe('writeItem()', () => {
     it('writes an item into the buffer', () => {
       const buffer = new SourceBuffer()
       buffer.writeItem({
@@ -165,6 +165,53 @@ describe('SourceBuffer', () => {
       inspect(buffer.toString()).isEql('testelement\ntestcomment\ntestcomment')
       // inspect(buffer.line = 1)
       // inspect(buffer.column = 5)
+    })
+  })
+
+  describe('loop()', () => {
+    it('loops through an array of items', () => {
+      const arr = [{
+        compile (buf) { buf.write('itemone') }
+      }, {
+        compile (buf) { buf.write('itemtwo') }
+      }, {
+        compile (buf) { buf.write('itemthree') }
+      }]
+
+      const buffer = new SourceBuffer()
+      buffer.loop(arr)
+
+      inspect(buffer.toString()).isEql('itemone\nitemtwo\nitemthree')
+    })
+
+    it('loops through an array of items with comments', () => {
+      const arr = [{
+        compile (buf) { buf.write('itemone') },
+        leadingComments: [{
+          compile (buf) { buf.write('commentone') }
+        }, {
+          compile (buf) { buf.write('commenttwo') }
+        }]
+      }, {
+        compile (buf) { buf.write('itemtwo') },
+        trailingComments: [{
+          compile (buf) { buf.write('commentthree') }
+        }]
+      }, {
+        compile (buf) { buf.write('itemthree') }
+      }]
+
+      const buffer = new SourceBuffer()
+      buffer.loop(arr)
+
+      inspect(buffer.toString()).isEql(
+        'commentone\n' +
+        'commenttwo\n' +
+        'itemone\n' +
+        'itemtwo\n' +
+        'commentthree\n' +
+        'itemthree'
+      )
     })
   })
 

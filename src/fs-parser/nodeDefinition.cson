@@ -141,11 +141,11 @@ definition:
   'punctuator "["':
     name: 'ArrayExpression'
 
-  # 'punctuator "("':
-  # name: 'ArrowFunctionExpression'
-
-  'punctuator "(" >> punctuator ")" > operator "=>"':
+  'punctuator "("':
     name: 'ArrowFunctionExpression'
+
+  #'punctuator "(" >> punctuator ")" > operator "=>"':
+  #  name: 'ArrowFunctionExpression'
 
   'operator [++,--]':
     name: 'UpdateExpression'
