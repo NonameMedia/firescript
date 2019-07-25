@@ -34,11 +34,28 @@ class SourceBuffer {
     return this
   }
 
+  writeItem (item) {
+    if (item.leadingComments && item.leadingComments.length) {
+      this.writeComments(item.leadingComments)
+      this.indent()
+    }
+
+    item.compile(this)
+
+    if (item.trailingComments && item.trailingComments.length) {
+      this.indent()
+      this.writeComments(item.trailingComments)
+    }
+  }
+
   writeComments (comments, joiner) {
     if (comments && comments.length > 0) {
-      comments.forEach((comment) => {
+      comments.forEach((comment, index) => {
+        if (index) {
+          joiner === undefined ? this.indent() : this.write(joiner)
+        }
+
         this.write(comment)
-        joiner === undefined ? this.indent() : this.write(joiner)
       })
     }
   }

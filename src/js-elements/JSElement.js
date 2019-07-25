@@ -132,9 +132,10 @@ class JSElement {
   renderComments (comments, isTrailing) {
     if (!comments) return ''
 
-    const trailingLine = !isTrailing ? '\n' : ''
+    const trailingLine = !isTrailing ? '' : ''
     const leadingLine = isTrailing ? '' : ''
 
+    console.log('CMTS', comments)
     return comments.map((comment, index, arr) => {
       if (comment.type === 'Line') {
         return '//' + comment.value
