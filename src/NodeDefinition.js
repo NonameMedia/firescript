@@ -20,6 +20,7 @@ class NodeDefinition {
   parse (definitionPattern) {
     // const patterns = definitionPattern.split(/(?<!(".+"))>/g)
     let startIndex = 0
+    let globalMatch = false
     const len = definitionPattern.length
     const patterns = []
     let goTo = null
@@ -34,7 +35,15 @@ class NodeDefinition {
       }
 
       if (definitionPattern.charAt(i) === '>') {
-        patterns.push(definitionPattern.slice(startIndex, i - 1).trim())
+        let prefix = globalMatch ? '*' : ''
+        if (definitionPattern.charAt(i + 1) === '>') {
+          i += 1
+          globalMatch = true
+        } else {
+          globalMatch = false
+        }
+
+        patterns.push(prefix + definitionPattern.slice(startIndex, i - 1).trim())
         startIndex = i + 1
       }
 
@@ -59,20 +68,21 @@ class NodeDefinition {
     }
 
     if (startIndex < len) {
-      patterns.push(definitionPattern.slice(startIndex))
+      let prefix = globalMatch ? '*' : ''
+      patterns.push(prefix + definitionPattern.slice(startIndex).trim())
     }
 
     const mapping = patterns.map((pat) => {
-      const nodeDefinition = pat.trim().match(/([a-z-]+)(?:\s+(?:"(.+?)"|\[(.+?)\]|\/(.+)\/))?/)
-      // console.log('NDD', nodeDefinition)
-      const value = nodeDefinition[2]
-        ? nodeDefinition[2] : nodeDefinition[3]
-          ? nodeDefinition[3].split(/,/g) : nodeDefinition[4]
-            ? new RegExp(nodeDefinition[4]) : null
+      const nodeDefinition = pat.trim().match(/(\*)?([a-z-]+)(?:\s+(?:"(.+?)"|\[(.+?)\]|\/(.+)\/))?/)
+      const value = nodeDefinition[3]
+        ? nodeDefinition[3] : nodeDefinition[4]
+          ? nodeDefinition[4].split(/,/g) : nodeDefinition[5]
+            ? new RegExp(nodeDefinition[5]) : null
 
       return {
-        type: nodeDefinition[1],
-        value: value
+        type: nodeDefinition[2],
+        value: value,
+        global: !!nodeDefinition[1]
       }
     })
 
@@ -80,9 +90,26 @@ class NodeDefinition {
 
     return {
       mapping: mapping,
-      test: (tokenBuffer) => mapping.every((definition, offset) => {
-        return tokenBuffer.match(definition.type, definition.value || definition.valueReg, offset)
-      })
+      test: (tokenBuffer) => {
+        let indexOffset = 0
+        return mapping.every((definition, offset) => {
+          const index = offset + indexOffset
+          if (definition.global) {
+            // console.log('FIND', definition, index, tokenBuffer[index])
+            indexOffset = tokenBuffer.find(definition.type, definition.value, index)
+            // console.log('RES', indexOffset, tokenBuffer.slice(0, 5))
+            if (indexOffset === -1) {
+              return false
+            }
+
+            indexOffset -= offset
+            return true
+          }
+
+          // console.log('MATCH', definition, index, tokenBuffer[index])
+          return tokenBuffer.match(definition.type, definition.value || definition.valueReg, index)
+        })
+      }
     }
   }
 
@@ -165,6 +192,8 @@ class NodeDefinition {
 
       return definition.name
     }
+
+    return null
   }
 }
 

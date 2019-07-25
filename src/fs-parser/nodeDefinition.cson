@@ -141,7 +141,10 @@ definition:
   'punctuator "["':
     name: 'ArrayExpression'
 
-  'punctuator "("':
+  # 'punctuator "("':
+  # name: 'ArrowFunctionExpression'
+
+  'punctuator "(" >> punctuator ")" > operator "=>"':
     name: 'ArrowFunctionExpression'
 
   'operator [++,--]':
