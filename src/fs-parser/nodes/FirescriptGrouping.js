@@ -7,7 +7,6 @@ class FirescriptGrouping extends Node {
     this.elements = []
 
     for (const scope of parser.walkScope()) {
-      scope.print()
       this.elements.push(scope.nextNode(this))
     }
   }

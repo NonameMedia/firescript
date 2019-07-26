@@ -12,8 +12,6 @@ class ArrowFunctionExpression extends Node {
   constructor (parser, args) {
     super(parser)
 
-    console.log('ARGS', args)
-
     this.async = false
     this.expression = false
     this.generator = false

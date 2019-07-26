@@ -1,0 +1,12 @@
+{
+  "type": "ArrowFunctionExpression",
+  "id": null,
+  "params": [],
+  "body": {
+    "type": "BlockStatement",
+    "body": []
+  },
+  "generator": false,
+  "expression": false,
+  "async": false
+}
