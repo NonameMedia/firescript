@@ -637,7 +637,6 @@ class Parser {
               }
 
               if (!scopeEnd && token.value > scopeIndention) {
-                console.log('IND', token, scopeIndention)
                 this.syntaxError('Indention error!')
               }
 
