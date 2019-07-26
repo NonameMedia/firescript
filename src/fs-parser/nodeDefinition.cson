@@ -142,7 +142,7 @@ definition:
     name: 'ArrayExpression'
 
   'punctuator "("':
-    name: 'ArrowFunctionExpression'
+    name: 'FirescriptGrouping'
 
   #'punctuator "(" >> punctuator ")" > operator "=>"':
   #  name: 'ArrowFunctionExpression'

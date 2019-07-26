@@ -50,7 +50,7 @@ describe('Elements', () => {
           const Node = require(`../../src/fs-parser/nodes/${fsNodeType}`)
           const node = new Node(parser)
           const fsast = node.resolve(ctx)
-          // console.log('NODE', fsast)
+          console.log('NODE', fsast)
           inspect(fsast).hasProps(ast)
         })
 

@@ -44,3 +44,5 @@ mapping:
     name: 'LogicalExpression'
   'punctuator "?"':
     name: 'ConditionalExpression'
+  'FirescriptGrouping > operator "=>"':
+    name: 'ArrowFunctionExpression'
