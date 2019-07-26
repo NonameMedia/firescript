@@ -52,7 +52,11 @@ class MemberExpression extends Node {
 
     while (true) {
       if (parser.isInnerScope(this.indention) || parser.isSameScope(this.indention)) {
-        parser.skipNext()
+        if (parser.match('indention > punctuator [.,\\[]')) {
+          parser.skipNext()
+        } else {
+          break
+        }
       }
 
       if (parser.match('punctuator "."')) {
