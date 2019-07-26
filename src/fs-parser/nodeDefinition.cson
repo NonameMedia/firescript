@@ -92,7 +92,7 @@ definition:
   'keyword "throw"':
     name: 'ThrowStatement'
 
-  'keyword try""':
+  'keyword "try"':
     name: 'TryStatement'
 
   'keyword "do"':
@@ -142,7 +142,10 @@ definition:
     name: 'ArrayExpression'
 
   'punctuator "("':
-    name: 'ArrowFunctionExpression'
+    name: 'FirescriptGrouping'
+
+  #'punctuator "(" >> punctuator ")" > operator "=>"':
+  #  name: 'ArrowFunctionExpression'
 
   'operator [++,--]':
     name: 'UpdateExpression'

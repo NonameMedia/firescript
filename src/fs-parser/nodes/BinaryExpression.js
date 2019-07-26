@@ -20,10 +20,6 @@ class BinaryExpression extends Node {
     }
 
     this.operator = token.value
-    if (parser.match('operator')) {
-      this.syntaxError('Unexpected token!')
-    }
-
     this.right = parser.nextNode(this)
   }
 

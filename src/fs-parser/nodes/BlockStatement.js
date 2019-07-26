@@ -45,6 +45,7 @@ class BlockStatement extends Node {
     if (parser.isInnerScope(this.indention)) {
       for (const scope of parser.walkScope()) {
         const nextNode = scope.nextNode(this)
+        // console.log('SCOPE', nextNode)
         if (nextNode.type === 'Comment') {
           comments.push(nextNode)
           continue

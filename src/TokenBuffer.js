@@ -9,86 +9,17 @@ class TokenBuffer extends Array {
     // this.indentionSize = 2
   }
 
-  // next () {
-  //   const token = this[this.index]
-  //   if (!token) {
-  //     return null
-  //   }
-  //
-  //   this.index += 1
-  //   return token
-  // }
-  //
-  // current () {
-  //   const token = this[this.index]
-  //   if (!token) {
-  //     return null
-  //   }
-  //
-  //   return token
-  // }
-  //
-  // previous () {
-  //   const token = this[this.index - 1]
-  //   if (!token) {
-  //     return null
-  //   }
-  //
-  //   return token
-  // }
-  //
-  // previousToken () {
-  //   let index = this.index - 1
-  //   while (true) {
-  //     const token = this[index]
-  //     if (!token) {
-  //       return null
-  //     }
-  //
-  //     if (token.type === 'indention') {
-  //       index -= 1
-  //       continue
-  //     }
-  //
-  //     return token
-  //   }
-  // }
-  //
-  // goForward (numItems) {
-  //   this.index += (numItems || 1)
-  // }
-  //
-  // goBackward (numItems) {
-  //   this.index -= (numItems || 1)
-  // }
-  //
-  // lookForward (type, value, numItems) {
-  //   const index = this.index + (numItems || 1)
-  //   return this.expect(type, value, index)
-  // }
-  //
-  // getRawValue () {
-  //   const token = this.next()
-  //   return token.value
-  // }
-  //
-  // getIndention (offset) {
-  //   offset = offset || 0
-  //   for (let index = this.index + offset; index >= 0; index--) {
-  //     const token = this[index]
-  //     if (!token) {
-  //       return 0
-  //     }
-  //
-  //     if (token.type === 'indention') {
-  //       return token.value
-  //     }
-  //   }
-  //
-  //   return 0
-  // }
+  find (type, value, index = 0) {
+    for (let i = index; i < this.length; i++) {
+      if (this.match(type, value, i)) {
+        return i
+      }
+    }
 
-  match (type, value, index) {
+    return -1
+  }
+
+  match (type, value, index = 0) {
     const token = this[index]
     // console.log('MATCH INDEX', token, type, value, index)
     if (!token) {
@@ -114,6 +45,10 @@ class TokenBuffer extends Array {
     }
 
     return token.type === type
+  }
+
+  getIndention () {
+    return this.length ? this[0].indention : 0
   }
 
   // match (type, value, offset) {

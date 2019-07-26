@@ -1,8 +1,9 @@
 Firescript
 ==========
 
-A great shit is comming up soon!
 =======
+[![Build Status](https://travis-ci.com/Andifeind/firescript.svg?branch=master)](https://travis-ci.com/Andifeind/firescript)
+
 Firescript is a language which gets transpiled into Javascript.
 A language which uses indention for block scoping, has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The transpiled output is clean and readable Javascript.
 

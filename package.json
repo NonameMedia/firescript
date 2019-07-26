@@ -1,6 +1,6 @@
 {
   "name": "firescript",
-  "version": "0.9.1",
+  "version": "0.9.7",
   "description": "Firescript transpiler",
   "main": "src/app.js",
   "bin": {
@@ -44,6 +44,7 @@
     "superconf": "^1.2.1",
     "superfs": "^0.12.2",
     "superimport": "^1.4.0",
-    "superreg": "^0.2.1"
+    "superreg": "^0.2.1",
+    "type-inspect": "^1.4.4"
   }
 }

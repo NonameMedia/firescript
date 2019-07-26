@@ -34,10 +34,27 @@ class SourceBuffer {
     return this
   }
 
-  writeComments (comments) {
+  writeItem (item) {
+    if (item.leadingComments && item.leadingComments.length) {
+      this.writeComments(item.leadingComments)
+      this.indent()
+    }
+
+    item.compile(this)
+
+    if (item.trailingComments && item.trailingComments.length) {
+      this.indent()
+      this.writeComments(item.trailingComments)
+    }
+  }
+
+  writeComments (comments, joiner) {
     if (comments && comments.length > 0) {
-      comments.forEach((comment) => {
-        // console.log('COMMENT', comment)
+      comments.forEach((comment, index) => {
+        if (index) {
+          joiner === undefined ? this.indent() : this.write(joiner)
+        }
+
         this.write(comment)
       })
     }
@@ -54,17 +71,9 @@ class SourceBuffer {
   getLocation () {
     return [ this.line, this.column ]
   }
-  //
-  // indent (size, noReturn) {
-  //   this.line += 1
-  //   this.column = 0
-  //
-  //   size = size || 0
-  //   this.indention += size
-  //   this.write(noReturn ? '\n' : '\n' + ' '.repeat(this.indention * this.indentionSize))
-  // }
 
   getIndent () {
+    // console.log('INDENT', this.indention, this.indentionSize, `"${' '.repeat(this.indention * this.indentionSize)}"`)
     return '\n' + ' '.repeat(this.indention * this.indentionSize)
   }
 
@@ -82,30 +91,14 @@ class SourceBuffer {
     return this
   }
 
-  loop (arr, joiner = '', fn) {
+  loop (arr, joiner = this.getIndent(), fn) {
     if (arr) {
       arr.forEach((item, index) => {
-        if (item.leadingComments) {
-          this.write(item.renderLeadingComments())
-        }
-
-        if (item.innerComments) {
-          this.write(item.renderInnerComments())
-        }
-
-        if (index) {
+        if (index > 0) {
           this.write(joiner)
         }
 
-        item.compile(this)
-
-        if (item.trailingComments) {
-          this.write(item.renderTrailingComments())
-        }
-
-        if (fn && fn(item, arr[index + 1])) {
-          this.nl()
-        }
+        this.writeItem(item)
       })
     }
 
@@ -133,6 +126,10 @@ class SourceBuffer {
 
   toString () {
     return this.buffer.join('')
+  }
+
+  print () {
+    console.log(this.buffer.slice(-5))
   }
 
   createLocationMap () {

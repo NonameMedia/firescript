@@ -1,4 +1,3 @@
-const path = require('path')
 const inspect = require('inspect.js')
 const sinon = require('sinon')
 inspect.useSinon(sinon)
@@ -277,23 +276,16 @@ describe('Parser', () => {
     it('fail on odd indentions', () => {
       const parser = new Parser(parserConf)
 
-      parser.parse(
-        'const banana =\n' +
-        '   fruit: \'Banana\'\n' +
-        '   color: \'yellow\'\n'
-      )
-
       try {
-        while (true) {
-          const token = parser.nextToken()
-          if (!token) {
-            break
-          }
-        }
+        parser.parse(
+          'const banana =\n' +
+          '   fruit: \'Banana\'\n' +
+          '   color: \'yellow\'\n'
+        )
 
         this.fail('Test should fail, but it passed!')
       } catch (err) {
-        console.log('ERR', err)
+        // console.log('ERR', err)
         inspect(err).isInstanceOf(Error)
         inspect(err).doesMatch(/Unexpected indention/)
       }
@@ -389,36 +381,11 @@ describe('Parser', () => {
   })
 
   describe('fillBuffer()', () => {
-    it('should fill the buffer with three items', () => {
+    it('should fill the buffer with all items', () => {
       const parser = new Parser(parserConf)
 
       parser.parse('const banana = \'Banana\'')
-      parser.fillBuffer(3)
-
-      inspect(parser.tokenBuffer).isArray()
-      inspect(parser.tokenBuffer).hasLength(3)
-      inspect(parser.tokenBuffer).getItem(0).hasProps({
-        type: 'identifier',
-        value: 'const',
-        isKeyword: true
-      })
-
-      inspect(parser.tokenBuffer).getItem(1).hasProps({
-        type: 'identifier',
-        value: 'banana'
-      })
-
-      inspect(parser.tokenBuffer).getItem(2).hasProps({
-        type: 'operator',
-        value: '='
-      })
-    })
-
-    it('should never overload the buffer', () => {
-      const parser = new Parser(parserConf)
-
-      parser.parse('const banana = \'Banana\'')
-      parser.fillBuffer(7)
+      parser.fillBuffer()
 
       inspect(parser.tokenBuffer).isArray()
       inspect(parser.tokenBuffer).hasLength(4)

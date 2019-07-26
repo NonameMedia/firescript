@@ -1,1 +1,29 @@
-{}
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "banana"
+            },
+            "arguments": []
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "getFruit"
+          }
+        },
+        "arguments": []
+      }
+    }
+  ],
+  "sourceType": "module"
+}

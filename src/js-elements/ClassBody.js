@@ -31,7 +31,7 @@ class ClassBody extends JSElement {
         buffer.indent()
       }
 
-      item.compile(buffer)
+      buffer.writeItem(item)
 
       if (this.addEmptyLine(item, this.body[index + 1])) {
         buffer.nl()

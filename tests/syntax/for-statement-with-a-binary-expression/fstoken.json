@@ -1,0 +1,70 @@
+[
+  {
+    "type": "identifier",
+    "value": "for"
+  },
+  {
+    "type": "identifier",
+    "value": "i"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "identifier",
+    "value": "num"
+  },
+  {
+    "type": "operator",
+    "value": "-"
+  },
+  {
+    "type": "numeric",
+    "value": "1"
+  },
+  {
+    "type": "punctuator",
+    "value": ";"
+  },
+  {
+    "type": "identifier",
+    "value": "i"
+  },
+  {
+    "type": "operator",
+    "value": "<"
+  },
+  {
+    "type": "identifier",
+    "value": "len"
+  },
+  {
+    "type": "punctuator",
+    "value": ";"
+  },
+  {
+    "type": "identifier",
+    "value": "i"
+  },
+  {
+    "type": "operator",
+    "value": "++"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "identifier",
+    "value": "log"
+  },
+  {
+    "type": "identifier",
+    "value": "i"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

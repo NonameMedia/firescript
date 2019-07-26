@@ -2,4 +2,5 @@
 function foo () {
   // Returns foo
   // End of comment
-}// End of function
+}
+// End of function

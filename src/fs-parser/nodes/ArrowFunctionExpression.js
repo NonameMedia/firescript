@@ -9,7 +9,7 @@ const ALLOWED_PARAMS = [
 ]
 
 class ArrowFunctionExpression extends Node {
-  constructor (parser) {
+  constructor (parser, args) {
     super(parser)
 
     this.async = false
@@ -24,7 +24,9 @@ class ArrowFunctionExpression extends Node {
     this.params = []
     this.fsParamTypings = []
 
-    if (parser.match('punctuator "("')) {
+    if (args && args.type === 'FirescriptGrouping') {
+      this.params = Array.from(args.elements)
+    } else if (parser.match('punctuator "("')) {
       for (const scope of parser.walkScope()) {
         if (scope.match('identifier > identifier')) {
           this.fsParamTypings.push(scope.createNode('FirescriptTyping'))

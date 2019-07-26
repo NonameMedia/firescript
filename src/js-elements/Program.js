@@ -21,7 +21,7 @@ class Program extends JSElement {
 
   compile (buffer) {
     this.body.forEach((item, index) => {
-      item.compile(buffer)
+      buffer.writeItem(item)
       buffer.nl(this.addEmptyLine(item, this.body[index + 1]) ? 2 : 1)
     })
   }
@@ -34,13 +34,6 @@ class Program extends JSElement {
     return (
       (item.type === 'ImportDeclaration' && next.type !== 'ImportDeclaration') ||
       (!item.type.startsWith('Export') && next.type.startsWith('Export'))
-    )
-  }
-
-  toESString (ctx) {
-    return this.renderElement(
-      ctx.join(this.body, '\n') +
-      '\n'
     )
   }
 }

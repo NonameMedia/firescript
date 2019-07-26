@@ -30,15 +30,26 @@ class BlockStatement extends JSElement {
   }
 
   compile (buffer) {
-    const body = this.addComments(this.body)
+    const body = this.body
     if (this.body.length === 0) {
-      buffer.write('{}')
+      buffer.write('{')
+      if (this.innerComments && this.innerComments.length) {
+        buffer.indent(1, true)
+        for (const comment of this.innerComments) {
+          buffer.indent()
+          buffer.write(comment)
+        }
+
+        buffer.indent(-1)
+      }
+      buffer.write('}')
+      buffer.writeComments(this.trailingComments)
       return
     }
 
     buffer.write('{')
     buffer.indent(1)
-    buffer.loop(body, buffer.getIndent())
+    buffer.loop(body)
     buffer.indent(-1)
     buffer.write('}')
   }
@@ -51,21 +62,6 @@ class BlockStatement extends JSElement {
     return (
       item.type === 'ClassDeclaration' && next
     )
-  }
-
-  toESString (ctx) {
-    const body = this.body.length === 0
-      ? ''
-      : ctx.indent(1) +
-      ctx.join(this.body, ctx.indent()) +
-      ctx.indent(-1)
-
-    const innerComments = this.innerComments ? ctx.join(this.innerComments, ctx.indent()) : ''
-
-    return this.renderElement('{' +
-      innerComments +
-      body +
-      '}')
   }
 }
 

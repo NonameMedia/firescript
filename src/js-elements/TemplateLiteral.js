@@ -26,7 +26,7 @@ class TemplateLiteral extends JSElement {
     buffer.write('`')
     const elements = SuperArray.merge(this.quasis, this.expressions)
     elements[0].head = true
-    buffer.loop(elements)
+    buffer.loop(elements, '')
     buffer.write('`')
   }
 }

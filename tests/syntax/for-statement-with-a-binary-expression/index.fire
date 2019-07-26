@@ -1,0 +1,2 @@
+for i = num - 1; i < len; i++
+  log i
