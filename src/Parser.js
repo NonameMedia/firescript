@@ -39,7 +39,7 @@ class Parser {
     this.tokenBuffer = new TokenBuffer()
   }
 
-  parse (source) {
+  parse (source, skipBuffer) {
     this.index = 0
     this.line = 1
     this.column = 1
@@ -50,24 +50,29 @@ class Parser {
     this.columnEnd = 0
 
     this.parserFuncs = this.createMatcher(this.matcherConf)
+    if (!skipBuffer) {
+      this.fillBuffer()
+    }
   }
 
   tokenize (source) {
     if (source) {
       this.parse(source)
+    } else if (this.tokenBuffer.length === 0) {
+      return this.fillBuffer()
     }
+    //
+    // const tokens = []
+    // while (true) {
+    //   const token = this.nextToken()
+    //   if (!token) {
+    //     break
+    //   }
+    //
+    //   tokens.push(token)
+    // }
 
-    const tokens = []
-    while (true) {
-      const token = this.nextToken()
-      if (!token) {
-        break
-      }
-
-      tokens.push(token)
-    }
-
-    return tokens
+    return this.tokenBuffer
   }
 
   /**
@@ -124,17 +129,17 @@ class Parser {
   }
 
   skipNext () {
-    this.fillBuffer(1)
+    // this.fillBuffer(1)
     return this.tokenBuffer.shift()
   }
 
   resolveNodeName (scope) {
-    const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
-      return Math.max(num, item.mapping.length)
-    }, 0)
-
-    const tokenBuffer = this.fillBuffer(bufferFillSize)
-    return this.nodeDefinition.resolve(tokenBuffer, scope)
+    // const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
+    //   return Math.max(num, item.mapping.length)
+    // }, 0)
+    //
+    // const tokenBuffer = this.fillBuffer(bufferFillSize)
+    return this.nodeDefinition.resolve(this.tokenBuffer, scope)
   }
 
   resolveToken (scope) {
@@ -158,7 +163,7 @@ class Parser {
   }
 
   showNextToken () {
-    this.fillBuffer(1)
+    // this.fillBuffer(1)
     return this.tokenBuffer[0]
   }
 
@@ -171,12 +176,12 @@ class Parser {
 
   resolveMapping (node, scope) {
     let mapNode = node
-    const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
-      return Math.max(num, item.mapping.length)
-    }, 0)
+    // const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
+    //   return Math.max(num, item.mapping.length)
+    // }, 0)
 
     while (true) {
-      this.fillBuffer(bufferFillSize)
+      // this.fillBuffer(bufferFillSize)
 
       // console.log('LOOKUP', mapNode.type, scope, this.tokenBuffer[0])
       const mapNodeName = this.nodeMapping.resolve(mapNode, this.tokenBuffer, scope)
@@ -332,7 +337,7 @@ class Parser {
 
   syntaxError (msg, token) {
     if (!token) {
-      this.fillBuffer(1)
+      // this.fillBuffer(1)
       token = this.tokenBuffer[0] || this
     }
 
@@ -432,8 +437,8 @@ class Parser {
 
     const matchDefinition = this.nodeDefinition.parse(matchString)
 
-    const tokenBuffer = this.fillBuffer(matchDefinition.mapping.length)
-    return matchDefinition.test(tokenBuffer)
+    // const tokenBuffer = this.fillBuffer(matchDefinition.mapping.length)
+    return matchDefinition.test(this.tokenBuffer)
   }
 
   // parseMatchString (matchString) {
@@ -471,7 +476,16 @@ class Parser {
    * @return {object} Returns the filled buffer
    */
   fillBuffer (numItems) {
-    for (let i = this.tokenBuffer.length; i < numItems; i++) {
+    // for (let i = this.tokenBuffer.length; i < numItems; i++) {
+    //   const token = this.nextToken(true)
+    //   if (!token) {
+    //     break
+    //   }
+    //
+    //   this.tokenBuffer.push(token)
+    // }
+
+    while (true) {
       const token = this.nextToken(true)
       if (!token) {
         break
@@ -497,9 +511,9 @@ class Parser {
    * @return {object} Returns a object
    */
   getPosition () {
-    if (this.tokenBuffer.length === 0) {
-      this.fillBuffer(1)
-    }
+    // if (this.tokenBuffer.length === 0) {
+    //   this.fillBuffer(1)
+    // }
 
     const token = this.tokenBuffer[0] || this
 
@@ -520,10 +534,10 @@ class Parser {
    * @returns {Boolean} Returns true if current token is type of indention and indention size is greater then current indention
    */
   isInnerScope (parentIndention) {
-    parentIndention = Number.isInteger(parentIndention) ? parentIndention : this.indention
-    if (this.tokenBuffer.length === 0) {
-      this.fillBuffer(1)
-    }
+    parentIndention = Number.isInteger(parentIndention) ? parentIndention : this.tokenBuffer.getIndention()
+    // if (this.tokenBuffer.length === 0) {
+    //   this.fillBuffer(1)
+    // }
 
     const token = this.tokenBuffer[0]
     if (!token || token.type !== 'indention') {
@@ -534,10 +548,10 @@ class Parser {
   }
 
   isOuterScope (parentIndention) {
-    parentIndention = parentIndention || this.indention
-    if (this.tokenBuffer.length === 0) {
-      this.fillBuffer(1)
-    }
+    parentIndention = parentIndention || this.tokenBuffer.getIndention()
+    // if (this.tokenBuffer.length === 0) {
+    //   this.fillBuffer(1)
+    // }
 
     const token = this.tokenBuffer[0]
     if (!token || !token.type === 'indention') {
@@ -548,10 +562,10 @@ class Parser {
   }
 
   isSameScope (parentIndention) {
-    parentIndention = parentIndention || this.indention
-    if (this.tokenBuffer.length === 0) {
-      this.fillBuffer(1)
-    }
+    parentIndention = parentIndention || this.tokenBuffer.getIndention()
+    // if (this.tokenBuffer.length === 0) {
+    //   this.fillBuffer(1)
+    // }
 
     const token = this.tokenBuffer[0]
     if (!token || !token.type === 'indention') {
@@ -568,24 +582,24 @@ class Parser {
    * @returns {Boolean} Returns true if end of file was reached
    */
   isEOF () {
-    if (this.tokenBuffer.length === 0) {
-      this.fillBuffer(1)
-    }
+    // if (this.tokenBuffer.length === 0) {
+    //   this.fillBuffer(1)
+    // }
 
     return this.tokenBuffer.length === 0
   }
 
   print (msg) {
-    this.fillBuffer(5)
+    // this.fillBuffer(5)
     if (msg) {
       console.log(msg)
     }
 
-    console.log(this.tokenBuffer)
+    console.log(this.tokenBuffer.slice(0, 5))
   }
 
   walkScope () {
-    let scopeIndention = this.indention
+    let scopeIndention = this.tokenBuffer.getIndention()
     let scopeEnd = null
 
     if (this.match('punctuator [{,[,(]')) {
@@ -623,6 +637,7 @@ class Parser {
               }
 
               if (!scopeEnd && token.value > scopeIndention) {
+                console.log('IND', token, scopeIndention)
                 this.syntaxError('Indention error!')
               }
 

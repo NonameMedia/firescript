@@ -47,6 +47,10 @@ class TokenBuffer extends Array {
     return token.type === type
   }
 
+  getIndention () {
+    return this.length ? this[0].indention : 0
+  }
+
   // match (type, value, offset) {
   //   return this.expect(type, value, this.index + offset)
   // }
