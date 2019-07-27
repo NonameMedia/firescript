@@ -17,7 +17,7 @@ describe('FSConfig', () => {
           esClasses: true,
           esTemplates: true,
           extendRegExp: true,
-          notIncludeFireRT: false,
+          dissableRuntime: false,
           fireRTModuleName: 'firescript-runtime'
         }
       })
@@ -38,7 +38,7 @@ describe('FSConfig', () => {
           esClasses: true,
           esTemplates: true,
           extendRegExp: true,
-          notIncludeFireRT: false,
+          dissableRuntime: false,
           fireRTModuleName: 'firescript-runtime'
         }
       })
@@ -54,7 +54,7 @@ describe('FSConfig', () => {
       esClasses: true,
       esTemplates: true,
       extendRegExp: true,
-      notIncludeFireRT: false,
+      dissableRuntime: false,
       fireRTModuleName: 'firescript-runtime'
     })
   })
