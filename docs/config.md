@@ -14,4 +14,4 @@ Firescript config properties
 | Name             | Default              | Description                                 |
 | ---------------- | -------------------- | ------------------------------------------- |
 | fireRTModuleName | ´firescript-runtime` | Overwrite FirescriptRuntime module name                |
-| noIncludeFireRT  | `false`              | Not include of FirescriptRuntime in transpiled sources |
+| dissableRuntime  | `false`              | Not include of FirescriptRuntime in transpiled sources |

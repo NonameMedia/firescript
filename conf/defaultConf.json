@@ -8,7 +8,7 @@
     "esClasses": true,
     "esTemplates": true,
     "extendRegExp": true,
-    "notIncludeFireRT": false,
+    "dissableRuntime": false,
     "fireRTModuleName": "firescript-runtime"
   }
 }

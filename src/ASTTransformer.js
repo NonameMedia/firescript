@@ -31,7 +31,7 @@ class ASTTransformer {
 
   transform (ast) {
     const transformatedAst = this.transformItem(ast)
-    if (this.importRuntime && this.ctx.noIncludeFireRT !== true) {
+    if (this.importRuntime && this.ctx.dissableRuntime !== true) {
       this.importModule([[ 'FirescriptRuntime' ]], this.ctx.fireRTModuleName || 'firescript-runtime', transformatedAst)
     }
 
