@@ -13,6 +13,7 @@ const ALLOWED_CHILDS = [
   'ForStatement',
   'ForInStatement',
   'ForOfStatement',
+  'FirescriptGrouping',
   'FunctionDeclaration',
   'IfStatement',
   'LabeledStatement',

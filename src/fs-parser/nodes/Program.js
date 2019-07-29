@@ -5,7 +5,7 @@ const ALLOWED_SCRIPT_CHILDS = [
   'BlockStatement', 'BreakStatement', 'ContinueStatement',
   'DebuggerStatement', 'DoWhileStatement', 'EmptyStatement',
   'ExpressionStatement', 'ForStatement', 'ForInStatement',
-  'ForOfStatement', 'FunctionDeclaration', 'IfStatement',
+  'ForOfStatement', 'FirescriptGrouping', 'FunctionDeclaration', 'IfStatement',
   'LabeledStatement', 'ReturnStatement', 'SwitchStatement',
   'ThrowStatement', 'TryStatement', 'VariableDeclaration',
   'WhileStatement', 'WithStatement', 'ClassDeclaration',

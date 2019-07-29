@@ -30,6 +30,7 @@ const str = '''
   World,
   I'm a multiline
   string
+'''
 
 const str = ```
   Hello
