@@ -45,6 +45,10 @@ class ExportNamedDeclaration extends Node {
 
         const node = scope.createNode('ExportSpecifier')
         this.specifiers.push(node)
+
+        if (parser.isSameScope(this.indention)) {
+          break
+        }
       }
     }
 
