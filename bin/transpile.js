@@ -18,7 +18,8 @@ module.exports = (fireio) => {
       const source = Firescript.transpile(input, {
         type: /* ctx.type || */ path.extname(file) === '.fire' ? 'fire' : 'js',
         setLocation: !!ctx.location,
-        verbose: ctx.verbose
+        verbose: ctx.verbose,
+        filename: file
       })
 
       if (output) {

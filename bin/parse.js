@@ -17,7 +17,8 @@ module.exports = (fireio) => {
           type: 'fire',
           includeComments: ctx.comments,
           setLocation: !!ctx.location,
-          setRange: !!ctx.range
+          setRange: !!ctx.range,
+          filename: file
         })
 
         const source = JSON.stringify(ast, null, '  ')
@@ -32,7 +33,8 @@ module.exports = (fireio) => {
           type: 'js',
           includeComments: ctx.comments,
           setLocation: !!ctx.location,
-          setRange: !!ctx.range
+          setRange: !!ctx.range,
+          filename: file
         })
 
         const source = JSON.stringify(ast, null, '  ')

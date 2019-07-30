@@ -10,7 +10,9 @@ module.exports = (fireio) => {
     .description('Tokenize a .fire or .js file')
     .action((ctx, file) => {
       const source = fs.readFileSync(file, { encoding: 'utf8' })
-      const tokenStack = Firescript.tokenize(source)
+      const tokenStack = Firescript.tokenize(source, {
+        filename: file
+      })
       const lines = []
       tokenStack.forEach((token) => {
         const keyQuote = ctx.js ? '' : '"'

@@ -11,6 +11,7 @@ class FirescriptParser {
     // this.setLocation = conf.setLocation || false
     // this.setRange = conf.setRange || false
     this.indentionSize = opts.indention || 2
+    this.filename = opts.filename || null
     // this.keyWords = 'import|func|class|const|let|var|return'
     // this.literalPattern = '\'[^]+?\'|\\d+'
     // this.binaryOperatorPattern = /^[+*/&-]$/
@@ -23,6 +24,7 @@ class FirescriptParser {
   parse (source) {
     try {
       parserConf.indentionSize = this.indentionSize
+      parserConf.filename = this.filename
       const parser = new Parser(parserConf)
       parser.parse(source)
 

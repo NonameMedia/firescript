@@ -11,6 +11,7 @@ class Parser {
     this.matcherConf = opts.matcher
     this.keyWords = opts.keyWords
     this.scopeDelimiter = opts.scopeDelimiter
+    this.filename = opts.filename || null
 
     if (!this.confDir) {
       throw new Error('The Parser.confDir parameter must be set!')
@@ -341,7 +342,8 @@ class Parser {
       token = this.tokenBuffer[0] || this
     }
 
-    throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}\n${this.sourcePreview(token)}`)
+    const errorFile = this.filename ? ` in file ${this.filename}` : ''
+    throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}${errorFile}\n${this.sourcePreview(token)}`)
   }
 
   getIdentifier () {

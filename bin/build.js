@@ -31,7 +31,8 @@ class BuildCMD {
 
     const source = Firescript.transpile(input, {
       type: 'fire',
-      verbose: this.conf.verbose
+      verbose: this.conf.verbose,
+      filename: infile
     })
 
     const fl = await SuperFS.writeFile(outfile, source, { encoding: 'utf8' })

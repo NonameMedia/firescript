@@ -650,4 +650,22 @@ describe('Parser', () => {
       ])
     })
   })
+
+  describe.only('syntaxError()', () => {
+    let parser
+
+    beforeEach(() => {
+      parser = new Parser(parserConf)
+      parser.parse('test on two')
+    })
+
+    it('throws an syntax error', () => {
+      inspect(parser.syntaxError.bind(parser)).withArgs('Test Error').doesThrow(/Test Error/)
+    })
+
+    it('error message contains the filename', () => {
+      parser.filename = '/test/fruits/banana/bananafile.fire'
+      inspect(parser.syntaxError.bind(parser)).withArgs('Test Error').doesThrow(/in file \/test\/fruits\/banana\/bananafile.fire/)
+    })
+  })
 })
