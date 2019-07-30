@@ -651,7 +651,7 @@ describe('Parser', () => {
     })
   })
 
-  describe.only('syntaxError()', () => {
+  describe('syntaxError()', () => {
     let parser
 
     beforeEach(() => {
