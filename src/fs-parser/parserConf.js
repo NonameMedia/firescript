@@ -28,7 +28,7 @@ module.exports = {
 
   matcher: [{
     type: 'template',
-    pattern: /((?<!\\)'.*\$\{)|(\}.*\$\{)|((?<!\\)\}.*')/,
+    pattern: /((?<!\\)'.*?\$\{)|((?<!\\)\}.*?'|(\}.*?\$\{))/,
     escape: '\\'
   }, {
     type: 'literal',
