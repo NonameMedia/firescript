@@ -683,6 +683,10 @@ class Parser {
       }
     }
   }
+
+  swapNode (ttokenType) {
+    this.tokenBuffer[0].type = ttokenType
+  }
 }
 
 module.exports = Parser
