@@ -1,0 +1,6 @@
+if foo
+  log 'Foo'
+elif bar
+  log 'Bar'
+else
+  log 'Bla'

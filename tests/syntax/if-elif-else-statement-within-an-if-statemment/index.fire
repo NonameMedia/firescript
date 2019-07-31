@@ -1,0 +1,9 @@
+if !banana
+  if foo
+    log 'Foo'
+  elif bar
+    log 'Bar'
+  else
+    log 'Bla'
+else
+  log 'Banana'

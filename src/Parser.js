@@ -550,7 +550,7 @@ class Parser {
   }
 
   isOuterScope (parentIndention) {
-    parentIndention = parentIndention || this.tokenBuffer.getIndention()
+    parentIndention = Number.isInteger(parentIndention) ? parentIndention : this.tokenBuffer.getIndention()
     // if (this.tokenBuffer.length === 0) {
     //   this.fillBuffer(1)
     // }
@@ -564,7 +564,7 @@ class Parser {
   }
 
   isSameScope (parentIndention) {
-    parentIndention = parentIndention || this.tokenBuffer.getIndention()
+    parentIndention = Number.isInteger(parentIndention) ? parentIndention : this.tokenBuffer.getIndention()
     // if (this.tokenBuffer.length === 0) {
     //   this.fillBuffer(1)
     // }

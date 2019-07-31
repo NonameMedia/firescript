@@ -1,0 +1,23 @@
+[
+  { "type": "identifier", "value": "if" },
+  { "type": "identifier", "value": "foo" },
+  { "type": "indention", "value": 1 },
+  { "type": "identifier", "value": "throw" },
+  { "type": "identifier", "value": "new" },
+  { "type": "identifier", "value": "Error" },
+  { "type": "punctuator", "value": "(" },
+  { "type": "literal", "value": "'Oh no'" },
+  { "type": "punctuator", "value": ")" },
+  { "type": "indention", "value": 0 },
+  { "type": "identifier", "value": "elif" },
+  { "type": "identifier", "value": "bar" },
+  { "type": "indention", "value": 1 },
+  { "type": "identifier", "value": "log" },
+  { "type": "literal", "value": "'Bar'" },
+  { "type": "indention", "value": 0 },
+  { "type": "identifier", "value": "else" },
+  { "type": "indention", "value": 1 },
+  { "type": "identifier", "value": "log" },
+  { "type": "literal", "value": "'Bla'" },
+  { "type": "indention", "value": 0 }
+]

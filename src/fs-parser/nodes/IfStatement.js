@@ -22,15 +22,15 @@ class IfStatement extends Node {
 
     this.consequent = parser.createNode('BlockStatement')
 
-    if (parser.match('indention > keyword "elif"')) {
-      parser.skipNext()
-      this.alternate = parser.createNode('IfStatement')
-    }
-
-    if (parser.match('indention > keyword "else"')) {
-      parser.skipNext()
-      parser.skipNext()
-      this.alternate = parser.createNode('BlockStatement')
+    if (parser.isSameScope(this.indention)) {
+      if (parser.match('indention > keyword "elif"')) {
+        parser.skipNext()
+        this.alternate = parser.createNode('IfStatement')
+      } else if (parser.match('indention > keyword "else"')) {
+        parser.skipNext()
+        parser.skipNext()
+        this.alternate = parser.createNode('BlockStatement')
+      }
     }
   }
 

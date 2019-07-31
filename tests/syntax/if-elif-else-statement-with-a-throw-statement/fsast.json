@@ -1,0 +1,102 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "IfStatement",
+      "test": {
+        "type": "Identifier",
+        "name": "foo"
+      },
+      "consequent": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ThrowStatement",
+            "argument": {
+              "type": "NewExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "Error"
+              },
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "value": "Oh no",
+                  "raw": "'Oh no'"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "alternate": {
+        "type": "IfStatement",
+        "test": {
+          "type": "Identifier",
+          "name": "bar"
+        },
+        "consequent": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "console"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "log"
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": "Bar",
+                    "raw": "'Bar'"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "alternate": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "Identifier",
+                    "name": "console"
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "log"
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": "Bla",
+                    "raw": "'Bla'"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

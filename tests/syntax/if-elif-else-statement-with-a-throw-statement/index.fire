@@ -1,0 +1,6 @@
+if foo
+  throw new Error('Oh no')
+elif bar
+  log 'Bar'
+else
+  log 'Bla'
