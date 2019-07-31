@@ -24,9 +24,9 @@ mapping:
       'Property': 'FunctionExpression'
       'NewExpression': '$origin'
   'Identifier > punctuator ":"':
-    name: 'ObjectExpression'
     scopes:
-      'ConditionalExpression': '$origin'
+      'VariableDeclarator': 'ObjectExpression'
+      'Property': 'ObjectExpression'
   'Literal > punctuator ":"':
     name: 'ObjectExpression'
     scopes:

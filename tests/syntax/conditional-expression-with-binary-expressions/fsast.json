@@ -1,0 +1,83 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "init": {
+            "type": "ConditionalExpression",
+            "test": {
+              "type": "BinaryExpression",
+              "operator": "===",
+              "left": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "bar"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "length"
+                }
+              },
+              "right": {
+                "type": "Literal",
+                "value": 1,
+                "raw": "1"
+              }
+            },
+            "consequent": {
+              "type": "BinaryExpression",
+              "operator": "===",
+              "left": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "bar"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "value"
+                }
+              },
+              "right": {
+                "type": "Identifier",
+                "name": "bla"
+              }
+            },
+            "alternate": {
+              "type": "BinaryExpression",
+              "operator": "===",
+              "left": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "Identifier",
+                  "name": "bar"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "value"
+                }
+              },
+              "right": {
+                "type": "Identifier",
+                "name": "blub"
+              }
+            }
+          }
+        }
+      ],
+      "kind": "const"
+    }
+  ]
+}
