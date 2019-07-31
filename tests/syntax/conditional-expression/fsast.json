@@ -1,0 +1,36 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "init": {
+            "type": "ConditionalExpression",
+            "test": {
+              "type": "Identifier",
+              "name": "bar"
+            },
+            "consequent": {
+              "type": "Literal",
+              "value": "yes",
+              "raw": "'yes'"
+            },
+            "alternate": {
+              "type": "Literal",
+              "value": "no",
+              "raw": "'no'"
+            }
+          }
+        }
+      ],
+      "kind": "const"
+    }
+  ]
+}
