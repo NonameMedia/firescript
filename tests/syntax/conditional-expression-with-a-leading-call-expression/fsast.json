@@ -1,0 +1,55 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "init": {
+            "type": "ConditionalExpression",
+            "test": {
+              "type": "Identifier",
+              "name": "bar"
+            },
+            "consequent": {
+              "type": "Literal",
+              "value": "yes",
+              "raw": "'yes'"
+            },
+            "alternate": {
+              "type": "Literal",
+              "value": "no",
+              "raw": "'no'"
+            }
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "banana"
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "getFruit"
+          }
+        },
+        "arguments": []
+      }
+    }
+  ]
+}
