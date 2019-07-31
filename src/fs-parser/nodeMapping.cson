@@ -30,6 +30,8 @@ mapping:
       'NewExpression': '$origin'
   'CallExpression > punctuator "."':
     name: 'MemberExpression'
+  'Super > punctuator "("':
+    name: 'CallExpression'
   'operator [=,*=,**=,/=,%=,+=,-=,
   <<=,>>=,>>>=,&=,^=,|=]':
     name: 'AssignmentExpression'

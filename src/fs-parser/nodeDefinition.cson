@@ -115,6 +115,7 @@ definition:
       'ClassBody': 'MethodDefinition'
       'MemberExpression': 'Identifier'
       'Property': 'Identifier'
+      'MethodDefinition': 'Identifier'
     name: 'FirescriptLogStatement'
 
   'identifier':
