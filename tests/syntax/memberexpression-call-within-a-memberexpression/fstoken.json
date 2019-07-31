@@ -1,0 +1,50 @@
+[
+  {
+    "type": "identifier",
+    "value": "fruits"
+  },
+  {
+    "type": "punctuator",
+    "value": "["
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+    {
+      "type": "identifier",
+      "value": "getName"
+    },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "punctuator",
+    "value": "]"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "getFruit"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  }
+]
