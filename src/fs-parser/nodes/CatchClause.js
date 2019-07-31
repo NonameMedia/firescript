@@ -3,7 +3,8 @@ const Node = require('./Node')
 const ALLOWED_PARAMS = [
   'Identifier',
   'ArrayPattern',
-  'ObjectPattern'
+  'ObjectPattern',
+  'FirescriptGrouping'
 ]
 
 /**

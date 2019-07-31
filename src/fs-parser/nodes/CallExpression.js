@@ -52,7 +52,8 @@ const ALLOWED_ARGUMENT_TYPES = [
   'YieldExpression',
   'AssignmentExpression',
   'SequenceExpression',
-  'SpreadElement'
+  'SpreadElement',
+  'FirescriptGrouping'
 ]
 
 class CallExpression extends Node {
