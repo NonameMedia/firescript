@@ -1,0 +1,46 @@
+[
+  {
+    "type": "identifier",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "template",
+    "value": "'${"
+  },
+  {
+    "type": "identifier",
+    "value": "banana"
+  },
+  {
+    "type": "template",
+    "value": "}'"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "toUpperCase"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

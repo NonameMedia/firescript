@@ -9,6 +9,14 @@ mapping:
     name: 'MemberExpression'
   'ThisExpression > punctuator "."':
     name: 'MemberExpression'
+  'ArrayExpression > punctuator "."':
+    name: 'MemberExpression'
+  'ObjectExpression > punctuator "."':
+    name: 'MemberExpression'
+  'Literal > punctuator "."':
+    name: 'MemberExpression'
+  'TemplateLiteral > punctuator "."':
+    name: 'MemberExpression'
   'Identifier > punctuator "("':
     name: 'CallExpression'
     allowNested: true

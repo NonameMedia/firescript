@@ -1,0 +1,51 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "foo"
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "MemberExpression",
+              "computed": false,
+              "object": {
+                "type": "ObjectExpression",
+                "properties": [
+                  {
+                    "type": "Property",
+                    "key": {
+                      "type": "Identifier",
+                      "name": "obj"
+                    },
+                    "computed": false,
+                    "value": {
+                      "type": "Identifier",
+                      "name": "obj"
+                    },
+                    "kind": "init",
+                    "method": false,
+                    "shorthand": true
+                  }
+                ]
+              },
+              "property": {
+                "type": "Identifier",
+                "name": "valueOf"
+              }
+            },
+            "arguments": []
+          }
+        }
+      ],
+      "kind": "const"
+    }
+  ],
+  "sourceType": "module"
+}
