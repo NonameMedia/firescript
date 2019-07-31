@@ -46,6 +46,7 @@ mapping:
     name: 'UpdateExpression'
   'operator [||,&&]':
     name: 'LogicalExpression'
+    allowNested: true
   'punctuator "?"':
     name: 'ConditionalExpression'
   'FirescriptGrouping > operator "=>"':

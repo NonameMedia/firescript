@@ -52,8 +52,6 @@ class Property extends Node {
       parser.skipNext()
     } else if (parser.match('punctuator "("')) {
       this.method = true
-    } else {
-      // this.syntaxError('Unexpected token')
     }
 
     if (this.method) {
