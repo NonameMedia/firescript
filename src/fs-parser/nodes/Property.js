@@ -19,6 +19,7 @@ const ALLOWED_VALUES = [
   'LogicalExpression',
   'ConditionalExpression',
   'BinaryExpression',
+  'UnaryExpression',
   'null'
 ]
 

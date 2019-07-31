@@ -7,7 +7,7 @@ const ALLOWED_VALUE_NODES = [
   'ArrowFunctionExpression', 'FunctionExpression', 'null',
   'Literal', 'ArrayExpression', 'ObjectExpression',
   'TemplateLiteral', 'CallExpression', 'MemberExpression', 'LogicalExpression',
-  'BinaryExpression', 'ConditionalExpression'
+  'BinaryExpression', 'ConditionalExpression', 'UnaryExpression'
 ]
 
 /**
