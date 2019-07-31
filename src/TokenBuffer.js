@@ -26,6 +26,18 @@ class TokenBuffer extends Array {
       return false
     }
 
+    if (type === 'indention' && value) {
+      switch (value) {
+        case '>=': return token.value >= token.indention
+        case '>': return token.value > token.indention
+        case '==': return token.value === token.indention
+        case '<': return token.value < token.indention
+        case '<=': return token.value <= token.indention
+      }
+
+      return false
+    }
+
     if (value && Array.isArray(value)) {
       return value.indexOf(token.value) >= 0
     } else if (value && value instanceof RegExp) {

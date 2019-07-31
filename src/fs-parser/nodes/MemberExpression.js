@@ -76,7 +76,6 @@ class MemberExpression extends Node {
       }
     }
 
-    // console.log('STACK', memberExpressionStack)
     if (memberExpressionStack.length === 2) {
       const obj = memberExpressionStack.shift()
       this.object = obj[0]
