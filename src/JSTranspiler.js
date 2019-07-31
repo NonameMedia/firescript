@@ -6,6 +6,7 @@ const ASTTransformer = require('./ASTTransformer')
 class JSTranspiler {
   constructor (opts) {
     this.config = new FSConfig()
+    this.filename = opts.filename
 
     if (opts && opts.features) {
       this.config.merge({
@@ -29,10 +30,11 @@ class JSTranspiler {
       const source = buffer.toString()
       return source.replace(/\s*$/, '\n')
     } catch (err) {
-      if (!err.token) {
-        throw err
+      if (this.filename) {
+        err.message += ` in file ${this.filename}`
       }
-      this.syntaxError(err)
+
+      throw err
     }
   }
 }
