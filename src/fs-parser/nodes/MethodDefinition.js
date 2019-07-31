@@ -58,6 +58,10 @@ class MethodDefinition extends Node {
       this.kind = next.value
     }
 
+    if (parser.match('operator [delete, void, typeof]')) {
+      parser.swapNode('identifier')
+    }
+
     this.key = parser.nextRealNode(this)
     if (this.key.type === 'Identifier' && this.key.name === 'constructor') {
       this.kind = 'constructor'
