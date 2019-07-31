@@ -174,7 +174,7 @@ class NodeMapping {
   resolve (node, tokenBuffer, scope) {
     const definition = this.nodeMapping.find((mapping, index) => {
       // console.log('FIND', scope.type, mapping.name, node.type)
-      if (!mapping.allowNested && (mapping.name === node.type || mapping.name === scope.type)) {
+      if (!mapping.allowNested && (mapping.name === node.type || (scope && mapping.name === scope.type))) {
         return false
       }
 
@@ -183,11 +183,11 @@ class NodeMapping {
       }
 
       // console.log('MAPPINGTYPE', scope)
-      return (!mapping.scopes && mapping.name) || mapping.scopes[scope.type] || mapping.name
+      return (!mapping.scopes && mapping.name) || (scope && mapping.scopes[scope.type]) || mapping.name
     })
 
     if (definition) {
-      if (definition.scopes && definition.scopes[scope.type]) {
+      if (definition.scopes && scope && definition.scopes[scope.type]) {
         return definition.scopes[scope.type]
       }
 
