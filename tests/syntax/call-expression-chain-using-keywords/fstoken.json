@@ -1,0 +1,28 @@
+[
+  { "type": "identifier", "value": "foo" },
+  { "type": "punctuator", "value": "(" },
+  { "type": "literal", "value": "'test'" },
+  { "type": "punctuator", "value": ")" },
+  { "type": "indention", "value": 1 },
+  { "type": "punctuator", "value": "." },
+  { "type": "operator", "value": "delete" },
+  { "type": "punctuator", "value": "(" },
+  { "type": "literal", "value": "'coconut'" },
+  { "type": "punctuator", "value": ")" },
+  { "type": "indention", "value": 1 },
+  { "type": "punctuator", "value": "." },
+  { "type": "identifier", "value": "call" },
+  { "type": "punctuator", "value": "(" },
+  { "type": "numeric", "value": "1328" },
+  { "type": "punctuator", "value": "," },
+  { "type": "punctuator", "value": "{" },
+  { "type": "indention", "value": 2 },
+  { "type": "identifier", "value": "bar" },
+  { "type": "punctuator", "value": ":" },
+  { "type": "literal", "value": "'bla'" },
+  { "type": "indention", "value": 0 },
+  { "type": "punctuator", "value": "}" },
+  { "type": "punctuator", "value": ")" },
+  { "type": "indention", "value": 0 }
+
+]

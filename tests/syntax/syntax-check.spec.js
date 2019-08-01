@@ -60,7 +60,7 @@ describe('Firescript Syntax Check', () => {
 
           // inspect.print(fsast)
           inspect(res).isObject()
-          inspect(res).hasProps(fsast)
+          inspect(res).isEql(fsast)
         })
 
         it(`transpile FS-AST into JS`, () => {

@@ -1,0 +1,82 @@
+[
+  {
+    "type": "identifier",
+    "value": "this"
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "foo"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "identifier",
+    "value": "req"
+  },
+  {
+    "type": "punctuator",
+    "value": ","
+  },
+  {
+    "type": "identifier",
+    "value": "res"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "operator",
+    "value": "delete"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "literal",
+    "value": "'coconut'"
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "punctuator",
+    "value": "."
+  },
+  {
+    "type": "identifier",
+    "value": "call"
+  },
+  {
+    "type": "punctuator",
+    "value": "("
+  },
+  {
+    "type": "punctuator",
+    "value": ")"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

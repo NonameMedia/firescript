@@ -1,0 +1,63 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                        "type": "CallExpression",
+                        "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                                "type": "CallExpression",
+                                "callee": {
+                                    "type": "MemberExpression",
+                                    "computed": false,
+                                    "object": {
+                                        "type": "ThisExpression"
+                                    },
+                                    "property": {
+                                        "type": "Identifier",
+                                        "name": "foo"
+                                    }
+                                },
+                                "arguments": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "req"
+                                    },
+                                    {
+                                        "type": "Identifier",
+                                        "name": "res"
+                                    }
+                                ]
+                            },
+                            "property": {
+                                "type": "Identifier",
+                                "name": "delete"
+                            }
+                        },
+                        "arguments": [
+                            {
+                                "type": "Literal",
+                                "value": "coconut",
+                                "raw": "'coconut'"
+                            }
+                        ]
+                    },
+                    "property": {
+                        "type": "Identifier",
+                        "name": "call"
+                    }
+                },
+                "arguments": []
+            }
+        }
+    ],
+    "sourceType": "module"
+}

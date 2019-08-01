@@ -1,0 +1,96 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "ArrowFunctionExpression",
+        "id": null,
+        "params": [],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "computed": false,
+                      "object": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "foo"
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": "test",
+                            "raw": "'test'"
+                          }
+                        ]
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "delete"
+                      }
+                    },
+                    "arguments": [
+                      {
+                        "type": "Literal",
+                        "value": "coconut",
+                        "raw": "'coconut'"
+                      }
+                    ]
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "call"
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Literal",
+                    "value": 1328,
+                    "raw": "1328"
+                  },
+                  {
+                    "type": "ObjectExpression",
+                    "properties": [
+                      {
+                        "type": "Property",
+                        "key": {
+                          "type": "Identifier",
+                          "name": "bar"
+                        },
+                        "computed": false,
+                        "value": {
+                          "type": "Literal",
+                          "value": "bla",
+                          "raw": "'bla'"
+                        },
+                        "kind": "init",
+                        "method": false,
+                        "shorthand": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "generator": false,
+        "expression": false,
+        "async": false
+      }
+    }
+  ]
+}
