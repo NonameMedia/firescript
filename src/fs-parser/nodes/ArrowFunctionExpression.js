@@ -49,6 +49,12 @@ class ArrowFunctionExpression extends Node {
 
     parser.skipNext()
     this.body = parser.createNode('BlockStatement')
+
+    if (this.params.length !== this.fsParamTypings.length) {
+      this.fsParamTypings = this.params.map((item) => {
+        return parser.createNode('FirescriptTyping', 'any')
+      })
+    }
   }
 
   resolve (ctx) {

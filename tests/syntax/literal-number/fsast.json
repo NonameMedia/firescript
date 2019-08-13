@@ -17,10 +17,7 @@
             "raw": "123",
             "value": 123
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
       ]
     }

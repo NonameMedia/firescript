@@ -156,6 +156,7 @@ definition:
     scopes:
       'ClassBody': 'MethodDefinition'
       'MethodDefinition': 'Identifier'
+      'MemberExpression': 'Identifier'
 
   'operator [+,-,~,!,delete,void,typeof]':
     name: 'UnaryExpression'

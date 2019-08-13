@@ -8,5 +8,6 @@
     "type": "Literal",
     "raw": "'bla'",
     "value": "bla"
-  }
+  },
+  "fsTyping": null
 }

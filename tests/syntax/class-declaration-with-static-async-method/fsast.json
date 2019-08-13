@@ -56,8 +56,7 @@
               "generator": false
             },
             "kind": "constructor",
-            "static": false,
-            "async": false
+            "static": false
           },
           {
             "type": "MethodDefinition",
@@ -102,10 +101,7 @@
                             "arguments": []
                           }
                         },
-                        "fsTyping": {
-                          "type": "FirescriptTyping",
-                          "name": "any"
-                        }
+                        "fsTyping": null
                       }
                     ]
                   },
@@ -123,8 +119,7 @@
               "generator": false
             },
             "kind": "method",
-            "static": true,
-            "async": true
+            "static": true
           }
         ]
       },

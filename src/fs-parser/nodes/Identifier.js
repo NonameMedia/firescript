@@ -4,6 +4,10 @@ class Identifier extends Node {
   constructor (parser) {
     super(parser)
 
+    if (parser.match('operator [delete, void, instanceof]')) {
+      parser.swapToken('identifier')
+    }
+
     if (!parser.match('identifier')) {
       this.syntaxError('Unexpected Token! Identifier expected')
     }

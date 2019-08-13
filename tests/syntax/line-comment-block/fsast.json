@@ -1,47 +1,47 @@
 {
-    "type": "Program",
-    "body": [
-        {
-            "type": "FunctionDeclaration",
-            "id": {
-                "type": "Identifier",
-                "name": "foo"
+  "type": "Program",
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "foo"
+      },
+      "params": [],
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ReturnStatement",
+            "argument": {
+              "type": "Literal",
+              "value": "foo",
+              "raw": "'foo'"
             },
-            "params": [],
-            "body": {
-                "type": "BlockStatement",
-                "body": [
-                    {
-                        "type": "ReturnStatement",
-                        "argument": {
-                            "type": "Literal",
-                            "value": "foo",
-                            "raw": "'foo'"
-                        },
-                        "leadingComments": [
-                            {
-                                "type": "Line",
-                                "value": " Returns foo"
-                            },
-                            {
-                                "type": "Line",
-                                "value": " End of comment"
-                            }
-                        ]
-                    }
-                ]
-            },
-            "generator": false,
-            "expression": false,
-            "async": false,
-            "fsParamTypings": [],
             "leadingComments": [
-                {
-                    "type": "Line",
-                    "value": " A function"
-                }
+              {
+                "type": "Line",
+                "value": " Returns foo"
+              },
+              {
+                "type": "Line",
+                "value": " End of comment"
+              }
             ]
+          }
+        ]
+      },
+      "generator": false,
+      "expression": false,
+      "async": false,
+      "fsParamTypings": [],
+      "leadingComments": [
+        {
+          "type": "Line",
+          "value": " A function"
         }
-    ],
-    "sourceType": "module"
+      ]
+    }
+  ],
+  "sourceType": "module"
 }

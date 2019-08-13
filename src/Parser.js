@@ -164,7 +164,6 @@ class Parser {
   }
 
   showNextToken () {
-    // this.fillBuffer(1)
     return this.tokenBuffer[0]
   }
 
@@ -194,6 +193,10 @@ class Parser {
 
       if (mapNodeName === '$origin') {
         return node
+      }
+
+      if (mapNodeName === '$last') {
+        return mapNode
       }
 
       const MapNode = require(path.join(this.confDir, `nodes/${mapNodeName}`))
@@ -600,21 +603,38 @@ class Parser {
     console.log(this.tokenBuffer.slice(0, 5))
   }
 
+  printNext (msg) {
+    if (msg) {
+      console.log(msg)
+    }
+
+    const token = this.showNextToken()
+    if (!token) {
+      console.log('> buffer end!!')
+      return
+    }
+
+    console.log(`> ${token.type} ${token.value}, ind ${token.indention} buffer len ${this.tokenBuffer.length}`)
+  }
+
   walkScope () {
     let scopeIndention = this.tokenBuffer.getIndention()
     let scopeEnd = null
+    let isInlineScope = true
+    // console.log('ENTER SCOPE', scopeEnd, scopeIndention, this.showNextToken())
 
     if (this.match('punctuator [{,[,(]')) {
       const token = this.nextToken()
       scopeEnd = this.scopeDelimiter[token.value]
       scopeIndention = null
+      isInlineScope = false
     }
     // console.log('INITIAL INDENTION', scopeIndention)
-    // console.log('ENTER SCOPE', scopeEnd, scopeIndention, this.showNextToken())
 
     if (this.match('indention')) {
       const token = this.nextToken()
       scopeIndention = token.value
+      isInlineScope = false
     }
 
     return {
@@ -622,6 +642,11 @@ class Parser {
         return {
           next: () => {
             if (this.match('indention')) {
+              if (isInlineScope) {
+                // console.log('INLINE SCOPE END')
+                return { done: true, value: this }
+              }
+
               const token = this.showNextToken()
               if (scopeIndention === null) {
                 scopeIndention = token.value
@@ -684,8 +709,8 @@ class Parser {
     }
   }
 
-  swapNode (ttokenType) {
-    this.tokenBuffer[0].type = ttokenType
+  swapToken (tokenType) {
+    this.tokenBuffer[0].type = tokenType
   }
 }
 

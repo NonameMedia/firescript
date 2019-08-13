@@ -10,8 +10,8 @@ class ClassBody extends Node {
       this.syntaxError('Unexpected token')
     }
 
-    const token = parser.nextToken()
-    this.indention = token.value
+    // const token = parser.nextToken()
+    // this.indention = token.value
 
     for (const scope of parser.walkScope()) {
       const node = scope.nextNode(this)

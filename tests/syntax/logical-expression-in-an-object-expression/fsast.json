@@ -49,10 +49,7 @@
               }
             ]
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
       ]
     }

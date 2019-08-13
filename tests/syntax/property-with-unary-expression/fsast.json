@@ -35,7 +35,8 @@
                 "shorthand": false
               }
             ]
-          }
+          },
+          "fsTyping": null
         }
       ],
       "kind": "const"

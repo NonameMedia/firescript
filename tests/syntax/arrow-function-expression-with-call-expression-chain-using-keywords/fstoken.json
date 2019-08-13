@@ -11,7 +11,7 @@
   { "type": "punctuator", "value": "." },
   { "type": "operator", "value": "delete" },
   { "type": "punctuator", "value": "(" },
-  { "type": "literal", "value": "'/coconut'" },
+  { "type": "literal", "value": "'coconut'" },
   { "type": "punctuator", "value": ")" },
   { "type": "indention", "value": 2 },
   { "type": "punctuator", "value": "." },

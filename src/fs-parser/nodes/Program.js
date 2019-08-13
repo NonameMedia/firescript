@@ -59,6 +59,10 @@ class Program extends Node {
 
       if (node.type === 'Comment') {
         comments.push(node)
+        if (parser.match('indention')) {
+          parser.skipNext()
+        }
+
         continue
       }
 

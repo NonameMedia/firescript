@@ -1,0 +1,5 @@
+switch type
+  case 'fs-str'
+    log 'string'
+  default
+    log 'any'

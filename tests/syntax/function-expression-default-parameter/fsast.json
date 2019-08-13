@@ -28,7 +28,8 @@
                 "right": {
                   "type": "ObjectExpression",
                   "properties": []
-                }
+                },
+                "operator": "="
               }
             ],
             "fsParamTypings": [
@@ -53,10 +54,7 @@
             "expression": false,
             "generator": false
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
       ]
     }

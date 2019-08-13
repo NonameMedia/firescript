@@ -21,7 +21,6 @@ mapping:
     name: 'CallExpression'
     allowNested: true
     scopes:
-      'Property': 'FunctionExpression'
       'NewExpression': '$origin'
   'Identifier > punctuator ":"':
     scopes:
@@ -35,7 +34,7 @@ mapping:
     name: 'CallExpression'
     allowNested: true
     scopes:
-      'NewExpression': '$origin'
+      'NewExpression': '$last'
   'CallExpression > punctuator "."':
     name: 'MemberExpression'
   'CallExpression > indention ">=" > punctuator "."':
@@ -50,12 +49,16 @@ mapping:
       'FunctionExpression': 'AssignmentPattern'
   'operator [instanceof,in,+,-,*,/,%,**,|,^,&,==,!=,===,!==,<,>,>=,<=,<<,>>,>>>]':
     name: 'BinaryExpression'
+    scopes:
+      'UnaryExpression': '$origin'
   'operator [++,--]':
     name: 'UpdateExpression'
   'operator [||,&&]':
     name: 'LogicalExpression'
-    allowNested: true
+    allowNested: false
   'punctuator "?"':
     name: 'ConditionalExpression'
+    scopes:
+      'BinaryExpression': '$origin'
   'FirescriptGrouping > operator "=>"':
     name: 'ArrowFunctionExpression'

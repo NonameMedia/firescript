@@ -28,6 +28,10 @@
                 "name": "done"
               }
             ],
+            "fsParamTypings": [{
+              "type": "FirescriptTyping",
+              "name": "any"
+            }],
             "body": {
               "type": "BlockStatement",
               "body": [

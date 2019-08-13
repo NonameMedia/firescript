@@ -15,8 +15,6 @@ class SwitchStatement extends Node {
       this.syntaxError('Unexpected token')
     }
 
-    parser.skipNext()
-
     this.cases = []
     let hasDefault = false
 

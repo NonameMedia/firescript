@@ -9,7 +9,8 @@
           "type": "Identifier",
           "name": "key"
         },
-        "init": null
+        "init": null,
+        "fsTyping": null
       }
     ],
     "kind": "const"

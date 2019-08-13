@@ -1,34 +1,35 @@
 {
-    "type": "Program",
-    "body": [
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
         {
-            "type": "VariableDeclaration",
-            "declarations": [
-                {
-                    "type": "VariableDeclarator",
-                    "id": {
-                        "type": "Identifier",
-                        "name": "res"
-                    },
-                    "init": {
-                        "type": "Literal",
-                        "value": "bla",
-                        "raw": "'bla'"
-                    }
-                }
-            ],
-            "kind": "const",
-            "leadingComments": [
-                {
-                    "type": "Block",
-                    "value": "\n variable comment\n",
-                    "range": [
-                        0,
-                        23
-                    ]
-                }
-            ]
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "res"
+          },
+          "init": {
+            "type": "Literal",
+            "value": "bla",
+            "raw": "'bla'"
+          },
+          "fsTyping": null
         }
-    ],
-    "sourceType": "script"
+      ],
+      "kind": "const",
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "\n variable comment\n",
+          "range": [
+            0,
+            23
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceType": "script"
 }

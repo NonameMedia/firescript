@@ -48,7 +48,8 @@
               }
             },
             "arguments": []
-          }
+          },
+          "fsTyping": null
         }
       ],
       "kind": "const"

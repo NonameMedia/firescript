@@ -25,7 +25,8 @@
                 "value": 1,
                 "raw": "1"
               }
-            }
+            },
+            "fsTyping": null
           }
         ],
         "kind": "let"
@@ -55,28 +56,13 @@
         "type": "BlockStatement",
         "body": [
           {
-            "type": "ExpressionStatement",
-            "expression": {
-              "type": "CallExpression",
-              "callee": {
-                "type": "MemberExpression",
-                "computed": false,
-                "object": {
-                  "type": "Identifier",
-                  "name": "console"
-                },
-                "property": {
-                  "type": "Identifier",
-                  "name": "log"
-                }
-              },
-              "arguments": [
-                {
-                  "type": "Identifier",
-                  "name": "i"
-                }
-              ]
-            }
+            "type": "FirescriptLogStatement",
+            "arguments": [
+              {
+                "type": "Identifier",
+                "name": "i"
+              }
+            ]
           }
         ]
       }

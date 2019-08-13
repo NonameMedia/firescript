@@ -31,7 +31,8 @@
               "value": null,
               "raw": "null"
             }
-          }
+          },
+          "fsTyping": null
         }
       ],
       "kind": "const"

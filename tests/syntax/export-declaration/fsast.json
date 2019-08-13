@@ -17,10 +17,7 @@
             "raw": "'Banana'",
             "value": "Banana"
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
       ]
     },

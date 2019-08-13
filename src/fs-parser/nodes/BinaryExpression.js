@@ -11,7 +11,7 @@ class BinaryExpression extends Node {
       if (parser.match('operator')) {
         this.syntaxError('Unexpected token!')
       }
-      this.left = parser.nextRealNode(this)
+      this.left = parser.nextNode(this)
     }
 
     const token = parser.nextToken()

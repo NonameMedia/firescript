@@ -69,47 +69,8 @@ class VariableDeclarator extends Node {
       }
 
       this.isAllowedNode(this.init, ALLOWED_CHILDS)
-      // if (parser.expect('indention')) {
-      //   if (this.isObjectExpression(tokenStack)) {
-      //     this.init = this.createObjectExpressionNode(tokenStack)
-      //   // }
-      //   // const objectExpressionNode = this.tryObjectExpression(tokenStack)
-      //   // if (objectExpressionNode) {
-      //   //   this.init = objectExpressionNode
-      //   } else {
-      //     const arrayExpressionNode = this.tryArrayExpression(tokenStack)
-      //     if (arrayExpressionNode) {
-      //       this.init = arrayExpressionNode
-      //     } else {
-      //       this.syntaxError('Unexpected token!', tokenStack.current())
-      //     }
-      //   }
-      // } else {
-      //   this.init = parser.nextNode(this)
-      //   this.isAllowedNode(this.init, ALLOWED_CHILDS)
-      // }
     }
   }
-
-  // isForLoop () {
-  //   return (
-  //     this.tokenStack.lookForward('identifier', 'in') && this.parent.parent.type === 'ForInStatement'
-  //   ) || (
-  //     this.tokenStack.lookForward('identifier', 'of') && this.parent.parent.type === 'ForOfStatement'
-  //   )
-  // }
-  //
-  // tryObject (tokenStack) {
-  //   return tokenStack.expect('indention') &&
-  //     tokenStack.lookForward('identifier', null, 1) &&
-  //     tokenStack.lookForward('punctuator', ':', 2)
-  // }
-  //
-  // tryArray (tokenStack) {
-  //   return tokenStack.expect('indention') &&
-  //     tokenStack.lookForward('identifier', null, 1) &&
-  //     tokenStack.lookForward('punctuator', ':', 2)
-  // }
 
   resolve (ctx) {
     return this.createJSON(ctx, {

@@ -4,7 +4,6 @@
   "body": [
     {
       "type": "VariableDeclaration",
-      "kind": "const",
       "declarations": [
         {
           "type": "VariableDeclarator",
@@ -21,6 +20,7 @@
                   "type": "Identifier",
                   "name": "bar"
                 },
+                "computed": false,
                 "value": {
                   "type": "ObjectExpression",
                   "properties": [
@@ -30,31 +30,28 @@
                         "type": "Identifier",
                         "name": "bla"
                       },
+                      "computed": false,
                       "value": {
                         "type": "Literal",
-                        "raw": "1",
-                        "value": 1
+                        "value": 1,
+                        "raw": "1"
                       },
-                      "shorthand": false,
-                      "computed": false,
                       "kind": "init",
-                      "method": false
+                      "method": false,
+                      "shorthand": false
                     }
                   ]
                 },
-                "shorthand": false,
-                "computed": false,
                 "kind": "init",
-                "method": false
+                "method": false,
+                "shorthand": false
               }
             ]
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
-      ]
+      ],
+      "kind": "const"
     }
   ]
 }

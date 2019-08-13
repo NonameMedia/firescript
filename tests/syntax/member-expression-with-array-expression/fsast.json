@@ -35,7 +35,8 @@
                 "name": "arr"
               }
             ]
-          }
+          },
+          "fsTyping": null
         }
       ],
       "kind": "const"

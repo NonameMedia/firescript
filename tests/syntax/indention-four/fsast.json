@@ -65,8 +65,7 @@
               "generator": false
             },
             "kind": "constructor",
-            "static": false,
-            "async": false
+            "static": false
           },
           {
             "type": "MethodDefinition",
@@ -129,8 +128,7 @@
               "generator": false
             },
             "kind": "method",
-            "static": false,
-            "async": false
+            "static": false
           }
         ]
       },

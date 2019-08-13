@@ -4,7 +4,6 @@
   "body": [
     {
       "type": "VariableDeclaration",
-      "kind": "const",
       "declarations": [
         {
           "type": "VariableDeclarator",
@@ -13,16 +12,19 @@
             "name": "num"
           },
           "init": {
-            "type": "Literal",
-            "raw": "-123",
-            "value": -123
+            "type": "UnaryExpression",
+            "operator": "-",
+            "argument": {
+              "type": "Literal",
+              "value": 123,
+              "raw": "123"
+            },
+            "prefix": true
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
-      ]
+      ],
+      "kind": "const"
     }
   ]
 }

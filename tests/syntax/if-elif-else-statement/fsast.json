@@ -12,29 +12,14 @@
         "type": "BlockStatement",
         "body": [
           {
-            "type": "ExpressionStatement",
-            "expression": {
-              "type": "CallExpression",
-              "callee": {
-                "type": "MemberExpression",
-                "computed": false,
-                "object": {
-                  "type": "Identifier",
-                  "name": "console"
-                },
-                "property": {
-                  "type": "Identifier",
-                  "name": "log"
-                }
-              },
-              "arguments": [
-                {
-                  "type": "Literal",
-                  "value": "Foo",
-                  "raw": "'Foo'"
-                }
-              ]
-            }
+            "type": "FirescriptLogStatement",
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "Foo",
+                "raw": "'Foo'"
+              }
+            ]
           }
         ]
       },
@@ -48,29 +33,14 @@
           "type": "BlockStatement",
           "body": [
             {
-              "type": "ExpressionStatement",
-              "expression": {
-                "type": "CallExpression",
-                "callee": {
-                  "type": "MemberExpression",
-                  "computed": false,
-                  "object": {
-                    "type": "Identifier",
-                    "name": "console"
-                  },
-                  "property": {
-                    "type": "Identifier",
-                    "name": "log"
-                  }
-                },
-                "arguments": [
-                  {
-                    "type": "Literal",
-                    "value": "Bar",
-                    "raw": "'Bar'"
-                  }
-                ]
-              }
+              "type": "FirescriptLogStatement",
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "value": "Bar",
+                  "raw": "'Bar'"
+                }
+              ]
             }
           ]
         },
@@ -78,29 +48,14 @@
           "type": "BlockStatement",
           "body": [
             {
-              "type": "ExpressionStatement",
-              "expression": {
-                "type": "CallExpression",
-                "callee": {
-                  "type": "MemberExpression",
-                  "computed": false,
-                  "object": {
-                    "type": "Identifier",
-                    "name": "console"
-                  },
-                  "property": {
-                    "type": "Identifier",
-                    "name": "log"
-                  }
-                },
-                "arguments": [
-                  {
-                    "type": "Literal",
-                    "value": "Bla",
-                    "raw": "'Bla'"
-                  }
-                ]
-              }
+              "type": "FirescriptLogStatement",
+              "arguments": [
+                {
+                  "type": "Literal",
+                  "value": "Bla",
+                  "raw": "'Bla'"
+                }
+              ]
             }
           ]
         }

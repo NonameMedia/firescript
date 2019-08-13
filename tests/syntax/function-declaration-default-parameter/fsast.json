@@ -18,7 +18,8 @@
           "right": {
             "type": "ObjectExpression",
             "properties": []
-          }
+          },
+          "operator": "="
         }
       ],
       "fsParamTypings": [{

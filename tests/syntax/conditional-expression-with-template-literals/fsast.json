@@ -71,7 +71,8 @@
                 }
               ]
             }
-          }
+          },
+          "fsTyping": null
         }
       ],
       "kind": "const"

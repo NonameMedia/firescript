@@ -3,33 +3,18 @@
   "sourceType": "module",
   "body": [
     {
-      "type": "ExpressionStatement",
-      "expression": {
-        "type": "CallExpression",
-        "callee": {
-          "type": "MemberExpression",
-          "computed": false,
-          "object": {
-            "type": "Identifier",
-            "name": "console"
-          },
-          "property": {
-            "type": "Identifier",
-            "name": "log"
-          }
+      "type": "FirescriptLogStatement",
+      "arguments": [
+        {
+          "type": "Literal",
+          "raw": "'I like bananas!'",
+          "value": "I like bananas!"
         },
-        "arguments": [
-          {
-            "type": "Literal",
-            "value": "I like bananas!",
-            "raw": "'I like bananas!'"
-          },
-          {
-            "type": "Identifier",
-            "name": "foo"
-          }
-        ]
-      }
+        {
+          "type": "Identifier",
+          "name": "foo"
+        }
+      ]
     },
     {
       "type": "IfStatement",
@@ -41,29 +26,14 @@
         "type": "BlockStatement",
         "body": [
           {
-            "type": "ExpressionStatement",
-            "expression": {
-              "type": "CallExpression",
-              "callee": {
-                "type": "MemberExpression",
-                "computed": false,
-                "object": {
-                  "type": "Identifier",
-                  "name": "console"
-                },
-                "property": {
-                  "type": "Identifier",
-                  "name": "log"
-                }
-              },
-              "arguments": [
-                {
-                  "type": "Literal",
-                  "value": "foo",
-                  "raw": "'foo'"
-                }
-              ]
-            }
+            "type": "FirescriptLogStatement",
+            "arguments": [
+              {
+                "type": "Literal",
+                "raw": "'foo'",
+                "value": "foo"
+              }
+            ]
           }
         ]
       },

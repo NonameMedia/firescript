@@ -25,6 +25,7 @@
             "type": "ArrowFunctionExpression",
             "id": null,
             "params": [],
+            "fsParamTypings": [],
             "body": {
               "type": "BlockStatement",
               "body": []

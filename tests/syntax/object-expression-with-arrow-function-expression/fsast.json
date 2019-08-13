@@ -25,6 +25,7 @@
                   "type": "ArrowFunctionExpression",
                   "id": null,
                   "params": [],
+                  "fsParamTypings": [],
                   "body": {
                     "type": "BlockStatement",
                     "body": [
@@ -49,10 +50,7 @@
               }
             ]
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "fsTyping": null
         }
       ]
     }

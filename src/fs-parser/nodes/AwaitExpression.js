@@ -26,8 +26,7 @@ class AwaitExpression extends Node {
   resolve (ctx) {
     return this.createJSON(ctx, {
       type: 'AwaitExpression',
-      argument: this.argument.resolve(ctx),
-      delegate: false
+      argument: this.argument.resolve(ctx)
     })
   }
 }
