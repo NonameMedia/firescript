@@ -1,5 +1,6 @@
 node_modules/
-log/
+logs/
 npm-debug.log
 tmp/
+dist/
 package-lock.json

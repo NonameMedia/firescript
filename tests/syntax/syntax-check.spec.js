@@ -41,6 +41,7 @@ describe('Firescript Syntax Check', () => {
         const fstoken = require(`${testCase.path}/fstoken.json`)
         const fsast = require(`${testCase.path}/fsast.json`)
         const fsconf = inspect.readJSON(`${testCase.path}/fsconf.json`)
+        const defaultConf = require('../../conf/defaultConf.json')
         const jsresult = inspect.readFile(`${testCase.path}/result.js`)
 
         it(`tokenize .fire script`, () => {
@@ -64,7 +65,7 @@ describe('Firescript Syntax Check', () => {
 
         it(`transpile FS-AST into JS`, () => {
           const transpiler = new JSTranspiler({
-            features: fsconf
+            features: Object.assign({}, defaultConf.features, fsconf)
           })
           const res = transpiler.transpile(fsast)
 

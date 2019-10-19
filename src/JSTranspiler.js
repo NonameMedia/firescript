@@ -1,27 +1,20 @@
 const Program = require('./js-elements/Program')
 const SourceBuffer = require('./SourceBuffer')
-const FSConfig = require('./utils/FSConfig')
 const ASTTransformer = require('./ASTTransformer')
 
 class JSTranspiler {
-  constructor (opts) {
-    this.config = new FSConfig()
+  constructor (opts = {}) {
     this.filename = opts.filename
-
-    if (opts && opts.features) {
-      this.config.merge({
-        features: opts.features
-      })
-    }
+    this.featureConf = opts.features
   }
 
   transpile (ast) {
     try {
-      const astTransformer = new ASTTransformer(this.config.getConf('features'))
+      const astTransformer = new ASTTransformer(this.featureConf)
       astTransformer.load('js-transformations')
 
       const tast = astTransformer.transform(ast)
-      const jse = new Program(tast, this.config.getConf('features'))
+      const jse = new Program(tast, this.featureConf)
 
       const buffer = new SourceBuffer()
       jse.compile(buffer)

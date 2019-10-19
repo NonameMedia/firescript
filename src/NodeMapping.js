@@ -1,17 +1,13 @@
-const superconf = require('superconf')
-
 class NodeMapping {
   constructor (opts) {
     opts = opts || {}
 
-    this.confDir = opts.confDir
+    this.confDir = opts.confDir.replace(/\/$/, '')
     if (!this.confDir) {
       throw new Error('The Parser.confDir parameter must be set!')
     }
 
-    const nodeMapping = superconf('nodeMapping', {
-      cwd: this.confDir
-    })
+    const nodeMapping = require(`${this.confDir}/nodeMapping.js`)
 
     this.nodeMapping = this.parseMapping(nodeMapping.mapping)
   }

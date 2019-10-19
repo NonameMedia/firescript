@@ -1,5 +1,3 @@
-const path = require('path')
-
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 const NodeMapping = require('./NodeMapping')
@@ -168,7 +166,7 @@ class Parser {
   }
 
   createNode (nodeName, childNode) {
-    const Node = require(path.join(this.confDir, `nodes/${nodeName}`))
+    const Node = require(`${this.confDir}/nodes/${nodeName}.js`)
     const node = new Node(this, childNode)
 
     return node
@@ -199,7 +197,7 @@ class Parser {
         return mapNode
       }
 
-      const MapNode = require(path.join(this.confDir, `nodes/${mapNodeName}`))
+      const MapNode = require(`${this.confDir}/nodes/${mapNodeName}.js`)
       mapNode = new MapNode(this, mapNode)
       // console.log('MAPNODE', mapNode.type, ' => ', mapNodeName)
     }
@@ -222,6 +220,10 @@ class Parser {
 
             while (true) {
               end.test(self.source)
+              if (end.lastIndex < nextIndex) {
+                throw new Error('Unexpected EOF reached')
+              }
+
               nextIndex = end.lastIndex
               if (self.source.charAt(nextIndex - 1) === item.escape) {
                 continue

@@ -38,8 +38,21 @@ module.exports = {
       ast = input
     }
 
-    const transpiler = opts.type === 'js' ? new FirescriptTranspiler(opts) : new JSTranspiler(opts)
-    return transpiler.transpile(ast)
+    if (opts.type === 'js') {
+      const transpiler = new FirescriptTranspiler(opts)
+      return transpiler.transpile(ast)
+    } else {
+      const fsConf = new FSConfig()
+      if (opts && opts.features) {
+        fsConf.merge({
+          features: opts.features
+        })
+      }
+
+      opts.features = fsConf.getConf('features')
+      const transpiler = new JSTranspiler(opts)
+      return transpiler.transpile(ast)
+    }
   },
   parse (input, opts) {
     opts = opts || {}

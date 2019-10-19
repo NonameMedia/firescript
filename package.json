@@ -30,7 +30,8 @@
     "firescript-test": "^0.8.1",
     "inspect.js": "^1.11.8",
     "shell-inspect": "1.2.0",
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "superjoin": "^0.5.1"
   },
   "dependencies": {
     "colorfy": "^2.0.4",

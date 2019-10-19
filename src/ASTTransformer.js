@@ -1,5 +1,3 @@
-const path = require('path')
-const superimport = require('superimport')
 const ASTCreator = require('./utils/ASTCreator')
 
 class ASTTransformer {
@@ -21,8 +19,25 @@ class ASTTransformer {
   }
 
   load (dirName) {
-    const transformations = superimport.importAll(path.join(__dirname, `./${dirName}`))
-    transformations.forEach((t) => t(this))
+    const transformations = [
+      'classDeclaration',
+      'exportAllDeclaration',
+      'exportDeclaration',
+      'functionDeclaration',
+      'functionExpression',
+      'functionParamTyping',
+      'importDeclaration',
+      'logStatement',
+      'programm',
+      'regexp',
+      'templateLiteral',
+      'variableTyping'
+    ]
+
+    transformations.forEach((t) => {
+      const fn = require(`./${dirName}/${t}.js`)
+      fn(this)
+    })
   }
 
   test (fn) {

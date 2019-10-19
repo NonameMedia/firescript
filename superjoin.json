@@ -1,5 +1,7 @@
 {
   "name": "firescript",
-  "main": "src/app.js",
-  "output": "dist/firescript.js"
+  "main": "./src/web.js",
+  "output": "dist/firescript.js",
+  "noRequire": true,
+  "umd": "firescript"
 }

@@ -1,6 +1,6 @@
 const Node = require('./Node')
 
-class NullNode extends FirescriptNode {
+class NullNode extends Node {
   constructor (parser) {
     super(parser)
     this.type = 'Null'

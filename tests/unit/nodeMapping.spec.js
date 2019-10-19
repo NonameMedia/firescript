@@ -13,7 +13,7 @@ describe('Node mappings', () => {
       })
 
       inspect(nodeMapping).isEql({
-        confDir: path.join(__dirname, './fixtures/parser/'),
+        confDir: path.join(__dirname, './fixtures/parser'),
         nodeMapping: [{
           mapping: [{
             node: 'Identifier'

@@ -1,6 +1,6 @@
 const Node = require('./Node')
 
-class FirescriptSyntaxError extends FirescriptNode {
+class FirescriptSyntaxError extends Node {
   constructor (parser, error) {
     super(parser)
 

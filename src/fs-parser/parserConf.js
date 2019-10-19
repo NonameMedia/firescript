@@ -23,12 +23,13 @@ function escapeReg (reg) {
 }
 
 module.exports = {
-  confDir: __dirname,
+  confDir: './fs-parser',
   keyWords: KEYWORDS,
 
   matcher: [{
     type: 'template',
-    pattern: /((?<!\\)'.*?\$\{)|((?<!\\)\}.*?'|(\}.*?\$\{))/,
+    // pattern: /('(\\.|[^'])*\$\{)|(\}.*?'|(\}.*?\$\{))/,
+    pattern: /(('|\})(\\'|\\\$|[^('|\\$])*\$\{)|(\}[^']*')/,
     escape: '\\'
   }, {
     type: 'literal',

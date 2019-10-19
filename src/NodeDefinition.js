@@ -1,17 +1,13 @@
-const superconf = require('superconf')
-
 class NodeDefinition {
   constructor (opts) {
     opts = opts || {}
 
-    this.confDir = opts.confDir
+    this.confDir = opts.confDir.replace(/\/$/, '')
     if (!this.confDir) {
       throw new Error('The Parser.confDir parameter must be set!')
     }
 
-    const nodeDefinition = superconf('nodeDefinition', {
-      cwd: this.confDir
-    })
+    const nodeDefinition = require(`${this.confDir}/nodeDefinition.js`)
 
     this.nodeDefinition = this.parseDefinition(nodeDefinition.definition)
     this.keywords = nodeDefinition.keywords
