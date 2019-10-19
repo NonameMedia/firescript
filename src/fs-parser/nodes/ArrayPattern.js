@@ -15,6 +15,11 @@ class ArrayPattern extends Node {
 
     this.elements = []
 
+    if (parser.match('punctuator "]"')) {
+      parser.skipNext()
+      return
+    }
+
     for (const scope of parser.walkScope()) {
       const node = scope.nextNode(this)
       this.isAllowedNode(node, ALLOWED_ELEMENTS)

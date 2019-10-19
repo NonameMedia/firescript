@@ -6,6 +6,11 @@ class ObjectExpression extends Node {
 
     this.properties = []
 
+    if (parser.match('punctuator "}"')) {
+      parser.skipNext()
+      return
+    }
+
     for (const scope of parser.walkScope()) {
       const property = scope.createNode('Property')
       this.properties.push(property)
