@@ -90,26 +90,8 @@ class Parser {
    * @method  nextToken
    * @returns {[type]} [description]
    */
-  nextToken (skipBuffer) {
-    if (!skipBuffer && this.tokenBuffer.length) {
-      return this.tokenBuffer.shift()
-    }
-
-    let res = null
-    this.parserFuncs.find((fn) => {
-      res = fn(this)
-      return !!res
-    })
-
-    if (!res) {
-      if (this.index < this.length) {
-        throw new SyntaxError(`Unexpected token at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
-      }
-
-      return null
-    }
-
-    return res
+  nextToken () {
+    return this.tokenBuffer.shift()
   }
 
   nextNode (scope) {
@@ -128,16 +110,10 @@ class Parser {
   }
 
   skipNext () {
-    // this.fillBuffer(1)
     return this.tokenBuffer.shift()
   }
 
   resolveNodeName (scope) {
-    // const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
-    //   return Math.max(num, item.mapping.length)
-    // }, 0)
-    //
-    // const tokenBuffer = this.fillBuffer(bufferFillSize)
     return this.nodeDefinition.resolve(this.tokenBuffer, scope)
   }
 
@@ -174,13 +150,8 @@ class Parser {
 
   resolveMapping (node, scope) {
     let mapNode = node
-    // const bufferFillSize = this.nodeDefinition.nodeDefinition.reduce((num, item) => {
-    //   return Math.max(num, item.mapping.length)
-    // }, 0)
 
     while (true) {
-      // this.fillBuffer(bufferFillSize)
-
       // console.log('LOOKUP', mapNode.type, scope, this.tokenBuffer[0])
       const mapNodeName = this.nodeMapping.resolve(mapNode, this.tokenBuffer, scope)
       // console.log('RESULT', mapNodeName)
@@ -207,7 +178,7 @@ class Parser {
   }
 
   createMatcher (arr) {
-    return arr.map((item) => {
+    function makePattern (item) {
       if (item.begin) {
         return function matchRange (self) {
           const begin = new RegExp(item.begin.source || item.begin, 'y')
@@ -216,8 +187,18 @@ class Parser {
           if (begin.test(self.source)) {
             let value
             let nextIndex = begin.lastIndex
-            end.lastIndex = nextIndex
 
+            if (item.matcher) {
+              value = self.source.slice(self.index, nextIndex)
+              const token = self.createToken(item.type, value, nextIndex)
+              self.tokenBuffer.push(token)
+
+              const subMatcher = self.createMatcher(item.matcher)
+              self.fillBuffer(subMatcher)
+              nextIndex = self.index
+            }
+
+            end.lastIndex = nextIndex
             while (true) {
               end.test(self.source)
               if (end.lastIndex < nextIndex) {
@@ -233,8 +214,12 @@ class Parser {
               break
             }
 
-            return self.createToken(item.type, value, nextIndex)
+            const token = self.createToken(item.type, value, nextIndex)
+            self.tokenBuffer.push(token)
+            return true
           }
+
+          return false
         }
       } else {
         return function matchPattern (self) {
@@ -243,11 +228,25 @@ class Parser {
           reg.lastIndex = self.index
           const match = reg.exec(self.source)
 
-          if (match) {
-            return self.createToken(item.type, match[0], reg.lastIndex)
+          if (!match) {
+            return false
           }
+
+          const token = self.createToken(item.type, match[0], reg.lastIndex)
+          self.tokenBuffer.push(token)
+
+          if (item.matcher) {
+            const subMatcher = self.createMatcher(item.matcher)
+            self.fillBuffer(subMatcher)
+          }
+
+          return true
         }
       }
+    }
+
+    return arr.map((item) => {
+      return makePattern(item)
     })
   }
 
@@ -477,28 +476,36 @@ class Parser {
   // }
 
   /**
-   * Fills the token buffer with `numItems` items
+   * Fills the token buffer with token items
    *
-   * @param  {number} numItems Number of items the buffer should be filled with
    * @return {object} Returns the filled buffer
    */
-  fillBuffer (numItems) {
-    // for (let i = this.tokenBuffer.length; i < numItems; i++) {
-    //   const token = this.nextToken(true)
-    //   if (!token) {
-    //     break
-    //   }
-    //
-    //   this.tokenBuffer.push(token)
-    // }
-
+  fillBuffer (subMatch) {
+    subMatch = subMatch || this.parserFuncs
+    let lastIndex = null
     while (true) {
-      const token = this.nextToken(true)
-      if (!token) {
+      const res = subMatch.find((fn) => {
+        return fn(this)
+      })
+
+      if (!res) {
+        if (!subMatch && this.index < this.length) {
+          throw new SyntaxError(`Unexpected token at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
+        }
+
+        lastIndex = null
         break
       }
 
-      this.tokenBuffer.push(token)
+      if (this.index === this.length) {
+        break
+      }
+
+      if (lastIndex === this.index) {
+        throw new Error(`Parser stucks in a loop at index ${this.index}:${this.length}! at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
+      }
+
+      lastIndex = this.index
     }
 
     return this.tokenBuffer

@@ -27,10 +27,26 @@ module.exports = {
   keyWords: KEYWORDS,
 
   matcher: [{
+  //   type: 'template',
+  //   // pattern: /('(\\.|[^'])*\$\{)|(\}.*?'|(\}.*?\$\{))/,
+  //   pattern: /(('|\})(\\'|\\\$|[^('|\\$])*\$\{)|(\}[^']*')/,
+  //   escape: '\\'
+  // }, {
     type: 'template',
-    // pattern: /('(\\.|[^'])*\$\{)|(\}.*?'|(\}.*?\$\{))/,
-    pattern: /(('|\})(\\'|\\\$|[^('|\\$])*\$\{)|(\}[^']*')/,
-    escape: '\\'
+    pattern: /'[^']*?\$\{/,
+    matcher: [{
+      type: 'identifier',
+      pattern: /\w+/
+    }, {
+      type: 'template',
+      pattern: /\}.*?(\$\{|')/
+    }, {
+      type: 'punctuator',
+      pattern: new RegExp(PUNCTUATORS.map((reg) => escapeReg(reg)).join('|'))
+    }, {
+      type: 'operator',
+      pattern: new RegExp(OPERATORS.map((reg) => escapeReg(reg)).join('|'))
+    }]
   }, {
     type: 'literal',
     begin: '\'',
