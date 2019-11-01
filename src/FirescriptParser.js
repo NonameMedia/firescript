@@ -22,26 +22,18 @@ class FirescriptParser {
   }
 
   parse (source) {
-    try {
-      parserConf.indentionSize = this.indentionSize
-      parserConf.filename = this.filename
-      const parser = new Parser(parserConf)
-      parser.parse(source)
+    parserConf.indentionSize = this.indentionSize
+    parserConf.filename = this.filename
+    const parser = new Parser(parserConf)
+    parser.parse(source)
 
-      const ast = new Program(parser, this.sourceType)
-      const ctx = new ParserContext({
-        setLocation: this.setLocation,
-        setRange: this.setRange
-      })
+    const ast = new Program(parser, this.sourceType)
+    const ctx = new ParserContext({
+      setLocation: this.setLocation,
+      setRange: this.setRange
+    })
 
-      return ast.resolve(ctx)
-    } catch (err) {
-      if (!err.token) {
-        throw err
-      }
-
-      this.syntaxError(err)
-    }
+    return ast.resolve(ctx)
   }
 
   tokenize (source) {

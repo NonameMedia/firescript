@@ -1,6 +1,7 @@
 const TokenBuffer = require('./TokenBuffer')
 const NodeDefinition = require('./NodeDefinition')
 const NodeMapping = require('./NodeMapping')
+const FSError = require('./FSError').FSError
 
 class Parser {
   constructor (opts = {}) {
@@ -202,7 +203,7 @@ class Parser {
             while (true) {
               end.test(self.source)
               if (end.lastIndex < nextIndex) {
-                throw new Error('Unexpected EOF reached')
+                throw new FSError('Unexpected EOF reached')
               }
 
               nextIndex = end.lastIndex
@@ -347,7 +348,8 @@ class Parser {
     }
 
     const errorFile = this.filename ? ` in file ${this.filename}` : ''
-    throw new SyntaxError(`${msg} at line ${token.line} in column ${token.column}${errorFile}\n${this.sourcePreview(token)}`)
+    const fsErr = `${msg} at line ${token.line} in column ${token.column}${errorFile}\n${this.sourcePreview(token)}`
+    throw new FSError(fsErr)
   }
 
   getIdentifier () {
@@ -490,7 +492,7 @@ class Parser {
 
       if (!res) {
         if (!subMatch && this.index < this.length) {
-          throw new SyntaxError(`Unexpected token at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
+          throw new FSError(`Unexpected token at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
         }
 
         lastIndex = null
