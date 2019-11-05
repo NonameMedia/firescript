@@ -6,6 +6,25 @@ const Parser = require('../../src/Parser')
 const parserConf = require('../../src/fs-parser/parserConf')
 
 describe('Parser', () => {
+  describe('createMatcher', () => {
+    it('creates a matcher array', () => {
+      const arr = [{
+        type: 'foo',
+        pattern: /foo/
+      }, {
+        type: 'bar',
+        begin: /b/,
+        end: /r/
+      }]
+
+      const parser = new Parser(parserConf)
+      inspect(parser.createMatcher(arr)).isEql([
+        inspect.match.func,
+        inspect.match.func
+      ])
+    })
+  })
+
   describe('nextToken()', () => {
     let parser
 
