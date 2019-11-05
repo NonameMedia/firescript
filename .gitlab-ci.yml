@@ -25,6 +25,14 @@ Test Node 11:
   image: node:11
   <<: *test
 
+Test Node 12:
+  image: node:12
+  <<: *test
+
+Test Node 13:
+  image: node:13
+  <<: *test
+
 Publish:
   stage: publish
   only:
