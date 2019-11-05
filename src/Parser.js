@@ -13,19 +13,19 @@ class Parser {
     this.filename = opts.filename || null
 
     if (!this.confDir) {
-      throw new Error('The Parser.confDir parameter must be set!')
+      throw new FSError('The Parser.confDir parameter must be set!')
     }
 
     if (!this.matcherConf) {
-      throw new Error('The Parser.matcher parameter must be set!')
+      throw new FSError('The Parser.matcher parameter must be set!')
     }
 
     if (!this.keyWords) {
-      throw new Error('The Parser.keyWords parameter must be set!')
+      throw new FSError('The Parser.keyWords parameter must be set!')
     }
 
     if (!this.scopeDelimiter) {
-      throw new Error('The Parser.scopeDelimiter parameter must be set!')
+      throw new FSError('The Parser.scopeDelimiter parameter must be set!')
     }
 
     this.nodeDefinition = new NodeDefinition({
@@ -134,7 +134,6 @@ class Parser {
     }
 
     const node = this.createNode(nodeName, null, scope)
-    // console.log('NODE', node)
     return node
   }
 
@@ -153,11 +152,8 @@ class Parser {
     let mapNode = node
 
     while (true) {
-      // console.log('LOOKUP', mapNode.type, scope, this.tokenBuffer[0])
       const mapNodeName = this.nodeMapping.resolve(mapNode, this.tokenBuffer, scope)
-      // console.log('RESULT', mapNodeName)
       if (!mapNodeName) {
-        // console.log('BREAK')
         break
       }
 
@@ -171,10 +167,8 @@ class Parser {
 
       const MapNode = require(`${this.confDir}/nodes/${mapNodeName}.js`)
       mapNode = new MapNode(this, mapNode)
-      // console.log('MAPNODE', mapNode.type, ' => ', mapNodeName)
     }
 
-    // console.log('END')
     return mapNode
   }
 
@@ -184,26 +178,23 @@ class Parser {
         return function matchRange (self) {
           const begin = new RegExp(item.begin.source || item.begin, 'y')
           begin.lastIndex = self.index
-          const end = new RegExp(item.end.source || item.end, 'g')
           if (begin.test(self.source)) {
             let value
             let nextIndex = begin.lastIndex
 
             if (item.matcher) {
-              value = self.source.slice(self.index, nextIndex)
-              const token = self.createToken(item.type, value, nextIndex)
-              self.tokenBuffer.push(token)
-
               const subMatcher = self.createMatcher(item.matcher)
               self.fillBuffer(subMatcher)
               nextIndex = self.index
             }
 
+            const end = new RegExp(item.end.source || item.end, 'g')
             end.lastIndex = nextIndex
+
             while (true) {
               end.test(self.source)
               if (end.lastIndex < nextIndex) {
-                throw new FSError('Unexpected EOF reached')
+                self.parseError('Unexpected EOF reached')
               }
 
               nextIndex = end.lastIndex
@@ -219,8 +210,6 @@ class Parser {
             self.tokenBuffer.push(token)
             return true
           }
-
-          return false
         }
       } else {
         return function matchPattern (self) {
@@ -233,8 +222,10 @@ class Parser {
             return false
           }
 
-          const token = self.createToken(item.type, match[0], reg.lastIndex)
-          self.tokenBuffer.push(token)
+          if (match) {
+            const token = self.createToken(item.type, match[0], reg.lastIndex)
+            self.tokenBuffer.push(token)
+          }
 
           if (item.matcher) {
             const subMatcher = self.createMatcher(item.matcher)
@@ -246,9 +237,7 @@ class Parser {
       }
     }
 
-    return arr.map((item) => {
-      return makePattern(item)
-    })
+    return arr.map(makePattern)
   }
 
   moveToNextItem (index) {
@@ -350,6 +339,11 @@ class Parser {
     const errorFile = this.filename ? ` in file ${this.filename}` : ''
     const fsErr = `${msg} at line ${token.line} in column ${token.column}${errorFile}\n${this.sourcePreview(token)}`
     throw new FSError(fsErr)
+  }
+
+  parseError (msg) {
+    console.log(this.tokenBuffer, this.index, this.length)
+    throw new FSError(msg)
   }
 
   getIdentifier () {
@@ -504,7 +498,7 @@ class Parser {
       }
 
       if (lastIndex === this.index) {
-        throw new Error(`Parser stucks in a loop at index ${this.index}:${this.length}! at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
+        throw new FSError(`Parser stucks in a loop at index ${this.index}:${this.length}! at line ${this.line} in column ${this.column} \n\n${this.sourcePreview()}`)
       }
 
       lastIndex = this.index
