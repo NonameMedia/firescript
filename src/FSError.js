@@ -8,6 +8,10 @@ const azure = isBrowser ? '' : '\u001b[38;5;39m'
 const uncolor = isBrowser ? '' : '\u001b[m'
 
 class FSError extends Error {
+  constructor (message, parser) {
+    super(message)
+  }
+
   toString () {
     const stack = this.stack.split('\n')
     const reg = /at\s+(.+)\s+\((.+?):(\d+):(\d+)\)/
