@@ -1,0 +1,4 @@
+const Banana = require('./class.fire')
+const banana = new Banana()
+const color = banana.getColor()
+log 'The banana is ${color}'
