@@ -1,0 +1,2 @@
+func foo(foo, ...bar.bla)
+  return bar

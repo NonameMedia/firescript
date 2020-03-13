@@ -1,0 +1,59 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "FunctionDeclaration",
+      "id": {
+        "type": "Identifier",
+        "name": "foo"
+      },
+      "params": [
+        {
+          "type": "Identifier",
+          "name": "foo"
+        },
+        {
+          "type": "RestElement",
+          "argument": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "bar"
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "bla"
+            }
+          }
+        }
+      ],
+      "fsParamTypings": [
+        {
+          "type": "FirescriptTyping",
+          "name": "any"
+        },
+        {
+          "type": "FirescriptTyping",
+          "name": "any"
+        }
+      ],
+      "body": {
+        "type": "BlockStatement",
+        "body": [
+          {
+            "type": "ReturnStatement",
+            "argument": {
+              "type": "Identifier",
+              "name": "bar"
+            }
+          }
+        ]
+      },
+      "async": false,
+      "expression": false,
+      "generator": false
+    }
+  ]
+}

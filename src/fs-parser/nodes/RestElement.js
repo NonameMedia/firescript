@@ -3,7 +3,8 @@ const Node = require('./Node')
 const ALLOWED_CHILDS = [
   'Identifier',
   'ArrayPattern',
-  'ObjectPattern'
+  'ObjectPattern',
+  'MemberExpression'
 ]
 
 class RestElement extends Node {
