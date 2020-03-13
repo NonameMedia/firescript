@@ -12,8 +12,13 @@ class ObjectExpression extends Node {
     }
 
     for (const scope of parser.walkScope()) {
-      const property = scope.createNode('Property')
-      this.properties.push(property)
+      if (parser.match('punctuator "..."')) {
+        const property = scope.createNode('SpreadElement')
+        this.properties.push(property)
+      } else {
+        const property = scope.createNode('Property')
+        this.properties.push(property)
+      }
     }
   }
 

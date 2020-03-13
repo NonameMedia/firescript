@@ -1,6 +1,6 @@
 const JSElement = require('./JSElement')
 
-const ALLOWED_NODES = [ 'Property' ]
+const ALLOWED_NODES = [ 'Property', 'SpreadElement' ]
 /**
  * ObjectExpression
  *
@@ -37,7 +37,7 @@ class ObjectExpression extends JSElement {
   }
 
   useMultiline () {
-    return this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value.type))
+    return this.properties.length > 2 || this.properties.some((item) => !/Literal|Identifier/.test(item.value && item.value.type))
   }
 }
 

@@ -1,19 +1,7 @@
 [
   {
     "type": "identifier",
-    "value": "class"
-  },
-  {
-    "type": "identifier",
-    "value": "Foo"
-  },
-  {
-    "type": "indention",
-    "value": 1
-  },
-  {
-    "type": "identifier",
-    "value": "bar"
+    "value": "foo"
   },
   {
     "type": "punctuator",
@@ -21,7 +9,7 @@
   },
   {
     "type": "identifier",
-    "value": "one"
+    "value": "foo"
   },
   {
     "type": "punctuator",
@@ -33,7 +21,7 @@
   },
   {
     "type": "identifier",
-    "value": "more"
+    "value": "bar"
   },
   {
     "type": "punctuator",

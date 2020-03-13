@@ -1,0 +1,42 @@
+[
+  {
+    "type": "identifier",
+    "value": "const"
+  },
+  {
+    "type": "identifier",
+    "value": "arr"
+  },
+  {
+    "type": "operator",
+    "value": "="
+  },
+  {
+    "type": "punctuator",
+    "value": "["
+  },
+  {
+    "type": "indention",
+    "value": 1
+  },
+  {
+    "type": "punctuator",
+    "value": "..."
+  },
+  {
+    "type": "identifier",
+    "value": "args"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  },
+  {
+    "type": "punctuator",
+    "value": "]"
+  },
+  {
+    "type": "indention",
+    "value": 0
+  }
+]

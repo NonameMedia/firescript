@@ -1,0 +1,32 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "arr"
+          },
+          "init": {
+            "type": "ArrayExpression",
+            "elements": [
+              {
+                "type": "SpreadElement",
+                "argument": {
+                  "type": "Identifier",
+                  "name": "args"
+                }
+              }
+            ]
+          },
+          "fsTyping": null
+        }
+      ]
+    }
+  ]
+}

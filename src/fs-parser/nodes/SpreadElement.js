@@ -3,7 +3,8 @@ const Node = require('./Node')
 const ALLOWED_CHILDS = [
   'Identifier',
   'ArrayPattern',
-  'ObjectPattern'
+  'ObjectPattern',
+  'MemberExpression'
 ]
 
 /**
@@ -21,7 +22,7 @@ class SpreadElement extends Node {
   constructor (parser) {
     super(parser)
 
-    if (!parser.match('punctuator "...""')) {
+    if (!parser.match('punctuator "..."')) {
       this.syntaxError('Unexpected token, ... punctuator expected')
     }
 
