@@ -15,6 +15,9 @@ module.exports = {
     'ThisExpression > punctuator "."': {
       name: 'MemberExpression'
     },
+    'ThisExpression > punctuator "["': {
+      name: 'MemberExpression'
+    },
     'ArrayExpression > punctuator "."': {
       name: 'MemberExpression'
     },
