@@ -26,13 +26,13 @@
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "^1.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-standard": "^4.0.1",
     "firescript-test": "^0.9.1",
     "inspect.js": "^1.11.8",
     "shell-inspect": "1.2.0",
-    "sinon": "^7.5.0",
+    "sinon": "^9.0.1",
     "superjoin": "^0.5.1"
   },
   "dependencies": {
