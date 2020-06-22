@@ -1,11 +1,9 @@
 const path = require('path')
 const SuperFS = require('superfs')
-const superconf = require('superconf')
 const colorfy = require('colorfy')
-const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
 
-const FirescriptParser = require('../src/FirescriptParser')
-const JSTranspiler = require('../src/JSTranspiler')
+const FirescriptParser = require('firescript-parser').FirescriptParser
+const JSTranspiler = require('firescript-transpiler').JSTranspiler
 
 const TEST_CASE_PATH = path.join(__dirname, '../tests/')
 

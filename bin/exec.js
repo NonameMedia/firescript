@@ -3,20 +3,16 @@ const path = require('path')
 const colorfy = require('colorfy')
 const FirescriptParser = require('firescript-parser').FirescriptParser
 const FirescriptLinter = require('firescript-linter').FirescriptLinter
+const JSTranspiler = require('firescript-transpiler').JSTranspiler
 const {
-  FSConfig,
-  JSTranspiler
-} = require('../')
+  FSConfig
+} = require('../src/app.js')
 
 module.exports = (fireio) => {
   const cmd = fireio
     .cmd('exec <file>')
     .description('Executes a .fire file')
     .action((ctx, file) => {
-      // file = path.resolve(process.cwd(), file)
-      // require('../src/register')
-      // require(file)
-      //
       function compile (mod, filename) {
         const source = fs.readFileSync(filename, 'utf8')
         const parser = new FirescriptParser()
@@ -48,7 +44,7 @@ module.exports = (fireio) => {
         const transpiler = new JSTranspiler(opts)
         const jsSource = transpiler.transpile(fsAst)
 
-        mod._compile(jsSource)
+        mod._compile(jsSource, filename)
       }
 
       // eslint-disable-next-line node/no-deprecated-api

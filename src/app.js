@@ -13,6 +13,7 @@ module.exports = {
   FirescriptLinter,
   JSTranspiler,
   Parser,
+  FSConfig,
   tokenize (input, opts) {
     const parser = new FirescriptParser(opts)
     return parser.tokenize(input)
