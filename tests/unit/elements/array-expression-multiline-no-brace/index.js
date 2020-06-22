@@ -1,5 +1,0 @@
-[
-  'banana',
-  'mango',
-  'peach'
-]EOF

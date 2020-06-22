@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
-const Firescript = require('../src/app')
+const FirescriptParser = require('firescript-parser').FirescriptParser
+const esprima = require('esprima')
 
 module.exports = (fireio) => {
   return fireio
@@ -13,7 +14,8 @@ module.exports = (fireio) => {
     .action((ctx, file, output) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       if (path.extname(file) === '.fire') {
-        const ast = Firescript.parse(fsSource, {
+        const parser = new FirescriptParser()
+        const ast = parser.parse(fsSource, {
           type: 'fire',
           includeComments: ctx.comments,
           setLocation: !!ctx.location,
@@ -29,11 +31,10 @@ module.exports = (fireio) => {
           console.log(source)
         }
       } else if (path.extname(file) === '.js') {
-        const ast = Firescript.parse(fsSource, {
-          type: 'js',
-          includeComments: ctx.comments,
-          setLocation: !!ctx.location,
-          setRange: !!ctx.range,
+        const ast = esprima.parseModule(fsSource, {
+          loc: !!ctx.location,
+          range: !!ctx.range,
+          comment: ctx.comments,
           filename: file
         })
 

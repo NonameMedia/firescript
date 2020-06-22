@@ -1,9 +1,0 @@
-{
-  "type": "UnaryExpression",
-  "operator": "typeof",
-  "argument": {
-    "type": "Identifier",
-    "name": "type"
-  },
-  "prefix": true
-}

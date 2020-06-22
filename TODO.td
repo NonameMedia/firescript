@@ -15,7 +15,7 @@ Tests:
 
 Line comment      | (x) Docs  Tests: (x) JSE (x) FSE (x) FSN (x) Syntax
 
-ArrayExpression             [ (*) FSN (*) JSE (*) FSE (*) Syntax ] 
+ArrayExpression             [ (*) FSN (*) JSE (*) FSE (*) Syntax ]
 ArrayPattern
 ArrowFunctionExpression
 AssignmentExpression
@@ -61,7 +61,6 @@ MemberExpression
 MetaProperty
 MethodDefinition
 NewExpression
-NullNode
 ObjectExpression
 ObjectPattern
 Program

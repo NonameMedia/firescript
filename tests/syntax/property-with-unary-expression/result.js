@@ -1,3 +1,0 @@
-const obj = {
-  foo: !bar
-};

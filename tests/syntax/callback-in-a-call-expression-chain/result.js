@@ -1,3 +1,0 @@
-foo.bar(() => {
-  return true;
-});

@@ -1,3 +1,0 @@
-async getFruits (banana)
-  return banana
-EOF

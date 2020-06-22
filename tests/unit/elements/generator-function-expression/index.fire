@@ -1,3 +1,0 @@
-gen getFruits (banana)
-  return banana
-EOF

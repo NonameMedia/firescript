@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const Firescript = require('../src/app')
+const FirescriptParser = require('firescript-parser').FirescriptParser
 
 module.exports = (fireio) => {
   return fireio
@@ -18,7 +18,8 @@ module.exports = (fireio) => {
       const astPath = path.join(__dirname, '../', slug, outfile || 'ast.json')
 
       const jsSource = fs.readFileSync(srcPath, { encoding: 'utf8' })
-      const ast = Firescript.parse(jsSource, {
+      const parser = new FirescriptParser()
+      const ast = parser.parse(jsSource, {
         type: 'js',
         comments: ctx.allowComments
       })

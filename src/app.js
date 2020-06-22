@@ -1,17 +1,17 @@
 const path = require('path')
 const fs = require('fs')
-const FirescriptParser = require('./FirescriptParser')
-const Parser = require('./Parser')
-const JSParser = require('./JSParser')
-const FirescriptTranspiler = require('./FirescriptTranspiler')
-const JSTranspiler = require('./JSTranspiler')
+const { FirescriptParser, Parser } = require('firescript-parser')
+const FirescriptLinter = require('firescript-linter').FirescriptLinter
+const FirescriptTranspiler = require('firescript-transpiler').FirescriptTranspiler
+const JSTranspiler = require('firescript-transpiler').JSTranspiler
 const FSConfig = require('./utils/FSConfig')
+const esprima = require('esprima')
 
 module.exports = {
   FirescriptParser,
   FirescriptTranspiler,
+  FirescriptLinter,
   JSTranspiler,
-  JSParser,
   Parser,
   tokenize (input, opts) {
     const parser = new FirescriptParser(opts)
@@ -31,12 +31,36 @@ module.exports = {
 
     if (typeof input === 'string') {
       if (opts.verbose) console.log(`[TRANSPILER] Transpile source into ${opts.type === 'fire' ? 'Javascript' : 'Firescript'}`)
-      const parser = opts.type === 'js' ? new JSParser(opts) : new FirescriptParser(opts)
-      ast = parser.parse(input)
+      if (opts.type === 'js') {
+        ast = esprima.parseModule(input, {
+          loc: !!opts.location,
+          range: !!opts.range,
+          comment: opts.comments
+        })
+      } else {
+        const parser = new FirescriptParser(opts)
+        ast = parser.parse(input)
+      }
     } else {
       if (opts.verbose) console.log(`[TRANSPILER] Transpile AST into ${opts.type === 'fire' ? 'Javascript' : 'Firescript'}`)
       ast = input
     }
+
+    // if (opts.linting && opts.type === 'fire') {
+    //   const linter = new FirescriptLinter()
+    //   const lintSession = linter.lint(ast)
+    //   if (lintSession.status === 'failed') {
+    //     lintSession.exceptions.forEach((exception) => {
+    //       const location = exception.location
+    //         ? `in file ${colorfy.grey(file)} at line ${colorfy.grey(exception.location[0])}` : ''
+    //       console.log(
+    //         `🔥${exception.message}`,
+    //         `(${colorfy.red(exception.exception)})`,
+    //         location
+    //       )
+    //     })
+    //   }
+    // }
 
     if (opts.type === 'js') {
       const transpiler = new FirescriptTranspiler(opts)
@@ -56,8 +80,18 @@ module.exports = {
   },
   parse (input, opts) {
     opts = opts || {}
-    const parser = opts.type === 'js' ? new JSParser(opts) : new FirescriptParser(opts)
-    return parser.parse(input)
+    let ast
+    if (opts.type === 'js') {
+      ast = esprima.parseModule(input, {
+        loc: !!opts.location,
+        range: !!opts.range,
+        comment: opts.comments
+      })
+    } else {
+      const parser = new FirescriptParser(opts)
+      ast = parser.parse(input)
+    }
+    return ast
   },
   loadConf (customConf) {
     const config = new FSConfig()

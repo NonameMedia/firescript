@@ -1,7 +1,0 @@
-{
-  "type": "ImportNamespaceSpecifier",
-  "local": {
-    "type": "Identifier",
-    "name": "foo"
-  }
-}

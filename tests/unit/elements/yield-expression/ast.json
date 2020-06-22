@@ -1,8 +1,0 @@
-{
-    "type": "YieldExpression",
-    "argument": {
-        "type": "Identifier",
-        "name": "banana"
-    },
-    "delegate": false
-}

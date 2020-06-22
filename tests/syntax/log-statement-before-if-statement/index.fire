@@ -1,3 +1,0 @@
-log 'I like bananas!' foo
-if foo
-  log 'foo'

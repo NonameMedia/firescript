@@ -1,6 +1,0 @@
-class HelloWorld
-    constructor (msg)
-        this.greeting = msg
-
-    print ()
-        log 'Hello ${this.greeting}'

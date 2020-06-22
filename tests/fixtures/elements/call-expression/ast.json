@@ -1,8 +1,0 @@
-{
-  "type": "CallExpression",
-  "callee": {
-    "type": "Identifier",
-    "name": "banana"
-  },
-  "arguments": []
-}

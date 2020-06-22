@@ -5,4 +5,9 @@ const app = FireIO.app('firescript', {
   projectRoot: path.join(__dirname, '../')
 })
 
-app.callCommand()
+app.callCommand().then((res) => {
+
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

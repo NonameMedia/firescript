@@ -1,1 +1,0 @@
-foo('bla', 'blub');

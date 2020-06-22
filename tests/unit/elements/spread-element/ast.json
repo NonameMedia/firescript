@@ -1,7 +1,0 @@
-{
-  "type": "SpreadElement",
-  "argument": {
-    "type": "Identifier",
-    "name": "args"
-  }
-}

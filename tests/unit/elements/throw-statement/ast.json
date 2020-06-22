@@ -1,7 +1,0 @@
-{
-  "type": "ThrowStatement",
-  "argument": {
-    "type": "Identifier",
-    "name": "err"
-  }
-}

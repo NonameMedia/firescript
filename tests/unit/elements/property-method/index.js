@@ -1,3 +1,0 @@
-getFruits () {
-  return this;
-}EOF

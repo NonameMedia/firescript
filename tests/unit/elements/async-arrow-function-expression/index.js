@@ -1,3 +1,0 @@
-async () => {
-  return 'banana';
-}EOF

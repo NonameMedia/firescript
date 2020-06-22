@@ -1,1 +1,0 @@
-res = 'bla'EOF

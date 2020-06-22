@@ -1,5 +1,5 @@
 const fs = require('fs')
-const Firescript = require('../src/app')
+const FirescriptParser = require('firescript-parser').FirescriptParser
 
 module.exports = (fireio) => {
   return fireio
@@ -10,7 +10,8 @@ module.exports = (fireio) => {
     .description('Tokenize a .fire or .js file')
     .action((ctx, file) => {
       const source = fs.readFileSync(file, { encoding: 'utf8' })
-      const tokenStack = Firescript.tokenize(source, {
+      const parser = new FirescriptParser()
+      const tokenStack = parser.tokenize(source, {
         filename: file
       })
       const lines = []

@@ -1,9 +1,0 @@
-{
-  "type": "Literal",
-  "value": "/banana/g",
-  "raw": "/banana/g",
-  "regex": {
-    "pattern": "banana",
-    "flags": "g"
-  }
-}

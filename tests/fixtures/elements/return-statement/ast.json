@@ -1,7 +1,0 @@
-{
-  "type": "ReturnStatement",
-  "argument": {
-    "type": "Identifier",
-    "name": "banana"
-  }
-}

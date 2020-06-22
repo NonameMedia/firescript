@@ -1,5 +1,0 @@
-{
-  "feature": "esModules",
-  "default": true,
-  "type": "bool"
-}
