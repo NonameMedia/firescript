@@ -3,7 +3,7 @@ const path = require('path')
 const colorfy = require('colorfy')
 const FirescriptParser = require('firescript-parser').FirescriptParser
 const FirescriptLinter = require('firescript-linter').FirescriptLinter
-const JSTranspiler = require('firescript-transpiler').JSTranspiler
+const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
 const {
   FSConfig
 } = require('../src/app.js')
@@ -41,7 +41,7 @@ module.exports = (fireio) => {
         const opts = {}
 
         opts.features = fsConf.getConf('features')
-        const transpiler = new JSTranspiler(opts)
+        const transpiler = new JavascriptTranspiler(opts)
         const jsSource = transpiler.transpile(fsAst)
 
         mod._compile(jsSource, filename)

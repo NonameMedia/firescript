@@ -3,13 +3,13 @@ const SuperFS = require('superfs')
 const colorfy = require('colorfy')
 
 const FirescriptParser = require('firescript-parser').FirescriptParser
-const JSTranspiler = require('firescript-transpiler').JSTranspiler
+const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
 
-const TEST_CASE_PATH = path.join(__dirname, '../tests/')
+const TEST_CASE_PATH = path.join(process.cwd(), '../tests/')
 
 const defaultFeatureConf = JSON.stringify({
   esModules: true,
-  esDefaultConf: true
+  esDefaultParams: true
 }, null, '  ')
 
 const testFiles = [
@@ -83,8 +83,8 @@ async function rewriteProject (ctx) {
 module.exports = (fireio) => {
   return fireio
     .cmd('mktest')
-    .description('Create a Firescript syntax test case')
-    .option('-r,--rewrire', 'Rewrite existing test case after code change')
+    .description('Create a Firescript syntax test')
+    .option('-r,--rewrire', 'Rewrite existing test after code change')
     .option('-t,--transform', 'Setup as transform test')
     .action(async (ctx) => {
       // if (!await SuperFS.exists(TEST_CASE_PATH)) {
@@ -94,7 +94,7 @@ module.exports = (fireio) => {
       //   return
       // }
 
-      ctx.testCaseRoot = ctx.transform ? path.join(TEST_CASE_PATH, 'transform') : path.join(TEST_CASE_PATH, 'syntax')
+      ctx.testCaseRoot = ctx.transform ? path.join(TEST_CASE_PATH, 'transform') : TEST_CASE_PATH
       const { testCaseDir } = ctx.rewrire ? await rewriteProject(ctx) : await createProject(ctx)
       const fileSource = await SuperFS.readFile(path.join(ctx.testCaseRoot, testCaseDir, 'index.fire'))
 
@@ -108,7 +108,7 @@ module.exports = (fireio) => {
         await SuperFS.writeFile(path.join(ctx.testCaseRoot, testCaseDir, 'fsast.json'), JSON.stringify(ast, null, '  '))
 
         const fsconf = require(path.join(ctx.testCaseRoot, testCaseDir, 'fsconf.json'))
-        const transpiler = new JSTranspiler({
+        const transpiler = new JavascriptTranspiler({
           features: fsconf
         })
         const result = transpiler.transpile(ast)

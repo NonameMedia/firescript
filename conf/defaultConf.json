@@ -1,7 +1,11 @@
 {
-  "src": "./",
+  "src": "src/",
   "dest": "dist/",
-  "copy": [],
+  "copy": [
+    "package.json",
+    "README.md",
+    "LICENSE.md"
+  ],
   "features": {
     "esModules": false,
     "esDefaultParams": false,

@@ -3,7 +3,7 @@ const fs = require('fs')
 const { FirescriptParser, Parser } = require('firescript-parser')
 const FirescriptLinter = require('firescript-linter').FirescriptLinter
 const FirescriptTranspiler = require('firescript-transpiler').FirescriptTranspiler
-const JSTranspiler = require('firescript-transpiler').JSTranspiler
+const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
 const FSConfig = require('./utils/FSConfig')
 const esprima = require('esprima')
 
@@ -11,7 +11,7 @@ module.exports = {
   FirescriptParser,
   FirescriptTranspiler,
   FirescriptLinter,
-  JSTranspiler,
+  JavascriptTranspiler,
   Parser,
   FSConfig,
   tokenize (input, opts) {
@@ -75,7 +75,7 @@ module.exports = {
       }
 
       opts.features = fsConf.getConf('features')
-      const transpiler = new JSTranspiler(opts)
+      const transpiler = new JavascriptTranspiler(opts)
       return transpiler.transpile(ast)
     }
   },

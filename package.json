@@ -1,16 +1,16 @@
 {
   "name": "firescript",
   "version": "0.12.1",
-  "description": "Firescript transpiler",
+  "description": "Firescript language",
   "main": "src/app.js",
   "bin": {
-    "fire": "./bin/fire"
+    "fire": "./bin/fire",
+    "firescript": "./bin/fire"
   },
   "scripts": {
-    "test": "npm run test:unit && npm run test:integration && npm run test:syntax && npm run test:transform",
+    "test": "npm run test:unit && npm run test:integration",
     "test:unit": "firetest tests/unit/\\*\\*/\\*.spec.js",
-    "test:integration": "firetest tests/integration/\\*\\*/\\*.spec.js",
-    "test:transform": "firetest tests/transform/\\*\\*/\\*.spec.js"
+    "test:integration": "firetest tests/integration/\\*\\*/\\*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -21,33 +21,33 @@
     "fs",
     "firescript"
   ],
-  "author": "Andi Heinkelein <andifeind@noname-media.com>",
+  "author": "Andi Heinkelein <firetux@noname-media.com>",
   "license": "MIT",
   "devDependencies": {
     "@noname-media/eslint-config-standard": "^1.1.2",
-    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-standard": "^4.0.1",
-    "firescript-linter": "^0.3.0",
-    "firescript-test": "^0.9.3",
+    "firescript-linter": "^0.5.3",
+    "firescript-test": "^0.10.2",
     "inspect.js": "^1.12.4",
     "shell-inspect": "1.2.0",
-    "sinon": "^9.0.2",
-    "superjoin": "^0.5.1"
+    "sinon": "^9.0.3"
   },
   "dependencies": {
-    "colorfy": "^2.1.1",
+    "colorfy": "^2.1.3",
     "esprima": "4.0.1",
     "fireio": "^0.5.2",
-    "firescript-parser": "^0.2.0",
+    "firescript-builder": "^0.1.1",
+    "firescript-parser": "^0.3.2",
     "firescript-runtime": "^0.3.7",
-    "firescript-transpiler": "^0.2.0",
+    "firescript-transpiler": "^0.3.0",
     "logtopus": "^1.1.3",
     "superarr": "0.1.0",
     "superconf": "^1.2.3",
-    "superfs": "^0.12.2",
+    "superfs": "^1.1.0",
     "superimport": "^1.4.0",
     "superreg": "^0.2.1",
-    "type-inspect": "^2.0.0"
+    "type-inspect": "^2.0.3"
   }
 }

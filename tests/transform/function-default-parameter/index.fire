@@ -1,2 +1,0 @@
-func getFoo (foo = {})
-  return foo

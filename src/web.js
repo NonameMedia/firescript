@@ -1,5 +1,5 @@
 const FirescriptParser = require('./FirescriptParser')
-const JSTranspiler = require('./JSTranspiler')
+const JavascriptTranspiler = require('./JavascriptTranspiler')
 
 require('./fs-parser/nodes/ArrayExpression.js')
 require('./fs-parser/nodes/ArrayPattern.js')
@@ -188,7 +188,7 @@ module.exports = {
       'fireRTModuleName': 'firescript-runtime'
     }
 
-    const transpiler = new JSTranspiler(opts)
+    const transpiler = new JavascriptTranspiler(opts)
     return transpiler.transpile(ast)
   }
 }

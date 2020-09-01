@@ -3,10 +3,11 @@ const SuperFS = require('superfs')
 const superconf = require('superconf')
 const colorfy = require('colorfy')
 const defaultConf = require(path.join(__dirname, '../conf/defaultConf.json'))
+// const initTemplate = require('firescript-project-templates').initTemplate
 
 function loadPkg () {
   try {
-    return require(path.join(process.cwd(), './package.json'))
+    return SuperFS.file(path.join(process.cwd(), './package.json'))
   } catch (err) {
     if (err.code === 100) { return {} }
     throw err
@@ -15,9 +16,9 @@ function loadPkg () {
 
 module.exports = (fireio) => {
   return fireio
-    .cmd('init')
+    .cmd('init [template]')
     .description('Create and initialize a .firerc.json configuration file under current working dir')
-    .action(async (ctx, name) => {
+    .action(async (ctx, template) => {
       const configFile = path.join(process.cwd(), '.firerc.json')
       const conf = superconf.merge(defaultConf, superconf('fire') || {})
 
@@ -48,7 +49,16 @@ module.exports = (fireio) => {
 
       await SuperFS.writeFile(configFile, prettyResult)
 
-      const pkg = loadPkg()
+      const pkgFile = loadPkg()
+      const pkg = await pkgFile.readJSON()
+      pkg.firescript = true
+
+      if (template) {
+        const files = await initTemplate(template, pkg)
+        console.log('Files', files)
+      }
+
       console.log('PKG', pkg)
+      await pkgFile.writeJSON(pkg)
     })
 }

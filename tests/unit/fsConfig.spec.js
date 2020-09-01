@@ -7,10 +7,14 @@ describe('FSConfig', () => {
     it('returns a config load from CWD', () => {
       process.chdir(path.join(__dirname, '../fixtures/banana-project'))
       const conf = new FSConfig()
-      inspect(conf.getConf()).isEql({
-        src: './',
+      inspect(conf.getConf()).hasProps({
+        src: 'src/',
         dest: 'dist/',
-        copy: [],
+        copy: [
+          'package.json',
+          'README.md',
+          'LICENSE.md'
+        ],
         features: {
           esModules: false,
           esDefaultParams: false,
@@ -29,9 +33,13 @@ describe('FSConfig', () => {
       process.chdir(path.join(__dirname, '../fixtures/banana-project'))
       const conf = new FSConfig()
       inspect(conf.getConf()).isEql({
-        src: './',
+        src: 'src/',
         dest: 'dist/',
-        copy: [],
+        copy: [
+          'package.json',
+          'README.md',
+          'LICENSE.md'
+        ],
         features: {
           esModules: false,
           esDefaultParams: false,
