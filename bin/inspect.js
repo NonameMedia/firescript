@@ -1,9 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const colorfy = require('colorfy')
-// const Firescript = require('../src/app')
 const FirescriptParser = require('firescript-parser').FirescriptParser
-const FirescriptLinter = require('../../firescript-linter').FirescriptLinter
 
 module.exports = (fireio) => {
   return fireio
