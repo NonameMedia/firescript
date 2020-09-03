@@ -1,0 +1,81 @@
+{
+  "type": "Program",
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "name"
+          },
+          "init": {
+            "type": "Literal",
+            "raw": "'World'",
+            "value": "World"
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "kind": "const",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "msg"
+          },
+          "init": {
+            "type": "TemplateLiteral",
+            "quasis": [
+              {
+                "type": "TemplateElement",
+                "value": {
+                  "cooked": "Hello ",
+                  "raw": "Hello "
+                },
+                "tail": false
+              },
+              {
+                "type": "TemplateElement",
+                "value": {
+                  "cooked": "",
+                  "raw": ""
+                },
+                "tail": true
+              }
+            ],
+            "expressions": [
+              {
+                "type": "Identifier",
+                "name": "name"
+              }
+            ]
+          },
+          "fsTyping": {
+            "type": "FirescriptTyping",
+            "name": "any"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FirescriptLogStatement",
+      "arguments": [
+        {
+          "type": "Identifier",
+          "name": "msg"
+        }
+      ]
+    }
+  ]
+}

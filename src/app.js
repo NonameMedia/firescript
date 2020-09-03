@@ -97,5 +97,35 @@ module.exports = {
   loadConf (customConf) {
     const config = new FSConfig()
     return config.merge(customConf)
+  },
+  version (print) {
+    const loadVersion = (pkgName) => {
+      try {
+        return `v${require(pkgName).version}`
+      } catch (err) {
+        return 'Not installed'
+      }
+    }
+    const version = loadVersion('../package.json')
+    const builderVersion = loadVersion('firescript-builder/package.json')
+    const parserVersion = loadVersion('firescript-parser/package.json')
+    const transpilerVersion = loadVersion('firescript-transpiler/package.json')
+    const linterVersion = loadVersion('firescript-linter/package.json')
+
+    if (print) {
+      console.log(`Firescript:            ${version}`)
+      console.log(`Firescript Builder:    ${builderVersion}`)
+      console.log(`Firescript Parser:     ${parserVersion}`)
+      console.log(`Firescript Linter:     ${linterVersion}`)
+      console.log(`Firescript Transpiler: ${transpilerVersion}`)
+    }
+
+    return {
+      firescript: version,
+      'firescript-builder': builderVersion,
+      'firescript-parser': parserVersion,
+      'firescript-linter': linterVersion,
+      'firescript-transpiler': transpilerVersion
+    }
   }
 }
