@@ -1,7 +1,7 @@
 const path = require('path')
 const colorfy = require('colorfy')
-const Firescript = require('../src/app')
 const FirescriptBuilder = require('firescript-builder').FirescriptBuilder
+const FirescriptConfig = require('firescript-config').FirescriptConfig
 
 const pkg = require('../package.json')
 
@@ -11,20 +11,19 @@ module.exports = (fireio) => {
     .option('-v, --verbose', 'Verbose log')
     .description('Build project')
     .action(async (ctx, src, dest) => {
-      const conf = Firescript.loadConf({
-        src: src,
-        dest: dest,
-        verbose: ctx.verbose
+      const config = new FirescriptConfig({
+        build: {
+          srcDir: src,
+          destDir: dest
+        }
       })
 
+      const buildConf = config.getConfig('build')
       const builder = new FirescriptBuilder({
-        srcDir: conf.src,
-        destDir: conf.dest,
-        features: conf.features
+        srcDir: buildConf.srcDir,
+        destDir: buildConf.destDir,
+        features: config.getConfig('features')
       })
-
-      // console.log('Conf:', conf)
-      // console.log('Builder:', builder)
 
       const cf = colorfy()
 
@@ -33,10 +32,10 @@ module.exports = (fireio) => {
         .nl()
         .print()
 
-      if (conf.verbose) {
+      if (ctx.verbose) {
         cf.grey('Run build tasks:').nl()
-          .txt('srcDir: ').grey(conf.src).nl()
-          .txt('destDir: ').grey(conf.dest).nl().print()
+          .txt('srcDir: ').grey(buildConf.srcDir).nl()
+          .txt('destDir: ').grey(buildConf.destDir).nl().print()
       }
 
       const buildFiles = await builder.build()
@@ -48,17 +47,17 @@ module.exports = (fireio) => {
           .print()
       }
 
-      if (conf.verbose) {
+      if (ctx.verbose) {
         cf.grey('Run copy tasks:').nl()
-          .txt('copyFiles: ').grey(JSON.stringify(conf.copy, null, '  ')).print()
+          .txt('copyFiles: ').grey(JSON.stringify(buildConf.copy, null, '  ')).print()
       }
 
-      const copyFiles = await builder.copy(conf.copy)
+      const copyFiles = await builder.copy(buildConf.copy)
       for (const fl of copyFiles) {
         cf.ored('Copy:  ')
           .grey(path.relative(process.cwd(), fl.path))
           .txt(' to ')
-          .grey(path.join(conf.dest, fl.relative))
+          .grey(path.join(buildConf.destDir, fl.relative))
           .print()
       }
 

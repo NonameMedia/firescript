@@ -1,6 +1,7 @@
 const path = require('path')
 const colorfy = require('colorfy')
 const SuperFS = require('superfs')
+const FirescriptConfig = require('firescript-config').FirescriptConfig
 const Firescript = require('../src/app')
 const copy = require('./copy').copy
 
@@ -9,10 +10,6 @@ const IGNORE_FILES = [
 ]
 
 class WatchCMD {
-  constructor (conf) {
-    this.conf = conf
-  }
-
   async transpileFile (filename, srcDir, destDir) {
     const cf = colorfy()
     if (path.extname(filename) !== '.fire') {
@@ -31,7 +28,6 @@ class WatchCMD {
 
     const source = Firescript.transpile(input, {
       type: 'fire',
-      verbose: this.conf.verbose,
       filename: infile
     })
 
@@ -64,15 +60,16 @@ module.exports = (fireio) => {
     .option('-v, --verbose', 'Verbose log')
     .description('Watch a directory and starts transpilation if a files content changes')
     .action(async (ctx, src, dest) => {
-      const conf = Firescript.loadConf({
-        src: src,
-        dest: dest,
-        verbose: ctx.verbose
+      const config = new FirescriptConfig({
+        build: {
+          srcDir: src,
+          destDir: dest
+        }
       })
 
-      const watchCmd = new WatchCMD(conf)
-      watchCmd.srcDir = path.resolve(process.cwd(), conf.src)
-      watchCmd.destDir = path.resolve(process.cwd(), conf.dest)
+      const watchCmd = new WatchCMD()
+      watchCmd.srcDir = path.resolve(process.cwd(), config.srcDir)
+      watchCmd.destDir = path.resolve(process.cwd(), config.destDir)
 
       // console.log('CONF', conf)
       await copy()

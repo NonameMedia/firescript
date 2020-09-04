@@ -1,10 +1,10 @@
 const path = require('path')
 const fs = require('fs')
 const { FirescriptParser, Parser } = require('firescript-parser')
+const FirescriptConfig = require('firescript-config').FirescriptConfig
 const FirescriptLinter = require('firescript-linter').FirescriptLinter
 const FirescriptTranspiler = require('firescript-transpiler').FirescriptTranspiler
 const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
-const FSConfig = require('./utils/FSConfig')
 const esprima = require('esprima')
 
 module.exports = {
@@ -13,7 +13,6 @@ module.exports = {
   FirescriptLinter,
   JavascriptTranspiler,
   Parser,
-  FSConfig,
   tokenize (input, opts) {
     const parser = new FirescriptParser(opts)
     return parser.tokenize(input)
@@ -67,14 +66,8 @@ module.exports = {
       const transpiler = new FirescriptTranspiler(opts)
       return transpiler.transpile(ast)
     } else {
-      const fsConf = new FSConfig()
-      if (opts && opts.features) {
-        fsConf.merge({
-          features: opts.features
-        })
-      }
-
-      opts.features = fsConf.getConf('features')
+      const config = new FirescriptConfig(opts)
+      opts.features = config.getConfig('features')
       const transpiler = new JavascriptTranspiler(opts)
       return transpiler.transpile(ast)
     }
@@ -95,8 +88,8 @@ module.exports = {
     return ast
   },
   loadConf (customConf) {
-    const config = new FSConfig()
-    return config.merge(customConf)
+    console.warn('Firescript.loadConf is deprecated! Use FirescriptConfig module instead')
+    return new FirescriptConfig()
   },
   version (print) {
     const loadVersion = (pkgName) => {

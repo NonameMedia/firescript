@@ -1,12 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 const colorfy = require('colorfy')
+const FirescriptConfig = require('firescript-config').FirescriptConfig
 const FirescriptParser = require('firescript-parser').FirescriptParser
 const FirescriptLinter = require('firescript-linter').FirescriptLinter
 const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
-const {
-  FSConfig
-} = require('../src/app.js')
 
 module.exports = (fireio) => {
   const cmd = fireio
@@ -32,15 +30,10 @@ module.exports = (fireio) => {
           })
         }
 
-        const fsConf = new FSConfig()
-        // if (opts && opts.features) {
-        //   fsConf.merge({
-        //     features: opts.features
-        //   })
-        // }
+        const config = new FirescriptConfig()
         const opts = {}
 
-        opts.features = fsConf.getConf('features')
+        opts.features = config.getConfig('features')
         const transpiler = new JavascriptTranspiler(opts)
         const jsSource = transpiler.transpile(fsAst)
 
