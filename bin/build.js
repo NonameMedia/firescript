@@ -18,6 +18,8 @@ module.exports = (fireio) => {
         }
       })
 
+      console.log('CONF', config)
+
       const buildConf = config.getConfig('build')
       const builder = new FirescriptBuilder({
         srcDir: buildConf.srcDir,
