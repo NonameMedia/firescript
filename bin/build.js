@@ -49,10 +49,10 @@ module.exports = (fireio) => {
 
       if (ctx.verbose) {
         cf.grey('Run copy tasks:').nl()
-          .txt('copyFiles: ').grey(JSON.stringify(buildConf.copy, null, '  ')).print()
+          .txt('copyFiles: ').grey(JSON.stringify(buildConf.copyFiles, null, '  ')).print()
       }
 
-      const copyFiles = await builder.copy(buildConf.copy)
+      const copyFiles = await builder.copy(buildConf.copyFiles)
       for (const fl of copyFiles) {
         cf.ored('Copy:  ')
           .grey(path.relative(process.cwd(), fl.path))
