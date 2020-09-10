@@ -41,7 +41,7 @@
     "firescript-config": "^0.2.1",
     "firescript-linter": "^0.6.0",
     "firescript-parser": "^0.3.3",
-    "firescript-runtime": "^0.3.9",
+    "firescript-runtime": "^0.3.10",
     "firescript-test": "^0.10.2",
     "firescript-transpiler": "^0.4.0",
     "logtopus": "^1.1.3",
