@@ -1,4 +1,4 @@
-const BuiltinModule = require('module').BuiltinModule
+const Module = require('module').Module
 const firescript = require('../')
 
 function compile (mod, filename) {
@@ -8,7 +8,7 @@ function compile (mod, filename) {
   }), filename)
 }
 
-const Module = module.constructor.length > 1 ? module.constructor : BuiltinModule
+// const Module = module.constructor ? module.constructor : BuiltinModule
 if (!Module._extensions['.fire']) {
   Module._extensions['.fire'] = compile
 }

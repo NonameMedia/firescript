@@ -19,7 +19,7 @@ describe('Module loading', () => {
     it('import FS into a CommonJS module (named-import)', () => {
       const cjs = require('../fixtures/modules/cjs/namedImport')
 
-      inspect(cjs).isEql({
+      inspect(cjs).hasProps({
         banana: 'Banana',
         __esModule: true
       })
@@ -105,7 +105,7 @@ describe('Module loading', () => {
     it('import FS into a CommonJS module (variable-import)', () => {
       const cjs = require('../fixtures/modules/cjs/variableImport')
 
-      inspect(cjs).isEql({
+      inspect(cjs).hasProps({
         banana: 'Banana',
         coconut: 'Coconut',
         pear: 'Pear',
