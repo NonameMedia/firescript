@@ -1,3 +1,4 @@
+const BuiltinModule = require('module').BuiltinModule
 const firescript = require('../')
 
 function compile (mod, filename) {
@@ -7,5 +8,7 @@ function compile (mod, filename) {
   }), filename)
 }
 
-// eslint-disable-next-line node/no-deprecated-api
-require.extensions['.fire'] = compile
+const Module = module.constructor.length > 1 ? module.constructor : BuiltinModule
+if (!Module._extensions['.fire']) {
+  Module._extensions['.fire'] = compile
+}

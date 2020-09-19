@@ -1,13 +1,13 @@
 const fs = require('fs')
 const path = require('path')
-const Firescript = require('../src/app')
+const FirescriptParser = require('firescript-parser').FirescriptParser
+const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
 
 module.exports = (fireio) => {
   return fireio
     .cmd('transpile <file> [output]')
-    .description('Read a file and transpiles it into FireScipt or Javascript')
+    .description('Reads a .fire file and transpiles it into Javascript')
     .option('-v,--verbose', 'Verbose log')
-    .option('-t,--type <type>', 'Set the source type. (fire|js)')
     .option('-l, --location', 'Add location')
     .action((ctx, file, output) => {
       file = path.resolve(process.cwd(), file)
@@ -15,12 +15,42 @@ module.exports = (fireio) => {
         ? require(file)
         : fs.readFileSync(file, { encoding: 'utf8' })
 
-      const source = Firescript.transpile(input, {
-        type: /* ctx.type || */ path.extname(file) === '.fire' ? 'fire' : 'js',
-        setLocation: !!ctx.location,
-        verbose: ctx.verbose,
+      // const source = Firescript.transpile(input, {
+      //   type: /* ctx.type || */ path.extname(file) === '.fire' ? 'fire' : 'js',
+      //   setLocation: !!ctx.location,
+      //   verbose: ctx.verbose,
+      //   filename: file
+      // })
+
+      const parser = new FirescriptParser({
         filename: file
       })
+      const fsAst = parser.parse(input)
+
+      const transpiler = new JavascriptTranspiler({
+        filename: file
+      })
+
+      const source = transpiler.transpile(fsAst)
+
+      // try {
+      //   const ast = parser.parse(input, {
+      //     // includeComments: ctx.comments,
+      //     // setLocation: !!ctx.location,
+      //     // setRange: !!ctx.range,
+      //     filename: file
+      //   })
+      //
+      //   const source = JSON.stringify(ast, null, '  ')
+      //
+      //   if (output) {
+      //     fs.writeFileSync(output, source, { encoding: 'utf8' })
+      //   } else {
+      //     console.log(source)
+      //   }
+      // } catch (err) {
+      //   throw colorizeParseError(err)
+      // }
 
       if (output) {
         fs.writeFileSync(output, source, { encoding: 'utf8' })
