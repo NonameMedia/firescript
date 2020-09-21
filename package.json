@@ -38,7 +38,7 @@
     "esprima": "4.0.1",
     "fireio": "^0.6.1",
     "firescript-builder": "^0.1.4",
-    "firescript-config": "^0.2.2",
+    "firescript-config": "^0.2.3",
     "firescript-linter": "^0.6.0",
     "firescript-parser": "^0.3.3",
     "firescript-runtime": "^0.3.10",
