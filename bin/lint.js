@@ -8,17 +8,16 @@ module.exports = (fireio) => {
   return fireio
     .cmd('lint <file>')
     .description('Lint a .fire file')
+    .option('--no-colors', 'Disable cli colors')
+    .option('-v, --verbose', 'Verbose log')
     .action((ctx, file) => {
-      const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       if (path.extname(file) === '.fire') {
         try {
-          const parser = new FirescriptParser()
+          const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
+          const parser = new FirescriptParser({
+            filename: file
+          })
           const fsAst = parser.parse(fsSource)
-          // const ast = Firescript.parse(fsSource, {
-          //   type: 'fire',
-          //   setLocation: true,
-          //   filename: file
-          // })
           const linter = new FirescriptLinter()
           const session = linter.lint(fsAst)
 
@@ -36,8 +35,16 @@ module.exports = (fireio) => {
             )
           })
         } catch (err) {
-          console.log('PARSE error:', err.stack)
+          if (ctx.noColors) {
+            err.colorsEnabled = false
+          }
+
+          console.log(ctx.verbose ? err.stack : err.toString())
+          process.exit(1)
         }
+      } else {
+        console.log('File seems not to be a .fire file')
+        process.exit(1)
       }
     })
 }
