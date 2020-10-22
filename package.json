@@ -11,8 +11,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "firetest tests/unit/\\*\\*/\\*.spec.js",
     "test:integration": "firetest tests/integration/\\*\\*/\\*.spec.js",
-    "pkg-version": "node -e 'require(\".\").version(true)'",
-    "build": "firescript build"
+    "pkg-version": "node -e 'require(\".\").version(true)'"
   },
   "repository": {
     "type": "git",
