@@ -37,7 +37,7 @@
     "colorfy": "^2.1.3",
     "esprima": "4.0.1",
     "fireio": "^0.6.2",
-    "firescript-builder": "^0.2.0",
+    "firescript-builder": "^0.2.1",
     "firescript-config": "^0.2.4",
     "firescript-linter": "^0.6.4",
     "firescript-parser": "^0.4.0",
