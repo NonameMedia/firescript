@@ -27,7 +27,7 @@ module.exports = (fireio) => {
 
           session.exceptions.forEach((exception) => {
             const location = exception.location
-              ? `in file ${colorfy.grey(file)} at line ${colorfy.grey(exception.location[0])}` : ''
+              ? `in file ${colorfy.grey(file)} at line ${colorfy.grey(exception.location[0])} in column ${colorfy.grey(exception.location[1])}` : ''
             console.log(
               `🔥${exception.message}`,
               `(${colorfy.red(exception.exception)})`,
