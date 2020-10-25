@@ -24,6 +24,8 @@ const greeting = str1 + str2
 Multiline strings
 -----------------
 
+
+
 ```fire
 const str = '''
   Hello
@@ -32,9 +34,9 @@ const str = '''
   string
 '''
 
-const str = ```
-  Hello
-  World,
-  I'm a multiline
-  code block
-```
+const str = `
+  "Hello\n" +
+  "World,\n" +
+  "I'm a multiline\n" +
+  "code block\n"
+`

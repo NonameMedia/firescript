@@ -1,5 +1,5 @@
 const Module = require('module').Module
-const firescript = require('../')
+const firescript = require('./app')
 
 function compile (mod, filename) {
   mod._compile(firescript.transpileFile(filename, {
