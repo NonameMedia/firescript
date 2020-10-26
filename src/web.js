@@ -179,13 +179,13 @@ module.exports = {
     }
 
     opts.features = {
-      'esModules': false,
-      'esDefaultParams': false,
-      'esClasses': true,
-      'esTemplates': true,
-      'extendRegExp': true,
-      'dissableRuntime': false,
-      'fireRTModuleName': 'firescript-runtime'
+      esModules: false,
+      esDefaultParams: false,
+      esClasses: true,
+      esTemplates: true,
+      extendRegExp: true,
+      dissableRuntime: false,
+      fireRTModuleName: 'firescript-runtime'
     }
 
     const transpiler = new JavascriptTranspiler(opts)

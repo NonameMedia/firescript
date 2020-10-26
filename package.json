@@ -11,7 +11,8 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "firetest tests/unit/\\*\\*/\\*.spec.js",
     "test:integration": "firetest tests/integration/\\*\\*/\\*.spec.js",
-    "pkg-version": "node -e 'require(\".\").version(true)'"
+    "pkg-version": "node -e 'require(\".\").version(true)'",
+    "lint": "eslint **/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +26,7 @@
   "author": "Andi Heinkelein <firetux@noname-media.com>",
   "license": "MIT",
   "devDependencies": {
-    "@noname-media/eslint-config-standard": "^1.1.3",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-standard": "^4.0.2",
+    "@noname-media/eslint-config-standard": "^1.1.2",
     "inspect.js": "^1.12.4",
     "shell-inspect": "1.2.0",
     "sinon": "^9.2.0"
