@@ -1,42 +1,4 @@
-image: node:8
-stages:
-  - test
-  - publish
-
-.test: &test
-  stage: test
-  script:
-   - npm install
-   - npm run test
-
-Test Node 10:
-  image: node:10
-  <<: *test
-
-Test Node 11:
-  image: node:11
-  <<: *test
-
-Test Node 12:
-  image: node:12
-  <<: *test
-
-Test Node 13:
-  image: node:13
-  <<: *test
-
-Test Node 14:
-  image: node:14
-  <<: *test
-
-Test Node 15:
-  image: node:15
-  <<: *test
-
-Publish:
-  stage: publish
-  only:
-    - tags
-  script:
-    - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> ~/.npmrc
-    - npm publish
+include:
+  - project: 'Coffeebreak/coffeebreak-ci'
+    ref: develop
+    file: 'gitlab/nodejs-module-pipeline.yml'
