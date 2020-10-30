@@ -29,7 +29,7 @@
     "@noname-media/eslint-config-standard": "^1.1.2",
     "inspect.js": "^1.12.4",
     "shell-inspect": "1.2.0",
-    "sinon": "^9.2.0"
+    "sinon": "^9.2.1"
   },
   "dependencies": {
     "acorn": "^8.0.4",
@@ -41,8 +41,8 @@
     "firescript-linter": "^0.6.4",
     "firescript-parser": "^0.5.1",
     "firescript-runtime": "^0.3.12",
-    "firescript-test": "^0.10.7",
-    "firescript-transpiler": "^0.4.4",
+    "firescript-test": "^0.10.8",
+    "firescript-transpiler": "^0.4.5",
     "superconf": "^1.2.3",
     "superfs": "^1.1.2"
   }
