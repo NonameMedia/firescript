@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const colorfy = require('colorfy')
 const FirescriptParser = require('firescript-parser').FirescriptParser
 const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspiler
 
@@ -9,6 +10,7 @@ module.exports = (fireio) => {
     .description('Reads a .fire file and transpiles it into Javascript')
     .option('-v,--verbose', 'Verbose log')
     .option('-l, --location', 'Add location')
+    .option('-p, --pretty', 'Prettify output')
     .action((ctx, file, output) => {
       file = path.resolve(process.cwd(), file)
       const input = path.extname(file) === '.json'
@@ -55,7 +57,16 @@ module.exports = (fireio) => {
       if (output) {
         fs.writeFileSync(output, source, { encoding: 'utf8' })
       } else {
-        console.log(source)
+        if (ctx.pretty) {
+          const lines = source.split('\n')
+          const gutterSize = String(lines.length).length
+          lines.forEach((line, index) => {
+            const gutter = String(index + 1).padStart(gutterSize, ' ')
+            console.log(`${colorfy.grey(gutter)} ${colorfy.dgrey('|')}`, line)
+          })
+        } else {
+          console.log(source)
+        }
       }
     })
 }

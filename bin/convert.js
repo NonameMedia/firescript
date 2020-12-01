@@ -12,7 +12,7 @@ module.exports = (fireio) => {
     .action((ctx, file, output) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       const ast = esprima.parseModule(fsSource, {
-        loc: !!ctx.location,
+        loc: true,
         range: !!ctx.range,
         comment: ctx.comments,
         filename: file
@@ -22,16 +22,24 @@ module.exports = (fireio) => {
         filename: file
       })
 
-      const source = transpiler.transpile(ast)
+      try {
+        const source = transpiler.transpile(ast)
+        if (ctx.create) {
+          output = file.replace(/\.js$/, '.fire')
+        }
 
-      if (ctx.create) {
-        output = file.replace(/\.js$/, '.fire')
-      }
+        if (output) {
+          fs.writeFileSync(output, source, { encoding: 'utf8' })
+        } else {
+          console.log(source)
+        }
+      } catch (err) {
+        if (err.__isFSError) {
+          err.source = fsSource
+        }
 
-      if (output) {
-        fs.writeFileSync(output, source, { encoding: 'utf8' })
-      } else {
-        console.log(source)
+        console.log('Convert failed!', err.message)
+        console.log(transpiler)
       }
     })
 }
