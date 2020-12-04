@@ -27,6 +27,8 @@ module.exports = {
       type: 'fire'
     }, opts || {})
 
+    const config = new FirescriptConfig(opts)
+
     let ast
 
     if (typeof input === 'string') {
@@ -38,7 +40,8 @@ module.exports = {
           comment: opts.comments
         })
       } else {
-        const parser = new FirescriptParser(opts)
+        const parserConf = config.getConfig('parser')
+        const parser = new FirescriptParser(parserConf)
         ast = parser.parse(input)
       }
     } else {
@@ -66,7 +69,6 @@ module.exports = {
       const transpiler = new FirescriptTranspiler(opts)
       return transpiler.transpile(ast)
     } else {
-      const config = new FirescriptConfig(opts)
       opts.features = config.getConfig('features')
       const transpiler = new JavascriptTranspiler(opts)
       return transpiler.transpile(ast)
