@@ -1,6 +1,6 @@
 {
   "name": "firescript",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "Firescript language",
   "main": "src/app.js",
   "bin": {
