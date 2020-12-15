@@ -1,7 +1,7 @@
 func makeError()
-  const banana = 'yellow'
+    const banana = 'yellow'
 
-  throw new Error('BananaError')
+    throw new Error('BananaError')
 
 # call error
 makeError()

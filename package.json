@@ -1,6 +1,6 @@
 {
   "name": "firescript",
-  "version": "0.16.4",
+  "version": "0.16.5",
   "description": "Firescript language",
   "main": "src/app.js",
   "bin": {
@@ -35,8 +35,8 @@
     "acorn": "^8.0.4",
     "colorfy": "^2.1.3",
     "esprima": "4.0.1",
-    "fireio": "^0.6.4",
-    "firescript-builder": "^0.2.5",
+    "fireio": "^0.7.0",
+    "firescript-builder": "^0.2.6",
     "firescript-config": "^0.4.0",
     "firescript-error": "^1.0.1",
     "firescript-linter": "^0.6.5",
