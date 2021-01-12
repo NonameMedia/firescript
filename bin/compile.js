@@ -6,7 +6,7 @@ const JavascriptTranspiler = require('firescript-transpiler').JavascriptTranspil
 
 module.exports = (fireio) => {
   return fireio
-    .cmd('transpile <file> [output]')
+    .cmd('compile <file> [output]')
     .description('Reads a .fire file and transpiles it into Javascript')
     .option('-v,--verbose', 'Verbose log')
     .option('-l, --location', 'Add location')

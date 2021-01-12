@@ -22,7 +22,7 @@ class WatchCMD {
     const infileRelative = infile.replace(process.cwd(), '.')
     const outfileRelative = outfile.replace(process.cwd(), '.')
 
-    cf.txt('Transpile ').grey(infileRelative).txt(' -> ').lime(outfileRelative).print()
+    cf.txt('Compile ').grey(infileRelative).txt(' -> ').lime(outfileRelative).print()
 
     const input = await SuperFS.readFile(infile)
 

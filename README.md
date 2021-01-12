@@ -1,35 +1,36 @@
 Firescript
 ==========
 
-=======
-[![Build Status](https://travis-ci.com/Andifeind/firescript.svg?branch=master)](https://travis-ci.com/Andifeind/firescript)
+[![Build Status](https://travis-ci.com/NonameMedia/firescript.svg?branch=master)](https://travis-ci.com/NonameMedia/firescript)
 
-Firescript is a language which gets transpiled into Javascript.
-A language which uses indention for block scoping, has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The transpiled output is clean and readable Javascript.
+Firescript is a script language that compiles into Javascript.
+A language which uses indention for block scoping, it has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The compiled output is clean and readable Javascript.
+
+Firescript is written in Node.js and partially in Firescript. It already has a syntax highlighter and linter integration for Atom IDE.
+
+Firescript is under developing, we recommend to not use it for production yet!
 
 Syntax
 ------
 
-```ts
+```coffee
 import Fruits from './fruits'
 
-class Banana extends Fruits
-  constructor ()
-    super()
+export class Banana extends Fruits
+    constructor ()
+        super()
 
-    this.name = 'Banana'
-    this.color = 'yellow'
+        this.name = 'Banana'
+        this.color = 'yellow'
 
-  getName ()
-    return this.name
+    getName ()
+        return this.name
 
-  setName (str name)
-    return this.name = name
-
-export Banana
+    setName (str name)
+        return this.name = name
 ```
 
-```ts
+```coffee
 import Banana from './banana'
 
 const banana = new Banana()
@@ -39,7 +40,7 @@ print(banana.getName())
 Requirements
 ------------
 
-Firescript requires Node.js 8 or higher.
+Firescript requires Node.js 12 or higher.
 
 Install
 -------
@@ -48,31 +49,32 @@ There are two options to install firescript. The most common option is to instal
 
 `npm install -g firescript`
 
-We recommend to install firescript localy. This installs an executable in `./node_modules/.bin` which makes Firescript accessable for NPM. Adding `../node_modules/.bin` to yout `$PATH` in your `.bashrc` makes the Firescript CLI executable by the command `fire` from the project root.  
+We recommend to install firescript localy. This installs an executable in `./node_modules/.bin` which makes Firescript accessable for NPM. Use `npx firescript [subcommand]`.
+
 
 `npm install firescript`
 
-Firescript is accessable on commandline by using the `fire` command.
+Firescript is accessable on commandline by using the `firescript` command.
 
 Usage
 -----
 
 ### Command Line
 
-Firescript comes with a commandline. If you've installed Firescript globally, you should have access to it by the `fire` command. Run `fire help` to get an overview of all available sub-commands or run `fire help <command>` to get a command's help page.
+Firescript comes with a commandline. If you've installed Firescript globally, you should have access to it by the `firescript` command. Run `firescript help` to get an overview of all available sub-commands or run `firescript help <command>` to get a command's help page.
 
 #### Commands
 
 | Command | Description |
 |----------|--|
-| `build` | Transpiles all `.fire` files and copies assets, reads project configuration from `.firerc.json` |
+| `build` | Compiles all `.fire` files and copies assets, reads project configuration from `.firerc.json` |
 | `copy` | Copies all assets, configured in `.firerc.json` by `copy` option to `dest` folder |
 | `init` | Initialize new Firescript project at current working dir |
 | `help` | Print a command overview |
 | `parse` | Parse a `.fire` or `.js` file into an AST tree |
 | `tokenize` | Tokenize a `.fire` or a `.js` file |
-| `transpile` | Transpiles a `.fire` file into Javascript or a `.js` file into Firescript |
-| `watch` | Watch `src` dir for changes und transpiles changed `.fire` files |
+| `compile` | Compiles a `.fire` file into Javascript or a `.js` file into Firescript |
+| `watch` | Watch `src` dir for changes and compiles changed `.fire` files |
 
 
 
@@ -81,33 +83,35 @@ Getting started
 --------------
 
 
-Create a Firescript project by using the `init` command. Create a project folder, change into it and run `fire init` to initialize a Firescript project.
+Create a Firescript project by using the `init` command. Create a project folder, change into it and run `firescript init` to initialize a Firescript project.
 
 ```shell
 mkdir ~/Projects/myfsproject
 cd myfsproject
-fire init
+npm init
+npm install firescript
+firescript init
 ```
 
 You'll find a `.firerc.json` file within your project folder. This file contains build and feature configuration.
 
-Firescript uses `.fire` as file extension. The `build` command transpiles all `.fire` files found in the source folder and writes the output to the destination folder. All other file are being ignored during the build process.
+Firescript uses `.fire` as file extension. The `build` command transpiles all `.fire` files found in the source folder and writes the output to the destination folder. All other files are being ignored during the build process.
 
 Use the [Firescript Example](
 https://github.com/Andifeind/firescript-example) project to play a little with it.
 
-Code transpilation
+Code compilation
 ------------------
 
-Run `fire build` to build the project. The `fire watch` command re-transpiles files when their content changes. Both commands overwriting existing files without prompting.
+Run `firescript build` to build the project. The `firescript watch` command re-transpiles files when their content changes. Both commands overwriting existing files without prompting.
 
 Author
 ------
 
-Andi Heinkelein <andifeind@noname-media.com>  
+Andi Heinkelein <andi@noname-media.com>
 
 License
 -------
 
 Firescript is licensed under the MIT license.  
-See [LICENSE.md](./LICENSE.md)
+See [LICENSE](./LICENSE)
