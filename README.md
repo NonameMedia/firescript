@@ -1,7 +1,7 @@
 Firescript
 ==========
 
-[![Build Status](https://travis-ci.com/NonameMedia/firescript.svg?branch=master)](https://travis-ci.com/NonameMedia/firescript)
+[![Build Status](https://travis-ci.com/NonameMedia/firescript.svg?branch=develop)](https://travis-ci.com/NonameMedia/firescript)
 
 Firescript is a script language that compiles into Javascript.
 A language which uses indention for block scoping, it has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The compiled output is clean and readable Javascript.
