@@ -41,6 +41,7 @@ module.exports = {
         })
       } else {
         const parserConf = config.getConfig('parser')
+        parserConf.filename = opts.filename
         const parser = new FirescriptParser(parserConf)
         ast = parser.parse(input)
       }
