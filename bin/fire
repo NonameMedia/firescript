@@ -2,7 +2,8 @@
 const path = require('path')
 const FireIO = require('fireio').FireIO
 const app = FireIO.app('firescript', {
-  projectRoot: path.join(__dirname, '../')
+  projectRoot: path.join(__dirname, '../'),
+  logLevel: 'warn'
 })
 
 app.callCommand().then((res) => {

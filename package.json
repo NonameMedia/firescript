@@ -35,7 +35,7 @@
     "acorn": "^8.0.5",
     "colorfy": "^2.1.3",
     "esprima": "4.0.1",
-    "fireio": "^0.7.1",
+    "fireio": "^0.7.2",
     "firescript-builder": "^0.2.8",
     "firescript-config": "^0.4.0",
     "firescript-error": "^1.1.0",
