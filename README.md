@@ -3,7 +3,7 @@ Firescript
 
 [![Build Status](https://travis-ci.com/NonameMedia/firescript.svg?branch=develop)](https://travis-ci.com/NonameMedia/firescript)
 
-<img src="./docs/logo.png" align="right" style="padding: 10px; width: 30%">
+<img src="./docs/logo.png" align="right" style="padding: 10px; width: 200px" width="200">
 
 Firescript is a script language that compiles into Javascript.
 A language which uses indention for block scoping, it has a clear and strict syntax, it supports dynamic typing and it's lesser code to write. The compiled output is clean and readable Javascript.
