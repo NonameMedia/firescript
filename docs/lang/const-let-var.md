@@ -1,10 +1,9 @@
 Variables
 =========
 
-Firescript supports three variable types. `const`, `let` and `var`
+Firescript supports two variable types. `const` and `let`.
 
-`const` and `let` are block scoped variables. The value of a `const` can't be changed or re-declared.  
-`var` declares a function scoped variable.
+`const` and `let` are both block scoped variables. The value of a `const` can't be changed or re-declared.  
 
 Syntax
 ------
@@ -15,10 +14,9 @@ const|let|var [name] = [value]
 
 #### Firescript
 
-```fire
+```coffee
 const foo = 'Foo'
 let bar = 'Bar'
-var bla = 'Bla'
 ```
 
 #### Javascript
@@ -26,5 +24,4 @@ var bla = 'Bla'
 ```js
 const foo = 'Foo';
 let bar = 'Bar';
-var bla = 'Bla';
 ```

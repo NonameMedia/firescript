@@ -37,6 +37,12 @@ const banana = new Banana()
 print(banana.getName())
 ```
 
+Docs
+----
+
+The docs page is not ready yet. If you're interested in the planed syntax, please have a look at the `docs/lang/` folder.
+
+
 Requirements
 ------------
 
@@ -104,6 +110,8 @@ Code compilation
 ------------------
 
 Run `firescript build` to build the project. The `firescript watch` command re-transpiles files when their content changes. Both commands overwriting existing files without prompting.
+
+
 
 Author
 ------
