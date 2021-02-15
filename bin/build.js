@@ -34,7 +34,7 @@ module.exports = (fireio) => {
           .print()
 
         if (ctx.verbose) {
-          cf.grey('Run build tasks:').nl()
+          cf.grey('Build source files:').nl()
             .txt('srcDir: ').grey(buildConf.srcDir).nl()
             .txt('destDir: ').grey(buildConf.destDir).nl().print()
         }
@@ -48,14 +48,33 @@ module.exports = (fireio) => {
             .print()
         }
 
+        if (buildConf.binDir) {
+          const destDir = path.join(buildConf.destDir, path.relative(process.cwd(), path.resolve(process.cwd(), buildConf.binDir)))
+
+          if (ctx.verbose) {
+            cf.grey('Build bin files:').nl()
+              .txt('binDir: ').grey(buildConf.binDir).nl()
+              .txt('destDir: ').grey(destDir).nl().print()
+          }
+
+          const buildBinFiles = await builder.build(buildConf.binDir, destDir)
+          for (const fl of buildBinFiles) {
+            cf.yellow('Build: ')
+              .grey(path.relative(process.cwd(), fl.sourceFile))
+              .txt(' to ')
+              .grey(path.relative(process.cwd(), fl.path))
+              .print()
+          }
+        }
+
         if (ctx.verbose) {
-          cf.grey('Run copy tasks:').nl()
+          cf.grey('Copy source files:').nl()
             .txt('copyFiles: ').grey(JSON.stringify(buildConf.copyFiles, null, '  ')).print()
         }
 
         const copyFiles = await builder.copy(buildConf.copyFiles)
         for (const fl of copyFiles) {
-          cf.ored('Copy:  ')
+          cf.ored('Copy: ')
             .grey(path.relative(process.cwd(), fl.path))
             .txt(' to ')
             .grey(path.join(buildConf.destDir, fl.relative))
