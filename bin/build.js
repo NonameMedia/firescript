@@ -8,6 +8,7 @@ const pkg = require('../package.json')
 module.exports = (fireio) => {
   return fireio
     .cmd('build [src] [dest]')
+    .option('-t, --firetree', 'Use FireTree parser')
     .option('-v, --verbose', 'Verbose log')
     .description('Build project')
     .action(async (ctx, src, dest) => {
@@ -21,6 +22,7 @@ module.exports = (fireio) => {
 
         const buildConf = config.getConfig('build')
         const builder = new FirescriptBuilder({
+          useFireTree: ctx.firetree,
           srcDir: buildConf.srcDir,
           destDir: buildConf.destDir,
           features: config.getConfig('features')
