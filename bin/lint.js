@@ -9,13 +9,15 @@ module.exports = (fireio) => {
     .cmd('lint <file>')
     .description('Lint a .fire file')
     .option('--no-colors', 'Disable cli colors')
+    .option('-t, --firetree', 'Use FireTree parser')
     .option('-v, --verbose', 'Verbose log')
     .action((ctx, file) => {
       if (path.extname(file) === '.fire') {
         try {
           const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
           const parser = new FirescriptParser({
-            filename: file
+            filename: file,
+            useFireTree: ctx.firetree
           })
           const fsAst = parser.parse(fsSource)
           const linter = new FirescriptLinter()

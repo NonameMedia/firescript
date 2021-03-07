@@ -6,13 +6,15 @@ module.exports = (fireio) => {
     .cmd('tokenize <file>')
     .option('-j,--js', 'Format as JS instead of JSON')
     .option('-l,--location', 'Show location')
+    .option('-t, --firetree', 'Use FireTree parser')
     .option('-v,--verbose', 'Verbose log')
     .description('Tokenize a .fire or .js file')
     .action((ctx, file) => {
       try {
         const source = fs.readFileSync(file, { encoding: 'utf8' })
         const parser = new FirescriptParser({
-          filename: file
+          filename: file,
+          useFireTree: ctx.firetree
         })
 
         const tokenStack = parser.tokenize(source, {

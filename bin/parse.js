@@ -9,6 +9,7 @@ module.exports = (fireio) => {
     .description('Parse a .fire or .js file into an AST tree')
     .option('-c, --comments', 'Include comments')
     .option('-l, --location', 'Add location')
+    .option('-t, --firetree', 'Use FireTree parser')
     .option('--no-colors', 'Disable cli colors')
     .option('-v, --verbose', 'Verbose log')
     // .option('-r, --range', 'Add range')
@@ -16,7 +17,8 @@ module.exports = (fireio) => {
       const fsSource = fs.readFileSync(file, { encoding: 'utf8' })
       if (path.extname(file) === '.fire') {
         const parser = new FirescriptParser({
-          filename: file
+          filename: file,
+          useFireTree: ctx.firetree
         })
 
         try {

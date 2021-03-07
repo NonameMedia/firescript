@@ -10,6 +10,7 @@ module.exports = (fireio) => {
     .description('Reads a .fire file and transpiles it into Javascript')
     .option('-v,--verbose', 'Verbose log')
     .option('-l, --location', 'Add location')
+    .option('-t, --firetree', 'Use FireTree parser')
     .option('-p, --pretty', 'Prettify output')
     .action((ctx, file, output) => {
       file = path.resolve(process.cwd(), file)
@@ -25,7 +26,8 @@ module.exports = (fireio) => {
       // })
 
       const parser = new FirescriptParser({
-        filename: file
+        filename: file,
+        useFireTree: ctx.firetree
       })
       const fsAst = parser.parse(input)
 
