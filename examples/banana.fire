@@ -7,5 +7,3 @@ class Banana
     getColor ()
         /* retunr the shit */
         return this.color
-
-module.exports.Banana = Banana
