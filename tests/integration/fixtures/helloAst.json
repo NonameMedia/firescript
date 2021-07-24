@@ -1,6 +1,5 @@
 {
   "type": "Program",
-  "sourceType": "module",
   "body": [
     {
       "type": "VariableDeclaration",
@@ -10,19 +9,43 @@
           "type": "VariableDeclarator",
           "id": {
             "type": "Identifier",
-            "name": "name"
+            "name": "name",
+            "index": 6,
+            "length": 6,
+            "line": 1,
+            "lineEnd": 1,
+            "columnEnd": 13,
+            "column": 7,
+            "indention": 0
           },
           "init": {
             "type": "Literal",
             "raw": "'World'",
-            "value": "World"
+            "value": "World",
+            "index": 13,
+            "length": 8,
+            "line": 1,
+            "lineEnd": 1,
+            "columnEnd": 22,
+            "column": 14,
+            "indention": 0
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "index": 11,
+          "length": 10,
+          "line": 1,
+          "lineEnd": 1,
+          "columnEnd": 22,
+          "column": 12,
+          "indention": 0
         }
-      ]
+      ],
+      "index": 0,
+      "length": 26,
+      "line": 1,
+      "lineEnd": 2,
+      "columnEnd": 6,
+      "column": 1,
+      "indention": 0
     },
     {
       "type": "VariableDeclaration",
@@ -32,50 +55,117 @@
           "type": "VariableDeclarator",
           "id": {
             "type": "Identifier",
-            "name": "msg"
+            "name": "msg",
+            "index": 27,
+            "length": 5,
+            "line": 2,
+            "lineEnd": 2,
+            "columnEnd": 12,
+            "column": 7,
+            "indention": 0
           },
           "init": {
             "type": "TemplateLiteral",
             "quasis": [
               {
                 "type": "TemplateElement",
+                "tail": false,
                 "value": {
                   "cooked": "Hello ",
                   "raw": "Hello "
                 },
-                "tail": false
+                "index": 33,
+                "length": 13,
+                "line": 2,
+                "lineEnd": 2,
+                "columnEnd": 26,
+                "column": 13,
+                "indention": 0
               },
               {
                 "type": "TemplateElement",
+                "tail": true,
                 "value": {
                   "cooked": "",
                   "raw": ""
                 },
-                "tail": true
+                "index": 46,
+                "length": 3,
+                "line": 2,
+                "lineEnd": 2,
+                "columnEnd": 29,
+                "column": 26,
+                "indention": 0
               }
             ],
             "expressions": [
               {
                 "type": "Identifier",
-                "name": "name"
+                "name": "name",
+                "index": 42,
+                "length": 6,
+                "line": 2,
+                "lineEnd": 2,
+                "columnEnd": 28,
+                "column": 22,
+                "indention": 0
               }
-            ]
+            ],
+            "index": 33,
+            "length": 16,
+            "line": 2,
+            "lineEnd": 2,
+            "columnEnd": 29,
+            "column": 13,
+            "indention": 0
           },
-          "fsTyping": {
-            "type": "FirescriptTyping",
-            "name": "any"
-          }
+          "index": 31,
+          "length": 18,
+          "line": 2,
+          "lineEnd": 2,
+          "columnEnd": 29,
+          "column": 11,
+          "indention": 0
         }
-      ]
+      ],
+      "index": 21,
+      "length": 31,
+      "line": 2,
+      "lineEnd": 3,
+      "columnEnd": 4,
+      "column": 1,
+      "indention": 0
     },
     {
-      "type": "FirescriptLogStatement",
+      "type": "LogStatement",
       "arguments": [
         {
           "type": "Identifier",
-          "name": "msg"
+          "name": "msg",
+          "index": 53,
+          "length": 4,
+          "line": 3,
+          "lineEnd": 3,
+          "columnEnd": 9,
+          "column": 5,
+          "indention": 0
         }
-      ]
+      ],
+      "index": 49,
+      "length": 8,
+      "line": 3,
+      "lineEnd": 3,
+      "columnEnd": 9,
+      "column": 1,
+      "indention": 0
     }
-  ]
+  ],
+  "sourceType": "module",
+  "index": 0,
+  "length": 57,
+  "line": 1,
+  "lineEnd": 3,
+  "columnEnd": 9,
+  "column": 1,
+  "indention": 0
 }

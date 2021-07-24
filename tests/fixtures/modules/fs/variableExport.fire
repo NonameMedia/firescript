@@ -1,3 +1,2 @@
 export const banana = 'Banana'
 export let coconut = 'Coconut'
-export var pear = 'Pear'

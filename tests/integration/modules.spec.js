@@ -108,7 +108,6 @@ describe('Module loading', () => {
       inspect(cjs).hasProps({
         banana: 'Banana',
         coconut: 'Coconut',
-        pear: 'Pear',
         __esModule: true
       })
     })
